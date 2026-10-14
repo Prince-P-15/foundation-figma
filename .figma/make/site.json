@@ -1,0 +1,10 @@
+{
+  "description": "Recreates exact webpage layouts from HTML files without altering design, enabling developers to preserve original structure and appearance effortlessly.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
