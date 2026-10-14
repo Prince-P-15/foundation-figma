@@ -1584,7 +1584,7 @@
   }
   .hero-arc-orbit {
     --orbit-size: 40%;
-    --spin-dur: 48s;
+    --spin-dur: 22s;
     position: absolute;
     left: var(--arc-cx);
     top: var(--arc-cy);
@@ -1602,6 +1602,7 @@
     animation: heroArcSpinRight var(--spin-dur) linear infinite;
     will-change: transform;
     pointer-events: none;
+    transform-origin: center center;
   }
   .hero-arc-orbit-spin .hero-arc-node {
     pointer-events: auto;
@@ -8095,13 +8096,12 @@
         support: 'linear-gradient(135deg, #3B82F6 0%, #6366F1 50%, #8B5CF6 100%)'
       };
 
-      // 4 rings — fewer icons per ring, evenly around full circle for breathing room
-      // Not all visible at once as they rotate through the upper arc
+      // 4 rings — faster spin so rotation is obvious at first glance
       const ringSpecs = [
-        { count: 4, size: '52%', dur: '56s', phase: 12 },
-        { count: 5, size: '68%', dur: '68s', phase: 28 },
-        { count: 5, size: '84%', dur: '80s', phase: 8 },
-        { count: 6, size: '100%', dur: '92s', phase: 20 }
+        { count: 4, size: '52%', dur: '16s', phase: 200 },
+        { count: 5, size: '68%', dur: '22s', phase: 215 },
+        { count: 5, size: '84%', dur: '28s', phase: 190 },
+        { count: 6, size: '100%', dur: '34s', phase: 205 }
       ];
 
       const products = ALL_SERVICES.slice(0, 20).map((svc) => ({ ...svc }));
@@ -8155,9 +8155,8 @@
 
       const html = ringSpecs.map((spec, ri) => {
         const dir = ri % 2 === 0 ? 'spin-right' : 'spin-left';
-        const delay = `${(-ri * 3.2).toFixed(1)}s`;
         const nodes = placedRings[ri].map((svc, i) => {
-          // Even spacing around the full circle — more air between icons
+          // Even spacing around the full circle; phase biased so many start in the visible upper arc
           const step = 360 / spec.count;
           const angle = (spec.phase || 0) + step * i;
           const cssAngle = angle - 270;
@@ -8166,7 +8165,7 @@
           return `
             <div class="hero-arc-spoke" style="--a:${cssAngle.toFixed(2)}deg;">
               <a href="#services" class="hero-arc-node" style="--arc-grad:${grad};" title="${safeName}" aria-label="${safeName}">
-                <span class="hero-arc-node-face" style="--spin-dur:${spec.dur};animation-delay:${delay};">
+                <span class="hero-arc-node-face" style="--spin-dur:${spec.dur};">
                   <span class="hero-arc-node-upright" style="--a:${cssAngle.toFixed(2)}deg;">
                     <span class="hero-arc-bubble">
                       <span class="hero-arc-icon" aria-hidden="true">
@@ -8182,7 +8181,7 @@
 
         return `
           <div class="hero-arc-orbit ${dir}" style="--orbit-size:${spec.size};--spin-dur:${spec.dur};">
-            <div class="hero-arc-orbit-spin" style="animation-delay:${delay};">${nodes}</div>
+            <div class="hero-arc-orbit-spin">${nodes}</div>
           </div>`;
       }).join('');
 
