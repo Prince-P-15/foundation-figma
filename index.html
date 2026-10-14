@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>York.ie — Company Operating System</title>
 
 <meta name="description" content="One console. Twenty-two services. York.ie runs the whole company across R&D, QA, GTM, Finance, and Capital.">
@@ -677,7 +680,7 @@
   }
   .hero-mvp-section[data-hero-layout="stacked"] .hero-editorial-col > div {
     width: 100%;
-    max-width: 860px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 0 !important;
     border-radius: 0 !important;
@@ -693,6 +696,7 @@
   .hero-mvp-section[data-hero-layout="stacked"] .hero-eyebrow-pill {
     display: none !important;
   }
+  #hero.hero-mvp-section[data-hero-layout="stacked"] h1.hero-editorial-headline,
   .hero-mvp-section[data-hero-layout="stacked"] .hero-editorial-headline {
     font-size: 72px !important;
     font-weight: 400;
@@ -710,8 +714,9 @@
     color: #F8FAFC !important;
     -webkit-text-fill-color: #F8FAFC;
   }
+  #hero.hero-mvp-section[data-hero-layout="stacked"] h1.hero-editorial-headline .hero-gradient-title,
   .hero-mvp-section[data-hero-layout="stacked"] .hero-editorial-headline .hero-gradient-title {
-    font-size: 72px;
+    font-size: 72px !important;
     font-weight: 400;
     margin-bottom: 0;
     display: inline;
@@ -1406,7 +1411,7 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 860px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 0 !important;
     border-radius: 0 !important;
@@ -1420,6 +1425,7 @@
   .hero-mvp-section[data-hero-layout="icons"] .hero-eyebrow-pill {
     display: none !important;
   }
+  #hero.hero-mvp-section[data-hero-layout="icons"] h1.hero-editorial-headline,
   .hero-mvp-section[data-hero-layout="icons"] .hero-editorial-headline {
     width: 100%;
     font-size: 72px !important;
@@ -1438,8 +1444,9 @@
     color: #F8FAFC !important;
     -webkit-text-fill-color: #F8FAFC;
   }
+  #hero.hero-mvp-section[data-hero-layout="icons"] h1.hero-editorial-headline .hero-gradient-title,
   .hero-mvp-section[data-hero-layout="icons"] .hero-editorial-headline .hero-gradient-title {
-    font-size: 72px;
+    font-size: 72px !important;
     font-weight: 400;
     margin-bottom: 0;
     display: inline;
@@ -2445,8 +2452,14 @@
     .hero-editorial-headline {
       font-size: 2.8rem;
     }
+    #hero.hero-mvp-section[data-hero-layout="stacked"] h1.hero-editorial-headline,
+    #hero.hero-mvp-section[data-hero-layout="icons"] h1.hero-editorial-headline,
     .hero-mvp-section[data-hero-layout="stacked"] .hero-editorial-headline,
     .hero-mvp-section[data-hero-layout="icons"] .hero-editorial-headline {
+      font-size: 72px !important;
+    }
+    #hero.hero-mvp-section[data-hero-layout="stacked"] h1.hero-editorial-headline .hero-gradient-title,
+    #hero.hero-mvp-section[data-hero-layout="icons"] h1.hero-editorial-headline .hero-gradient-title {
       font-size: 72px !important;
     }
   }
@@ -7510,12 +7523,30 @@
     (function initHeroLayoutTabs() {
       const hero = document.getElementById('hero');
       const tabs = document.querySelectorAll('.hero-layout-tab');
+      const headline = document.querySelector('#hero h1.hero-editorial-headline');
+      const gradientTitle = headline?.querySelector('.hero-gradient-title');
       if (!hero || !tabs.length) return;
+
+      function applyHeroTitleSize(layout) {
+        if (!headline) return;
+        if (layout === 'stacked' || layout === 'icons') {
+          headline.style.setProperty('font-size', '72px', 'important');
+          headline.style.setProperty('line-height', '1.08', 'important');
+          if (gradientTitle) {
+            gradientTitle.style.setProperty('font-size', '72px', 'important');
+          }
+        } else {
+          headline.style.removeProperty('font-size');
+          headline.style.removeProperty('line-height');
+          if (gradientTitle) gradientTitle.style.removeProperty('font-size');
+        }
+      }
 
       tabs.forEach((tab) => {
         tab.addEventListener('click', () => {
           const layout = tab.getAttribute('data-hero-layout') || 'split';
           hero.setAttribute('data-hero-layout', layout);
+          applyHeroTitleSize(layout);
           tabs.forEach((t) => {
             const on = t === tab;
             t.classList.toggle('active', on);
@@ -7524,6 +7555,8 @@
           window.dispatchEvent(new Event('resize'));
         });
       });
+
+      applyHeroTitleSize(hero.getAttribute('data-hero-layout') || 'split');
     })();
 
     // ─── 2.45 TOP-DOWN PRODUCT LOGO → SCREEN PREVIEW (gentle auto-rotate) ───
