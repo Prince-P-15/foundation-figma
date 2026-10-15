@@ -228,7 +228,25 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
 .arrow{color:var(--faint);font-size:15px;transition:transform .15s,color .15s}
 .svc:hover .arrow{transform:translateX(3px);color:var(--em-d)}
 
-/* Journey */
+/* Journey strip on Overview */
+.journey-strip{padding:18px 20px;margin-bottom:20px}
+.journey-strip-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.journey-strip-head h2{font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.journey-flow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
+.stage{
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;
+  padding:12px 8px;border:1px solid var(--line);border-radius:12px;background:var(--bg-2);
+  min-height:96px;transition:border-color .15s,background .15s,transform .15s;
+}
+.stage:hover,.stage:focus-visible{border-color:#A7F3D0;background:var(--em-50);transform:translateY(-1px)}
+.stage-ic{
+  width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:#fff;margin-bottom:2px;
+}
+.stage-ic i,.stage-ic svg{width:16px;height:16px}
+.stage-name{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.25}
+.stage-count{font-size:11px;color:var(--muted);font-family:var(--mono)}
+
+/* Journey full view */
 .flow-row{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;position:relative}
 .flow{display:flex;flex-direction:column;gap:3px;padding:14px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card);transition:all .15s;position:relative}
 .flow:hover{border-color:#A7F3D0}
@@ -284,6 +302,7 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
 @media (max-width:1180px){
   .kpis{grid-template-columns:repeat(2,1fr)}
   .two{grid-template-columns:1fr}
+  .journey-flow{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:10px}
   .flow-row{grid-template-columns:repeat(4,1fr)}
 }
 @media (max-width:860px){
@@ -300,6 +319,7 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
 }
 @media (max-width:560px){
   .kpis,.svc-grid{grid-template-columns:1fr}
+  .journey-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
   .flow-row{grid-template-columns:repeat(2,1fr)}
   .init{grid-template-columns:1fr 40px;row-gap:6px}.init .bar{grid-column:1/-1;order:5}.init .tag{display:none}
   .crumbs .root{display:none}.crumbs .root + i{display:none}
@@ -417,6 +437,14 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
             <span class="grow" aria-hidden="true"></span>
             <span class="link" aria-hidden="true">Details <i data-lucide="arrow-right" style="width:13px;height:13px"></i></span>
           </button>
+
+          <div class="card journey-strip" aria-labelledby="journey-strip-heading">
+            <div class="journey-strip-head">
+              <h2 id="journey-strip-heading">Your product journey</h2>
+              <button type="button" class="link" data-view="journey" aria-label="View full product journey">View full journey <i data-lucide="arrow-right" style="width:13px;height:13px" aria-hidden="true"></i></button>
+            </div>
+            <div class="journey-flow" id="journeyStrip" role="list" aria-label="Product journey stages"></div>
+          </div>
 
           <div class="two">
             <div class="card panel">
@@ -665,6 +693,16 @@ document.querySelectorAll('#svcFilterBar .chipbtn').forEach(c => {
 });
 $('svcFilter').addEventListener('input', applySvcFilters);
 
+/* ——— Render: overview journey strip ——— */
+const STRIP_COLORS = ['#F97316','#3B82F6','#8B5CF6','#10B981','#0EA5E9','#F59E0B','#EC4899'];
+const STRIP_COUNTS = [12, 8, 5, 3, 7, 4, 2];
+$('journeyStrip').innerHTML = STAGES.slice(0, 7).map((s, i) => `
+  <button type="button" class="stage" role="listitem" data-view="journey" data-stage-jump="${i}" aria-label="${esc(s.n)} stage, ${STRIP_COUNTS[i]} active items. Open product journey.">
+    <span class="stage-ic" style="background:${STRIP_COLORS[i]}" aria-hidden="true"><i data-lucide="${s.ic}"></i></span>
+    <span class="stage-name">${esc(s.n === 'Ideate' ? 'Ideation' : s.n)}</span>
+    <span class="stage-count">${STRIP_COUNTS[i]}</span>
+  </button>`).join('');
+
 /* ——— Render: journey ——— */
 $('flowRow').innerHTML = STAGES.map((s,i) => `
   <button type="button" class="flow${i===0?' active':''}" role="tab" aria-selected="${i===0?'true':'false'}" data-stage="${i}" id="stage-tab-${i}" aria-controls="stage-panel-${i}">
@@ -681,18 +719,20 @@ $('flowDetail').innerHTML = STAGES.map((s,i) => `
       ? `<button type="button" class="chipbtn" data-nav="${esc(t)}">${esc(t)}</button>`
       : `<button type="button" class="chipbtn" data-soon="${esc(t)}">${esc(t)}</button>`).join('')}</div>
   </div>`).join('');
-document.querySelectorAll('.flow').forEach(f => f.addEventListener('click', () => {
+function selectStage(idx){
+  const i = String(idx);
   document.querySelectorAll('.flow').forEach(x => {
-    const on = x === f;
+    const on = x.dataset.stage === i;
     x.classList.toggle('active', on);
     x.setAttribute('aria-selected', on ? 'true' : 'false');
   });
   document.querySelectorAll('.flow-panel').forEach(p => {
-    const on = p.dataset.panel === f.dataset.stage;
+    const on = p.dataset.panel === i;
     p.classList.toggle('on', on);
     if (on) p.removeAttribute('hidden'); else p.setAttribute('hidden','');
   });
-}));
+}
+document.querySelectorAll('.flow').forEach(f => f.addEventListener('click', () => selectStage(f.dataset.stage)));
 
 /* ——— Views & nav ——— */
 const VIEW_TITLES = { dashboard:'Dashboard', journey:'Product Journey', services:'All Services' };
@@ -748,7 +788,12 @@ document.addEventListener('click', e => {
   const soon = e.target.closest('[data-soon]');
   if (soon){ toast(`${soon.dataset.soon} opens in the full console`); return; }
   const v = e.target.closest('[data-view]');
-  if (v && !v.closest('.cmdk')){ e.preventDefault(); showView(v.dataset.view); return; }
+  if (v && !v.closest('.cmdk')){
+    e.preventDefault();
+    showView(v.dataset.view);
+    if (v.dataset.stageJump != null) selectStage(v.dataset.stageJump);
+    return;
+  }
   const n = e.target.closest('[data-nav]');
   if (n){ e.preventDefault(); navToService(n.dataset.nav); return; }
   const svc = e.target.closest('.svc[data-svc-name]');
