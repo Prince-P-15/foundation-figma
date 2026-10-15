@@ -17,11 +17,10 @@
   /* WCAG AA: muted ≥4.5:1 on white; faint only for large/non-essential */
   --ink:#0F172A; --ink-2:#1E293B; --muted:#475569; --faint:#64748B;
   --em:#059669; --em-d:#047857; --em-50:#ECFDF5; --em-100:#D1FAE5;
-  --rail:#1E293B; --rail-2:#0F172A;
   --rose:#DC2626; --amber:#B45309; --blue:#1D4ED8; --violet:#6D28D9; --orange:#C2410C;
   --shadow:0 1px 2px rgba(15,23,42,.04), 0 1px 3px rgba(15,23,42,.05);
   --shadow-md:0 4px 14px rgba(15,23,42,.07);
-  --rail-w:56px; --side-w:240px; --top-h:56px;
+  --side-w:240px; --top-h:56px;
   --focus:#047857; --focus-on-dark:#6EE7B7;
   --sans:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
   --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -36,7 +35,6 @@ a{color:inherit;text-decoration:none}
 i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75;pointer-events:none}
 :focus{outline:none}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
-.irail :focus-visible,.irail-logo:focus-visible,.irail-add:focus-visible{outline-color:var(--focus-on-dark)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .skip-link{
   position:absolute;left:12px;top:0;z-index:9999;padding:10px 16px;border-radius:0 0 10px 10px;
@@ -54,25 +52,8 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
 }
 
 /* ———— App shell ———— */
-.app{display:grid;grid-template-columns:var(--rail-w) var(--side-w) 1fr;height:100vh;transition:grid-template-columns .22s ease}
-.nav-collapsed .app{grid-template-columns:var(--rail-w) 0px 1fr}
-
-/* Icon rail */
-.irail{background:var(--rail-2);display:flex;flex-direction:column;align-items:center;padding:12px 0;gap:4px;z-index:40;border-right:1px solid rgba(255,255,255,.04)}
-.irail-logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--em),var(--em-d));display:grid;place-items:center;color:#fff;margin-bottom:12px;box-shadow:0 2px 8px rgba(16,185,129,.35)}
-.irail-logo i{width:18px;height:18px;fill:#fff;stroke-width:1.5}
-.irail-btn{position:relative;width:44px;height:44px;border-radius:10px;display:grid;place-items:center;color:#CBD5E1;transition:background .15s,color .15s}
-.irail-btn i{width:19px;height:19px}
-.irail-btn:hover{background:rgba(255,255,255,.1);color:#F8FAFC}
-.irail-btn.active{background:rgba(16,185,129,.22);color:#A7F3D0}
-.irail-btn.active::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:#34D399}
-.irail-sep{width:24px;height:1px;background:rgba(255,255,255,.14);margin:8px 0}
-.irail-spacer{flex:1}
-.irail-add{border:1px dashed rgba(255,255,255,.35);color:#E2E8F0;width:40px;height:40px;border-radius:10px;display:grid;place-items:center}
-.irail-add:hover{border-color:#6EE7B7;color:#A7F3D0;background:rgba(16,185,129,.15)}
-[data-tip]{position:relative}
-.irail [data-tip]::after{content:attr(data-tip);position:absolute;left:calc(100% + 12px);top:50%;transform:translateY(-50%) translateX(-4px);background:#0F172A;color:#fff;font-size:12px;font-weight:500;padding:6px 10px;border-radius:7px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s,transform .12s;z-index:100;box-shadow:var(--shadow-md)}
-.irail [data-tip]:hover::after,.irail [data-tip]:focus-visible::after{opacity:1;transform:translateY(-50%) translateX(0)}
+.app{display:grid;grid-template-columns:var(--side-w) 1fr;height:100vh;transition:grid-template-columns .22s ease}
+.nav-collapsed .app{grid-template-columns:0px 1fr}
 
 /* Product sidebar */
 .side{background:var(--card);border-right:1px solid var(--line);display:flex;flex-direction:column;min-width:0;overflow:hidden;z-index:30}
@@ -306,8 +287,8 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
   .flow-row{grid-template-columns:repeat(4,1fr)}
 }
 @media (max-width:860px){
-  .app,.nav-collapsed .app{grid-template-columns:var(--rail-w) 1fr}
-  .side{position:fixed;left:var(--rail-w);top:0;bottom:0;width:var(--side-w);transform:translateX(-120%);transition:transform .22s;box-shadow:var(--shadow-md);visibility:visible!important}
+  .app,.nav-collapsed .app{grid-template-columns:1fr}
+  .side{position:fixed;left:0;top:0;bottom:0;width:var(--side-w);transform:translateX(-120%);transition:transform .22s;box-shadow:var(--shadow-md);visibility:visible!important}
   .side.drawer{transform:none}
   .scrim.show{display:block;position:fixed;inset:0;background:rgba(15,23,42,.35);z-index:25}
   .hamburger,.nav-collapsed .tb-toggle{display:grid}
@@ -329,19 +310,6 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <div class="app" id="appShell">
-
-  <!-- Icon rail -->
-  <nav class="irail" aria-label="Primary modules">
-    <a class="irail-logo" href="#view-dashboard" data-view="dashboard" aria-label="York Foundation home"><i data-lucide="zap" aria-hidden="true"></i></a>
-    <button class="irail-btn active" type="button" data-view="dashboard" data-rkey="dashboard" data-tip="Dashboard" aria-label="Dashboard" aria-current="page"><i data-lucide="layout-dashboard" aria-hidden="true"></i></button>
-    <button class="irail-btn" type="button" data-view="journey" data-rkey="journey" data-tip="Product Journey" aria-label="Product Journey"><i data-lucide="route" aria-hidden="true"></i></button>
-    <button class="irail-btn" type="button" data-view="services" data-rkey="services" data-tip="All Services" aria-label="All Services"><i data-lucide="layout-grid" aria-hidden="true"></i></button>
-    <div class="irail-sep" role="separator" aria-hidden="true"></div>
-    <button class="irail-btn" type="button" data-nav="Fuel" data-rkey="Fuel" data-tip="Fuel" aria-label="Open Fuel"><i data-lucide="flame" aria-hidden="true"></i></button>
-    <button class="irail-btn" type="button" data-nav="R&amp;D Pulse" data-rkey="R&amp;D Pulse" data-tip="Pulse" aria-label="Open R&amp;D Pulse"><i data-lucide="activity" aria-hidden="true"></i></button>
-    <div class="irail-spacer" aria-hidden="true"></div>
-    <button class="irail-add" type="button" id="railAdd" data-tip="Create new" aria-label="Create new"><i data-lucide="plus" aria-hidden="true"></i></button>
-  </nav>
 
   <!-- Product sidebar -->
   <aside class="side" id="side" aria-label="Product navigation">
@@ -736,14 +704,12 @@ document.querySelectorAll('.flow').forEach(f => f.addEventListener('click', () =
 
 /* ——— Views & nav ——— */
 const VIEW_TITLES = { dashboard:'Dashboard', journey:'Product Journey', services:'All Services' };
-function setActive(key, railKey){
+function setActive(key){
   document.querySelectorAll('#sideNav .nav-item').forEach(b => {
     const on = b.dataset.key === key;
     b.classList.toggle('active', on);
     on ? b.setAttribute('aria-current','page') : b.removeAttribute('aria-current');
   });
-  const rk = railKey || key;
-  document.querySelectorAll('.irail-btn[data-rkey]').forEach(b => b.classList.toggle('active', b.dataset.rkey === rk));
 }
 function announce(msg){ const lr = $('liveRegion'); if (lr){ lr.textContent = ''; requestAnimationFrame(() => { lr.textContent = msg; }); } }
 function showView(name, opts = {}){
@@ -754,10 +720,6 @@ function showView(name, opts = {}){
     else { v.setAttribute('hidden',''); v.setAttribute('aria-hidden','true'); }
   });
   setActive(name);
-  document.querySelectorAll('.irail-btn[data-view]').forEach(b => {
-    const on = b.dataset.view === name;
-    if (on) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current');
-  });
   $('crumbCur').textContent = VIEW_TITLES[name] || name;
   if (name === 'services' && !opts.keepFilter){
     $('svcFilter').value = '';
@@ -780,8 +742,7 @@ function navToService(label){
   document.querySelectorAll('#svcFilterBar .chipbtn').forEach((x,i) => x.classList.toggle('active', i === 0));
   applySvcFilters();
   const inNav = !!document.querySelector(`#sideNav .nav-item[data-key="${CSS.escape(label)}"]`);
-  const railKey = (label === 'Fuel' || label === 'R&D Pulse') ? label : 'services';
-  setActive(inNav ? label : 'services', railKey);
+  setActive(inNav ? label : 'services');
   $('crumbCur').textContent = label;
 }
 document.addEventListener('click', e => {
@@ -849,7 +810,6 @@ $('bellBtn').addEventListener('click', () => toast('You have 3 unread notificati
 $('helpBtn').addEventListener('click', () => toast('Help Center opens in the full console'));
 $('wsBtn').addEventListener('click', () => toast('Workspace: Acme Inc'));
 $('userBtn').addEventListener('click', () => toast('Alex Kim · Admin'));
-$('railAdd').addEventListener('click', () => { openCmdk(); cmdkInput.value = 'new'; renderCmdk('new'); });
 
 /* ——— Command palette ——— */
 const cmdk = $('cmdk'), cmdkInput = $('cmdkInput'), cmdkList = $('cmdkList');
