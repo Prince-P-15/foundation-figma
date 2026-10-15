@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>York Foundation — Console</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --york-blue:#0B4F6C; --york-blue-2:#093D55; --york-blue-dim:#E8F1F5;
+  --york-green:#0A8F7A; --york-green-2:#087A68; --york-green-dim:#E6F5F1;
+  --violet:#5B6B8C; --violet-dim:#EEF0F4;
+  --cyan:#0E8494; --cyan-dim:#E5F4F6;
+  --amber:#B8860B; --amber-dim:#F7F1E0;
+  --coral:#C45C26; --coral-dim:#F8EDE6;
+  --magenta:#8B4A6B; --magenta-dim:#F4EBF0;
+  --indigo:#3D5A80; --indigo-dim:#E9EEF4;
+
+  --canvas:#F4F6F5; --surface:#FFFFFF; --surface-2:#EEF1F0; --surface-3:#E4E8E6;
+  --border:rgba(15,23,42,.08); --border-2:rgba(15,23,42,.14);
+  --text:#0F172A; --text-2:#475569; --text-3:#94A3B8;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --shadow-xs:0 1px 0 rgba(15,23,42,.04);
+  --shadow-sm:0 1px 2px rgba(15,23,42,.05);
+  --shadow-md:0 2px 8px rgba(15,23,42,.06);
+  --shadow-lg:0 8px 24px rgba(15,23,42,.08);
+  --r-sm:6px; --r-md:8px; --r-lg:10px; --r-xl:12px;
+  --sidebar:240px; --topbar:56px;
+  --accent:var(--york-green);
+  --accent-dim:var(--york-green-dim);
+}
+html,body{height:100%}
+body{
+  background:var(--canvas); color:var(--text);
+  font-family:var(--sans); font-size:14px; line-height:1.5;
+  -webkit-font-smoothing:antialiased; overflow:hidden;
+}
+a{color:inherit; text-decoration:none}
+button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit}
+::-webkit-scrollbar{width:10px; height:10px}
+::-webkit-scrollbar-thumb{background:rgba(0,0,0,.12); border-radius:5px; border:2px solid transparent; background-clip:padding-box}
+::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.2); background-clip:padding-box; border:2px solid transparent}
+::-webkit-scrollbar-track{background:transparent}
+
+/* ---------- APP SHELL ---------- */
+.app{
+  display:grid; grid-template-columns:var(--sidebar) 1fr; grid-template-rows:var(--topbar) 1fr;
+  height:100vh;
+}
+
+/* ---------- SIDEBAR ---------- */
+.sidebar{
+  grid-row:1/3; grid-column:1;
+  background:var(--surface); border-right:1px solid var(--border);
+  display:flex; flex-direction:column; overflow:hidden;
+}
+.sb-top{
+  display:flex; align-items:center; gap:11px;
+  padding:14px 16px; height:var(--topbar);
+  border-bottom:1px solid var(--border); flex-shrink:0;
+}
+.sb-logo{
+  width:28px; height:28px; border-radius:7px; display:grid; place-items:center;
+  background:var(--york-green); color:#fff;
+  flex-shrink:0; overflow:hidden;
+}
+.sb-logo img{width:100%; height:100%; object-fit:cover}
+.sb-logo svg{width:15px; height:15px}
+.sb-brand{font-weight:600; font-size:14px; letter-spacing:-.02em; flex:1}
+.sb-exit{
+  font-size:11.5px; font-weight:500; color:var(--text-3);
+  padding:4px 8px; border-radius:6px; border:1px solid transparent;
+}
+.sb-exit:hover{color:var(--text); border-color:var(--border); background:var(--surface-2)}
+.sb-workspace{
+  display:flex; align-items:center; gap:8px;
+  margin:12px 12px 6px; padding:9px 11px;
+  border-radius:var(--r-sm); border:1px solid var(--border); background:var(--surface-2);
+  cursor:pointer; transition:all .15s;
+}
+.sb-workspace:hover{background:var(--surface-3)}
+.sb-ws-avatar{
+  width:22px; height:22px; border-radius:5px; display:grid; place-items:center;
+  background:var(--amber); color:#fff;
+  font-size:9.5px; font-weight:700; font-family:var(--mono);
+}
+.sb-ws-name{font-size:13px; font-weight:500; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.sb-ws-chev{color:var(--text-3); flex-shrink:0}
+.sb-ws-chev svg{width:13px; height:13px}
+.sb-scroll{flex:1; overflow-y:auto; padding:10px 8px 12px}
+
+.sb-group{margin-bottom:6px}
+.sb-group-label{
+  font-size:10.5px; font-weight:600; color:var(--text-3);
+  letter-spacing:.09em; text-transform:uppercase;
+  padding:12px 12px 6px;
+}
+.sb-item{
+  display:flex; align-items:center; gap:10px;
+  padding:8px 11px; border-radius:var(--r-sm);
+  color:var(--text-2); font-size:13.5px; font-weight:500;
+  cursor:pointer; transition:all .12s; position:relative;
+  margin-bottom:1px;
+}
+.sb-item:hover{background:var(--surface-2); color:var(--text)}
+.sb-item.active{background:var(--accent-dim); color:var(--york-green-2)}
+.sb-item.active .sb-ic{color:var(--york-green)}
+.sb-item.active .sb-badge{background:rgba(10,143,122,.12); color:var(--york-green-2)}
+.sb-ic{width:16px; height:16px; flex-shrink:0; color:var(--text-3); display:grid; place-items:center}
+.sb-ic svg{width:16px; height:16px}
+.sb-label{flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.sb-badge{
+  font-size:10.5px; font-weight:600; font-family:var(--mono);
+  padding:1px 7px; border-radius:6px;
+  background:var(--surface-2); color:var(--text-2);
+}
+.sb-badge.new{background:var(--york-green-dim); color:var(--york-green-2)}
+.sb-bottom{
+  padding:12px; border-top:1px solid var(--border); flex-shrink:0;
+}
+.sb-user{
+  display:flex; align-items:center; gap:10px;
+  padding:9px 10px; border-radius:var(--r-sm);
+  cursor:pointer; transition:all .15s;
+}
+.sb-user:hover{background:var(--surface-2)}
+.sb-user-avatar{
+  width:30px; height:30px; border-radius:7px; display:grid; place-items:center;
+  background:var(--york-blue); color:#fff;
+  font-size:11px; font-weight:700; font-family:var(--mono); flex-shrink:0;
+}
+.sb-user-info{flex:1; min-width:0}
+.sb-user-name{font-size:13px; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.sb-user-role{font-size:11px; color:var(--text-3); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+
+/* ---------- TOPBAR ---------- */
+.topbar{
+  grid-row:1; grid-column:2;
+  display:flex; align-items:center; gap:14px;
+  padding:0 22px; border-bottom:1px solid var(--border);
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.tb-crumbs{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--text-3); font-weight:500}
+.tb-crumbs .here{color:var(--text); font-weight:600}
+.tb-crumbs .sep{opacity:.5}
+.tb-actions{margin-left:auto; display:flex; align-items:center; gap:6px}
+.tb-search{
+  display:flex; align-items:center; gap:8px;
+  padding:7px 12px; border-radius:9px; border:1px solid var(--border);
+  background:var(--surface-2); color:var(--text-3); font-size:13px;
+  transition:all .15s; min-width:230px; margin-right:6px;
+}
+.tb-search:hover{border-color:var(--border-2); background:var(--surface); color:var(--text-2)}
+.tb-search svg{width:14px; height:14px}
+.tb-search kbd{
+  margin-left:auto; font-family:var(--mono); font-size:10.5px;
+  padding:1px 6px; border-radius:5px;
+  background:var(--surface); border:1px solid var(--border); color:var(--text-3);
+}
+.tb-icon{
+  width:34px; height:34px; border-radius:9px; display:grid; place-items:center;
+  color:var(--text-2); position:relative; transition:all .15s;
+}
+.tb-icon:hover{background:var(--surface-2); color:var(--text)}
+.tb-icon svg{width:17px; height:17px}
+.tb-icon .dot{
+  position:absolute; top:7px; right:8px;
+  width:7px; height:7px; border-radius:50%;
+  background:var(--york-green); border:2px solid var(--canvas);
+}
+.tb-avatar{
+  width:30px; height:30px; border-radius:7px; display:grid; place-items:center;
+  background:var(--york-blue); color:#fff;
+  font-size:11px; font-weight:700; font-family:var(--mono); cursor:pointer;
+}
+
+/* ---------- MAIN ---------- */
+.main{
+  grid-row:2; grid-column:2;
+  overflow-y:auto; padding:26px 30px 60px;
+}
+.view{display:none; animation:viewIn .28s cubic-bezier(.2,.8,.3,1) both}
+.view.active{display:block}
+@keyframes viewIn{from{opacity:0; transform:translateY(6px)}to{opacity:1; transform:none}}
+
+.page-head{margin-bottom:22px}
+.page-head h1{
+  font-size:1.45rem; font-weight:600; letter-spacing:-.025em; margin-bottom:4px;
+}
+.page-head p{color:var(--text-2); font-size:13.5px}
+
+/* ---------- STATS ROW ---------- */
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:22px}
+.stat{
+  padding:16px 18px; border-radius:var(--r-md);
+  background:var(--surface); border:1px solid var(--border);
+  transition:all .2s;
+}
+.stat:hover{border-color:var(--border-2); box-shadow:var(--shadow-xs)}
+.stat-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px}
+.stat-label{font-size:11.5px; font-weight:600; color:var(--text-3); letter-spacing:.05em; text-transform:uppercase}
+.stat-ic{width:26px; height:26px; border-radius:8px; display:grid; place-items:center}
+.stat-ic svg{width:14px; height:14px}
+.stat-val{font-size:1.7rem; font-weight:600; letter-spacing:-.03em; line-height:1; margin-bottom:6px}
+.stat-val span{font-size:.85rem; color:var(--text-3); font-weight:500; margin-left:2px; letter-spacing:0}
+.stat-sub{font-size:12px; color:var(--text-3); display:flex; align-items:center; gap:5px}
+.trend-up{color:var(--york-green-2); font-weight:600}
+.trend-dn{color:var(--coral); font-weight:600}
+
+/* ---------- JOURNEY STRIP ---------- */
+.journey{
+  border-radius:var(--r-lg); background:var(--surface); border:1px solid var(--border);
+  padding:24px 26px 20px; margin-bottom:22px;
+}
+.journey-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:20px}
+.journey-head h2{font-size:1rem; font-weight:600; letter-spacing:-.015em}
+.journey-head .link{font-size:12.5px; color:var(--york-green-2); font-weight:500; display:flex; align-items:center; gap:5px}
+.journey-head .link:hover{text-decoration:underline}
+.journey-flow{
+  display:grid; grid-template-columns:repeat(7,1fr); gap:8px;
+  position:relative;
+}
+.stage{
+  padding:14px 10px 12px; border-radius:var(--r-md);
+  background:var(--surface-2); border:1px solid transparent;
+  cursor:pointer; transition:all .2s; text-align:center; position:relative;
+}
+.stage:hover{border-color:var(--border-2); background:var(--surface); box-shadow:var(--shadow-xs)}
+.stage-ic{
+  width:32px; height:32px; border-radius:10px; display:grid; place-items:center;
+  margin:0 auto 8px; color:#fff;
+}
+.stage-ic svg{width:16px; height:16px}
+.stage-name{font-size:11.5px; font-weight:600; letter-spacing:-.005em; margin-bottom:2px}
+.stage-count{font-size:10.5px; color:var(--text-3); font-family:var(--mono)}
+.stage::after{
+  content:''; position:absolute; top:50%; right:-14px; transform:translateY(-50%);
+  width:12px; height:1.5px; background:var(--border-2);
+}
+.stage:last-child::after{display:none}
+
+/* ---------- PANELS ---------- */
+.panels{display:grid; grid-template-columns:1.55fr 1fr; gap:14px; margin-bottom:22px}
+.panel{
+  border-radius:var(--r-lg); background:var(--surface); border:1px solid var(--border);
+  overflow:hidden; display:flex; flex-direction:column;
+}
+.panel-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:15px 18px; border-bottom:1px solid var(--border); flex-shrink:0;
+}
+.panel-head h3{font-size:13.5px; font-weight:600; letter-spacing:-.01em}
+.panel-head .link{font-size:12px; color:var(--york-green-2); font-weight:500}
+.panel-head .link:hover{text-decoration:underline}
+.panel-body{padding:6px 18px 14px}
+
+/* initiative rows */
+.init{
+  display:flex; align-items:center; gap:12px;
+  padding:12px 0; border-bottom:1px solid var(--border);
+  cursor:pointer; transition:all .15s;
+}
+.init:last-child{border-bottom:none}
+.init:hover{padding-left:4px}
+.init-dot{width:8px; height:8px; border-radius:50%; flex-shrink:0}
+.init-body{flex:1; min-width:0}
+.init-name{font-size:13.5px; font-weight:500; margin-bottom:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.init-meta{font-size:11.5px; color:var(--text-3); display:flex; align-items:center; gap:8px}
+.init-meta .stage-tag{
+  font-family:var(--mono); padding:1px 6px; border-radius:4px;
+  background:var(--surface-2); color:var(--text-2); font-size:10.5px; font-weight:500;
+}
+.init-progress{
+  width:80px; height:4px; border-radius:2px; background:var(--surface-3);
+  overflow:hidden; flex-shrink:0;
+}
+.init-progress span{display:block; height:100%; border-radius:2px}
+
+/* activity rows */
+.act{
+  display:flex; gap:12px; padding:11px 0;
+  border-bottom:1px solid var(--border); font-size:13px; line-height:1.55;
+}
+.act:last-child{border-bottom:none}
+.act-dot{width:7px; height:7px; border-radius:50%; margin-top:6px; flex-shrink:0}
+.act-dot.ok{background:var(--york-green); box-shadow:0 0 0 3px var(--york-green-dim)}
+.act-dot.warn{background:var(--amber); box-shadow:0 0 0 3px var(--amber-dim)}
+.act-dot.err{background:var(--coral); box-shadow:0 0 0 3px var(--coral-dim)}
+.act-dot.info{background:var(--york-green); box-shadow:0 0 0 3px var(--york-green-dim)}
+.act-text{flex:1; color:var(--text-2)}
+.act-text b{color:var(--text); font-weight:500}
+.act-time{font-size:11.5px; color:var(--text-3); font-family:var(--mono); flex-shrink:0}
+
+/* ---------- SERVICE GRID ---------- */
+.svc-header{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:16px; gap:16px; flex-wrap:wrap;
+}
+.svc-header h2{font-size:1rem; font-weight:600; letter-spacing:-.015em}
+.svc-header .link{font-size:12.5px; color:var(--york-green-2); font-weight:500}
+.svc-header .link:hover{text-decoration:underline}
+
+.svc-cats{display:flex; flex-direction:column; gap:26px}
+.svc-cat{}
+.svc-cat-head{
+  display:flex; align-items:center; gap:10px; margin-bottom:12px;
+}
+.svc-cat-dot{width:8px; height:8px; border-radius:50%; flex-shrink:0}
+.svc-cat-name{font-size:12.5px; font-weight:600; letter-spacing:.01em}
+.svc-cat-count{
+  font-size:11px; font-family:var(--mono); color:var(--text-3);
+  background:var(--surface-2); padding:1px 7px; border-radius:5px;
+}
+.svc-grid{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+}
+.svc{
+  padding:16px 16px 14px; border-radius:var(--r-md);
+  background:var(--surface); border:1px solid var(--border);
+  cursor:pointer; transition:all .2s; display:flex; flex-direction:column;
+  min-height:130px;
+}
+.svc:hover{box-shadow:var(--shadow-sm); border-color:var(--border-2)}
+.svc-icon{
+  width:32px; height:32px; border-radius:9px; display:grid; place-items:center;
+  margin-bottom:12px; color:#fff;
+}
+.svc-icon svg{width:16px; height:16px}
+.svc-name{font-size:13px; font-weight:600; letter-spacing:-.01em; margin-bottom:3px}
+.svc-desc{
+  font-size:11.5px; color:var(--text-3); line-height:1.5;
+  flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.svc-foot{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-top:12px; padding-top:10px; border-top:1px solid var(--border);
+}
+.svc-status{
+  display:flex; align-items:center; gap:5px;
+  font-size:10.5px; font-family:var(--mono); font-weight:500;
+}
+.svc-status .sdot{width:6px; height:6px; border-radius:50%}
+.svc-status.live{color:var(--york-green-2)}
+.svc-status.live .sdot{background:var(--york-green)}
+.svc-status.beta{color:var(--amber)}
+.svc-status.beta .sdot{background:var(--amber)}
+.svc-status.new{color:var(--york-blue)}
+.svc-status.new .sdot{background:var(--york-blue)}
+.svc-open{color:var(--text-3); font-size:12px; transition:all .15s}
+.svc:hover .svc-open{color:var(--york-green)}
+
+/* ---------- JOURNEY FULL VIEW ---------- */
+.journey-full{
+  border-radius:var(--r-lg); background:var(--surface); border:1px solid var(--border);
+  padding:32px 30px; margin-bottom:22px;
+}
+.journey-full h2{font-size:1.15rem; font-weight:600; letter-spacing:-.02em; margin-bottom:6px}
+.journey-full > p{color:var(--text-2); font-size:13.5px; margin-bottom:28px; max-width:680px}
+.flow-row{
+  display:grid; grid-template-columns:repeat(8,1fr); gap:6px; margin-bottom:32px;
+}
+.flow-stage{
+  padding:16px 12px 14px; border-radius:var(--r-md);
+  background:var(--surface-2); border:1px solid transparent;
+  text-align:center; cursor:pointer; transition:all .2s; position:relative;
+}
+.flow-stage:hover{background:var(--surface); border-color:var(--border-2); box-shadow:var(--shadow-sm)}
+.flow-num{
+  font-size:10.5px; font-family:var(--mono); color:var(--text-3);
+  margin-bottom:8px; letter-spacing:.05em;
+}
+.flow-ic{
+  width:36px; height:36px; border-radius:11px; display:grid; place-items:center;
+  margin:0 auto 10px; color:#fff;
+}
+.flow-ic svg{width:18px; height:18px}
+.flow-name{font-size:12.5px; font-weight:600; margin-bottom:3px}
+.flow-desc{font-size:10.5px; color:var(--text-3); line-height:1.4}
+.flow-stage::after{
+  content:''; position:absolute; top:50%; right:-8px; transform:translateY(-50%);
+  width:10px; height:1.5px; background:var(--border-2);
+}
+.flow-stage:last-child::after{display:none}
+
+/* flow detail */
+.flow-detail{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px}
+.flow-panel{
+  padding:20px 22px; border-radius:var(--r-md);
+  background:var(--surface-2); border:1px solid var(--border);
+}
+.flow-panel h4{font-size:12.5px; font-weight:600; margin-bottom:4px; display:flex; align-items:center; gap:8px}
+.flow-panel h4 .chip{
+  font-size:10px; font-family:var(--mono); padding:1px 7px; border-radius:4px;
+  background:var(--surface); color:var(--text-2); font-weight:500;
+}
+.flow-panel p{font-size:12.5px; color:var(--text-2); line-height:1.6; margin-bottom:12px}
+.flow-panel .tool-list{display:flex; flex-wrap:wrap; gap:6px}
+.flow-panel .tool{
+  font-size:11.5px; padding:4px 10px; border-radius:6px;
+  background:var(--surface); border:1px solid var(--border); color:var(--text-2);
+  font-weight:500;
+}
+.flow-panel .tool:hover{border-color:var(--york-green); color:var(--york-green-2)}
+
+/* ---------- FILTER BAR ---------- */
+.filter-bar{
+  display:flex; align-items:center; gap:8px; margin-bottom:18px; flex-wrap:wrap;
+}
+.filter-chip{
+  padding:6px 12px; border-radius:6px; font-size:12.5px; font-weight:500;
+  color:var(--text-2); background:var(--surface); border:1px solid var(--border);
+  transition:all .15s;
+}
+.filter-chip:hover{border-color:var(--border-2); color:var(--text)}
+.filter-chip.active{background:var(--york-green); color:#fff; border-color:var(--york-green)}
+.filter-spacer{flex:1}
+.filter-search{
+  display:flex; align-items:center; gap:8px;
+  padding:7px 12px; border-radius:9px; border:1px solid var(--border);
+  background:var(--surface); font-size:13px; min-width:220px;
+}
+.filter-search svg{width:14px; height:14px; color:var(--text-3)}
+.filter-search input{
+  flex:1; background:transparent; border:none; outline:none;
+  font-family:var(--sans); font-size:13px; color:var(--text);
+}
+.filter-search input::placeholder{color:var(--text-3)}
+
+/* ---------- CMND PALETTE ---------- */
+.cmdk{
+  position:fixed; inset:0; z-index:200; display:none;
+  align-items:flex-start; justify-content:center; padding-top:12vh;
+  background:rgba(20,20,20,.35); backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+}
+.cmdk.open{display:flex; animation:fadeIn .15s both}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.cmdk-box{
+  width:100%; max-width:600px; border-radius:var(--r-lg); overflow:hidden;
+  background:var(--surface); border:1px solid var(--border-2);
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.35);
+  animation:popIn .18s cubic-bezier(.2,.9,.3,1.2) both;
+}
+@keyframes popIn{from{opacity:0; transform:scale(.97) translateY(-6px)}to{opacity:1; transform:none}}
+.cmdk-input{
+  display:flex; align-items:center; gap:12px; padding:16px 18px;
+  border-bottom:1px solid var(--border);
+}
+.cmdk-input svg{width:17px; height:17px; color:var(--text-3)}
+.cmdk-input input{
+  flex:1; background:transparent; border:none; outline:none;
+  font-family:var(--sans); font-size:15px; color:var(--text);
+}
+.cmdk-input input::placeholder{color:var(--text-3)}
+.cmdk-list{max-height:380px; overflow-y:auto; padding:8px}
+.cmdk-group{
+  font-size:10.5px; font-weight:600; color:var(--text-3);
+  text-transform:uppercase; letter-spacing:.08em;
+  padding:10px 12px 6px;
+}
+.cmdk-item{
+  display:flex; align-items:center; gap:11px;
+  padding:9px 12px; border-radius:var(--r-sm); font-size:13.5px;
+  color:var(--text-2); cursor:pointer; transition:all .1s;
+}
+.cmdk-item:hover, .cmdk-item.sel{background:var(--surface-2); color:var(--text)}
+.cmdk-item .ci{
+  width:26px; height:26px; border-radius:7px; display:grid; place-items:center;
+  background:var(--surface-2); color:var(--text-3); flex-shrink:0;
+}
+.cmdk-item .ci svg{width:14px; height:14px}
+.cmdk-item.sel .ci{background:var(--accent-dim); color:var(--york-green)}
+.cmdk-item .ck{margin-left:auto; font-family:var(--mono); font-size:10.5px; color:var(--text-3)}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:1200px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .svc-grid{grid-template-columns:repeat(3,1fr)}
+  .panels{grid-template-columns:1fr}
+  .journey-flow{grid-template-columns:repeat(4,1fr); row-gap:20px}
+  .stage::after{display:none}
+  .flow-row{grid-template-columns:repeat(4,1fr); row-gap:12px}
+  .flow-stage::after{display:none}
+  .flow-detail{grid-template-columns:1fr}
+}
+@media(max-width:900px){
+  :root{--sidebar:0px}
+  .sidebar{display:none}
+  .stats{grid-template-columns:1fr}
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .tb-search{display:none}
+  .main{padding:20px 18px 48px}
+  .tb-crumbs{font-size:12px}
+}
+@media(max-width:600px){
+  .svc-grid{grid-template-columns:1fr}
+  .flow-row{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-top">
+      <div class="sb-logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5l6 8 6-8M12 13v6"/></svg>
+      </div>
+      <div class="sb-brand">York Foundation</div>
+      <a class="sb-exit" href="index.html" title="Back to site">Exit</a>
+    </div>
+
+    <div class="sb-workspace">
+      <div class="sb-ws-avatar">AC</div>
+      <div class="sb-ws-name">Acme Inc</div>
+      <div class="sb-ws-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    </div>
+
+    <div class="sb-scroll">
+      <div class="sb-group">
+        <div class="sb-item active" data-view="dashboard">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></span>
+          <span class="sb-label">Dashboard</span>
+        </div>
+        <div class="sb-item" data-view="journey">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6v6H4zM14 14h6v6h-6zM10 7h4v10h-4z"/></svg></span>
+          <span class="sb-label">Product Journey</span>
+        </div>
+        <div class="sb-item" data-view="services">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+          <span class="sb-label">All Services</span>
+          <span class="sb-badge">24</span>
+        </div>
+      </div>
+
+      <div class="sb-group">
+        <div class="sb-group-label">Build & Ship</div>
+        <div class="sb-item" data-nav="R&D Launchpad">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg></span>
+          <span class="sb-label">R&D Launchpad</span>
+        </div>
+        <div class="sb-item" data-nav="Gerrit">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M8.5 6L15.5 12M8.5 18L15.5 12"/></svg></span>
+          <span class="sb-label">Gerrit</span>
+        </div>
+        <div class="sb-item" data-nav="Design Library">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></span>
+          <span class="sb-label">Design Library</span>
+        </div>
+        <div class="sb-item" data-nav="PMT">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg></span>
+          <span class="sb-label">PMT</span>
+        </div>
+      </div>
+
+      <div class="sb-group">
+        <div class="sb-group-label">Go-to-Market</div>
+        <div class="sb-item" data-nav="GTM Launchpad">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+          <span class="sb-label">GTM Launchpad</span>
+        </div>
+        <div class="sb-item" data-nav="GTM Pulse">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20v-6M9 20V8M14 20v-9M19 20V5"/></svg></span>
+          <span class="sb-label">GTM Pulse</span>
+        </div>
+      </div>
+
+      <div class="sb-group">
+        <div class="sb-group-label">Signal & Analytics</div>
+        <div class="sb-item" data-nav="R&D Pulse">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span>
+          <span class="sb-label">R&D Pulse</span>
+        </div>
+        <div class="sb-item" data-nav="Finance Pulse">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+          <span class="sb-label">Finance Pulse</span>
+        </div>
+        <div class="sb-item" data-nav="Prompt Dashboard">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h7"/></svg></span>
+          <span class="sb-label">Prompt Dashboard</span>
+        </div>
+      </div>
+
+      <div class="sb-group">
+        <div class="sb-group-label">AI & Advisory</div>
+        <div class="sb-item" data-nav="Fuel">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.5 4.5 2.5 6.5 7 7-4.5.5-6.5 2.5-7 7-.5-4.5-2.5-6.5-7-7 4.5-.5 6.5-2.5 7-7z"/></svg></span>
+          <span class="sb-label">Fuel</span>
+        </div>
+        <div class="sb-item" data-nav="Investment Advisor">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span>
+          <span class="sb-label">Investment Advisor</span>
+          <span class="sb-badge new">NEW</span>
+        </div>
+      </div>
+
+      <div class="sb-group">
+        <div class="sb-group-label">Platform</div>
+        <div class="sb-item" data-nav="Connector Hub">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6M9 16h6M9 8h6"/><rect x="4" y="3" width="16" height="18" rx="2"/></svg></span>
+          <span class="sb-label">Connector Hub</span>
+        </div>
+        <div class="sb-item" data-nav="Team & Access">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          <span class="sb-label">Team &amp; Access</span>
+        </div>
+        <div class="sb-item" data-nav="Billing">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
+          <span class="sb-label">Billing &amp; Usage</span>
+        </div>
+        <div class="sb-item" data-nav="Settings">
+          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2V21a2 2 0 1 1-4 0v-.1A1.7 1.7 0 0 0 7 19.4a1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0-1.2-2.9H1a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 2.6 7a1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H7a1.7 1.7 0 0 0 1-1.5V1a2 2 0 1 1 4 0v.1A1.7 1.7 0 0 0 17 2.6a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V7a1.7 1.7 0 0 0 1.5 1H23a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span>
+          <span class="sb-label">Settings</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-bottom">
+      <div class="sb-user">
+        <div class="sb-user-avatar">AK</div>
+        <div class="sb-user-info">
+          <div class="sb-user-name">Alex Kim</div>
+          <div class="sb-user-role">Admin</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="tb-crumbs">
+      <span>Acme Inc</span>
+      <span class="sep">/</span>
+      <span class="here" id="crumb">Dashboard</span>
+    </div>
+    <div class="tb-actions">
+      <button class="tb-search" id="openCmdk">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <span>Search services, actions…</span>
+        <kbd>⌘K</kbd>
+      </button>
+      <button class="tb-icon" title="Notifications">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        <span class="dot"></span>
+      </button>
+      <button class="tb-icon" title="Help">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3 2.5c-.6.3-1 .9-1 1.6v.4M12 17h.01"/></svg>
+      </button>
+      <div class="tb-avatar">AK</div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ============ VIEW: DASHBOARD ============ -->
+    <section class="view active" id="view-dashboard">
+      <div class="page-head">
+        <h1>Acme workspace</h1>
+        <p>Initiatives, health, and activity across the York stack.</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-head">
+            <span class="stat-label">Active Initiatives</span>
+            <span class="stat-ic" style="background:var(--york-blue-dim); color:var(--york-blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></span>
+          </div>
+          <div class="stat-val">18</div>
+          <div class="stat-sub">across R&amp;D, GTM &amp; Finance</div>
+        </div>
+        <div class="stat">
+          <div class="stat-head">
+            <span class="stat-label">R&amp;D Health</span>
+            <span class="stat-ic" style="background:var(--york-green-dim); color:var(--york-green-2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span>
+          </div>
+          <div class="stat-val">87<span>/100</span></div>
+          <div class="stat-sub"><span class="trend-up">▲ 4.2</span> vs last sprint</div>
+        </div>
+        <div class="stat">
+          <div class="stat-head">
+            <span class="stat-label">GTM Reach</span>
+            <span class="stat-ic" style="background:var(--amber-dim); color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20v-6M9 20V8M14 20v-9M19 20V5"/></svg></span>
+          </div>
+          <div class="stat-val">184K</div>
+          <div class="stat-sub"><span class="trend-up">▲ 12.6%</span> this month</div>
+        </div>
+        <div class="stat">
+          <div class="stat-head">
+            <span class="stat-label">Runway</span>
+            <span class="stat-ic" style="background:var(--york-blue-dim); color:var(--york-blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+          </div>
+          <div class="stat-val">22<span>mo</span></div>
+          <div class="stat-sub">at current burn rate</div>
+        </div>
+      </div>
+
+      <div class="journey">
+        <div class="journey-head">
+          <h2>Your product journey</h2>
+          <a class="link" data-view="journey">View full journey →</a>
+        </div>
+        <div class="journey-flow">
+          <div class="stage">
+            <div class="stage-ic" style="background:var(--york-blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.5 4.5 2.5 6.5 7 7-4.5.5-6.5 2.5-7 7-.5-4.5-2.5-6.5-7-7 4.5-.5 6.5-2.5 7-7z"/></svg></div>
+            <div class="stage-name">Ideation</div>
+            <div class="stage-count">Fuel · 3</div>
+          </div>
+          <div class="stage">
+            <div class="stage-ic" style="background:var(--york-blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></div>
+            <div class="stage-name">Build</div>
+            <div class="stage-count">Launchpad · 7</div>
+          </div>
+          <div class="stage">
+            <div class="stage-ic" style="background:var(--cyan)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div>
+            <div class="stage-name">QA &amp; Audit</div>
+            <div class="stage-count">5 tools · 4</div>
+          </div>
+          <div class="stage">
+            <div class="stage-ic" style="background:var(--york-green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></div>
+            <div class="stage-name">Go-to-Market</div>
+            <div class="stage-count">GTM · 6</div>
+          </div>
+          <div class="stage">
+            <div class="stage-ic" style="background:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20v-6M9 20V8M14 20v-9M19 20V5"/></svg></div>
+            <div class="stage-name">Signal</div>
+            <div class="stage-count">Pulse · 3</div>
+          </div>
+          <div class="stage">
+            <div class="stage-ic" style="background:var(--magenta)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div class="stage-name">Finance</div>
+            <div class="stage-count">Finance Pulse</div>
+          </div>
+          <div class="stage">
+            <div class="stage-ic" style="background:var(--indigo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
+            <div class="stage-name">Invest</div>
+            <div class="stage-count">AI Advisor</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panels">
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Active initiatives</h3>
+            <a class="link">View all →</a>
+          </div>
+          <div class="panel-body">
+            <div class="init">
+              <span class="init-dot" style="background:var(--york-blue)"></span>
+              <div class="init-body">
+                <div class="init-name">york-api v2 — payments webhook</div>
+                <div class="init-meta"><span class="stage-tag">R&amp;D</span> · 3 contributors · QA passing</div>
+              </div>
+              <div class="init-progress"><span style="width:78%; background:var(--york-blue)"></span></div>
+            </div>
+            <div class="init">
+              <span class="init-dot" style="background:var(--york-green)"></span>
+              <div class="init-body">
+                <div class="init-name">Q1 brand campaign — LinkedIn + X</div>
+                <div class="init-meta"><span class="stage-tag">GTM</span> · 12 posts scheduled</div>
+              </div>
+              <div class="init-progress"><span style="width:45%; background:var(--york-green)"></span></div>
+            </div>
+            <div class="init">
+              <span class="init-dot" style="background:var(--york-blue)"></span>
+              <div class="init-body">
+                <div class="init-name">Series A data room — investor deck v3</div>
+                <div class="init-meta"><span class="stage-tag">CAPITAL</span> · 4 investors engaged</div>
+              </div>
+              <div class="init-progress"><span style="width:62%; background:var(--york-blue)"></span></div>
+            </div>
+            <div class="init">
+              <span class="init-dot" style="background:var(--amber)"></span>
+              <div class="init-body">
+                <div class="init-name">Q1 internal audit — SOC 2 readiness</div>
+                <div class="init-meta"><span class="stage-tag">AUDIT</span> · 18 controls reviewed</div>
+              </div>
+              <div class="init-progress"><span style="width:34%; background:var(--amber)"></span></div>
+            </div>
+            <div class="init">
+              <span class="init-dot" style="background:var(--cyan)"></span>
+              <div class="init-body">
+                <div class="init-name">Onboarding LMS — new hire track</div>
+                <div class="init-meta"><span class="stage-tag">PEOPLE</span> · 24 lessons published</div>
+              </div>
+              <div class="init-progress"><span style="width:88%; background:var(--cyan)"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Recent activity</h3>
+            <a class="link">See all →</a>
+          </div>
+          <div class="panel-body">
+            <div class="act">
+              <span class="act-dot ok"></span>
+              <span class="act-text"><b>R&amp;D Pulse</b> health score improved to 87 — QA pass rate up 4.2</span>
+              <span class="act-time">12m</span>
+            </div>
+            <div class="act">
+              <span class="act-dot info"></span>
+              <span class="act-text"><b>GTM Launchpad</b> scheduled 3 posts across LinkedIn &amp; X</span>
+              <span class="act-time">28m</span>
+            </div>
+            <div class="act">
+              <span class="act-dot warn"></span>
+              <span class="act-text"><b>Prompt Dashboard</b> flagged 6 prompts with regression in eval score</span>
+              <span class="act-time">1h</span>
+            </div>
+            <div class="act">
+              <span class="act-dot ok"></span>
+              <span class="act-text"><b>Investment Advisor</b> matched 2 new seed-stage investors in your sector</span>
+              <span class="act-time">2h</span>
+            </div>
+            <div class="act">
+              <span class="act-dot err"></span>
+              <span class="act-text"><b>Internal Audit</b> flagged control AC-14 missing evidence</span>
+              <span class="act-time">3h</span>
+            </div>
+            <div class="act">
+              <span class="act-dot info"></span>
+              <span class="act-text"><b>Hub</b> onboarded 2 new team members this week</span>
+              <span class="act-time">5h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="svc-header">
+        <h2>Your services</h2>
+        <a class="link" data-view="services">View all 24 →</a>
+      </div>
+      <div class="svc-grid" id="quickServices"></div>
+    </section>
+
+    <!-- ============ VIEW: JOURNEY ============ -->
+    <section class="view" id="view-journey">
+      <div class="page-head">
+        <h1>Product Journey</h1>
+        <p>The full lifecycle, from first idea to investor update — every stage connected.</p>
+      </div>
+
+      <div class="journey-full">
+        <h2>Eight stages, one thread</h2>
+        <p>Each stage feeds the next. Data, context, and decisions flow forward — so nothing gets re-explained, re-exported, or lost between tools.</p>
+
+        <div class="flow-row">
+          <div class="flow-stage">
+            <div class="flow-num">01</div>
+            <div class="flow-ic" style="background:var(--york-blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.5 4.5 2.5 6.5 7 7-4.5.5-6.5 2.5-7 7-.5-4.5-2.5-6.5-7-7 4.5-.5 6.5-2.5 7-7z"/></svg></div>
+            <div class="flow-name">Ideate</div>
+            <div class="flow-desc">Research &amp; framing</div>
+          </div>
+          <div class="flow-stage">
+            <div class="flow-num">02</div>
+            <div class="flow-ic" style="background:var(--york-blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></div>
+            <div class="flow-name">Build</div>
+            <div class="flow-desc">Code &amp; ship</div>
+          </div>
+          <div class="flow-stage">
+            <div class="flow-num">03</div>
+            <div class="flow-ic" style="background:var(--cyan)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div>
+            <div class="flow-name">QA &amp; Audit</div>
+            <div class="flow-desc">Quality gates</div>
+          </div>
+          <div class="flow-stage">
+            <div class="flow-num">04</div>
+            <div class="flow-ic" style="background:var(--york-green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></div>
+            <div class="flow-name">Launch</div>
+            <div class="flow-desc">Campaigns &amp; CRM</div>
+          </div>
+          <div class="flow-stage">
+            <div class="flow-num">05</div>
+            <div class="flow-ic" style="background:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20v-6M9 20V8M14 20v-9M19 20V5"/></svg></div>
+            <div class="flow-name">Measure</div>
+            <div class="flow-desc">Signal &amp; pulse</div>
+          </div>
+          <div class="flow-stage">
+            <div class="flow-num">06</div>
+            <div class="flow-ic" style="background:var(--magenta)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div class="flow-name">Finance</div>
+            <div class="flow-desc">Burn, runway, ROI</div>
+          </div>
+          <div class="flow-stage">
+            <div class="flow-num">07</div>
+            <div class="flow-ic" style="background:var(--indigo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
+            <div class="flow-name">Invest</div>
+            <div class="flow-desc">Raise &amp; report</div>
+          </div>
+          <div class="flow-stage">
+            <div class="flow-num">08</div>
+            <div class="flow-ic" style="background:var(--york-blue-2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+            <div class="flow-name">People</div>
+            <div class="flow-desc">Hire, learn, assess</div>
+          </div>
+        </div>
+
+        <div class="flow-detail">
+          <div class="flow-panel">
+            <h4>Stage 01 — Ideate <span class="chip">FUEL</span></h4>
+            <p>Research, frame, and pressure-test ideas. Fuel pulls context from Slack, Granola, HubSpot, and your own workspace history — so decisions start informed, not blank.</p>
+            <div class="tool-list">
+              <span class="tool">Fuel</span>
+              <span class="tool">Design Library</span>
+              <span class="tool">Competitor Analysis</span>
+            </div>
+          </div>
+          <div class="flow-panel">
+            <h4>Stage 02 — Build <span class="chip">R&amp;D</span></h4>
+            <p>Ship in R&amp;D Launchpad. Code review flows through Gerrit, tasks through PMT, design assets through the Design Library — every artifact linked to the initiative.</p>
+            <div class="tool-list">
+              <span class="tool">R&amp;D Launchpad</span>
+              <span class="tool">Gerrit</span>
+              <span class="tool">PMT</span>
+              <span class="tool">Design Library</span>
+            </div>
+          </div>
+          <div class="flow-panel">
+            <h4>Stage 03 — QA &amp; Audit <span class="chip">QUALITY</span></h4>
+            <p>Automated QA, internal audit, external compliance, UI/UX review, and cloud security — five gates, one signal. Failures roll up into R&amp;D Pulse automatically.</p>
+            <div class="tool-list">
+              <span class="tool">QA Usage Dashboard</span>
+              <span class="tool">Internal Audit</span>
+              <span class="tool">External Audit</span>
+              <span class="tool">UI/UX Audit</span>
+              <span class="tool">Prowler</span>
+            </div>
+          </div>
+          <div class="flow-panel">
+            <h4>Stage 04 — Launch <span class="chip">GTM</span></h4>
+            <p>Coordinate campaigns across social, CRM, and ads from one calendar. Approval flows, connector health, and scheduling — all in GTM Launchpad.</p>
+            <div class="tool-list">
+              <span class="tool">GTM Launchpad</span>
+              <span class="tool">Survey Ticket</span>
+            </div>
+          </div>
+          <div class="flow-panel">
+            <h4>Stage 05 — Measure <span class="chip">SIGNAL</span></h4>
+            <p>R&amp;D Pulse tracks engineering health. GTM Pulse tracks market performance. Prompt Dashboard tracks AI quality. All three roll up into one workspace signal.</p>
+            <div class="tool-list">
+              <span class="tool">R&amp;D Pulse</span>
+              <span class="tool">GTM Pulse</span>
+              <span class="tool">Prompt Dashboard</span>
+            </div>
+          </div>
+          <div class="flow-panel">
+            <h4>Stage 06 — Finance <span class="chip">CAPITAL</span></h4>
+            <p>Burn, runway, unit economics, per-initiative ROI. Finance Pulse connects engineering spend and GTM spend to outcomes — so you know which products are actually working.</p>
+            <div class="tool-list">
+              <span class="tool">Finance Pulse</span>
+            </div>
+          </div>
+          <div class="flow-panel">
+            <h4>Stage 07 — Invest <span class="chip">CAPITAL</span></h4>
+            <p>AI Investment Advisor identifies investor fit, prepares updates, manages the data room, and tracks engagement — from first outreach to signed term sheet.</p>
+            <div class="tool-list">
+              <span class="tool">Investment Advisor</span>
+              <span class="tool">Data Room</span>
+              <span class="tool">Investor Updates</span>
+            </div>
+          </div>
+          <div class="flow-panel">
+            <h4>Stage 08 — People <span class="chip">HRMS</span></h4>
+            <p>Hub manages HR, teams, and projects. LMS delivers learning. Assessment Platform runs org-wide evaluations. Walk-in and Internship Drives handle recruitment events.</p>
+            <div class="tool-list">
+              <span class="tool">Hub</span>
+              <span class="tool">LMS</span>
+              <span class="tool">Assessment</span>
+              <span class="tool">Walk in Drive</span>
+              <span class="tool">Internship Drive</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VIEW: SERVICES ============ -->
+    <section class="view" id="view-services">
+      <div class="page-head">
+        <h1>All Services</h1>
+        <p>24 products across build, quality, market, signal, capital, people, and support.</p>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-chip active">All</button>
+        <button class="filter-chip">Build</button>
+        <button class="filter-chip">Quality</button>
+        <button class="filter-chip">GTM</button>
+        <button class="filter-chip">Signal</button>
+        <button class="filter-chip">Capital</button>
+        <button class="filter-chip">People</button>
+        <button class="filter-chip">Support</button>
+        <div class="filter-spacer"></div>
+        <div class="filter-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input type="text" placeholder="Filter services…" id="svcFilter">
+        </div>
+      </div>
+
+      <div class="svc-cats" id="svcCatalog"></div>
+    </section>
+
+  </main>
+</div>
+
+<!-- COMMAND PALETTE -->
+<div class="cmdk" id="cmdk">
+  <div class="cmdk-box">
+    <div class="cmdk-input">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input type="text" id="cmdkInput" placeholder="Search services, actions, or ask anything…" autocomplete="off">
+    </div>
+    <div class="cmdk-list" id="cmdkList"></div>
+  </div>
+</div>
+
+<script>
+/* ============ DATA ============ */
+const CATEGORIES = [
+  { name:'Build & Ship', color:'var(--york-blue)', dim:'var(--york-blue-dim)', services:[
+    { name:'R&D Launchpad', desc:'AI-native fullstack product development platform.', icon:'M8 8l-4 4 4 4M16 8l4 4-4 4', status:'live' },
+    { name:'Gerrit', desc:'Code review platform for structured peer review.', icon:'M6 6h.01M6 18h.01M18 12h.01M8.5 6L15.5 12M8.5 18L15.5 12', status:'live' },
+    { name:'Design Library', desc:'Centralized design assets and component registry.', icon:'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z', status:'live' },
+    { name:'PMT', desc:'Project management tool for R&D and GTM initiatives.', icon:'M3 4h18v16H3zM3 10h18M9 10v10', status:'live' },
+  ]},
+  { name:'Quality & Audit', color:'var(--cyan)', dim:'var(--cyan-dim)', services:[
+    { name:'QA Usage Dashboard', desc:'Playwright run analytics across every project.', icon:'M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3zM9 12l2 2 4-4', status:'live' },
+    { name:'Internal Audit Platform', desc:'Structured internal auditing across controls.', icon:'M9 12h6M9 16h6M9 8h6M4 3h16v18H4z', status:'live' },
+    { name:'External Audit Platform', desc:'External compliance and regulatory readiness.', icon:'M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z', status:'live' },
+    { name:'UI/UX Audit Platform', desc:'UI/UX auditing against design guidelines.', icon:'M4 5h16v12H4zM8 21h8M12 17v4', status:'beta' },
+    { name:'Prowler', desc:'Cloud security posture scanning and compliance.', icon:'M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3zM8 12l2 2 6-6', status:'live' },
+  ]},
+  { name:'Go-to-Market', color:'var(--york-green)', dim:'var(--york-green-dim)', services:[
+    { name:'GTM Launchpad', desc:'Plan and schedule campaigns across social + CRM.', icon:'M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z', status:'live' },
+    { name:'GTM Pulse', desc:'Market performance — impressions, engagement, pipeline.', icon:'M4 20v-6M9 20V8M14 20v-9M19 20V5', status:'live' },
+  ]},
+  { name:'Signal & Analytics', color:'var(--amber)', dim:'var(--amber-dim)', services:[
+    { name:'R&D Pulse', desc:'Project health and engineering metrics tracking.', icon:'M3 12h4l3-8 4 16 3-8h4', status:'live' },
+    { name:'Finance Pulse', desc:'Burn, runway, unit economics, and initiative ROI.', icon:'M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6', status:'beta' },
+    { name:'Prompt Dashboard', desc:'AI prompt tracking, evaluation, and version analytics.', icon:'M4 7h16M4 12h10M4 17h7', status:'live' },
+  ]},
+  { name:'AI & Advisory', color:'var(--york-blue)', dim:'var(--york-blue-dim)', services:[
+    { name:'Fuel', desc:'AI advisor connected to Slack, Granola, and HubSpot.', icon:'M12 3c.5 4.5 2.5 6.5 7 7-4.5.5-6.5 2.5-7 7-.5-4.5-2.5-6.5-7-7 4.5-.5 6.5-2.5 7-7z', status:'live' },
+    { name:'Investment Advisor', desc:'Investor matching, updates, and data room management.', icon:'M3 17l6-6 4 4 8-8M14 7h7v7', status:'new' },
+  ]},
+  { name:'People & Learning', color:'var(--magenta)', dim:'var(--magenta-dim)', services:[
+    { name:'Hub', desc:'HRMS and people management, teams, and projects.', icon:'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8z', status:'live' },
+    { name:'LMS', desc:'Learning management system for onboarding & training.', icon:'M4 5l8-3 8 3-8 3-8-3zM4 5v11l8 5 8-5V5M12 12v9', status:'live' },
+    { name:'Assessment Platform', desc:'Org-wide assessments and skill tracking.', icon:'M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11', status:'live' },
+    { name:'Walk in Drive', desc:'Recruitment event platform for walk-in hiring.', icon:'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8zM23 21v-2a4 4 0 0 0-3-3.87', status:'live' },
+    { name:'Internship Drive', desc:'Internship recruitment and program management.', icon:'M22 10L12 5 2 10l10 5 10-5zM6 12v5c3 3 9 3 12 0v-5', status:'live' },
+  ]},
+  { name:'Support', color:'var(--coral)', dim:'var(--coral-dim)', services:[
+    { name:'Support Ticket', desc:'Unified ticketing across every product and team.', icon:'M4 4h16v12H8l-4 4V4z', status:'live' },
+    { name:'Survey Ticket', desc:'Survey and feedback system for internal & external users.', icon:'M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11', status:'live' },
+  ]},
+];
+
+/* ============ RENDER SERVICE GRID (quick + full) ============ */
+function svcCard(s, color) {
+  const statusText = s.status === 'new' ? 'NEW' : s.status === 'beta' ? 'BETA' : 'LIVE';
+  return `<div class="svc">
+    <div class="svc-icon" style="background:${color}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="${s.icon}"/></svg></div>
+    <div class="svc-name">${s.name}</div>
+    <div class="svc-desc">${s.desc}</div>
+    <div class="svc-foot">
+      <span class="svc-status ${s.status}"><span class="sdot"></span>${statusText}</span>
+      <span class="svc-open">→</span>
+    </div>
+  </div>`;
+}
+
+// Quick services on dashboard (6 featured)
+const featured = ['R&D Launchpad','Fuel','GTM Launchpad','R&D Pulse','Investment Advisor','Hub'];
+const allServices = CATEGORIES.flatMap(c => c.services.map(s => ({...s, color:c.color})));
+const qs = document.getElementById('quickServices');
+featured.forEach(name => {
+  const s = allServices.find(x => x.name === name);
+  if (s) qs.insertAdjacentHTML('beforeend', svcCard(s, s.color));
+});
+
+// Full catalog
+const cat = document.getElementById('svcCatalog');
+CATEGORIES.forEach(c => {
+  cat.insertAdjacentHTML('beforeend', `
+    <div class="svc-cat">
+      <div class="svc-cat-head">
+        <span class="svc-cat-dot" style="background:${c.color}"></span>
+        <span class="svc-cat-name">${c.name}</span>
+        <span class="svc-cat-count">${c.services.length}</span>
+      </div>
+      <div class="svc-grid">
+        ${c.services.map(s => svcCard(s, c.color)).join('')}
+      </div>
+    </div>
+  `);
+});
+
+/* ============ VIEW SWITCHING ============ */
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  const el = document.getElementById('view-' + name);
+  if (el) el.classList.add('active');
+  document.querySelectorAll('.sb-item').forEach(b => b.classList.toggle('active', b.dataset.view === name));
+  const labels = { dashboard:'Dashboard', journey:'Product Journey', services:'All Services' };
+  document.getElementById('crumb').textContent = labels[name] || 'Dashboard';
+  document.querySelector('.main').scrollTop = 0;
+}
+
+document.querySelectorAll('[data-view]').forEach(el => {
+  el.addEventListener('click', () => showView(el.dataset.view));
+});
+
+// Sidebar direct nav items — for now, just switch to services view for demo
+document.querySelectorAll('.sb-item[data-nav]').forEach(el => {
+  el.addEventListener('click', () => {
+    document.getElementById('crumb').textContent = el.dataset.nav;
+    showView('services');
+  });
+});
+
+/* ============ FILTER CHIPS (Services) ============ */
+document.querySelectorAll('.filter-chip').forEach(c => {
+  c.addEventListener('click', () => {
+    document.querySelectorAll('.filter-chip').forEach(x => x.classList.remove('active'));
+    c.classList.add('active');
+  });
+});
+document.getElementById('svcFilter').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll('#svcCatalog .svc').forEach(s => {
+    s.style.display = s.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+  document.querySelectorAll('#svcCatalog .svc-cat').forEach(c => {
+    const visible = [...c.querySelectorAll('.svc')].some(s => s.style.display !== 'none');
+    c.style.display = visible ? '' : 'none';
+  });
+});
+
+/* ============ COMMAND PALETTE ============ */
+const cmdk = document.getElementById('cmdk');
+const cmdkInput = document.getElementById('cmdkInput');
+const cmdkList = document.getElementById('cmdkList');
+let selIdx = 0;
+
+const CMND_ITEMS = [
+  { group:'Navigate', items:[
+    { label:'Dashboard', view:'dashboard', key:'G D' },
+    { label:'Product Journey', view:'journey', key:'G J' },
+    { label:'All Services', view:'services', key:'G S' },
+  ]},
+  { group:'Services', items: allServices.map(s => ({ label:s.name, service:true, key:'' })) },
+  { group:'Actions', items:[
+    { label:'Create new initiative', key:'N I' },
+    { label:'Invite team member', key:'I T' },
+    { label:'Start new R&D project', key:'N P' },
+    { label:'Schedule GTM campaign', key:'N C' },
+    { label:'Prepare investor update', key:'N U' },
+  ]},
+];
+
+function renderCmdk(filter='') {
+  const f = filter.toLowerCase();
+  let html = '';
+  CMND_ITEMS.forEach(g => {
+    const items = g.items.filter(i => i.label.toLowerCase().includes(f));
+    if (!items.length) return;
+    html += `<div class="cmdk-group">${g.group}</div>`;
+    items.forEach(i => {
+      html += `<div class="cmdk-item" data-view="${i.view||''}" data-label="${i.label}">
+        <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/></svg></span>
+        ${i.label}
+        ${i.key ? `<span class="ck">${i.key}</span>` : ''}
+      </div>`;
+    });
+  });
+  cmdkList.innerHTML = html;
+  cmdkList.querySelectorAll('.cmdk-item').forEach(el => {
+    el.addEventListener('click', () => {
+      if (el.dataset.view) showView(el.dataset.view);
+      closeCmdk();
+    });
+  });
+  selIdx = 0;
+  setSel(0);
+}
+function items() { return [...cmdkList.querySelectorAll('.cmdk-item')]; }
+function setSel(i) {
+  const it = items();
+  it.forEach(x => x.classList.remove('sel'));
+  selIdx = Math.max(0, Math.min(i, it.length - 1));
+  if (it[selIdx]) { it[selIdx].classList.add('sel'); it[selIdx].scrollIntoView({block:'nearest'}); }
+}
+function openCmdk() { cmdk.classList.add('open'); cmdkInput.value=''; renderCmdk(); cmdkInput.focus(); }
+function closeCmdk() { cmdk.classList.remove('open'); }
+
+document.getElementById('openCmdk').addEventListener('click', openCmdk);
+cmdk.addEventListener('click', e => { if (e.target === cmdk) closeCmdk(); });
+cmdkInput.addEventListener('input', () => renderCmdk(cmdkInput.value));
+cmdkInput.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown') { e.preventDefault(); setSel(selIdx + 1); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); setSel(selIdx - 1); }
+  else if (e.key === 'Enter') {
+    const it = items()[selIdx];
+    if (it) { if (it.dataset.view) showView(it.dataset.view); closeCmdk(); }
+  } else if (e.key === 'Escape') closeCmdk();
+});
+addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openCmdk(); }
+  if (e.key === 'Escape' && cmdk.classList.contains('open')) closeCmdk();
+});
+</script>
+</body>
+</html>
