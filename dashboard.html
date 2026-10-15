@@ -234,35 +234,6 @@ button{font-family:inherit; cursor:pointer; border:none; background:none; color:
 .trend-up{color:var(--brand); font-weight:600}
 .trend-dn{color:var(--err); font-weight:600}
 
-/* ---------- JOURNEY STRIP ---------- */
-.journey{
-  border-radius:var(--r-lg); background:var(--surface); border:1px solid var(--line);
-  padding:24px; margin-bottom:24px;
-}
-.journey-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px}
-.journey-head h2{font-size:15px; font-weight:600; letter-spacing:-.015em; color:var(--ink)}
-.journey-head .link{font-size:13px; color:var(--brand); font-weight:500}
-.journey-head .link:hover{color:var(--brand-deep)}
-.journey-flow{
-  display:grid; grid-template-columns:repeat(7,1fr); gap:10px;
-  position:relative;
-}
-.stage{
-  padding:14px 10px; border-radius:var(--r-md);
-  background:var(--canvas); border:1px solid var(--line);
-  cursor:pointer; transition:border-color .15s, background .15s; text-align:center; position:relative;
-}
-.stage:hover{border-color:var(--brand); background:var(--surface)}
-.stage-ic{
-  width:32px; height:32px; border-radius:8px; display:grid; place-items:center;
-  margin:0 auto 8px; color:var(--brand) !important;
-  background:var(--brand-dim) !important;
-}
-.stage-ic svg{width:16px; height:16px}
-.stage-name{font-size:12px; font-weight:600; letter-spacing:-.01em; margin-bottom:2px; color:var(--ink)}
-.stage-count{font-size:11px; color:var(--ink-3)}
-.stage::after{display:none}
-
 /* ---------- PANELS ---------- */
 .panels{display:grid; grid-template-columns:1.55fr 1fr; gap:16px; margin-bottom:24px}
 .panel{
@@ -375,56 +346,6 @@ button{font-family:inherit; cursor:pointer; border:none; background:none; color:
 .svc-open{color:var(--ink-3); font-size:12px}
 .svc:hover .svc-open{color:var(--brand)}
 
-/* ---------- JOURNEY FULL VIEW ---------- */
-.journey-full{
-  border-radius:var(--r-lg); background:var(--surface); border:1px solid var(--line);
-  padding:28px; margin-bottom:24px;
-}
-.journey-full h2{font-size:1.15rem; font-weight:600; letter-spacing:-.02em; margin-bottom:6px}
-.journey-full > p{color:var(--text-2); font-size:13.5px; margin-bottom:28px; max-width:680px}
-.flow-row{
-  display:grid; grid-template-columns:repeat(8,1fr); gap:6px; margin-bottom:32px;
-}
-.flow-stage{
-  padding:16px 12px 14px; border-radius:var(--r-md);
-  background:var(--canvas); border:1px solid var(--line);
-  text-align:center; cursor:pointer; transition:border-color .15s; position:relative;
-}
-.flow-stage:hover{background:var(--surface); border-color:var(--brand)}
-.flow-num{
-  font-size:10.5px; font-family:var(--mono); color:var(--text-3);
-  margin-bottom:8px; letter-spacing:.05em;
-}
-.flow-ic{
-  width:36px; height:36px; border-radius:8px; display:grid; place-items:center;
-  margin:0 auto 10px; color:var(--brand) !important;
-  background:var(--brand-dim) !important;
-}
-.flow-ic svg{width:18px; height:18px}
-.flow-name{font-size:12.5px; font-weight:600; margin-bottom:3px}
-.flow-desc{font-size:10.5px; color:var(--text-3); line-height:1.4}
-.flow-stage::after{display:none}
-
-/* flow detail */
-.flow-detail{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px}
-.flow-panel{
-  padding:20px 22px; border-radius:var(--r-md);
-  background:var(--surface-2); border:1px solid var(--border);
-}
-.flow-panel h4{font-size:12.5px; font-weight:600; margin-bottom:4px; display:flex; align-items:center; gap:8px}
-.flow-panel h4 .chip{
-  font-size:10px; font-family:var(--mono); padding:1px 7px; border-radius:4px;
-  background:var(--surface); color:var(--text-2); font-weight:500;
-}
-.flow-panel p{font-size:12.5px; color:var(--text-2); line-height:1.6; margin-bottom:12px}
-.flow-panel .tool-list{display:flex; flex-wrap:wrap; gap:6px}
-.flow-panel .tool{
-  font-size:11.5px; padding:4px 10px; border-radius:6px;
-  background:var(--surface); border:1px solid var(--border); color:var(--text-2);
-  font-weight:500;
-}
-.flow-panel .tool:hover{border-color:var(--brand); color:var(--brand-deep)}
-
 /* ---------- FILTER BAR ---------- */
 .filter-bar{
   display:flex; align-items:center; gap:8px; margin-bottom:18px; flex-wrap:wrap;
@@ -500,11 +421,6 @@ button{font-family:inherit; cursor:pointer; border:none; background:none; color:
   .stats{grid-template-columns:repeat(2,1fr)}
   .svc-grid{grid-template-columns:repeat(3,1fr)}
   .panels{grid-template-columns:1fr}
-  .journey-flow{grid-template-columns:repeat(4,1fr); row-gap:20px}
-  .stage::after{display:none}
-  .flow-row{grid-template-columns:repeat(4,1fr); row-gap:12px}
-  .flow-stage::after{display:none}
-  .flow-detail{grid-template-columns:1fr}
 }
 @media(max-width:900px){
   :root{--sidebar:0px}
@@ -517,7 +433,6 @@ button{font-family:inherit; cursor:pointer; border:none; background:none; color:
 }
 @media(max-width:600px){
   .svc-grid{grid-template-columns:1fr}
-  .flow-row{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
@@ -546,10 +461,6 @@ button{font-family:inherit; cursor:pointer; border:none; background:none; color:
         <div class="sb-item active" data-view="dashboard">
           <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></span>
           <span class="sb-label">Dashboard</span>
-        </div>
-        <div class="sb-item" data-view="journey">
-          <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6v6H4zM14 14h6v6h-6zM10 7h4v10h-4z"/></svg></span>
-          <span class="sb-label">Product Journey</span>
         </div>
         <div class="sb-item" data-view="services">
           <span class="sb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
@@ -720,50 +631,6 @@ button{font-family:inherit; cursor:pointer; border:none; background:none; color:
         </div>
       </div>
 
-      <div class="journey">
-        <div class="journey-head">
-          <h2>Your product journey</h2>
-          <a class="link" data-view="journey">View full journey →</a>
-        </div>
-        <div class="journey-flow">
-          <div class="stage">
-            <div class="stage-ic" style="background:var(--york-blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.5 4.5 2.5 6.5 7 7-4.5.5-6.5 2.5-7 7-.5-4.5-2.5-6.5-7-7 4.5-.5 6.5-2.5 7-7z"/></svg></div>
-            <div class="stage-name">Ideation</div>
-            <div class="stage-count">Fuel · 3</div>
-          </div>
-          <div class="stage">
-            <div class="stage-ic" style="background:var(--york-blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></div>
-            <div class="stage-name">Build</div>
-            <div class="stage-count">Launchpad · 7</div>
-          </div>
-          <div class="stage">
-            <div class="stage-ic" style="background:var(--cyan)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div>
-            <div class="stage-name">QA &amp; Audit</div>
-            <div class="stage-count">5 tools · 4</div>
-          </div>
-          <div class="stage">
-            <div class="stage-ic" style="background:var(--york-green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></div>
-            <div class="stage-name">Go-to-Market</div>
-            <div class="stage-count">GTM · 6</div>
-          </div>
-          <div class="stage">
-            <div class="stage-ic" style="background:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20v-6M9 20V8M14 20v-9M19 20V5"/></svg></div>
-            <div class="stage-name">Signal</div>
-            <div class="stage-count">Pulse · 3</div>
-          </div>
-          <div class="stage">
-            <div class="stage-ic" style="background:var(--magenta)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-            <div class="stage-name">Finance</div>
-            <div class="stage-count">Finance Pulse</div>
-          </div>
-          <div class="stage">
-            <div class="stage-ic" style="background:var(--indigo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
-            <div class="stage-name">Invest</div>
-            <div class="stage-count">AI Advisor</div>
-          </div>
-        </div>
-      </div>
-
       <div class="panels">
         <div class="panel">
           <div class="panel-head">
@@ -859,147 +726,6 @@ button{font-family:inherit; cursor:pointer; border:none; background:none; color:
         <a class="link" data-view="services">View all 24 →</a>
       </div>
       <div class="svc-grid" id="quickServices"></div>
-    </section>
-
-    <!-- ============ VIEW: JOURNEY ============ -->
-    <section class="view" id="view-journey">
-      <div class="page-head">
-        <h1>Product Journey</h1>
-        <p>The full lifecycle, from first idea to investor update — every stage connected.</p>
-      </div>
-
-      <div class="journey-full">
-        <h2>Eight stages, one thread</h2>
-        <p>Each stage feeds the next. Data, context, and decisions flow forward — so nothing gets re-explained, re-exported, or lost between tools.</p>
-
-        <div class="flow-row">
-          <div class="flow-stage">
-            <div class="flow-num">01</div>
-            <div class="flow-ic" style="background:var(--york-blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.5 4.5 2.5 6.5 7 7-4.5.5-6.5 2.5-7 7-.5-4.5-2.5-6.5-7-7 4.5-.5 6.5-2.5 7-7z"/></svg></div>
-            <div class="flow-name">Ideate</div>
-            <div class="flow-desc">Research &amp; framing</div>
-          </div>
-          <div class="flow-stage">
-            <div class="flow-num">02</div>
-            <div class="flow-ic" style="background:var(--york-blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></div>
-            <div class="flow-name">Build</div>
-            <div class="flow-desc">Code &amp; ship</div>
-          </div>
-          <div class="flow-stage">
-            <div class="flow-num">03</div>
-            <div class="flow-ic" style="background:var(--cyan)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div>
-            <div class="flow-name">QA &amp; Audit</div>
-            <div class="flow-desc">Quality gates</div>
-          </div>
-          <div class="flow-stage">
-            <div class="flow-num">04</div>
-            <div class="flow-ic" style="background:var(--york-green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></div>
-            <div class="flow-name">Launch</div>
-            <div class="flow-desc">Campaigns &amp; CRM</div>
-          </div>
-          <div class="flow-stage">
-            <div class="flow-num">05</div>
-            <div class="flow-ic" style="background:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20v-6M9 20V8M14 20v-9M19 20V5"/></svg></div>
-            <div class="flow-name">Measure</div>
-            <div class="flow-desc">Signal &amp; pulse</div>
-          </div>
-          <div class="flow-stage">
-            <div class="flow-num">06</div>
-            <div class="flow-ic" style="background:var(--magenta)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-            <div class="flow-name">Finance</div>
-            <div class="flow-desc">Burn, runway, ROI</div>
-          </div>
-          <div class="flow-stage">
-            <div class="flow-num">07</div>
-            <div class="flow-ic" style="background:var(--indigo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
-            <div class="flow-name">Invest</div>
-            <div class="flow-desc">Raise &amp; report</div>
-          </div>
-          <div class="flow-stage">
-            <div class="flow-num">08</div>
-            <div class="flow-ic" style="background:var(--york-blue-2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
-            <div class="flow-name">People</div>
-            <div class="flow-desc">Hire, learn, assess</div>
-          </div>
-        </div>
-
-        <div class="flow-detail">
-          <div class="flow-panel">
-            <h4>Stage 01 — Ideate <span class="chip">FUEL</span></h4>
-            <p>Research, frame, and pressure-test ideas. Fuel pulls context from Slack, Granola, HubSpot, and your own workspace history — so decisions start informed, not blank.</p>
-            <div class="tool-list">
-              <span class="tool">Fuel</span>
-              <span class="tool">Design Library</span>
-              <span class="tool">Competitor Analysis</span>
-            </div>
-          </div>
-          <div class="flow-panel">
-            <h4>Stage 02 — Build <span class="chip">R&amp;D</span></h4>
-            <p>Ship in R&amp;D Launchpad. Code review flows through Gerrit, tasks through PMT, design assets through the Design Library — every artifact linked to the initiative.</p>
-            <div class="tool-list">
-              <span class="tool">R&amp;D Launchpad</span>
-              <span class="tool">Gerrit</span>
-              <span class="tool">PMT</span>
-              <span class="tool">Design Library</span>
-            </div>
-          </div>
-          <div class="flow-panel">
-            <h4>Stage 03 — QA &amp; Audit <span class="chip">QUALITY</span></h4>
-            <p>Automated QA, internal audit, external compliance, UI/UX review, and cloud security — five gates, one signal. Failures roll up into R&amp;D Pulse automatically.</p>
-            <div class="tool-list">
-              <span class="tool">QA Usage Dashboard</span>
-              <span class="tool">Internal Audit</span>
-              <span class="tool">External Audit</span>
-              <span class="tool">UI/UX Audit</span>
-              <span class="tool">Prowler</span>
-            </div>
-          </div>
-          <div class="flow-panel">
-            <h4>Stage 04 — Launch <span class="chip">GTM</span></h4>
-            <p>Coordinate campaigns across social, CRM, and ads from one calendar. Approval flows, connector health, and scheduling — all in GTM Launchpad.</p>
-            <div class="tool-list">
-              <span class="tool">GTM Launchpad</span>
-              <span class="tool">Survey Ticket</span>
-            </div>
-          </div>
-          <div class="flow-panel">
-            <h4>Stage 05 — Measure <span class="chip">SIGNAL</span></h4>
-            <p>R&amp;D Pulse tracks engineering health. GTM Pulse tracks market performance. Prompt Dashboard tracks AI quality. All three roll up into one workspace signal.</p>
-            <div class="tool-list">
-              <span class="tool">R&amp;D Pulse</span>
-              <span class="tool">GTM Pulse</span>
-              <span class="tool">Prompt Dashboard</span>
-            </div>
-          </div>
-          <div class="flow-panel">
-            <h4>Stage 06 — Finance <span class="chip">CAPITAL</span></h4>
-            <p>Burn, runway, unit economics, per-initiative ROI. Finance Pulse connects engineering spend and GTM spend to outcomes — so you know which products are actually working.</p>
-            <div class="tool-list">
-              <span class="tool">Finance Pulse</span>
-            </div>
-          </div>
-          <div class="flow-panel">
-            <h4>Stage 07 — Invest <span class="chip">CAPITAL</span></h4>
-            <p>AI Investment Advisor identifies investor fit, prepares updates, manages the data room, and tracks engagement — from first outreach to signed term sheet.</p>
-            <div class="tool-list">
-              <span class="tool">Investment Advisor</span>
-              <span class="tool">Data Room</span>
-              <span class="tool">Investor Updates</span>
-            </div>
-          </div>
-          <div class="flow-panel">
-            <h4>Stage 08 — People <span class="chip">HRMS</span></h4>
-            <p>Hub manages HR, teams, and projects. LMS delivers learning. Assessment Platform runs org-wide evaluations. Walk-in and Internship Drives handle recruitment events.</p>
-            <div class="tool-list">
-              <span class="tool">Hub</span>
-              <span class="tool">LMS</span>
-              <span class="tool">Assessment</span>
-              <span class="tool">Walk in Drive</span>
-              <span class="tool">Internship Drive</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- ============ VIEW: SERVICES ============ -->
@@ -1131,7 +857,7 @@ function showView(name) {
   const el = document.getElementById('view-' + name);
   if (el) el.classList.add('active');
   document.querySelectorAll('.sb-item').forEach(b => b.classList.toggle('active', b.dataset.view === name));
-  const labels = { dashboard:'Dashboard', journey:'Product Journey', services:'All Services' };
+  const labels = { dashboard:'Dashboard', services:'All Services' };
   document.getElementById('crumb').textContent = labels[name] || 'Dashboard';
   document.querySelector('.main').scrollTop = 0;
 }
@@ -1175,7 +901,6 @@ let selIdx = 0;
 const CMND_ITEMS = [
   { group:'Navigate', items:[
     { label:'Dashboard', view:'dashboard', key:'G D' },
-    { label:'Product Journey', view:'journey', key:'G J' },
     { label:'All Services', view:'services', key:'G S' },
   ]},
   { group:'Services', items: allServices.map(s => ({ label:s.name, service:true, key:'' })) },
