@@ -326,6 +326,59 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 }
 .svc-cat .svc-grid{padding:0; grid-template-columns:repeat(4,minmax(0,1fr))}
 
+/* Product Journey */
+.journey-card{
+  background:var(--white); border:1px solid var(--line); border-radius:var(--r);
+  padding:var(--space-6); margin-bottom:var(--space-6);
+}
+.journey-card > h2{font-size:18px; font-weight:700; letter-spacing:-.02em; color:var(--ink-strong); margin-bottom:var(--space-2)}
+.journey-card > .journey-intro{font-size:14px; color:var(--muted); line-height:1.55; margin-bottom:var(--space-6); max-width:62ch}
+.flow-row{
+  display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); gap:var(--space-2);
+  margin-bottom:var(--space-7);
+}
+.flow-stage{
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  padding:var(--space-4) var(--space-2); border-radius:var(--r);
+  background:var(--bg); border:1px solid var(--line);
+  cursor:pointer; transition:border-color .15s ease, background .15s ease;
+}
+.flow-stage:hover,.flow-stage.active{border-color:#A7F3D0; background:#F0FDF9}
+.flow-num{
+  font-size:11px; font-family:var(--mono); font-weight:500; color:var(--subtle);
+  margin-bottom:var(--space-2); letter-spacing:.04em;
+}
+.flow-ic{
+  width:36px; height:36px; border-radius:var(--r-ctl); display:grid; place-items:center;
+  margin-bottom:var(--space-3); background:var(--brand-50); color:var(--brand-700);
+}
+.flow-ic i,.flow-ic svg{width:var(--icon);height:var(--icon)}
+.flow-name{font-size:13px; font-weight:600; color:var(--ink-strong); margin-bottom:2px}
+.flow-desc{font-size:11px; color:var(--muted); line-height:1.4}
+.flow-detail{display:grid; grid-template-columns:1fr 1fr; gap:var(--space-3)}
+.flow-panel{
+  padding:var(--space-5); border-radius:var(--r);
+  background:var(--bg); border:1px solid var(--line);
+}
+.flow-panel h4{
+  font-size:14px; font-weight:600; color:var(--ink-strong); margin-bottom:var(--space-2);
+  display:flex; align-items:center; gap:var(--space-2); flex-wrap:wrap;
+}
+.flow-panel h4 .chip{
+  display:inline-flex; align-items:center; height:22px; padding:0 8px;
+  font-size:10px; font-family:var(--mono); font-weight:500; letter-spacing:.04em;
+  border-radius:6px; background:var(--brand-50); color:var(--brand-700);
+}
+.flow-panel p{font-size:var(--ctl-fs); color:var(--muted); line-height:1.55; margin-bottom:var(--space-3)}
+.tool-list{display:flex; flex-wrap:wrap; gap:var(--space-2)}
+.tool{
+  display:inline-flex; align-items:center; height:28px; padding:0 10px;
+  font-size:12px; font-weight:500; border-radius:var(--r-ctl);
+  background:var(--white); border:1px solid var(--line); color:var(--ink);
+  cursor:pointer; transition:border-color .15s ease, color .15s ease;
+}
+.tool:hover{border-color:#A7F3D0; color:var(--brand-700)}
+
 .cmdk{position:fixed;inset:0;z-index:50;display:none;align-items:flex-start;justify-content:center;padding-top:14vh;background:rgba(30,41,59,.28)}
 .cmdk.open{display:flex}
 .cmdk-box{width:min(560px,92vw);background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 20px 50px rgba(30,41,59,.14)}
@@ -344,12 +397,15 @@ button{cursor:pointer;border:none;background:none;color:inherit}
   .spot{height:auto; min-height:200px}
   .section{grid-template-columns:1fr; gap:var(--space-3)}
   .svc-cat .svc-grid,.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flow-row{grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--space-3)}
+  .flow-detail{grid-template-columns:1fr}
 }
 @media(max-width:720px){
   :root{--rail:0px}
   .rail,.notice{display:none}
   .field-grid{grid-template-columns:1fr}
   .main{padding:var(--space-5) var(--space-4) 48px}
+  .flow-row{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 </style>
 </head>
@@ -367,6 +423,9 @@ button{cursor:pointer;border:none;background:none;color:inherit}
     </button>
     <button class="rail-btn" type="button" data-view="services" aria-label="Services">
       <i data-lucide="grid-2x2"></i><span class="tip">Services</span>
+    </button>
+    <button class="rail-btn" type="button" data-view="journey" aria-label="Product Journey">
+      <i data-lucide="route"></i><span class="tip">Product Journey</span>
     </button>
     <button class="rail-btn" type="button" data-nav="Fuel" aria-label="Fuel">
       <i data-lucide="flame"></i><span class="tip">Fuel</span>
@@ -544,6 +603,144 @@ button{cursor:pointer;border:none;background:none;color:inherit}
       </div>
     </section>
 
+    <section class="view" id="view-journey">
+      <h1 class="page-title">Product Journey</h1>
+      <p class="page-lede">The full lifecycle, from first idea to investor update — every stage connected.</p>
+
+      <div class="journey-card">
+        <h2>Eight stages, one thread</h2>
+        <p class="journey-intro">Each stage feeds the next. Data, context, and decisions flow forward — so nothing gets re-explained, re-exported, or lost between tools.</p>
+
+        <div class="flow-row">
+          <button class="flow-stage active" type="button" data-stage="1">
+            <div class="flow-num">01</div>
+            <div class="flow-ic"><i data-lucide="flame"></i></div>
+            <div class="flow-name">Ideate</div>
+            <div class="flow-desc">Research &amp; framing</div>
+          </button>
+          <button class="flow-stage" type="button" data-stage="2">
+            <div class="flow-num">02</div>
+            <div class="flow-ic"><i data-lucide="code-2"></i></div>
+            <div class="flow-name">Build</div>
+            <div class="flow-desc">Code &amp; ship</div>
+          </button>
+          <button class="flow-stage" type="button" data-stage="3">
+            <div class="flow-num">03</div>
+            <div class="flow-ic"><i data-lucide="shield-check"></i></div>
+            <div class="flow-name">QA &amp; Audit</div>
+            <div class="flow-desc">Quality gates</div>
+          </button>
+          <button class="flow-stage" type="button" data-stage="4">
+            <div class="flow-num">04</div>
+            <div class="flow-ic"><i data-lucide="send"></i></div>
+            <div class="flow-name">Launch</div>
+            <div class="flow-desc">Campaigns &amp; CRM</div>
+          </button>
+          <button class="flow-stage" type="button" data-stage="5">
+            <div class="flow-num">05</div>
+            <div class="flow-ic"><i data-lucide="activity"></i></div>
+            <div class="flow-name">Measure</div>
+            <div class="flow-desc">Signal &amp; pulse</div>
+          </button>
+          <button class="flow-stage" type="button" data-stage="6">
+            <div class="flow-num">06</div>
+            <div class="flow-ic"><i data-lucide="wallet"></i></div>
+            <div class="flow-name">Finance</div>
+            <div class="flow-desc">Burn, runway, ROI</div>
+          </button>
+          <button class="flow-stage" type="button" data-stage="7">
+            <div class="flow-num">07</div>
+            <div class="flow-ic"><i data-lucide="trending-up"></i></div>
+            <div class="flow-name">Invest</div>
+            <div class="flow-desc">Raise &amp; report</div>
+          </button>
+          <button class="flow-stage" type="button" data-stage="8">
+            <div class="flow-num">08</div>
+            <div class="flow-ic"><i data-lucide="users"></i></div>
+            <div class="flow-name">People</div>
+            <div class="flow-desc">Hire, learn, assess</div>
+          </button>
+        </div>
+
+        <div class="flow-detail">
+          <div class="flow-panel" data-panel="1">
+            <h4>Stage 01 — Ideate <span class="chip">FUEL</span></h4>
+            <p>Research, frame, and pressure-test ideas. Fuel pulls context from Slack, Granola, HubSpot, and your workspace history — so decisions start informed, not blank.</p>
+            <div class="tool-list">
+              <button class="tool" type="button" data-nav="Fuel">Fuel</button>
+              <button class="tool" type="button" data-nav="Design Library">Design Library</button>
+              <button class="tool" type="button">Competitor Analysis</button>
+            </div>
+          </div>
+          <div class="flow-panel" data-panel="2">
+            <h4>Stage 02 — Build <span class="chip">R&amp;D</span></h4>
+            <p>Ship in R&amp;D Launchpad. Code review flows through Gerrit, tasks through PMT, design assets through the Design Library — every artifact linked to the initiative.</p>
+            <div class="tool-list">
+              <button class="tool" type="button" data-nav="R&D Launchpad">R&amp;D Launchpad</button>
+              <button class="tool" type="button" data-nav="Gerrit">Gerrit</button>
+              <button class="tool" type="button" data-nav="PMT">PMT</button>
+              <button class="tool" type="button" data-nav="Design Library">Design Library</button>
+            </div>
+          </div>
+          <div class="flow-panel" data-panel="3">
+            <h4>Stage 03 — QA &amp; Audit <span class="chip">QUALITY</span></h4>
+            <p>Automated QA, internal audit, external compliance, UI/UX review, and cloud security — five gates, one signal. Failures roll up into R&amp;D Pulse automatically.</p>
+            <div class="tool-list">
+              <button class="tool" type="button" data-nav="QA Usage Dashboard">QA Usage Dashboard</button>
+              <button class="tool" type="button" data-nav="Internal Audit Platform">Internal Audit</button>
+              <button class="tool" type="button" data-nav="External Audit Platform">External Audit</button>
+              <button class="tool" type="button" data-nav="UI/UX Audit Platform">UI/UX Audit</button>
+              <button class="tool" type="button" data-nav="Prowler">Prowler</button>
+            </div>
+          </div>
+          <div class="flow-panel" data-panel="4">
+            <h4>Stage 04 — Launch <span class="chip">GTM</span></h4>
+            <p>Coordinate campaigns across social, CRM, and ads from one calendar. Approval flows, connector health, and scheduling — all in GTM Launchpad.</p>
+            <div class="tool-list">
+              <button class="tool" type="button" data-nav="GTM Launchpad">GTM Launchpad</button>
+              <button class="tool" type="button" data-nav="Survey Ticket">Survey Ticket</button>
+            </div>
+          </div>
+          <div class="flow-panel" data-panel="5">
+            <h4>Stage 05 — Measure <span class="chip">SIGNAL</span></h4>
+            <p>R&amp;D Pulse tracks engineering health. GTM Pulse tracks market performance. Prompt Dashboard tracks AI quality. All three roll up into one workspace signal.</p>
+            <div class="tool-list">
+              <button class="tool" type="button" data-nav="R&D Pulse">R&amp;D Pulse</button>
+              <button class="tool" type="button" data-nav="GTM Pulse">GTM Pulse</button>
+              <button class="tool" type="button" data-nav="Prompt Dashboard">Prompt Dashboard</button>
+            </div>
+          </div>
+          <div class="flow-panel" data-panel="6">
+            <h4>Stage 06 — Finance <span class="chip">CAPITAL</span></h4>
+            <p>Burn, runway, unit economics, per-initiative ROI. Finance Pulse connects engineering spend and GTM spend to outcomes — so you know which products are actually working.</p>
+            <div class="tool-list">
+              <button class="tool" type="button" data-nav="Finance Pulse">Finance Pulse</button>
+            </div>
+          </div>
+          <div class="flow-panel" data-panel="7">
+            <h4>Stage 07 — Invest <span class="chip">CAPITAL</span></h4>
+            <p>Investment Advisor identifies investor fit, prepares updates, manages the data room, and tracks engagement — from first outreach to signed term sheet.</p>
+            <div class="tool-list">
+              <button class="tool" type="button" data-nav="Investment Advisor">Investment Advisor</button>
+              <button class="tool" type="button">Data Room</button>
+              <button class="tool" type="button">Investor Updates</button>
+            </div>
+          </div>
+          <div class="flow-panel" data-panel="8">
+            <h4>Stage 08 — People <span class="chip">HRMS</span></h4>
+            <p>Hub manages HR, teams, and projects. LMS delivers learning. Assessment Platform runs org-wide evaluations. Walk-in and Internship Drives handle recruitment events.</p>
+            <div class="tool-list">
+              <button class="tool" type="button" data-nav="Hub">Hub</button>
+              <button class="tool" type="button" data-nav="LMS">LMS</button>
+              <button class="tool" type="button" data-nav="Assessment Platform">Assessment</button>
+              <button class="tool" type="button">Walk in Drive</button>
+              <button class="tool" type="button">Internship Drive</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="view" id="view-services">
       <h1 class="page-title">Services</h1>
       <p class="page-lede">Browse the full York Foundation catalog by category.</p>
@@ -646,15 +843,26 @@ function paintIcons() {
   if (window.lucide) lucide.createIcons({ attrs: { 'stroke-width': 1.75 } });
 }
 
+const VIEW_CRUMBS = { dashboard:'Overview', services:'Services', journey:'Product Journey' };
+
 function showView(name) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   const el = document.getElementById('view-' + name);
   if (el) el.classList.add('active');
   document.querySelectorAll('.rail-btn[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === name));
-  document.getElementById('crumb').textContent = name === 'services' ? 'Services' : 'Overview';
+  document.getElementById('crumb').textContent = VIEW_CRUMBS[name] || 'Overview';
   document.querySelector('.main').scrollTop = 0;
   paintIcons();
 }
+
+document.querySelectorAll('.flow-stage').forEach(stage => {
+  stage.addEventListener('click', () => {
+    document.querySelectorAll('.flow-stage').forEach(s => s.classList.remove('active'));
+    stage.classList.add('active');
+    const panel = document.querySelector(`.flow-panel[data-panel="${stage.dataset.stage}"]`);
+    if (panel) panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  });
+});
 
 document.querySelectorAll('[data-view]').forEach(el => {
   el.addEventListener('click', () => showView(el.dataset.view));
@@ -682,6 +890,7 @@ const CMND_ITEMS = [
   { group:'Navigate', items:[
     { label:'Overview', view:'dashboard', key:'G D', icon:'layout-dashboard' },
     { label:'Services', view:'services', key:'G S', icon:'grid-2x2' },
+    { label:'Product Journey', view:'journey', key:'G J', icon:'route' },
   ]},
   { group:'Services', items: allServices.map(s => ({ label:s.name, icon:s.icon, key:'' })) },
 ];
