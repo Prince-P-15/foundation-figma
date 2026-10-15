@@ -8,10 +8,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>try{var _n=localStorage.getItem('york-nav-open');if(_n==='false'||_n==='0')document.documentElement.classList.add('nav-collapsed')}catch(e){}</script>
 <script src="https://unpkg.com/lucide@0.468.0"></script>
 <style>
+@property --rail{syntax:'<length>'; inherits:true; initial-value:240px}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
+  --rail:240px;
+  transition:--rail .28s cubic-bezier(.4,0,.2,1);
+  --rose-50:#FFF1F2; --rose-100:#FFE4E6; --rose-600:#E11D48; --rose-700:#BE123C;
   /* Palette — soft slate + emerald, no pure black */
   --ink:#334155;
   --ink-strong:#1E293B;
@@ -42,6 +47,7 @@
   --shadow-hover:0 2px 4px rgba(30,41,59,.05), 0 16px 40px rgba(30,41,59,.1);
   --top:72px;
 }
+:root.nav-collapsed{--rail:72px}
 html,body{height:100%}
 body{
   background:var(--bg); color:var(--ink);
@@ -55,7 +61,7 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 ::-webkit-scrollbar{width:8px;height:8px}
 ::-webkit-scrollbar-thumb{background:rgba(100,116,139,.28);border-radius:var(--r-pill)}
 
-.app{display:grid; grid-template-rows:var(--top) minmax(0,1fr); height:100vh; position:relative}
+.app{display:grid; grid-template-columns:var(--rail) minmax(0,1fr); grid-template-rows:var(--top) minmax(0,1fr); height:100vh; position:relative}
 .app::before{
   content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
   background:
@@ -87,37 +93,91 @@ button{cursor:pointer;border:none;background:none;color:inherit}
   box-shadow:var(--shadow); min-width:0;
 }
 
-/* ——— Topbar ——— */
-.topbar{
-  position:relative; z-index:20; grid-row:1;
-  display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:var(--space-4);
-  padding:0 32px;
-  background:rgba(244,251,248,.72);
-  -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(226,232,240,.6);
+/* ——— Sidebar rail ——— */
+.rail{
+  grid-column:1; grid-row:1 / -1; position:relative; z-index:30; display:flex; flex-direction:column; min-width:0;
+  background:rgba(255,255,255,.74);
+  -webkit-backdrop-filter:blur(18px) saturate(1.2); backdrop-filter:blur(18px) saturate(1.2);
+  border-right:1px solid rgba(226,232,240,.85);
 }
-.brand{display:flex; align-items:center; gap:10px; justify-self:start; border-radius:var(--r-ctl); padding:4px}
+.rail-head{height:var(--top); flex-shrink:0; display:flex; align-items:center; padding:0 18px; border-bottom:1px solid rgba(226,232,240,.6)}
+.brand{display:flex; align-items:center; gap:10px; border-radius:var(--r-ctl); min-width:0}
 .brand-logo{
   width:36px; height:36px; border-radius:11px; flex-shrink:0; display:grid; place-items:center; color:#fff;
   background:linear-gradient(135deg,var(--brand-500),var(--brand-700));
   box-shadow:0 6px 14px rgba(5,150,105,.28);
 }
 .brand-logo i,.brand-logo svg{width:17px;height:17px}
-.brand-name{font-size:18px; font-weight:700; letter-spacing:-.03em; color:var(--ink-strong)}
-.pill-nav{
-  display:flex; align-items:center; gap:2px; padding:4px; border-radius:var(--r-pill);
-  background:rgba(255,255,255,.75); border:1px solid var(--line);
-  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
-  box-shadow:0 1px 2px rgba(30,41,59,.04);
+.brand-name{font-size:18px; font-weight:700; letter-spacing:-.03em; color:var(--ink-strong); white-space:nowrap}
+.rail-toggle{
+  position:absolute; top:calc(var(--top) / 2 - 14px); right:-14px; width:28px; height:28px; border-radius:50%; z-index:2;
+  display:grid; place-items:center; color:var(--muted); background:var(--white); border:1px solid var(--line);
+  box-shadow:0 2px 8px rgba(30,41,59,.1); transition:color .15s ease, border-color .15s ease, background .15s ease;
 }
-.pill-nav button{
-  height:34px; padding:0 18px; border-radius:var(--r-pill);
-  font-size:13px; font-weight:500; color:var(--muted); white-space:nowrap;
-  display:inline-flex; align-items:center; gap:6px;
+.rail-toggle:hover{color:var(--brand-700); border-color:var(--brand-200); background:var(--brand-50)}
+.rail-toggle i,.rail-toggle svg{width:15px; height:15px; transition:transform .28s ease}
+.nav-collapsed .rail-toggle svg{transform:rotate(180deg)}
+.rail-nav{flex:1; min-height:0; overflow-y:auto; overflow-x:hidden; padding:14px 12px 10px; display:flex; flex-direction:column; gap:2px}
+.rail-nav::-webkit-scrollbar{width:4px}
+.nav-group{display:flex; flex-direction:column; gap:2px}
+.nav-group-label{padding:16px 14px 6px; font-size:10.5px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--subtle); white-space:nowrap}
+.nav-item{
+  position:relative; display:flex; align-items:center; width:100%; height:42px; padding:0 14px; flex-shrink:0;
+  border-radius:12px; color:var(--muted); font-size:13.5px; font-weight:500; text-align:left;
   transition:background .15s ease, color .15s ease;
 }
-.pill-nav button:hover{color:var(--ink-strong); background:var(--surface)}
-.pill-nav button.active{background:var(--brand-600); color:#fff; font-weight:600; box-shadow:0 4px 10px rgba(5,150,105,.25)}
+.nav-item > i,.nav-item > svg{width:20px; height:20px; flex-shrink:0}
+.nav-label{flex:1; min-width:0; margin-left:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.nav-item:hover{background:var(--surface); color:var(--ink-strong)}
+.nav-item.active{background:var(--brand-50); color:var(--brand-700); font-weight:600}
+.nav-item.active > svg{color:var(--brand-600)}
+.nav-item.active::before{content:''; position:absolute; left:-12px; top:9px; bottom:9px; width:3px; border-radius:0 3px 3px 0; background:var(--brand-500)}
+.nav-badge{
+  margin-left:8px; min-width:22px; height:20px; padding:0 7px; border-radius:var(--r-pill); display:inline-grid; place-items:center;
+  font-family:var(--mono); font-size:10.5px; font-weight:600; color:var(--muted); background:var(--surface); border:1px solid var(--line); flex-shrink:0;
+}
+.nav-item.active .nav-badge{background:var(--white); color:var(--brand-700); border-color:var(--brand-100)}
+.nav-badge.new{background:var(--brand-600); border-color:var(--brand-600); color:#fff; letter-spacing:.04em; font-size:9.5px}
+.rail-foot{flex-shrink:0; padding:10px 12px 14px; border-top:1px solid rgba(226,232,240,.7); display:flex; flex-direction:column; gap:2px}
+.nav-tip{
+  position:fixed; z-index:90; transform:translateY(-50%); pointer-events:none; opacity:0; transition:opacity .12s ease;
+  background:var(--ink-strong); color:#fff; font-size:12px; font-weight:500; padding:6px 10px; border-radius:8px; white-space:nowrap;
+  box-shadow:0 8px 20px rgba(30,41,59,.22);
+}
+.nav-tip.show{opacity:1}
+.scrim{position:fixed; inset:0; z-index:25; background:rgba(30,41,59,.3); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); display:none}
+
+@media(min-width:861px){
+  .nav-collapsed .brand-name,
+  .nav-collapsed .nav-label{display:none}
+  .nav-collapsed .nav-group-label{font-size:0; height:1px; padding:0; margin:10px 14px; background:var(--line)}
+  .nav-collapsed .nav-group:first-child .nav-group-label{display:none}
+  .nav-collapsed .nav-badge{position:absolute; top:2px; right:0; min-width:18px; height:16px; padding:0 4px; font-size:9px; margin:0}
+}
+
+/* ——— Topbar ——— */
+.topbar{
+  position:relative; z-index:20; grid-column:2; grid-row:1;
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,560px) minmax(0,1fr); align-items:center; gap:var(--space-4);
+  padding:0 32px;
+  background:rgba(244,251,248,.72);
+  -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(226,232,240,.6);
+}
+.top-left{display:flex; align-items:center; gap:var(--space-3); min-width:0}
+.icon-btn.hamburger{display:none}
+.crumbs{display:flex; align-items:center; gap:6px; min-width:0; font-size:13px; color:var(--subtle); white-space:nowrap}
+.crumbs svg{width:14px; height:14px; flex-shrink:0}
+.crumbs b{font-size:17px; font-weight:700; letter-spacing:-.025em; color:var(--ink-strong); overflow:hidden; text-overflow:ellipsis}
+.top-search{
+  display:flex; align-items:center; gap:10px; width:100%; height:42px; padding:0 8px 0 16px; border-radius:var(--r-pill);
+  border:1px solid var(--line); background:rgba(255,255,255,.85); color:var(--subtle); font-size:13px; text-align:left;
+  transition:border-color .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.top-search:hover{border-color:var(--line-2); background:var(--white); box-shadow:0 2px 10px rgba(30,41,59,.05)}
+.top-search > i,.top-search > svg{width:var(--icon); height:var(--icon); flex-shrink:0}
+.top-search span{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.kbd{font-family:var(--mono); font-size:11px; font-weight:500; padding:4px 9px; border-radius:var(--r-pill); background:var(--surface); border:1px solid var(--line); color:var(--muted); flex-shrink:0}
 .top-right{display:flex; align-items:center; justify-content:flex-end; gap:var(--space-2); min-width:0}
 .icon-btn{
   width:var(--ctl-h); height:var(--ctl-h); border-radius:50%; display:grid; place-items:center; color:var(--muted);
@@ -130,15 +190,18 @@ button{cursor:pointer;border:none;background:none;color:inherit}
   content:''; position:absolute; top:8px; right:9px; width:8px; height:8px; border-radius:50%;
   background:var(--brand-500); border:2px solid var(--white);
 }
+.user{display:flex; align-items:center; gap:10px; margin-left:6px; min-width:0}
+.user-name{font-size:13px; font-weight:600; color:var(--ink-strong); line-height:1.2; white-space:nowrap}
+.user-name small{display:block; font-size:11px; font-weight:400; color:var(--subtle)}
 .avatar{
   width:38px; height:38px; border-radius:50%; flex-shrink:0; display:grid; place-items:center;
   background:linear-gradient(135deg,var(--brand-500),var(--teal-600)); color:#fff;
-  font-size:12px; font-weight:600; font-family:var(--mono); margin-left:4px;
+  font-size:12px; font-weight:600; font-family:var(--mono);
   box-shadow:0 0 0 3px rgba(255,255,255,.9);
 }
 
 /* ——— Main ——— */
-.main{position:relative; z-index:1; grid-row:2; overflow-y:auto; overflow-x:hidden; padding:20px 32px 80px; min-width:0}
+.main{position:relative; z-index:1; grid-column:2; grid-row:2; overflow-y:auto; overflow-x:hidden; padding:20px 32px 80px; min-width:0; container:main / inline-size}
 .wrap{max-width:1360px; margin:0 auto}
 .view{display:none}.view.active{display:block; animation:viewIn .35s ease both}
 @keyframes viewIn{from{opacity:0; transform:translateY(6px)}to{opacity:1; transform:none}}
@@ -432,6 +495,60 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 }
 .tool:hover{border-color:var(--brand-200); color:var(--brand-700)}
 
+/* ——— Requires your attention ——— */
+.attn,.recent{margin-top:var(--space-5); padding:var(--space-5)}
+.attn-table{margin-top:var(--space-3)}
+.attn-cols,.attn-row{
+  display:grid; grid-template-columns:minmax(0,3fr) minmax(0,1.3fr) minmax(0,1.4fr) 56px 108px 72px; gap:var(--space-4); align-items:center; padding:0 14px;
+}
+.attn-cols{height:32px; font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--subtle); border-bottom:1px solid var(--line)}
+.attn-cols .r,.attn-row .r{text-align:right}
+.attn-row{
+  width:100%; min-height:62px; border-radius:16px; text-align:left; border:1px solid transparent; cursor:pointer;
+  transition:background .15s ease, border-color .15s ease;
+}
+.attn-row + .attn-row{margin-top:2px}
+.attn-row:hover{background:rgba(255,255,255,.9); border-color:var(--brand-200)}
+.attn-item{display:flex; align-items:center; gap:12px; min-width:0}
+.attn-ic{width:36px; height:36px; border-radius:12px; display:grid; place-items:center; flex-shrink:0; background:var(--brand-50); color:var(--brand-700)}
+.attn-ic i,.attn-ic svg{width:16px; height:16px}
+.attn-ic.amber{background:var(--amber-100); color:var(--amber-700)}
+.attn-ic.teal{background:#CCFBF1; color:var(--teal-600)}
+.attn-ic.rose{background:var(--rose-100); color:var(--rose-700)}
+.attn-txt{min-width:0}
+.attn-txt b{display:block; font-size:13.5px; font-weight:600; color:var(--ink-strong); letter-spacing:-.01em; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.attn-txt small{display:block; font-size:12px; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.attn-src{font-size:12.5px; font-weight:500; color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.pill{display:inline-flex; align-items:center; gap:6px; height:24px; padding:0 10px; border-radius:var(--r-pill); font-size:11.5px; font-weight:600; white-space:nowrap; max-width:100%}
+.pill.soft{background:var(--surface); color:var(--muted); font-weight:500; border:1px solid var(--line)}
+.pill.st::before{content:''; width:6px; height:6px; border-radius:50%; background:currentColor}
+.pill.crit{background:var(--rose-50); color:var(--rose-700); border:1px solid var(--rose-100)}
+.pill.high{background:var(--amber-100); color:var(--amber-700); border:1px solid #FDE68A}
+.pill.review{background:#F0FDFA; color:var(--teal-600); border:1px solid #CCFBF1}
+.pill.fresh{background:var(--brand-50); color:var(--brand-700); border:1px solid var(--brand-100)}
+.own{width:28px; height:28px; border-radius:50%; display:grid; place-items:center; font-family:var(--mono); font-size:9.5px; font-weight:600; background:var(--brand-100); color:var(--brand-700); border:2px solid var(--white); box-shadow:0 0 0 1px var(--line)}
+.own.t{background:#CCFBF1; color:var(--teal-600)}
+.own.a{background:var(--amber-100); color:var(--amber-700)}
+.attn-when{font-family:var(--mono); font-size:11px; color:var(--subtle)}
+
+/* ——— Recent activity ——— */
+.recent-list{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-2) var(--space-4); margin-top:var(--space-4)}
+.ra{
+  display:flex; align-items:flex-start; gap:12px; width:100%; padding:12px; border-radius:16px; text-align:left;
+  background:rgba(255,255,255,.55); border:1px solid transparent; cursor:pointer;
+  transition:background .15s ease, border-color .15s ease, transform .15s ease;
+}
+.ra:hover{background:var(--white); border-color:var(--brand-200); transform:translateY(-1px)}
+.ra-ic{width:34px; height:34px; border-radius:50%; display:grid; place-items:center; flex-shrink:0; background:var(--brand-50); color:var(--brand-700)}
+.ra-ic i,.ra-ic svg{width:15px; height:15px}
+.ra-ic.amber{background:var(--amber-100); color:var(--amber-700)}
+.ra-ic.teal{background:#CCFBF1; color:var(--teal-600)}
+.ra-ic.rose{background:var(--rose-100); color:var(--rose-700)}
+.ra-txt{min-width:0; flex:1}
+.ra-txt b{display:block; font-size:13px; font-weight:600; color:var(--ink-strong); letter-spacing:-.01em; line-height:1.35}
+.ra-txt small{display:block; font-size:12px; color:var(--muted); margin-top:2px}
+.ra time{font-family:var(--mono); font-size:10.5px; color:var(--subtle); white-space:nowrap; padding-top:2px}
+
 /* ——— Command palette ——— */
 .cmdk{position:fixed;inset:0;z-index:70;display:none;align-items:flex-start;justify-content:center;padding-top:14vh;background:rgba(30,41,59,.28);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 .cmdk.open{display:flex}
@@ -458,26 +575,51 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .toast i,.toast svg{width:15px;height:15px;color:#6EE7B7;flex-shrink:0}
 
 /* ——— Responsive ——— */
-@media(max-width:1180px){
+@container main (max-width:1100px){
   .ov-grid{grid-template-columns:1fr}
   .ov-left{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start}
   .svc-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
-@media(max-width:1000px){
-  .ov-bottom{grid-template-columns:1fr}
+@container main (max-width:940px){
   .svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .flow-row{grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--space-3)}
   .flow-detail{grid-template-columns:1fr}
+  .recent-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@container main (max-width:820px){
+  .attn-cols{display:none}
+  .attn-row{grid-template-columns:minmax(0,1fr) auto; row-gap:6px; padding:12px 14px}
+  .attn-row .attn-src,.attn-row .attn-when,.attn-row .attn-own{display:none}
+  .attn-row .attn-type{display:none}
+}
+@container main (max-width:720px){
+  .ov-bottom{grid-template-columns:1fr}
+  .ov-left{grid-template-columns:1fr}
+}
+@container main (max-width:600px){
+  .recent-list{grid-template-columns:1fr}
+  .svc-grid{grid-template-columns:1fr}
+  .flow-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:1100px){
+  .user-name{display:none}
 }
 @media(max-width:860px){
-  :root{--top:112px}
-  .topbar{grid-template-columns:1fr auto; grid-template-areas:"brand right" "nav nav"; align-content:center; row-gap:8px; padding:8px 16px}
-  .brand{grid-area:brand}
-  .top-right{grid-area:right}
-  .pill-nav{grid-area:nav; justify-self:stretch; overflow-x:auto; justify-content:space-between}
-  .pill-nav button{flex:1; justify-content:center; padding:0 12px}
+  :root{--top:64px}
+  .app{grid-template-columns:minmax(0,1fr)}
+  .topbar,.main{grid-column:1}
+  .topbar{grid-template-columns:minmax(0,1fr) minmax(0,260px) auto; padding:0 16px; gap:var(--space-3)}
+  .icon-btn.hamburger{display:grid}
+  .kbd{display:none}
+  .rail{
+    position:fixed; top:0; left:0; bottom:0; width:264px; transform:translateX(-102%);
+    transition:transform .28s cubic-bezier(.4,0,.2,1); background:rgba(255,255,255,.96);
+  }
+  .rail.drawer-open{transform:none; box-shadow:0 0 50px rgba(30,41,59,.22)}
+  .rail-toggle{display:none}
+  .scrim.show{display:block}
+  .crumbs .crumb-root,.crumbs > svg{display:none}
   .main{padding:16px 16px 64px}
-  .ov-left{grid-template-columns:1fr}
 }
 @media(max-width:640px){
   .hero{margin:8px auto 28px}
@@ -486,11 +628,12 @@ button{cursor:pointer;border:none;background:none;color:inherit}
   .metric:nth-child(n){margin-top:0}
   .metric-val{font-size:28px}
   .orb-stage{padding:20px 14px 28px}
-  .svc-grid{grid-template-columns:1fr}
-  .flow-row{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ask-bar .spacer{display:none}
   .ask-bar .send{margin-left:auto}
   .tbl-search{min-width:0; width:100%}
+  .topbar{grid-template-columns:minmax(0,1fr) auto auto}
+  .top-search{width:38px; height:38px; padding:0; justify-content:center; justify-self:end}
+  .top-search span{display:none}
 }
 @media(max-width:420px){
   .metrics{grid-template-columns:1fr}
@@ -502,25 +645,41 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 </style>
 </head>
 <body>
-<div class="app">
-  <header class="topbar">
-    <a class="brand" href="#" data-view="dashboard" title="York — Dashboard">
-      <div class="brand-logo" aria-hidden="true"><i data-lucide="zap"></i></div>
-      <span class="brand-name">York</span>
-    </a>
+<div class="app" id="app">
+  <aside class="rail" id="rail" aria-label="Main navigation">
+    <div class="rail-head">
+      <a class="brand" href="#" data-view="dashboard" data-tip="York" title="York — Dashboard">
+        <div class="brand-logo" aria-hidden="true"><i data-lucide="zap"></i></div>
+        <span class="brand-name">York</span>
+      </a>
+    </div>
+    <button class="rail-toggle" type="button" id="railToggle" aria-label="Collapse sidebar" aria-expanded="true" aria-controls="rail"><i data-lucide="chevron-left"></i></button>
+    <nav class="rail-nav" id="railNav" aria-label="Primary"></nav>
+    <div class="rail-foot" id="railFoot"></div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+  <div class="nav-tip" id="navTip" role="tooltip"></div>
 
-    <nav class="pill-nav" id="pillNav" aria-label="Primary">
-      <button type="button" data-view="dashboard" data-key="dashboard" class="active">Dashboard</button>
-      <button type="button" data-view="services" data-key="services">Services</button>
-      <button type="button" data-view="journey" data-key="journey">Journey</button>
-      <button type="button" data-nav="Fuel" data-key="fuel">Fuel</button>
-    </nav>
+  <header class="topbar">
+    <div class="top-left">
+      <button class="icon-btn hamburger" type="button" id="hamburger" aria-label="Open navigation"><i data-lucide="menu"></i></button>
+      <div class="crumbs" aria-label="Breadcrumb">
+        <span class="crumb-root" id="crumbRoot">York Foundation</span>
+        <i data-lucide="chevron-right"></i>
+        <b id="crumbCur">Dashboard</b>
+      </div>
+    </div>
+
+    <button class="top-search" type="button" id="openCmdk" title="Search (⌘K or /)" aria-label="Search">
+      <i data-lucide="search"></i><span>Search services, actions, or ask Fuel…</span><kbd class="kbd">⌘K</kbd>
+    </button>
 
     <div class="top-right">
-      <button class="icon-btn hide-xs" type="button" id="openCmdk" title="Search (⌘K or /)" aria-label="Search"><i data-lucide="search"></i></button>
-      <button class="icon-btn hide-xs" type="button" id="settingsBtn" title="Settings" aria-label="Settings"><i data-lucide="settings"></i></button>
       <button class="icon-btn has-dot" type="button" id="bellBtn" title="Notifications" aria-label="Notifications"><i data-lucide="bell"></i></button>
-      <div class="avatar" title="Alex Kim">AK</div>
+      <div class="user" title="Alex Kim">
+        <div class="avatar">AK</div>
+        <div class="user-name">Alex Kim<small>Admin</small></div>
+      </div>
     </div>
   </header>
 
@@ -626,6 +785,37 @@ button{cursor:pointer;border:none;background:none;color:inherit}
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Requires your attention -->
+      <div class="glass attn" id="attn">
+        <div class="card-head">
+          <div>
+            <h3>Requires your attention</h3>
+            <div class="sub"><span id="attnCount">6</span> open items across audits, prompts, and investor activity</div>
+          </div>
+          <label class="tbl-search">
+            <i data-lucide="search"></i>
+            <input type="text" placeholder="Search items…" id="attnFilter" autocomplete="off" aria-label="Search items requiring attention">
+          </label>
+        </div>
+        <div class="attn-table">
+          <div class="attn-cols" aria-hidden="true"><span>Item</span><span>Source</span><span>Type</span><span>Owner</span><span>Status</span><span class="r">Updated</span></div>
+          <div id="attnRows"></div>
+          <div class="empty" id="attnEmpty">Nothing matches your search.</div>
+        </div>
+      </div>
+
+      <!-- Recent activity -->
+      <div class="glass recent" id="recent">
+        <div class="card-head">
+          <div>
+            <h3>Recent activity</h3>
+            <div class="sub">Latest events across your connected services</div>
+          </div>
+          <button class="link-btn" type="button" data-view="services">All services <i data-lucide="arrow-up-right" style="width:14px;height:14px"></i></button>
+        </div>
+        <div class="recent-list" id="recentList"></div>
       </div>
     </section>
 
@@ -1093,15 +1283,164 @@ document.querySelectorAll('[data-quick]').forEach(b => b.addEventListener('click
   else if (k === 'gtm') navToService('GTM Launchpad');
 }));
 
+/* ——— Sidebar ——— */
+const NAV = [
+  { items:[
+    { label:'Dashboard',       icon:'layout-dashboard', view:'dashboard' },
+    { label:'Product Journey', icon:'route',            view:'journey' },
+    { label:'All Services',    icon:'layout-grid',      view:'services', badge:String(allServices.length) },
+  ]},
+  { group:'Build & Ship', items:[
+    { label:'R&D Launchpad', icon:'rocket',          svc:true },
+    { label:'Gerrit',        icon:'git-pull-request', svc:true },
+    { label:'Design Library',icon:'palette',          svc:true },
+    { label:'PMT',           icon:'kanban',           svc:true },
+  ]},
+  { group:'Go-to-Market', items:[
+    { label:'GTM Launchpad', icon:'send',        svc:true },
+    { label:'GTM Pulse',     icon:'bar-chart-3', svc:true },
+  ]},
+  { group:'Signal & Analytics', items:[
+    { label:'R&D Pulse',        icon:'activity', svc:true },
+    { label:'Finance Pulse',    icon:'wallet',   svc:true },
+    { label:'Prompt Dashboard', icon:'terminal', svc:true },
+  ]},
+  { group:'AI & Advisory', items:[
+    { label:'Fuel',               icon:'flame',       svc:true },
+    { label:'Investment Advisor', icon:'trending-up', svc:true, badge:'NEW' },
+  ]},
+  { group:'Platform', items:[
+    { label:'Connector Hub',   icon:'plug',        soon:true },
+    { label:'Team & Access',   icon:'users',       soon:true },
+    { label:'Billing & Usage', icon:'credit-card', soon:true },
+    { label:'Settings',        icon:'settings',    soon:true },
+  ]},
+];
+const NAV_FOOT = [
+  { label:'Help Center', icon:'life-buoy', soon:true },
+  { label:'Settings',    icon:'settings',  soon:true },
+  { label:'Log Out',     icon:'log-out',   href:'index.html' },
+];
+function navItem(it) {
+  const badge = it.badge ? `<span class="nav-badge${it.badge === 'NEW' ? ' new' : ''}">${esc(it.badge)}</span>` : '';
+  const inner = `<i data-lucide="${it.icon}"></i><span class="nav-label">${esc(it.label)}</span>${badge}`;
+  const tip = `data-tip="${esc(it.label)}" aria-label="${esc(it.label)}${it.badge ? ' (' + esc(it.badge) + ')' : ''}"`;
+  if (it.href) return `<a class="nav-item" href="${it.href}" ${tip}>${inner}</a>`;
+  const attrs = it.view ? `data-view="${it.view}" data-key="${it.view}"`
+    : it.svc ? `data-nav="${esc(it.label)}" data-key="${esc(it.label)}"`
+    : `data-soon="${esc(it.label)}"`;
+  return `<button type="button" class="nav-item" ${attrs} ${tip}>${inner}</button>`;
+}
+$('railNav').innerHTML = NAV.map(g => `
+  <div class="nav-group">${g.group ? `<div class="nav-group-label">${esc(g.group)}</div>` : ''}${g.items.map(navItem).join('')}</div>`).join('');
+$('railFoot').innerHTML = NAV_FOOT.map(navItem).join('');
+
+const rootEl = document.documentElement, rail = $('rail'), navTip = $('navTip'), scrim = $('scrim');
+const isDesktop = () => matchMedia('(min-width:861px)').matches;
+function setNavOpen(open) {
+  rootEl.classList.toggle('nav-collapsed', !open);
+  try { localStorage.setItem('york-nav-open', open ? 'true' : 'false'); } catch (e) {}
+  const t = $('railToggle');
+  t.setAttribute('aria-expanded', String(open));
+  t.setAttribute('aria-label', open ? 'Collapse sidebar' : 'Expand sidebar');
+  hideTip();
+}
+$('railToggle').addEventListener('click', () => setNavOpen(rootEl.classList.contains('nav-collapsed')));
+(function(){
+  const open = !rootEl.classList.contains('nav-collapsed');
+  const t = $('railToggle');
+  t.setAttribute('aria-expanded', String(open));
+  t.setAttribute('aria-label', open ? 'Collapse sidebar' : 'Expand sidebar');
+})();
+function openDrawer(){ rail.classList.add('drawer-open'); scrim.classList.add('show'); }
+function closeDrawer(){ rail.classList.remove('drawer-open'); scrim.classList.remove('show'); }
+$('hamburger').addEventListener('click', openDrawer);
+scrim.addEventListener('click', closeDrawer);
+addEventListener('resize', () => { if (isDesktop()) closeDrawer(); hideTip(); });
+
+function showTip(el) {
+  if (!rootEl.classList.contains('nav-collapsed') || !isDesktop()) return;
+  const r = el.getBoundingClientRect();
+  navTip.textContent = el.dataset.tip;
+  navTip.style.top = (r.top + r.height / 2) + 'px';
+  navTip.style.left = (r.right + 14) + 'px';
+  navTip.classList.add('show');
+}
+function hideTip(){ navTip.classList.remove('show'); }
+rail.addEventListener('mouseover', e => { const el = e.target.closest('[data-tip]'); if (el) showTip(el); });
+rail.addEventListener('mouseout', e => { if (e.target.closest('[data-tip]')) hideTip(); });
+rail.addEventListener('focusin', e => { const el = e.target.closest('[data-tip]'); if (el) showTip(el); });
+rail.addEventListener('focusout', hideTip);
+$('railNav').addEventListener('scroll', hideTip);
+
+/* ——— Requires your attention ——— */
+const ATTN = [
+  { icon:'shield-alert',   tone:'rose',  title:'2 public storage buckets flagged', sub:'Prowler · prod-us-east · CIS 2.1.5',            svc:'Prowler',            type:'Audit flag',        who:'PN', cls:'',  st:'crit',   stText:'Critical',  when:'12m' },
+  { icon:'trending-down',  tone:'amber', title:'onboarding-summary v14 regressed', sub:'Pass rate 91% → 78% on 120-case eval',           svc:'Prompt Dashboard',   type:'Prompt regression', who:'DP', cls:'a', st:'high',   stText:'High',      when:'48m' },
+  { icon:'users',          tone:'teal',  title:'3 new investor matches for Seed',  sub:'Fit score 86+ · warm intro available',           svc:'Investment Advisor', type:'Investor match',    who:'AK', cls:'',  st:'fresh',  stText:'New',       when:'1h' },
+  { icon:'clipboard-check',tone:'rose',  title:'Control AC-14 evidence missing',   sub:'Internal audit · due Fri Oct 16',                svc:'Internal Audit Platform', type:'Audit flag',   who:'PN', cls:'',  st:'high',   stText:'High',      when:'2h' },
+  { icon:'wallet',         tone:'amber', title:'Burn running +8% vs plan',         sub:'Finance Pulse · infra + contractor spend',       svc:'Finance Pulse',      type:'Burn variance',     who:'LC', cls:'t', st:'review', stText:'In review', when:'3h' },
+  { icon:'send',           tone:'teal',  title:'3 scheduled posts need approval',  sub:'GTM Launchpad · Q4 launch campaign',             svc:'GTM Launchpad',      type:'Approval',          who:'SO', cls:'t', st:'review', stText:'In review', when:'5h' },
+];
+function attnRow(a) {
+  return `<button type="button" class="attn-row" data-nav="${esc(a.svc)}">
+    <span class="attn-item"><span class="attn-ic ${a.tone}"><i data-lucide="${a.icon}"></i></span>
+      <span class="attn-txt"><b>${esc(a.title)}</b><small>${esc(a.sub)}</small></span></span>
+    <span class="attn-src">${esc(a.svc)}</span>
+    <span class="attn-type"><span class="pill soft">${esc(a.type)}</span></span>
+    <span class="attn-own"><span class="own ${a.cls}">${a.who}</span></span>
+    <span><span class="pill st ${a.st}">${esc(a.stText)}</span></span>
+    <span class="attn-when r">${a.when} ago</span>
+  </button>`;
+}
+$('attnRows').innerHTML = ATTN.map(attnRow).join('');
+$('attnFilter').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase().trim();
+  let n = 0;
+  document.querySelectorAll('#attnRows .attn-row').forEach(r => {
+    const show = !q || r.textContent.toLowerCase().includes(q);
+    r.style.display = show ? '' : 'none';
+    if (show) n++;
+  });
+  $('attnCount').textContent = n;
+  $('attnEmpty').classList.toggle('show', n === 0);
+});
+
+/* ——— Recent activity ——— */
+const RECENT = [
+  { icon:'shield-alert',    tone:'rose',  t:'Prowler flagged 2 public buckets',   s:'Prowler · prod-us-east',           svc:'Prowler',            when:'12m' },
+  { icon:'git-merge',       tone:'',      t:'Change 4182 merged into york-api',   s:'Gerrit · 2 approvals',             svc:'Gerrit',             when:'38m' },
+  { icon:'terminal',        tone:'amber', t:'onboarding-summary v14 evaluated',   s:'Prompt Dashboard · 120 cases',     svc:'Prompt Dashboard',   when:'1h' },
+  { icon:'calendar-check',  tone:'teal',  t:'3 posts scheduled for Oct 16',       s:'GTM Launchpad · LinkedIn, X',      svc:'GTM Launchpad',      when:'2h' },
+  { icon:'trending-up',     tone:'',      t:'3 investor matches surfaced',        s:'Investment Advisor · Seed',        svc:'Investment Advisor', when:'3h' },
+  { icon:'wallet',          tone:'amber', t:'Burn forecast refreshed',            s:'Finance Pulse · runway 22 mo',     svc:'Finance Pulse',      when:'5h' },
+];
+$('recentList').innerHTML = RECENT.map(r => `
+  <button type="button" class="ra" data-nav="${esc(r.svc)}">
+    <span class="ra-ic ${r.tone}"><i data-lucide="${r.icon}"></i></span>
+    <span class="ra-txt"><b>${esc(r.t)}</b><small>${esc(r.s)}</small></span>
+    <time>${r.when}</time>
+  </button>`).join('');
+
 /* ——— Views & navigation ——— */
-function setPill(key) {
-  document.querySelectorAll('#pillNav button').forEach(b => b.classList.toggle('active', b.dataset.key === key));
+const VIEW_TITLES = { dashboard:'Dashboard', journey:'Product Journey', services:'All Services' };
+function setNavActive(key) {
+  document.querySelectorAll('.rail .nav-item[data-key]').forEach(b => {
+    const on = b.dataset.key === key;
+    b.classList.toggle('active', on);
+    if (on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
+  });
+}
+function setCrumb(name, extra) {
+  $('crumbRoot').textContent = extra ? 'All Services' : 'York Foundation';
+  $('crumbCur').textContent = extra || VIEW_TITLES[name] || '';
 }
 function showView(name, opts = {}) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   const el = $('view-' + name);
   if (el) el.classList.add('active');
-  setPill(name);
+  setNavActive(name);
+  setCrumb(name);
   if (name === 'services' && !opts.keepFilter) {
     $('svcFilter').value = '';
     document.querySelectorAll('#svcFilterBar .btn-chip').forEach((x,i) => x.classList.toggle('active', i === 0));
@@ -1120,9 +1459,14 @@ function navToService(label) {
   $('svcFilter').value = label;
   document.querySelectorAll('#svcFilterBar .btn-chip').forEach((x,i) => x.classList.toggle('active', i === 0));
   applySvcFilters();
-  setPill(label === 'Fuel' ? 'fuel' : 'services');
+  const inNav = !!document.querySelector(`.rail .nav-item[data-key="${CSS.escape(label)}"]`);
+  setNavActive(inNav ? label : 'services');
+  setCrumb('services', label);
 }
 document.addEventListener('click', e => {
+  if (e.target.closest('.rail .nav-item, .rail .brand')) { closeDrawer(); hideTip(); }
+  const soon = e.target.closest('[data-soon]');
+  if (soon) { toast(`${soon.dataset.soon} opens in the full console`); return; }
   const v = e.target.closest('[data-view]');
   if (v && !v.closest('.cmdk')) { e.preventDefault(); showView(v.dataset.view); return; }
   const n = e.target.closest('[data-nav]');
@@ -1142,7 +1486,6 @@ document.querySelectorAll('.flow-stage').forEach(stage => {
   });
 });
 $('bellBtn').addEventListener('click', () => toast('You have 3 unread notifications'));
-$('settingsBtn').addEventListener('click', () => toast('Settings open in the full console'));
 
 function animateCover() {
   const bar = $('coverBar');
@@ -1219,8 +1562,11 @@ addEventListener('keydown', e => {
     e.preventDefault(); openCmdk(); return;
   }
   if (e.key === 'Escape' && cmdk.classList.contains('open')) closeCmdk();
+  else if (e.key === 'Escape') closeDrawer();
 });
 
+setNavActive('dashboard');
+setCrumb('dashboard');
 paintIcons();
 countUp();
 animateCover();
