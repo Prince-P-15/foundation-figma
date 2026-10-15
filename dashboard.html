@@ -107,7 +107,7 @@ button{cursor:pointer;border:none;background:none;color:inherit}
   background:var(--white); border-right:1px solid var(--line);
   display:flex; flex-direction:column; align-items:stretch;
   padding:var(--space-3) var(--space-2); gap:var(--space-1);
-  overflow:hidden; transition:padding .22s ease;
+  overflow:hidden; transition:padding .22s ease; min-height:0;
 }
 .rail-top{
   display:flex; align-items:center; justify-content:center; gap:var(--space-2);
@@ -154,6 +154,63 @@ button{cursor:pointer;border:none;background:none;color:inherit}
   padding:6px 10px; border-radius:var(--r-ctl); white-space:nowrap; z-index:5; pointer-events:none;
 }
 .app:not(.nav-open) .rail-btn:hover .tip{display:block}
+.rail-scroll{flex:1; overflow-y:auto; overflow-x:hidden; display:flex; flex-direction:column; gap:2px; min-height:0}
+.rail-group{margin-bottom:var(--space-2)}
+.rail-group-label{
+  display:none; font-size:10px; font-weight:600; color:var(--subtle);
+  letter-spacing:.08em; text-transform:uppercase;
+  padding:var(--space-3) var(--space-3) var(--space-1);
+}
+.app.nav-open .rail-group-label{display:block}
+.rail-workspace{
+  display:flex; align-items:center; gap:var(--space-2);
+  height:40px; margin:0 var(--space-1) var(--space-2); padding:0 var(--space-2);
+  border-radius:var(--r-ctl); border:1px solid var(--line); background:var(--surface);
+  cursor:pointer; min-width:0;
+}
+.app:not(.nav-open) .rail-workspace{justify-content:center; padding:0; margin:0 0 var(--space-2)}
+.rail-workspace:hover{background:var(--bg)}
+.rail-ws-avatar{
+  width:24px; height:24px; border-radius:7px; flex-shrink:0;
+  display:grid; place-items:center; background:linear-gradient(135deg,#FBBF24,#F97316);
+  color:#fff; font-size:9px; font-weight:700; font-family:var(--mono);
+}
+.rail-ws-name{
+  display:none; flex:1; font-size:var(--ctl-fs); font-weight:600; color:var(--ink-strong);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.app.nav-open .rail-ws-name{display:block}
+.rail-ws-chev{display:none; color:var(--subtle); flex-shrink:0}
+.app.nav-open .rail-ws-chev{display:grid}
+.rail-ws-chev i,.rail-ws-chev svg{width:14px;height:14px}
+.app:not(.nav-open) .rail-workspace .rail-ws-chev{display:none}
+.rail-badge{
+  display:none; margin-left:auto; font-size:10px; font-weight:600; font-family:var(--mono);
+  padding:1px 7px; border-radius:6px; background:var(--surface); color:var(--muted);
+}
+.app.nav-open .rail-badge{display:inline-flex}
+.rail-btn.active .rail-badge{background:var(--brand-100); color:var(--brand-700)}
+.rail-badge.new{background:var(--brand-50); color:var(--brand-700)}
+.rail-bottom{
+  flex-shrink:0; padding-top:var(--space-2); border-top:1px solid var(--line);
+  margin-top:var(--space-1);
+}
+.rail-user{
+  display:flex; align-items:center; gap:var(--space-2);
+  height:44px; padding:0 var(--space-2); border-radius:var(--r-ctl); cursor:pointer;
+}
+.app.nav-open .rail-user{padding:0 var(--space-3)}
+.rail-user:hover{background:var(--surface)}
+.rail-user-avatar{
+  width:32px; height:32px; border-radius:var(--r-ctl); flex-shrink:0;
+  display:grid; place-items:center; background:var(--brand-600); color:#fff;
+  font-size:11px; font-weight:700; font-family:var(--mono);
+}
+.rail-user-info{display:none; min-width:0; flex:1}
+.app.nav-open .rail-user-info{display:block}
+.rail-user-name{font-size:var(--ctl-fs); font-weight:600; color:var(--ink-strong); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.rail-user-role{font-size:11px; color:var(--subtle)}
+.app.nav-open .rail-brand-name::after{content:' Foundation'}
 .rail-spacer{flex:1}
 .rail-exit{
   height:var(--ctl-h); display:flex; align-items:center; justify-content:center; gap:var(--space-2);
@@ -213,6 +270,103 @@ button{cursor:pointer;border:none;background:none;color:inherit}
   font-size:12px; font-weight:700; font-family:var(--mono);
   border:1px solid var(--brand-100);
 }
+.icon-btn.has-dot{position:relative}
+.icon-btn.has-dot::after{
+  content:''; position:absolute; top:8px; right:9px;
+  width:7px; height:7px; border-radius:50%; background:var(--brand-500);
+  border:2px solid var(--white);
+}
+
+.stats{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--space-4); margin-bottom:var(--space-7)}
+.stat{
+  padding:var(--space-4) var(--space-5); border-radius:var(--r);
+  background:var(--white); border:1px solid var(--line);
+  transition:border-color .15s ease, box-shadow .15s ease;
+}
+.stat:hover{border-color:var(--line-2); box-shadow:0 4px 14px rgba(30,41,59,.06)}
+.stat-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-3)}
+.stat-label{font-size:11px; font-weight:600; color:var(--subtle); letter-spacing:.05em; text-transform:uppercase}
+.stat-ic{
+  width:28px; height:28px; border-radius:var(--r-ctl); display:grid; place-items:center;
+  background:var(--brand-50); color:var(--brand-700);
+}
+.stat-ic i,.stat-ic svg{width:14px;height:14px}
+.stat-val{font-size:1.65rem; font-weight:700; letter-spacing:-.03em; color:var(--ink-strong); line-height:1; margin-bottom:6px}
+.stat-val span{font-size:.85rem; color:var(--subtle); font-weight:500}
+.stat-sub{font-size:12px; color:var(--subtle)}
+.trend-up{color:var(--brand-600); font-weight:600}
+.trend-dn{color:var(--warn-ink); font-weight:600}
+
+.journey-strip{
+  background:var(--white); border:1px solid var(--line); border-radius:var(--r);
+  padding:var(--space-5) var(--space-6); margin-bottom:var(--space-7);
+}
+.journey-strip-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-5); gap:var(--space-3)}
+.journey-strip-head h2{font-size:15px; font-weight:600; color:var(--ink-strong)}
+.link-btn{
+  display:inline-flex; align-items:center; gap:4px; font-size:var(--ctl-fs); font-weight:600;
+  color:var(--brand-700); background:none; border:none; cursor:pointer; font-family:var(--sans);
+}
+.link-btn:hover{text-decoration:underline; text-underline-offset:2px}
+.journey-flow{display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:var(--space-2)}
+.stage{
+  padding:var(--space-3) var(--space-2); border-radius:var(--r-ctl); text-align:center;
+  background:var(--bg); border:1px solid var(--line); cursor:pointer;
+  transition:border-color .15s ease, background .15s ease, transform .15s ease;
+}
+.stage:hover{border-color:#A7F3D0; background:#F0FDF9; transform:translateY(-1px)}
+.stage-ic{
+  width:32px; height:32px; border-radius:var(--r-ctl); margin:0 auto var(--space-2);
+  display:grid; place-items:center; color:#fff;
+}
+.stage-ic i,.stage-ic svg{width:16px;height:16px}
+.stage-name{font-size:12px; font-weight:600; color:var(--ink-strong); margin-bottom:2px}
+.stage-count{font-size:10px; color:var(--subtle); font-family:var(--mono)}
+
+.panels-stack{display:flex; flex-direction:column; gap:var(--space-4); margin-bottom:var(--space-7)}
+.panel-head{
+  display:flex; align-items:center; justify-content:space-between;
+  min-height:52px; padding:0 var(--space-4); border-bottom:1px solid var(--line);
+}
+.panel-head h3{font-size:14px; font-weight:600; color:var(--ink-strong)}
+.panel-body{padding:var(--space-1) var(--space-4) var(--space-4)}
+
+.act{
+  display:flex; gap:var(--space-3); padding:var(--space-3) 0;
+  border-bottom:1px solid var(--line); font-size:var(--ctl-fs); line-height:1.5;
+}
+.act:last-child{border-bottom:none}
+.act-dot{width:7px; height:7px; border-radius:50%; margin-top:7px; flex-shrink:0}
+.act-dot.ok{background:var(--brand-500); box-shadow:0 0 0 3px var(--brand-50)}
+.act-dot.warn{background:#F59E0B; box-shadow:0 0 0 3px #FEF3C7}
+.act-dot.err{background:#EF4444; box-shadow:0 0 0 3px #FEE2E2}
+.act-dot.info{background:#3B82F6; box-shadow:0 0 0 3px #DBEAFE}
+.act-text{flex:1; color:var(--muted)}
+.act-text b{color:var(--ink-strong); font-weight:600}
+.act-time{font-size:11px; color:var(--subtle); font-family:var(--mono); flex-shrink:0}
+
+.svc-header{display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-4); gap:var(--space-3)}
+.svc-header h2{font-size:15px; font-weight:600; color:var(--ink-strong)}
+.svc-status{display:inline-flex; align-items:center; gap:5px; font-size:10px; font-family:var(--mono); font-weight:600; letter-spacing:.02em}
+.svc-status .sdot{width:6px; height:6px; border-radius:50%}
+.svc-status.live{color:var(--brand-700)}.svc-status.live .sdot{background:var(--brand-500)}
+.svc-status.beta{color:#D97706}.svc-status.beta .sdot{background:#F59E0B}
+.svc-status.new{color:#7C3AED}.svc-status.new .sdot{background:#8B5CF6}
+.svc-open{margin-left:auto; color:var(--subtle); font-size:12px}
+.svc:hover .svc-open{color:var(--brand-700)}
+.filter-spacer{flex:1}
+.filter-search{
+  display:flex; align-items:center; gap:var(--space-2);
+  height:var(--ctl-h); padding:0 var(--ctl-px); min-width:220px;
+  border:1px solid var(--line); border-radius:var(--r-ctl); background:var(--white);
+}
+.filter-search i,.filter-search svg{width:var(--icon);height:var(--icon);color:var(--subtle)}
+.filter-search input{
+  flex:1; border:none; outline:none; height:100%; font-size:var(--ctl-fs);
+  font-family:var(--sans); color:var(--ink-strong); background:transparent;
+}
+.filter-search input::placeholder{color:var(--subtle)}
+.init-dot{width:8px; height:8px; border-radius:50%; flex-shrink:0}
 
 .main{grid-row:3; grid-column:2; overflow-y:auto; padding:var(--space-6) 36px 72px}
 .view{display:none}.view.active{display:block}
@@ -359,7 +513,10 @@ button{cursor:pointer;border:none;background:none;color:inherit}
   font-size:12px; color:var(--muted); line-height:1.45; flex:1;
   display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
 }
-.svc-foot{margin-top:var(--space-3); font-size:11px; font-family:var(--mono); color:var(--brand-700); letter-spacing:.02em}
+.svc-foot{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--space-2);
+  margin-top:var(--space-3); padding-top:var(--space-3); border-top:1px solid var(--line);
+}
 
 .filter-bar{display:flex; flex-wrap:wrap; gap:var(--space-2); margin-bottom:var(--space-5)}
 .svc-cats{display:flex; flex-direction:column; gap:var(--space-7)}
@@ -440,6 +597,8 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 @media(max-width:1100px){
   .spotlights{grid-template-columns:1fr}
   .spot{height:auto; min-height:200px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .journey-flow{grid-template-columns:repeat(4,minmax(0,1fr)); row-gap:var(--space-3)}
   .svc-cat .svc-grid,.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .flow-row{grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--space-3)}
   .flow-detail{grid-template-columns:1fr}
@@ -462,7 +621,7 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 </style>
 </head>
 <body>
-<div class="app">
+<div class="app nav-open">
   <div class="notice">
     <span>You have <b>14 days</b> left on your York Foundation trial.</span>
     <a href="#">Upgrade plan</a>
@@ -479,26 +638,65 @@ button{cursor:pointer;border:none;background:none;color:inherit}
         <i data-lucide="panel-left-close" class="icon-close"></i>
       </button>
     </div>
-    <button class="rail-btn active" type="button" data-view="dashboard" aria-label="Dashboard">
-      <i data-lucide="layout-dashboard"></i><span class="label">Dashboard</span><span class="tip">Dashboard</span>
+    <button type="button" class="rail-workspace" aria-label="Switch workspace">
+      <span class="rail-ws-avatar">AC</span>
+      <span class="rail-ws-name">Acme Inc</span>
+      <span class="rail-ws-chev"><i data-lucide="chevron-down"></i></span>
     </button>
-    <button class="rail-btn" type="button" data-view="services" aria-label="Services">
-      <i data-lucide="grid-2x2"></i><span class="label">Services</span><span class="tip">Services</span>
-    </button>
-    <button class="rail-btn" type="button" data-view="journey" aria-label="Product Journey">
-      <i data-lucide="route"></i><span class="label">Product Journey</span><span class="tip">Product Journey</span>
-    </button>
-    <button class="rail-btn" type="button" data-nav="Fuel" aria-label="Fuel">
-      <i data-lucide="flame"></i><span class="label">Fuel</span><span class="tip">Fuel</span>
-    </button>
-    <button class="rail-btn" type="button" data-nav="R&D Pulse" aria-label="Pulse">
-      <i data-lucide="activity"></i><span class="label">Pulse</span><span class="tip">Pulse</span>
-    </button>
-    <button class="rail-btn" type="button" data-nav="Settings" aria-label="Settings">
-      <i data-lucide="settings"></i><span class="label">Settings</span><span class="tip">Settings</span>
-    </button>
-    <div class="rail-spacer"></div>
-    <a class="rail-exit" href="index.html"><i data-lucide="log-out"></i><span class="exit-label">Exit</span></a>
+    <div class="rail-scroll">
+      <div class="rail-group">
+        <div class="rail-group-label">Primary</div>
+        <button class="rail-btn active" type="button" data-view="dashboard" aria-label="Dashboard">
+          <i data-lucide="layout-dashboard"></i><span class="label">Dashboard</span><span class="tip">Dashboard</span>
+        </button>
+        <button class="rail-btn" type="button" data-view="journey" aria-label="Product Journey">
+          <i data-lucide="route"></i><span class="label">Product Journey</span><span class="tip">Product Journey</span>
+        </button>
+        <button class="rail-btn" type="button" data-view="services" aria-label="All Services">
+          <i data-lucide="layout-grid"></i><span class="label">All Services</span><span class="rail-badge">24</span><span class="tip">All Services (24)</span>
+        </button>
+      </div>
+      <div class="rail-group">
+        <div class="rail-group-label">Build &amp; Ship</div>
+        <button class="rail-btn" type="button" data-nav="R&amp;D Launchpad"><i data-lucide="rocket"></i><span class="label">R&amp;D Launchpad</span><span class="tip">R&amp;D Launchpad</span></button>
+        <button class="rail-btn" type="button" data-nav="Gerrit"><i data-lucide="git-pull-request"></i><span class="label">Gerrit</span><span class="tip">Gerrit</span></button>
+        <button class="rail-btn" type="button" data-nav="Design Library"><i data-lucide="compass"></i><span class="label">Design Library</span><span class="tip">Design Library</span></button>
+        <button class="rail-btn" type="button" data-nav="PMT"><i data-lucide="kanban-square"></i><span class="label">PMT</span><span class="tip">PMT</span></button>
+      </div>
+      <div class="rail-group">
+        <div class="rail-group-label">Go-to-Market</div>
+        <button class="rail-btn" type="button" data-nav="GTM Launchpad"><i data-lucide="send"></i><span class="label">GTM Launchpad</span><span class="tip">GTM Launchpad</span></button>
+        <button class="rail-btn" type="button" data-nav="GTM Pulse"><i data-lucide="bar-chart-3"></i><span class="label">GTM Pulse</span><span class="tip">GTM Pulse</span></button>
+      </div>
+      <div class="rail-group">
+        <div class="rail-group-label">Signal &amp; Analytics</div>
+        <button class="rail-btn" type="button" data-nav="R&amp;D Pulse"><i data-lucide="activity"></i><span class="label">R&amp;D Pulse</span><span class="tip">R&amp;D Pulse</span></button>
+        <button class="rail-btn" type="button" data-nav="Finance Pulse"><i data-lucide="wallet"></i><span class="label">Finance Pulse</span><span class="tip">Finance Pulse</span></button>
+        <button class="rail-btn" type="button" data-nav="Prompt Dashboard"><i data-lucide="terminal"></i><span class="label">Prompt Dashboard</span><span class="tip">Prompt Dashboard</span></button>
+      </div>
+      <div class="rail-group">
+        <div class="rail-group-label">AI &amp; Advisory</div>
+        <button class="rail-btn" type="button" data-nav="Fuel"><i data-lucide="flame"></i><span class="label">Fuel</span><span class="tip">Fuel</span></button>
+        <button class="rail-btn" type="button" data-nav="Investment Advisor"><i data-lucide="trending-up"></i><span class="label">Investment Advisor</span><span class="rail-badge new">NEW</span><span class="tip">Investment Advisor (NEW)</span></button>
+      </div>
+      <div class="rail-group">
+        <div class="rail-group-label">Platform</div>
+        <button class="rail-btn" type="button" data-nav="Connector Hub"><i data-lucide="plug"></i><span class="label">Connector Hub</span><span class="tip">Connector Hub</span></button>
+        <button class="rail-btn" type="button" data-nav="Team &amp; Access"><i data-lucide="users"></i><span class="label">Team &amp; Access</span><span class="tip">Team &amp; Access</span></button>
+        <button class="rail-btn" type="button" data-nav="Billing &amp; Usage"><i data-lucide="credit-card"></i><span class="label">Billing &amp; Usage</span><span class="tip">Billing &amp; Usage</span></button>
+        <button class="rail-btn" type="button" data-nav="Settings"><i data-lucide="settings"></i><span class="label">Settings</span><span class="tip">Settings</span></button>
+      </div>
+    </div>
+    <div class="rail-bottom">
+      <div class="rail-user">
+        <div class="rail-user-avatar">AK</div>
+        <div class="rail-user-info">
+          <div class="rail-user-name">Alex Kim</div>
+          <div class="rail-user-role">Admin</div>
+        </div>
+      </div>
+      <a class="rail-exit" href="index.html"><i data-lucide="log-out"></i><span class="exit-label">Exit to sign-in</span></a>
+    </div>
   </aside>
 
   <header class="topbar">
@@ -508,7 +706,7 @@ button{cursor:pointer;border:none;background:none;color:inherit}
     <div class="crumbs">
       <span>Acme Inc</span>
       <span class="sep">›</span>
-      <span class="here" id="crumb">Overview</span>
+      <span class="here" id="crumb">Dashboard</span>
     </div>
     <div class="top-actions">
       <button class="setup-pill" type="button">
@@ -517,8 +715,11 @@ button{cursor:pointer;border:none;background:none;color:inherit}
       </button>
       <button class="search" type="button" id="openCmdk">
         <i data-lucide="search"></i>
-        <span>Search</span>
+        <span>Search services, actions…</span>
         <kbd>⌘K</kbd>
+      </button>
+      <button class="icon-btn has-dot" type="button" title="Notifications" aria-label="Notifications">
+        <i data-lucide="bell"></i>
       </button>
       <button class="icon-btn" type="button" title="Help" aria-label="Help">
         <i data-lucide="circle-help"></i>
@@ -529,8 +730,8 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 
   <main class="main">
     <section class="view active" id="view-dashboard">
-      <h1 class="page-title">Overview</h1>
-      <p class="page-lede">Health, initiatives, and live activity across R&amp;D, GTM, and Capital — powered by Fuel.</p>
+      <h1 class="page-title">Good morning, Alex.</h1>
+      <p class="page-lede">Here's your workspace at a glance — from ideation through investment.</p>
 
       <div class="spotlights">
         <a class="spot work" href="#" data-nav="PMT">
@@ -562,109 +763,179 @@ button{cursor:pointer;border:none;background:none;color:inherit}
         </a>
       </div>
 
-      <div class="section">
-        <div class="section-meta">
-          <h2>Status and control</h2>
-          <p>Workspace availability and operating mode for Acme Inc.</p>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-head">
+            <span class="stat-label">Active Initiatives</span>
+            <span class="stat-ic"><i data-lucide="git-branch"></i></span>
+          </div>
+          <div class="stat-val">18</div>
+          <div class="stat-sub">across R&amp;D, GTM &amp; Finance</div>
         </div>
-        <div class="card">
-          <div class="card-row">
-            <span class="label">Console status</span>
-            <span class="badge ok"><i data-lucide="check"></i> Active</span>
-            <button class="toggle" type="button" aria-label="Toggle console status"></button>
+        <div class="stat">
+          <div class="stat-head">
+            <span class="stat-label">R&amp;D Health</span>
+            <span class="stat-ic"><i data-lucide="activity"></i></span>
           </div>
-          <div class="card-row">
-            <span class="label">Fuel advisory</span>
-            <span class="badge soft">Recommended</span>
-            <button class="toggle" type="button" aria-label="Toggle Fuel"></button>
-          </div>
+          <div class="stat-val">87<span>/100</span></div>
+          <div class="stat-sub"><span class="trend-up">▲ 4.2</span> vs last sprint</div>
         </div>
-      </div>
-
-      <div class="section">
-        <div class="section-meta">
-          <h2>Active initiatives</h2>
-          <p>Work currently moving across R&amp;D, GTM, and capital.</p>
+        <div class="stat">
+          <div class="stat-head">
+            <span class="stat-label">GTM Reach</span>
+            <span class="stat-ic"><i data-lucide="bar-chart-3"></i></span>
+          </div>
+          <div class="stat-val">184K</div>
+          <div class="stat-sub"><span class="trend-up">▲ 12.6%</span> this month</div>
         </div>
-        <div class="card">
-          <div class="init-row">
-            <div class="init-ico"><i data-lucide="code-2"></i></div>
-            <div class="init-body">
-              <div class="init-name">york-api v2 — payments webhook</div>
-              <div class="init-meta"><span class="tag">R&amp;D</span> 3 contributors · QA passing</div>
-            </div>
-            <div class="progress"><span style="width:78%"></span></div>
+        <div class="stat">
+          <div class="stat-head">
+            <span class="stat-label">Runway</span>
+            <span class="stat-ic"><i data-lucide="wallet"></i></span>
           </div>
-          <div class="init-row">
-            <div class="init-ico"><i data-lucide="megaphone"></i></div>
-            <div class="init-body">
-              <div class="init-name">Q1 brand campaign — LinkedIn + X</div>
-              <div class="init-meta"><span class="tag">GTM</span> 12 posts scheduled</div>
-            </div>
-            <div class="progress"><span style="width:45%"></span></div>
-          </div>
-          <div class="init-row">
-            <div class="init-ico"><i data-lucide="landmark"></i></div>
-            <div class="init-body">
-              <div class="init-name">Series A data room — investor deck v3</div>
-              <div class="init-meta"><span class="tag">Capital</span> 4 investors engaged</div>
-            </div>
-            <div class="progress"><span style="width:62%"></span></div>
-          </div>
-          <div class="init-row">
-            <div class="init-ico"><i data-lucide="shield-check"></i></div>
-            <div class="init-body">
-              <div class="init-name">Q1 internal audit — SOC 2 readiness</div>
-              <div class="init-meta"><span class="tag">Audit</span> 18 controls reviewed</div>
-            </div>
-            <div class="progress"><span style="width:34%"></span></div>
-          </div>
+          <div class="stat-val">22<span>mo</span></div>
+          <div class="stat-sub">at current burn rate</div>
         </div>
       </div>
 
-      <div class="section">
-        <div class="section-meta">
-          <h2>Response handling</h2>
-          <p>Route Fuel and Support Ticket replies to the right owners.</p>
+      <div class="journey-strip">
+        <div class="journey-strip-head">
+          <h2>Your product journey</h2>
+          <button type="button" class="link-btn" data-view="journey">View full journey <i data-lucide="arrow-right"></i></button>
         </div>
+        <div class="journey-flow">
+          <button type="button" class="stage" data-view="journey">
+            <div class="stage-ic" style="background:#8B5CF6"><i data-lucide="flame"></i></div>
+            <div class="stage-name">Ideation</div>
+            <div class="stage-count">Fuel · 3</div>
+          </button>
+          <button type="button" class="stage" data-view="journey">
+            <div class="stage-ic" style="background:#2563EB"><i data-lucide="code-2"></i></div>
+            <div class="stage-name">Build</div>
+            <div class="stage-count">Launchpad · 7</div>
+          </button>
+          <button type="button" class="stage" data-view="journey">
+            <div class="stage-ic" style="background:#0891B2"><i data-lucide="shield-check"></i></div>
+            <div class="stage-name">QA &amp; Audit</div>
+            <div class="stage-count">5 tools · 4</div>
+          </button>
+          <button type="button" class="stage" data-view="journey">
+            <div class="stage-ic" style="background:var(--brand-600)"><i data-lucide="send"></i></div>
+            <div class="stage-name">Go-to-Market</div>
+            <div class="stage-count">GTM · 6</div>
+          </button>
+          <button type="button" class="stage" data-view="journey">
+            <div class="stage-ic" style="background:#D97706"><i data-lucide="radio"></i></div>
+            <div class="stage-name">Signal</div>
+            <div class="stage-count">Pulse · 3</div>
+          </button>
+          <button type="button" class="stage" data-view="journey">
+            <div class="stage-ic" style="background:#DB2777"><i data-lucide="landmark"></i></div>
+            <div class="stage-name">Finance</div>
+            <div class="stage-count">Finance Pulse</div>
+          </button>
+          <button type="button" class="stage" data-view="journey">
+            <div class="stage-ic" style="background:#4F46E5"><i data-lucide="trending-up"></i></div>
+            <div class="stage-name">Invest</div>
+            <div class="stage-count">AI Advisor</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="panels-stack">
         <div class="card">
-          <div class="card-row">
-            <span class="label">Assistant deflection</span>
-            <span class="badge soft">Recommended</span>
-            <button class="toggle" type="button" aria-label="Toggle deflection"></button>
+          <div class="panel-head">
+            <h3>Active initiatives</h3>
+            <button type="button" class="link-btn">View all →</button>
           </div>
-          <div class="field-grid">
-            <div class="field">
-              <label>Support <span class="hint">optional</span></label>
-              <div class="input">
-                <i data-lucide="mail"></i>
-                <input type="email" placeholder="support@acme.com" />
+          <div class="panel-body">
+            <div class="init-row">
+              <span class="init-dot" style="background:#2563EB"></span>
+              <div class="init-body">
+                <div class="init-name">york-api v2 — payments webhook</div>
+                <div class="init-meta"><span class="tag">R&amp;D</span> 3 contributors · QA passing</div>
               </div>
+              <div class="progress"><span style="width:78%"></span></div>
             </div>
-            <div class="field">
-              <label>Sales <span class="hint">optional</span></label>
-              <div class="input">
-                <i data-lucide="mail"></i>
-                <input type="email" placeholder="sales@acme.com" />
+            <div class="init-row">
+              <span class="init-dot" style="background:var(--brand-600)"></span>
+              <div class="init-body">
+                <div class="init-name">Q1 brand campaign — LinkedIn + X</div>
+                <div class="init-meta"><span class="tag">GTM</span> 12 posts scheduled</div>
               </div>
+              <div class="progress"><span style="width:45%"></span></div>
+            </div>
+            <div class="init-row">
+              <span class="init-dot" style="background:#8B5CF6"></span>
+              <div class="init-body">
+                <div class="init-name">Series A data room — investor deck v3</div>
+                <div class="init-meta"><span class="tag">CAPITAL</span> 4 investors engaged</div>
+              </div>
+              <div class="progress"><span style="width:62%"></span></div>
+            </div>
+            <div class="init-row">
+              <span class="init-dot" style="background:#D97706"></span>
+              <div class="init-body">
+                <div class="init-name">Q1 internal audit — SOC 2 readiness</div>
+                <div class="init-meta"><span class="tag">AUDIT</span> 18 controls reviewed</div>
+              </div>
+              <div class="progress"><span style="width:34%"></span></div>
+            </div>
+            <div class="init-row">
+              <span class="init-dot" style="background:#0891B2"></span>
+              <div class="init-body">
+                <div class="init-name">Onboarding LMS — new hire track</div>
+                <div class="init-meta"><span class="tag">PEOPLE</span> 24 lessons published</div>
+              </div>
+              <div class="progress"><span style="width:88%"></span></div>
             </div>
           </div>
-          <div class="card-foot">
-            <span>Advanced routing is available on enterprise plans.</span>
-            <button class="btn btn-secondary" type="button">Contact sales</button>
+        </div>
+        <div class="card">
+          <div class="panel-head">
+            <h3>Recent activity</h3>
+            <button type="button" class="link-btn">See all →</button>
+          </div>
+          <div class="panel-body">
+            <div class="act">
+              <span class="act-dot ok"></span>
+              <span class="act-text"><b>R&amp;D Pulse</b> health score improved to 87 — QA pass rate up 4.2</span>
+              <span class="act-time">12m</span>
+            </div>
+            <div class="act">
+              <span class="act-dot info"></span>
+              <span class="act-text"><b>GTM Launchpad</b> scheduled 3 posts across LinkedIn &amp; X</span>
+              <span class="act-time">28m</span>
+            </div>
+            <div class="act">
+              <span class="act-dot warn"></span>
+              <span class="act-text"><b>Prompt Dashboard</b> flagged 6 prompts with regression in eval score</span>
+              <span class="act-time">1h</span>
+            </div>
+            <div class="act">
+              <span class="act-dot ok"></span>
+              <span class="act-text"><b>Investment Advisor</b> matched 2 new seed-stage investors in your sector</span>
+              <span class="act-time">2h</span>
+            </div>
+            <div class="act">
+              <span class="act-dot err"></span>
+              <span class="act-text"><b>Internal Audit</b> flagged control AC-14 missing evidence</span>
+              <span class="act-time">3h</span>
+            </div>
+            <div class="act">
+              <span class="act-dot info"></span>
+              <span class="act-text"><b>Hub</b> onboarded 2 new team members this week</span>
+              <span class="act-time">5h</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="section">
-        <div class="section-meta">
-          <h2>Pinned services</h2>
-          <p>Shortcuts to the tools your team opens most.</p>
-        </div>
-        <div class="card">
-          <div class="svc-grid" id="quickServices"></div>
-        </div>
+      <div class="svc-header">
+        <h2>Your services</h2>
+        <button type="button" class="link-btn" data-view="services">View all 24 →</button>
       </div>
+      <div class="svc-grid" id="quickServices" style="padding:0;margin-bottom:var(--space-7)"></div>
     </section>
 
     <section class="view" id="view-journey">
@@ -797,8 +1068,8 @@ button{cursor:pointer;border:none;background:none;color:inherit}
               <button class="tool" type="button" data-nav="Hub">Hub</button>
               <button class="tool" type="button" data-nav="LMS">LMS</button>
               <button class="tool" type="button" data-nav="Assessment Platform">Assessment</button>
-              <button class="tool" type="button">Walk in Drive</button>
-              <button class="tool" type="button">Internship Drive</button>
+              <button class="tool" type="button" data-nav="Walk in Drive">Walk in Drive</button>
+              <button class="tool" type="button" data-nav="Internship Drive">Internship Drive</button>
             </div>
           </div>
         </div>
@@ -806,17 +1077,22 @@ button{cursor:pointer;border:none;background:none;color:inherit}
     </section>
 
     <section class="view" id="view-services">
-      <h1 class="page-title">Services</h1>
-      <p class="page-lede">Browse the full York Foundation catalog by category.</p>
+      <h1 class="page-title">All Services</h1>
+      <p class="page-lede">24 products across build, quality, market, signal, capital, people, and support.</p>
       <div class="filter-bar">
-        <button class="btn btn-chip active" type="button">All</button>
-        <button class="btn btn-chip" type="button">Build</button>
-        <button class="btn btn-chip" type="button">Quality</button>
-        <button class="btn btn-chip" type="button">GTM</button>
-        <button class="btn btn-chip" type="button">Signal</button>
-        <button class="btn btn-chip" type="button">Capital</button>
-        <button class="btn btn-chip" type="button">People</button>
-        <button class="btn btn-chip" type="button">Support</button>
+        <button class="btn btn-chip active" type="button" data-filter="all">All</button>
+        <button class="btn btn-chip" type="button" data-filter="Build &amp; Ship">Build</button>
+        <button class="btn btn-chip" type="button" data-filter="Quality &amp; Audit">Quality</button>
+        <button class="btn btn-chip" type="button" data-filter="Go-to-Market">GTM</button>
+        <button class="btn btn-chip" type="button" data-filter="Signal &amp; Analytics">Signal</button>
+        <button class="btn btn-chip" type="button" data-filter="capital">Capital</button>
+        <button class="btn btn-chip" type="button" data-filter="People &amp; Learning">People</button>
+        <button class="btn btn-chip" type="button" data-filter="Support">Support</button>
+        <span class="filter-spacer"></span>
+        <div class="filter-search">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Filter services…" id="svcFilter" autocomplete="off">
+        </div>
       </div>
       <div class="svc-cats" id="svcCatalog"></div>
     </section>
@@ -827,7 +1103,7 @@ button{cursor:pointer;border:none;background:none;color:inherit}
   <div class="cmdk-box">
     <div class="cmdk-input">
       <i data-lucide="search"></i>
-      <input type="text" id="cmdkInput" placeholder="Search services or actions…" autocomplete="off">
+      <input type="text" id="cmdkInput" placeholder="Search services, actions, or ask anything…" autocomplete="off">
     </div>
     <div class="cmdk-list" id="cmdkList"></div>
   </div>
@@ -858,13 +1134,15 @@ const CATEGORIES = [
     { name:'Prompt Dashboard', desc:'AI prompt tracking, evaluation, and version analytics.', icon:'terminal', status:'live' },
   ]},
   { name:'AI & Advisory', services:[
-    { name:'Fuel', desc:'Company scorecard, peer benchmarks, and operating history.', icon:'flame', status:'live' },
+    { name:'Fuel', desc:'AI advisor connected to Slack, Granola, and HubSpot.', icon:'flame', status:'live' },
     { name:'Investment Advisor', desc:'Investor matching, updates, and data room management.', icon:'trending-up', status:'new' },
   ]},
   { name:'People & Learning', services:[
     { name:'Hub', desc:'HRMS and people management, teams, and projects.', icon:'users', status:'live' },
-    { name:'LMS', desc:'Learning management for onboarding and training.', icon:'graduation-cap', status:'live' },
+    { name:'LMS', desc:'Learning management system for onboarding & training.', icon:'graduation-cap', status:'live' },
     { name:'Assessment Platform', desc:'Org-wide assessments and skill tracking.', icon:'badge-check', status:'live' },
+    { name:'Walk in Drive', desc:'Recruitment event platform for walk-in hiring.', icon:'user-plus', status:'live' },
+    { name:'Internship Drive', desc:'Internship recruitment and program management.', icon:'layers', status:'live' },
   ]},
   { name:'Support', services:[
     { name:'Support Ticket', desc:'Unified ticketing across every product and team.', icon:'ticket', status:'live' },
@@ -874,11 +1152,14 @@ const CATEGORIES = [
 
 function svcCard(s) {
   const statusText = s.status === 'new' ? 'NEW' : s.status === 'beta' ? 'BETA' : 'LIVE';
-  return `<div class="svc">
+  return `<div class="svc" data-svc-name="${s.name}">
     <div class="svc-icon"><i data-lucide="${s.icon}"></i></div>
     <div class="svc-name">${s.name}</div>
     <div class="svc-desc">${s.desc}</div>
-    <div class="svc-foot">${statusText}</div>
+    <div class="svc-foot">
+      <span class="svc-status ${s.status}"><span class="sdot"></span>${statusText}</span>
+      <span class="svc-open">→</span>
+    </div>
   </div>`;
 }
 
@@ -893,7 +1174,7 @@ featured.forEach(name => {
 const cat = document.getElementById('svcCatalog');
 CATEGORIES.forEach(c => {
   cat.insertAdjacentHTML('beforeend', `
-    <div class="svc-cat">
+    <div class="svc-cat" data-cat="${c.name}">
       <div class="svc-cat-head">
         <span class="svc-cat-name">${c.name}</span>
         <span class="svc-cat-count">${c.services.length}</span>
@@ -907,17 +1188,24 @@ function paintIcons() {
   if (window.lucide) lucide.createIcons({ attrs: { 'stroke-width': 1.75 } });
 }
 
-const VIEW_CRUMBS = { dashboard:'Overview', services:'Services', journey:'Product Journey' };
+const VIEW_CRUMBS = { dashboard:'Dashboard', services:'All Services', journey:'Product Journey' };
 
 function showView(name) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   const el = document.getElementById('view-' + name);
   if (el) el.classList.add('active');
   document.querySelectorAll('.rail-btn[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === name));
-  document.getElementById('crumb').textContent = VIEW_CRUMBS[name] || 'Overview';
+  document.querySelectorAll('.rail-btn[data-nav]').forEach(b => b.classList.remove('active'));
+  document.getElementById('crumb').textContent = VIEW_CRUMBS[name] || 'Dashboard';
   document.querySelector('.main').scrollTop = 0;
   if (window.matchMedia('(max-width: 720px)').matches) setNavOpen(false);
   paintIcons();
+}
+
+function navToService(label) {
+  showView('services');
+  document.querySelectorAll('.rail-btn[data-view]').forEach(b => b.classList.remove('active'));
+  document.getElementById('crumb').textContent = label;
 }
 
 document.querySelectorAll('.flow-stage').forEach(stage => {
@@ -935,17 +1223,45 @@ document.querySelectorAll('[data-view]').forEach(el => {
 document.querySelectorAll('[data-nav]').forEach(el => {
   el.addEventListener('click', (e) => {
     e.preventDefault();
-    document.getElementById('crumb').textContent = el.dataset.nav || 'Services';
-    showView('services');
+    navToService(el.dataset.nav || 'All Services');
   });
 });
+
+function applySvcFilters() {
+  const chip = document.querySelector('.btn-chip.active');
+  const filter = chip?.dataset.filter || 'all';
+  const q = (document.getElementById('svcFilter')?.value || '').toLowerCase();
+  document.querySelectorAll('#svcCatalog .svc-cat').forEach(catEl => {
+    const catName = catEl.dataset.cat || '';
+    let catVisible = filter === 'all';
+    if (filter === 'capital') {
+      catVisible = catName === 'AI & Advisory' || catName === 'Signal & Analytics';
+    } else if (filter !== 'all') {
+      catVisible = catName === filter;
+    }
+    catEl.querySelectorAll('.svc').forEach(svc => {
+      const text = svc.textContent.toLowerCase();
+      const matchQ = !q || text.includes(q);
+      let matchFilter = catVisible;
+      if (filter === 'capital' && catName === 'Signal & Analytics') {
+        matchFilter = svc.dataset.svcName === 'Finance Pulse';
+      }
+      const show = matchFilter && matchQ;
+      svc.style.display = show ? '' : 'none';
+    });
+    const anyVisible = [...catEl.querySelectorAll('.svc')].some(s => s.style.display !== 'none');
+    catEl.style.display = anyVisible ? '' : 'none';
+  });
+}
 
 document.querySelectorAll('.btn-chip').forEach(c => {
   c.addEventListener('click', () => {
     document.querySelectorAll('.btn-chip').forEach(x => x.classList.remove('active'));
     c.classList.add('active');
+    applySvcFilters();
   });
 });
+document.getElementById('svcFilter')?.addEventListener('input', applySvcFilters);
 
 const cmdk = document.getElementById('cmdk');
 const cmdkInput = document.getElementById('cmdkInput');
@@ -953,11 +1269,18 @@ const cmdkList = document.getElementById('cmdkList');
 let selIdx = 0;
 const CMND_ITEMS = [
   { group:'Navigate', items:[
-    { label:'Overview', view:'dashboard', key:'G D', icon:'layout-dashboard' },
-    { label:'Services', view:'services', key:'G S', icon:'grid-2x2' },
+    { label:'Dashboard', view:'dashboard', key:'G D', icon:'layout-dashboard' },
     { label:'Product Journey', view:'journey', key:'G J', icon:'route' },
+    { label:'All Services', view:'services', key:'G S', icon:'layout-grid' },
   ]},
   { group:'Services', items: allServices.map(s => ({ label:s.name, icon:s.icon, key:'' })) },
+  { group:'Actions', items:[
+    { label:'Create new initiative', key:'N I', icon:'plus-circle' },
+    { label:'Invite team member', key:'I T', icon:'user-plus' },
+    { label:'Start new R&D project', key:'N P', icon:'rocket' },
+    { label:'Schedule GTM campaign', key:'N C', icon:'send' },
+    { label:'Prepare investor update', key:'N U', icon:'file-text' },
+  ]},
 ];
 
 function renderCmdk(filter='') {
@@ -1014,7 +1337,7 @@ function setNavOpen(open) {
   });
   paintIcons();
 }
-setNavOpen(localStorage.getItem('york-nav-open') === '1');
+setNavOpen(localStorage.getItem('york-nav-open') !== '0');
 document.getElementById('navToggle')?.addEventListener('click', () => setNavOpen(!app.classList.contains('nav-open')));
 document.getElementById('navToggleTop')?.addEventListener('click', () => setNavOpen(!app.classList.contains('nav-open')));
 
