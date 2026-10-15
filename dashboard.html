@@ -75,11 +75,13 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
 .grp{margin-top:14px}
 .grp:first-child{margin-top:4px}
 .grp-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:0 10px 5px}
-.nav-item{display:flex;align-items:center;gap:10px;width:100%;padding:10px 10px;min-height:40px;border-radius:8px;font-size:13.5px;font-weight:500;color:var(--ink-2);transition:background .12s,color .12s}
-.nav-item i{color:var(--muted);width:16px;height:16px}
+.nav-item{display:flex;align-items:center;gap:10px;width:100%;padding:7px 8px;min-height:40px;border-radius:9px;font-size:13.5px;font-weight:500;color:var(--ink-2);transition:background .12s,color .12s}
+.nav-ic{width:28px;height:28px;border-radius:7px;background:#F1F5F9;color:#475569;display:grid;place-items:center;flex-shrink:0;transition:background .12s,color .12s}
+.nav-ic i,.nav-ic svg{width:15px;height:15px}
 .nav-item:hover{background:var(--bg)}
+.nav-item:hover .nav-ic{background:#E2E8F0;color:var(--ink)}
 .nav-item.active{background:var(--em-50);color:var(--em-d);font-weight:600}
-.nav-item.active i{color:var(--em-d)}
+.nav-item.active .nav-ic{background:var(--em-100);color:var(--em-d)}
 .nav-lbl{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .nbadge{font-family:var(--mono);font-size:10px;font-weight:500;padding:1px 6px;border-radius:99px;background:var(--bg);color:var(--muted)}
 .nbadge.new{background:var(--em-100);color:var(--em-d);font-family:var(--sans);font-weight:700;letter-spacing:.04em}
@@ -125,12 +127,8 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
 .sec-title{font-size:15px;font-weight:700;letter-spacing:-.01em}
 .link{font-size:13px;font-weight:600;color:var(--em-d);display:inline-flex;align-items:center;gap:4px;text-decoration:underline;text-underline-offset:3px;text-decoration-color:transparent}
 .link:hover,.link:focus-visible{color:#065F46;text-decoration-color:currentColor}
-.tag{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.03em;padding:3px 8px;border-radius:6px;white-space:nowrap;border:1px solid transparent}
-.tag.rd{background:#EFF6FF;color:#1E40AF;border-color:#BFDBFE}
-.tag.gtm{background:#F5F3FF;color:#5B21B6;border-color:#DDD6FE}
+.tag{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.03em;padding:3px 8px;border-radius:6px;white-space:nowrap;border:1px solid #E2E8F0;background:#F8FAFC;color:#475569}
 .tag.capital{background:var(--em-50);color:var(--em-d);border-color:#A7F3D0}
-.tag.audit{background:#FFF7ED;color:#9A3412;border-color:#FED7AA}
-.tag.people{background:#FDF2F8;color:#9D174D;border-color:#FBCFE8}
 
 /* Greeting + KPIs */
 .hello h1{font-size:26px;font-weight:700;letter-spacing:-.03em}
@@ -139,11 +137,8 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
 .kpi{padding:16px 18px 15px;display:flex;flex-direction:column;gap:4px}
 .kpi-top{display:flex;align-items:center;justify-content:space-between}
 .kpi-lbl{font-size:13px;font-weight:600;color:var(--muted)}
-.kpi-ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center}
+.kpi-ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:#F1F5F9;color:#475569}
 .kpi-ic.g{background:var(--em-50);color:var(--em-d)}
-.kpi-ic.b{background:#EFF6FF;color:#1D4ED8}
-.kpi-ic.v{background:#F5F3FF;color:#6D28D9}
-.kpi-ic.a{background:#FFFBEB;color:#B45309}
 .kpi-val{font-size:32px;font-weight:700;letter-spacing:-.035em;line-height:1.15;margin-top:4px}
 .kpi-val small{font-size:15px;font-weight:500;color:var(--muted);letter-spacing:0;margin-left:2px}
 .kpi-sub{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
@@ -171,19 +166,15 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
 .init b{display:block;font-size:13.5px;font-weight:600}
 .init small{font-size:12px;color:var(--muted)}
 .bar{height:6px;background:var(--line-2);border-radius:99px;overflow:hidden}
-.bar i{display:block;height:100%;border-radius:99px;background:var(--em)}
-.bar.rd i{background:#3B82F6}.bar.gtm i{background:#8B5CF6}.bar.capital i{background:var(--em)}.bar.audit i{background:#F97316}.bar.people i{background:#EC4899}
+.bar i{display:block;height:100%;border-radius:99px;background:#94A3B8}
+.bar.capital i{background:var(--em)}
 .pct{font-family:var(--mono);font-size:12px;color:var(--ink-2);text-align:right}
 .ra{display:flex;align-items:flex-start;gap:12px;padding:10px 8px;margin:0 -8px;border-radius:10px;width:calc(100% + 16px);transition:background .12s}
 .ra:hover{background:var(--bg-2)}
 .ra + .ra{border-top:1px solid var(--line-2)}
-.ra-dot{width:9px;height:9px;border-radius:50%;margin-top:6px;flex-shrink:0;box-shadow:0 0 0 3px rgba(0,0,0,.04)}
+.ra-dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0;background:#94A3B8;box-shadow:0 0 0 3px #F1F5F9}
 .ra-dot.g{background:var(--em);box-shadow:0 0 0 3px var(--em-50)}
-.ra-dot.p{background:var(--violet);box-shadow:0 0 0 3px #F5F3FF}
-.ra-dot.b{background:var(--blue);box-shadow:0 0 0 3px #EFF6FF}
-.ra-dot.o{background:var(--orange);box-shadow:0 0 0 3px #FFF7ED}
-.ra-dot.r{background:var(--rose);box-shadow:0 0 0 3px #FEF2F2}
-.ra-dot.k{background:#BE185D;box-shadow:0 0 0 3px #FDF2F8}
+.ra-dot.r,.ra-dot.o{background:var(--amber);box-shadow:0 0 0 3px #FFFBEB}
 .ra-txt{flex:1;min-width:0}
 .ra-txt b{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
 .ra-txt small{font-size:12.5px;color:var(--muted)}
@@ -192,8 +183,9 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
 /* Service cards */
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .svc{display:flex;flex-direction:column;gap:5px;padding:16px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s;font:inherit;color:inherit}
-.svc:hover{border-color:#A7F3D0;box-shadow:var(--shadow-md);transform:translateY(-1px)}
-.svc-ic{width:36px;height:36px;border-radius:10px;background:var(--em-50);color:var(--em-d);display:grid;place-items:center;margin-bottom:6px}
+.svc:hover{border-color:#CBD5E1;box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.svc:hover .svc-ic{background:var(--em-50);color:var(--em-d)}
+.svc-ic{width:36px;height:36px;border-radius:10px;background:#F1F5F9;color:#334155;display:grid;place-items:center;margin-bottom:6px;transition:background .15s,color .15s}
 .svc-ic i{width:18px;height:18px}
 .svc-name{font-weight:600;font-size:14px}
 .svc-desc{font-size:12.5px;color:var(--muted);min-height:36px}
@@ -220,8 +212,9 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
   min-height:96px;transition:border-color .15s,background .15s,transform .15s;
 }
 .stage:hover,.stage:focus-visible{border-color:#A7F3D0;background:var(--em-50);transform:translateY(-1px)}
+.stage:hover .stage-ic,.stage:focus-visible .stage-ic{background:var(--em);color:#fff}
 .stage-ic{
-  width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:#fff;margin-bottom:2px;
+  width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:#E2E8F0;color:#334155;margin-bottom:2px;transition:background .15s,color .15s;
 }
 .stage-ic i,.stage-ic svg{width:16px;height:16px}
 .stage-name{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.25}
@@ -374,19 +367,19 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
               <div class="kpi-role">Relevant for Admin and Founder</div>
             </div>
             <div class="card kpi" role="listitem">
-              <div class="kpi-top"><span class="kpi-lbl">R&amp;D Health</span><span class="kpi-ic b" aria-hidden="true"><i data-lucide="activity"></i></span></div>
+              <div class="kpi-top"><span class="kpi-lbl">R&amp;D Health</span><span class="kpi-ic" aria-hidden="true"><i data-lucide="heart-pulse"></i></span></div>
               <div class="kpi-val" aria-label="87 out of 100">87<small>/100</small></div>
               <div class="kpi-sub up"><span class="sr-only">Up </span>4.2 vs last sprint</div>
               <div class="kpi-role">Relevant for Tech and Founder</div>
             </div>
             <div class="card kpi" role="listitem">
-              <div class="kpi-top"><span class="kpi-lbl">GTM Reach</span><span class="kpi-ic v" aria-hidden="true"><i data-lucide="megaphone"></i></span></div>
+              <div class="kpi-top"><span class="kpi-lbl">GTM Reach</span><span class="kpi-ic" aria-hidden="true"><i data-lucide="megaphone"></i></span></div>
               <div class="kpi-val" aria-label="184 thousand">184K</div>
               <div class="kpi-sub up"><span class="sr-only">Up </span>12.6% this month</div>
               <div class="kpi-role">Relevant for Founder and GTM</div>
             </div>
             <div class="card kpi" role="listitem">
-              <div class="kpi-top"><span class="kpi-lbl">Runway</span><span class="kpi-ic a" aria-hidden="true"><i data-lucide="wallet"></i></span></div>
+              <div class="kpi-top"><span class="kpi-lbl">Runway</span><span class="kpi-ic" aria-hidden="true"><i data-lucide="circle-dollar-sign"></i></span></div>
               <div class="kpi-val" aria-label="22 months">22<small>mo</small></div>
               <div class="kpi-sub">at current burn rate</div>
               <div class="kpi-role">Relevant for Finance and Founder</div>
@@ -483,39 +476,39 @@ const CATEGORIES = [
   { name:'Build & Ship', services:[
     { name:'R&D Launchpad', desc:'AI-native fullstack product development platform.', icon:'rocket', status:'live' },
     { name:'Gerrit', desc:'Code review platform for structured peer review.', icon:'git-pull-request', status:'live' },
-    { name:'Design Library', desc:'Centralized design assets and component registry.', icon:'palette', status:'live' },
-    { name:'PMT', desc:'Project management for R&D and GTM initiatives.', icon:'kanban', status:'live' },
+    { name:'Design Library', desc:'Centralized design assets and component registry.', icon:'component', status:'live' },
+    { name:'PMT', desc:'Project management for R&D and GTM initiatives.', icon:'square-kanban', status:'live' },
   ]},
   { name:'Quality & Audit', services:[
     { name:'QA Usage Dashboard', desc:'Playwright run analytics across every project.', icon:'flask-conical', status:'live' },
     { name:'Internal Audit Platform', desc:'Structured internal auditing across controls.', icon:'clipboard-check', status:'live' },
-    { name:'External Audit Platform', desc:'External compliance and regulatory readiness.', icon:'file-check-2', status:'live' },
+    { name:'External Audit Platform', desc:'External compliance and regulatory readiness.', icon:'scale', status:'live' },
     { name:'UI/UX Audit Platform', desc:'UI/UX auditing against design guidelines.', icon:'scan-eye', status:'beta' },
-    { name:'Prowler', desc:'Cloud security posture scanning and compliance.', icon:'shield', status:'live' },
+    { name:'Prowler', desc:'Cloud security posture scanning and compliance.', icon:'shield-alert', status:'live' },
   ]},
   { name:'Go-to-Market', services:[
-    { name:'GTM Launchpad', desc:'Plan and schedule campaigns across social + CRM.', icon:'send', status:'live' },
-    { name:'GTM Pulse', desc:'Market performance — impressions, engagement, pipeline.', icon:'bar-chart-3', status:'live' },
+    { name:'GTM Launchpad', desc:'Plan and schedule campaigns across social + CRM.', icon:'megaphone', status:'live' },
+    { name:'GTM Pulse', desc:'Market performance — impressions, engagement, pipeline.', icon:'line-chart', status:'live' },
   ]},
   { name:'Signal & Analytics', services:[
-    { name:'R&D Pulse', desc:'Project health and engineering metrics tracking.', icon:'activity', status:'live' },
-    { name:'Finance Pulse', desc:'Burn, runway, unit economics, and initiative ROI.', icon:'wallet', status:'beta' },
-    { name:'Prompt Dashboard', desc:'AI prompt tracking, evaluation, and version analytics.', icon:'terminal', status:'live' },
+    { name:'R&D Pulse', desc:'Project health and engineering metrics tracking.', icon:'heart-pulse', status:'live' },
+    { name:'Finance Pulse', desc:'Burn, runway, unit economics, and initiative ROI.', icon:'circle-dollar-sign', status:'beta' },
+    { name:'Prompt Dashboard', desc:'AI prompt tracking, evaluation, and version analytics.', icon:'bot-message-square', status:'live' },
   ]},
   { name:'AI & Advisory', services:[
-    { name:'Fuel', desc:'AI advisor connected to Slack, Granola, and HubSpot.', icon:'flame', status:'live' },
-    { name:'Investment Advisor', desc:'Investor matching, updates, and data room management.', icon:'trending-up', status:'new' },
+    { name:'Fuel', desc:'AI advisor connected to Slack, Granola, and HubSpot.', icon:'brain-circuit', status:'live' },
+    { name:'Investment Advisor', desc:'Investor matching, updates, and data room management.', icon:'landmark', status:'new' },
   ]},
   { name:'People & Learning', services:[
-    { name:'Hub', desc:'HRMS and people management, teams, and projects.', icon:'users', status:'live' },
-    { name:'LMS', desc:'Learning management system for onboarding & training.', icon:'graduation-cap', status:'live' },
-    { name:'Assessment Platform', desc:'Org-wide assessments and skill tracking.', icon:'badge-check', status:'live' },
-    { name:'Walk in Drive', desc:'Recruitment event platform for walk-in hiring.', icon:'user-plus', status:'live' },
-    { name:'Internship Drive', desc:'Internship recruitment and program management.', icon:'layers', status:'live' },
+    { name:'Hub', desc:'HRMS and people management, teams, and projects.', icon:'building-2', status:'live' },
+    { name:'LMS', desc:'Learning management system for onboarding & training.', icon:'book-open', status:'live' },
+    { name:'Assessment Platform', desc:'Org-wide assessments and skill tracking.', icon:'clipboard-list', status:'live' },
+    { name:'Walk in Drive', desc:'Recruitment event platform for walk-in hiring.', icon:'door-open', status:'live' },
+    { name:'Internship Drive', desc:'Internship recruitment and program management.', icon:'backpack', status:'live' },
   ]},
   { name:'Support', services:[
-    { name:'Support Ticket', desc:'Unified ticketing across every product and team.', icon:'ticket', status:'live' },
-    { name:'Survey Ticket', desc:'Survey and feedback for internal and external users.', icon:'message-square-text', status:'live' },
+    { name:'Support Ticket', desc:'Unified ticketing across every product and team.', icon:'life-buoy', status:'live' },
+    { name:'Survey Ticket', desc:'Survey and feedback for internal and external users.', icon:'messages-square', status:'live' },
   ]},
 ];
 const allServices = CATEGORIES.flatMap(c => c.services);
@@ -538,38 +531,35 @@ const RECENT = [
 ];
 const FEATURED = ['R&D Launchpad','Fuel','GTM Launchpad','R&D Pulse','Investment Advisor','Hub'];
 const STAGES = [
-  { n:'Ideate', d:'Research & framing', ic:'flame', chip:'FUEL', p:'Research, frame, and pressure-test ideas. Fuel pulls context from Slack, Granola, HubSpot, and your workspace history — so decisions start informed, not blank.', tools:['Fuel','Design Library','Competitor Analysis'] },
+  { n:'Ideate', d:'Research & framing', ic:'lightbulb', chip:'FUEL', p:'Research, frame, and pressure-test ideas. Fuel pulls context from Slack, Granola, HubSpot, and your workspace history — so decisions start informed, not blank.', tools:['Fuel','Design Library','Competitor Analysis'] },
   { n:'Build', d:'Code & ship', ic:'code-2', chip:'R&D', p:'Ship in R&D Launchpad. Code review flows through Gerrit, tasks through PMT, design assets through the Design Library — every artifact linked to the initiative.', tools:['R&D Launchpad','Gerrit','PMT','Design Library'] },
   { n:'QA & Audit', d:'Quality gates', ic:'shield-check', chip:'QUALITY', p:'Automated QA, internal audit, external compliance, UI/UX review, and cloud security — five gates, one signal. Failures roll up into R&D Pulse automatically.', tools:['QA Usage Dashboard','Internal Audit Platform','External Audit Platform','UI/UX Audit Platform','Prowler'] },
   { n:'Launch', d:'Campaigns & CRM', ic:'send', chip:'GTM', p:'Coordinate campaigns across social, CRM, and ads from one calendar. Approval flows, connector health, and scheduling — all in GTM Launchpad.', tools:['GTM Launchpad','Survey Ticket'] },
-  { n:'Measure', d:'Signal & pulse', ic:'activity', chip:'SIGNAL', p:'R&D Pulse tracks engineering health. GTM Pulse tracks market performance. Prompt Dashboard tracks AI quality. All three roll up into one workspace signal.', tools:['R&D Pulse','GTM Pulse','Prompt Dashboard'] },
+  { n:'Measure', d:'Signal & pulse', ic:'gauge', chip:'SIGNAL', p:'R&D Pulse tracks engineering health. GTM Pulse tracks market performance. Prompt Dashboard tracks AI quality. All three roll up into one workspace signal.', tools:['R&D Pulse','GTM Pulse','Prompt Dashboard'] },
   { n:'Finance', d:'Burn, runway, ROI', ic:'wallet', chip:'CAPITAL', p:'Burn, runway, unit economics, per-initiative ROI. Finance Pulse connects engineering spend and GTM spend to outcomes — so you know which products are actually working.', tools:['Finance Pulse'] },
   { n:'Invest', d:'Raise & report', ic:'trending-up', chip:'CAPITAL', p:'Investment Advisor identifies investor fit, prepares updates, manages the data room, and tracks engagement — from first outreach to signed term sheet.', tools:['Investment Advisor','Data Room','Investor Updates'] },
-  { n:'People', d:'Hire, learn, assess', ic:'users', chip:'HRMS', p:'Hub manages HR, teams, and projects. LMS delivers learning. Assessment Platform runs org-wide evaluations. Walk-in and Internship Drives handle recruitment events.', tools:['Hub','LMS','Assessment Platform','Walk in Drive','Internship Drive'] },
+  { n:'People', d:'Hire, learn, assess', ic:'users-round', chip:'HRMS', p:'Hub manages HR, teams, and projects. LMS delivers learning. Assessment Platform runs org-wide evaluations. Walk-in and Internship Drives handle recruitment events.', tools:['Hub','LMS','Assessment Platform','Walk in Drive','Internship Drive'] },
 ];
 const NAV = [
   { items:[
     { label:'Dashboard', icon:'layout-dashboard', view:'dashboard' },
-    { label:'Product Journey', icon:'route', view:'journey' },
+    { label:'Product Journey', icon:'map', view:'journey' },
     { label:'All Services', icon:'layout-grid', view:'services', badge:String(allServices.length) },
   ]},
-  { group:'Build & Ship', items:[
-    { label:'R&D Launchpad', icon:'rocket', svc:1 }, { label:'Gerrit', icon:'git-pull-request', svc:1 },
-    { label:'Design Library', icon:'palette', svc:1 }, { label:'PMT', icon:'kanban', svc:1 },
-  ]},
-  { group:'Go-to-Market', items:[
-    { label:'GTM Launchpad', icon:'send', svc:1 }, { label:'GTM Pulse', icon:'bar-chart-3', svc:1 },
-  ]},
-  { group:'Signal & Analytics', items:[
-    { label:'R&D Pulse', icon:'activity', svc:1 }, { label:'Finance Pulse', icon:'wallet', svc:1 },
-    { label:'Prompt Dashboard', icon:'terminal', svc:1 },
-  ]},
-  { group:'AI & Advisory', items:[
-    { label:'Fuel', icon:'flame', svc:1 }, { label:'Investment Advisor', icon:'trending-up', svc:1, badge:'NEW' },
-  ]},
+  ...CATEGORIES.map(c => ({
+    group: c.name,
+    items: c.services.map(s => ({
+      label: s.name,
+      icon: s.icon,
+      svc: 1,
+      badge: s.status === 'new' ? 'NEW' : undefined,
+    })),
+  })),
   { group:'Platform', items:[
-    { label:'Connector Hub', icon:'plug', soon:1 }, { label:'Team & Access', icon:'users', soon:1 },
-    { label:'Billing & Usage', icon:'credit-card', soon:1 }, { label:'Settings', icon:'settings', soon:1 },
+    { label:'Connector Hub', icon:'cable', soon:1 },
+    { label:'Team & Access', icon:'user-cog', soon:1 },
+    { label:'Billing & Usage', icon:'receipt', soon:1 },
+    { label:'Settings', icon:'sliders-horizontal', soon:1 },
   ]},
 ];
 
@@ -583,7 +573,7 @@ function toast(msg){ $('toastMsg').textContent = msg; $('toast').classList.add('
 /* ——— Render: product sidebar ——— */
 function navItem(it){
   const badge = it.badge ? `<span class="nbadge${it.badge==='NEW'?' new':''}">${esc(it.badge)}</span>` : '';
-  const inner = `<i data-lucide="${it.icon}"></i><span class="nav-lbl">${esc(it.label)}</span>${badge}`;
+  const inner = `<span class="nav-ic" aria-hidden="true"><i data-lucide="${it.icon}"></i></span><span class="nav-lbl">${esc(it.label)}</span>${badge}`;
   const attrs = it.view ? `data-view="${it.view}" data-key="${it.view}"` : it.svc ? `data-nav="${esc(it.label)}" data-key="${esc(it.label)}"` : `data-soon="${esc(it.label)}"`;
   return `<button type="button" class="nav-item" ${attrs}>${inner}</button>`;
 }
@@ -662,11 +652,10 @@ document.querySelectorAll('#svcFilterBar .chipbtn').forEach(c => {
 $('svcFilter').addEventListener('input', applySvcFilters);
 
 /* ——— Render: overview journey strip ——— */
-const STRIP_COLORS = ['#F97316','#3B82F6','#8B5CF6','#10B981','#0EA5E9','#F59E0B','#EC4899'];
 const STRIP_COUNTS = [12, 8, 5, 3, 7, 4, 2];
 $('journeyStrip').innerHTML = STAGES.slice(0, 7).map((s, i) => `
   <button type="button" class="stage" role="listitem" data-view="journey" data-stage-jump="${i}" aria-label="${esc(s.n)} stage, ${STRIP_COUNTS[i]} active items. Open product journey.">
-    <span class="stage-ic" style="background:${STRIP_COLORS[i]}" aria-hidden="true"><i data-lucide="${s.ic}"></i></span>
+    <span class="stage-ic" aria-hidden="true"><i data-lucide="${s.ic}"></i></span>
     <span class="stage-name">${esc(s.n === 'Ideate' ? 'Ideation' : s.n)}</span>
     <span class="stage-count">${STRIP_COUNTS[i]}</span>
   </button>`).join('');
@@ -817,7 +806,7 @@ let selIdx = 0, flat = [];
 const CMDS = [
   { group:'Navigate', items:[
     { label:'Dashboard', view:'dashboard', key:'G D', icon:'layout-dashboard' },
-    { label:'Product Journey', view:'journey', key:'G J', icon:'route' },
+    { label:'Product Journey', view:'journey', key:'G J', icon:'map' },
     { label:'All Services', view:'services', key:'G S', icon:'layout-grid' },
   ]},
   { group:'Services', items: allServices.map(s => ({ label:s.name, service:s.name, icon:s.icon })) },
