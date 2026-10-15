@@ -62,7 +62,7 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .app{
   display:grid;
   grid-template-columns:var(--rail) minmax(0,1fr);
-  grid-template-rows:auto var(--top) minmax(0,1fr);
+  grid-template-rows:var(--top) minmax(0,1fr);
   height:100vh;
   transition:grid-template-columns .22s ease;
 }
@@ -90,17 +90,9 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .btn-chip:hover{background:var(--surface); color:var(--ink)}
 .btn-chip.active{background:var(--brand-600); border-color:var(--brand-600); color:#fff; font-weight:600}
 
-.notice{
-  grid-column:1/-1; display:flex; align-items:center; justify-content:center; gap:10px;
-  padding:7px var(--space-4); background:var(--warn-bg); color:var(--warn-ink);
-  font-size:12px; border-bottom:1px solid var(--warn-line);
-}
-.notice b{font-weight:600}
-.notice a{font-weight:600; text-decoration:underline; text-underline-offset:2px}
-
 /* ——— Sidebar ——— */
 .rail{
-  grid-row:2/4; grid-column:1;
+  grid-row:1/3; grid-column:1;
   background:var(--white); border-right:1px solid var(--line);
   display:flex; flex-direction:column; align-items:stretch;
   padding:var(--space-4) var(--space-3); gap:var(--space-1);
@@ -156,67 +148,17 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 }
 .app:not(.nav-open) .rail-btn:hover .tip{display:block}
 .rail-scroll{flex:1; overflow-y:auto; overflow-x:hidden; display:flex; flex-direction:column; gap:2px; min-height:0}
-.rail-group{margin-bottom:var(--space-1); display:flex; flex-direction:column; gap:2px}
-.rail-group-label{
-  display:none; font-size:10px; font-weight:600; color:var(--subtle);
-  letter-spacing:.08em; text-transform:uppercase;
-  padding:var(--space-3) var(--space-3) var(--space-1);
-}
-.app.nav-open .rail-group-label{display:block}
-.app:not(.nav-open) .rail-group + .rail-group{border-top:1px solid var(--line); padding-top:var(--space-2); margin-top:var(--space-1)}
-.rail-workspace{
-  display:flex; align-items:center; gap:10px; width:100%;
-  height:44px; margin-bottom:var(--space-3); padding:0 var(--space-2);
-  border-radius:var(--r-ctl); border:1px solid var(--line); background:var(--bg);
-  min-width:0; flex-shrink:0; text-align:left;
-}
-.app:not(.nav-open) .rail-workspace{justify-content:center; padding:0}
-.rail-workspace:hover{background:var(--surface); border-color:var(--line-2)}
-.rail-ws-avatar{
-  width:28px; height:28px; border-radius:8px; flex-shrink:0;
-  display:grid; place-items:center; background:linear-gradient(135deg,#FBBF24,#F97316);
-  color:#fff; font-size:10px; font-weight:700; font-family:var(--mono);
-}
-.rail-ws-text{display:none; flex:1; min-width:0; line-height:1.2}
-.app.nav-open .rail-ws-text{display:block}
-.rail-ws-name{display:block; font-size:var(--ctl-fs); font-weight:600; color:var(--ink-strong); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-.rail-ws-sub{display:block; font-size:11px; color:var(--subtle)}
-.rail-ws-chev{display:none; color:var(--subtle); flex-shrink:0}
-.app.nav-open .rail-ws-chev{display:grid}
-.rail-ws-chev i,.rail-ws-chev svg{width:14px;height:14px}
-.rail-badge{
-  display:none; margin-left:auto; font-size:10px; font-weight:600; font-family:var(--mono);
-  padding:1px 7px; border-radius:6px; background:var(--surface); color:var(--muted);
-}
-.app.nav-open .rail-badge{display:inline-flex}
-.rail-btn.active .rail-badge{background:var(--brand-100); color:var(--brand-700)}
-.rail-badge.new{background:var(--brand-50); color:var(--brand-700); border:1px solid var(--brand-100)}
 .rail-bottom{
   flex-shrink:0; padding-top:var(--space-2); border-top:1px solid var(--line);
   margin-top:var(--space-2); display:flex; flex-direction:column; gap:2px;
 }
 .rail-util{display:flex; flex-direction:column; gap:2px; padding-bottom:var(--space-2); border-bottom:1px solid var(--line); margin-bottom:var(--space-2)}
 .rail-btn.logout:hover{background:#FEF2F2; color:#B91C1C}
-.rail-user{
-  display:flex; align-items:center; gap:10px;
-  height:48px; padding:0 var(--space-2); border-radius:var(--r-ctl); justify-content:center;
-}
-.app.nav-open .rail-user{justify-content:flex-start; padding:0 var(--space-2)}
-.rail-user:hover{background:var(--surface)}
-.rail-user-avatar{
-  width:34px; height:34px; border-radius:50%; flex-shrink:0;
-  display:grid; place-items:center; background:linear-gradient(135deg,var(--brand-500),var(--teal-600)); color:#fff;
-  font-size:11px; font-weight:700; font-family:var(--mono);
-}
-.rail-user-info{display:none; min-width:0; flex:1; line-height:1.25}
-.app.nav-open .rail-user-info{display:block}
-.rail-user-name{font-size:var(--ctl-fs); font-weight:600; color:var(--ink-strong); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-.rail-user-role{font-size:11px; color:var(--subtle)}
 .rail-scrim{display:none}
 
 /* ——— Topbar ——— */
 .topbar{
-  grid-row:2; grid-column:2; min-width:0;
+  grid-row:1; grid-column:2; min-width:0;
   display:grid; grid-template-columns:minmax(150px,1fr) minmax(220px,560px) minmax(150px,1fr);
   align-items:center; gap:var(--space-4); padding:0 28px;
   background:var(--white); border-bottom:1px solid var(--line);
@@ -263,7 +205,7 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .top-user-mail{font-size:11px; color:var(--subtle); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 
 /* ——— Main ——— */
-.main{grid-row:3; grid-column:2; overflow-y:auto; overflow-x:hidden; padding:28px 28px 72px; min-width:0}
+.main{grid-row:2; grid-column:2; overflow-y:auto; overflow-x:hidden; padding:28px 28px 72px; min-width:0}
 .wrap{max-width:1480px; margin:0 auto}
 .view{display:none}.view.active{display:block}
 
@@ -429,59 +371,7 @@ tbody tr:last-child td{border-bottom:none}
 .empty{display:none; text-align:center; padding:var(--space-7) var(--space-4); color:var(--muted); font-size:13px}
 .empty.show{display:block}
 
-/* initiatives + activity */
-.panel-pad{padding:var(--space-2) var(--space-6) var(--space-4)}
-.init-row{display:flex; align-items:center; gap:var(--space-3); min-height:64px; border-bottom:1px solid var(--line)}
-.init-row:last-child{border-bottom:none}
-.init-dot{width:8px; height:8px; border-radius:50%; flex-shrink:0}
-.init-body{flex:1; min-width:0}
-.init-name{font-size:14px; font-weight:500; color:var(--ink-strong); margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-.init-meta{font-size:12px; color:var(--muted)}
-.tag{
-  display:inline-flex; align-items:center; height:22px;
-  font-size:11px; font-weight:500; color:var(--muted);
-  background:var(--surface); padding:0 7px; border-radius:6px; margin-right:6px;
-}
-.progress{width:88px; height:5px; border-radius:var(--r-pill); background:var(--line); overflow:hidden; flex-shrink:0}
-.progress span{display:block; height:100%; background:var(--brand-500); border-radius:inherit}
-.act{display:flex; gap:var(--space-3); padding:var(--space-3) 0; border-bottom:1px solid var(--line); font-size:var(--ctl-fs); line-height:1.5}
-.act:last-child{border-bottom:none}
-.act-dot{width:7px; height:7px; border-radius:50%; margin-top:7px; flex-shrink:0}
-.act-dot.ok{background:var(--brand-500); box-shadow:0 0 0 3px var(--brand-50)}
-.act-dot.warn{background:#F59E0B; box-shadow:0 0 0 3px #FEF3C7}
-.act-dot.err{background:#EF4444; box-shadow:0 0 0 3px #FEE2E2}
-.act-dot.info{background:#3B82F6; box-shadow:0 0 0 3px #DBEAFE}
-.act-text{flex:1; color:var(--muted)}
-.act-text b{color:var(--ink-strong); font-weight:600}
-.act-time{font-size:11px; color:var(--subtle); font-family:var(--mono); flex-shrink:0}
-
-/* Spotlight */
-.spotlights{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-5); margin-bottom:var(--space-6)}
-.spot{
-  display:flex; flex-direction:column;
-  min-height:208px; padding:var(--space-5);
-  border-radius:var(--r-card); color:#fff; overflow:hidden;
-  box-shadow:0 8px 22px rgba(30,41,59,.08);
-  transition:transform .18s ease, box-shadow .18s ease;
-}
-.spot:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(30,41,59,.12)}
-.spot.work{background:linear-gradient(145deg,#0D9488 0%,#0F766E 100%)}
-.spot.service{background:linear-gradient(145deg,#34D399 0%,#059669 100%)}
-.spot.stack{background:linear-gradient(145deg,#2DD4BF 0%,#0891B2 100%)}
-.spot-badge{
-  display:inline-flex; align-items:center; gap:6px; align-self:flex-start;
-  height:26px; padding:0 10px; border-radius:var(--r-pill);
-  background:rgba(255,255,255,.2); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
-}
-.spot-badge i,.spot-badge svg{width:12px;height:12px}
-.spot-title{margin-top:var(--space-4); font-size:19px; font-weight:700; letter-spacing:-.02em; line-height:1.25; color:#fff}
-.spot-desc{margin-top:var(--space-2); font-size:13px; line-height:1.5; color:rgba(255,255,255,.9); max-width:30ch; flex:1}
-.spot-foot{display:flex; align-items:center; justify-content:space-between; gap:var(--space-3); margin-top:var(--space-4); min-height:var(--ctl-h)}
-.spot-stat{font-family:var(--mono); font-size:12px; font-weight:500; color:rgba(255,255,255,.95); letter-spacing:-.01em}
-
 /* Services */
-.sec-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-4); gap:var(--space-3)}
-.sec-head h2{font-size:16px; font-weight:700; letter-spacing:-.015em; color:var(--ink-strong)}
 .svc-grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-4)}
 .svc{
   padding:var(--space-4); border:1px solid var(--line); border-radius:var(--r);
@@ -584,8 +474,6 @@ tbody tr:last-child td{border-bottom:none}
 @media(max-width:1100px){
   .row-2{grid-template-columns:1fr}
   .row-2.two-eq{grid-template-columns:1fr}
-  .spotlights{grid-template-columns:1fr}
-  .spot{min-height:190px}
   .svc-cat .svc-grid,.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .flow-row{grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--space-3)}
   .flow-detail{grid-template-columns:1fr}
@@ -601,7 +489,6 @@ tbody tr:last-child td{border-bottom:none}
 }
 @media(max-width:720px){
   :root{--rail:0px}
-  .notice{display:none}
   .top-nav-toggle{display:grid}
   .main{padding:var(--space-5) var(--space-4) 48px}
   .kpis{grid-template-columns:1fr}
@@ -613,11 +500,9 @@ tbody tr:last-child td{border-bottom:none}
   }
   .app.nav-open .rail{transform:translateX(0)}
   .app.nav-open .rail-scrim{display:block; position:fixed; inset:0; z-index:30; background:rgba(30,41,59,.28)}
-  .app .rail .rail-btn .label,.app .rail .rail-group-label,.app .rail .rail-brand-name,.app .rail .rail-ws-text,.app .rail .rail-user-info{display:block}
-  .app .rail .rail-badge{display:inline-flex}
+  .app .rail .rail-btn .label,.app .rail .rail-brand-name{display:block}
   .app .rail .rail-btn{justify-content:flex-start; padding:0 var(--space-3)}
   .app .rail .rail-top{flex-direction:row; justify-content:space-between}
-  .app .rail .rail-user,.app .rail .rail-workspace{justify-content:flex-start; padding:0 var(--space-2)}
   .app .rail .rail-toggle .icon-open{display:none}
   .app .rail .rail-toggle .icon-close{display:block}
 }
@@ -625,11 +510,6 @@ tbody tr:last-child td{border-bottom:none}
 </head>
 <body>
 <div class="app nav-open">
-  <div class="notice">
-    <span>You have <b>14 days</b> left on your York Foundation trial.</span>
-    <a href="#">Upgrade plan</a>
-  </div>
-
   <aside class="rail" aria-label="Primary">
     <div class="rail-top">
       <a class="rail-brand" href="index.html" title="York Foundation — home">
@@ -641,69 +521,31 @@ tbody tr:last-child td{border-bottom:none}
         <i data-lucide="panel-left-close" class="icon-close"></i>
       </button>
     </div>
-    <button type="button" class="rail-workspace" aria-label="Switch workspace">
-      <span class="rail-ws-avatar">AC</span>
-      <span class="rail-ws-text"><span class="rail-ws-name">Acme Inc</span><span class="rail-ws-sub">Workspace</span></span>
-      <span class="rail-ws-chev"><i data-lucide="chevrons-up-down"></i></span>
-    </button>
-
     <div class="rail-scroll">
-      <div class="rail-group">
-        <div class="rail-group-label">Primary</div>
-        <button class="rail-btn active" type="button" data-view="dashboard" aria-label="Dashboard">
-          <i data-lucide="layout-dashboard"></i><span class="label">Dashboard</span><span class="tip">Dashboard</span>
-        </button>
-        <button class="rail-btn" type="button" data-view="journey" aria-label="Product Journey">
-          <i data-lucide="route"></i><span class="label">Product Journey</span><span class="tip">Product Journey</span>
-        </button>
-        <button class="rail-btn" type="button" data-view="services" aria-label="All Services">
-          <i data-lucide="layout-grid"></i><span class="label">All Services</span><span class="rail-badge">24</span><span class="tip">All Services (24)</span>
-        </button>
-      </div>
-      <div class="rail-group">
-        <div class="rail-group-label">Build &amp; Ship</div>
-        <button class="rail-btn" type="button" data-nav="R&amp;D Launchpad"><i data-lucide="rocket"></i><span class="label">R&amp;D Launchpad</span><span class="tip">R&amp;D Launchpad</span></button>
-        <button class="rail-btn" type="button" data-nav="Gerrit"><i data-lucide="git-pull-request"></i><span class="label">Gerrit</span><span class="tip">Gerrit</span></button>
-        <button class="rail-btn" type="button" data-nav="Design Library"><i data-lucide="compass"></i><span class="label">Design Library</span><span class="tip">Design Library</span></button>
-        <button class="rail-btn" type="button" data-nav="PMT"><i data-lucide="kanban-square"></i><span class="label">PMT</span><span class="tip">PMT</span></button>
-      </div>
-      <div class="rail-group">
-        <div class="rail-group-label">Go-to-Market</div>
-        <button class="rail-btn" type="button" data-nav="GTM Launchpad"><i data-lucide="send"></i><span class="label">GTM Launchpad</span><span class="tip">GTM Launchpad</span></button>
-        <button class="rail-btn" type="button" data-nav="GTM Pulse"><i data-lucide="bar-chart-3"></i><span class="label">GTM Pulse</span><span class="tip">GTM Pulse</span></button>
-      </div>
-      <div class="rail-group">
-        <div class="rail-group-label">Signal &amp; Analytics</div>
-        <button class="rail-btn" type="button" data-nav="R&amp;D Pulse"><i data-lucide="activity"></i><span class="label">R&amp;D Pulse</span><span class="tip">R&amp;D Pulse</span></button>
-        <button class="rail-btn" type="button" data-nav="Finance Pulse"><i data-lucide="wallet"></i><span class="label">Finance Pulse</span><span class="tip">Finance Pulse</span></button>
-        <button class="rail-btn" type="button" data-nav="Prompt Dashboard"><i data-lucide="terminal"></i><span class="label">Prompt Dashboard</span><span class="tip">Prompt Dashboard</span></button>
-      </div>
-      <div class="rail-group">
-        <div class="rail-group-label">AI &amp; Advisory</div>
-        <button class="rail-btn" type="button" data-nav="Fuel"><i data-lucide="flame"></i><span class="label">Fuel</span><span class="tip">Fuel</span></button>
-        <button class="rail-btn" type="button" data-nav="Investment Advisor"><i data-lucide="trending-up"></i><span class="label">Investment Advisor</span><span class="rail-badge new">NEW</span><span class="tip">Investment Advisor (NEW)</span></button>
-      </div>
-      <div class="rail-group">
-        <div class="rail-group-label">Platform</div>
-        <button class="rail-btn" type="button" data-nav="Connector Hub"><i data-lucide="plug"></i><span class="label">Connector Hub</span><span class="tip">Connector Hub</span></button>
-        <button class="rail-btn" type="button" data-nav="Team &amp; Access"><i data-lucide="users"></i><span class="label">Team &amp; Access</span><span class="tip">Team &amp; Access</span></button>
-        <button class="rail-btn" type="button" data-nav="Billing &amp; Usage"><i data-lucide="credit-card"></i><span class="label">Billing &amp; Usage</span><span class="tip">Billing &amp; Usage</span></button>
-        <button class="rail-btn" type="button" data-nav="Settings"><i data-lucide="settings"></i><span class="label">Settings</span><span class="tip">Settings</span></button>
-      </div>
+      <button class="rail-btn active" type="button" data-view="dashboard" aria-label="Dashboard">
+        <i data-lucide="layout-dashboard"></i><span class="label">Dashboard</span><span class="tip">Dashboard</span>
+      </button>
+      <button class="rail-btn" type="button" data-nav="R&amp;D Pulse" aria-label="Insights">
+        <i data-lucide="line-chart"></i><span class="label">Insights</span><span class="tip">Insights</span>
+      </button>
+      <button class="rail-btn" type="button" data-view="services" aria-label="Services">
+        <i data-lucide="layout-grid"></i><span class="label">Services</span><span class="tip">Services</span>
+      </button>
+      <button class="rail-btn" type="button" data-nav="Fuel"><i data-lucide="flame"></i><span class="label">Fuel</span><span class="tip">Fuel</span></button>
+      <button class="rail-btn" type="button" data-nav="R&amp;D Launchpad"><i data-lucide="rocket"></i><span class="label">R&amp;D Launchpad</span><span class="tip">R&amp;D Launchpad</span></button>
+      <button class="rail-btn" type="button" data-nav="GTM Launchpad"><i data-lucide="send"></i><span class="label">GTM Launchpad</span><span class="tip">GTM Launchpad</span></button>
+      <button class="rail-btn" type="button" data-nav="R&amp;D Pulse"><i data-lucide="activity"></i><span class="label">R&amp;D Pulse</span><span class="tip">R&amp;D Pulse</span></button>
+      <button class="rail-btn" type="button" data-nav="Finance Pulse"><i data-lucide="wallet"></i><span class="label">Pulse</span><span class="tip">Pulse</span></button>
+      <button class="rail-btn" type="button" data-nav="Investment Advisor"><i data-lucide="trending-up"></i><span class="label">Investment Advisor</span><span class="tip">Investment Advisor</span></button>
+      <button class="rail-btn" type="button" data-nav="Connector Hub"><i data-lucide="plug"></i><span class="label">Connector Hub</span><span class="tip">Connector Hub</span></button>
+      <button class="rail-btn" type="button" data-nav="Hub"><i data-lucide="users"></i><span class="label">Team</span><span class="tip">Team</span></button>
     </div>
 
     <div class="rail-bottom">
       <div class="rail-util">
         <button class="rail-btn" type="button" data-nav="Help Center"><i data-lucide="life-buoy"></i><span class="label">Help Center</span><span class="tip">Help Center</span></button>
-        <button class="rail-btn" type="button" data-nav="Settings"><i data-lucide="sliders-horizontal"></i><span class="label">Settings</span><span class="tip">Settings</span></button>
+        <button class="rail-btn" type="button" data-nav="Settings"><i data-lucide="settings"></i><span class="label">Settings</span><span class="tip">Settings</span></button>
         <a class="rail-btn logout" href="index.html"><i data-lucide="log-out"></i><span class="label">Log Out</span><span class="tip">Log Out</span></a>
-      </div>
-      <div class="rail-user">
-        <div class="rail-user-avatar">AK</div>
-        <div class="rail-user-info">
-          <div class="rail-user-name">Alex Kim</div>
-          <div class="rail-user-role">Admin</div>
-        </div>
       </div>
     </div>
   </aside>
@@ -747,8 +589,8 @@ tbody tr:last-child td{border-bottom:none}
         </div>
         <div class="cta-row">
           <button class="btn btn-secondary" type="button" data-nav="Fuel"><i data-lucide="flame"></i>Open Fuel</button>
-          <button class="btn btn-secondary" type="button" id="newInitiative"><i data-lucide="git-branch-plus"></i>New initiative</button>
-          <button class="btn btn-primary" type="button" data-view="services"><i data-lucide="plus"></i>Launch service</button>
+          <button class="btn btn-secondary" type="button" id="newInitiative"><i data-lucide="git-branch-plus"></i>Add initiative</button>
+          <button class="btn btn-primary" type="button" id="primaryAdd" aria-label="Create"><i data-lucide="plus"></i></button>
         </div>
       </div>
 
@@ -812,10 +654,10 @@ tbody tr:last-child td{border-bottom:none}
         </div>
       </div>
 
-      <div class="card" style="margin-bottom:var(--space-5)">
+      <div class="card">
         <div class="card-head">
           <div>
-            <h3>Requires your attention</h3>
+            <h3>Requires your approval.</h3>
             <div class="sub">Flags, regressions, and approvals across your services</div>
           </div>
           <button type="button" class="link-btn" data-view="services">View services →</button>
@@ -826,19 +668,14 @@ tbody tr:last-child td{border-bottom:none}
             <input type="text" id="attnSearch" placeholder="Search ref, service, owner…" autocomplete="off">
           </label>
           <span class="spacer"></span>
-          <div id="attnChips" style="display:flex;gap:8px;flex-wrap:wrap">
-            <button class="btn btn-chip active" type="button" data-status="all">All</button>
-            <button class="btn btn-chip" type="button" data-status="open">Open</button>
-            <button class="btn btn-chip" type="button" data-status="review">In review</button>
-            <button class="btn btn-chip" type="button" data-status="pending">Pending</button>
-            <button class="btn btn-chip" type="button" data-status="resolved">Resolved</button>
-          </div>
           <label class="select">
-            <select id="attnImpact" aria-label="Filter by impact">
-              <option value="all">All impact</option>
-              <option value="high">High</option>
-              <option value="medium">Medium</option>
-              <option value="low">Low</option>
+            <select id="attnStatus" aria-label="Filter by status">
+              <option value="all">All statuses</option>
+              <option value="open">Open</option>
+              <option value="review">In review</option>
+              <option value="pending">Pending</option>
+              <option value="scheduled">Scheduled</option>
+              <option value="resolved">Resolved</option>
             </select>
             <i data-lucide="chevron-down"></i>
           </label>
@@ -857,107 +694,6 @@ tbody tr:last-child td{border-bottom:none}
           <span>Updated just now</span>
         </div>
       </div>
-
-      <div class="row-2 two-eq" style="margin-bottom:var(--space-5)">
-        <div class="card">
-          <div class="card-head">
-            <h3>Active initiatives</h3>
-            <button type="button" class="link-btn">View all →</button>
-          </div>
-          <div class="panel-pad">
-            <div class="init-row">
-              <span class="init-dot" style="background:#0D9488"></span>
-              <div class="init-body">
-                <div class="init-name">york-api v2 — payments webhook</div>
-                <div class="init-meta"><span class="tag">R&amp;D</span> 3 contributors · QA passing</div>
-              </div>
-              <div class="progress"><span style="width:78%"></span></div>
-            </div>
-            <div class="init-row">
-              <span class="init-dot" style="background:var(--brand-600)"></span>
-              <div class="init-body">
-                <div class="init-name">Q1 brand campaign — LinkedIn + X</div>
-                <div class="init-meta"><span class="tag">GTM</span> 12 posts scheduled</div>
-              </div>
-              <div class="progress"><span style="width:45%"></span></div>
-            </div>
-            <div class="init-row">
-              <span class="init-dot" style="background:#8B5CF6"></span>
-              <div class="init-body">
-                <div class="init-name">Series A data room — investor deck v3</div>
-                <div class="init-meta"><span class="tag">CAPITAL</span> 4 investors engaged</div>
-              </div>
-              <div class="progress"><span style="width:62%"></span></div>
-            </div>
-            <div class="init-row">
-              <span class="init-dot" style="background:#D97706"></span>
-              <div class="init-body">
-                <div class="init-name">Q1 internal audit — SOC 2 readiness</div>
-                <div class="init-meta"><span class="tag">AUDIT</span> 18 controls reviewed</div>
-              </div>
-              <div class="progress"><span style="width:34%"></span></div>
-            </div>
-            <div class="init-row">
-              <span class="init-dot" style="background:#0891B2"></span>
-              <div class="init-body">
-                <div class="init-name">Onboarding LMS — new hire track</div>
-                <div class="init-meta"><span class="tag">PEOPLE</span> 24 lessons published</div>
-              </div>
-              <div class="progress"><span style="width:88%"></span></div>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-head">
-            <h3>Recent activity</h3>
-            <button type="button" class="link-btn">See all →</button>
-          </div>
-          <div class="panel-pad">
-            <div class="act"><span class="act-dot ok"></span><span class="act-text"><b>R&amp;D Pulse</b> health score improved to 87 — QA pass rate up 4.2</span><span class="act-time">12m</span></div>
-            <div class="act"><span class="act-dot info"></span><span class="act-text"><b>GTM Launchpad</b> scheduled 3 posts across LinkedIn &amp; X</span><span class="act-time">28m</span></div>
-            <div class="act"><span class="act-dot warn"></span><span class="act-text"><b>Prompt Dashboard</b> flagged 6 prompts with regression in eval score</span><span class="act-time">1h</span></div>
-            <div class="act"><span class="act-dot ok"></span><span class="act-text"><b>Investment Advisor</b> matched 2 new seed-stage investors in your sector</span><span class="act-time">2h</span></div>
-            <div class="act"><span class="act-dot err"></span><span class="act-text"><b>Internal Audit</b> flagged control AC-14 missing evidence</span><span class="act-time">3h</span></div>
-            <div class="act"><span class="act-dot info"></span><span class="act-text"><b>Hub</b> onboarded 2 new team members this week</span><span class="act-time">5h</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="spotlights">
-        <a class="spot work" href="#" data-nav="PMT">
-          <span class="spot-badge"><i data-lucide="briefcase"></i> Work</span>
-          <div class="spot-title">Agentic Work Management</div>
-          <p class="spot-desc">Sprint velocity and handoff latency across active programs.</p>
-          <div class="spot-foot">
-            <span class="spot-stat">+38% velocity</span>
-            <span class="btn btn-ghost">Open <i data-lucide="arrow-right"></i></span>
-          </div>
-        </a>
-        <a class="spot service" href="#" data-nav="Support Ticket">
-          <span class="spot-badge"><i data-lucide="headset"></i> Service</span>
-          <div class="spot-title">York Service Hub</div>
-          <p class="spot-desc">Unified tickets, SLAs, and customer health in one console.</p>
-          <div class="spot-foot">
-            <span class="spot-stat">1.2s MTTR</span>
-            <span class="btn btn-ghost">Open <i data-lucide="arrow-right"></i></span>
-          </div>
-        </a>
-        <a class="spot stack" href="#" data-nav="R&amp;D Launchpad">
-          <span class="spot-badge"><i data-lucide="cpu"></i> Stack</span>
-          <div class="spot-title">Agent mesh runtime</div>
-          <p class="spot-desc">Deploy and orchestrate agents across your product surface.</p>
-          <div class="spot-foot">
-            <span class="spot-stat">240 agents</span>
-            <span class="btn btn-ghost">Open <i data-lucide="arrow-right"></i></span>
-          </div>
-        </a>
-      </div>
-
-      <div class="sec-head">
-        <h2>Your services</h2>
-        <button type="button" class="link-btn" data-view="services">View all 24 →</button>
-      </div>
-      <div class="svc-grid" id="quickServices"></div>
     </section>
 
     <!-- ============ JOURNEY ============ -->
@@ -1203,14 +939,6 @@ function svcCard(s) {
   </div>`;
 }
 
-/* Quick services (featured 6) */
-const featured = ['R&D Launchpad','Fuel','GTM Launchpad','R&D Pulse','Investment Advisor','Hub'];
-const qs = document.getElementById('quickServices');
-featured.forEach(name => {
-  const s = allServices.find(x => x.name === name);
-  if (s) qs.insertAdjacentHTML('beforeend', svcCard(s));
-});
-
 /* Full catalog */
 const cat = document.getElementById('svcCatalog');
 CATEGORIES.forEach(c => {
@@ -1317,13 +1045,12 @@ const ATTN = [
 ];
 const STATUS_LABEL = { open:'Open', review:'In review', pending:'Pending', scheduled:'Scheduled', resolved:'Resolved' };
 const IMPACT_LABEL = { high:'High', medium:'Medium', low:'Low' };
-const attnState = { status:'all', impact:'all', q:'' };
+const attnState = { status:'all', q:'' };
 function initials(n){ return n.split(' ').map(p => p[0]).join('').slice(0,2).toUpperCase(); }
 function renderAttn() {
   const q = attnState.q.trim().toLowerCase();
   const rows = ATTN.filter(r =>
     (attnState.status === 'all' || r.status === attnState.status) &&
-    (attnState.impact === 'all' || r.impact === attnState.impact) &&
     (!q || [r.ref, r.service, r.desc, r.owner, STATUS_LABEL[r.status]].join(' ').toLowerCase().includes(q))
   );
   document.getElementById('attnBody').innerHTML = rows.map(r => `
@@ -1339,13 +1066,7 @@ function renderAttn() {
   document.getElementById('attnCount').textContent = `Showing ${rows.length} of ${ATTN.length} items`;
 }
 document.getElementById('attnSearch').addEventListener('input', e => { attnState.q = e.target.value; renderAttn(); });
-document.getElementById('attnImpact').addEventListener('change', e => { attnState.impact = e.target.value; renderAttn(); });
-document.querySelectorAll('#attnChips .btn-chip').forEach(c => c.addEventListener('click', () => {
-  document.querySelectorAll('#attnChips .btn-chip').forEach(x => x.classList.remove('active'));
-  c.classList.add('active');
-  attnState.status = c.dataset.status;
-  renderAttn();
-}));
+document.getElementById('attnStatus').addEventListener('change', e => { attnState.status = e.target.value; renderAttn(); });
 document.getElementById('attnBody').addEventListener('click', e => {
   const tr = e.target.closest('tr[data-service]');
   if (tr) navToService(tr.dataset.service);
@@ -1363,7 +1084,7 @@ function toast(msg) {
 }
 
 /* ——— Views & navigation ——— */
-const VIEW_TITLES = { dashboard:'Dashboard Overview', services:'All Services', journey:'Product Journey' };
+const VIEW_TITLES = { dashboard:'Dashboard Overview', services:'Services', journey:'Product Journey' };
 const app = document.querySelector('.app');
 const isMobile = () => window.matchMedia('(max-width: 720px)').matches;
 
@@ -1426,6 +1147,7 @@ document.querySelectorAll('.flow-stage').forEach(stage => {
 });
 
 document.getElementById('newInitiative').addEventListener('click', () => toast('New initiative draft created'));
+document.getElementById('primaryAdd').addEventListener('click', () => toast('Quick create opened'));
 document.getElementById('bellBtn').addEventListener('click', () => toast('You have 3 unread notifications'));
 
 /* ——— Services filters ——— */
