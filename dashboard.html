@@ -297,31 +297,11 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .trend-up{color:var(--brand-600); font-weight:600}
 .trend-dn{color:var(--warn-ink); font-weight:600}
 
-.journey-strip{
-  background:var(--white); border:1px solid var(--line); border-radius:var(--r);
-  padding:var(--space-5) var(--space-6); margin-bottom:var(--space-7);
-}
-.journey-strip-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-5); gap:var(--space-3)}
-.journey-strip-head h2{font-size:15px; font-weight:600; color:var(--ink-strong)}
 .link-btn{
   display:inline-flex; align-items:center; gap:4px; font-size:var(--ctl-fs); font-weight:600;
   color:var(--brand-700); background:none; border:none; cursor:pointer; font-family:var(--sans);
 }
 .link-btn:hover{text-decoration:underline; text-underline-offset:2px}
-.journey-flow{display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:var(--space-2)}
-.stage{
-  padding:var(--space-3) var(--space-2); border-radius:var(--r-ctl); text-align:center;
-  background:var(--bg); border:1px solid var(--line); cursor:pointer;
-  transition:border-color .15s ease, background .15s ease, transform .15s ease;
-}
-.stage:hover{border-color:#A7F3D0; background:#F0FDF9; transform:translateY(-1px)}
-.stage-ic{
-  width:32px; height:32px; border-radius:var(--r-ctl); margin:0 auto var(--space-2);
-  display:grid; place-items:center; color:#fff;
-}
-.stage-ic i,.stage-ic svg{width:16px;height:16px}
-.stage-name{font-size:12px; font-weight:600; color:var(--ink-strong); margin-bottom:2px}
-.stage-count{font-size:10px; color:var(--subtle); font-family:var(--mono)}
 
 .panels-stack{display:flex; flex-direction:column; gap:var(--space-4); margin-bottom:var(--space-7)}
 .panel-head{
@@ -598,7 +578,6 @@ button{cursor:pointer;border:none;background:none;color:inherit}
   .spotlights{grid-template-columns:1fr}
   .spot{height:auto; min-height:200px}
   .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .journey-flow{grid-template-columns:repeat(4,minmax(0,1fr)); row-gap:var(--space-3)}
   .svc-cat .svc-grid,.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .flow-row{grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--space-3)}
   .flow-detail{grid-template-columns:1fr}
@@ -795,50 +774,6 @@ button{cursor:pointer;border:none;background:none;color:inherit}
           </div>
           <div class="stat-val">22<span>mo</span></div>
           <div class="stat-sub">at current burn rate</div>
-        </div>
-      </div>
-
-      <div class="journey-strip">
-        <div class="journey-strip-head">
-          <h2>Your product journey</h2>
-          <button type="button" class="link-btn" data-view="journey">View full journey <i data-lucide="arrow-right"></i></button>
-        </div>
-        <div class="journey-flow">
-          <button type="button" class="stage" data-view="journey">
-            <div class="stage-ic" style="background:#8B5CF6"><i data-lucide="flame"></i></div>
-            <div class="stage-name">Ideation</div>
-            <div class="stage-count">Fuel · 3</div>
-          </button>
-          <button type="button" class="stage" data-view="journey">
-            <div class="stage-ic" style="background:#2563EB"><i data-lucide="code-2"></i></div>
-            <div class="stage-name">Build</div>
-            <div class="stage-count">Launchpad · 7</div>
-          </button>
-          <button type="button" class="stage" data-view="journey">
-            <div class="stage-ic" style="background:#0891B2"><i data-lucide="shield-check"></i></div>
-            <div class="stage-name">QA &amp; Audit</div>
-            <div class="stage-count">5 tools · 4</div>
-          </button>
-          <button type="button" class="stage" data-view="journey">
-            <div class="stage-ic" style="background:var(--brand-600)"><i data-lucide="send"></i></div>
-            <div class="stage-name">Go-to-Market</div>
-            <div class="stage-count">GTM · 6</div>
-          </button>
-          <button type="button" class="stage" data-view="journey">
-            <div class="stage-ic" style="background:#D97706"><i data-lucide="radio"></i></div>
-            <div class="stage-name">Signal</div>
-            <div class="stage-count">Pulse · 3</div>
-          </button>
-          <button type="button" class="stage" data-view="journey">
-            <div class="stage-ic" style="background:#DB2777"><i data-lucide="landmark"></i></div>
-            <div class="stage-name">Finance</div>
-            <div class="stage-count">Finance Pulse</div>
-          </button>
-          <button type="button" class="stage" data-view="journey">
-            <div class="stage-ic" style="background:#4F46E5"><i data-lucide="trending-up"></i></div>
-            <div class="stage-name">Invest</div>
-            <div class="stage-count">AI Advisor</div>
-          </button>
         </div>
       </div>
 
