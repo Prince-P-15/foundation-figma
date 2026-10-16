@@ -531,11 +531,11 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
 
 /* Theme toggle button in topbar */
 .theme-toggle-btn{color:var(--muted);transition:all .15s}
-.theme-toggle-btn:hover{color:var(--ink);background:var(--bg)}
-.theme-sun{display:none}
-.theme-moon{display:block}
+.theme-toggle-btn:hover{color:var(--ink);background:var(--bg-2)}
+.theme-sun{display:none!important}
+.theme-moon{display:block!important}
 :root[data-theme="dark"] .theme-moon{display:none!important}
-:root[data-theme="dark"] .theme-sun{display:block!important;color:#FBBF24}
+:root[data-theme="dark"] .theme-sun{display:block!important;color:#FDE047!important}
 
 /* ─── UNIFIED WEBSITE CTA BUTTON SYSTEM ─── */
 .btn-primary, .btn-cta {
@@ -1012,8 +1012,20 @@ i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75
         <i data-lucide="search" aria-hidden="true"></i><span>Search services, actions…</span><kbd class="kbd" style="flex:none" aria-hidden="true">⌘K</kbd>
       </button>
       <button class="icon-btn theme-toggle-btn" type="button" id="themeSwitchBtn" aria-label="Toggle dark/light mode" title="Toggle color theme">
-        <i data-lucide="moon" class="theme-moon" aria-hidden="true"></i>
-        <i data-lucide="sun" class="theme-sun" aria-hidden="true"></i>
+        <svg class="theme-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
       </button>
       <button class="icon-btn bell" type="button" id="bellBtn" aria-label="Notifications, 3 unread"><i data-lucide="bell" aria-hidden="true"></i><span class="dot" aria-hidden="true"></span></button>
       <button class="icon-btn help-btn" type="button" id="helpBtn" aria-label="Help and documentation"><i data-lucide="circle-help" aria-hidden="true"></i></button>
