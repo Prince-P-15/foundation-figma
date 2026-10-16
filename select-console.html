@@ -102,7 +102,7 @@
     }
     .container {
       width: 100%;
-      max-width: 960px;
+      max-width: 1200px;
       margin-top: 40px;
       display: flex;
       flex-direction: column;
@@ -157,10 +157,10 @@
     }
     .cards-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       .cards-grid {
         grid-template-columns: 1fr;
       }
@@ -377,7 +377,7 @@
       </a>
 
       <!-- Card 2: Executive Pro -->
-      <a href="dashboard.html" class="card featured" id="cardV2">
+      <a href="dashboard.html" class="card" id="cardV2">
         <div class="badge-row">
           <span class="tag tag-pro">Version 2 · Modern Pro</span>
           <span class="rec-badge highlight">Executive Perspectives</span>
@@ -388,7 +388,7 @@
           </div>
           <div class="icon-meta">
             <h2>Executive Pro Console</h2>
-            <span>Collapsible Sidebar &amp; Executive Strip</span>
+            <span>Collapsible Sidebar &amp; Strip</span>
           </div>
         </div>
         <p class="desc">Modern enterprise layout with collapsible floating sidebar, executive billing resource strip, and full 8-gate product quality telemetry.</p>
@@ -403,10 +403,38 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </div>
       </a>
+
+      <!-- Card 3: Website-Aligned Theme -->
+      <a href="dashboard-v3.html" class="card featured" id="cardV3">
+        <div class="badge-row">
+          <span class="tag tag-pro" style="background:#ECFDF5;color:#047857;border-color:rgba(16,185,129,0.35)">Version 3 · Website Matched</span>
+          <span class="rec-badge highlight" style="color:#059669">Latest Release</span>
+        </div>
+        <div class="icon-row">
+          <div class="icon-bubble" style="background:linear-gradient(135deg, #10B981, #059669);color:#FFFFFF;box-shadow:0 4px 12px rgba(16,185,129,0.3)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="icon-meta">
+            <h2>Website-Aligned Console</h2>
+            <span>Pure White Light · #0B0F19 Dark</span>
+          </div>
+        </div>
+        <p class="desc">Identical full feature set styled directly with York website design tokens: crisp white and deep navy canvases, smooth aurora ambient glow, and website CTA system.</p>
+        <ul class="feature-list">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Pure white light mode and deep-space navy dark mode</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Subtle ambient aurora drift background glow</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 20px card curvatures matching website flagship cards</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-header layout toggle between v1, v2, and v3</li>
+        </ul>
+        <div class="launch-btn btn-v2" style="background:linear-gradient(135deg, #10B981 0%, #059669 100%);color:#FFFFFF;box-shadow:0 4px 16px rgba(16,185,129,0.35)">
+          <span>Launch Version 3</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
     </div>
 
     <!-- Foot -->
-    <p class="footer-note">Tip: You can freely switch between both layouts anytime from the top bar switcher.</p>
+    <p class="footer-note">Tip: You can freely switch between Version 1, Version 2, and Version 3 anytime from the top bar switcher.</p>
   </div>
 
   <script>

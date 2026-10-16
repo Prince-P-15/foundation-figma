@@ -7353,10 +7353,10 @@
     background: var(--bg-surface);
     border: 1px solid var(--line);
     border-radius: 24px;
-    width: min(940px, 94vw);
+    width: min(1180px, 96vw);
     max-height: 90vh;
     overflow-y: auto;
-    padding: 36px 40px 32px;
+    padding: 36px 36px 32px;
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
     position: relative;
     display: flex;
@@ -7416,10 +7416,10 @@
   }
   .console-cards-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
   }
-  @media (max-width: 760px) {
+  @media (max-width: 1024px) {
     .console-cards-grid {
       grid-template-columns: 1fr;
     }
@@ -10258,7 +10258,7 @@
       </a>
 
       <!-- Card 2: Version 2 Modern Executive Pro Layout -->
-      <a href="dashboard.html" class="console-choice-card featured" id="choiceCardV2">
+      <a href="dashboard.html" class="console-choice-card" id="choiceCardV2">
         <div class="console-choice-badge">
           <span class="choice-tag tag-pro">version-2</span>
           <span class="choice-rec highlight">Executive Pro Console</span>
@@ -10269,7 +10269,7 @@
           </div>
           <div class="choice-ic-meta">
             <h3 class="choice-title">Version 2</h3>
-            <span class="choice-flavor">Collapsible Sidebar · Executive Resource Strip</span>
+            <span class="choice-flavor">Collapsible Sidebar · Resource Strip</span>
           </div>
         </div>
         <p class="choice-desc">Modern enterprise layout with collapsible floating sidebar, executive billing resource strip, and full 8-gate product quality telemetry.</p>
@@ -10277,10 +10277,38 @@
           <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Collapsible floating sidebar with icon collapse mode</li>
           <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Executive billing &amp; compute resource strip</li>
           <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Initiatives velocity column chart &amp; live stream</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-header v1 / v2 tabs to switch anytime</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-header v1 / v2 / v3 tabs to switch anytime</li>
         </ul>
         <span class="choice-launch-btn btn-v2">
           <span>Launch Version 2</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <!-- Card 3: Version 3 Website-Matched Theme Layout -->
+      <a href="dashboard-v3.html" class="console-choice-card featured" id="choiceCardV3">
+        <div class="console-choice-badge">
+          <span class="choice-tag tag-pro" style="background:#ECFDF5;color:#047857;border-color:rgba(16,185,129,0.35)">version-3</span>
+          <span class="choice-rec highlight" style="color:#059669">Website Matched · New</span>
+        </div>
+        <div class="console-choice-icon-row">
+          <div class="choice-ic-bubble" style="background:linear-gradient(135deg, #10B981, #059669);color:#FFFFFF;box-shadow:0 4px 12px rgba(16,185,129,0.3)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="choice-ic-meta">
+            <h3 class="choice-title">Version 3</h3>
+            <span class="choice-flavor">Website Design Theme · Dual Light &amp; Dark</span>
+          </div>
+        </div>
+        <p class="choice-desc">Identical console features styled in the York website visual language: crisp pure white light mode, rich deep-navy dark mode (#0B0F19), ambient glow orbs, and unified CTA system.</p>
+        <ul class="choice-features-list">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1:1 Website color tokens (#FFFFFF light / #0B0F19 dark)</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Soft ambient aurora background glow &amp; 20px card radii</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Complete feature parity with Executive Pro &amp; all 23 services</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-header v1 / v2 / v3 tabs to switch anytime</li>
+        </ul>
+        <span class="choice-launch-btn btn-v2" style="background:linear-gradient(135deg, #10B981 0%, #059669 100%);box-shadow:0 4px 16px rgba(16,185,129,0.35)">
+          <span>Launch Version 3</span>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </span>
       </a>
@@ -10288,7 +10316,7 @@
 
     <!-- Footer helper -->
     <div class="console-select-foot">
-      <span>You can freely toggle between v1 Minimal and v2 Executive Pro inside either dashboard.</span>
+      <span>You can freely toggle between Version 1, Version 2, and Version 3 inside any dashboard topbar.</span>
     </div>
   </div>
 </div>
