@@ -1,0 +1,4651 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>York Foundation — Enterprise Operating System</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  (function(){
+    try {
+      var nav = (window.performance && performance.getEntriesByType) ? performance.getEntriesByType('navigation')[0] : null;
+      var isReload = (nav && nav.type === 'reload') || (window.performance && performance.navigation && performance.navigation.type === 1);
+      if (isReload || !sessionStorage.getItem('york_session_active')) {
+        sessionStorage.removeItem('york_session_active');
+        window.location.replace('index.html');
+        return;
+      }
+      var saved = localStorage.getItem('york-theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    } catch(e){}
+  })();
+</script>
+<script src="https://unpkg.com/lucide@0.468.0"></script>
+<style>
+/* ─── YORK DESIGN TOKENS (V3 WEBSITE-ALIGNED EXECUTIVE CONSOLE) ─── */
+:root, :root[data-theme="light"] {
+  --bg-app: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-pill: #FFFFFF;
+  --bg-pill-hover: #F8FAFC;
+  --bg-subtle: #F8FAFC;
+  --bg-subtle-2: #F1F5F9;
+  --bg-drawer: rgba(255, 255, 255, 0.98);
+  
+  --line: rgba(0, 0, 0, 0.08);
+  --line-strong: rgba(0, 0, 0, 0.14);
+  
+  --text-main: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --text-faint: #94A3B8;
+  
+  /* Website Brand Palette */
+  --emerald: #059669;
+  --emerald-dark: #047857;
+  --emerald-accent: #10B981;
+  --emerald-light: #D1FAE5;
+  --emerald-subtle: #ECFDF5;
+  --btn-primary-bg: #059669;
+  --btn-primary-hover: #047857;
+  
+  /* Unified Website CTA Button Tokens (Exact Website Navbar & Flagship CTA) */
+  --cta-primary-bg: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  --cta-primary-hover-bg: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+  --cta-primary-color: #FFFFFF;
+  --cta-primary-border: rgba(255, 255, 255, 0.22);
+  --cta-primary-shadow: 0 4px 16px rgba(16, 185, 129, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  --cta-primary-shadow-hover: 0 8px 28px rgba(16, 185, 129, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  --cta-radius: 8px;
+  
+  --shadow-dock: 0 2px 10px rgba(15, 23, 42, 0.04);
+  --shadow-card: 0 8px 24px -6px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.03);
+  --shadow-pill: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --shadow-drawer: 0 20px 40px -10px rgba(15, 23, 42, 0.12);
+  
+  --radius-card: 20px;
+  --radius-pill: 9999px;
+  --radius-btn: 8px;
+  
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+:root[data-theme="dark"] {
+  --bg-app: #0B0F19;
+  --bg-card: #121829;
+  --bg-card-dark: #0D1220;
+  --bg-pill: #1B2238;
+  --bg-pill-hover: #222B45;
+  --bg-subtle: #161E33;
+  --bg-subtle-2: #1B243D;
+  --bg-drawer: rgba(18, 24, 41, 0.98);
+  
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  
+  --text-main: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-faint: #475569;
+  
+  /* Website Brand Palette (Dark Mode) */
+  --emerald: #10B981;
+  --emerald-dark: #34D399;
+  --emerald-light: rgba(16, 185, 129, 0.22);
+  --emerald-subtle: rgba(16, 185, 129, 0.14);
+  --emerald-accent: #34D399;
+  --btn-primary-bg: #10B981;
+  --btn-primary-hover: #34D399;
+  
+  /* Unified Website CTA Button Tokens (Dark Mode) */
+  --cta-primary-bg: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  --cta-primary-hover-bg: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+  --cta-primary-color: #FFFFFF;
+  --cta-primary-border: rgba(255, 255, 255, 0.25);
+  --cta-primary-shadow: 0 4px 20px rgba(16, 185, 129, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  --cta-primary-shadow-hover: 0 8px 30px rgba(16, 185, 129, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  
+  --shadow-dock: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --shadow-card: 0 16px 36px -10px rgba(0, 0, 0, 0.45);
+  --shadow-pill: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-drawer: 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+}
+
+html, body {
+  height: 100%;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-size: 13.5px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ambient Aurora Glow Orbs matching Website */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(110px);
+  -webkit-filter: blur(110px);
+  will-change: transform, opacity;
+  display: block;
+  transition: opacity 0.5s ease;
+}
+
+/* Orb A: Mint / Emerald Ambient Wash (Upper Left) */
+body::before {
+  width: min(70vw, 750px);
+  height: min(60vw, 680px);
+  left: -8%;
+  top: -15%;
+  animation: heroAmbientDriftA 26s ease-in-out infinite;
+}
+
+/* Orb B: Sky / Cyan Celestial Wash (Upper Right) */
+body::after {
+  width: min(65vw, 700px);
+  height: min(55vw, 620px);
+  right: -8%;
+  top: -10%;
+  animation: heroAmbientDriftB 32s ease-in-out infinite;
+}
+
+:root[data-theme="light"] body::before {
+  background: radial-gradient(circle at 45% 45%, rgba(45, 212, 191, 0.16) 0%, rgba(16, 185, 129, 0.07) 50%, transparent 72%);
+  opacity: 0.75;
+}
+:root[data-theme="light"] body::after {
+  background: radial-gradient(circle at 55% 45%, rgba(56, 189, 248, 0.14) 0%, rgba(99, 102, 241, 0.05) 50%, transparent 72%);
+  opacity: 0.7;
+}
+
+:root[data-theme="dark"] body::before {
+  background: radial-gradient(circle at 45% 45%, rgba(16, 185, 129, 0.18) 0%, rgba(5, 150, 105, 0.09) 50%, transparent 72%);
+  opacity: 0.85;
+  mix-blend-mode: screen;
+}
+:root[data-theme="dark"] body::after {
+  background: radial-gradient(circle at 55% 45%, rgba(14, 165, 233, 0.15) 0%, rgba(99, 102, 241, 0.08) 50%, transparent 72%);
+  opacity: 0.8;
+  mix-blend-mode: screen;
+}
+
+@keyframes heroAmbientDriftA {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  38% { transform: translate3d(45px, 25px, 0) scale(1.06); }
+  72% { transform: translate3d(-20px, 40px, 0) scale(1.02); }
+}
+
+@keyframes heroAmbientDriftB {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  42% { transform: translate3d(-40px, 30px, 0) scale(1.07); }
+  78% { transform: translate3d(25px, 15px, 0) scale(0.98); }
+}
+
+/* WCAG Accessible Focus Rings */
+:focus-visible {
+  outline: 2px solid var(--emerald-accent);
+  outline-offset: 2px;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+input {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+i[data-lucide], svg.lucide {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  stroke-width: 1.8;
+  pointer-events: none;
+}
+
+.mono { font-family: var(--font-mono); }
+
+/* ─── SHELL STRUCTURE (FLOATING SIDEBAR + CANVAS) ─── */
+.canvas-wrapper {
+  display: flex;
+  min-height: 100vh;
+  padding: 16px;
+  gap: 16px;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   FLOATING SIDEBAR NAVIGATION WITH EXPAND & COLLAPSE
+   ═════════════════════════════════════════════════════════════════ */
+.permanent-sidebar {
+  width: 260px;
+  min-width: 260px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 16px;
+  left: 16px;
+  height: calc(100vh - 32px);
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 40;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), min-width 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s ease;
+}
+
+/* Collapsed Floating Sidebar - Strictly Show Icons Only */
+.permanent-sidebar.collapsed {
+  width: 72px;
+  min-width: 72px;
+}
+.permanent-sidebar.collapsed .sidebar-header {
+  padding: 14px 6px 12px;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+.permanent-sidebar.collapsed .sidebar-brand-box {
+  justify-content: center;
+  width: 100%;
+}
+.permanent-sidebar.collapsed .sidebar-brand-logo {
+  height: 26px;
+  width: auto;
+}
+.permanent-sidebar.collapsed .sidebar-brand-box span,
+.permanent-sidebar.collapsed .sidebar-workspace-pill span,
+.permanent-sidebar.collapsed .sidebar-ws-tag,
+.permanent-sidebar.collapsed .sidebar-workspace-pill svg,
+.permanent-sidebar.collapsed .sidebar-workspace-pill i,
+.permanent-sidebar.collapsed .sidebar-main-nav-btn span,
+.permanent-sidebar.collapsed .sidebar-category-title,
+.permanent-sidebar.collapsed .sidebar-nav-item .sidebar-nav-label,
+.permanent-sidebar.collapsed .sidebar-nav-item .sidebar-badge,
+.permanent-sidebar.collapsed .sidebar-compute-meter,
+.permanent-sidebar.collapsed .sidebar-user-tile div:not(.sidebar-user-avatar),
+.permanent-sidebar.collapsed .sidebar-user-tile svg,
+.permanent-sidebar.collapsed .sidebar-user-tile i {
+  display: none !important;
+}
+.permanent-sidebar.collapsed .sidebar-workspace-pill {
+  margin: 10px 8px 6px;
+  padding: 8px 0;
+  justify-content: center;
+  width: calc(100% - 16px);
+}
+.permanent-sidebar.collapsed .sidebar-primary-nav {
+  padding: 8px 4px;
+  align-items: center;
+}
+.permanent-sidebar.collapsed .sidebar-main-nav-btn {
+  justify-content: center;
+  padding: 0;
+  width: 44px;
+  height: 40px;
+  margin: 0 auto;
+}
+.permanent-sidebar.collapsed .sidebar-main-nav-btn i,
+.permanent-sidebar.collapsed .sidebar-main-nav-btn svg {
+  margin: 0 auto;
+  width: 18px;
+  height: 18px;
+}
+.permanent-sidebar.collapsed .sidebar-nav-scroll {
+  padding: 6px 4px;
+}
+.permanent-sidebar.collapsed .sidebar-category-group {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.permanent-sidebar.collapsed .sidebar-nav-item {
+  justify-content: center;
+  padding: 0;
+  width: 44px;
+  height: 40px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+.permanent-sidebar.collapsed .sidebar-nav-item i,
+.permanent-sidebar.collapsed .sidebar-nav-item svg {
+  margin: 0 auto;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.permanent-sidebar.collapsed .sidebar-footer {
+  padding: 12px 6px;
+}
+.permanent-sidebar.collapsed .sidebar-user-tile {
+  justify-content: center;
+  padding: 4px 0;
+}
+.permanent-sidebar.collapsed .sidebar-user-avatar {
+  margin: 0 auto;
+}
+
+.sidebar-header {
+  padding: 16px 18px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+.sidebar-brand-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.sidebar-brand-logo {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+.sidebar-brand-logo.logo-dark-mode { display: none; }
+.sidebar-brand-logo.logo-light-mode { display: block; }
+:root[data-theme="dark"] .sidebar-brand-logo.logo-dark-mode { display: block; }
+:root[data-theme="dark"] .sidebar-brand-logo.logo-light-mode { display: none; }
+.sidebar-collapse-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.sidebar-collapse-btn:hover {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+}
+
+.sidebar-workspace-pill {
+  margin: 12px 14px 6px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-subtle);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.sidebar-workspace-pill:hover {
+  border-color: var(--line-strong);
+  background: var(--bg-pill-hover);
+}
+.sidebar-ws-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+}
+
+/* Primary Top 4 Navigation in Sidebar */
+.sidebar-primary-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 12px 10px;
+  border-bottom: 1px solid var(--line);
+}
+.sidebar-main-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+.sidebar-main-nav-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+}
+.sidebar-main-nav-btn.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: rgba(0, 179, 137, 0.3);
+}
+.sidebar-main-nav-btn i {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar-nav-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 12px 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+.sidebar-category-group {
+  margin-top: 16px;
+}
+.sidebar-category-group:first-child {
+  margin-top: 4px;
+}
+.sidebar-category-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 6px 10px 4px;
+}
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.12s;
+  cursor: pointer;
+}
+.sidebar-nav-item:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+}
+.sidebar-nav-item.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  font-weight: 600;
+}
+:root[data-theme="dark"] .sidebar-nav-item.active {
+  background: rgba(0, 179, 137, 0.2);
+  color: #34D399;
+}
+.sidebar-nav-item i {
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+}
+.sidebar-nav-item.active i {
+  color: var(--emerald-dark);
+}
+:root[data-theme="dark"] .sidebar-nav-item.active i {
+  color: #34D399;
+}
+.sidebar-nav-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sidebar-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+}
+.sidebar-badge.new {
+  background: var(--emerald-light);
+  color: var(--emerald-dark);
+}
+
+.sidebar-footer {
+  border-top: 1px solid var(--line);
+  padding: 12px 14px;
+  background: var(--bg-card);
+}
+.sidebar-compute-meter {
+  padding: 9px 12px;
+  border-radius: 12px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.sidebar-compute-meter:hover {
+  border-color: var(--line-strong);
+}
+.sidebar-compute-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.sidebar-compute-bar {
+  height: 5px;
+  background: var(--bg-subtle-2);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.sidebar-compute-bar i {
+  display: block;
+  height: 100%;
+  width: 61%;
+  background: var(--emerald);
+  border-radius: 99px;
+}
+
+.sidebar-user-tile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.sidebar-user-tile:hover {
+  background: var(--bg-subtle);
+}
+.sidebar-user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #00B389;
+  color: #FFFFFF;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+
+/* ─── MAIN DESK CANVAS ─── */
+.desk-canvas {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 6px 12px 36px 6px;
+  max-width: 1560px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ─── SINGLE UNIFIED ROUNDED TOPBAR TAB / CAPSULE DOCK ─── */
+.floating-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  position: relative;
+  width: 100%;
+  height: 56px;
+  padding: 6px 8px 6px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.03);
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+:root[data-theme="dark"] .floating-topbar {
+  background: var(--bg-card);
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* Left Group: Breadcrumbs + Vertical Divider + Theme Switcher */
+.topbar-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.topbar-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+
+.topbar-crumb-org {
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.topbar-crumb-slash {
+  color: var(--text-muted);
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+.topbar-crumb-view {
+  font-weight: 600;
+  color: var(--emerald-dark);
+}
+
+:root[data-theme="dark"] .topbar-crumb-view {
+  color: #00D6A4;
+}
+
+.topbar-v-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--line);
+  flex-shrink: 0;
+}
+
+/* Version Switcher embedded seamlessly */
+.version-switch-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: var(--bg-subtle);
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+}
+
+:root[data-theme="dark"] .version-switch-pill {
+  background: #080C14;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.version-switch-lbl {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 0 6px 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.v-tab-btn {
+  padding: 4px 11px;
+  border-radius: var(--radius-pill);
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.v-tab-btn:hover {
+  color: var(--text-main);
+  background: var(--bg-pill-hover);
+}
+
+.v-tab-btn.active {
+  font-weight: 700;
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border: 1px solid rgba(0, 179, 137, 0.35);
+}
+
+:root[data-theme="dark"] .v-tab-btn.active {
+  background: rgba(0, 180, 138, 0.18);
+  color: #00D6A4;
+  border-color: rgba(0, 180, 138, 0.35);
+}
+
+/* WIDE SEARCH BAR (Generous width, single line, no overlap) */
+.top-search-pill {
+  flex: 1;
+  min-width: 240px;
+  max-width: 440px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 14px 0 16px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+.top-search-pill:hover {
+  background: var(--bg-pill-hover);
+  border-color: var(--line-strong);
+  color: var(--text-main);
+}
+
+:root[data-theme="dark"] .top-search-pill {
+  background: #080C14;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+}
+
+:root[data-theme="dark"] .top-search-pill:hover {
+  background: #101827;
+  border-color: rgba(0, 180, 138, 0.35);
+  color: var(--text-main);
+}
+
+.top-search-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.top-search-inner i, .top-search-inner svg {
+  width: 15px;
+  height: 15px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.top-search-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.top-search-kbd {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+:root[data-theme="dark"] .top-search-kbd {
+  background: #141E32;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--text-muted);
+}
+
+/* Right Actions Group (Buttons neatly seated inside dock) */
+.topbar-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.topbar-action-btn, .top-circle-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.topbar-action-btn:hover, .top-circle-btn:hover {
+  background: var(--bg-pill-hover);
+  color: var(--text-main);
+  border-color: var(--line-strong);
+}
+
+:root[data-theme="dark"] .topbar-action-btn,
+:root[data-theme="dark"] .top-circle-btn {
+  background: #080C14;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="dark"] .topbar-action-btn:hover,
+:root[data-theme="dark"] .top-circle-btn:hover {
+  background: #141E32;
+  color: #F8FAFC;
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.topbar-bell-dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #EF4444;
+  border: 1.5px solid var(--bg-card);
+}
+
+.topbar-user-avatar, .top-user-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--emerald-dark);
+  color: #FFFFFF;
+  font-size: 12.5px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border: 2px solid var(--bg-card);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.15s;
+  box-sizing: border-box;
+}
+
+:root[data-theme="dark"] .topbar-user-avatar,
+:root[data-theme="dark"] .top-user-avatar {
+  background: rgba(0, 180, 138, 0.22);
+  color: #00D6A4;
+  border-color: rgba(0, 180, 138, 0.35);
+}
+
+/* ─── PAGE TITLE & PILL CONTROLS ROW ─── */
+.title-controls-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.page-headline-wrap {
+  display: flex;
+  flex-direction: column;
+}
+.page-headline-lead {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.controls-pill-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Date Range Pill - Standardized 38px Height */
+.date-pill {
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-pill);
+  box-sizing: border-box;
+  font-size: 12.5px;
+  color: var(--text-main);
+}
+.date-pill i {
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.date-pill-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.date-pill-label {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.date-pill-val {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* Export / Action CTA Button - Standardized 38px Height matching Website CTA System */
+.export-pill-btn {
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 16px;
+  background: var(--cta-primary-bg) !important;
+  color: var(--cta-primary-color) !important;
+  border-radius: var(--cta-radius) !important; /* Strict 8px crisp corners matching website */
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  box-shadow: var(--cta-primary-shadow) !important;
+  border: 1px solid var(--cta-primary-border) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+.export-pill-btn:hover {
+  background: var(--cta-primary-hover-bg) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: var(--cta-primary-shadow-hover) !important;
+}
+.export-pill-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+}
+.export-pill-btn:hover::after {
+  left: 140%;
+}
+.export-pill-btn i, .export-pill-btn svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+.export-pill-btn:hover i, .export-pill-btn:hover svg {
+  transform: translate(1px, -1px);
+}
+
+/* ─── 4-CARD METRIC DECK (COMPLETE KPI TELEMETRY) ─── */
+.metrics-card-deck {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.deck-card {
+  padding: 22px 24px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+  background: var(--bg-card);
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+}
+.deck-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+/* Card 1: Featured Primary Accent */
+.deck-card.primary-accent-card {
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1.5px solid var(--emerald-light);
+}
+.deck-card.primary-accent-card .deck-arrow-btn {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+}
+:root[data-theme="dark"] .deck-card.primary-accent-card {
+  border-color: rgba(0, 179, 137, 0.4);
+}
+:root[data-theme="dark"] .deck-card.primary-accent-card .deck-arrow-btn {
+  background: rgba(0, 179, 137, 0.22);
+  color: #34D399;
+}
+
+.deck-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.deck-card-label {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.deck-card.primary-accent-card .deck-card-label {
+  color: var(--text-main);
+  font-weight: 600;
+}
+.deck-arrow-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.deck-card:hover .deck-arrow-btn {
+  transform: translate(2px, -2px);
+}
+.deck-arrow-btn i {
+  width: 15px;
+  height: 15px;
+}
+
+.deck-card-value {
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin: 10px 0 4px;
+}
+.deck-card-value small {
+  font-size: 18px;
+  font-weight: 500;
+  opacity: 0.65;
+}
+
+.deck-card-caption {
+  font-size: 12.5px;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.deck-card-caption b {
+  font-weight: 600;
+  color: var(--emerald-dark);
+}
+.deck-card-caption .dot-sep {
+  opacity: 0.5;
+}
+
+/* ─── EXECUTIVE BILLING & COMPUTE RESOURCE CARD ─── */
+.billing-executive-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 14px 0 20px;
+  transition: all 0.2s ease;
+}
+:root[data-theme="dark"] .billing-executive-card {
+  background: #172033;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.billing-segment {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.billing-plan-seg {
+  flex: 0 0 auto;
+}
+.billing-plan-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border: 1px solid rgba(0, 179, 137, 0.25);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+:root[data-theme="dark"] .billing-plan-icon {
+  background: rgba(0, 179, 137, 0.18);
+  color: #34D399;
+}
+.billing-plan-icon svg, .billing-plan-icon i {
+  width: 18px;
+  height: 18px;
+}
+.billing-seg-content {
+  display: flex;
+  flex-direction: column;
+}
+.billing-plan-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.billing-plan-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+.billing-live-tag {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 1.5px 6px;
+  border-radius: 4px;
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border: 1px solid rgba(0, 179, 137, 0.3);
+  letter-spacing: 0.05em;
+}
+:root[data-theme="dark"] .billing-live-tag {
+  background: rgba(0, 179, 137, 0.15);
+  color: #34D399;
+  border-color: rgba(52, 211, 153, 0.3);
+}
+.billing-plan-meta {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+.billing-v-divider {
+  width: 1px;
+  height: 30px;
+  background: var(--line);
+  flex-shrink: 0;
+}
+.billing-compute-seg {
+  flex: 1 1 320px;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.billing-compute-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+}
+.billing-compute-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.billing-compute-title svg, .billing-compute-title i {
+  width: 13px;
+  height: 13px;
+  color: var(--emerald);
+}
+.billing-compute-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.billing-pct-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--emerald-dark);
+  background: var(--emerald-subtle);
+  border: 1px solid rgba(0, 179, 137, 0.25);
+  padding: 0 6px;
+  border-radius: 99px;
+}
+:root[data-theme="dark"] .billing-pct-pill {
+  background: rgba(0, 179, 137, 0.18);
+  color: #34D399;
+}
+.billing-tokens-count {
+  font-size: 11.5px;
+  color: var(--text-main);
+  font-weight: 600;
+}
+.billing-tokens-total {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 11px;
+}
+.billing-progress-track {
+  height: 6px;
+  background: var(--bg-subtle-2);
+  border-radius: 99px;
+  overflow: hidden;
+  width: 100%;
+}
+.billing-progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--emerald);
+  transition: width 0.4s ease;
+}
+.billing-stats-seg {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+.billing-mini-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.billing-stat-caption {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.billing-stat-value {
+  font-size: 13px;
+  color: var(--text-main);
+}
+.billing-stat-max {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-left: 2px;
+}
+.billing-tier-chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  border: 1px solid var(--line);
+}
+.billing-action-seg {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.billing-manage-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: var(--cta-radius) !important; /* Strict 8px crisp corners matching website */
+  background: var(--cta-primary-bg) !important;
+  color: var(--cta-primary-color) !important;
+  border: 1px solid var(--cta-primary-border) !important;
+  box-shadow: var(--cta-primary-shadow) !important;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+.billing-manage-btn:hover {
+  background: var(--cta-primary-hover-bg) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: var(--cta-primary-shadow-hover) !important;
+}
+.billing-manage-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+}
+.billing-manage-btn:hover::after {
+  left: 140%;
+}
+.billing-manage-btn svg, .billing-manage-btn i {
+  width: 13px;
+  height: 13px;
+  transition: transform 0.2s ease;
+}
+.billing-manage-btn:hover svg, .billing-manage-btn:hover i {
+  transform: translateX(3px);
+}
+@media (max-width: 1100px) {
+  .billing-executive-card {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+}
+@media (max-width: 768px) {
+  .billing-executive-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .billing-v-divider { display: none; }
+  .billing-compute-seg { max-width: 100%; }
+  .billing-stats-seg { justify-content: space-between; }
+  .billing-action-seg { justify-content: flex-end; }
+}
+
+/* ─── 2-CARD BOTTOM SECTION (SPACIOUS EXECUTIVE SPLIT) ─── */
+.bottom-cards-row {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.feature-large-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 24px 26px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.feature-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.feature-card-heading-box {
+  display: flex;
+  flex-direction: column;
+}
+.feature-card-title {
+  font-size: 17.5px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+.feature-card-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.feature-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-filter-pill {
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-subtle);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.card-filter-pill:hover, .card-filter-pill.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+}
+.card-round-icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.card-round-icon-btn:hover {
+  background: var(--bg-subtle-2);
+  color: var(--text-main);
+}
+.card-round-icon-btn.open {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+  box-shadow: 0 0 0 3px var(--emerald-subtle);
+}
+.card-round-icon-btn.has-filter {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald);
+}
+.card-filter-dropdown-wrap {
+  position: relative;
+}
+/* Ensure [hidden] always hides regardless of flex/grid/block on classes */
+[hidden] {
+  display: none !important;
+}
+.card-filter-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 290px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+  z-index: 100;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: filterPop 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-filter-popover[hidden] {
+  display: none !important;
+}
+:root[data-theme="dark"] .card-filter-popover {
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  background: #141E32;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+@keyframes filterPop {
+  from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.filter-popover-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.filter-popover-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.filter-popover-title i, .filter-popover-title svg {
+  width: 13px;
+  height: 13px;
+  color: var(--emerald);
+}
+.filter-popover-close {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.filter-popover-close:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+  border-color: var(--line);
+}
+.filter-popover-close i, .filter-popover-close svg {
+  width: 13px;
+  height: 13px;
+  pointer-events: none;
+}
+.filter-popover-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.filter-popover-subhead {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+}
+.filter-popover-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.popover-chip {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.popover-chip:hover {
+  background: var(--bg-subtle-2);
+  color: var(--text-main);
+}
+.popover-chip.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+  font-weight: 700;
+}
+:root[data-theme="dark"] .popover-chip.active {
+  background: rgba(0, 180, 138, 0.2);
+  color: #34D399;
+  border-color: rgba(0, 180, 138, 0.4);
+}
+.filter-popover-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.filter-popover-reset {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+.filter-popover-reset:hover {
+  color: var(--text-main);
+  background: var(--bg-subtle);
+}
+.filter-popover-apply {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: var(--emerald);
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.filter-popover-apply:hover {
+  opacity: 0.9;
+}
+
+/* Services filter close button */
+.services-filter-close-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.services-filter-close-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+  border-color: var(--line);
+}
+.services-filter-close-btn i, .services-filter-close-btn svg {
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+
+/* ─── LEFT CARD: INITIATIVES DELIVERY COLUMN BARS + DATA LIST ─── */
+.chart-columns-visual {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  align-items: flex-end;
+  padding: 44px 16px 22px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.bar-column-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+.bar-column-pill-track {
+  width: 100%;
+  max-width: 44px;
+  height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  background: rgba(15, 23, 42, 0.04);
+  border-radius: 8px;
+  border: 1px solid rgba(15, 23, 42, 0.04);
+}
+:root[data-theme="dark"] .bar-column-pill-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.bar-pillar {
+  width: 100%;
+  border-radius: 6px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+.bar-column-item:hover .bar-pillar {
+  transform: scaleY(1.03);
+}
+
+/* Decent, High-Craft Solid Colors for Bars (Strictly No Gradients) */
+.bar-pillar.col-rd {
+  background: #3B82F6;
+  border: 1px solid #3B82F6;
+  box-shadow: none;
+}
+.bar-pillar.col-gtm {
+  background: #8B5CF6;
+  border: 1px solid #8B5CF6;
+  box-shadow: none;
+}
+.bar-pillar.col-capital {
+  background: #00B389;
+  border: 1px solid #00B389;
+  box-shadow: none;
+}
+.bar-pillar.col-audit {
+  background: #F59E0B;
+  border: 1px solid #F59E0B;
+  box-shadow: none;
+}
+.bar-pillar.col-people {
+  background: #6366F1;
+  border: 1px solid #6366F1;
+  box-shadow: none;
+}
+
+/* Dark mode decent solid tints */
+:root[data-theme="dark"] .bar-pillar.col-rd {
+  background: #60A5FA;
+  border: 1px solid #60A5FA;
+}
+:root[data-theme="dark"] .bar-pillar.col-gtm {
+  background: #A78BFA;
+  border: 1px solid #A78BFA;
+}
+:root[data-theme="dark"] .bar-pillar.col-capital {
+  background: #34D399;
+  border: 1px solid #34D399;
+}
+:root[data-theme="dark"] .bar-pillar.col-audit {
+  background: #FBBF24;
+  border: 1px solid #FBBF24;
+}
+:root[data-theme="dark"] .bar-pillar.col-people {
+  background: #818CF8;
+  border: 1px solid #818CF8;
+}
+
+/* Light Floating Value Tags */
+.column-value-floating-tag {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2.5px 7.5px;
+  border-radius: 99px;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+.column-value-floating-tag.col-rd { background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
+.column-value-floating-tag.col-gtm { background: #F5F3FF; color: #6D28D9; border: 1px solid #DDD6FE; }
+.column-value-floating-tag.col-capital { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
+.column-value-floating-tag.col-audit { background: #FFFBEB; color: #B45309; border: 1px solid #FDE68A; }
+.column-value-floating-tag.col-people { background: #EEF2FF; color: #4338CA; border: 1px solid #C7D2FE; }
+
+:root[data-theme="dark"] .column-value-floating-tag.col-rd { background: rgba(59, 130, 246, 0.15); color: #93C5FD; border-color: rgba(59, 130, 246, 0.25); }
+:root[data-theme="dark"] .column-value-floating-tag.col-gtm { background: rgba(139, 92, 246, 0.15); color: #DDD6FE; border-color: rgba(139, 92, 246, 0.25); }
+:root[data-theme="dark"] .column-value-floating-tag.col-capital { background: rgba(0, 180, 138, 0.15); color: #6EE7B7; border-color: rgba(0, 180, 138, 0.25); }
+:root[data-theme="dark"] .column-value-floating-tag.col-audit { background: rgba(245, 158, 11, 0.15); color: #FDE68A; border-color: rgba(245, 158, 11, 0.25); }
+:root[data-theme="dark"] .column-value-floating-tag.col-people { background: rgba(99, 102, 241, 0.15); color: #A5B4FC; border-color: rgba(99, 102, 241, 0.25); }
+
+.bar-column-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: center;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+.bar-column-sub {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+/* Sub-section Header linking analytics chart to detailed list */
+.initiatives-sub-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px 10px 4px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 4px;
+}
+.sub-head-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+}
+.sub-head-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 99px;
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border: 1px solid var(--emerald-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.stream-pulse-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 0 2px rgba(0, 180, 138, 0.25);
+}
+
+/* Integrated Initiatives Table List - Spacious & Clear */
+.initiatives-table-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.initiative-data-row {
+  display: grid;
+  grid-template-columns: 1fr auto 120px 42px;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 12px;
+  border-radius: 0 !important;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.initiative-data-row:last-child {
+  border-bottom: none;
+}
+.initiative-data-row:hover {
+  background: var(--bg-subtle);
+}
+.init-title-box b {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+.init-title-box small {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  display: block;
+}
+.init-tag-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.init-tag-badge.rd { color: #1D4ED8; background: #EFF6FF; border-color: #BFDBFE; }
+.init-tag-badge.gtm { color: #6D28D9; background: #F5F3FF; border-color: #DDD6FE; }
+.init-tag-badge.capital { color: var(--emerald-dark); background: var(--emerald-subtle); border-color: var(--emerald-light); }
+.init-tag-badge.audit { color: #B45309; background: #FFFBEB; border-color: #FDE68A; }
+.init-tag-badge.people { color: var(--text-secondary); background: var(--bg-subtle); border-color: var(--line); }
+
+:root[data-theme="dark"] .init-tag-badge.rd { color: #93C5FD; background: rgba(59, 130, 246, 0.16); border-color: rgba(147, 197, 253, 0.3); }
+:root[data-theme="dark"] .init-tag-badge.gtm { color: #DDD6FE; background: rgba(139, 92, 246, 0.16); border-color: rgba(221, 214, 254, 0.3); }
+:root[data-theme="dark"] .init-tag-badge.capital { color: #6EE7B7; background: rgba(0, 180, 138, 0.16); border-color: rgba(110, 231, 183, 0.3); }
+:root[data-theme="dark"] .init-tag-badge.audit { color: #FDE68A; background: rgba(245, 158, 11, 0.16); border-color: rgba(253, 230, 138, 0.3); }
+:root[data-theme="dark"] .init-tag-badge.people { color: #A5B4FC; background: rgba(99, 102, 241, 0.16); border-color: rgba(99, 102, 241, 0.3); }
+
+.init-mini-bar {
+  height: 6px;
+  background: var(--bg-subtle-2);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.init-mini-bar div,
+.init-mini-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 99px !important;
+}
+.init-bar-fill.col-rd { background: #3B82F6; }
+.init-bar-fill.col-gtm { background: #8B5CF6; }
+.init-bar-fill.col-capital { background: #00B389; }
+.init-bar-fill.col-audit { background: #F59E0B; }
+.init-bar-fill.col-people { background: #6366F1; }
+
+:root[data-theme="dark"] .init-bar-fill.col-rd { background: #60A5FA; }
+:root[data-theme="dark"] .init-bar-fill.col-gtm { background: #A78BFA; }
+:root[data-theme="dark"] .init-bar-fill.col-capital { background: #34D399; }
+:root[data-theme="dark"] .init-bar-fill.col-audit { background: #FBBF24; }
+:root[data-theme="dark"] .init-bar-fill.col-people { background: #818CF8; }
+.init-pct-val {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  font-weight: 700;
+  text-align: right;
+}
+
+/* ─── RIGHT CARD: MULTI-STREAM OPERATIONAL TELEMETRY SPECTRUM (PLEASANT COLORS) ─── */
+.telemetry-spectrum-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 14px 14px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.telemetry-stream-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+  cursor: pointer;
+}
+.telemetry-stream-row:hover {
+  background: var(--bg-card);
+}
+
+.tel-cat-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 145px;
+  flex-shrink: 0;
+}
+.tel-cat-ic {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+}
+.tel-cat-ic i, .tel-cat-ic svg {
+  width: 14px;
+  height: 14px;
+}
+.tel-cat-ic.col-rd { background: #EFF6FF; color: #2563EB; border-color: #DBEAFE; }
+.tel-cat-ic.col-gtm { background: #F5F3FF; color: #7C3AED; border-color: #EDE9FE; }
+.tel-cat-ic.col-capital { background: #ECFDF5; color: #047857; border-color: #A7F3D0; }
+.tel-cat-ic.col-audit { background: #FFFBEB; color: #D97706; border-color: #FEF3C7; }
+
+:root[data-theme="dark"] .tel-cat-ic.col-rd { background: rgba(59, 130, 246, 0.15); color: #93C5FD; border-color: rgba(59, 130, 246, 0.25); }
+:root[data-theme="dark"] .tel-cat-ic.col-gtm { background: rgba(139, 92, 246, 0.15); color: #DDD6FE; border-color: rgba(139, 92, 246, 0.25); }
+:root[data-theme="dark"] .tel-cat-ic.col-capital { background: rgba(0, 180, 138, 0.15); color: #6EE7B7; border-color: rgba(0, 180, 138, 0.25); }
+:root[data-theme="dark"] .tel-cat-ic.col-audit { background: rgba(245, 158, 11, 0.15); color: #FDE68A; border-color: rgba(245, 158, 11, 0.25); }
+
+.tel-cat-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.tel-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  line-height: 1.25;
+}
+.tel-role {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* 12-Segment Activity Spectrum Strip */
+.tel-bars-spectrum {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 5px;
+  height: 28px;
+  padding: 0 8px;
+}
+.t-bar {
+  width: 6px;
+  border-radius: 3px;
+  opacity: 1 !important; /* Solid color throughout, no fade/gradient */
+  transition: transform 0.2s ease;
+}
+.telemetry-stream-row:hover .t-bar {
+  transform: scaleY(1.08);
+}
+
+.tel-bars-spectrum.col-rd .t-bar { background: #2563EB; }
+.tel-bars-spectrum.col-gtm .t-bar { background: #7C3AED; }
+.tel-bars-spectrum.col-capital .t-bar { background: #059669; }
+.tel-bars-spectrum.col-audit .t-bar { background: #D97706; }
+
+:root[data-theme="dark"] .tel-bars-spectrum.col-rd .t-bar { background: #3B82F6; }
+:root[data-theme="dark"] .tel-bars-spectrum.col-gtm .t-bar { background: #8B5CF6; }
+:root[data-theme="dark"] .tel-bars-spectrum.col-capital .t-bar { background: #10B981; }
+:root[data-theme="dark"] .tel-bars-spectrum.col-audit .t-bar { background: #F59E0B; }
+
+.t-bar.active {
+  opacity: 1 !important;
+  box-shadow: none !important;
+}
+
+/* Metric Badges on right - Clean & Light */
+.tel-metric-badge {
+  width: 68px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.tel-val {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.tel-caption {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+}
+
+.tel-metric-badge.col-rd .tel-val { color: #2563EB; }
+.tel-metric-badge.col-gtm .tel-val { color: #7C3AED; }
+.tel-metric-badge.col-capital .tel-val { color: #0284C7; }
+.tel-metric-badge.col-audit .tel-val { color: #B45309; }
+
+:root[data-theme="dark"] .tel-metric-badge.col-rd .tel-val { color: #93C5FD; }
+:root[data-theme="dark"] .tel-metric-badge.col-gtm .tel-val { color: #DDD6FE; }
+:root[data-theme="dark"] .tel-metric-badge.col-capital .tel-val { color: #7DD3FC; }
+:root[data-theme="dark"] .tel-metric-badge.col-audit .tel-val { color: #FDE68A; }
+
+/* Integrated Activity Stream - Clean Vertical Micro-Timeline */
+.telemetry-stream-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.stream-event-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 12px;
+  border-radius: 0 !important;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.stream-event-item:last-child {
+  border-bottom: none;
+}
+.stream-event-item:hover {
+  background: var(--bg-subtle);
+}
+.stream-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+:root[data-theme="dark"] .stream-dot {
+  box-shadow: 0 0 0 2px rgba(15, 22, 38, 0.8);
+}
+.stream-dot.b { background: #2563EB; }
+.stream-dot.g { background: var(--emerald); }
+.stream-dot.o { background: #D97706; }
+.stream-dot.r { background: #DC2626; }
+.stream-dot.p { background: #7C3AED; }
+.stream-meta-box {
+  flex: 1;
+  min-width: 0;
+}
+.stream-meta-box b {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+.stream-meta-box small {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  display: block;
+}
+.stream-time-val {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ─── FULL-WIDTH DECK (SERVICES REGISTRY) ─── */
+.full-width-deck-section {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 26px 28px;
+  box-shadow: var(--shadow-card);
+}
+.full-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.full-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+.full-section-lede {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ─── SERVICE GRID & UNIFIED PRODUCT CARD VISUALS (MATCHING WEBSITE) ─── */
+.service-cards-deck-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .service-cards-deck-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .service-cards-deck-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.svc-card,
+.service-deck-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 22px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 180px;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+/* Minimal, pleasant cyan-to-teal ambient shadow on hover (Website match) */
+.svc-card:hover,
+.svc-card.highlighted,
+.service-deck-card:hover {
+  background: var(--bg-card);
+  border-color: rgba(6, 184, 178, 0.45);
+  box-shadow: 
+    0 14px 32px -8px rgba(6, 184, 178, 0.22),
+    0 4px 14px -2px rgba(1, 160, 207, 0.16),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+  transform: translateY(-3px);
+}
+
+:root[data-theme="dark"] .svc-card,
+:root[data-theme="dark"] .service-deck-card {
+  background: #0E1626;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="dark"] .svc-card:hover,
+:root[data-theme="dark"] .svc-card.highlighted,
+:root[data-theme="dark"] .service-deck-card:hover {
+  background: #141E32;
+  border-color: rgba(6, 184, 178, 0.52);
+  box-shadow: 
+    0 16px 36px -8px rgba(6, 184, 178, 0.32),
+    0 6px 18px -2px rgba(1, 160, 207, 0.22),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3px);
+}
+
+.svc-card-tag-row,
+.service-deck-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+/* Decent solid/pastel tag colors instead of gradient (User explicit requirement) */
+.svc-cat-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+/* Category-specific decent solid tints - light mode */
+.svc-cat-tag.build { background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE; }
+.svc-cat-tag.quality { background: #F5F3FF; color: #6D28D9; border-color: #DDD6FE; }
+.svc-cat-tag.gtm { background: #ECFDF5; color: #047857; border-color: #A7F3D0; }
+.svc-cat-tag.signal { background: #FFFBEB; color: #B45309; border-color: #FDE68A; }
+.svc-cat-tag.capital, .svc-cat-tag.ai { background: #ECFDF5; color: #065F46; border-color: #A7F3D0; }
+.svc-cat-tag.people { background: #F1F5F9; color: #334155; border-color: #CBD5E1; }
+.svc-cat-tag.support { background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE; }
+
+/* Category-specific decent subtle tints - dark mode */
+:root[data-theme="dark"] .svc-cat-tag.build { background: rgba(59, 130, 246, 0.16); color: #93C5FD; border-color: rgba(147, 197, 253, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.quality { background: rgba(139, 92, 246, 0.16); color: #DDD6FE; border-color: rgba(221, 214, 254, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.gtm { background: rgba(0, 180, 138, 0.16); color: #6EE7B7; border-color: rgba(110, 231, 183, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.signal { background: rgba(245, 158, 11, 0.16); color: #FDE68A; border-color: rgba(253, 230, 138, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.capital, :root[data-theme="dark"] .svc-cat-tag.ai { background: rgba(16, 185, 129, 0.16); color: #34D399; border-color: rgba(52, 211, 153, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.people { background: rgba(99, 102, 241, 0.16); color: #A5B4FC; border-color: rgba(99, 102, 241, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.support { background: rgba(59, 130, 246, 0.16); color: #93C5FD; border-color: rgba(147, 197, 253, 0.3); }
+
+/* Right-aligned status pill inside card top row */
+.svc-status-pill,
+.service-deck-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+.svc-status-pill.live, .service-deck-badge.live { color: #047857; background: #ECFDF5; border-color: #A7F3D0; }
+.svc-status-pill.beta, .service-deck-badge.beta { color: #B45309; background: #FFFBEB; border-color: #FDE68A; }
+.svc-status-pill.new, .service-deck-badge.new { color: #1D4ED8; background: #EFF6FF; border-color: #BFDBFE; }
+
+:root[data-theme="dark"] .svc-status-pill.live, :root[data-theme="dark"] .service-deck-badge.live { color: #34D399; background: rgba(0, 180, 138, 0.16); border-color: rgba(52, 211, 153, 0.3); }
+:root[data-theme="dark"] .svc-status-pill.beta, :root[data-theme="dark"] .service-deck-badge.beta { color: #FDE68A; background: rgba(245, 158, 11, 0.16); border-color: rgba(253, 230, 138, 0.3); }
+:root[data-theme="dark"] .svc-status-pill.new, :root[data-theme="dark"] .service-deck-badge.new { color: #93C5FD; background: rgba(59, 130, 246, 0.16); border-color: rgba(147, 197, 253, 0.3); }
+
+.svc-plan-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+.svc-plan-tag svg {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.svc-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.svc-mini-icon,
+.service-deck-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #FFF;
+  flex-shrink: 0;
+  position: relative;
+  background: var(--icon-gradient, linear-gradient(135deg, #10B981 0%, #06B6D4 100%));
+  box-shadow: 0 4px 12px -2px var(--icon-bloom, rgba(16, 185, 129, 0.35)), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.svc-mini-icon i, .svc-mini-icon svg,
+.service-deck-icon i, .service-deck-icon svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+.svc-card:hover .svc-mini-icon,
+.service-deck-card:hover .svc-mini-icon,
+.service-deck-card:hover .service-deck-icon {
+  transform: scale(1.1) translateY(-1px);
+  box-shadow: 0 8px 18px -2px var(--icon-bloom, rgba(16, 185, 129, 0.5)), inset 0 1px 1.5px rgba(255, 255, 255, 0.65);
+}
+
+.svc-card h3,
+.service-deck-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.svc-card p.svc-desc,
+.service-deck-desc {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* Category Filter Pills in Registry */
+.category-pill-tray {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.category-pill-btn {
+  padding: 7px 15px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.category-pill-btn:hover {
+  background: var(--bg-subtle-2);
+  color: var(--text-main);
+}
+.category-pill-btn.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+}
+:root[data-theme="dark"] .category-pill-btn.active {
+  background: rgba(0, 179, 137, 0.2);
+  color: #34D399;
+  border-color: rgba(0, 179, 137, 0.4);
+}
+
+/* Filter bar & Dropdown in Services Registry */
+.services-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  position: relative;
+  z-index: 30;
+}
+.services-filter-bar .grow { flex: 1; }
+.services-filter-dropdown-wrap { position: relative; }
+.services-filter-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+.services-filter-trigger-btn i { width: 14px; height: 14px; color: var(--text-muted); transition: color 0.15s; }
+.services-filter-trigger-btn:hover { background: var(--bg-subtle); border-color: var(--line-strong); }
+.services-filter-trigger-btn:hover i { color: var(--text-main); }
+.services-filter-trigger-btn.open { border-color: var(--emerald); box-shadow: 0 0 0 3px var(--emerald-subtle); }
+.services-filter-trigger-btn.open .filter-chevron { transform: rotate(180deg); }
+.services-filter-active-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--bg-subtle-2);
+  color: var(--text-muted);
+  transition: all 0.15s;
+}
+.services-filter-trigger-btn.has-filter .services-filter-active-pill {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+}
+:root[data-theme="dark"] .services-filter-trigger-btn.has-filter .services-filter-active-pill {
+  background: rgba(0, 180, 138, 0.2);
+  color: #34D399;
+}
+
+.services-filter-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 280px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.04);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 100;
+  animation: popFade 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.services-filter-dropdown-menu[hidden] {
+  display: none !important;
+}
+.services-filter-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px 6px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 4px;
+}
+.services-filter-menu-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.services-filter-menu-title i { width: 12px; height: 12px; }
+.services-filter-reset-action {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+.services-filter-reset-action:hover { color: var(--text-main); background: var(--bg-subtle); }
+.services-filter-menu-items { display: flex; flex-direction: column; gap: 2px; }
+.services-filter-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-main);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: all 0.12s ease;
+}
+.services-filter-item:hover { background: var(--bg-subtle); }
+.services-filter-item.active { background: var(--emerald-subtle); color: var(--emerald-dark); font-weight: 600; }
+:root[data-theme="dark"] .services-filter-item.active { background: rgba(0, 180, 138, 0.2); color: #34D399; }
+.services-f-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; background: var(--text-muted); }
+.services-f-dot.rd { background: #2563EB; }
+.services-f-dot.audit { background: #D97706; }
+.services-f-dot.gtm { background: #7C3AED; }
+.services-f-dot.signal { background: #0284C7; }
+.services-f-dot.ai { background: var(--emerald); }
+.services-f-dot.people { background: #6366F1; }
+.services-f-dot.support { background: #0D9488; }
+.services-f-name { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.services-f-count { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); background: var(--bg-subtle-2); padding: 1px 6px; border-radius: 99px; }
+.services-f-check { width: 14px; height: 14px; color: var(--emerald); opacity: 0; transition: opacity 0.15s ease; }
+.services-filter-item.active .services-f-check { opacity: 1; }
+
+.services-active-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 10px;
+  background: var(--emerald-subtle);
+  border: 1px solid var(--emerald-light);
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--emerald-dark);
+}
+:root[data-theme="dark"] .services-active-filter-chip { background: rgba(0, 180, 138, 0.2); border-color: rgba(0, 180, 138, 0.4); color: #34D399; }
+.services-active-chip-clear { background: none; border: none; cursor: pointer; display: grid; place-items: center; color: var(--emerald-dark); padding: 2px; border-radius: 50%; }
+.services-active-chip-clear:hover { background: rgba(0, 180, 138, 0.2); }
+.services-active-chip-clear i { width: 12px; height: 12px; }
+
+.services-fsearch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: var(--bg-card);
+  color: var(--text-muted);
+  min-width: 240px;
+}
+.services-fsearch:focus-within { border-color: var(--emerald); box-shadow: 0 0 0 3px var(--emerald-subtle); }
+.services-fsearch input { border: 0; outline: 0; background: none; flex: 1; font-size: 13px; color: var(--text-main); }
+
+/* ─── INTEGRATED DASHBOARD PRODUCT JOURNEY SECTION ─── */
+/* ─── INTEGRATED DASHBOARD PRODUCT JOURNEY SECTION (REFINED EXECUTIVE LIFECYCLE FLOW) ─── */
+.journey-pipeline-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 24px 26px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.journey-pipeline-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.journey-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.journey-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.journey-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: var(--emerald-subtle);
+  border: 1px solid var(--emerald-light);
+  color: var(--emerald-dark);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.journey-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 0 2px rgba(0, 180, 138, 0.25);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.journey-pipeline-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+
+.journey-pipeline-sub {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+/* 8-Stage Interactive Timeline Rail - Sculpted & Connected */
+.journey-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+  position: relative;
+  align-items: stretch;
+}
+
+@media (max-width: 1200px) {
+  .journey-steps-grid {
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 14px;
+  }
+}
+@media (max-width: 640px) {
+  .journey-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.journey-step-btn {
+  padding: 14px 12px 12px;
+  border-radius: 14px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+  text-align: left;
+  min-height: 152px;
+  height: 152px;
+  box-sizing: border-box;
+}
+
+.journey-step-btn:hover {
+  background: var(--bg-card);
+  border-color: var(--line-strong);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+.journey-step-btn.active {
+  background: #FFFFFF;
+  border-color: var(--emerald);
+  box-shadow: 0 2px 8px rgba(0, 180, 138, 0.08);
+}
+
+:root[data-theme="dark"] .journey-step-btn.active {
+  background: #141E30;
+  border-color: var(--emerald);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.journey-step-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 20px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.journey-step-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-faint);
+  letter-spacing: 0.02em;
+}
+
+.journey-step-btn.active .journey-step-num {
+  color: var(--emerald-dark);
+}
+
+:root[data-theme="dark"] .journey-step-btn.active .journey-step-num {
+  color: var(--emerald);
+}
+
+.journey-step-chip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--bg-card);
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+}
+
+.journey-step-btn.active .journey-step-chip {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+}
+
+:root[data-theme="dark"] .journey-step-btn.active .journey-step-chip {
+  background: rgba(0, 214, 164, 0.15);
+  color: #34D399;
+  border-color: rgba(0, 214, 164, 0.3);
+}
+
+.journey-step-icon-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.journey-step-btn:hover .journey-step-icon-wrap {
+  border-color: var(--line-strong);
+  color: var(--text-main);
+}
+
+.journey-step-btn.active .journey-step-icon-wrap {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: rgba(0, 180, 138, 0.35);
+  box-shadow: 0 1px 3px rgba(0, 180, 138, 0.12);
+}
+
+:root[data-theme="dark"] .journey-step-btn.active .journey-step-icon-wrap {
+  background: rgba(0, 180, 138, 0.16);
+  color: #34D399;
+  border-color: rgba(0, 214, 164, 0.35);
+  box-shadow: none;
+}
+
+.journey-step-icon-wrap i,
+.journey-step-icon-wrap svg {
+  width: 18px;
+  height: 18px;
+}
+
+.journey-step-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.journey-step-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 3px;
+}
+
+.journey-step-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.35;
+  min-height: 29px;
+  max-height: 29px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.journey-step-btn.active .journey-step-name {
+  color: var(--text-main);
+}
+
+.journey-step-btn.active .journey-step-desc {
+  color: var(--text-secondary);
+}
+
+.journey-step-indicator {
+  display: none;
+}
+
+
+/* ─── COMMAND PALETTE (⌘K) ─── */
+.cmdk-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 14vh;
+  z-index: 200;
+}
+.cmdk-backdrop.open { display: flex; }
+.cmdk-card {
+  width: min(580px, 92vw);
+  background: var(--bg-card);
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.2);
+  overflow: hidden;
+}
+.cmdk-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+.cmdk-search-bar input {
+  flex: 1;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 14.5px;
+  color: var(--text-main);
+}
+.cmdk-results-list {
+  max-height: 380px;
+  overflow-y: auto;
+  padding: 8px;
+}
+.cmdk-group-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 8px 12px 4px;
+}
+.cmdk-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.cmdk-item-row.selected, .cmdk-item-row:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+}
+.cmdk-item-row .kbd { margin-left: auto; }
+
+/* Toast */
+.toast-pill {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--line-strong);
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 300;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+}
+:root[data-theme="dark"] .toast-pill {
+  background: #1B2337;
+  color: #F8FAFC;
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.toast-pill.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.toast-pill i { color: var(--emerald-accent); }
+
+.theme-sun-icon { display: none !important; }
+.theme-moon-icon { display: block !important; }
+:root[data-theme="dark"] .theme-sun-icon { display: block !important; color: #FDE047; }
+:root[data-theme="dark"] .theme-moon-icon { display: none !important; }
+
+/* ─── RESPONSIVE BREAKPOINTS ─── */
+@media (max-width: 1200px) {
+  .metrics-card-deck { grid-template-columns: repeat(2, 1fr); }
+  .bottom-cards-row { grid-template-columns: 1fr; }
+  .service-cards-deck-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 992px) {
+  .permanent-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    border-radius: 0;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 200;
+  }
+  .permanent-sidebar.mobile-open {
+    transform: translateX(0);
+    box-shadow: var(--shadow-drawer);
+  }
+  .sidebar-mobile-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(4px);
+    z-index: 199;
+  }
+  .sidebar-mobile-backdrop.show { display: block; }
+}
+@media (max-width: 820px) {
+  .canvas-wrapper { padding: 14px; flex-direction: column; }
+  .service-cards-deck-grid { grid-template-columns: 1fr; }
+  .page-headline-lead { font-size: 20px; }
+  .controls-pill-row { width: 100%; justify-content: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="canvas-wrapper">
+
+  <!-- ================= PERMANENT SIDEBAR NAVIGATION ================= -->
+  <div class="sidebar-mobile-backdrop" id="sidebarBackdrop"></div>
+  <aside class="permanent-sidebar" id="permanentSidebar" aria-label="Sidebar Navigation">
+    <!-- Brand Header -->
+    <div class="sidebar-header">
+      <a href="index.html" class="sidebar-brand-box" id="sidebarBrandBtn" title="Return to York Website" style="text-decoration:none">
+        <img src="logo-light.svg" alt="York.ie" class="sidebar-brand-logo logo-light-mode" height="28" />
+        <img src="logo-dark.svg" alt="York.ie" class="sidebar-brand-logo logo-dark-mode" height="28" />
+      </a>
+      <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" title="Toggle navigation collapse">
+        <i data-lucide="panel-left-close"></i>
+      </button>
+    </div>
+
+    <!-- Workspace Selector -->
+    <div class="sidebar-workspace-pill" id="sidebarWsBtn" title="Switch Workspace">
+      <div style="width:22px;height:22px;border-radius:6px;background:var(--emerald);color:#fff;display:grid;place-items:center;font-weight:700;font-size:11.5px">A</div>
+      <span style="font-weight:600;font-size:13px;flex:1;color:var(--text-main)">Acme Inc</span>
+      <span class="sidebar-ws-tag">PROD</span>
+      <i data-lucide="chevrons-up-down" style="width:13px;height:13px;color:var(--text-muted)"></i>
+    </div>
+
+    <!-- Top 4 Primary Navigation (Moved from Topbar to Sidebar) -->
+    <nav class="sidebar-primary-nav" id="sidebarPrimaryNav" aria-label="Main Navigation">
+      <button type="button" class="sidebar-main-nav-btn active" data-view="dashboard">
+        <i data-lucide="layout-grid"></i>
+        <span>Dashboard</span>
+      </button>
+      <button type="button" class="sidebar-main-nav-btn" data-view="journey">
+        <i data-lucide="activity"></i>
+        <span>Journey</span>
+      </button>
+      <button type="button" class="sidebar-main-nav-btn" data-view="services">
+        <i data-lucide="layers"></i>
+        <span>Services</span>
+      </button>
+      <button type="button" class="sidebar-main-nav-btn" data-view="capital">
+        <i data-lucide="database"></i>
+        <span>Capital</span>
+      </button>
+    </nav>
+
+    <!-- Full Categorized Service Navigation (All 23 Services) -->
+    <div class="sidebar-nav-scroll" id="sidebarNavScroll"></div>
+
+    <!-- Compute / Fuel Tokens & User Info Footer -->
+    <div class="sidebar-footer">
+      <div class="sidebar-compute-meter" id="sidebarFuelBtn" title="View token compute details">
+        <div class="sidebar-compute-top">
+          <span style="display:inline-flex;align-items:center;gap:5px"><i data-lucide="zap" style="width:12px;height:12px;color:var(--emerald)"></i> Fuel Compute</span>
+          <span class="mono" style="color:var(--emerald-dark)">61% used</span>
+        </div>
+        <div class="sidebar-compute-bar"><i></i></div>
+        <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--text-muted);margin-top:5px">
+          <span>152.4K / 250K tokens</span>
+          <span>42/60 seats</span>
+        </div>
+      </div>
+
+      <div class="sidebar-user-tile" id="sidebarUserTile" title="User Settings">
+        <div class="sidebar-user-avatar">AK</div>
+        <div style="flex:1;min-width:0">
+          <b style="font-size:12px;display:block;line-height:1.2;color:var(--text-main)">Alex Kim</b>
+          <small style="font-size:11px;color:var(--text-muted)">Admin &amp; Founder</small>
+        </div>
+        <i data-lucide="chevron-right" style="width:14px;height:14px;color:var(--text-muted)"></i>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN DESK CANVAS ================= -->
+  <main class="desk-canvas" id="mainDesk">
+
+    <!-- 1. Floating Top Navigation Bar (Left Crumb, Center Switcher, Right Tools) -->
+    <!-- 1. Floating Top Navigation Bar (Single Unified Rounded Dock Capsule) -->
+    <header class="floating-topbar">
+      <!-- Left: Breadcrumb + Theme Switcher -->
+      <div class="topbar-nav-group">
+        <div class="topbar-breadcrumb">
+          <span class="topbar-crumb-org">Acme Inc</span>
+          <span class="topbar-crumb-slash">/</span>
+          <span class="topbar-crumb-view" id="topbarCurrentView">Dashboard</span>
+        </div>
+
+        <div class="topbar-v-divider" aria-hidden="true"></div>
+
+        <!-- Theme Version Switcher -->
+        <div class="version-switch-pill" role="navigation" aria-label="Console version">
+          <span class="version-switch-lbl">Console:</span>
+          <a href="dashboard-v1.html" class="v-tab-btn">
+            v1
+          </a>
+          <a href="dashboard.html" class="v-tab-btn">
+            v2
+          </a>
+          <a href="dashboard-v3.html" class="v-tab-btn active">
+            v3
+          </a>
+        </div>
+      </div>
+
+      <!-- Center-Right: Wide Search Bar (Generous width, text never overlaps) -->
+      <button class="top-search-pill" id="topSearchBtn" type="button" aria-label="Search or run command (⌘K)">
+        <div class="top-search-inner">
+          <i data-lucide="search" aria-hidden="true"></i>
+          <span class="top-search-text">Search services, actions, initiatives…</span>
+        </div>
+        <kbd class="top-search-kbd">⌘K</kbd>
+      </button>
+
+      <!-- Right Action Cluster: Dark/Light, Bell, Avatar -->
+      <div class="topbar-actions-group">
+        <button class="topbar-action-btn" id="themeSwitchBtn" type="button" aria-label="Toggle Color Theme" title="Toggle dark/light mode">
+          <svg class="theme-sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button class="topbar-action-btn" id="topBellBtn" type="button" aria-label="Notifications" title="Notifications">
+          <i data-lucide="bell" aria-hidden="true"></i>
+          <span class="topbar-bell-dot" aria-hidden="true"></span>
+        </button>
+
+        <div class="topbar-user-avatar" id="topUserBtn" role="button" tabindex="0" title="Alex Kim (Admin &amp; Founder)" aria-label="Alex Kim (Admin &amp; Founder)">
+          AK
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. Section Headline & Executive Persona Controls Row (Standardized 38px Height, 24px Single Line Title) -->
+    <section class="title-controls-row">
+      <div class="page-headline-wrap">
+        <h1 class="page-headline-lead" id="canvasTitle">Your Initiatives &amp; Operations</h1>
+      </div>
+
+      <div class="controls-pill-row">
+        <!-- Date Range Pill - 38px Height -->
+        <div class="date-pill">
+          <i data-lucide="calendar"></i>
+          <div class="date-pill-text">
+            <span class="date-pill-label">Sprint 24:</span>
+            <span class="date-pill-val">15 Oct – 29 Oct 2026</span>
+          </div>
+        </div>
+
+        <!-- Export CSV / Report Pill - 38px Height -->
+        <button class="export-pill-btn" id="exportBtn" type="button">
+          <span>Export Summary</span>
+          <i data-lucide="arrow-up-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 3. Dynamic Views Container -->
+    <div id="viewsHost">
+
+      <!-- ============ DASHBOARD OVERVIEW VIEW ============ -->
+      <div class="view-panel active" id="view-dashboard">
+        <!-- 4-Card Deck (Complete Telemetry: Initiatives, R&D Health, GTM Pulse, Runway) -->
+        <div class="metrics-card-deck">
+          <!-- Card 1 (Primary Accent Card) -->
+          <div class="deck-card primary-accent-card" data-nav="R&D Launchpad">
+            <div class="deck-card-top">
+              <span class="deck-card-label">Active Initiatives</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div class="deck-card-value">18</div>
+            <div class="deck-card-caption">
+              <b>10 R&amp;D</b>
+              <span class="dot-sep">·</span>
+              <span>5 GTM</span>
+              <span class="dot-sep">·</span>
+              <span>3 Finance</span>
+            </div>
+          </div>
+
+          <!-- Card 2 (R&D Health) -->
+          <div class="deck-card" data-nav="R&D Pulse">
+            <div class="deck-card-top">
+              <span class="deck-card-label">R&amp;D Health Score</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div class="deck-card-value">87<small>/100</small></div>
+            <div class="deck-card-caption">
+              <b>+4.2 pts</b>
+              <span class="dot-sep">·</span>
+              <span>Optimal velocity</span>
+            </div>
+          </div>
+
+          <!-- Card 3 (GTM Market Reach) -->
+          <div class="deck-card" data-nav="GTM Pulse">
+            <div class="deck-card-top">
+              <span class="deck-card-label">Market Reach</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div class="deck-card-value">184.2K</div>
+            <div class="deck-card-caption">
+              <b>+12.6%</b>
+              <span class="dot-sep">·</span>
+              <span>14.8K conversions</span>
+            </div>
+          </div>
+
+          <!-- Card 4 (Capital Runway) -->
+          <div class="deck-card" data-nav="Finance Pulse">
+            <div class="deck-card-top">
+              <span class="deck-card-label">Capital Runway</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div class="deck-card-value">22<small>mo</small></div>
+            <div class="deck-card-caption">
+              <b>$42K/mo burn</b>
+              <span class="dot-sep">·</span>
+              <span>Series A ready</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Executive Billing & Compute Resource Card -->
+        <div class="billing-executive-card">
+          <!-- Col 1: Plan & Subscription -->
+          <div class="billing-segment billing-plan-seg">
+            <div class="billing-plan-icon">
+              <i data-lucide="sparkles"></i>
+            </div>
+            <div class="billing-seg-content">
+              <div class="billing-plan-title-row">
+                <span class="billing-plan-name">Enterprise Scale</span>
+                <span class="billing-live-tag">ACTIVE</span>
+              </div>
+              <span class="billing-plan-meta">$1,840/mo · Auto-renews Nov 1</span>
+            </div>
+          </div>
+
+          <div class="billing-v-divider" aria-hidden="true"></div>
+
+          <!-- Col 2: Token Compute Meter -->
+          <div class="billing-segment billing-compute-seg">
+            <div class="billing-compute-head">
+              <div class="billing-compute-title">
+                <i data-lucide="zap"></i>
+                <span>Fuel Compute</span>
+              </div>
+              <div class="billing-compute-stat">
+                <span class="billing-pct-pill">61%</span>
+                <span class="billing-tokens-count">152.4K <span class="billing-tokens-total">/ 250K tokens</span></span>
+              </div>
+            </div>
+            <div class="billing-progress-track">
+              <div class="billing-progress-fill" style="width: 61%;"></div>
+            </div>
+          </div>
+
+          <div class="billing-v-divider" aria-hidden="true"></div>
+
+          <!-- Col 3: Seats & Tier -->
+          <div class="billing-segment billing-stats-seg">
+            <div class="billing-mini-stat">
+              <span class="billing-stat-caption">Seats</span>
+              <span class="billing-stat-value"><b class="mono">42</b><span class="billing-stat-max">/60</span></span>
+            </div>
+            <div class="billing-mini-stat">
+              <span class="billing-stat-caption">Compute Tier</span>
+              <span class="billing-tier-chip">Tier-1 High Perf</span>
+            </div>
+          </div>
+
+          <!-- Col 4: Action CTA -->
+          <div class="billing-action-seg">
+            <button type="button" class="billing-manage-btn" id="stripManageBtn">
+              <span>Manage Plan</span>
+              <i data-lucide="arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div style="height: 24px;"></div>
+
+        <!-- 2-Card Bottom Split (Initiatives Velocity & Cross-Service Signal) -->
+        <div class="bottom-cards-row">
+          <!-- Left Large Card: Initiatives Column Bars + Detailed Workstream List -->
+          <div class="feature-large-card">
+            <div class="feature-card-header">
+              <div class="feature-card-heading-box">
+                <h2 class="feature-card-title">Initiatives Velocity &amp; Delivery</h2>
+                <span class="feature-card-subtitle">Active delivery streams &amp; completion status</span>
+              </div>
+              <div class="feature-card-actions">
+                <button class="card-filter-pill active" type="button">Sprint 24</button>
+                <div class="card-filter-dropdown-wrap" id="initFilterWrap">
+                  <button class="card-round-icon-btn" id="filterInitBtn" type="button" aria-label="Filter" aria-expanded="false" aria-haspopup="true"><i data-lucide="sliders-horizontal"></i></button>
+                  <div class="card-filter-popover" id="filterInitPopover" hidden>
+                    <div class="filter-popover-head">
+                      <span class="filter-popover-title"><i data-lucide="sliders-horizontal"></i> Filter Initiatives</span>
+                      <button type="button" class="filter-popover-close" id="closeInitFilterBtn" aria-label="Close filter"><i data-lucide="x"></i></button>
+                    </div>
+                    <div class="filter-popover-section">
+                      <div class="filter-popover-subhead">Filter by Category</div>
+                      <div class="filter-popover-chips" id="initCatChips">
+                        <button type="button" class="popover-chip active" data-cat="all">All</button>
+                        <button type="button" class="popover-chip" data-cat="rd">R&D</button>
+                        <button type="button" class="popover-chip" data-cat="gtm">GTM</button>
+                        <button type="button" class="popover-chip" data-cat="capital">Capital</button>
+                        <button type="button" class="popover-chip" data-cat="audit">Quality</button>
+                        <button type="button" class="popover-chip" data-cat="people">People</button>
+                      </div>
+                    </div>
+                    <div class="filter-popover-section">
+                      <div class="filter-popover-subhead">Filter by Status</div>
+                      <div class="filter-popover-chips" id="initStatusChips">
+                        <button type="button" class="popover-chip active" data-status="all">All</button>
+                        <button type="button" class="popover-chip" data-status="On track">On track</button>
+                        <button type="button" class="popover-chip" data-status="In review">In review</button>
+                        <button type="button" class="popover-chip" data-status="Target 85%">Target 85%</button>
+                        <button type="button" class="popover-chip" data-status="Evidence req">Evidence req</button>
+                        <button type="button" class="popover-chip" data-status="In progress">In progress</button>
+                      </div>
+                    </div>
+                    <div class="filter-popover-foot">
+                      <button type="button" class="filter-popover-reset" id="resetInitFilterBtn">Reset</button>
+                      <button type="button" class="filter-popover-apply" id="applyInitFilterBtn">Done</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sculpted Vertical Column Pillars with Floating Value Tag (Pleasant Executive Palette) -->
+            <div class="chart-columns-visual" id="initiativesBarChart">
+              <!-- Bar 1: R&D york-api (72%) - Royal Blue -->
+              <div class="bar-column-item" data-nav="R&D Launchpad">
+                <div class="bar-column-pill-track">
+                  <div class="column-value-floating-tag col-rd">72%</div>
+                  <div class="bar-pillar col-rd" style="height: 72%;"></div>
+                </div>
+                <span class="bar-column-label">york-api</span>
+                <span class="bar-column-sub">R&amp;D</span>
+              </div>
+
+              <!-- Bar 2: GTM Q1 Brand (48%) - Soft Violet -->
+              <div class="bar-column-item" data-nav="GTM Launchpad">
+                <div class="bar-column-pill-track">
+                  <div class="column-value-floating-tag col-gtm">48%</div>
+                  <div class="bar-pillar col-gtm" style="height: 48%;"></div>
+                </div>
+                <span class="bar-column-label">Q1 Brand</span>
+                <span class="bar-column-sub">GTM</span>
+              </div>
+
+              <!-- Bar 3: Capital Series A (85%) - Ocean Sky -->
+              <div class="bar-column-item" data-nav="Investment Advisor">
+                <div class="bar-column-pill-track">
+                  <div class="column-value-floating-tag col-capital">85%</div>
+                  <div class="bar-pillar col-capital" style="height: 85%;"></div>
+                </div>
+                <span class="bar-column-label">Series A</span>
+                <span class="bar-column-sub">Capital</span>
+              </div>
+
+              <!-- Bar 4: Quality Audit AC (61%) - Warm Amber -->
+              <div class="bar-column-item" data-nav="Internal Audit Platform">
+                <div class="bar-column-pill-track">
+                  <div class="column-value-floating-tag col-audit">61%</div>
+                  <div class="bar-pillar col-audit" style="height: 61%;"></div>
+                </div>
+                <span class="bar-column-label">Audit AC</span>
+                <span class="bar-column-sub">Quality</span>
+              </div>
+
+              <!-- Bar 5: People LMS Cohort (34%) - Slate Steel -->
+              <div class="bar-column-item" data-nav="LMS">
+                <div class="bar-column-pill-track">
+                  <div class="column-value-floating-tag col-people">34%</div>
+                  <div class="bar-pillar col-people" style="height: 34%;"></div>
+                </div>
+                <span class="bar-column-label">LMS Cohort</span>
+                <span class="bar-column-sub">People</span>
+              </div>
+            </div>
+
+            <!-- Sub-section Header connecting analytics chart to detailed workstreams list -->
+            <div class="initiatives-sub-section-head">
+              <span class="sub-head-title">Delivery Workstreams</span>
+              <span class="sub-head-badge">5 in flight</span>
+            </div>
+
+            <!-- Integrated Detailed Active Initiatives Table Rows -->
+            <div class="initiatives-table-list" id="initiativesTableList"></div>
+          </div>
+
+          <!-- Right Large Card: Service Telemetry Spectrum + Live Activity Stream -->
+          <div class="feature-large-card">
+            <div class="feature-card-header">
+              <div class="feature-card-heading-box">
+                <h2 class="feature-card-title">Cross-Service Signal &amp; Telemetry</h2>
+                <span class="feature-card-subtitle">Activity telemetry &amp; real-time operational feed</span>
+              </div>
+              <div class="feature-card-actions">
+                <button class="card-filter-pill active" id="telemetryViewToggle" type="button">Live Stream</button>
+                <div class="card-filter-dropdown-wrap" id="streamFilterWrap">
+                  <button class="card-round-icon-btn" id="streamFilterBtn" type="button" aria-label="Settings" aria-expanded="false" aria-haspopup="true"><i data-lucide="sliders-horizontal"></i></button>
+                  <div class="card-filter-popover" id="streamFilterPopover" hidden>
+                    <div class="filter-popover-head">
+                      <span class="filter-popover-title"><i data-lucide="sliders-horizontal"></i> Filter Activity Stream</span>
+                      <button type="button" class="filter-popover-close" id="closeStreamFilterBtn" aria-label="Close filter"><i data-lucide="x"></i></button>
+                    </div>
+                    <div class="filter-popover-section">
+                      <div class="filter-popover-subhead">Filter by Event Type</div>
+                      <div class="filter-popover-chips" id="streamSeverityChips">
+                        <button type="button" class="popover-chip active" data-dot="all">All</button>
+                        <button type="button" class="popover-chip" data-dot="b">Engineering</button>
+                        <button type="button" class="popover-chip" data-dot="g">Success</button>
+                        <button type="button" class="popover-chip" data-dot="p">Advisory</button>
+                        <button type="button" class="popover-chip" data-dot="o">Warning</button>
+                        <button type="button" class="popover-chip" data-dot="r">Alerts</button>
+                      </div>
+                    </div>
+                    <div class="filter-popover-foot">
+                      <button type="button" class="filter-popover-reset" id="resetStreamFilterBtn">Reset</button>
+                      <button type="button" class="filter-popover-apply" id="applyStreamFilterBtn">Done</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Multi-Stream Operational Telemetry Spectrum (Pleasant Palette: Royal Blue, Iris, Sky, Warm Amber) -->
+            <div class="telemetry-spectrum-container">
+              <!-- Stream 1: Build & Ship (Royal Blue) -->
+              <div class="telemetry-stream-row" data-nav="R&D Launchpad">
+                <div class="tel-cat-label">
+                  <span class="tel-cat-ic col-rd"><i data-lucide="terminal"></i></span>
+                  <div class="tel-cat-text">
+                    <span class="tel-name">Build &amp; Ship</span>
+                    <span class="tel-role">R&amp;D Pipeline</span>
+                  </div>
+                </div>
+                <div class="tel-bars-spectrum col-rd" aria-label="12-day velocity spectrum">
+                  <span class="t-bar" style="height:12px;opacity:0.45"></span>
+                  <span class="t-bar" style="height:16px;opacity:0.6"></span>
+                  <span class="t-bar" style="height:14px;opacity:0.55"></span>
+                  <span class="t-bar" style="height:20px;opacity:0.85"></span>
+                  <span class="t-bar" style="height:24px;opacity:1"></span>
+                  <span class="t-bar" style="height:18px;opacity:0.75"></span>
+                  <span class="t-bar" style="height:22px;opacity:0.9"></span>
+                  <span class="t-bar" style="height:15px;opacity:0.65"></span>
+                  <span class="t-bar" style="height:20px;opacity:0.85"></span>
+                  <span class="t-bar" style="height:24px;opacity:1"></span>
+                  <span class="t-bar" style="height:26px;opacity:1"></span>
+                  <span class="t-bar active" style="height:28px"></span>
+                </div>
+                <div class="tel-metric-badge col-rd">
+                  <span class="tel-val mono">98.4%</span>
+                  <span class="tel-caption">uptime</span>
+                </div>
+              </div>
+
+              <!-- Stream 2: Quality & Audit (Iris / Violet) -->
+              <div class="telemetry-stream-row" data-nav="QA Usage Dashboard">
+                <div class="tel-cat-label">
+                  <span class="tel-cat-ic col-gtm"><i data-lucide="shield-check"></i></span>
+                  <div class="tel-cat-text">
+                    <span class="tel-name">Quality &amp; Audit</span>
+                    <span class="tel-role">Gates &amp; Evals</span>
+                  </div>
+                </div>
+                <div class="tel-bars-spectrum col-gtm" aria-label="12-day velocity spectrum">
+                  <span class="t-bar" style="height:14px;opacity:0.5"></span>
+                  <span class="t-bar" style="height:18px;opacity:0.7"></span>
+                  <span class="t-bar" style="height:20px;opacity:0.8"></span>
+                  <span class="t-bar" style="height:16px;opacity:0.65"></span>
+                  <span class="t-bar" style="height:22px;opacity:0.9"></span>
+                  <span class="t-bar" style="height:20px;opacity:0.85"></span>
+                  <span class="t-bar" style="height:24px;opacity:0.95"></span>
+                  <span class="t-bar" style="height:19px;opacity:0.75"></span>
+                  <span class="t-bar" style="height:22px;opacity:0.9"></span>
+                  <span class="t-bar" style="height:25px;opacity:1"></span>
+                  <span class="t-bar" style="height:22px;opacity:0.9"></span>
+                  <span class="t-bar active" style="height:28px"></span>
+                </div>
+                <div class="tel-metric-badge col-gtm">
+                  <span class="tel-val mono">100%</span>
+                  <span class="tel-caption">passed</span>
+                </div>
+              </div>
+
+              <!-- Stream 3: Go-to-Market (Sky / Cyan) -->
+              <div class="telemetry-stream-row" data-nav="GTM Launchpad">
+                <div class="tel-cat-label">
+                  <span class="tel-cat-ic col-capital"><i data-lucide="send"></i></span>
+                  <div class="tel-cat-text">
+                    <span class="tel-name">Go-to-Market</span>
+                    <span class="tel-role">Channels &amp; CRM</span>
+                  </div>
+                </div>
+                <div class="tel-bars-spectrum col-capital" aria-label="12-day velocity spectrum">
+                  <span class="t-bar" style="height:10px;opacity:0.4"></span>
+                  <span class="t-bar" style="height:15px;opacity:0.6"></span>
+                  <span class="t-bar" style="height:18px;opacity:0.75"></span>
+                  <span class="t-bar" style="height:14px;opacity:0.55"></span>
+                  <span class="t-bar" style="height:21px;opacity:0.85"></span>
+                  <span class="t-bar" style="height:24px;opacity:0.95"></span>
+                  <span class="t-bar" style="height:18px;opacity:0.7"></span>
+                  <span class="t-bar" style="height:22px;opacity:0.9"></span>
+                  <span class="t-bar" style="height:20px;opacity:0.8"></span>
+                  <span class="t-bar" style="height:26px;opacity:1"></span>
+                  <span class="t-bar" style="height:24px;opacity:0.95"></span>
+                  <span class="t-bar active" style="height:28px"></span>
+                </div>
+                <div class="tel-metric-badge col-capital">
+                  <span class="tel-val mono">184K</span>
+                  <span class="tel-caption">reach</span>
+                </div>
+              </div>
+
+              <!-- Stream 4: Signal & Capital (Warm Amber) -->
+              <div class="telemetry-stream-row" data-nav="Finance Pulse">
+                <div class="tel-cat-label">
+                  <span class="tel-cat-ic col-audit"><i data-lucide="trending-up"></i></span>
+                  <div class="tel-cat-text">
+                    <span class="tel-name">Signal &amp; Capital</span>
+                    <span class="tel-role">Runway &amp; Burn</span>
+                  </div>
+                </div>
+                <div class="tel-bars-spectrum col-audit" aria-label="12-day velocity spectrum">
+                  <span class="t-bar" style="height:15px;opacity:0.55"></span>
+                  <span class="t-bar" style="height:18px;opacity:0.7"></span>
+                  <span class="t-bar" style="height:16px;opacity:0.65"></span>
+                  <span class="t-bar" style="height:20px;opacity:0.8"></span>
+                  <span class="t-bar" style="height:22px;opacity:0.9"></span>
+                  <span class="t-bar" style="height:19px;opacity:0.75"></span>
+                  <span class="t-bar" style="height:21px;opacity:0.85"></span>
+                  <span class="t-bar" style="height:23px;opacity:0.95"></span>
+                  <span class="t-bar" style="height:20px;opacity:0.85"></span>
+                  <span class="t-bar" style="height:24px;opacity:0.95"></span>
+                  <span class="t-bar" style="height:22px;opacity:0.9"></span>
+                  <span class="t-bar active" style="height:28px"></span>
+                </div>
+                <div class="tel-metric-badge col-audit">
+                  <span class="tel-val mono">22mo</span>
+                  <span class="tel-caption">runway</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sub-section Header connecting telemetry spectrum to live stream feed -->
+            <div class="initiatives-sub-section-head">
+              <span class="sub-head-title">Live Operational Stream</span>
+              <span class="sub-head-badge"><span class="stream-pulse-dot" aria-hidden="true"></span>Live Feed</span>
+            </div>
+
+            <!-- Integrated Real-Time Activity Feed -->
+            <div class="telemetry-stream-feed" id="telemetryStreamFeed"></div>
+          </div>
+        </div>
+
+        <div style="height: 24px;"></div>
+
+        <!-- 3. Integrated Product Journey & Lifecycle Delivery Section (Spacious Cards, No Full-Width Lower Card) -->
+        <div class="journey-pipeline-card">
+          <div class="journey-pipeline-header">
+            <div class="journey-header-left">
+              <div class="journey-title-row">
+                <span class="journey-status-pill">
+                  <span class="journey-pulse-dot" aria-hidden="true"></span>
+                  <span>Lifecycle Flow</span>
+                </span>
+                <h2 class="journey-pipeline-title">Product Delivery Journey</h2>
+              </div>
+              <p class="journey-pipeline-sub">End-to-end operational gates from ideation to production telemetry</p>
+            </div>
+            <button class="card-filter-pill" data-view="journey" type="button">Full Lifecycle Architecture →</button>
+          </div>
+
+          <!-- 8 Lifecycle Stage Interactive Steps Rail -->
+          <div class="journey-steps-grid" id="dashboardJourneySteps"></div>
+        </div>
+
+        <div style="height: 24px;"></div>
+        <div class="full-width-deck-section">
+          <div class="full-section-head">
+            <div>
+              <h2 class="full-section-title">Core Services Registry</h2>
+              <p class="full-section-lede">Quick-launch your active engineering, quality, and capital workspaces</p>
+            </div>
+            <button class="card-filter-pill" data-view="services">Browse all 23 services →</button>
+          </div>
+          <div class="service-cards-deck-grid" id="coreFeaturedGrid"></div>
+        </div>
+      </div>
+
+      <!-- ============ PRODUCT JOURNEY VIEW ============ -->
+      <div class="view-panel" id="view-journey" style="display:none">
+        <div class="full-width-deck-section">
+          <div class="full-section-head">
+            <div>
+              <h2 class="full-section-title">Product Lifecycle Architecture</h2>
+              <p class="full-section-lede">The end-to-end company operating model across 8 delivery gates</p>
+            </div>
+          </div>
+          <div class="category-pill-tray" id="journeyPillTray"></div>
+          <div class="feature-large-card" id="journeyStageDetailBox" style="min-height:220px"></div>
+        </div>
+      </div>
+
+      <!-- ============ SERVICES CATALOG VIEW ============ -->
+      <div class="view-panel" id="view-services" style="display:none">
+        <div class="full-width-deck-section">
+          <div class="full-section-head">
+            <div>
+              <h2 class="full-section-title">All 23 Enterprise Services</h2>
+              <p class="full-section-lede">Direct registry of build, quality, marketing, intelligence, and people platforms</p>
+            </div>
+          </div>
+          <div class="services-filter-bar" id="servicesFilterBar">
+            <div class="services-filter-dropdown-wrap" id="servicesFilterDropdownWrap">
+              <button class="services-filter-trigger-btn" id="servicesFilterBtn" type="button" aria-expanded="false" aria-haspopup="true">
+                <i data-lucide="sliders-horizontal"></i>
+                <span>Filter</span>
+                <span class="services-filter-active-pill" id="servicesActiveBadge">All</span>
+                <i data-lucide="chevron-down" class="filter-chevron"></i>
+              </button>
+
+              <div class="services-filter-dropdown-menu" id="servicesFilterMenu" hidden>
+                <div class="services-filter-menu-head">
+                  <span class="services-filter-menu-title"><i data-lucide="sliders-horizontal"></i> Category</span>
+                  <div style="display:flex;align-items:center;gap:6px">
+                    <button type="button" class="services-filter-reset-action" id="servicesResetBtn">Reset</button>
+                    <button type="button" class="services-filter-close-btn" id="servicesCloseFilterBtn" aria-label="Close filter"><i data-lucide="x"></i></button>
+                  </div>
+                </div>
+                <div class="services-filter-menu-items" id="servicesCategoryPills" role="menu">
+                  <button class="category-pill-btn active services-filter-item" type="button" data-filter="all" role="menuitem">
+                    <span class="services-f-dot all"></span>
+                    <span class="services-f-name">All</span>
+                    <span class="services-f-count">23</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                  <button class="category-pill-btn services-filter-item" type="button" data-filter="Build &amp; Ship" role="menuitem">
+                    <span class="services-f-dot rd"></span>
+                    <span class="services-f-name">Build &amp; Ship</span>
+                    <span class="services-f-count">5</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                  <button class="category-pill-btn services-filter-item" type="button" data-filter="Quality &amp; Audit" role="menuitem">
+                    <span class="services-f-dot audit"></span>
+                    <span class="services-f-name">Quality &amp; Audit</span>
+                    <span class="services-f-count">4</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                  <button class="category-pill-btn services-filter-item" type="button" data-filter="Go-to-Market" role="menuitem">
+                    <span class="services-f-dot gtm"></span>
+                    <span class="services-f-name">GTM</span>
+                    <span class="services-f-count">3</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                  <button class="category-pill-btn services-filter-item" type="button" data-filter="Signal &amp; Analytics" role="menuitem">
+                    <span class="services-f-dot signal"></span>
+                    <span class="services-f-name">Signal &amp; Analytics</span>
+                    <span class="services-f-count">3</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                  <button class="category-pill-btn services-filter-item" type="button" data-filter="AI &amp; Advisory" role="menuitem">
+                    <span class="services-f-dot ai"></span>
+                    <span class="services-f-name">AI &amp; Advisory</span>
+                    <span class="services-f-count">2</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                  <button class="category-pill-btn services-filter-item" type="button" data-filter="People &amp; Learning" role="menuitem">
+                    <span class="services-f-dot people"></span>
+                    <span class="services-f-name">People &amp; Learning</span>
+                    <span class="services-f-count">3</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                  <button class="category-pill-btn services-filter-item" type="button" data-filter="Support" role="menuitem">
+                    <span class="services-f-dot support"></span>
+                    <span class="services-f-name">Support</span>
+                    <span class="services-f-count">3</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="services-active-filter-chip" id="servicesActiveChip" style="display:none">
+              <span class="services-active-chip-text" id="servicesActiveChipText"></span>
+              <button type="button" class="services-active-chip-clear" id="servicesClearChipBtn" aria-label="Clear active filter"><i data-lucide="x"></i></button>
+            </div>
+
+            <span class="grow"></span>
+            <label class="services-fsearch"><i data-lucide="search"></i><input type="text" id="servicesSearchInput" placeholder="Filter services…" autocomplete="off"></label>
+          </div>
+          <div class="service-cards-deck-grid" id="allServicesDeckGrid"></div>
+        </div>
+      </div>
+
+      <!-- ============ CAPITAL VIEW ============ -->
+      <div class="view-panel" id="view-capital" style="display:none">
+        <div class="full-width-deck-section">
+          <div class="full-section-head">
+            <div>
+              <h2 class="full-section-title">Capital, Runway &amp; Financial Signal</h2>
+              <p class="full-section-lede">Investment matching, data rooms, and unit economics</p>
+            </div>
+          </div>
+          <div class="metrics-card-deck">
+            <div class="deck-card primary-accent-card">
+              <div class="deck-card-top"><span class="deck-card-label">Runway Duration</span><div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div></div>
+              <div class="deck-card-value">22<small> months</small></div>
+              <div class="deck-card-caption">Stable at $42K/mo burn</div>
+            </div>
+            <div class="deck-card">
+              <div class="deck-card-top"><span class="deck-card-label">Investor Matches</span><div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div></div>
+              <div class="deck-card-value">14</div>
+              <div class="deck-card-caption">3 qualified in last 48h</div>
+            </div>
+            <div class="deck-card">
+              <div class="deck-card-top"><span class="deck-card-label">Data Room Docs</span><div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div></div>
+              <div class="deck-card-value">100%</div>
+              <div class="deck-card-caption">All 14 core exhibits audited</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ================= COMMAND PALETTE MODAL (⌘K) ================= -->
+<div class="cmdk-backdrop" id="cmdkModal">
+  <div class="cmdk-card">
+    <div class="cmdk-search-bar">
+      <i data-lucide="search"></i>
+      <input type="text" id="cmdkInput" placeholder="Type a service, initiative, or command…" autocomplete="off" />
+      <span class="kbd" style="font-size:11px;padding:2px 6px;border-radius:4px;border:1px solid var(--line)">ESC</span>
+    </div>
+    <div class="cmdk-results-list" id="cmdkResults"></div>
+  </div>
+</div>
+
+<!-- Toast Notice -->
+<div class="toast-pill" id="toastPill">
+  <i data-lucide="check"></i>
+  <span id="toastText"></span>
+</div>
+
+<script>
+/* ——— DATA REPOSITORY ——— */
+const CATEGORIES = [
+  { name:'Build & Ship', services:[
+    { name:'R&D Launchpad', desc:'AI-native fullstack product development platform.', icon:'rocket', status:'live' },
+    { name:'Gerrit', desc:'Code review platform for structured peer review.', icon:'git-pull-request', status:'live' },
+    { name:'Design Library', desc:'Centralized design assets and component registry.', icon:'component', status:'live' },
+    { name:'PMT', desc:'Project management for R&D and GTM initiatives.', icon:'square-kanban', status:'live' },
+  ]},
+  { name:'Quality & Audit', services:[
+    { name:'QA Usage Dashboard', desc:'Playwright run analytics across every project.', icon:'flask-conical', status:'live' },
+    { name:'Internal Audit Platform', desc:'Structured internal auditing across controls.', icon:'clipboard-check', status:'live' },
+    { name:'External Audit Platform', desc:'External compliance and regulatory readiness.', icon:'scale', status:'live' },
+    { name:'UI/UX Audit Platform', desc:'UI/UX auditing against design guidelines.', icon:'scan-eye', status:'beta' },
+    { name:'Prowler', desc:'Cloud security posture scanning and compliance.', icon:'shield-alert', status:'live' },
+  ]},
+  { name:'Go-to-Market', services:[
+    { name:'GTM Launchpad', desc:'Plan and schedule campaigns across social + CRM.', icon:'megaphone', status:'live' },
+    { name:'GTM Pulse', desc:'Market performance — impressions, engagement, pipeline.', icon:'line-chart', status:'live' },
+  ]},
+  { name:'Signal & Analytics', services:[
+    { name:'R&D Pulse', desc:'Project health and engineering metrics tracking.', icon:'heart-pulse', status:'live' },
+    { name:'Finance Pulse', desc:'Burn, runway, unit economics, and initiative ROI.', icon:'circle-dollar-sign', status:'beta' },
+    { name:'Prompt Dashboard', desc:'AI prompt tracking, evaluation, and version analytics.', icon:'bot-message-square', status:'live' },
+  ]},
+  { name:'AI & Advisory', services:[
+    { name:'Fuel', desc:'AI advisor connected to Slack, Granola, and HubSpot.', icon:'brain-circuit', status:'live' },
+    { name:'Investment Advisor', desc:'Investor matching, updates, and data room management.', icon:'landmark', status:'new' },
+  ]},
+  { name:'People & Learning', services:[
+    { name:'Hub', desc:'HRMS and people management, teams, and projects.', icon:'building-2', status:'live' },
+    { name:'LMS', desc:'Learning management system for onboarding & training.', icon:'book-open', status:'live' },
+    { name:'Assessment Platform', desc:'Org-wide assessments and skill tracking.', icon:'clipboard-list', status:'live' },
+    { name:'Walk in Drive', desc:'Recruitment event platform for walk-in hiring.', icon:'door-open', status:'live' },
+    { name:'Internship Drive', desc:'Internship recruitment and program management.', icon:'backpack', status:'live' },
+  ]},
+  { name:'Support', services:[
+    { name:'Support Ticket', desc:'Unified ticketing across every product and team.', icon:'life-buoy', status:'live' },
+    { name:'Survey Ticket', desc:'Survey and feedback for internal and external users.', icon:'messages-square', status:'live' },
+  ]},
+];
+
+CATEGORIES.forEach(c => {
+  const slug = c.name.toLowerCase().includes('build') ? 'build' :
+               c.name.toLowerCase().includes('quality') ? 'quality' :
+               c.name.toLowerCase().includes('market') ? 'gtm' :
+               c.name.toLowerCase().includes('signal') ? 'signal' :
+               c.name.toLowerCase().includes('ai') ? 'capital' :
+               c.name.toLowerCase().includes('people') ? 'people' : 'support';
+  c.slug = slug;
+  c.services.forEach(s => {
+    s.catName = c.name;
+    s.catSlug = slug;
+  });
+});
+
+const CATEGORY_STYLES = {
+  build: {
+    gradient: 'linear-gradient(135deg, #0284C7 0%, #06B6D4 50%, #10B981 100%)',
+    bloom: 'rgba(6, 182, 212, 0.35)',
+  },
+  quality: {
+    gradient: 'linear-gradient(135deg, #0284C7 0%, #06B6D4 45%, #10B981 100%)',
+    bloom: 'rgba(6, 182, 212, 0.35)',
+  },
+  gtm: {
+    gradient: 'linear-gradient(135deg, #0D9488 0%, #10B981 45%, #6366F1 100%)',
+    bloom: 'rgba(139, 92, 246, 0.35)',
+  },
+  signal: {
+    gradient: 'linear-gradient(135deg, #F59E0B 0%, #D97706 45%, #EF4444 100%)',
+    bloom: 'rgba(245, 158, 11, 0.35)',
+  },
+  capital: {
+    gradient: 'linear-gradient(135deg, #059669 0%, #10B981 45%, #06B6D4 100%)',
+    bloom: 'rgba(16, 185, 129, 0.35)',
+  },
+  people: {
+    gradient: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%)',
+    bloom: 'rgba(139, 92, 246, 0.35)',
+  },
+  support: {
+    gradient: 'linear-gradient(135deg, #3B82F6 0%, #6366F1 50%, #8B5CF6 100%)',
+    bloom: 'rgba(99, 102, 241, 0.35)',
+  }
+};
+
+const allServices = CATEGORIES.flatMap(c => c.services);
+const svcMap = Object.fromEntries(allServices.map(s => [s.name, s]));
+const CORE_KEYS = ['R&D Launchpad', 'Fuel', 'GTM Launchpad', 'R&D Pulse', 'Investment Advisor', 'Hub'];
+
+const INITIATIVES = [
+  { name:'york-api v2',        sub:'R&D Launchpad · 6 contributors', tag:'R&D',     cls:'rd',      pct:72, svc:'R&D Launchpad' },
+  { name:'Q1 brand campaign',  sub:'GTM Launchpad · 3 channels',     tag:'GTM',     cls:'gtm',     pct:48, svc:'GTM Launchpad' },
+  { name:'Series A data room', sub:'Investment Advisor · 14 docs',   tag:'CAPITAL', cls:'capital', pct:85, svc:'Investment Advisor' },
+  { name:'Q1 internal audit',  sub:'Internal Audit · 32 controls',   tag:'AUDIT',   cls:'audit',   pct:61, svc:'Internal Audit Platform' },
+  { name:'Onboarding LMS',     sub:'LMS · 4 cohorts',                tag:'PEOPLE',  cls:'people',  pct:34, svc:'LMS' },
+];
+
+const RECENT_UPDATES = [
+  { dot:'b', title:'R&D Pulse score up 4.2 points',       sub:'Sprint 24 closed',        svc:'R&D Pulse',          time:'12m' },
+  { dot:'g', title:'3 posts scheduled for Oct 16',        sub:'LinkedIn, X, newsletter', svc:'GTM Launchpad',      time:'38m' },
+  { dot:'o', title:'onboarding-summary v14 evaluated',    sub:'120-case eval completed', svc:'Prompt Dashboard',   time:'1h' },
+  { dot:'g', title:'3 investor matches surfaced',         sub:'Series A criteria',       svc:'Investment Advisor', time:'2h' },
+  { dot:'r', title:'Control AC-14 evidence required',     sub:'Due Friday Oct 16',       svc:'Internal Audit Platform', time:'3h' },
+  { dot:'b', title:'4 new hires added to onboarding',     sub:'People operations',       svc:'Hub',                time:'5h' },
+];
+
+const STAGES = [
+  { n:'Ideate', d:'Research & framing', ic:'lightbulb', chip:'FUEL', p:'Research, frame, and pressure-test ideas. Fuel connects context from communication tools, documents, and prior iterations.', tools:['Fuel','Design Library'] },
+  { n:'Build', d:'Code & ship', ic:'code-2', chip:'R&D', p:'Ship in R&D Launchpad. Peer reviews flow via Gerrit, task tracking in PMT, and shared components from the Design Library.', tools:['R&D Launchpad','Gerrit','PMT','Design Library'] },
+  { n:'QA & Audit', d:'Quality gates', ic:'shield-check', chip:'QUALITY', p:'Automated end-to-end tests, internal audit controls, compliance gates, and cloud vulnerability scanning.', tools:['QA Usage Dashboard','Internal Audit Platform','External Audit Platform','UI/UX Audit Platform','Prowler'] },
+  { n:'Launch', d:'Campaigns & CRM', ic:'send', chip:'GTM', p:'Coordinate campaigns across social channels and CRM from a unified release calendar.', tools:['GTM Launchpad','Survey Ticket'] },
+  { n:'Measure', d:'Signal & metrics', ic:'gauge', chip:'SIGNAL', p:'Track sprint velocity, marketing conversions, and prompt accuracy with live telemetry.', tools:['R&D Pulse','GTM Pulse','Prompt Dashboard'] },
+  { n:'Finance', d:'Burn & economics', ic:'wallet', chip:'CAPITAL', p:'Understand unit economics, burn rate, and initiative ROI in one dashboard.', tools:['Finance Pulse'] },
+  { n:'Invest', d:'Investor updates', ic:'trending-up', chip:'CAPITAL', p:'Surface qualified investors, prepare investor updates, and manage data room materials.', tools:['Investment Advisor'] },
+  { n:'People', d:'Team & learning', ic:'users-round', chip:'HRMS', p:'Manage team rosters, onboarding modules, evaluations, and hiring programs.', tools:['Hub','LMS','Assessment Platform','Walk in Drive','Internship Drive'] },
+];
+
+/* ——— HELPERS ——— */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const renderIcons = () => { if (window.lucide) lucide.createIcons({ attrs:{ 'stroke-width':1.8 } }); };
+
+let toastTimer;
+function showToast(msg){
+  $('toastText').textContent = msg;
+  $('toastPill').classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => $('toastPill').classList.remove('show'), 2200);
+}
+
+/* ——— POPULATE PERMANENT SIDEBAR NAVIGATION (ALL 23 SERVICES) ——— */
+$('sidebarNavScroll').innerHTML = CATEGORIES.map(cat => `
+  <div class="sidebar-category-group">
+    <div class="sidebar-category-title">${esc(cat.name)}</div>
+    ${cat.services.map(s => `
+      <button type="button" class="sidebar-nav-item" data-nav="${esc(s.name)}">
+        <i data-lucide="${s.icon}"></i>
+        <span class="sidebar-nav-label">${esc(s.name)}</span>
+        ${s.status === 'new' ? '<span class="sidebar-badge new">NEW</span>' : ''}
+      </button>`).join('')}
+  </div>`).join('') + `
+  <div class="sidebar-category-group">
+    <div class="sidebar-category-title">Platform &amp; Tools</div>
+    <button type="button" class="sidebar-nav-item" data-soon="Connector Hub"><i data-lucide="cable"></i><span class="sidebar-nav-label">Connector Hub</span></button>
+    <button type="button" class="sidebar-nav-item" data-soon="Team &amp; Access"><i data-lucide="user-cog"></i><span class="sidebar-nav-label">Team &amp; Access</span></button>
+    <button type="button" class="sidebar-nav-item" data-soon="Billing &amp; Usage"><i data-lucide="receipt"></i><span class="sidebar-nav-label">Billing &amp; Usage</span></button>
+  </div>`;
+
+/* ——— POPULATE INITIATIVES LIST INSIDE LEFT CARD ——— */
+$('initiativesTableList').innerHTML = INITIATIVES.map(i => `
+  <div class="initiative-data-row" data-nav="${esc(i.svc)}">
+    <div class="init-title-box">
+      <b>${esc(i.name)}</b>
+      <small>${esc(i.sub)}</small>
+    </div>
+    <span class="init-tag-badge ${i.cls}">${i.tag}</span>
+    <div class="init-mini-bar">
+      <div class="init-bar-fill col-${i.cls}" style="height:100%;width:${i.pct}%;"></div>
+    </div>
+    <span class="init-pct-val">${i.pct}%</span>
+  </div>`).join('');
+
+/* ——— POPULATE TELEMETRY STREAM FEED INSIDE RIGHT CARD ——— */
+$('telemetryStreamFeed').innerHTML = RECENT_UPDATES.map(r => `
+  <div class="stream-event-item" data-nav="${esc(r.svc)}">
+    <span class="stream-dot ${r.dot}"></span>
+    <div class="stream-meta-box">
+      <b>${esc(r.title)}</b>
+      <small>${esc(r.sub)}</small>
+    </div>
+    <span class="stream-time-val">${r.time}</span>
+  </div>`).join('');
+
+/* ——— RENDER SERVICE TILES (MATCHING WEBSITE PRODUCT CARDS) ——— */
+function serviceCardMarkup(s){
+  if (!s) return '';
+  const st = s.status === 'new' ? 'NEW' : s.status === 'beta' ? 'BETA' : 'LIVE';
+  const catSlug = s.catSlug || 'build';
+  const catName = s.catName || 'Build & Ship';
+  const catStyle = CATEGORY_STYLES[catSlug] || CATEGORY_STYLES.build;
+  return `
+    <div class="svc-card service-deck-card" data-svc-name="${esc(s.name)}" role="button" tabindex="0">
+      <div class="svc-card-tag-row">
+        <span class="svc-cat-tag ${catSlug}">${esc(catName)}</span>
+        <span class="svc-status-pill ${s.status}">${st}</span>
+      </div>
+      
+      <div class="svc-plan-tag">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82zM7 7h.01"/>
+        </svg>
+        <span>Available on both plans</span>
+      </div>
+
+      <div class="svc-title-row">
+        <div class="svc-mini-icon" style="background: ${catStyle.gradient}; --icon-gradient: ${catStyle.gradient}; --icon-bloom: ${catStyle.bloom};">
+          <i data-lucide="${s.icon}"></i>
+        </div>
+        <h3 class="service-deck-name">${esc(s.name)}</h3>
+      </div>
+
+      <p class="svc-desc service-deck-desc">${esc(s.desc)}</p>
+    </div>`;
+}
+
+$('coreFeaturedGrid').innerHTML = CORE_KEYS.map(k => serviceCardMarkup(svcMap[k])).join('');
+$('allServicesDeckGrid').innerHTML = allServices.map(serviceCardMarkup).join('');
+renderIcons();
+
+/* ——— RENDER JOURNEY TABS & DETAILS (VIEW & DASHBOARD) ——— */
+$('journeyPillTray').innerHTML = STAGES.map((s, i) => `
+  <button class="category-pill-btn${i===0?' active':''}" data-stage="${i}">
+    0${i+1}. ${esc(s.n)}
+  </button>`).join('');
+
+function renderJourneyDetail(idx){
+  const s = STAGES[idx];
+  $('journeyStageDetailBox').innerHTML = `
+    <div style="margin-bottom:12px">
+      <span class="card-filter-pill" style="margin-bottom:8px;display:inline-block">Stage 0${idx+1} · ${s.chip}</span>
+      <h3 style="font-size:20px;font-weight:700;color:var(--text-main);margin-bottom:4px">${esc(s.n)} — ${esc(s.d)}</h3>
+      <p style="font-size:14px;color:var(--text-secondary);max-width:760px;line-height:1.5">${esc(s.p)}</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      ${s.tools.map(t => `<button class="card-filter-pill" data-nav="${esc(t)}">${esc(t)} →</button>`).join('')}
+    </div>`;
+  renderIcons();
+}
+renderJourneyDetail(0);
+
+document.querySelectorAll('#journeyPillTray .category-pill-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#journeyPillTray .category-pill-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderJourneyDetail(+btn.dataset.stage);
+  });
+});
+
+/* ——— RENDER INTEGRATED PRODUCT JOURNEY ON MAIN DASHBOARD (REFINED EXECUTIVE 8 CARDS) ——— */
+function renderDashboardJourney(activeIdx = 1){
+  const stepsContainer = $('dashboardJourneySteps');
+  if (!stepsContainer) return;
+
+  stepsContainer.innerHTML = STAGES.map((s, idx) => `
+    <button type="button" class="journey-step-btn${idx === activeIdx ? ' active' : ''}" data-dash-stage="${idx}" aria-label="Gate 0${idx+1}: ${esc(s.n)}, ${esc(s.d)}. Category ${s.chip}.">
+      <div class="journey-step-top">
+        <span class="journey-step-num">0${idx+1}</span>
+        <span class="journey-step-chip">${s.chip}</span>
+      </div>
+      <div class="journey-step-icon-wrap" aria-hidden="true">
+        <i data-lucide="${s.ic}"></i>
+      </div>
+      <div class="journey-step-content">
+        <span class="journey-step-name">${esc(s.n)}</span>
+        <span class="journey-step-desc">${esc(s.d)}</span>
+      </div>
+      <div class="journey-step-indicator" aria-hidden="true"></div>
+    </button>
+  `).join('');
+  renderIcons();
+}
+renderDashboardJourney(1); // Default to Stage 02: Build (active delivery)
+
+document.addEventListener('click', e => {
+  const step = e.target.closest('[data-dash-stage]');
+  if (step){
+    const idx = parseInt(step.dataset.dashStage, 10);
+    renderDashboardJourney(idx);
+    showToast(`Gate 0${idx+1}: ${STAGES[idx].n} selected`);
+  }
+});
+
+/* ——— ROLE PERSPECTIVE SWITCHER (FOUNDER, SALES, MANAGER, TECH) ——— */
+const ROLE_DATA = {
+  founder: {
+    title: 'Executive Overview &amp; Company Health',
+    metrics: [
+      { label:'Active Initiatives', val:'18', sub:'10 R&D · 5 GTM · 3 Finance', nav:'R&D Launchpad', cls:'primary-accent-card' },
+      { label:'R&D Health Score', val:'87<small>/100</small>', sub:'+4.2 pts · Optimal velocity', nav:'R&D Pulse' },
+      { label:'Market Reach', val:'184.2K', sub:'+12.6% · 14.8K conversions', nav:'GTM Pulse' },
+      { label:'Capital Runway', val:'22<small>mo</small>', sub:'$42K/mo burn · Series A ready', nav:'Finance Pulse' }
+    ],
+    journeyGate: 1 // Build
+  },
+  sales: {
+    title: 'GTM Pipeline &amp; Revenue Conversion',
+    metrics: [
+      { label:'Pipeline Velocity', val:'$480K', sub:'14 deals in active review', nav:'GTM Launchpad', cls:'primary-accent-card' },
+      { label:'Marketing Reach', val:'184.2K', sub:'+18.4% QoQ organic growth', nav:'GTM Pulse' },
+      { label:'Active Campaigns', val:'8<small> live</small>', sub:'LinkedIn, X, Webinar series', nav:'GTM Launchpad' },
+      { label:'Lead-to-Close', val:'24<small> days</small>', sub:'-6 days vs Q3 benchmark', nav:'Finance Pulse' }
+    ],
+    journeyGate: 3 // Launch
+  },
+  manager: {
+    title: 'Sprint Velocity &amp; Delivery Quality Gates',
+    metrics: [
+      { label:'Sprint Delivery', val:'92%', sub:'38/41 story points closed', nav:'PMT', cls:'primary-accent-card' },
+      { label:'Blocked Tasks', val:'2', sub:'Under peer review in Gerrit', nav:'Gerrit' },
+      { label:'Quality Pass Rate', val:'99.4%', sub:'1,480 automated tests clear', nav:'QA Usage Dashboard' },
+      { label:'Team Capacity', val:'84%', sub:'6 cohorts across engineering', nav:'Hub' }
+    ],
+    journeyGate: 2 // QA & Audit
+  },
+  tech: {
+    title: 'Engineering Health &amp; Cloud Infrastructure',
+    metrics: [
+      { label:'Code Commits', val:'412', sub:'48 pull requests merged', nav:'R&D Launchpad', cls:'primary-accent-card' },
+      { label:'Test Coverage', val:'94.8%', sub:'Playwright E2E suite', nav:'QA Usage Dashboard' },
+      { label:'Audit Controls', val:'32/32', sub:'SOC2 & ISO 27001 aligned', nav:'Internal Audit Platform' },
+      { label:'AI Model Latency', val:'184<small>ms</small>', sub:'Prompt Dashboard v14 eval', nav:'Prompt Dashboard' }
+    ],
+    journeyGate: 1 // Build
+  }
+};
+
+let currentRole = 'founder';
+
+function setRolePerspective(roleKey){
+  currentRole = roleKey;
+  const data = ROLE_DATA[roleKey] || ROLE_DATA.founder;
+  
+  // Update role buttons
+  document.querySelectorAll('.role-pill-btn').forEach(btn => {
+    const isAct = btn.dataset.role === roleKey;
+    btn.classList.toggle('active', isAct);
+  });
+
+  // Update Section Title (single line, 24px)
+  $('canvasTitle').innerHTML = data.title;
+
+  // Update Metric Deck
+  const deck = document.querySelector('.metrics-card-deck');
+  if (deck){
+    deck.innerHTML = data.metrics.map(m => `
+      <div class="deck-card ${m.cls || ''}" data-nav="${esc(m.nav)}">
+        <div class="deck-card-top">
+          <span class="deck-card-label">${esc(m.label)}</span>
+          <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+        </div>
+        <div class="deck-card-value">${m.val}</div>
+        <div class="deck-card-caption">
+          <b>${m.sub.split('·')[0]}</b>
+          ${m.sub.includes('·') ? `<span class="dot-sep">·</span><span>${m.sub.split('·').slice(1).join('·')}</span>` : ''}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Update Journey focus
+  renderDashboardJourney(data.journeyGate);
+  renderIcons();
+  showToast(`View switched to ${roleKey.toUpperCase()} perspective`);
+}
+
+document.querySelectorAll('.role-pill-btn').forEach(btn => {
+  btn.addEventListener('click', () => setRolePerspective(btn.dataset.role));
+});
+
+/* ——— SERVICE REGISTRY FILTERING & SEARCH ——— */
+function updateServicesFilterUI(filterName, labelText) {
+  const isAll = !filterName || filterName === 'all';
+  const badge = $('servicesActiveBadge');
+  const chip = $('servicesActiveChip');
+  const chipTxt = $('servicesActiveChipText');
+  const btn = $('servicesFilterBtn');
+  
+  if (badge) badge.textContent = isAll ? 'All' : labelText;
+  if (btn) btn.classList.toggle('has-filter', !isAll);
+  if (chip && chipTxt) {
+    if (isAll) {
+      chip.style.display = 'none';
+    } else {
+      chip.style.display = 'inline-flex';
+      chipTxt.textContent = labelText;
+    }
+  }
+}
+
+function applyServicesFilter2() {
+  const activeBtn = document.querySelector('#servicesCategoryPills .category-pill-btn.active');
+  const filter = activeBtn?.dataset.filter || 'all';
+  const q = ($('servicesSearchInput')?.value || '').toLowerCase().trim();
+  
+  const base = (filter === 'all') 
+    ? allServices 
+    : (CATEGORIES.find(c => c.name === filter)?.services || allServices);
+    
+  const filtered = q ? base.filter(s => s.name.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q)) : base;
+  $('allServicesDeckGrid').innerHTML = filtered.map(serviceCardMarkup).join('');
+  renderIcons();
+}
+
+/* ——— FILTER POPOVER WIRING: INITIATIVES, TELEMETRY & SERVICES ——— */
+
+// 1. INITIATIVES FILTER
+let activeInitCat = 'all';
+let activeInitStatus = 'all';
+
+function renderInitiativesList() {
+  const listEl = $('initiativesTableList');
+  if (!listEl) return;
+  const filtered = INITIATIVES.filter(i => {
+    const matchCat = (activeInitCat === 'all') || (i.cls === activeInitCat);
+    const matchStatus = (activeInitStatus === 'all') || (i.tag === activeInitStatus || (i.statusBadge && i.statusBadge === activeInitStatus));
+    return matchCat && matchStatus;
+  });
+
+  if (filtered.length === 0) {
+    listEl.innerHTML = `<div style="padding:24px 16px;text-align:center;color:var(--text-muted);font-size:13px">No initiatives match selected filters</div>`;
+  } else {
+    listEl.innerHTML = filtered.map(i => `
+      <div class="initiative-data-row" data-nav="${esc(i.svc)}">
+        <div class="init-title-box">
+          <b>${esc(i.name)}</b>
+          <small>${esc(i.sub)}</small>
+        </div>
+        <span class="init-tag-badge ${i.cls}">${i.tag}</span>
+        <div class="init-mini-bar">
+          <div class="init-bar-fill col-${i.cls}" style="height:100%;width:${i.pct}%;"></div>
+        </div>
+        <span class="init-pct-val">${i.pct}%</span>
+      </div>`).join('');
+  }
+
+  // Also adjust opacity of bar chart pillars to reflect category filter
+  const chartItems = document.querySelectorAll('#initiativesBarChart .bar-column-item');
+  chartItems.forEach(item => {
+    if (activeInitCat === 'all') {
+      item.style.opacity = '1';
+      item.style.filter = 'none';
+    } else {
+      const isMatch = item.querySelector(`.col-${activeInitCat}`);
+      item.style.opacity = isMatch ? '1' : '0.28';
+      item.style.filter = isMatch ? 'none' : 'grayscale(30%)';
+    }
+  });
+
+  // Update button active state indicator
+  const hasFilter = activeInitCat !== 'all' || activeInitStatus !== 'all';
+  $('filterInitBtn')?.classList.toggle('has-filter', hasFilter);
+  renderIcons();
+}
+
+const fInitBtn = $('filterInitBtn');
+const fInitPopover = $('filterInitPopover');
+const closeInitBtn = $('closeInitFilterBtn');
+const resetInitBtn = $('resetInitFilterBtn');
+const applyInitBtn = $('applyInitFilterBtn');
+
+if (fInitBtn && fInitPopover) {
+  // Toggle filter on button click
+  fInitBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const willOpen = fInitPopover.hidden;
+    // Close other popovers first
+    if (streamFilterPopover) streamFilterPopover.hidden = true;
+    if (sFilterMenu) sFilterMenu.hidden = true;
+    $('streamFilterBtn')?.classList.remove('open');
+    $('servicesFilterBtn')?.classList.remove('open');
+
+    fInitPopover.hidden = !willOpen;
+    fInitBtn.classList.toggle('open', willOpen);
+    fInitBtn.setAttribute('aria-expanded', String(willOpen));
+    renderIcons();
+  });
+
+  // Explicit close button
+  closeInitBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    fInitPopover.hidden = true;
+    fInitBtn.classList.remove('open');
+    fInitBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  // Done button
+  applyInitBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    fInitPopover.hidden = true;
+    fInitBtn.classList.remove('open');
+    fInitBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  // Reset button
+  resetInitBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    activeInitCat = 'all';
+    activeInitStatus = 'all';
+    document.querySelectorAll('#initCatChips .popover-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === 'all'));
+    document.querySelectorAll('#initStatusChips .popover-chip').forEach(c => c.classList.toggle('active', c.dataset.status === 'all'));
+    renderInitiativesList();
+  });
+
+  // Category chip selection
+  document.querySelectorAll('#initCatChips .popover-chip').forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('#initCatChips .popover-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeInitCat = chip.dataset.cat || 'all';
+      renderInitiativesList();
+    });
+  });
+
+  // Status chip selection
+  document.querySelectorAll('#initStatusChips .popover-chip').forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('#initStatusChips .popover-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeInitStatus = chip.dataset.status || 'all';
+      renderInitiativesList();
+    });
+  });
+
+  // Outside click dismiss
+  document.addEventListener('click', (e) => {
+    if (!fInitPopover.hidden && !e.target.closest('#initFilterWrap')) {
+      fInitPopover.hidden = true;
+      fInitBtn.classList.remove('open');
+      fInitBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Escape key dismiss
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !fInitPopover.hidden) {
+      fInitPopover.hidden = true;
+      fInitBtn.classList.remove('open');
+      fInitBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+// 2. TELEMETRY STREAM FEED FILTER
+let activeStreamDot = 'all';
+
+function renderStreamFeed() {
+  const feedEl = $('telemetryStreamFeed');
+  if (!feedEl) return;
+  const filtered = RECENT_UPDATES.filter(r => {
+    return activeStreamDot === 'all' || r.dot === activeStreamDot;
+  });
+
+  if (filtered.length === 0) {
+    feedEl.innerHTML = `<div style="padding:24px 16px;text-align:center;color:var(--text-muted);font-size:13px">No events match selected filter</div>`;
+  } else {
+    feedEl.innerHTML = filtered.map(r => `
+      <div class="stream-event-item" data-nav="${esc(r.svc)}">
+        <span class="stream-dot ${r.dot}"></span>
+        <div class="stream-meta-box">
+          <b>${esc(r.title)}</b>
+          <small>${esc(r.sub)}</small>
+        </div>
+        <span class="stream-time-val">${r.time}</span>
+      </div>`).join('');
+  }
+
+  const hasFilter = activeStreamDot !== 'all';
+  $('streamFilterBtn')?.classList.toggle('has-filter', hasFilter);
+  renderIcons();
+}
+
+const streamFilterBtn = $('streamFilterBtn');
+const streamFilterPopover = $('streamFilterPopover');
+const closeStreamFilterBtn = $('closeStreamFilterBtn');
+const resetStreamFilterBtn = $('resetStreamFilterBtn');
+const applyStreamFilterBtn = $('applyStreamFilterBtn');
+
+if (streamFilterBtn && streamFilterPopover) {
+  // Toggle filter on button click
+  streamFilterBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const willOpen = streamFilterPopover.hidden;
+    // Close other popovers first
+    if (fInitPopover) fInitPopover.hidden = true;
+    if (sFilterMenu) sFilterMenu.hidden = true;
+    $('filterInitBtn')?.classList.remove('open');
+    $('servicesFilterBtn')?.classList.remove('open');
+
+    streamFilterPopover.hidden = !willOpen;
+    streamFilterBtn.classList.toggle('open', willOpen);
+    streamFilterBtn.setAttribute('aria-expanded', String(willOpen));
+    renderIcons();
+  });
+
+  // Explicit close button
+  closeStreamFilterBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    streamFilterPopover.hidden = true;
+    streamFilterBtn.classList.remove('open');
+    streamFilterBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  // Done button
+  applyStreamFilterBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    streamFilterPopover.hidden = true;
+    streamFilterBtn.classList.remove('open');
+    streamFilterBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  // Reset button
+  resetStreamFilterBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    activeStreamDot = 'all';
+    document.querySelectorAll('#streamSeverityChips .popover-chip').forEach(c => c.classList.toggle('active', c.dataset.dot === 'all'));
+    renderStreamFeed();
+  });
+
+  // Severity chip selection
+  document.querySelectorAll('#streamSeverityChips .popover-chip').forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('#streamSeverityChips .popover-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeStreamDot = chip.dataset.dot || 'all';
+      renderStreamFeed();
+    });
+  });
+
+  // Outside click dismiss
+  document.addEventListener('click', (e) => {
+    if (!streamFilterPopover.hidden && !e.target.closest('#streamFilterWrap')) {
+      streamFilterPopover.hidden = true;
+      streamFilterBtn.classList.remove('open');
+      streamFilterBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Escape key dismiss
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !streamFilterPopover.hidden) {
+      streamFilterPopover.hidden = true;
+      streamFilterBtn.classList.remove('open');
+      streamFilterBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+// 3. SERVICES REGISTRY FILTER
+const sFilterBtn = $('servicesFilterBtn');
+const sFilterMenu = $('servicesFilterMenu');
+const sCloseFilterBtn = $('servicesCloseFilterBtn');
+
+if (sFilterBtn && sFilterMenu) {
+  sFilterBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = !sFilterMenu.hidden;
+    // Close other popovers
+    if (fInitPopover) fInitPopover.hidden = true;
+    if (streamFilterPopover) streamFilterPopover.hidden = true;
+    $('filterInitBtn')?.classList.remove('open');
+    $('streamFilterBtn')?.classList.remove('open');
+
+    sFilterMenu.hidden = open;
+    sFilterBtn.classList.toggle('open', !open);
+    sFilterBtn.setAttribute('aria-expanded', String(!open));
+    renderIcons();
+  });
+
+  // Explicit close button inside services filter menu
+  sCloseFilterBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    sFilterMenu.hidden = true;
+    sFilterBtn.classList.remove('open');
+    sFilterBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!sFilterMenu.hidden && !e.target.closest('#servicesFilterDropdownWrap')) {
+      sFilterMenu.hidden = true;
+      sFilterBtn.classList.remove('open');
+      sFilterBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !sFilterMenu.hidden) {
+      sFilterMenu.hidden = true;
+      sFilterBtn.classList.remove('open');
+      sFilterBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+document.querySelectorAll('#servicesCategoryPills .category-pill-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#servicesCategoryPills .category-pill-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const label = btn.querySelector('.services-f-name')?.textContent || btn.textContent.trim();
+    updateServicesFilterUI(btn.dataset.filter, label);
+    if (sFilterMenu) {
+      sFilterMenu.hidden = true;
+      sFilterBtn?.classList.remove('open');
+      sFilterBtn?.setAttribute('aria-expanded', 'false');
+    }
+    applyServicesFilter2();
+  });
+});
+
+$('servicesResetBtn')?.addEventListener('click', () => {
+  const allBtn = document.querySelector('#servicesCategoryPills .category-pill-btn[data-filter="all"]');
+  if (allBtn) allBtn.click();
+});
+$('servicesClearChipBtn')?.addEventListener('click', () => {
+  const allBtn = document.querySelector('#servicesCategoryPills .category-pill-btn[data-filter="all"]');
+  if (allBtn) allBtn.click();
+});
+$('servicesSearchInput')?.addEventListener('input', applyServicesFilter2);
+
+/* ——— NAVIGATION STATE ——— */
+const HEADLINES = {
+  dashboard: 'Your Initiatives &amp; Operations',
+  journey: 'Product Lifecycle &amp; Quality Gates',
+  services: 'Enterprise Registry &amp; 23 Live Services',
+  capital: 'Capital Runway &amp; Investor Signal'
+};
+const VIEW_NAMES = {
+  dashboard: 'Dashboard',
+  journey: 'Journey',
+  services: 'Services',
+  capital: 'Capital'
+};
+
+function switchView(name){
+  document.querySelectorAll('.view-panel').forEach(p => p.style.display = (p.id === 'view-' + name) ? 'block' : 'none');
+  document.querySelectorAll('.sidebar-main-nav-btn').forEach(b => b.classList.toggle('active', b.dataset.view === name));
+  document.querySelectorAll('.sidebar-nav-item').forEach(b => b.classList.toggle('active', b.dataset.nav === name));
+  $('canvasTitle').innerHTML = HEADLINES[name] || 'York Console';
+  const curView = $('topbarCurrentView');
+  if (curView) curView.textContent = VIEW_NAMES[name] || 'Dashboard';
+  closeMobileSidebar();
+  renderIcons();
+}
+
+/* ——— MOBILE & FLOATING SIDEBAR TOGGLE ——— */
+const permSidebar = $('permanentSidebar'), sidebarBackdrop = $('sidebarBackdrop');
+function openMobileSidebar(){
+  permSidebar.classList.add('mobile-open');
+  sidebarBackdrop.classList.add('show');
+}
+function closeMobileSidebar(){
+  permSidebar.classList.remove('mobile-open');
+  sidebarBackdrop.classList.remove('show');
+}
+if (sidebarBackdrop) sidebarBackdrop.addEventListener('click', closeMobileSidebar);
+
+// Toggle Expand / Collapse on Floating Sidebar
+const sidebarCollapseBtn = $('sidebarCollapseBtn');
+if (sidebarCollapseBtn) {
+  sidebarCollapseBtn.addEventListener('click', () => {
+    permSidebar.classList.toggle('collapsed');
+    const isCollapsed = permSidebar.classList.contains('collapsed');
+    sidebarCollapseBtn.setAttribute('title', isCollapsed ? 'Expand sidebar' : 'Collapse sidebar');
+    sidebarCollapseBtn.setAttribute('aria-expanded', !isCollapsed);
+    sidebarCollapseBtn.innerHTML = isCollapsed 
+      ? '<i data-lucide="panel-left-open"></i>' 
+      : '<i data-lucide="panel-left-close"></i>';
+    renderIcons();
+    showToast(isCollapsed ? 'Sidebar collapsed' : 'Sidebar expanded');
+  });
+}
+
+/* ——— CLICK ACTIONS ——— */
+document.addEventListener('click', e => {
+  const soon = e.target.closest('[data-soon]');
+  if (soon){ showToast(`${soon.dataset.soon} opens in full console`); return; }
+  const v = e.target.closest('[data-view]');
+  if (v && !v.closest('.cmdk-card')){
+    e.preventDefault();
+    switchView(v.dataset.view);
+    return;
+  }
+  const n = e.target.closest('[data-nav]');
+  if (n){
+    e.preventDefault();
+    closeMobileSidebar();
+    document.querySelectorAll('.sidebar-nav-item').forEach(item => {
+      item.classList.toggle('active', item.dataset.nav === n.dataset.nav);
+    });
+    showToast(`Opening ${n.dataset.nav}`);
+    return;
+  }
+  const tile = e.target.closest('.service-deck-card[data-svc-name], .svc-card[data-svc-name]');
+  if (tile){
+    showToast(`Launching ${tile.dataset.svcName}`);
+  }
+});
+
+/* ——— THEME SWITCHER ——— */
+$('themeSwitchBtn').addEventListener('click', () => {
+  const cur = document.documentElement.getAttribute('data-theme') || 'light';
+  const target = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', target);
+  try { localStorage.setItem('york-theme', target); } catch(e){}
+  showToast(`Switched to ${target} mode`);
+});
+
+/* ——— QUICK ACTIONS ——— */
+if ($('shareWorkspaceBtn')) $('shareWorkspaceBtn').addEventListener('click', () => showToast('Workspace link copied'));
+$('topBellBtn').addEventListener('click', () => showToast('3 unread alerts'));
+$('topUserBtn').addEventListener('click', () => showToast('Alex Kim (Admin & Founder)'));
+$('funnelToggleBtn').addEventListener('click', () => showToast('Filter applied'));
+$('sidebarBrandBtn').addEventListener('click', (e) => {
+  e.preventDefault();
+  try { sessionStorage.removeItem('york_session_active'); } catch(err){}
+  window.location.href = 'index.html';
+});
+document.querySelectorAll('.v-tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    try { sessionStorage.setItem('york_session_active', 'true'); } catch(err){}
+  });
+});
+$('sidebarWsBtn').addEventListener('click', () => showToast('Workspace: Acme Inc (PROD)'));
+$('sidebarFuelBtn').addEventListener('click', () => showToast('Fuel compute: 152,400 / 250,000 used'));
+$('sidebarUserTile').addEventListener('click', () => showToast('User profile: Alex Kim'));
+$('stripManageBtn').addEventListener('click', () => showToast('Opening billing & plan management…'));
+
+/* ——— COMMAND PALETTE (⌘K) ——— */
+const cmdk = $('cmdkModal'), cmdkInput = $('cmdkInput'), cmdkResults = $('cmdkResults');
+const CMDS = [
+  { group:'Navigation', items:[
+    { label:'Dashboard Overview', view:'dashboard', key:'G D', icon:'layout-dashboard' },
+    { label:'Product Journey', view:'journey', key:'G J', icon:'git-merge' },
+    { label:'Services Registry', view:'services', key:'G S', icon:'layers' },
+    { label:'Capital & Runway', view:'capital', key:'G C', icon:'database' },
+  ]},
+  { group:'Quick Actions', items:[
+    { label:'Export Sprint Summary CSV', key:'E S', icon:'arrow-up-right', toast:'Exporting CSV…' },
+    { label:'Toggle Dark/Light Mode', icon:'sun', action: () => $('themeSwitchBtn').click() },
+  ]},
+  { group:'Services (23)', items: allServices.map(s => ({ label:s.name, toast:`Launching ${s.name}`, icon:s.icon })) }
+];
+
+let flatCmds = [], curSel = 0;
+function renderCmdk(term = ''){
+  const q = term.toLowerCase().trim();
+  let html = ''; flatCmds = [];
+  CMDS.forEach(grp => {
+    const matches = grp.items.filter(i => i.label.toLowerCase().includes(q));
+    if (!matches.length) return;
+    html += `<div class="cmdk-group-title">${esc(grp.group)}</div>`;
+    matches.forEach(m => {
+      html += `<div class="cmdk-item-row" data-idx="${flatCmds.length}"><i data-lucide="${m.icon}"></i><span>${esc(m.label)}</span>${m.key ? `<span class="kbd" style="font-size:11px;padding:2px 6px;border-radius:4px;border:1px solid var(--line);margin-left:auto">${m.key}</span>` : ''}</div>`;
+      flatCmds.push(m);
+    });
+  });
+  cmdkResults.innerHTML = html || '<div class="cmdk-group-title" style="padding:16px;text-align:center">No matching commands</div>';
+  renderIcons();
+  cmdkResults.querySelectorAll('.cmdk-item-row').forEach(row => {
+    row.addEventListener('click', () => runCmd(flatCmds[+row.dataset.idx]));
+  });
+  setSelection(0);
+}
+
+function setSelection(idx){
+  const rows = [...cmdkResults.querySelectorAll('.cmdk-item-row')];
+  rows.forEach(r => r.classList.remove('selected'));
+  curSel = Math.max(0, Math.min(idx, rows.length - 1));
+  if (rows[curSel]){
+    rows[curSel].classList.add('selected');
+    rows[curSel].scrollIntoView({ block:'nearest' });
+  }
+}
+
+function runCmd(item){
+  closeCmdk();
+  if (!item) return;
+  if (item.action) item.action();
+  else if (item.view) switchView(item.view);
+  else if (item.toast) showToast(item.toast);
+}
+
+function openCmdk(){
+  cmdk.classList.add('open');
+  cmdkInput.value = '';
+  renderCmdk();
+  cmdkInput.focus();
+}
+function closeCmdk(){
+  cmdk.classList.remove('open');
+}
+
+$('topSearchBtn').addEventListener('click', openCmdk);
+cmdk.addEventListener('click', e => { if (e.target === cmdk) closeCmdk(); });
+cmdkInput.addEventListener('input', () => renderCmdk(cmdkInput.value));
+cmdkInput.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown'){ e.preventDefault(); setSelection(curSel + 1); }
+  else if (e.key === 'ArrowUp'){ e.preventDefault(); setSelection(curSel - 1); }
+  else if (e.key === 'Enter'){ runCmd(flatCmds[curSel]); }
+  else if (e.key === 'Escape') closeCmdk();
+});
+
+window.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); openCmdk(); }
+  if (e.key === 'Escape'){
+    if (cmdk.classList.contains('open')) closeCmdk();
+    else closeMobileSidebar();
+  }
+});
+
+/* ——— INIT ——— */
+renderIcons();
+</script>
+</body>
+</html>
