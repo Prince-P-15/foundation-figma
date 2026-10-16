@@ -11,7 +11,7 @@
 <script>
   (function(){
     try {
-      var saved = localStorage.getItem('york-theme');
+      var saved = localStorage.getItem('york_theme') || localStorage.getItem('theme') || localStorage.getItem('york-theme');
       if (saved) {
         document.documentElement.setAttribute('data-theme', saved);
       } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -2496,7 +2496,11 @@ $('themeSwitchBtn').addEventListener('click', () => {
   const cur = document.documentElement.getAttribute('data-theme') || 'light';
   const target = cur === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', target);
-  try { localStorage.setItem('york-theme', target); } catch(e){}
+  try {
+    localStorage.setItem('york-theme', target);
+    localStorage.setItem('york_theme', target);
+    localStorage.setItem('theme', target);
+  } catch(e){}
   showToast(`Switched to ${target} mode`);
 });
 

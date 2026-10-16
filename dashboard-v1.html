@@ -17,7 +17,7 @@ try {
     window.location.replace('index.html');
   }
 } catch(e){}
-try{var _n=localStorage.getItem('york-nav-open');if(_n==='false'||_n==='0')document.documentElement.classList.add('nav-collapsed');var _t=localStorage.getItem('york-theme');if(_t==='dark'||(!_t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}
+try{var _n=localStorage.getItem('york-nav-open');if(_n==='false'||_n==='0')document.documentElement.classList.add('nav-collapsed');var _t=localStorage.getItem('york_theme')||localStorage.getItem('theme')||localStorage.getItem('york-theme');if(_t==='dark'||(!_t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}
 </script>
 <script src="https://unpkg.com/lucide@0.468.0"></script>
 <style>
@@ -1436,7 +1436,11 @@ $('themeSwitchBtn')?.addEventListener('click', () => {
   const cur = document.documentElement.getAttribute('data-theme') || 'light';
   const target = cur === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', target);
-  try { localStorage.setItem('york-theme', target); } catch(e){}
+  try {
+    localStorage.setItem('york-theme', target);
+    localStorage.setItem('york_theme', target);
+    localStorage.setItem('theme', target);
+  } catch(e){}
   toast(`Switched to ${target} mode`);
   paintIcons();
 });

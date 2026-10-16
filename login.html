@@ -432,11 +432,15 @@
       const cur = document.documentElement.getAttribute('data-theme');
       const next = cur === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
+      try {
+        localStorage.setItem('theme', next);
+        localStorage.setItem('york_theme', next);
+        localStorage.setItem('york-theme', next);
+      } catch (e) {}
       updateTheme();
     });
     // Restore preference
-    const saved = localStorage.getItem('theme');
+    const saved = localStorage.getItem('york_theme') || localStorage.getItem('theme') || localStorage.getItem('york-theme');
     if (saved) {
       document.documentElement.setAttribute('data-theme', saved);
       updateTheme();
