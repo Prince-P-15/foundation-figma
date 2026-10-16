@@ -1,477 +1,3490 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>York Foundation — Dashboard</title>
+<title>York Foundation — Enterprise Operating System</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script>try{var _n=localStorage.getItem('york-nav-open');if(_n==='false'||_n==='0')document.documentElement.classList.add('nav-collapsed')}catch(e){}</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  (function(){
+    try {
+      var nav = (window.performance && performance.getEntriesByType) ? performance.getEntriesByType('navigation')[0] : null;
+      var isReload = (nav && nav.type === 'reload') || (window.performance && performance.navigation && performance.navigation.type === 1);
+      if (isReload || !sessionStorage.getItem('york_session_active')) {
+        sessionStorage.removeItem('york_session_active');
+        window.location.replace('index.html');
+        return;
+      }
+      var saved = localStorage.getItem('york-theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    } catch(e){}
+  })();
+</script>
 <script src="https://unpkg.com/lucide@0.468.0"></script>
 <style>
-:root{
-  --bg:#F4F5F7; --bg-2:#F8FAFC; --card:#FFFFFF;
-  --line:#E5E7EB; --line-2:#EEF0F3;
-  /* WCAG AA: muted ≥4.5:1 on white; faint only for large/non-essential */
-  --ink:#0F172A; --ink-2:#1E293B; --muted:#475569; --faint:#64748B;
-  --em:#059669; --em-d:#047857; --em-50:#ECFDF5; --em-100:#D1FAE5;
-  --rose:#DC2626; --amber:#B45309; --blue:#1D4ED8; --violet:#6D28D9; --orange:#C2410C;
-  --shadow:0 1px 2px rgba(15,23,42,.04), 0 1px 3px rgba(15,23,42,.05);
-  --shadow-md:0 4px 14px rgba(15,23,42,.07);
-  --side-w:240px; --top-h:56px;
-  --focus:#047857; --focus-on-dark:#6EE7B7;
-  --sans:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+/* ─── YORK DESIGN TOKENS (EXECUTIVE PRO CONSOLE — WCAG AA/AAA COMPLIANT) ─── */
+:root, :root[data-theme="light"] {
+  --bg-app: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-pill: #FFFFFF;
+  --bg-pill-hover: #F1F5F9;
+  --bg-subtle: #F8FAFC;
+  --bg-subtle-2: #F1F5F9;
+  --bg-drawer: rgba(255, 255, 255, 0.98);
+  
+  --line: #E2E8F0;
+  --line-strong: #CBD5E1;
+  
+  --text-main: #0F172A;        /* 15.8:1 contrast on white (WCAG AAA) */
+  --text-secondary: #334155;   /* 10.35:1 contrast on white (WCAG AAA) */
+  --text-muted: #475569;       /* 7.58:1 contrast on white (WCAG AAA) */
+  --text-faint: #64748B;       /* 4.76:1 contrast on white (WCAG AA) */
+  
+  /* York Signature Brand Palette (Calibrated directly from official York logo #00B48A) */
+  --emerald: #00B48A;          /* Official York Logo Green (Graphic/UI accent) */
+  --emerald-dark: #005E44;     /* 7.82:1 contrast on white for text/badges (WCAG AAA) */
+  --emerald-accent: #007A5A;   /* 5.34:1 contrast on white for interactive links/focus (WCAG AA) */
+  --emerald-light: #D1FAE5;    /* 10% tint for badge backgrounds */
+  --emerald-subtle: #ECFDF5;   /* 5% tint for subtle highlights */
+  --btn-primary-bg: #007A5A;   /* 5.34:1 accessible button fill for white text (WCAG AA) */
+  --btn-primary-hover: #005E44;
+  
+  --shadow-dock: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+  --shadow-pill: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-drawer: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+  
+  --radius-card: 16px;
+  --radius-pill: 9999px;
+  --radius-btn: 10px;
+  
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-html,body{height:100%}
-body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
-input{font:inherit;color:inherit}
-a{color:inherit;text-decoration:none}
-i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75;pointer-events:none}
-:focus{outline:none}
-:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.skip-link{
-  position:absolute;left:12px;top:0;z-index:9999;padding:10px 16px;border-radius:0 0 10px 10px;
-  background:var(--em-d);color:#fff;font-weight:600;font-size:14px;
-  transform:translateY(-120%);transition:transform .15s;
+
+:root[data-theme="dark"] {
+  --bg-app: #080C14;
+  --bg-card: #0F1626;
+  --bg-card-dark: #070B12;
+  --bg-pill: #172033;
+  --bg-pill-hover: #1E2B45;
+  --bg-subtle: #131C2E;
+  --bg-subtle-2: #1B2842;
+  --bg-drawer: rgba(15, 22, 38, 0.98);
+  
+  --line: rgba(255, 255, 255, 0.10);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  
+  --text-main: #F8FAFC;        /* 16.5:1 contrast on dark base (WCAG AAA) */
+  --text-secondary: #E2E8F0;   /* 13.8:1 contrast on dark base (WCAG AAA) */
+  --text-muted: #94A3B8;       /* 7.3:1 contrast on dark base (WCAG AAA) */
+  --text-faint: #CBD5E1;       /* 11.4:1 contrast on dark base (WCAG AAA) */
+  
+  /* York Signature Brand Palette (Dark Mode: calibrated for high contrast on dark surfaces) */
+  --emerald: #00D6A4;          /* Bright York Logo Green (10.2:1 contrast on dark canvas) */
+  --emerald-dark: #00D6A4;     /* Legible high-contrast green for dark mode text */
+  --emerald-light: rgba(0, 180, 138, 0.22);
+  --emerald-subtle: rgba(0, 180, 138, 0.14);
+  --emerald-accent: #34D399;
+  --btn-primary-bg: #00B48A;   /* Primary action button on dark */
+  --btn-primary-hover: #00D6A4;
+  
+  --shadow-dock: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --shadow-pill: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-drawer: 0 24px 60px rgba(0, 0, 0, 0.6);
 }
-.skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid var(--focus-on-dark);outline-offset:2px}
-.mono{font-family:var(--mono)}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
-}
-@media (prefers-contrast:more){
-  :root{--line:#94A3B8; --muted:#334155; --faint:#475569}
-  .card,.svc,.panel,.search,.ws{border-width:2px}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
 }
 
-/* ———— App shell ———— */
-.app{display:grid;grid-template-columns:var(--side-w) 1fr;height:100vh;transition:grid-template-columns .22s ease}
-.nav-collapsed .app{grid-template-columns:0px 1fr}
-
-/* Product sidebar */
-.side{background:var(--card);border-right:1px solid var(--line);display:flex;flex-direction:column;min-width:0;overflow:hidden;z-index:30}
-.nav-collapsed .side{border-right-color:transparent;visibility:hidden;pointer-events:none;transition:visibility 0s .22s}
-.side-inner{width:var(--side-w);display:flex;flex-direction:column;height:100%}
-.side-head{display:flex;align-items:center;gap:9px;padding:14px 14px 10px}
-.brand-mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--em),var(--em-d));display:grid;place-items:center;color:#fff;flex-shrink:0}
-.brand-mark i{width:15px;height:15px;fill:#fff;stroke-width:1.5}
-.brand-word{font-weight:700;font-size:15px;letter-spacing:-.02em;flex:1;white-space:nowrap}
-.brand-word span{color:var(--muted);font-weight:500}
-.icon-btn{width:40px;height:40px;min-width:40px;min-height:40px;border-radius:8px;display:grid;place-items:center;color:var(--muted);flex-shrink:0;transition:background .15s,color .15s}
-.icon-btn:hover{background:var(--bg);color:var(--ink)}
-.ws{margin:2px 14px 10px;display:flex;align-items:center;gap:9px;padding:8px 10px;min-height:44px;border:1px solid var(--line);border-radius:10px;background:var(--bg-2);width:calc(100% - 28px);transition:border-color .15s}
-.ws:hover{border-color:#94A3B8}
-.ws-mark{width:24px;height:24px;border-radius:7px;background:var(--orange);color:#fff;font-weight:700;font-size:12px;display:grid;place-items:center;flex-shrink:0}
-.ws-name{font-weight:600;font-size:13px;flex:1;color:var(--ink)}
-.ws i{width:14px;height:14px;color:var(--muted)}
-.side-scroll{flex:1;overflow-y:auto;padding:0 10px 10px;scrollbar-width:thin;scrollbar-color:#CBD5E1 transparent}
-.grp{margin-top:14px}
-.grp:first-child{margin-top:4px}
-.grp-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:0 10px 5px}
-.nav-item{display:flex;align-items:center;gap:10px;width:100%;padding:7px 8px;min-height:40px;border-radius:9px;font-size:13.5px;font-weight:500;color:var(--ink-2);transition:background .12s,color .12s}
-.nav-ic{width:28px;height:28px;border-radius:7px;background:#F1F5F9;color:#475569;display:grid;place-items:center;flex-shrink:0;transition:background .12s,color .12s}
-.nav-ic i,.nav-ic svg{width:15px;height:15px}
-.nav-item:hover{background:var(--bg)}
-.nav-item:hover .nav-ic{background:#E2E8F0;color:var(--ink)}
-.nav-item.active{background:var(--em-50);color:var(--em-d);font-weight:600}
-.nav-item.active .nav-ic{background:var(--em-100);color:var(--em-d)}
-.nav-lbl{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.nbadge{font-family:var(--mono);font-size:10px;font-weight:500;padding:1px 6px;border-radius:99px;background:var(--bg);color:var(--muted)}
-.nbadge.new{background:var(--em-100);color:var(--em-d);font-family:var(--sans);font-weight:700;letter-spacing:.04em}
-.side-foot{border-top:1px solid var(--line);padding:10px 12px}
-.user{display:flex;align-items:center;gap:10px;padding:6px;border-radius:10px;width:100%}
-.user:hover{background:var(--bg)}
-.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#334155,#0F172A);color:#fff;font-size:12px;font-weight:600;display:grid;place-items:center;flex-shrink:0}
-.user b{display:block;font-size:13px;font-weight:600;line-height:1.2}
-.user small{font-size:11.5px;color:var(--muted)}
-.user .meta{flex:1;min-width:0}
-.user i{width:14px;height:14px;color:var(--faint)}
-
-/* Main column */
-.col{display:flex;flex-direction:column;min-width:0;height:100vh}
-.topbar{height:var(--top-h);flex-shrink:0;background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 24px}
-.tb-toggle{display:none}
-.nav-collapsed .tb-toggle{display:grid}
-.hamburger{display:none}
-.crumbs{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);white-space:nowrap;min-width:0}
-.crumbs i{width:14px;height:14px;color:var(--faint)}
-.crumbs b{color:var(--ink);font-weight:600;overflow:hidden;text-overflow:ellipsis}
-.tb-spacer{flex:1}
-.search{display:flex;align-items:center;gap:9px;width:min(420px,38vw);height:36px;padding:0 8px 0 13px;border:1px solid var(--line);border-radius:99px;background:var(--bg-2);color:var(--faint);font-size:13px;transition:border-color .15s,box-shadow .15s}
-.search:hover{border-color:#CBD5E1;background:#fff}
-.search span{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.kbd{font-family:var(--mono);font-size:11px;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:6px;padding:2px 6px}
-.bell{position:relative}
-.bell .dot{position:absolute;top:6px;right:7px;width:8px;height:8px;border-radius:50%;background:var(--rose);border:2px solid #fff}
-.tb-avatar{width:32px;height:32px;border-radius:50%;background:var(--em-50);color:var(--em-d);border:1px solid var(--em-100);font-size:12px;font-weight:700;display:grid;place-items:center}
-.main{flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#CBD5E1 transparent}
-.page{max-width:1280px;margin:0 auto;padding:26px 28px 48px}
-.view{display:none}
-.view.active{display:block;animation:fade .25s ease}
-.view[hidden]{display:none!important}
-@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-
-/* Common */
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
-.page-head{margin-bottom:20px}
-.page-title{font-size:24px;font-weight:700;letter-spacing:-.025em}
-.page-lede{color:var(--muted);margin-top:3px;font-size:14px}
-.sec-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
-.sec-title{font-size:15px;font-weight:700;letter-spacing:-.01em}
-.link{font-size:13px;font-weight:600;color:var(--em-d);display:inline-flex;align-items:center;gap:4px;text-decoration:underline;text-underline-offset:3px;text-decoration-color:transparent}
-.link:hover,.link:focus-visible{color:#065F46;text-decoration-color:currentColor}
-.tag{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.03em;padding:3px 8px;border-radius:6px;white-space:nowrap;border:1px solid #E2E8F0;background:#F8FAFC;color:#475569}
-.tag.capital{background:var(--em-50);color:var(--em-d);border-color:#A7F3D0}
-
-/* Greeting + KPIs */
-.hello h1{font-size:26px;font-weight:700;letter-spacing:-.03em}
-.hello p{color:var(--muted);margin-top:3px}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:20px 0 14px}
-.kpi{padding:16px 18px 15px;display:flex;flex-direction:column;gap:4px}
-.kpi-top{display:flex;align-items:center;justify-content:space-between}
-.kpi-lbl{font-size:13px;font-weight:600;color:var(--muted)}
-.kpi-ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:#F1F5F9;color:#475569}
-.kpi-ic.g{background:var(--em-50);color:var(--em-d)}
-.kpi-val{font-size:32px;font-weight:700;letter-spacing:-.035em;line-height:1.15;margin-top:4px}
-.kpi-val small{font-size:15px;font-weight:500;color:var(--muted);letter-spacing:0;margin-left:2px}
-.kpi-sub{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
-.kpi-sub.up{color:var(--em-d);font-weight:600}
-.kpi-sub.up::before{content:'↑ ';font-weight:700}
-.kpi-role{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em;margin-top:6px;padding-top:8px;border-top:1px dashed var(--line)}
-
-/* Billing strip */
-.strip{display:flex;align-items:center;gap:18px;padding:10px 16px;margin-bottom:20px;font-size:12.5px;flex-wrap:wrap}
-.strip .st-ic{width:26px;height:26px;border-radius:7px;background:var(--em-50);color:var(--em-d);display:grid;place-items:center}
-.strip .st-ic i{width:14px;height:14px}
-.strip b{font-weight:600}
-.strip .sep{width:1px;height:18px;background:var(--line)}
-.strip .mono{color:var(--ink-2)}
-.meter{width:90px;height:5px;border-radius:99px;background:var(--line-2);overflow:hidden;display:inline-block;vertical-align:middle;margin:0 6px}
-.meter i{display:block;height:100%;background:var(--em);border-radius:99px}
-.strip .grow{flex:1}
-
-/* Two columns */
-.two{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;margin-bottom:24px}
-.panel{padding:18px 20px}
-.init{display:grid;grid-template-columns:1fr auto 130px 40px;align-items:center;gap:14px;padding:11px 8px;margin:0 -8px;border-radius:10px;width:calc(100% + 16px);transition:background .12s}
-.init:hover{background:var(--bg-2)}
-.init + .init{border-top:1px solid var(--line-2)}
-.init b{display:block;font-size:13.5px;font-weight:600}
-.init small{font-size:12px;color:var(--muted)}
-.bar{height:6px;background:var(--line-2);border-radius:99px;overflow:hidden}
-.bar i{display:block;height:100%;border-radius:99px;background:#94A3B8}
-.bar.capital i{background:var(--em)}
-.pct{font-family:var(--mono);font-size:12px;color:var(--ink-2);text-align:right}
-.ra{display:flex;align-items:flex-start;gap:12px;padding:10px 8px;margin:0 -8px;border-radius:10px;width:calc(100% + 16px);transition:background .12s}
-.ra:hover{background:var(--bg-2)}
-.ra + .ra{border-top:1px solid var(--line-2)}
-.ra-dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0;background:#94A3B8;box-shadow:0 0 0 3px #F1F5F9}
-.ra-dot.g{background:var(--em);box-shadow:0 0 0 3px var(--em-50)}
-.ra-dot.r,.ra-dot.o{background:var(--amber);box-shadow:0 0 0 3px #FFFBEB}
-.ra-txt{flex:1;min-width:0}
-.ra-txt b{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
-.ra-txt small{font-size:12.5px;color:var(--muted)}
-.ra time{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap;padding-top:2px}
-
-/* Service cards */
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.svc{display:flex;flex-direction:column;gap:5px;padding:16px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s;font:inherit;color:inherit}
-.svc:hover{border-color:#CBD5E1;box-shadow:var(--shadow-md);transform:translateY(-1px)}
-.svc:hover .svc-ic{background:var(--em-50);color:var(--em-d)}
-.svc-ic{width:36px;height:36px;border-radius:10px;background:#F1F5F9;color:#334155;display:grid;place-items:center;margin-bottom:6px;transition:background .15s,color .15s}
-.svc-ic i{width:18px;height:18px}
-.svc-name{font-weight:600;font-size:14px}
-.svc-desc{font-size:12.5px;color:var(--muted);min-height:36px}
-.svc-foot{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
-.status{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--em-d)}
-.status .d{width:7px;height:7px;border-radius:50%;background:var(--em);box-shadow:0 0 0 3px var(--em-100);flex-shrink:0}
-.status.new{color:#1D4ED8}.status.new .d{background:var(--blue);box-shadow:0 0 0 3px #DBEAFE}
-.status.beta{color:#92400E}.status.beta .d{background:#D97706;box-shadow:0 0 0 3px #FEF3C7}
-@media (prefers-reduced-motion:no-preference){
-  .status:not(.new):not(.beta) .d{animation:pulse 2s infinite}
-  @keyframes pulse{0%,100%{box-shadow:0 0 0 3px var(--em-100)}50%{box-shadow:0 0 0 5px rgba(5,150,105,.18)}}
+html, body {
+  height: 100%;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-size: 13.5px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
-.arrow{color:var(--faint);font-size:15px;transition:transform .15s,color .15s}
-.svc:hover .arrow{transform:translateX(3px);color:var(--em-d)}
 
-/* Journey strip on Overview */
-.journey-strip{padding:18px 20px;margin-bottom:20px}
-.journey-strip-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
-.journey-strip-head h2{font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
-.journey-flow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
-.stage{
-  display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;
-  padding:12px 8px;border:1px solid var(--line);border-radius:12px;background:var(--bg-2);
-  min-height:96px;transition:border-color .15s,background .15s,transform .15s;
+/* WCAG Accessible Focus Rings */
+:focus-visible {
+  outline: 2px solid var(--emerald-accent);
+  outline-offset: 2px;
 }
-.stage:hover,.stage:focus-visible{border-color:#A7F3D0;background:var(--em-50);transform:translateY(-1px)}
-.stage:hover .stage-ic,.stage:focus-visible .stage-ic{background:var(--em);color:#fff}
-.stage-ic{
-  width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:#E2E8F0;color:#334155;margin-bottom:2px;transition:background .15s,color .15s;
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
 }
-.stage-ic i,.stage-ic svg{width:16px;height:16px}
-.stage-name{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.25}
-.stage-count{font-size:11px;color:var(--muted);font-family:var(--mono)}
 
-/* Journey full view */
-.flow-row{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;position:relative}
-.flow{display:flex;flex-direction:column;gap:3px;padding:14px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card);transition:all .15s;position:relative}
-.flow:hover{border-color:#A7F3D0}
-.flow.active{border-color:var(--em);background:var(--em-50);box-shadow:0 0 0 3px rgba(16,185,129,.1)}
-.flow-num{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
-.flow.active .flow-num{color:var(--em-d)}
-.flow-ic{width:32px;height:32px;border-radius:9px;background:var(--bg);color:var(--ink-2);display:grid;place-items:center;margin:6px 0 4px}
-.flow.active .flow-ic{background:var(--em);color:#fff}
-.flow-name{font-weight:600;font-size:13.5px}
-.flow-desc{font-size:11.5px;color:var(--muted)}
-.flow-detail{margin-top:16px;padding:22px 24px}
-.flow-panel{display:none}.flow-panel.on{display:block;animation:fade .2s}
-.flow-panel h3{font-size:17px;font-weight:700;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
-.flow-panel p{color:var(--ink-2);margin:8px 0 14px;max-width:720px}
-.chips{display:flex;gap:8px;flex-wrap:wrap}
-.chipbtn{padding:6px 13px;border:1px solid var(--line);border-radius:99px;background:#fff;font-size:12.5px;font-weight:500;transition:all .15s}
-.chipbtn:hover{border-color:var(--em);color:var(--em-d);background:var(--em-50)}
-.chipbtn.active{background:var(--em-d);color:#fff;border-color:var(--em-d)}
-.chipbtn[aria-pressed="true"]{background:var(--em-d);color:#fff;border-color:var(--em-d)}
-
-/* Services view */
-.filter-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-.filter-bar .grow{flex:1}
-.fsearch{display:flex;align-items:center;gap:8px;height:34px;padding:0 12px;border:1px solid var(--line);border-radius:99px;background:#fff;color:var(--faint);min-width:230px}
-.fsearch input{border:0;outline:0;background:none;flex:1;font-size:13px;color:var(--ink)}
-.cat{margin-bottom:26px}
-.cat-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.cat-name{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
-.cat-count{font-family:var(--mono);font-size:10.5px;background:var(--line-2);color:var(--muted);padding:1px 7px;border-radius:99px}
-.empty{display:none;text-align:center;color:var(--muted);padding:48px 0}
-.empty.show{display:block}
-
-/* cmdk */
-.cmdk{position:fixed;inset:0;background:rgba(15,23,42,.5);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;padding-top:14vh;z-index:200}
-.cmdk.open{display:flex}
-.cmdk[aria-hidden="false"]{display:flex}
-.cmdk-box{width:min(600px,92vw);background:#fff;border-radius:16px;box-shadow:0 24px 70px rgba(15,23,42,.28);overflow:hidden;border:1px solid var(--line)}
-.cmdk-in{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);color:var(--faint)}
-.cmdk-in input{flex:1;border:0;outline:0;font-size:15px;color:var(--ink);background:none}
-.cmdk-list{max-height:380px;overflow-y:auto;padding:8px}
-.cmdk-group{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);padding:10px 10px 4px}
-.cmdk-item{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:9px;cursor:pointer;font-size:13.5px;color:var(--ink-2)}
-.cmdk-item i{color:var(--muted)}
-.cmdk-item.sel{background:var(--em-50);color:var(--em-d)}
-.cmdk-item.sel i{color:var(--em-d)}
-.cmdk-item .kbd{margin-left:auto}
-.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-size:13px;display:flex;align-items:center;gap:9px;opacity:0;pointer-events:none;transition:all .25s;z-index:300;box-shadow:var(--shadow-md)}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.toast i{color:#34D399}
-.scrim{display:none}
-
-/* Responsive */
-@media (max-width:1180px){
-  .kpis{grid-template-columns:repeat(2,1fr)}
-  .two{grid-template-columns:1fr}
-  .journey-flow{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:10px}
-  .flow-row{grid-template-columns:repeat(4,1fr)}
+input {
+  font: inherit;
+  color: inherit;
 }
-@media (max-width:860px){
-  .app,.nav-collapsed .app{grid-template-columns:1fr}
-  .side{position:fixed;left:0;top:0;bottom:0;width:var(--side-w);transform:translateX(-120%);transition:transform .22s;box-shadow:var(--shadow-md);visibility:visible!important}
-  .side.drawer{transform:none}
-  .scrim.show{display:block;position:fixed;inset:0;background:rgba(15,23,42,.35);z-index:25}
-  .hamburger,.nav-collapsed .tb-toggle{display:grid}
-  .side-head .icon-btn{display:none}
-  .svc-grid{grid-template-columns:repeat(2,1fr)}
-  .topbar{padding:0 14px}.page{padding:20px 16px 40px}
-  .search{width:auto;flex:1;max-width:none}.search .kbd{display:none}
-  .help-btn{display:none}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
-@media (max-width:560px){
-  .kpis,.svc-grid{grid-template-columns:1fr}
-  .journey-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .flow-row{grid-template-columns:repeat(2,1fr)}
-  .init{grid-template-columns:1fr 40px;row-gap:6px}.init .bar{grid-column:1/-1;order:5}.init .tag{display:none}
-  .crumbs .root{display:none}.crumbs .root + i{display:none}
+
+i[data-lucide], svg.lucide {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  stroke-width: 1.8;
+  pointer-events: none;
+}
+
+.mono { font-family: var(--font-mono); }
+
+/* ─── SHELL STRUCTURE (FLOATING SIDEBAR + CANVAS) ─── */
+.canvas-wrapper {
+  display: flex;
+  min-height: 100vh;
+  padding: 16px;
+  gap: 16px;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   FLOATING SIDEBAR NAVIGATION WITH EXPAND & COLLAPSE
+   ═════════════════════════════════════════════════════════════════ */
+.permanent-sidebar {
+  width: 260px;
+  min-width: 260px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 16px;
+  left: 16px;
+  height: calc(100vh - 32px);
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 40;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), min-width 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s ease;
+}
+
+/* Collapsed Floating Sidebar - Strictly Show Icons Only */
+.permanent-sidebar.collapsed {
+  width: 72px;
+  min-width: 72px;
+}
+.permanent-sidebar.collapsed .sidebar-header {
+  padding: 14px 6px 12px;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+.permanent-sidebar.collapsed .sidebar-brand-box {
+  justify-content: center;
+  width: 100%;
+}
+.permanent-sidebar.collapsed .sidebar-brand-logo {
+  height: 26px;
+  width: auto;
+}
+.permanent-sidebar.collapsed .sidebar-brand-box span,
+.permanent-sidebar.collapsed .sidebar-workspace-pill span,
+.permanent-sidebar.collapsed .sidebar-ws-tag,
+.permanent-sidebar.collapsed .sidebar-workspace-pill svg,
+.permanent-sidebar.collapsed .sidebar-workspace-pill i,
+.permanent-sidebar.collapsed .sidebar-main-nav-btn span,
+.permanent-sidebar.collapsed .sidebar-category-title,
+.permanent-sidebar.collapsed .sidebar-nav-item .sidebar-nav-label,
+.permanent-sidebar.collapsed .sidebar-nav-item .sidebar-badge,
+.permanent-sidebar.collapsed .sidebar-compute-meter,
+.permanent-sidebar.collapsed .sidebar-user-tile div:not(.sidebar-user-avatar),
+.permanent-sidebar.collapsed .sidebar-user-tile svg,
+.permanent-sidebar.collapsed .sidebar-user-tile i {
+  display: none !important;
+}
+.permanent-sidebar.collapsed .sidebar-workspace-pill {
+  margin: 10px 8px 6px;
+  padding: 8px 0;
+  justify-content: center;
+  width: calc(100% - 16px);
+}
+.permanent-sidebar.collapsed .sidebar-primary-nav {
+  padding: 8px 4px;
+  align-items: center;
+}
+.permanent-sidebar.collapsed .sidebar-main-nav-btn {
+  justify-content: center;
+  padding: 0;
+  width: 44px;
+  height: 40px;
+  margin: 0 auto;
+}
+.permanent-sidebar.collapsed .sidebar-main-nav-btn i,
+.permanent-sidebar.collapsed .sidebar-main-nav-btn svg {
+  margin: 0 auto;
+  width: 18px;
+  height: 18px;
+}
+.permanent-sidebar.collapsed .sidebar-nav-scroll {
+  padding: 6px 4px;
+}
+.permanent-sidebar.collapsed .sidebar-category-group {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.permanent-sidebar.collapsed .sidebar-nav-item {
+  justify-content: center;
+  padding: 0;
+  width: 44px;
+  height: 40px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+.permanent-sidebar.collapsed .sidebar-nav-item i,
+.permanent-sidebar.collapsed .sidebar-nav-item svg {
+  margin: 0 auto;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.permanent-sidebar.collapsed .sidebar-footer {
+  padding: 12px 6px;
+}
+.permanent-sidebar.collapsed .sidebar-user-tile {
+  justify-content: center;
+  padding: 4px 0;
+}
+.permanent-sidebar.collapsed .sidebar-user-avatar {
+  margin: 0 auto;
+}
+
+.sidebar-header {
+  padding: 16px 18px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+.sidebar-brand-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.sidebar-brand-logo {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+.sidebar-brand-logo.logo-dark-mode { display: none; }
+.sidebar-brand-logo.logo-light-mode { display: block; }
+:root[data-theme="dark"] .sidebar-brand-logo.logo-dark-mode { display: block; }
+:root[data-theme="dark"] .sidebar-brand-logo.logo-light-mode { display: none; }
+.sidebar-collapse-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.sidebar-collapse-btn:hover {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+}
+
+.sidebar-workspace-pill {
+  margin: 12px 14px 6px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-subtle);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.sidebar-workspace-pill:hover {
+  border-color: var(--line-strong);
+  background: var(--bg-pill-hover);
+}
+.sidebar-ws-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+}
+
+/* Primary Top 4 Navigation in Sidebar */
+.sidebar-primary-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 12px 10px;
+  border-bottom: 1px solid var(--line);
+}
+.sidebar-main-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+.sidebar-main-nav-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+}
+.sidebar-main-nav-btn.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: rgba(0, 179, 137, 0.3);
+}
+.sidebar-main-nav-btn i {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar-nav-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 12px 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+.sidebar-category-group {
+  margin-top: 16px;
+}
+.sidebar-category-group:first-child {
+  margin-top: 4px;
+}
+.sidebar-category-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 6px 10px 4px;
+}
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.12s;
+  cursor: pointer;
+}
+.sidebar-nav-item:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+}
+.sidebar-nav-item.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  font-weight: 600;
+}
+:root[data-theme="dark"] .sidebar-nav-item.active {
+  background: rgba(0, 179, 137, 0.2);
+  color: #34D399;
+}
+.sidebar-nav-item i {
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+}
+.sidebar-nav-item.active i {
+  color: var(--emerald-dark);
+}
+:root[data-theme="dark"] .sidebar-nav-item.active i {
+  color: #34D399;
+}
+.sidebar-nav-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sidebar-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+}
+.sidebar-badge.new {
+  background: var(--emerald-light);
+  color: var(--emerald-dark);
+}
+
+.sidebar-footer {
+  border-top: 1px solid var(--line);
+  padding: 12px 14px;
+  background: var(--bg-card);
+}
+.sidebar-compute-meter {
+  padding: 9px 12px;
+  border-radius: 12px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.sidebar-compute-meter:hover {
+  border-color: var(--line-strong);
+}
+.sidebar-compute-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.sidebar-compute-bar {
+  height: 5px;
+  background: var(--bg-subtle-2);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.sidebar-compute-bar i {
+  display: block;
+  height: 100%;
+  width: 61%;
+  background: var(--emerald);
+  border-radius: 99px;
+}
+
+.sidebar-user-tile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.sidebar-user-tile:hover {
+  background: var(--bg-subtle);
+}
+.sidebar-user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #00B389;
+  color: #FFFFFF;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+
+/* ─── MAIN DESK CANVAS ─── */
+.desk-canvas {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 6px 12px 36px 6px;
+  max-width: 1560px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ─── SINGLE UNIFIED ROUNDED TOPBAR TAB / CAPSULE DOCK ─── */
+.floating-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  position: relative;
+  width: 100%;
+  height: 56px;
+  padding: 6px 8px 6px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.03);
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+:root[data-theme="dark"] .floating-topbar {
+  background: var(--bg-card);
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* Left Group: Breadcrumbs + Vertical Divider + Theme Switcher */
+.topbar-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.topbar-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+
+.topbar-crumb-org {
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.topbar-crumb-slash {
+  color: var(--text-muted);
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+.topbar-crumb-view {
+  font-weight: 600;
+  color: var(--emerald-dark);
+}
+
+:root[data-theme="dark"] .topbar-crumb-view {
+  color: #00D6A4;
+}
+
+.topbar-v-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--line);
+  flex-shrink: 0;
+}
+
+/* Version Switcher embedded seamlessly */
+.version-switch-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: var(--bg-subtle);
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+}
+
+:root[data-theme="dark"] .version-switch-pill {
+  background: #080C14;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.version-switch-lbl {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 0 6px 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.v-tab-btn {
+  padding: 4px 11px;
+  border-radius: var(--radius-pill);
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.v-tab-btn:hover {
+  color: var(--text-main);
+  background: var(--bg-pill-hover);
+}
+
+.v-tab-btn.active {
+  font-weight: 700;
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border: 1px solid rgba(0, 179, 137, 0.35);
+}
+
+:root[data-theme="dark"] .v-tab-btn.active {
+  background: rgba(0, 180, 138, 0.18);
+  color: #00D6A4;
+  border-color: rgba(0, 180, 138, 0.35);
+}
+
+/* WIDE SEARCH BAR (Generous width, single line, no overlap) */
+.top-search-pill {
+  flex: 1;
+  min-width: 280px;
+  max-width: 580px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 14px 0 16px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+.top-search-pill:hover {
+  background: var(--bg-pill-hover);
+  border-color: var(--line-strong);
+  color: var(--text-main);
+}
+
+:root[data-theme="dark"] .top-search-pill {
+  background: #080C14;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+}
+
+:root[data-theme="dark"] .top-search-pill:hover {
+  background: #101827;
+  border-color: rgba(0, 180, 138, 0.35);
+  color: var(--text-main);
+}
+
+.top-search-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.top-search-inner i, .top-search-inner svg {
+  width: 15px;
+  height: 15px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.top-search-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.top-search-kbd {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+:root[data-theme="dark"] .top-search-kbd {
+  background: #141E32;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--text-muted);
+}
+
+/* Right Actions Group (Buttons neatly seated inside dock) */
+.topbar-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.topbar-action-btn, .top-circle-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.topbar-action-btn:hover, .top-circle-btn:hover {
+  background: var(--bg-pill-hover);
+  color: var(--text-main);
+  border-color: var(--line-strong);
+}
+
+:root[data-theme="dark"] .topbar-action-btn,
+:root[data-theme="dark"] .top-circle-btn {
+  background: #080C14;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="dark"] .topbar-action-btn:hover,
+:root[data-theme="dark"] .top-circle-btn:hover {
+  background: #141E32;
+  color: #F8FAFC;
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.topbar-bell-dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #EF4444;
+  border: 1.5px solid var(--bg-card);
+}
+
+.topbar-user-avatar, .top-user-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--emerald-dark);
+  color: #FFFFFF;
+  font-size: 12.5px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border: 2px solid var(--bg-card);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.15s;
+  box-sizing: border-box;
+}
+
+:root[data-theme="dark"] .topbar-user-avatar,
+:root[data-theme="dark"] .top-user-avatar {
+  background: rgba(0, 180, 138, 0.22);
+  color: #00D6A4;
+  border-color: rgba(0, 180, 138, 0.35);
+}
+
+/* ─── PAGE TITLE & PILL CONTROLS ROW ─── */
+.title-controls-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.page-headline-wrap {
+  display: flex;
+  flex-direction: column;
+}
+.page-headline-lead {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.controls-pill-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Date Range Pill - Standardized 38px Height */
+.date-pill {
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-pill);
+  box-sizing: border-box;
+  font-size: 12.5px;
+  color: var(--text-main);
+}
+.date-pill i {
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.date-pill-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.date-pill-label {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.date-pill-val {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* Export / Action Pill - Standardized 38px Height */
+.export-pill-btn {
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px;
+  background: var(--btn-primary-bg);
+  color: #FFFFFF;
+  border-radius: var(--radius-pill);
+  font-size: 12.5px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 179, 137, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+.export-pill-btn:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 179, 137, 0.35);
+}
+:root[data-theme="dark"] .export-pill-btn {
+  background: var(--btn-primary-bg);
+  color: #FFFFFF;
+}
+.export-pill-btn i {
+  width: 14px;
+  height: 14px;
+}
+
+/* ─── 4-CARD METRIC DECK (COMPLETE KPI TELEMETRY) ─── */
+.metrics-card-deck {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.deck-card {
+  padding: 22px 24px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+  background: var(--bg-card);
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+}
+.deck-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+/* Card 1: Featured Primary Accent */
+.deck-card.primary-accent-card {
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1.5px solid var(--emerald-light);
+}
+.deck-card.primary-accent-card .deck-arrow-btn {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+}
+:root[data-theme="dark"] .deck-card.primary-accent-card {
+  border-color: rgba(0, 179, 137, 0.4);
+}
+:root[data-theme="dark"] .deck-card.primary-accent-card .deck-arrow-btn {
+  background: rgba(0, 179, 137, 0.22);
+  color: #34D399;
+}
+
+.deck-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.deck-card-label {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.deck-card.primary-accent-card .deck-card-label {
+  color: var(--text-main);
+  font-weight: 600;
+}
+.deck-arrow-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.deck-card:hover .deck-arrow-btn {
+  transform: translate(2px, -2px);
+}
+.deck-arrow-btn i {
+  width: 15px;
+  height: 15px;
+}
+
+.deck-card-value {
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin: 10px 0 4px;
+}
+.deck-card-value small {
+  font-size: 18px;
+  font-weight: 500;
+  opacity: 0.65;
+}
+
+.deck-card-caption {
+  font-size: 12.5px;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.deck-card-caption b {
+  font-weight: 600;
+  color: var(--emerald-dark);
+}
+.deck-card-caption .dot-sep {
+  opacity: 0.5;
+}
+
+/* ─── EXECUTIVE BILLING & COMPUTE RESOURCE CARD ─── */
+.billing-executive-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 14px 0 20px;
+  transition: all 0.2s ease;
+}
+:root[data-theme="dark"] .billing-executive-card {
+  background: #172033;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.billing-segment {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.billing-plan-seg {
+  flex: 0 0 auto;
+}
+.billing-plan-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border: 1px solid rgba(0, 179, 137, 0.25);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+:root[data-theme="dark"] .billing-plan-icon {
+  background: rgba(0, 179, 137, 0.18);
+  color: #34D399;
+}
+.billing-plan-icon svg, .billing-plan-icon i {
+  width: 18px;
+  height: 18px;
+}
+.billing-seg-content {
+  display: flex;
+  flex-direction: column;
+}
+.billing-plan-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.billing-plan-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+.billing-live-tag {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 1.5px 6px;
+  border-radius: 4px;
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border: 1px solid rgba(0, 179, 137, 0.3);
+  letter-spacing: 0.05em;
+}
+:root[data-theme="dark"] .billing-live-tag {
+  background: rgba(0, 179, 137, 0.15);
+  color: #34D399;
+  border-color: rgba(52, 211, 153, 0.3);
+}
+.billing-plan-meta {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+.billing-v-divider {
+  width: 1px;
+  height: 30px;
+  background: var(--line);
+  flex-shrink: 0;
+}
+.billing-compute-seg {
+  flex: 1 1 320px;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.billing-compute-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+}
+.billing-compute-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.billing-compute-title svg, .billing-compute-title i {
+  width: 13px;
+  height: 13px;
+  color: var(--emerald);
+}
+.billing-compute-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.billing-pct-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--emerald-dark);
+  background: var(--emerald-subtle);
+  border: 1px solid rgba(0, 179, 137, 0.25);
+  padding: 0 6px;
+  border-radius: 99px;
+}
+:root[data-theme="dark"] .billing-pct-pill {
+  background: rgba(0, 179, 137, 0.18);
+  color: #34D399;
+}
+.billing-tokens-count {
+  font-size: 11.5px;
+  color: var(--text-main);
+  font-weight: 600;
+}
+.billing-tokens-total {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 11px;
+}
+.billing-progress-track {
+  height: 6px;
+  background: var(--bg-subtle-2);
+  border-radius: 99px;
+  overflow: hidden;
+  width: 100%;
+}
+.billing-progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--emerald);
+  transition: width 0.4s ease;
+}
+.billing-stats-seg {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+.billing-mini-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.billing-stat-caption {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.billing-stat-value {
+  font-size: 13px;
+  color: var(--text-main);
+}
+.billing-stat-max {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-left: 2px;
+}
+.billing-tier-chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  border: 1px solid var(--line);
+}
+.billing-action-seg {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.billing-manage-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+.billing-manage-btn:hover {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: rgba(0, 179, 137, 0.35);
+  transform: translateY(-1px);
+}
+:root[data-theme="dark"] .billing-manage-btn {
+  background: #1B2337;
+  color: #E2E8F0;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+:root[data-theme="dark"] .billing-manage-btn:hover {
+  background: rgba(0, 179, 137, 0.2);
+  color: #34D399;
+}
+.billing-manage-btn svg, .billing-manage-btn i {
+  width: 13px;
+  height: 13px;
+  transition: transform 0.15s ease;
+}
+.billing-manage-btn:hover svg, .billing-manage-btn:hover i {
+  transform: translateX(2px);
+}
+@media (max-width: 1100px) {
+  .billing-executive-card {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+}
+@media (max-width: 768px) {
+  .billing-executive-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .billing-v-divider { display: none; }
+  .billing-compute-seg { max-width: 100%; }
+  .billing-stats-seg { justify-content: space-between; }
+  .billing-action-seg { justify-content: flex-end; }
+}
+
+/* ─── 2-CARD BOTTOM SECTION (SPACIOUS EXECUTIVE SPLIT) ─── */
+.bottom-cards-row {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.feature-large-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 24px 26px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.feature-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.feature-card-heading-box {
+  display: flex;
+  flex-direction: column;
+}
+.feature-card-title {
+  font-size: 17.5px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+.feature-card-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.feature-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-filter-pill {
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-subtle);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.card-filter-pill:hover, .card-filter-pill.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+}
+.card-round-icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.card-round-icon-btn:hover {
+  background: var(--bg-subtle-2);
+  color: var(--text-main);
+}
+.card-round-icon-btn.open {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+  box-shadow: 0 0 0 3px var(--emerald-subtle);
+}
+.card-round-icon-btn.has-filter {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald);
+}
+.card-filter-dropdown-wrap {
+  position: relative;
+}
+.card-filter-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 290px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+  z-index: 100;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: filterPop 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+:root[data-theme="dark"] .card-filter-popover {
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  background: #141E32;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+@keyframes filterPop {
+  from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.filter-popover-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.filter-popover-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.filter-popover-title i, .filter-popover-title svg {
+  width: 13px;
+  height: 13px;
+  color: var(--emerald);
+}
+.filter-popover-close {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.filter-popover-close:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+  border-color: var(--line);
+}
+.filter-popover-close i, .filter-popover-close svg {
+  width: 13px;
+  height: 13px;
+}
+.filter-popover-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.filter-popover-subhead {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+}
+.filter-popover-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.popover-chip {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.popover-chip:hover {
+  background: var(--bg-subtle-2);
+  color: var(--text-main);
+}
+.popover-chip.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+  font-weight: 700;
+}
+:root[data-theme="dark"] .popover-chip.active {
+  background: rgba(0, 180, 138, 0.2);
+  color: #34D399;
+  border-color: rgba(0, 180, 138, 0.4);
+}
+.filter-popover-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.filter-popover-reset {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+.filter-popover-reset:hover {
+  color: var(--text-main);
+  background: var(--bg-subtle);
+}
+.filter-popover-apply {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: var(--emerald);
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.filter-popover-apply:hover {
+  opacity: 0.9;
+}
+
+/* Services filter close button */
+.services-filter-close-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.services-filter-close-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+  border-color: var(--line);
+}
+.services-filter-close-btn i, .services-filter-close-btn svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* ─── LEFT CARD: INITIATIVES DELIVERY COLUMN BARS + DATA LIST ─── */
+.chart-columns-visual {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  align-items: flex-end;
+  padding: 44px 16px 22px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.bar-column-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+.bar-column-pill-track {
+  width: 100%;
+  max-width: 44px;
+  height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  background: rgba(15, 23, 42, 0.04);
+  border-radius: 8px;
+  border: 1px solid rgba(15, 23, 42, 0.04);
+}
+:root[data-theme="dark"] .bar-column-pill-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.bar-pillar {
+  width: 100%;
+  border-radius: 6px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+.bar-column-item:hover .bar-pillar {
+  transform: scaleY(1.03);
+}
+
+/* Decent, High-Craft Solid Colors for Bars (Strictly No Gradients) */
+.bar-pillar.col-rd {
+  background: #3B82F6;
+  border: 1px solid #3B82F6;
+  box-shadow: none;
+}
+.bar-pillar.col-gtm {
+  background: #8B5CF6;
+  border: 1px solid #8B5CF6;
+  box-shadow: none;
+}
+.bar-pillar.col-capital {
+  background: #00B389;
+  border: 1px solid #00B389;
+  box-shadow: none;
+}
+.bar-pillar.col-audit {
+  background: #F59E0B;
+  border: 1px solid #F59E0B;
+  box-shadow: none;
+}
+.bar-pillar.col-people {
+  background: #6366F1;
+  border: 1px solid #6366F1;
+  box-shadow: none;
+}
+
+/* Dark mode decent solid tints */
+:root[data-theme="dark"] .bar-pillar.col-rd {
+  background: #60A5FA;
+  border: 1px solid #60A5FA;
+}
+:root[data-theme="dark"] .bar-pillar.col-gtm {
+  background: #A78BFA;
+  border: 1px solid #A78BFA;
+}
+:root[data-theme="dark"] .bar-pillar.col-capital {
+  background: #34D399;
+  border: 1px solid #34D399;
+}
+:root[data-theme="dark"] .bar-pillar.col-audit {
+  background: #FBBF24;
+  border: 1px solid #FBBF24;
+}
+:root[data-theme="dark"] .bar-pillar.col-people {
+  background: #818CF8;
+  border: 1px solid #818CF8;
+}
+
+/* Light Floating Value Tags */
+.column-value-floating-tag {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2.5px 7.5px;
+  border-radius: 99px;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+.column-value-floating-tag.col-rd { background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
+.column-value-floating-tag.col-gtm { background: #F5F3FF; color: #6D28D9; border: 1px solid #DDD6FE; }
+.column-value-floating-tag.col-capital { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
+.column-value-floating-tag.col-audit { background: #FFFBEB; color: #B45309; border: 1px solid #FDE68A; }
+.column-value-floating-tag.col-people { background: #EEF2FF; color: #4338CA; border: 1px solid #C7D2FE; }
+
+:root[data-theme="dark"] .column-value-floating-tag.col-rd { background: rgba(59, 130, 246, 0.15); color: #93C5FD; border-color: rgba(59, 130, 246, 0.25); }
+:root[data-theme="dark"] .column-value-floating-tag.col-gtm { background: rgba(139, 92, 246, 0.15); color: #DDD6FE; border-color: rgba(139, 92, 246, 0.25); }
+:root[data-theme="dark"] .column-value-floating-tag.col-capital { background: rgba(0, 180, 138, 0.15); color: #6EE7B7; border-color: rgba(0, 180, 138, 0.25); }
+:root[data-theme="dark"] .column-value-floating-tag.col-audit { background: rgba(245, 158, 11, 0.15); color: #FDE68A; border-color: rgba(245, 158, 11, 0.25); }
+:root[data-theme="dark"] .column-value-floating-tag.col-people { background: rgba(99, 102, 241, 0.15); color: #A5B4FC; border-color: rgba(99, 102, 241, 0.25); }
+
+.bar-column-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: center;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+.bar-column-sub {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+/* Sub-section Header linking analytics chart to detailed list */
+.initiatives-sub-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px 10px 4px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 4px;
+}
+.sub-head-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+}
+.sub-head-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 99px;
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border: 1px solid var(--emerald-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.stream-pulse-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 0 2px rgba(0, 180, 138, 0.25);
+}
+
+/* Integrated Initiatives Table List - Spacious & Clear */
+.initiatives-table-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.initiative-data-row {
+  display: grid;
+  grid-template-columns: 1fr auto 120px 42px;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 12px;
+  border-radius: 0 !important;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.initiative-data-row:last-child {
+  border-bottom: none;
+}
+.initiative-data-row:hover {
+  background: var(--bg-subtle);
+}
+.init-title-box b {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+.init-title-box small {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  display: block;
+}
+.init-tag-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.init-tag-badge.rd { color: #1D4ED8; background: #EFF6FF; border-color: #BFDBFE; }
+.init-tag-badge.gtm { color: #6D28D9; background: #F5F3FF; border-color: #DDD6FE; }
+.init-tag-badge.capital { color: var(--emerald-dark); background: var(--emerald-subtle); border-color: var(--emerald-light); }
+.init-tag-badge.audit { color: #B45309; background: #FFFBEB; border-color: #FDE68A; }
+.init-tag-badge.people { color: var(--text-secondary); background: var(--bg-subtle); border-color: var(--line); }
+
+:root[data-theme="dark"] .init-tag-badge.rd { color: #93C5FD; background: rgba(59, 130, 246, 0.16); border-color: rgba(147, 197, 253, 0.3); }
+:root[data-theme="dark"] .init-tag-badge.gtm { color: #DDD6FE; background: rgba(139, 92, 246, 0.16); border-color: rgba(221, 214, 254, 0.3); }
+:root[data-theme="dark"] .init-tag-badge.capital { color: #6EE7B7; background: rgba(0, 180, 138, 0.16); border-color: rgba(110, 231, 183, 0.3); }
+:root[data-theme="dark"] .init-tag-badge.audit { color: #FDE68A; background: rgba(245, 158, 11, 0.16); border-color: rgba(253, 230, 138, 0.3); }
+:root[data-theme="dark"] .init-tag-badge.people { color: #A5B4FC; background: rgba(99, 102, 241, 0.16); border-color: rgba(99, 102, 241, 0.3); }
+
+.init-mini-bar {
+  height: 6px;
+  background: var(--bg-subtle-2);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.init-mini-bar div,
+.init-mini-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 99px !important;
+}
+.init-bar-fill.col-rd { background: #3B82F6; }
+.init-bar-fill.col-gtm { background: #8B5CF6; }
+.init-bar-fill.col-capital { background: #00B389; }
+.init-bar-fill.col-audit { background: #F59E0B; }
+.init-bar-fill.col-people { background: #6366F1; }
+
+:root[data-theme="dark"] .init-bar-fill.col-rd { background: #60A5FA; }
+:root[data-theme="dark"] .init-bar-fill.col-gtm { background: #A78BFA; }
+:root[data-theme="dark"] .init-bar-fill.col-capital { background: #34D399; }
+:root[data-theme="dark"] .init-bar-fill.col-audit { background: #FBBF24; }
+:root[data-theme="dark"] .init-bar-fill.col-people { background: #818CF8; }
+.init-pct-val {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  font-weight: 700;
+  text-align: right;
+}
+
+/* ─── RIGHT CARD: MULTI-STREAM OPERATIONAL TELEMETRY SPECTRUM (PLEASANT COLORS) ─── */
+.telemetry-spectrum-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 14px 14px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.telemetry-stream-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+  cursor: pointer;
+}
+.telemetry-stream-row:hover {
+  background: var(--bg-card);
+}
+
+.tel-cat-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 145px;
+  flex-shrink: 0;
+}
+.tel-cat-ic {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+}
+.tel-cat-ic i, .tel-cat-ic svg {
+  width: 14px;
+  height: 14px;
+}
+.tel-cat-ic.col-rd { background: #EFF6FF; color: #2563EB; border-color: #DBEAFE; }
+.tel-cat-ic.col-gtm { background: #F5F3FF; color: #7C3AED; border-color: #EDE9FE; }
+.tel-cat-ic.col-capital { background: #ECFDF5; color: #047857; border-color: #A7F3D0; }
+.tel-cat-ic.col-audit { background: #FFFBEB; color: #D97706; border-color: #FEF3C7; }
+
+:root[data-theme="dark"] .tel-cat-ic.col-rd { background: rgba(59, 130, 246, 0.15); color: #93C5FD; border-color: rgba(59, 130, 246, 0.25); }
+:root[data-theme="dark"] .tel-cat-ic.col-gtm { background: rgba(139, 92, 246, 0.15); color: #DDD6FE; border-color: rgba(139, 92, 246, 0.25); }
+:root[data-theme="dark"] .tel-cat-ic.col-capital { background: rgba(0, 180, 138, 0.15); color: #6EE7B7; border-color: rgba(0, 180, 138, 0.25); }
+:root[data-theme="dark"] .tel-cat-ic.col-audit { background: rgba(245, 158, 11, 0.15); color: #FDE68A; border-color: rgba(245, 158, 11, 0.25); }
+
+.tel-cat-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.tel-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  line-height: 1.25;
+}
+.tel-role {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* 12-Segment Activity Spectrum Strip */
+.tel-bars-spectrum {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 5px;
+  height: 28px;
+  padding: 0 8px;
+}
+.t-bar {
+  width: 6px;
+  border-radius: 3px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.telemetry-stream-row:hover .t-bar {
+  transform: scaleY(1.1);
+}
+
+.tel-bars-spectrum.col-rd .t-bar { background: #3B82F6; }
+.tel-bars-spectrum.col-gtm .t-bar { background: #8B5CF6; }
+.tel-bars-spectrum.col-capital .t-bar { background: #00B389; }
+.tel-bars-spectrum.col-audit .t-bar { background: #F59E0B; }
+
+:root[data-theme="dark"] .tel-bars-spectrum.col-rd .t-bar { background: rgba(96, 165, 250, 0.7); }
+:root[data-theme="dark"] .tel-bars-spectrum.col-gtm .t-bar { background: rgba(167, 139, 250, 0.7); }
+:root[data-theme="dark"] .tel-bars-spectrum.col-capital .t-bar { background: rgba(52, 211, 153, 0.7); }
+:root[data-theme="dark"] .tel-bars-spectrum.col-audit .t-bar { background: rgba(251, 191, 36, 0.7); }
+
+.t-bar.active {
+  opacity: 1 !important;
+  box-shadow: none !important;
+}
+
+/* Metric Badges on right - Clean & Light */
+.tel-metric-badge {
+  width: 68px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.tel-val {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.tel-caption {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+}
+
+.tel-metric-badge.col-rd .tel-val { color: #2563EB; }
+.tel-metric-badge.col-gtm .tel-val { color: #7C3AED; }
+.tel-metric-badge.col-capital .tel-val { color: #0284C7; }
+.tel-metric-badge.col-audit .tel-val { color: #B45309; }
+
+:root[data-theme="dark"] .tel-metric-badge.col-rd .tel-val { color: #93C5FD; }
+:root[data-theme="dark"] .tel-metric-badge.col-gtm .tel-val { color: #DDD6FE; }
+:root[data-theme="dark"] .tel-metric-badge.col-capital .tel-val { color: #7DD3FC; }
+:root[data-theme="dark"] .tel-metric-badge.col-audit .tel-val { color: #FDE68A; }
+
+/* Integrated Activity Stream - Clean Vertical Micro-Timeline */
+.telemetry-stream-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.stream-event-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 12px;
+  border-radius: 0 !important;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.stream-event-item:last-child {
+  border-bottom: none;
+}
+.stream-event-item:hover {
+  background: var(--bg-subtle);
+}
+.stream-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+:root[data-theme="dark"] .stream-dot {
+  box-shadow: 0 0 0 2px rgba(15, 22, 38, 0.8);
+}
+.stream-dot.b { background: #2563EB; }
+.stream-dot.g { background: var(--emerald); }
+.stream-dot.o { background: #D97706; }
+.stream-dot.r { background: #DC2626; }
+.stream-dot.p { background: #7C3AED; }
+.stream-meta-box {
+  flex: 1;
+  min-width: 0;
+}
+.stream-meta-box b {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+.stream-meta-box small {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  display: block;
+}
+.stream-time-val {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ─── FULL-WIDTH DECK (SERVICES REGISTRY) ─── */
+.full-width-deck-section {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 26px 28px;
+  box-shadow: var(--shadow-card);
+}
+.full-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.full-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+.full-section-lede {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Service Grid inside Canvas */
+.service-cards-deck-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.service-deck-card {
+  padding: 18px 20px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--bg-subtle);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 130px;
+  cursor: pointer;
+}
+.service-deck-card:hover {
+  background: var(--bg-card);
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+.service-deck-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.service-deck-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--bg-card);
+  display: grid;
+  place-items: center;
+  color: var(--text-main);
+  border: 1px solid var(--line);
+}
+.service-deck-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  color: var(--text-muted);
+}
+.service-deck-badge.live { color: var(--emerald-dark); background: var(--emerald-subtle); border-color: var(--emerald-light); }
+.service-deck-badge.beta { color: #B45309; background: #FFFBEB; border-color: #FDE68A; }
+.service-deck-badge.new { color: #1D4ED8; background: #EFF6FF; border-color: #BFDBFE; }
+:root[data-theme="dark"] .service-deck-badge.beta { color: #FDE68A; background: rgba(245, 158, 11, 0.16); border-color: rgba(253, 230, 138, 0.3); }
+:root[data-theme="dark"] .service-deck-badge.new { color: #93C5FD; background: rgba(59, 130, 246, 0.16); border-color: rgba(147, 197, 253, 0.3); }
+
+.service-deck-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 3px;
+}
+.service-deck-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Category Filter Pills in Registry */
+.category-pill-tray {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.category-pill-btn {
+  padding: 7px 15px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.category-pill-btn:hover {
+  background: var(--bg-subtle-2);
+  color: var(--text-main);
+}
+.category-pill-btn.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+}
+:root[data-theme="dark"] .category-pill-btn.active {
+  background: rgba(0, 179, 137, 0.2);
+  color: #34D399;
+  border-color: rgba(0, 179, 137, 0.4);
+}
+
+/* Filter bar & Dropdown in Services Registry */
+.services-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  position: relative;
+  z-index: 30;
+}
+.services-filter-bar .grow { flex: 1; }
+.services-filter-dropdown-wrap { position: relative; }
+.services-filter-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+.services-filter-trigger-btn i { width: 14px; height: 14px; color: var(--text-muted); transition: color 0.15s; }
+.services-filter-trigger-btn:hover { background: var(--bg-subtle); border-color: var(--line-strong); }
+.services-filter-trigger-btn:hover i { color: var(--text-main); }
+.services-filter-trigger-btn.open { border-color: var(--emerald); box-shadow: 0 0 0 3px var(--emerald-subtle); }
+.services-filter-trigger-btn.open .filter-chevron { transform: rotate(180deg); }
+.services-filter-active-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--bg-subtle-2);
+  color: var(--text-muted);
+  transition: all 0.15s;
+}
+.services-filter-trigger-btn.has-filter .services-filter-active-pill {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+}
+:root[data-theme="dark"] .services-filter-trigger-btn.has-filter .services-filter-active-pill {
+  background: rgba(0, 180, 138, 0.2);
+  color: #34D399;
+}
+
+.services-filter-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 280px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.04);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 100;
+  animation: popFade 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.services-filter-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px 6px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 4px;
+}
+.services-filter-menu-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.services-filter-menu-title i { width: 12px; height: 12px; }
+.services-filter-reset-action {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+.services-filter-reset-action:hover { color: var(--text-main); background: var(--bg-subtle); }
+.services-filter-menu-items { display: flex; flex-direction: column; gap: 2px; }
+.services-filter-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-main);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: all 0.12s ease;
+}
+.services-filter-item:hover { background: var(--bg-subtle); }
+.services-filter-item.active { background: var(--emerald-subtle); color: var(--emerald-dark); font-weight: 600; }
+:root[data-theme="dark"] .services-filter-item.active { background: rgba(0, 180, 138, 0.2); color: #34D399; }
+.services-f-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; background: var(--text-muted); }
+.services-f-dot.rd { background: #2563EB; }
+.services-f-dot.audit { background: #D97706; }
+.services-f-dot.gtm { background: #7C3AED; }
+.services-f-dot.signal { background: #0284C7; }
+.services-f-dot.ai { background: var(--emerald); }
+.services-f-dot.people { background: #6366F1; }
+.services-f-dot.support { background: #0D9488; }
+.services-f-name { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.services-f-count { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); background: var(--bg-subtle-2); padding: 1px 6px; border-radius: 99px; }
+.services-f-check { width: 14px; height: 14px; color: var(--emerald); opacity: 0; transition: opacity 0.15s ease; }
+.services-filter-item.active .services-f-check { opacity: 1; }
+
+.services-active-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 10px;
+  background: var(--emerald-subtle);
+  border: 1px solid var(--emerald-light);
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--emerald-dark);
+}
+:root[data-theme="dark"] .services-active-filter-chip { background: rgba(0, 180, 138, 0.2); border-color: rgba(0, 180, 138, 0.4); color: #34D399; }
+.services-active-chip-clear { background: none; border: none; cursor: pointer; display: grid; place-items: center; color: var(--emerald-dark); padding: 2px; border-radius: 50%; }
+.services-active-chip-clear:hover { background: rgba(0, 180, 138, 0.2); }
+.services-active-chip-clear i { width: 12px; height: 12px; }
+
+.services-fsearch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: var(--bg-card);
+  color: var(--text-muted);
+  min-width: 240px;
+}
+.services-fsearch:focus-within { border-color: var(--emerald); box-shadow: 0 0 0 3px var(--emerald-subtle); }
+.services-fsearch input { border: 0; outline: 0; background: none; flex: 1; font-size: 13px; color: var(--text-main); }
+
+/* ─── INTEGRATED DASHBOARD PRODUCT JOURNEY SECTION ─── */
+/* ─── INTEGRATED DASHBOARD PRODUCT JOURNEY SECTION (REFINED EXECUTIVE LIFECYCLE FLOW) ─── */
+.journey-pipeline-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 24px 26px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.journey-pipeline-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--emerald);
+  opacity: 0.3;
+}
+
+.journey-pipeline-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.journey-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.journey-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.journey-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: var(--emerald-subtle);
+  border: 1px solid var(--emerald-light);
+  color: var(--emerald-dark);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.journey-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 0 2px rgba(0, 180, 138, 0.25);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.journey-pipeline-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+
+.journey-pipeline-sub {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+/* 8-Stage Interactive Timeline Rail - Sculpted & Connected */
+.journey-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+  position: relative;
+  align-items: stretch;
+}
+
+@media (max-width: 1200px) {
+  .journey-steps-grid {
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 14px;
+  }
+}
+@media (max-width: 640px) {
+  .journey-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.journey-step-btn {
+  padding: 14px 12px 12px;
+  border-radius: 14px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+  text-align: left;
+  min-height: 152px;
+  height: 152px;
+  box-sizing: border-box;
+}
+
+.journey-step-btn:hover {
+  background: var(--bg-card);
+  border-color: var(--line-strong);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+.journey-step-btn.active {
+  background: #FFFFFF;
+  border-color: var(--emerald);
+  box-shadow: 0 2px 8px rgba(0, 180, 138, 0.08);
+}
+
+:root[data-theme="dark"] .journey-step-btn.active {
+  background: #141E30;
+  border-color: var(--emerald);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.journey-step-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 20px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.journey-step-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-faint);
+  letter-spacing: 0.02em;
+}
+
+.journey-step-btn.active .journey-step-num {
+  color: var(--emerald-dark);
+}
+
+:root[data-theme="dark"] .journey-step-btn.active .journey-step-num {
+  color: var(--emerald);
+}
+
+.journey-step-chip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--bg-card);
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+}
+
+.journey-step-btn.active .journey-step-chip {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+}
+
+:root[data-theme="dark"] .journey-step-btn.active .journey-step-chip {
+  background: rgba(0, 214, 164, 0.15);
+  color: #34D399;
+  border-color: rgba(0, 214, 164, 0.3);
+}
+
+.journey-step-icon-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.journey-step-btn:hover .journey-step-icon-wrap {
+  border-color: var(--line-strong);
+  color: var(--text-main);
+}
+
+.journey-step-btn.active .journey-step-icon-wrap {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: rgba(0, 180, 138, 0.35);
+  box-shadow: 0 1px 3px rgba(0, 180, 138, 0.12);
+}
+
+:root[data-theme="dark"] .journey-step-btn.active .journey-step-icon-wrap {
+  background: rgba(0, 180, 138, 0.16);
+  color: #34D399;
+  border-color: rgba(0, 214, 164, 0.35);
+  box-shadow: none;
+}
+
+.journey-step-icon-wrap i,
+.journey-step-icon-wrap svg {
+  width: 18px;
+  height: 18px;
+}
+
+.journey-step-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.journey-step-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 3px;
+}
+
+.journey-step-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.35;
+  min-height: 29px;
+  max-height: 29px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.journey-step-btn.active .journey-step-name {
+  color: var(--text-main);
+}
+
+.journey-step-btn.active .journey-step-desc {
+  color: var(--text-secondary);
+}
+
+.journey-step-indicator {
+  display: none;
+}
+
+
+/* ─── COMMAND PALETTE (⌘K) ─── */
+.cmdk-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 14vh;
+  z-index: 200;
+}
+.cmdk-backdrop.open { display: flex; }
+.cmdk-card {
+  width: min(580px, 92vw);
+  background: var(--bg-card);
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.2);
+  overflow: hidden;
+}
+.cmdk-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+.cmdk-search-bar input {
+  flex: 1;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 14.5px;
+  color: var(--text-main);
+}
+.cmdk-results-list {
+  max-height: 380px;
+  overflow-y: auto;
+  padding: 8px;
+}
+.cmdk-group-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 8px 12px 4px;
+}
+.cmdk-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.cmdk-item-row.selected, .cmdk-item-row:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+}
+.cmdk-item-row .kbd { margin-left: auto; }
+
+/* Toast */
+.toast-pill {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--line-strong);
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 300;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+}
+:root[data-theme="dark"] .toast-pill {
+  background: #1B2337;
+  color: #F8FAFC;
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.toast-pill.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.toast-pill i { color: var(--emerald-accent); }
+
+.theme-sun-icon { display: none; }
+.theme-moon-icon { display: block; }
+:root[data-theme="dark"] .theme-sun-icon { display: block; }
+:root[data-theme="dark"] .theme-moon-icon { display: none; }
+
+/* ─── RESPONSIVE BREAKPOINTS ─── */
+@media (max-width: 1200px) {
+  .metrics-card-deck { grid-template-columns: repeat(2, 1fr); }
+  .bottom-cards-row { grid-template-columns: 1fr; }
+  .service-cards-deck-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 992px) {
+  .permanent-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    border-radius: 0;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 200;
+  }
+  .permanent-sidebar.mobile-open {
+    transform: translateX(0);
+    box-shadow: var(--shadow-drawer);
+  }
+  .sidebar-mobile-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(4px);
+    z-index: 199;
+  }
+  .sidebar-mobile-backdrop.show { display: block; }
+}
+@media (max-width: 820px) {
+  .canvas-wrapper { padding: 14px; flex-direction: column; }
+  .service-cards-deck-grid { grid-template-columns: 1fr; }
+  .page-headline-lead { font-size: 20px; }
+  .controls-pill-row { width: 100%; justify-content: flex-start; }
 }
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to main content</a>
-<div class="app" id="appShell">
 
-  <!-- Product sidebar -->
-  <aside class="side" id="side" aria-label="Product navigation">
-    <div class="side-inner">
-      <div class="side-head">
-        <div class="brand-mark" aria-hidden="true"><i data-lucide="zap"></i></div>
-        <div class="brand-word" id="sideBrand">York <span>Foundation</span></div>
-        <button class="icon-btn" type="button" id="sideToggle" aria-label="Collapse product navigation" aria-expanded="true" aria-controls="side"><i data-lucide="panel-left-close" aria-hidden="true"></i></button>
-      </div>
-      <button class="ws" type="button" id="wsBtn" aria-label="Current workspace Acme Inc. Switch workspace">
-        <span class="ws-mark" aria-hidden="true">A</span><span class="ws-name">Acme Inc</span><i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+<div class="canvas-wrapper">
+
+  <!-- ================= PERMANENT SIDEBAR NAVIGATION ================= -->
+  <div class="sidebar-mobile-backdrop" id="sidebarBackdrop"></div>
+  <aside class="permanent-sidebar" id="permanentSidebar" aria-label="Sidebar Navigation">
+    <!-- Brand Header -->
+    <div class="sidebar-header">
+      <a href="index.html" class="sidebar-brand-box" id="sidebarBrandBtn" title="Return to York Website" style="text-decoration:none">
+        <img src="logo-light.svg" alt="York.ie" class="sidebar-brand-logo logo-light-mode" height="28" />
+        <img src="logo-dark.svg" alt="York.ie" class="sidebar-brand-logo logo-dark-mode" height="28" />
+      </a>
+      <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" title="Toggle navigation collapse">
+        <i data-lucide="panel-left-close"></i>
       </button>
-      <div class="side-scroll" id="sideNav" role="navigation" aria-label="Product areas"></div>
-      <div class="side-foot">
-        <button class="user" type="button" id="userBtn" aria-label="Alex Kim, Admin. Account menu">
-          <span class="avatar" aria-hidden="true">AK</span>
-          <span class="meta"><b>Alex Kim</b><small>Admin</small></span>
-          <i data-lucide="more-horizontal" aria-hidden="true"></i>
-        </button>
+    </div>
+
+    <!-- Workspace Selector -->
+    <div class="sidebar-workspace-pill" id="sidebarWsBtn" title="Switch Workspace">
+      <div style="width:22px;height:22px;border-radius:6px;background:var(--emerald);color:#fff;display:grid;place-items:center;font-weight:700;font-size:11.5px">A</div>
+      <span style="font-weight:600;font-size:13px;flex:1;color:var(--text-main)">Acme Inc</span>
+      <span class="sidebar-ws-tag">PROD</span>
+      <i data-lucide="chevrons-up-down" style="width:13px;height:13px;color:var(--text-muted)"></i>
+    </div>
+
+    <!-- Top 4 Primary Navigation (Moved from Topbar to Sidebar) -->
+    <nav class="sidebar-primary-nav" id="sidebarPrimaryNav" aria-label="Main Navigation">
+      <button type="button" class="sidebar-main-nav-btn active" data-view="dashboard">
+        <i data-lucide="layout-grid"></i>
+        <span>Dashboard</span>
+      </button>
+      <button type="button" class="sidebar-main-nav-btn" data-view="journey">
+        <i data-lucide="activity"></i>
+        <span>Journey</span>
+      </button>
+      <button type="button" class="sidebar-main-nav-btn" data-view="services">
+        <i data-lucide="layers"></i>
+        <span>Services</span>
+      </button>
+      <button type="button" class="sidebar-main-nav-btn" data-view="capital">
+        <i data-lucide="database"></i>
+        <span>Capital</span>
+      </button>
+    </nav>
+
+    <!-- Full Categorized Service Navigation (All 23 Services) -->
+    <div class="sidebar-nav-scroll" id="sidebarNavScroll"></div>
+
+    <!-- Compute / Fuel Tokens & User Info Footer -->
+    <div class="sidebar-footer">
+      <div class="sidebar-compute-meter" id="sidebarFuelBtn" title="View token compute details">
+        <div class="sidebar-compute-top">
+          <span style="display:inline-flex;align-items:center;gap:5px"><i data-lucide="zap" style="width:12px;height:12px;color:var(--emerald)"></i> Fuel Compute</span>
+          <span class="mono" style="color:var(--emerald-dark)">61% used</span>
+        </div>
+        <div class="sidebar-compute-bar"><i></i></div>
+        <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--text-muted);margin-top:5px">
+          <span>152.4K / 250K tokens</span>
+          <span>42/60 seats</span>
+        </div>
+      </div>
+
+      <div class="sidebar-user-tile" id="sidebarUserTile" title="User Settings">
+        <div class="sidebar-user-avatar">AK</div>
+        <div style="flex:1;min-width:0">
+          <b style="font-size:12px;display:block;line-height:1.2;color:var(--text-main)">Alex Kim</b>
+          <small style="font-size:11px;color:var(--text-muted)">Admin &amp; Founder</small>
+        </div>
+        <i data-lucide="chevron-right" style="width:14px;height:14px;color:var(--text-muted)"></i>
       </div>
     </div>
   </aside>
-  <div class="scrim" id="scrim" hidden></div>
 
-  <!-- Main -->
-  <div class="col">
-    <header class="topbar">
-      <button class="icon-btn hamburger" type="button" id="hamburger" aria-label="Open product navigation" aria-controls="side" aria-expanded="false"><i data-lucide="menu" aria-hidden="true"></i></button>
-      <button class="icon-btn tb-toggle" type="button" id="tbToggle" aria-label="Expand product navigation" aria-expanded="false" aria-controls="side"><i data-lucide="panel-left-open" aria-hidden="true"></i></button>
-      <nav class="crumbs" aria-label="Breadcrumb">
-        <ol style="display:flex;align-items:center;gap:8px;list-style:none;margin:0;padding:0">
-          <li class="root">Acme Inc</li>
-          <li aria-hidden="true"><i data-lucide="chevron-right"></i></li>
-          <li><b id="crumbCur" aria-current="page">Dashboard</b></li>
-        </ol>
-      </nav>
-      <div class="tb-spacer" aria-hidden="true"></div>
-      <button class="search" type="button" id="openCmdk" aria-label="Search services and actions. Keyboard shortcut Command K">
-        <i data-lucide="search" aria-hidden="true"></i><span>Search services, actions…</span><kbd class="kbd" style="flex:none" aria-hidden="true">⌘K</kbd>
+  <!-- ================= MAIN DESK CANVAS ================= -->
+  <main class="desk-canvas" id="mainDesk">
+
+    <!-- 1. Floating Top Navigation Bar (Left Crumb, Center Switcher, Right Tools) -->
+    <!-- 1. Floating Top Navigation Bar (Single Unified Rounded Dock Capsule) -->
+    <header class="floating-topbar">
+      <!-- Left: Breadcrumb + Theme Switcher -->
+      <div class="topbar-nav-group">
+        <div class="topbar-breadcrumb">
+          <span class="topbar-crumb-org">Acme Inc</span>
+          <span class="topbar-crumb-slash">/</span>
+          <span class="topbar-crumb-view" id="topbarCurrentView">Dashboard</span>
+        </div>
+
+        <div class="topbar-v-divider" aria-hidden="true"></div>
+
+        <!-- Theme Version Switcher -->
+        <div class="version-switch-pill" role="navigation" aria-label="Console version">
+          <span class="version-switch-lbl">Console:</span>
+          <a href="dashboard-v1.html" class="v-tab-btn">
+            v1
+          </a>
+          <a href="dashboard.html" class="v-tab-btn active">
+            v2
+          </a>
+        </div>
+      </div>
+
+      <!-- Center-Right: Wide Search Bar (Generous width, text never overlaps) -->
+      <button class="top-search-pill" id="topSearchBtn" type="button" aria-label="Search or run command (⌘K)">
+        <div class="top-search-inner">
+          <i data-lucide="search" aria-hidden="true"></i>
+          <span class="top-search-text">Search services, actions, initiatives…</span>
+        </div>
+        <kbd class="top-search-kbd">⌘K</kbd>
       </button>
-      <button class="icon-btn bell" type="button" id="bellBtn" aria-label="Notifications, 3 unread"><i data-lucide="bell" aria-hidden="true"></i><span class="dot" aria-hidden="true"></span></button>
-      <button class="icon-btn help-btn" type="button" id="helpBtn" aria-label="Help and documentation"><i data-lucide="circle-help" aria-hidden="true"></i></button>
-      <div class="tb-avatar" aria-label="Signed in as Alex Kim" title="Alex Kim" role="img">AK</div>
+
+      <!-- Right Action Cluster: Dark/Light, Bell, Avatar -->
+      <div class="topbar-actions-group">
+        <button class="topbar-action-btn" id="themeSwitchBtn" type="button" aria-label="Toggle Color Theme" title="Toggle dark/light mode">
+          <i data-lucide="sun" class="theme-sun-icon" aria-hidden="true"></i>
+          <i data-lucide="moon" class="theme-moon-icon" aria-hidden="true"></i>
+        </button>
+
+        <button class="topbar-action-btn" id="topBellBtn" type="button" aria-label="Notifications" title="Notifications">
+          <i data-lucide="bell" aria-hidden="true"></i>
+          <span class="topbar-bell-dot" aria-hidden="true"></span>
+        </button>
+
+        <div class="topbar-user-avatar" id="topUserBtn" role="button" tabindex="0" title="Alex Kim (Admin &amp; Founder)" aria-label="Alex Kim (Admin &amp; Founder)">
+          AK
+        </div>
+      </div>
     </header>
 
-    <main class="main" id="main" tabindex="-1">
-      <div class="page">
-        <div id="liveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-
-        <!-- ============ OVERVIEW ============ -->
-        <section class="view active" id="view-dashboard" aria-labelledby="dash-heading">
-          <div class="hello">
-            <h1 id="dash-heading">Good morning, Alex.</h1>
-            <p>Here's your workspace at a glance — from ideation through investment.</p>
-          </div>
-
-          <div class="kpis" role="list" aria-label="Key performance indicators">
-            <div class="card kpi" role="listitem">
-              <div class="kpi-top"><span class="kpi-lbl">Active Initiatives</span><span class="kpi-ic g" aria-hidden="true"><i data-lucide="layers"></i></span></div>
-              <div class="kpi-val" aria-label="18 active initiatives">18</div>
-              <div class="kpi-sub">across R&amp;D, GTM &amp; Finance</div>
-              <div class="kpi-role">Relevant for Admin and Founder</div>
-            </div>
-            <div class="card kpi" role="listitem">
-              <div class="kpi-top"><span class="kpi-lbl">R&amp;D Health</span><span class="kpi-ic" aria-hidden="true"><i data-lucide="heart-pulse"></i></span></div>
-              <div class="kpi-val" aria-label="87 out of 100">87<small>/100</small></div>
-              <div class="kpi-sub up"><span class="sr-only">Up </span>4.2 vs last sprint</div>
-              <div class="kpi-role">Relevant for Tech and Founder</div>
-            </div>
-            <div class="card kpi" role="listitem">
-              <div class="kpi-top"><span class="kpi-lbl">GTM Reach</span><span class="kpi-ic" aria-hidden="true"><i data-lucide="megaphone"></i></span></div>
-              <div class="kpi-val" aria-label="184 thousand">184K</div>
-              <div class="kpi-sub up"><span class="sr-only">Up </span>12.6% this month</div>
-              <div class="kpi-role">Relevant for Founder and GTM</div>
-            </div>
-            <div class="card kpi" role="listitem">
-              <div class="kpi-top"><span class="kpi-lbl">Runway</span><span class="kpi-ic" aria-hidden="true"><i data-lucide="circle-dollar-sign"></i></span></div>
-              <div class="kpi-val" aria-label="22 months">22<small>mo</small></div>
-              <div class="kpi-sub">at current burn rate</div>
-              <div class="kpi-role">Relevant for Finance and Founder</div>
-            </div>
-          </div>
-
-          <button class="card strip" type="button" data-soon="Billing & Usage" style="width:100%" aria-label="Billing and Usage. Fuel tokens 61 percent used. Seats 42 of 60. Next invoice November 1. Open details.">
-            <span class="st-ic" aria-hidden="true"><i data-lucide="credit-card"></i></span>
-            <b>Billing &amp; Usage</b>
-            <span class="sep" aria-hidden="true"></span>
-            <span>Fuel tokens <span class="meter" role="progressbar" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100" aria-label="Fuel tokens 61 percent used"><i style="width:61%"></i></span><span class="mono">61%</span></span>
-            <span class="sep" aria-hidden="true"></span>
-            <span>Seats <span class="mono">42 / 60</span></span>
-            <span class="sep" aria-hidden="true"></span>
-            <span>Next invoice <span class="mono">Nov 1</span></span>
-            <span class="grow" aria-hidden="true"></span>
-            <span class="link" aria-hidden="true">Details <i data-lucide="arrow-right" style="width:13px;height:13px"></i></span>
-          </button>
-
-          <div class="card journey-strip" aria-labelledby="journey-strip-heading">
-            <div class="journey-strip-head">
-              <h2 id="journey-strip-heading">Your product journey</h2>
-              <button type="button" class="link" data-view="journey" aria-label="View full product journey">View full journey <i data-lucide="arrow-right" style="width:13px;height:13px" aria-hidden="true"></i></button>
-            </div>
-            <div class="journey-flow" id="journeyStrip" role="list" aria-label="Product journey stages"></div>
-          </div>
-
-          <div class="two">
-            <div class="card panel">
-              <div class="sec-head"><h2 class="sec-title" id="init-heading">Active initiatives</h2><button type="button" class="link" data-view="services">View all <i data-lucide="arrow-right" style="width:13px;height:13px" aria-hidden="true"></i></button></div>
-              <div id="initList" role="list" aria-labelledby="init-heading"></div>
-            </div>
-            <div class="card panel">
-              <div class="sec-head"><h2 class="sec-title" id="recent-heading">Recent activity</h2><span class="mono" style="font-size:12px;color:var(--muted)">LAST 24H</span></div>
-              <div id="recentList" role="list" aria-labelledby="recent-heading"></div>
-            </div>
-          </div>
-
-          <div class="sec-head">
-            <h2 class="sec-title" id="svc-heading">Your services</h2>
-            <a class="link" href="#view-services" data-view="services">View all <span id="svcCount">24</span> →</a>
-          </div>
-          <div class="svc-grid" id="featured" role="list" aria-labelledby="svc-heading"></div>
-        </section>
-
-        <!-- ============ JOURNEY ============ -->
-        <section class="view" id="view-journey" aria-labelledby="journey-title" hidden>
-          <div class="page-head">
-            <h2 class="page-title" id="journey-title">Product Journey</h2>
-            <p class="page-lede">The full lifecycle, from first idea to investor update — every stage connected.</p>
-          </div>
-          <div class="flow-row" id="flowRow" role="tablist" aria-label="Journey stages"></div>
-          <div class="card flow-detail" id="flowDetail"></div>
-        </section>
-
-        <!-- ============ SERVICES ============ -->
-        <section class="view" id="view-services" aria-labelledby="services-title" hidden>
-          <div class="page-head">
-            <h2 class="page-title">All Services</h2>
-            <p class="page-lede"><span id="svcCount2">23</span> products across build, quality, market, signal, capital, people, and support.</p>
-          </div>
-          <div class="filter-bar" id="svcFilterBar">
-            <button class="chipbtn active" type="button" data-filter="all">All</button>
-            <button class="chipbtn" type="button" data-filter="Build &amp; Ship">Build</button>
-            <button class="chipbtn" type="button" data-filter="Quality &amp; Audit">Quality</button>
-            <button class="chipbtn" type="button" data-filter="Go-to-Market">GTM</button>
-            <button class="chipbtn" type="button" data-filter="Signal &amp; Analytics">Signal</button>
-            <button class="chipbtn" type="button" data-filter="capital">Capital</button>
-            <button class="chipbtn" type="button" data-filter="People &amp; Learning">People</button>
-            <button class="chipbtn" type="button" data-filter="Support">Support</button>
-            <span class="grow"></span>
-            <label class="fsearch"><i data-lucide="search"></i><input type="text" id="svcFilter" placeholder="Filter services…" autocomplete="off"></label>
-          </div>
-          <div id="svcCatalog"></div>
-          <div class="empty" id="svcEmpty">No services match your filters.</div>
-        </section>
-
+    <!-- 2. Section Headline & Executive Persona Controls Row (Standardized 38px Height, 24px Single Line Title) -->
+    <section class="title-controls-row">
+      <div class="page-headline-wrap">
+        <h1 class="page-headline-lead" id="canvasTitle">Your Initiatives &amp; Operations</h1>
       </div>
-    </main>
+
+      <div class="controls-pill-row">
+        <!-- Date Range Pill - 38px Height -->
+        <div class="date-pill">
+          <i data-lucide="calendar"></i>
+          <div class="date-pill-text">
+            <span class="date-pill-label">Sprint 24:</span>
+            <span class="date-pill-val">15 Oct – 29 Oct 2026</span>
+          </div>
+        </div>
+
+        <!-- Export CSV / Report Pill - 38px Height -->
+        <button class="export-pill-btn" id="exportBtn" type="button">
+          <span>Export Summary</span>
+          <i data-lucide="arrow-up-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 3. Dynamic Views Container -->
+    <div id="viewsHost">
+
+      <!-- ============ DASHBOARD OVERVIEW VIEW ============ -->
+      <div class="view-panel active" id="view-dashboard">
+        <!-- 4-Card Deck (Complete Telemetry: Initiatives, R&D Health, GTM Pulse, Runway) -->
+        <div class="metrics-card-deck">
+          <!-- Card 1 (Primary Accent Card) -->
+          <div class="deck-card primary-accent-card" data-nav="R&D Launchpad">
+            <div class="deck-card-top">
+              <span class="deck-card-label">Active Initiatives</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div class="deck-card-value">18</div>
+            <div class="deck-card-caption">
+              <b>10 R&amp;D</b>
+              <span class="dot-sep">·</span>
+              <span>5 GTM</span>
+              <span class="dot-sep">·</span>
+              <span>3 Finance</span>
+            </div>
+          </div>
+
+          <!-- Card 2 (R&D Health) -->
+          <div class="deck-card" data-nav="R&D Pulse">
+            <div class="deck-card-top">
+              <span class="deck-card-label">R&amp;D Health Score</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div class="deck-card-value">87<small>/100</small></div>
+            <div class="deck-card-caption">
+              <b>+4.2 pts</b>
+              <span class="dot-sep">·</span>
+              <span>Optimal velocity</span>
+            </div>
+          </div>
+
+          <!-- Card 3 (GTM Market Reach) -->
+          <div class="deck-card" data-nav="GTM Pulse">
+            <div class="deck-card-top">
+              <span class="deck-card-label">Market Reach</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div class="deck-card-value">184.2K</div>
+            <div class="deck-card-caption">
+              <b>+12.6%</b>
+              <span class="dot-sep">·</span>
+              <span>14.8K conversions</span>
+            </div>
+          </div>
+
+          <!-- Card 4 (Capital Runway) -->
+          <div class="deck-card" data-nav="Finance Pulse">
+            <div class="deck-card-top">
+              <span class="deck-card-label">Capital Runway</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div class="deck-card-value">22<small>mo</small></div>
+            <div class="deck-card-caption">
+              <b>$42K/mo burn</b>
+              <span class="dot-sep">·</span>
+              <span>Series A ready</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Executive Billing & Compute Resource Card -->
+        <div class="billing-executive-card">
+          <!-- Col 1: Plan & Subscription -->
+          <div class="billing-segment billing-plan-seg">
+            <div class="billing-plan-icon">
+              <i data-lucide="sparkles"></i>
+            </div>
+            <div class="billing-seg-content">
+              <div class="billing-plan-title-row">
+                <span class="billing-plan-name">Enterprise Scale</span>
+                <span class="billing-live-tag">ACTIVE</span>
+              </div>
+              <span class="billing-plan-meta">$1,840/mo · Auto-renews Nov 1</span>
+            </div>
+          </div>
+
+          <div class="billing-v-divider" aria-hidden="true"></div>
+
+          <!-- Col 2: Token Compute Meter -->
+          <div class="billing-segment billing-compute-seg">
+            <div class="billing-compute-head">
+              <div class="billing-compute-title">
+                <i data-lucide="zap"></i>
+                <span>Fuel Compute</span>
+              </div>
+              <div class="billing-compute-stat">
+                <span class="billing-pct-pill">61%</span>
+                <span class="billing-tokens-count">152.4K <span class="billing-tokens-total">/ 250K tokens</span></span>
+              </div>
+            </div>
+            <div class="billing-progress-track">
+              <div class="billing-progress-fill" style="width: 61%;"></div>
+            </div>
+          </div>
+
+          <div class="billing-v-divider" aria-hidden="true"></div>
+
+          <!-- Col 3: Seats & Tier -->
+          <div class="billing-segment billing-stats-seg">
+            <div class="billing-mini-stat">
+              <span class="billing-stat-caption">Seats</span>
+              <span class="billing-stat-value"><b class="mono">42</b><span class="billing-stat-max">/60</span></span>
+            </div>
+            <div class="billing-mini-stat">
+              <span class="billing-stat-caption">Compute Tier</span>
+              <span class="billing-tier-chip">Tier-1 High Perf</span>
+            </div>
+          </div>
+
+          <!-- Col 4: Action CTA -->
+          <div class="billing-action-seg">
+            <button type="button" class="billing-manage-btn" id="stripManageBtn">
+              <span>Manage Plan</span>
+              <i data-lucide="arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div style="height: 24px;"></div>
+
+        <!-- 2-Card Bottom Split (Initiatives Velocity & Cross-Service Signal) -->
+        <div class="bottom-cards-row">
+          <!-- Left Large Card: Initiatives Column Bars + Detailed Workstream List -->
+          <div class="feature-large-card">
+            <div class="feature-card-header">
+              <div class="feature-card-heading-box">
+                <h2 class="feature-card-title">Initiatives Velocity &amp; Delivery</h2>
+                <span class="feature-card-subtitle">Active delivery streams &amp; completion status</span>
+              </div>
+              <div class="feature-card-actions">
+                <button class="card-filter-pill active" type="button">Sprint 24</button>
+                <div class="card-filter-dropdown-wrap" id="initFilterWrap">
+                  <button class="card-round-icon-btn" id="filterInitBtn" type="button" aria-label="Filter" aria-expanded="false" aria-haspopup="true"><i data-lucide="sliders-horizontal"></i></button>
+                  <div class="card-filter-popover" id="filterInitPopover" hidden>
+                    <div class="filter-popover-head">
+                      <span class="filter-popover-title"><i data-lucide="sliders-horizontal"></i> Filter Initiatives</span>
+                      <button type="button" class="filter-popover-close" id="closeInitFilterBtn" aria-label="Close filter"><i data-lucide="x"></i></button>
+                    </div>
+                    <div class="filter-popover-section">
+                      <div class="filter-popover-subhead">Filter by Category</div>
+                      <div class="filter-popover-chips" id="initCatChips">
+                        <button type="button" class="popover-chip active" data-cat="all">All</button>
+                        <button type="button" class="popover-chip" data-cat="rd">R&D</button>
+                        <button type="button" class="popover-chip" data-cat="gtm">GTM</button>
+                        <button type="button" class="popover-chip" data-cat="capital">Capital</button>
+                        <button type="button" class="popover-chip" data-cat="audit">Quality</button>
+                        <button type="button" class="popover-chip" data-cat="people">People</button>
+                      </div>
+                    </div>
+                    <div class="filter-popover-section">
+                      <div class="filter-popover-subhead">Filter by Status</div>
+                      <div class="filter-popover-chips" id="initStatusChips">
+                        <button type="button" class="popover-chip active" data-status="all">All</button>
+                        <button type="button" class="popover-chip" data-status="On track">On track</button>
+                        <button type="button" class="popover-chip" data-status="In review">In review</button>
+                        <button type="button" class="popover-chip" data-status="Target 85%">Target 85%</button>
+                        <button type="button" class="popover-chip" data-status="Evidence req">Evidence req</button>
+                        <button type="button" class="popover-chip" data-status="In progress">In progress</button>
+                      </div>
+                    </div>
+                    <div class="filter-popover-foot">
+                      <button type="button" class="filter-popover-reset" id="resetInitFilterBtn">Reset</button>
+                      <button type="button" class="filter-popover-apply" id="applyInitFilterBtn">Done</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sculpted Vertical Column Pillars with Floating Value Tag (Pleasant Executive Palette) -->
+            <div class="chart-columns-visual" id="initiativesBarChart">
+              <!-- Bar 1: R&D york-api (72%) - Royal Blue -->
+              <div class="bar-column-item" data-nav="R&D Launchpad">
+                <div class="bar-column-pill-track">
+                  <div class="column-value-floating-tag col-rd">72%</div>
+                  <div class="bar-pillar col-rd" style="height: 72%;"></div>
+                </div>
+                <span class="bar-column-label">york-api</span>
+                <span class="bar-column-sub">R&amp;D</span>
+              </div>
+
+              <!-- Bar 2: GTM Q1 Brand (48%) - Soft Violet -->
+              <div class="bar-column-item" data-nav="GTM Launchpad">
+                <div class="bar-column-pill-track">
+                  <div class="column-value-floating-tag col-gtm">48%</div>
+                  <div class="bar-pillar col-gtm" style="height: 48%;"></div>
+                </div>
+                <span class="bar-column-label">Q1 Brand</span>
+                <span class="bar-column-sub">GTM</span>
+              </div>
+
+              <!-- Bar 3: Capital Series A (85%) - Ocean Sky -->
+              <div class="bar-column-item" data-nav="Investment Advisor">
+                <div class="bar-column-pill-track">
+                  <div class="column-value-floating-tag col-capital">85%</div>
+                  <div class="bar-pillar col-capital" style="height: 85%;"></div>
+                </div>
+                <span class="bar-column-label">Series A</span>
+                <span class="bar-column-sub">Capital</span>
+              </div>
+
+              <!-- Bar 4: Quality Audit AC (61%) - Warm Amber -->
+              <div class="bar-column-item" data-nav="Internal Audit Platform">
+                <div class="bar-column-pill-track">
+                  <div class="column-value-floating-tag col-audit">61%</div>
+                  <div class="bar-pillar col-audit" style="height: 61%;"></div>
+                </div>
+                <span class="bar-column-label">Audit AC</span>
+                <span class="bar-column-sub">Quality</span>
+              </div>
+
+              <!-- Bar 5: People LMS Cohort (34%) - Slate Steel -->
+              <div class="bar-column-item" data-nav="LMS">
+                <div class="bar-column-pill-track">
+                  <div class="column-value-floating-tag col-people">34%</div>
+                  <div class="bar-pillar col-people" style="height: 34%;"></div>
+                </div>
+                <span class="bar-column-label">LMS Cohort</span>
+                <span class="bar-column-sub">People</span>
+              </div>
+            </div>
+
+            <!-- Sub-section Header connecting analytics chart to detailed workstreams list -->
+            <div class="initiatives-sub-section-head">
+              <span class="sub-head-title">Delivery Workstreams</span>
+              <span class="sub-head-badge">5 in flight</span>
+            </div>
+
+            <!-- Integrated Detailed Active Initiatives Table Rows -->
+            <div class="initiatives-table-list" id="initiativesTableList"></div>
+          </div>
+
+          <!-- Right Large Card: Service Telemetry Spectrum + Live Activity Stream -->
+          <div class="feature-large-card">
+            <div class="feature-card-header">
+              <div class="feature-card-heading-box">
+                <h2 class="feature-card-title">Cross-Service Signal &amp; Telemetry</h2>
+                <span class="feature-card-subtitle">Activity telemetry &amp; real-time operational feed</span>
+              </div>
+              <div class="feature-card-actions">
+                <button class="card-filter-pill active" id="telemetryViewToggle" type="button">Live Stream</button>
+                <div class="card-filter-dropdown-wrap" id="streamFilterWrap">
+                  <button class="card-round-icon-btn" id="streamFilterBtn" type="button" aria-label="Settings" aria-expanded="false" aria-haspopup="true"><i data-lucide="sliders-horizontal"></i></button>
+                  <div class="card-filter-popover" id="streamFilterPopover" hidden>
+                    <div class="filter-popover-head">
+                      <span class="filter-popover-title"><i data-lucide="sliders-horizontal"></i> Filter Activity Stream</span>
+                      <button type="button" class="filter-popover-close" id="closeStreamFilterBtn" aria-label="Close filter"><i data-lucide="x"></i></button>
+                    </div>
+                    <div class="filter-popover-section">
+                      <div class="filter-popover-subhead">Filter by Event Type</div>
+                      <div class="filter-popover-chips" id="streamSeverityChips">
+                        <button type="button" class="popover-chip active" data-dot="all">All</button>
+                        <button type="button" class="popover-chip" data-dot="b">Engineering</button>
+                        <button type="button" class="popover-chip" data-dot="g">Success</button>
+                        <button type="button" class="popover-chip" data-dot="p">Advisory</button>
+                        <button type="button" class="popover-chip" data-dot="o">Warning</button>
+                        <button type="button" class="popover-chip" data-dot="r">Alerts</button>
+                      </div>
+                    </div>
+                    <div class="filter-popover-foot">
+                      <button type="button" class="filter-popover-reset" id="resetStreamFilterBtn">Reset</button>
+                      <button type="button" class="filter-popover-apply" id="applyStreamFilterBtn">Done</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Multi-Stream Operational Telemetry Spectrum (Pleasant Palette: Royal Blue, Iris, Sky, Warm Amber) -->
+            <div class="telemetry-spectrum-container">
+              <!-- Stream 1: Build & Ship (Royal Blue) -->
+              <div class="telemetry-stream-row" data-nav="R&D Launchpad">
+                <div class="tel-cat-label">
+                  <span class="tel-cat-ic col-rd"><i data-lucide="terminal"></i></span>
+                  <div class="tel-cat-text">
+                    <span class="tel-name">Build &amp; Ship</span>
+                    <span class="tel-role">R&amp;D Pipeline</span>
+                  </div>
+                </div>
+                <div class="tel-bars-spectrum col-rd" aria-label="12-day velocity spectrum">
+                  <span class="t-bar" style="height:12px;opacity:0.45"></span>
+                  <span class="t-bar" style="height:16px;opacity:0.6"></span>
+                  <span class="t-bar" style="height:14px;opacity:0.55"></span>
+                  <span class="t-bar" style="height:20px;opacity:0.85"></span>
+                  <span class="t-bar" style="height:24px;opacity:1"></span>
+                  <span class="t-bar" style="height:18px;opacity:0.75"></span>
+                  <span class="t-bar" style="height:22px;opacity:0.9"></span>
+                  <span class="t-bar" style="height:15px;opacity:0.65"></span>
+                  <span class="t-bar" style="height:20px;opacity:0.85"></span>
+                  <span class="t-bar" style="height:24px;opacity:1"></span>
+                  <span class="t-bar" style="height:26px;opacity:1"></span>
+                  <span class="t-bar active" style="height:28px"></span>
+                </div>
+                <div class="tel-metric-badge col-rd">
+                  <span class="tel-val mono">98.4%</span>
+                  <span class="tel-caption">uptime</span>
+                </div>
+              </div>
+
+              <!-- Stream 2: Quality & Audit (Iris / Violet) -->
+              <div class="telemetry-stream-row" data-nav="QA Usage Dashboard">
+                <div class="tel-cat-label">
+                  <span class="tel-cat-ic col-gtm"><i data-lucide="shield-check"></i></span>
+                  <div class="tel-cat-text">
+                    <span class="tel-name">Quality &amp; Audit</span>
+                    <span class="tel-role">Gates &amp; Evals</span>
+                  </div>
+                </div>
+                <div class="tel-bars-spectrum col-gtm" aria-label="12-day velocity spectrum">
+                  <span class="t-bar" style="height:14px;opacity:0.5"></span>
+                  <span class="t-bar" style="height:18px;opacity:0.7"></span>
+                  <span class="t-bar" style="height:20px;opacity:0.8"></span>
+                  <span class="t-bar" style="height:16px;opacity:0.65"></span>
+                  <span class="t-bar" style="height:22px;opacity:0.9"></span>
+                  <span class="t-bar" style="height:20px;opacity:0.85"></span>
+                  <span class="t-bar" style="height:24px;opacity:0.95"></span>
+                  <span class="t-bar" style="height:19px;opacity:0.75"></span>
+                  <span class="t-bar" style="height:22px;opacity:0.9"></span>
+                  <span class="t-bar" style="height:25px;opacity:1"></span>
+                  <span class="t-bar" style="height:22px;opacity:0.9"></span>
+                  <span class="t-bar active" style="height:28px"></span>
+                </div>
+                <div class="tel-metric-badge col-gtm">
+                  <span class="tel-val mono">100%</span>
+                  <span class="tel-caption">passed</span>
+                </div>
+              </div>
+
+              <!-- Stream 3: Go-to-Market (Sky / Cyan) -->
+              <div class="telemetry-stream-row" data-nav="GTM Launchpad">
+                <div class="tel-cat-label">
+                  <span class="tel-cat-ic col-capital"><i data-lucide="send"></i></span>
+                  <div class="tel-cat-text">
+                    <span class="tel-name">Go-to-Market</span>
+                    <span class="tel-role">Channels &amp; CRM</span>
+                  </div>
+                </div>
+                <div class="tel-bars-spectrum col-capital" aria-label="12-day velocity spectrum">
+                  <span class="t-bar" style="height:10px;opacity:0.4"></span>
+                  <span class="t-bar" style="height:15px;opacity:0.6"></span>
+                  <span class="t-bar" style="height:18px;opacity:0.75"></span>
+                  <span class="t-bar" style="height:14px;opacity:0.55"></span>
+                  <span class="t-bar" style="height:21px;opacity:0.85"></span>
+                  <span class="t-bar" style="height:24px;opacity:0.95"></span>
+                  <span class="t-bar" style="height:18px;opacity:0.7"></span>
+                  <span class="t-bar" style="height:22px;opacity:0.9"></span>
+                  <span class="t-bar" style="height:20px;opacity:0.8"></span>
+                  <span class="t-bar" style="height:26px;opacity:1"></span>
+                  <span class="t-bar" style="height:24px;opacity:0.95"></span>
+                  <span class="t-bar active" style="height:28px"></span>
+                </div>
+                <div class="tel-metric-badge col-capital">
+                  <span class="tel-val mono">184K</span>
+                  <span class="tel-caption">reach</span>
+                </div>
+              </div>
+
+              <!-- Stream 4: Signal & Capital (Warm Amber) -->
+              <div class="telemetry-stream-row" data-nav="Finance Pulse">
+                <div class="tel-cat-label">
+                  <span class="tel-cat-ic col-audit"><i data-lucide="trending-up"></i></span>
+                  <div class="tel-cat-text">
+                    <span class="tel-name">Signal &amp; Capital</span>
+                    <span class="tel-role">Runway &amp; Burn</span>
+                  </div>
+                </div>
+                <div class="tel-bars-spectrum col-audit" aria-label="12-day velocity spectrum">
+                  <span class="t-bar" style="height:15px;opacity:0.55"></span>
+                  <span class="t-bar" style="height:18px;opacity:0.7"></span>
+                  <span class="t-bar" style="height:16px;opacity:0.65"></span>
+                  <span class="t-bar" style="height:20px;opacity:0.8"></span>
+                  <span class="t-bar" style="height:22px;opacity:0.9"></span>
+                  <span class="t-bar" style="height:19px;opacity:0.75"></span>
+                  <span class="t-bar" style="height:21px;opacity:0.85"></span>
+                  <span class="t-bar" style="height:23px;opacity:0.95"></span>
+                  <span class="t-bar" style="height:20px;opacity:0.85"></span>
+                  <span class="t-bar" style="height:24px;opacity:0.95"></span>
+                  <span class="t-bar" style="height:22px;opacity:0.9"></span>
+                  <span class="t-bar active" style="height:28px"></span>
+                </div>
+                <div class="tel-metric-badge col-audit">
+                  <span class="tel-val mono">22mo</span>
+                  <span class="tel-caption">runway</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sub-section Header connecting telemetry spectrum to live stream feed -->
+            <div class="initiatives-sub-section-head">
+              <span class="sub-head-title">Live Operational Stream</span>
+              <span class="sub-head-badge"><span class="stream-pulse-dot" aria-hidden="true"></span>Live Feed</span>
+            </div>
+
+            <!-- Integrated Real-Time Activity Feed -->
+            <div class="telemetry-stream-feed" id="telemetryStreamFeed"></div>
+          </div>
+        </div>
+
+        <div style="height: 24px;"></div>
+
+        <!-- 3. Integrated Product Journey & Lifecycle Delivery Section (Spacious Cards, No Full-Width Lower Card) -->
+        <div class="journey-pipeline-card">
+          <div class="journey-pipeline-header">
+            <div class="journey-header-left">
+              <div class="journey-title-row">
+                <span class="journey-status-pill">
+                  <span class="journey-pulse-dot" aria-hidden="true"></span>
+                  <span>Lifecycle Flow</span>
+                </span>
+                <h2 class="journey-pipeline-title">Product Delivery Journey</h2>
+              </div>
+              <p class="journey-pipeline-sub">End-to-end operational gates from ideation to production telemetry</p>
+            </div>
+            <button class="card-filter-pill" data-view="journey" type="button">Full Lifecycle Architecture →</button>
+          </div>
+
+          <!-- 8 Lifecycle Stage Interactive Steps Rail -->
+          <div class="journey-steps-grid" id="dashboardJourneySteps"></div>
+        </div>
+
+        <div style="height: 24px;"></div>
+        <div class="full-width-deck-section">
+          <div class="full-section-head">
+            <div>
+              <h2 class="full-section-title">Core Services Registry</h2>
+              <p class="full-section-lede">Quick-launch your active engineering, quality, and capital workspaces</p>
+            </div>
+            <button class="card-filter-pill" data-view="services">Browse all 23 services →</button>
+          </div>
+          <div class="service-cards-deck-grid" id="coreFeaturedGrid"></div>
+        </div>
+      </div>
+
+      <!-- ============ PRODUCT JOURNEY VIEW ============ -->
+      <div class="view-panel" id="view-journey" style="display:none">
+        <div class="full-width-deck-section">
+          <div class="full-section-head">
+            <div>
+              <h2 class="full-section-title">Product Lifecycle Architecture</h2>
+              <p class="full-section-lede">The end-to-end company operating model across 8 delivery gates</p>
+            </div>
+          </div>
+          <div class="category-pill-tray" id="journeyPillTray"></div>
+          <div class="feature-large-card" id="journeyStageDetailBox" style="min-height:220px"></div>
+        </div>
+      </div>
+
+      <!-- ============ SERVICES CATALOG VIEW ============ -->
+      <div class="view-panel" id="view-services" style="display:none">
+        <div class="full-width-deck-section">
+          <div class="full-section-head">
+            <div>
+              <h2 class="full-section-title">All 23 Enterprise Services</h2>
+              <p class="full-section-lede">Direct registry of build, quality, marketing, intelligence, and people platforms</p>
+            </div>
+          </div>
+          <div class="services-filter-bar" id="servicesFilterBar">
+            <div class="services-filter-dropdown-wrap" id="servicesFilterDropdownWrap">
+              <button class="services-filter-trigger-btn" id="servicesFilterBtn" type="button" aria-expanded="false" aria-haspopup="true">
+                <i data-lucide="sliders-horizontal"></i>
+                <span>Filter</span>
+                <span class="services-filter-active-pill" id="servicesActiveBadge">All</span>
+                <i data-lucide="chevron-down" class="filter-chevron"></i>
+              </button>
+
+              <div class="services-filter-dropdown-menu" id="servicesFilterMenu" hidden>
+                <div class="services-filter-menu-head">
+                  <span class="services-filter-menu-title"><i data-lucide="sliders-horizontal"></i> Category</span>
+                  <div style="display:flex;align-items:center;gap:6px">
+                    <button type="button" class="services-filter-reset-action" id="servicesResetBtn">Reset</button>
+                    <button type="button" class="services-filter-close-btn" id="servicesCloseFilterBtn" aria-label="Close filter"><i data-lucide="x"></i></button>
+                  </div>
+                </div>
+                <div class="services-filter-menu-items" id="servicesCategoryPills" role="menu">
+                  <button class="category-pill-btn active services-filter-item" type="button" data-filter="all" role="menuitem">
+                    <span class="services-f-dot all"></span>
+                    <span class="services-f-name">All</span>
+                    <span class="services-f-count">23</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                  <button class="category-pill-btn services-filter-item" type="button" data-filter="Build &amp; Ship" role="menuitem">
+                    <span class="services-f-dot rd"></span>
+                    <span class="services-f-name">Build &amp; Ship</span>
+                    <span class="services-f-count">5</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                  <button class="category-pill-btn services-filter-item" type="button" data-filter="Quality &amp; Audit" role="menuitem">
+                    <span class="services-f-dot audit"></span>
+                    <span class="services-f-name">Quality &amp; Audit</span>
+                    <span class="services-f-count">4</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                  <button class="category-pill-btn services-filter-item" type="button" data-filter="Go-to-Market" role="menuitem">
+                    <span class="services-f-dot gtm"></span>
+                    <span class="services-f-name">GTM</span>
+                    <span class="services-f-count">3</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                  <button class="category-pill-btn services-filter-item" type="button" data-filter="Signal &amp; Analytics" role="menuitem">
+                    <span class="services-f-dot signal"></span>
+                    <span class="services-f-name">Signal &amp; Analytics</span>
+                    <span class="services-f-count">3</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                  <button class="category-pill-btn services-filter-item" type="button" data-filter="AI &amp; Advisory" role="menuitem">
+                    <span class="services-f-dot ai"></span>
+                    <span class="services-f-name">AI &amp; Advisory</span>
+                    <span class="services-f-count">2</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                  <button class="category-pill-btn services-filter-item" type="button" data-filter="People &amp; Learning" role="menuitem">
+                    <span class="services-f-dot people"></span>
+                    <span class="services-f-name">People &amp; Learning</span>
+                    <span class="services-f-count">3</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                  <button class="category-pill-btn services-filter-item" type="button" data-filter="Support" role="menuitem">
+                    <span class="services-f-dot support"></span>
+                    <span class="services-f-name">Support</span>
+                    <span class="services-f-count">3</span>
+                    <i data-lucide="check" class="services-f-check"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="services-active-filter-chip" id="servicesActiveChip" style="display:none">
+              <span class="services-active-chip-text" id="servicesActiveChipText"></span>
+              <button type="button" class="services-active-chip-clear" id="servicesClearChipBtn" aria-label="Clear active filter"><i data-lucide="x"></i></button>
+            </div>
+
+            <span class="grow"></span>
+            <label class="services-fsearch"><i data-lucide="search"></i><input type="text" id="servicesSearchInput" placeholder="Filter services…" autocomplete="off"></label>
+          </div>
+          <div class="service-cards-deck-grid" id="allServicesDeckGrid"></div>
+        </div>
+      </div>
+
+      <!-- ============ CAPITAL VIEW ============ -->
+      <div class="view-panel" id="view-capital" style="display:none">
+        <div class="full-width-deck-section">
+          <div class="full-section-head">
+            <div>
+              <h2 class="full-section-title">Capital, Runway &amp; Financial Signal</h2>
+              <p class="full-section-lede">Investment matching, data rooms, and unit economics</p>
+            </div>
+          </div>
+          <div class="metrics-card-deck">
+            <div class="deck-card primary-accent-card">
+              <div class="deck-card-top"><span class="deck-card-label">Runway Duration</span><div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div></div>
+              <div class="deck-card-value">22<small> months</small></div>
+              <div class="deck-card-caption">Stable at $42K/mo burn</div>
+            </div>
+            <div class="deck-card">
+              <div class="deck-card-top"><span class="deck-card-label">Investor Matches</span><div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div></div>
+              <div class="deck-card-value">14</div>
+              <div class="deck-card-caption">3 qualified in last 48h</div>
+            </div>
+            <div class="deck-card">
+              <div class="deck-card-top"><span class="deck-card-label">Data Room Docs</span><div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div></div>
+              <div class="deck-card-value">100%</div>
+              <div class="deck-card-caption">All 14 core exhibits audited</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ================= COMMAND PALETTE MODAL (⌘K) ================= -->
+<div class="cmdk-backdrop" id="cmdkModal">
+  <div class="cmdk-card">
+    <div class="cmdk-search-bar">
+      <i data-lucide="search"></i>
+      <input type="text" id="cmdkInput" placeholder="Type a service, initiative, or command…" autocomplete="off" />
+      <span class="kbd" style="font-size:11px;padding:2px 6px;border-radius:4px;border:1px solid var(--line)">ESC</span>
+    </div>
+    <div class="cmdk-results-list" id="cmdkResults"></div>
   </div>
 </div>
 
-<div class="cmdk" id="cmdk" role="dialog" aria-modal="true" aria-label="Command palette" aria-hidden="true" hidden>
-  <div class="cmdk-box">
-    <div class="cmdk-in"><i data-lucide="search" aria-hidden="true"></i><label class="sr-only" for="cmdkInput">Search services and actions</label><input type="text" id="cmdkInput" placeholder="Search services, actions…" autocomplete="off" aria-autocomplete="list" aria-controls="cmdkList"></div>
-    <div class="cmdk-list" id="cmdkList" role="listbox" aria-label="Search results"></div>
-  </div>
+<!-- Toast Notice -->
+<div class="toast-pill" id="toastPill">
+  <i data-lucide="check"></i>
+  <span id="toastText"></span>
 </div>
-<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"><i data-lucide="check-circle-2" aria-hidden="true"></i><span id="toastMsg"></span></div>
 
 <script>
-/* ——— Data ——— */
+/* ——— DATA REPOSITORY ——— */
 const CATEGORIES = [
   { name:'Build & Ship', services:[
     { name:'R&D Launchpad', desc:'AI-native fullstack product development platform.', icon:'rocket', status:'live' },
@@ -511,383 +3524,809 @@ const CATEGORIES = [
     { name:'Survey Ticket', desc:'Survey and feedback for internal and external users.', icon:'messages-square', status:'live' },
   ]},
 ];
+
 const allServices = CATEGORIES.flatMap(c => c.services);
-const svcByName = Object.fromEntries(allServices.map(s => [s.name, s]));
+const svcMap = Object.fromEntries(allServices.map(s => [s.name, s]));
+const CORE_KEYS = ['R&D Launchpad', 'Fuel', 'GTM Launchpad', 'R&D Pulse', 'Investment Advisor', 'Hub'];
 
 const INITIATIVES = [
-  { name:'york-api v2',           sub:'R&D Launchpad · 6 contributors', tag:'R&D',     cls:'rd',      pct:72, svc:'R&D Launchpad' },
-  { name:'Q1 brand campaign',     sub:'GTM Launchpad · 3 channels',     tag:'GTM',     cls:'gtm',     pct:48, svc:'GTM Launchpad' },
-  { name:'Series A data room',    sub:'Investment Advisor · 14 docs',   tag:'CAPITAL', cls:'capital', pct:85, svc:'Investment Advisor' },
-  { name:'Q1 internal audit',     sub:'Internal Audit · 32 controls',   tag:'AUDIT',   cls:'audit',   pct:61, svc:'Internal Audit Platform' },
-  { name:'Onboarding LMS',        sub:'LMS · 4 cohorts',                tag:'PEOPLE',  cls:'people',  pct:34, svc:'LMS' },
-];
-const RECENT = [
-  { dot:'b', t:'R&D Pulse score up 4.2 points',       s:'Pulse · sprint 24 closed',        svc:'R&D Pulse',          when:'12m' },
-  { dot:'p', t:'3 posts scheduled for Oct 16',        s:'GTM · LinkedIn, X, newsletter',   svc:'GTM Launchpad',      when:'38m' },
-  { dot:'o', t:'onboarding-summary v14 evaluated',    s:'Prompt · 120-case eval',          svc:'Prompt Dashboard',   when:'1h' },
-  { dot:'g', t:'3 investor matches surfaced',         s:'Investment Advisor · Series A',   svc:'Investment Advisor', when:'2h' },
-  { dot:'r', t:'Control AC-14 evidence missing',      s:'Internal Audit · due Fri Oct 16', svc:'Internal Audit Platform', when:'3h' },
-  { dot:'k', t:'4 new hires added to onboarding',     s:'Hub · People ops',                svc:'Hub',                when:'5h' },
-];
-const FEATURED = ['R&D Launchpad','Fuel','GTM Launchpad','R&D Pulse','Investment Advisor','Hub'];
-const STAGES = [
-  { n:'Ideate', d:'Research & framing', ic:'lightbulb', chip:'FUEL', p:'Research, frame, and pressure-test ideas. Fuel pulls context from Slack, Granola, HubSpot, and your workspace history — so decisions start informed, not blank.', tools:['Fuel','Design Library','Competitor Analysis'] },
-  { n:'Build', d:'Code & ship', ic:'code-2', chip:'R&D', p:'Ship in R&D Launchpad. Code review flows through Gerrit, tasks through PMT, design assets through the Design Library — every artifact linked to the initiative.', tools:['R&D Launchpad','Gerrit','PMT','Design Library'] },
-  { n:'QA & Audit', d:'Quality gates', ic:'shield-check', chip:'QUALITY', p:'Automated QA, internal audit, external compliance, UI/UX review, and cloud security — five gates, one signal. Failures roll up into R&D Pulse automatically.', tools:['QA Usage Dashboard','Internal Audit Platform','External Audit Platform','UI/UX Audit Platform','Prowler'] },
-  { n:'Launch', d:'Campaigns & CRM', ic:'send', chip:'GTM', p:'Coordinate campaigns across social, CRM, and ads from one calendar. Approval flows, connector health, and scheduling — all in GTM Launchpad.', tools:['GTM Launchpad','Survey Ticket'] },
-  { n:'Measure', d:'Signal & pulse', ic:'gauge', chip:'SIGNAL', p:'R&D Pulse tracks engineering health. GTM Pulse tracks market performance. Prompt Dashboard tracks AI quality. All three roll up into one workspace signal.', tools:['R&D Pulse','GTM Pulse','Prompt Dashboard'] },
-  { n:'Finance', d:'Burn, runway, ROI', ic:'wallet', chip:'CAPITAL', p:'Burn, runway, unit economics, per-initiative ROI. Finance Pulse connects engineering spend and GTM spend to outcomes — so you know which products are actually working.', tools:['Finance Pulse'] },
-  { n:'Invest', d:'Raise & report', ic:'trending-up', chip:'CAPITAL', p:'Investment Advisor identifies investor fit, prepares updates, manages the data room, and tracks engagement — from first outreach to signed term sheet.', tools:['Investment Advisor','Data Room','Investor Updates'] },
-  { n:'People', d:'Hire, learn, assess', ic:'users-round', chip:'HRMS', p:'Hub manages HR, teams, and projects. LMS delivers learning. Assessment Platform runs org-wide evaluations. Walk-in and Internship Drives handle recruitment events.', tools:['Hub','LMS','Assessment Platform','Walk in Drive','Internship Drive'] },
-];
-const NAV = [
-  { items:[
-    { label:'Dashboard', icon:'layout-dashboard', view:'dashboard' },
-    { label:'Product Journey', icon:'map', view:'journey' },
-    { label:'All Services', icon:'layout-grid', view:'services', badge:String(allServices.length) },
-  ]},
-  ...CATEGORIES.map(c => ({
-    group: c.name,
-    items: c.services.map(s => ({
-      label: s.name,
-      icon: s.icon,
-      svc: 1,
-      badge: s.status === 'new' ? 'NEW' : undefined,
-    })),
-  })),
-  { group:'Platform', items:[
-    { label:'Connector Hub', icon:'cable', soon:1 },
-    { label:'Team & Access', icon:'user-cog', soon:1 },
-    { label:'Billing & Usage', icon:'receipt', soon:1 },
-    { label:'Settings', icon:'sliders-horizontal', soon:1 },
-  ]},
+  { name:'york-api v2',        sub:'R&D Launchpad · 6 contributors', tag:'R&D',     cls:'rd',      pct:72, svc:'R&D Launchpad' },
+  { name:'Q1 brand campaign',  sub:'GTM Launchpad · 3 channels',     tag:'GTM',     cls:'gtm',     pct:48, svc:'GTM Launchpad' },
+  { name:'Series A data room', sub:'Investment Advisor · 14 docs',   tag:'CAPITAL', cls:'capital', pct:85, svc:'Investment Advisor' },
+  { name:'Q1 internal audit',  sub:'Internal Audit · 32 controls',   tag:'AUDIT',   cls:'audit',   pct:61, svc:'Internal Audit Platform' },
+  { name:'Onboarding LMS',     sub:'LMS · 4 cohorts',                tag:'PEOPLE',  cls:'people',  pct:34, svc:'LMS' },
 ];
 
-/* ——— Helpers ——— */
+const RECENT_UPDATES = [
+  { dot:'b', title:'R&D Pulse score up 4.2 points',       sub:'Sprint 24 closed',        svc:'R&D Pulse',          time:'12m' },
+  { dot:'g', title:'3 posts scheduled for Oct 16',        sub:'LinkedIn, X, newsletter', svc:'GTM Launchpad',      time:'38m' },
+  { dot:'o', title:'onboarding-summary v14 evaluated',    sub:'120-case eval completed', svc:'Prompt Dashboard',   time:'1h' },
+  { dot:'g', title:'3 investor matches surfaced',         sub:'Series A criteria',       svc:'Investment Advisor', time:'2h' },
+  { dot:'r', title:'Control AC-14 evidence required',     sub:'Due Friday Oct 16',       svc:'Internal Audit Platform', time:'3h' },
+  { dot:'b', title:'4 new hires added to onboarding',     sub:'People operations',       svc:'Hub',                time:'5h' },
+];
+
+const STAGES = [
+  { n:'Ideate', d:'Research & framing', ic:'lightbulb', chip:'FUEL', p:'Research, frame, and pressure-test ideas. Fuel connects context from communication tools, documents, and prior iterations.', tools:['Fuel','Design Library'] },
+  { n:'Build', d:'Code & ship', ic:'code-2', chip:'R&D', p:'Ship in R&D Launchpad. Peer reviews flow via Gerrit, task tracking in PMT, and shared components from the Design Library.', tools:['R&D Launchpad','Gerrit','PMT','Design Library'] },
+  { n:'QA & Audit', d:'Quality gates', ic:'shield-check', chip:'QUALITY', p:'Automated end-to-end tests, internal audit controls, compliance gates, and cloud vulnerability scanning.', tools:['QA Usage Dashboard','Internal Audit Platform','External Audit Platform','UI/UX Audit Platform','Prowler'] },
+  { n:'Launch', d:'Campaigns & CRM', ic:'send', chip:'GTM', p:'Coordinate campaigns across social channels and CRM from a unified release calendar.', tools:['GTM Launchpad','Survey Ticket'] },
+  { n:'Measure', d:'Signal & metrics', ic:'gauge', chip:'SIGNAL', p:'Track sprint velocity, marketing conversions, and prompt accuracy with live telemetry.', tools:['R&D Pulse','GTM Pulse','Prompt Dashboard'] },
+  { n:'Finance', d:'Burn & economics', ic:'wallet', chip:'CAPITAL', p:'Understand unit economics, burn rate, and initiative ROI in one dashboard.', tools:['Finance Pulse'] },
+  { n:'Invest', d:'Investor updates', ic:'trending-up', chip:'CAPITAL', p:'Surface qualified investors, prepare investor updates, and manage data room materials.', tools:['Investment Advisor'] },
+  { n:'People', d:'Team & learning', ic:'users-round', chip:'HRMS', p:'Manage team rosters, onboarding modules, evaluations, and hiring programs.', tools:['Hub','LMS','Assessment Platform','Walk in Drive','Internship Drive'] },
+];
+
+/* ——— HELPERS ——— */
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-const paintIcons = () => { if (window.lucide) lucide.createIcons({ attrs:{ 'stroke-width':1.75 } }); };
-let toastT;
-function toast(msg){ $('toastMsg').textContent = msg; $('toast').classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => $('toast').classList.remove('show'), 2400); }
+const renderIcons = () => { if (window.lucide) lucide.createIcons({ attrs:{ 'stroke-width':1.8 } }); };
 
-/* ——— Render: product sidebar ——— */
-function navItem(it){
-  const badge = it.badge ? `<span class="nbadge${it.badge==='NEW'?' new':''}">${esc(it.badge)}</span>` : '';
-  const inner = `<span class="nav-ic" aria-hidden="true"><i data-lucide="${it.icon}"></i></span><span class="nav-lbl">${esc(it.label)}</span>${badge}`;
-  const attrs = it.view ? `data-view="${it.view}" data-key="${it.view}"` : it.svc ? `data-nav="${esc(it.label)}" data-key="${esc(it.label)}"` : `data-soon="${esc(it.label)}"`;
-  return `<button type="button" class="nav-item" ${attrs}>${inner}</button>`;
+let toastTimer;
+function showToast(msg){
+  $('toastText').textContent = msg;
+  $('toastPill').classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => $('toastPill').classList.remove('show'), 2200);
 }
-$('sideNav').innerHTML = NAV.map(g => `<div class="grp">${g.group ? `<div class="grp-label">${esc(g.group)}</div>` : ''}${g.items.map(navItem).join('')}</div>`).join('');
 
-/* ——— Render: overview ——— */
-const DOT_LABEL = { g:'Success', p:'Advisory', b:'Info', o:'Warning', r:'Alert', k:'People' };
-$('initList').innerHTML = INITIATIVES.map(i => `
-  <button type="button" class="init" role="listitem" data-nav="${esc(i.svc)}" aria-label="${esc(i.name)}, ${i.tag}, ${i.pct} percent complete. Open ${esc(i.svc)}.">
-    <span><b>${esc(i.name)}</b><small>${esc(i.sub)}</small></span>
-    <span class="tag ${i.cls}">${i.tag}</span>
-    <span class="bar ${i.cls}" role="progressbar" aria-valuenow="${i.pct}" aria-valuemin="0" aria-valuemax="100" aria-label="${i.pct} percent complete"><i style="width:${i.pct}%"></i></span>
-    <span class="pct" aria-hidden="true">${i.pct}%</span>
-  </button>`).join('');
-$('recentList').innerHTML = RECENT.map(r => `
-  <button type="button" class="ra" role="listitem" data-nav="${esc(r.svc)}" aria-label="${DOT_LABEL[r.dot] || 'Update'}: ${esc(r.t)}. ${esc(r.s)}. ${r.when} ago.">
-    <span class="ra-dot ${r.dot}" aria-hidden="true"></span>
-    <span class="ra-txt"><b>${esc(r.t)}</b><small>${esc(r.s)}</small></span>
-    <time datetime="">${r.when} ago</time>
-  </button>`).join('');
+/* ——— POPULATE PERMANENT SIDEBAR NAVIGATION (ALL 23 SERVICES) ——— */
+$('sidebarNavScroll').innerHTML = CATEGORIES.map(cat => `
+  <div class="sidebar-category-group">
+    <div class="sidebar-category-title">${esc(cat.name)}</div>
+    ${cat.services.map(s => `
+      <button type="button" class="sidebar-nav-item" data-nav="${esc(s.name)}">
+        <i data-lucide="${s.icon}"></i>
+        <span class="sidebar-nav-label">${esc(s.name)}</span>
+        ${s.status === 'new' ? '<span class="sidebar-badge new">NEW</span>' : ''}
+      </button>`).join('')}
+  </div>`).join('') + `
+  <div class="sidebar-category-group">
+    <div class="sidebar-category-title">Platform &amp; Tools</div>
+    <button type="button" class="sidebar-nav-item" data-soon="Connector Hub"><i data-lucide="cable"></i><span class="sidebar-nav-label">Connector Hub</span></button>
+    <button type="button" class="sidebar-nav-item" data-soon="Team &amp; Access"><i data-lucide="user-cog"></i><span class="sidebar-nav-label">Team &amp; Access</span></button>
+    <button type="button" class="sidebar-nav-item" data-soon="Billing &amp; Usage"><i data-lucide="receipt"></i><span class="sidebar-nav-label">Billing &amp; Usage</span></button>
+  </div>`;
 
-function svcCard(s){
-  const st = s.status === 'new' ? 'NEW' : s.status === 'beta' ? 'BETA' : 'LIVE';
-  return `<button type="button" class="svc" data-svc-name="${esc(s.name)}" aria-label="${esc(s.name)}, status ${st}. ${esc(s.desc)}">
-    <div class="svc-ic" aria-hidden="true"><i data-lucide="${s.icon}"></i></div>
-    <div class="svc-name">${esc(s.name)}</div>
-    <div class="svc-desc">${esc(s.desc)}</div>
-    <div class="svc-foot"><span class="status ${s.status}"><span class="d" aria-hidden="true"></span><span class="sr-only">Status </span>${st}</span><span class="arrow" aria-hidden="true">→</span></div>
-  </button>`;
-}
-$('featured').innerHTML = FEATURED.map(n => svcCard(svcByName[n])).join('');
-$('svcCount').textContent = allServices.length;
-$('svcCount2').textContent = allServices.length;
-
-/* ——— Render: services ——— */
-$('svcCatalog').innerHTML = CATEGORIES.map(c => `
-  <div class="cat" data-cat="${esc(c.name)}">
-    <div class="cat-head"><span class="cat-name">${esc(c.name)}</span><span class="cat-count">${c.services.length}</span></div>
-    <div class="svc-grid">${c.services.map(svcCard).join('')}</div>
+/* ——— POPULATE INITIATIVES LIST INSIDE LEFT CARD ——— */
+$('initiativesTableList').innerHTML = INITIATIVES.map(i => `
+  <div class="initiative-data-row" data-nav="${esc(i.svc)}">
+    <div class="init-title-box">
+      <b>${esc(i.name)}</b>
+      <small>${esc(i.sub)}</small>
+    </div>
+    <span class="init-tag-badge ${i.cls}">${i.tag}</span>
+    <div class="init-mini-bar">
+      <div class="init-bar-fill col-${i.cls}" style="height:100%;width:${i.pct}%;"></div>
+    </div>
+    <span class="init-pct-val">${i.pct}%</span>
   </div>`).join('');
 
-function applySvcFilters(){
-  const chip = document.querySelector('#svcFilterBar .chipbtn.active');
-  const filter = chip?.dataset.filter || 'all';
-  const q = $('svcFilter').value.toLowerCase().trim();
-  let total = 0;
-  document.querySelectorAll('#svcCatalog .cat').forEach(cat => {
-    const name = cat.dataset.cat;
-    let catOk = filter === 'all' || name === filter;
-    if (filter === 'capital') catOk = name === 'AI & Advisory' || name === 'Signal & Analytics';
-    let any = false;
-    cat.querySelectorAll('.svc').forEach(s => {
-      let ok = catOk;
-      if (filter === 'capital' && name === 'Signal & Analytics') ok = s.dataset.svcName === 'Finance Pulse';
-      if (filter === 'capital' && name === 'AI & Advisory') ok = s.dataset.svcName === 'Investment Advisor';
-      ok = ok && (!q || s.textContent.toLowerCase().includes(q));
-      s.style.display = ok ? '' : 'none';
-      if (ok){ any = true; total++; }
-    });
-    cat.style.display = any ? '' : 'none';
-  });
-  $('svcEmpty').classList.toggle('show', total === 0);
+/* ——— POPULATE TELEMETRY STREAM FEED INSIDE RIGHT CARD ——— */
+$('telemetryStreamFeed').innerHTML = RECENT_UPDATES.map(r => `
+  <div class="stream-event-item" data-nav="${esc(r.svc)}">
+    <span class="stream-dot ${r.dot}"></span>
+    <div class="stream-meta-box">
+      <b>${esc(r.title)}</b>
+      <small>${esc(r.sub)}</small>
+    </div>
+    <span class="stream-time-val">${r.time}</span>
+  </div>`).join('');
+
+/* ——— RENDER SERVICE TILES ——— */
+function serviceCardMarkup(s){
+  const st = s.status === 'new' ? 'NEW' : s.status === 'beta' ? 'BETA' : 'LIVE';
+  return `
+    <div class="service-deck-card" data-svc-name="${esc(s.name)}" role="button">
+      <div>
+        <div class="service-deck-top">
+          <div class="service-deck-icon"><i data-lucide="${s.icon}"></i></div>
+          <span class="service-deck-badge ${s.status}">${st}</span>
+        </div>
+        <div class="service-deck-name">${esc(s.name)}</div>
+        <div class="service-deck-desc">${esc(s.desc)}</div>
+      </div>
+    </div>`;
 }
-document.querySelectorAll('#svcFilterBar .chipbtn').forEach(c => {
-  c.setAttribute('aria-pressed', c.classList.contains('active') ? 'true' : 'false');
-  c.addEventListener('click', () => {
-    document.querySelectorAll('#svcFilterBar .chipbtn').forEach(x => {
-      x.classList.remove('active');
-      x.setAttribute('aria-pressed', 'false');
-    });
-    c.classList.add('active');
-    c.setAttribute('aria-pressed', 'true');
-    applySvcFilters();
+
+$('coreFeaturedGrid').innerHTML = CORE_KEYS.map(k => serviceCardMarkup(svcMap[k])).join('');
+$('allServicesDeckGrid').innerHTML = allServices.map(serviceCardMarkup).join('');
+
+/* ——— RENDER JOURNEY TABS & DETAILS (VIEW & DASHBOARD) ——— */
+$('journeyPillTray').innerHTML = STAGES.map((s, i) => `
+  <button class="category-pill-btn${i===0?' active':''}" data-stage="${i}">
+    0${i+1}. ${esc(s.n)}
+  </button>`).join('');
+
+function renderJourneyDetail(idx){
+  const s = STAGES[idx];
+  $('journeyStageDetailBox').innerHTML = `
+    <div style="margin-bottom:12px">
+      <span class="card-filter-pill" style="margin-bottom:8px;display:inline-block">Stage 0${idx+1} · ${s.chip}</span>
+      <h3 style="font-size:20px;font-weight:700;color:var(--text-main);margin-bottom:4px">${esc(s.n)} — ${esc(s.d)}</h3>
+      <p style="font-size:14px;color:var(--text-secondary);max-width:760px;line-height:1.5">${esc(s.p)}</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      ${s.tools.map(t => `<button class="card-filter-pill" data-nav="${esc(t)}">${esc(t)} →</button>`).join('')}
+    </div>`;
+  renderIcons();
+}
+renderJourneyDetail(0);
+
+document.querySelectorAll('#journeyPillTray .category-pill-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#journeyPillTray .category-pill-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderJourneyDetail(+btn.dataset.stage);
   });
 });
-$('svcFilter').addEventListener('input', applySvcFilters);
 
-/* ——— Render: overview journey strip ——— */
-const STRIP_COUNTS = [12, 8, 5, 3, 7, 4, 2];
-$('journeyStrip').innerHTML = STAGES.slice(0, 7).map((s, i) => `
-  <button type="button" class="stage" role="listitem" data-view="journey" data-stage-jump="${i}" aria-label="${esc(s.n)} stage, ${STRIP_COUNTS[i]} active items. Open product journey.">
-    <span class="stage-ic" aria-hidden="true"><i data-lucide="${s.ic}"></i></span>
-    <span class="stage-name">${esc(s.n === 'Ideate' ? 'Ideation' : s.n)}</span>
-    <span class="stage-count">${STRIP_COUNTS[i]}</span>
-  </button>`).join('');
+/* ——— RENDER INTEGRATED PRODUCT JOURNEY ON MAIN DASHBOARD (REFINED EXECUTIVE 8 CARDS) ——— */
+function renderDashboardJourney(activeIdx = 1){
+  const stepsContainer = $('dashboardJourneySteps');
+  if (!stepsContainer) return;
 
-/* ——— Render: journey ——— */
-$('flowRow').innerHTML = STAGES.map((s,i) => `
-  <button type="button" class="flow${i===0?' active':''}" role="tab" aria-selected="${i===0?'true':'false'}" data-stage="${i}" id="stage-tab-${i}" aria-controls="stage-panel-${i}">
-    <span class="flow-num">${String(i+1).padStart(2,'0')}</span>
-    <span class="flow-ic" aria-hidden="true"><i data-lucide="${s.ic}"></i></span>
-    <span class="flow-name">${esc(s.n)}</span>
-    <span class="flow-desc">${esc(s.d)}</span>
-  </button>`).join('');
-$('flowDetail').innerHTML = STAGES.map((s,i) => `
-  <div class="flow-panel${i===0?' on':''}" role="tabpanel" id="stage-panel-${i}" data-panel="${i}" aria-labelledby="stage-tab-${i}" ${i===0?'':'hidden'}>
-    <h3>Stage ${String(i+1).padStart(2,'0')} — ${esc(s.n)} <span class="tag capital" style="background:var(--bg);color:var(--muted)">${s.chip}</span></h3>
-    <p>${esc(s.p)}</p>
-    <div class="chips">${s.tools.map(t => svcByName[t]
-      ? `<button type="button" class="chipbtn" data-nav="${esc(t)}">${esc(t)}</button>`
-      : `<button type="button" class="chipbtn" data-soon="${esc(t)}">${esc(t)}</button>`).join('')}</div>
-  </div>`).join('');
-function selectStage(idx){
-  const i = String(idx);
-  document.querySelectorAll('.flow').forEach(x => {
-    const on = x.dataset.stage === i;
-    x.classList.toggle('active', on);
-    x.setAttribute('aria-selected', on ? 'true' : 'false');
-  });
-  document.querySelectorAll('.flow-panel').forEach(p => {
-    const on = p.dataset.panel === i;
-    p.classList.toggle('on', on);
-    if (on) p.removeAttribute('hidden'); else p.setAttribute('hidden','');
-  });
+  stepsContainer.innerHTML = STAGES.map((s, idx) => `
+    <button type="button" class="journey-step-btn${idx === activeIdx ? ' active' : ''}" data-dash-stage="${idx}" aria-label="Gate 0${idx+1}: ${esc(s.n)}, ${esc(s.d)}. Category ${s.chip}.">
+      <div class="journey-step-top">
+        <span class="journey-step-num">0${idx+1}</span>
+        <span class="journey-step-chip">${s.chip}</span>
+      </div>
+      <div class="journey-step-icon-wrap" aria-hidden="true">
+        <i data-lucide="${s.ic}"></i>
+      </div>
+      <div class="journey-step-content">
+        <span class="journey-step-name">${esc(s.n)}</span>
+        <span class="journey-step-desc">${esc(s.d)}</span>
+      </div>
+      <div class="journey-step-indicator" aria-hidden="true"></div>
+    </button>
+  `).join('');
+  renderIcons();
 }
-document.querySelectorAll('.flow').forEach(f => f.addEventListener('click', () => selectStage(f.dataset.stage)));
+renderDashboardJourney(1); // Default to Stage 02: Build (active delivery)
 
-/* ——— Views & nav ——— */
-const VIEW_TITLES = { dashboard:'Dashboard', journey:'Product Journey', services:'All Services' };
-function setActive(key){
-  document.querySelectorAll('#sideNav .nav-item').forEach(b => {
-    const on = b.dataset.key === key;
-    b.classList.toggle('active', on);
-    on ? b.setAttribute('aria-current','page') : b.removeAttribute('aria-current');
-  });
-}
-function announce(msg){ const lr = $('liveRegion'); if (lr){ lr.textContent = ''; requestAnimationFrame(() => { lr.textContent = msg; }); } }
-function showView(name, opts = {}){
-  document.querySelectorAll('.view').forEach(v => {
-    const on = v.id === 'view-' + name;
-    v.classList.toggle('active', on);
-    if (on){ v.removeAttribute('hidden'); v.setAttribute('aria-hidden','false'); }
-    else { v.setAttribute('hidden',''); v.setAttribute('aria-hidden','true'); }
-  });
-  setActive(name);
-  $('crumbCur').textContent = VIEW_TITLES[name] || name;
-  if (name === 'services' && !opts.keepFilter){
-    $('svcFilter').value = '';
-    document.querySelectorAll('#svcFilterBar .chipbtn').forEach((x,i) => {
-      const on = i === 0;
-      x.classList.toggle('active', on);
-      x.setAttribute('aria-pressed', on ? 'true' : 'false');
-    });
-    applySvcFilters();
+document.addEventListener('click', e => {
+  const step = e.target.closest('[data-dash-stage]');
+  if (step){
+    const idx = parseInt(step.dataset.dashStage, 10);
+    renderDashboardJourney(idx);
+    showToast(`Gate 0${idx+1}: ${STAGES[idx].n} selected`);
   }
-  $('main').scrollTop = 0;
-  announce(`Navigated to ${VIEW_TITLES[name] || name}`);
-  closeDrawer();
-  paintIcons();
+});
+
+/* ——— ROLE PERSPECTIVE SWITCHER (FOUNDER, SALES, MANAGER, TECH) ——— */
+const ROLE_DATA = {
+  founder: {
+    title: 'Executive Overview &amp; Company Health',
+    metrics: [
+      { label:'Active Initiatives', val:'18', sub:'10 R&D · 5 GTM · 3 Finance', nav:'R&D Launchpad', cls:'primary-accent-card' },
+      { label:'R&D Health Score', val:'87<small>/100</small>', sub:'+4.2 pts · Optimal velocity', nav:'R&D Pulse' },
+      { label:'Market Reach', val:'184.2K', sub:'+12.6% · 14.8K conversions', nav:'GTM Pulse' },
+      { label:'Capital Runway', val:'22<small>mo</small>', sub:'$42K/mo burn · Series A ready', nav:'Finance Pulse' }
+    ],
+    journeyGate: 1 // Build
+  },
+  sales: {
+    title: 'GTM Pipeline &amp; Revenue Conversion',
+    metrics: [
+      { label:'Pipeline Velocity', val:'$480K', sub:'14 deals in active review', nav:'GTM Launchpad', cls:'primary-accent-card' },
+      { label:'Marketing Reach', val:'184.2K', sub:'+18.4% QoQ organic growth', nav:'GTM Pulse' },
+      { label:'Active Campaigns', val:'8<small> live</small>', sub:'LinkedIn, X, Webinar series', nav:'GTM Launchpad' },
+      { label:'Lead-to-Close', val:'24<small> days</small>', sub:'-6 days vs Q3 benchmark', nav:'Finance Pulse' }
+    ],
+    journeyGate: 3 // Launch
+  },
+  manager: {
+    title: 'Sprint Velocity &amp; Delivery Quality Gates',
+    metrics: [
+      { label:'Sprint Delivery', val:'92%', sub:'38/41 story points closed', nav:'PMT', cls:'primary-accent-card' },
+      { label:'Blocked Tasks', val:'2', sub:'Under peer review in Gerrit', nav:'Gerrit' },
+      { label:'Quality Pass Rate', val:'99.4%', sub:'1,480 automated tests clear', nav:'QA Usage Dashboard' },
+      { label:'Team Capacity', val:'84%', sub:'6 cohorts across engineering', nav:'Hub' }
+    ],
+    journeyGate: 2 // QA & Audit
+  },
+  tech: {
+    title: 'Engineering Health &amp; Cloud Infrastructure',
+    metrics: [
+      { label:'Code Commits', val:'412', sub:'48 pull requests merged', nav:'R&D Launchpad', cls:'primary-accent-card' },
+      { label:'Test Coverage', val:'94.8%', sub:'Playwright E2E suite', nav:'QA Usage Dashboard' },
+      { label:'Audit Controls', val:'32/32', sub:'SOC2 & ISO 27001 aligned', nav:'Internal Audit Platform' },
+      { label:'AI Model Latency', val:'184<small>ms</small>', sub:'Prompt Dashboard v14 eval', nav:'Prompt Dashboard' }
+    ],
+    journeyGate: 1 // Build
+  }
+};
+
+let currentRole = 'founder';
+
+function setRolePerspective(roleKey){
+  currentRole = roleKey;
+  const data = ROLE_DATA[roleKey] || ROLE_DATA.founder;
+  
+  // Update role buttons
+  document.querySelectorAll('.role-pill-btn').forEach(btn => {
+    const isAct = btn.dataset.role === roleKey;
+    btn.classList.toggle('active', isAct);
+  });
+
+  // Update Section Title (single line, 24px)
+  $('canvasTitle').innerHTML = data.title;
+
+  // Update Metric Deck
+  const deck = document.querySelector('.metrics-card-deck');
+  if (deck){
+    deck.innerHTML = data.metrics.map(m => `
+      <div class="deck-card ${m.cls || ''}" data-nav="${esc(m.nav)}">
+        <div class="deck-card-top">
+          <span class="deck-card-label">${esc(m.label)}</span>
+          <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+        </div>
+        <div class="deck-card-value">${m.val}</div>
+        <div class="deck-card-caption">
+          <b>${m.sub.split('·')[0]}</b>
+          ${m.sub.includes('·') ? `<span class="dot-sep">·</span><span>${m.sub.split('·').slice(1).join('·')}</span>` : ''}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Update Journey focus
+  renderDashboardJourney(data.journeyGate);
+  renderIcons();
+  showToast(`View switched to ${roleKey.toUpperCase()} perspective`);
 }
-function navToService(label){
-  if (!svcByName[label]){ toast(`${label} opens in the full console`); return; }
-  showView('services', { keepFilter:true });
-  $('svcFilter').value = label;
-  document.querySelectorAll('#svcFilterBar .chipbtn').forEach((x,i) => x.classList.toggle('active', i === 0));
-  applySvcFilters();
-  const inNav = !!document.querySelector(`#sideNav .nav-item[data-key="${CSS.escape(label)}"]`);
-  setActive(inNav ? label : 'services');
-  $('crumbCur').textContent = label;
+
+document.querySelectorAll('.role-pill-btn').forEach(btn => {
+  btn.addEventListener('click', () => setRolePerspective(btn.dataset.role));
+});
+
+/* ——— SERVICE REGISTRY FILTERING & SEARCH ——— */
+function updateServicesFilterUI(filterName, labelText) {
+  const isAll = !filterName || filterName === 'all';
+  const badge = $('servicesActiveBadge');
+  const chip = $('servicesActiveChip');
+  const chipTxt = $('servicesActiveChipText');
+  const btn = $('servicesFilterBtn');
+  
+  if (badge) badge.textContent = isAll ? 'All' : labelText;
+  if (btn) btn.classList.toggle('has-filter', !isAll);
+  if (chip && chipTxt) {
+    if (isAll) {
+      chip.style.display = 'none';
+    } else {
+      chip.style.display = 'inline-flex';
+      chipTxt.textContent = labelText;
+    }
+  }
 }
+
+function applyServicesFilter2() {
+  const activeBtn = document.querySelector('#servicesCategoryPills .category-pill-btn.active');
+  const filter = activeBtn?.dataset.filter || 'all';
+  const q = ($('servicesSearchInput')?.value || '').toLowerCase().trim();
+  
+  const base = (filter === 'all') 
+    ? allServices 
+    : (CATEGORIES.find(c => c.name === filter)?.services || allServices);
+    
+  const filtered = q ? base.filter(s => s.name.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q)) : base;
+  $('allServicesDeckGrid').innerHTML = filtered.map(serviceCardMarkup).join('');
+  renderIcons();
+}
+
+/* ——— FILTER POPOVER WIRING: INITIATIVES, TELEMETRY & SERVICES ——— */
+
+// 1. INITIATIVES FILTER
+let activeInitCat = 'all';
+let activeInitStatus = 'all';
+
+function renderInitiativesList() {
+  const listEl = $('initiativesTableList');
+  if (!listEl) return;
+  const filtered = INITIATIVES.filter(i => {
+    const matchCat = (activeInitCat === 'all') || (i.cls === activeInitCat);
+    const matchStatus = (activeInitStatus === 'all') || (i.tag === activeInitStatus || (i.statusBadge && i.statusBadge === activeInitStatus));
+    return matchCat && matchStatus;
+  });
+
+  if (filtered.length === 0) {
+    listEl.innerHTML = `<div style="padding:24px 16px;text-align:center;color:var(--text-muted);font-size:13px">No initiatives match selected filters</div>`;
+  } else {
+    listEl.innerHTML = filtered.map(i => `
+      <div class="initiative-data-row" data-nav="${esc(i.svc)}">
+        <div class="init-title-box">
+          <b>${esc(i.name)}</b>
+          <small>${esc(i.sub)}</small>
+        </div>
+        <span class="init-tag-badge ${i.cls}">${i.tag}</span>
+        <div class="init-mini-bar">
+          <div class="init-bar-fill col-${i.cls}" style="height:100%;width:${i.pct}%;"></div>
+        </div>
+        <span class="init-pct-val">${i.pct}%</span>
+      </div>`).join('');
+  }
+
+  // Also adjust opacity of bar chart pillars to reflect category filter
+  const chartItems = document.querySelectorAll('#initiativesBarChart .bar-column-item');
+  chartItems.forEach(item => {
+    if (activeInitCat === 'all') {
+      item.style.opacity = '1';
+      item.style.filter = 'none';
+    } else {
+      const isMatch = item.querySelector(`.col-${activeInitCat}`);
+      item.style.opacity = isMatch ? '1' : '0.28';
+      item.style.filter = isMatch ? 'none' : 'grayscale(30%)';
+    }
+  });
+
+  // Update button active state indicator
+  const hasFilter = activeInitCat !== 'all' || activeInitStatus !== 'all';
+  $('filterInitBtn')?.classList.toggle('has-filter', hasFilter);
+  renderIcons();
+}
+
+const fInitBtn = $('filterInitBtn');
+const fInitPopover = $('filterInitPopover');
+const closeInitBtn = $('closeInitFilterBtn');
+const resetInitBtn = $('resetInitFilterBtn');
+const applyInitBtn = $('applyInitFilterBtn');
+
+if (fInitBtn && fInitPopover) {
+  // Toggle filter on button click
+  fInitBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const willOpen = fInitPopover.hidden;
+    // Close other popovers first
+    if (streamFilterPopover) streamFilterPopover.hidden = true;
+    if (sFilterMenu) sFilterMenu.hidden = true;
+    $('streamFilterBtn')?.classList.remove('open');
+    $('servicesFilterBtn')?.classList.remove('open');
+
+    fInitPopover.hidden = !willOpen;
+    fInitBtn.classList.toggle('open', willOpen);
+    fInitBtn.setAttribute('aria-expanded', String(willOpen));
+    renderIcons();
+  });
+
+  // Explicit close button
+  closeInitBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    fInitPopover.hidden = true;
+    fInitBtn.classList.remove('open');
+    fInitBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  // Done button
+  applyInitBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    fInitPopover.hidden = true;
+    fInitBtn.classList.remove('open');
+    fInitBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  // Reset button
+  resetInitBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    activeInitCat = 'all';
+    activeInitStatus = 'all';
+    document.querySelectorAll('#initCatChips .popover-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === 'all'));
+    document.querySelectorAll('#initStatusChips .popover-chip').forEach(c => c.classList.toggle('active', c.dataset.status === 'all'));
+    renderInitiativesList();
+  });
+
+  // Category chip selection
+  document.querySelectorAll('#initCatChips .popover-chip').forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('#initCatChips .popover-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeInitCat = chip.dataset.cat || 'all';
+      renderInitiativesList();
+    });
+  });
+
+  // Status chip selection
+  document.querySelectorAll('#initStatusChips .popover-chip').forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('#initStatusChips .popover-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeInitStatus = chip.dataset.status || 'all';
+      renderInitiativesList();
+    });
+  });
+
+  // Outside click dismiss
+  document.addEventListener('click', (e) => {
+    if (!fInitPopover.hidden && !e.target.closest('#initFilterWrap')) {
+      fInitPopover.hidden = true;
+      fInitBtn.classList.remove('open');
+      fInitBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Escape key dismiss
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !fInitPopover.hidden) {
+      fInitPopover.hidden = true;
+      fInitBtn.classList.remove('open');
+      fInitBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+// 2. TELEMETRY STREAM FEED FILTER
+let activeStreamDot = 'all';
+
+function renderStreamFeed() {
+  const feedEl = $('telemetryStreamFeed');
+  if (!feedEl) return;
+  const filtered = RECENT_UPDATES.filter(r => {
+    return activeStreamDot === 'all' || r.dot === activeStreamDot;
+  });
+
+  if (filtered.length === 0) {
+    feedEl.innerHTML = `<div style="padding:24px 16px;text-align:center;color:var(--text-muted);font-size:13px">No events match selected filter</div>`;
+  } else {
+    feedEl.innerHTML = filtered.map(r => `
+      <div class="stream-event-item" data-nav="${esc(r.svc)}">
+        <span class="stream-dot ${r.dot}"></span>
+        <div class="stream-meta-box">
+          <b>${esc(r.title)}</b>
+          <small>${esc(r.sub)}</small>
+        </div>
+        <span class="stream-time-val">${r.time}</span>
+      </div>`).join('');
+  }
+
+  const hasFilter = activeStreamDot !== 'all';
+  $('streamFilterBtn')?.classList.toggle('has-filter', hasFilter);
+  renderIcons();
+}
+
+const streamFilterBtn = $('streamFilterBtn');
+const streamFilterPopover = $('streamFilterPopover');
+const closeStreamFilterBtn = $('closeStreamFilterBtn');
+const resetStreamFilterBtn = $('resetStreamFilterBtn');
+const applyStreamFilterBtn = $('applyStreamFilterBtn');
+
+if (streamFilterBtn && streamFilterPopover) {
+  // Toggle filter on button click
+  streamFilterBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const willOpen = streamFilterPopover.hidden;
+    // Close other popovers first
+    if (fInitPopover) fInitPopover.hidden = true;
+    if (sFilterMenu) sFilterMenu.hidden = true;
+    $('filterInitBtn')?.classList.remove('open');
+    $('servicesFilterBtn')?.classList.remove('open');
+
+    streamFilterPopover.hidden = !willOpen;
+    streamFilterBtn.classList.toggle('open', willOpen);
+    streamFilterBtn.setAttribute('aria-expanded', String(willOpen));
+    renderIcons();
+  });
+
+  // Explicit close button
+  closeStreamFilterBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    streamFilterPopover.hidden = true;
+    streamFilterBtn.classList.remove('open');
+    streamFilterBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  // Done button
+  applyStreamFilterBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    streamFilterPopover.hidden = true;
+    streamFilterBtn.classList.remove('open');
+    streamFilterBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  // Reset button
+  resetStreamFilterBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    activeStreamDot = 'all';
+    document.querySelectorAll('#streamSeverityChips .popover-chip').forEach(c => c.classList.toggle('active', c.dataset.dot === 'all'));
+    renderStreamFeed();
+  });
+
+  // Severity chip selection
+  document.querySelectorAll('#streamSeverityChips .popover-chip').forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('#streamSeverityChips .popover-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeStreamDot = chip.dataset.dot || 'all';
+      renderStreamFeed();
+    });
+  });
+
+  // Outside click dismiss
+  document.addEventListener('click', (e) => {
+    if (!streamFilterPopover.hidden && !e.target.closest('#streamFilterWrap')) {
+      streamFilterPopover.hidden = true;
+      streamFilterBtn.classList.remove('open');
+      streamFilterBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Escape key dismiss
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !streamFilterPopover.hidden) {
+      streamFilterPopover.hidden = true;
+      streamFilterBtn.classList.remove('open');
+      streamFilterBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+// 3. SERVICES REGISTRY FILTER
+const sFilterBtn = $('servicesFilterBtn');
+const sFilterMenu = $('servicesFilterMenu');
+const sCloseFilterBtn = $('servicesCloseFilterBtn');
+
+if (sFilterBtn && sFilterMenu) {
+  sFilterBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = !sFilterMenu.hidden;
+    // Close other popovers
+    if (fInitPopover) fInitPopover.hidden = true;
+    if (streamFilterPopover) streamFilterPopover.hidden = true;
+    $('filterInitBtn')?.classList.remove('open');
+    $('streamFilterBtn')?.classList.remove('open');
+
+    sFilterMenu.hidden = open;
+    sFilterBtn.classList.toggle('open', !open);
+    sFilterBtn.setAttribute('aria-expanded', String(!open));
+    renderIcons();
+  });
+
+  // Explicit close button inside services filter menu
+  sCloseFilterBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    sFilterMenu.hidden = true;
+    sFilterBtn.classList.remove('open');
+    sFilterBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!sFilterMenu.hidden && !e.target.closest('#servicesFilterDropdownWrap')) {
+      sFilterMenu.hidden = true;
+      sFilterBtn.classList.remove('open');
+      sFilterBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !sFilterMenu.hidden) {
+      sFilterMenu.hidden = true;
+      sFilterBtn.classList.remove('open');
+      sFilterBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+document.querySelectorAll('#servicesCategoryPills .category-pill-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#servicesCategoryPills .category-pill-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const label = btn.querySelector('.services-f-name')?.textContent || btn.textContent.trim();
+    updateServicesFilterUI(btn.dataset.filter, label);
+    if (sFilterMenu) {
+      sFilterMenu.hidden = true;
+      sFilterBtn?.classList.remove('open');
+      sFilterBtn?.setAttribute('aria-expanded', 'false');
+    }
+    applyServicesFilter2();
+  });
+});
+
+$('servicesResetBtn')?.addEventListener('click', () => {
+  const allBtn = document.querySelector('#servicesCategoryPills .category-pill-btn[data-filter="all"]');
+  if (allBtn) allBtn.click();
+});
+$('servicesClearChipBtn')?.addEventListener('click', () => {
+  const allBtn = document.querySelector('#servicesCategoryPills .category-pill-btn[data-filter="all"]');
+  if (allBtn) allBtn.click();
+});
+$('servicesSearchInput')?.addEventListener('input', applyServicesFilter2);
+
+/* ——— NAVIGATION STATE ——— */
+const HEADLINES = {
+  dashboard: 'Your Initiatives &amp; Operations',
+  journey: 'Product Lifecycle &amp; Quality Gates',
+  services: 'Enterprise Registry &amp; 23 Live Services',
+  capital: 'Capital Runway &amp; Investor Signal'
+};
+const VIEW_NAMES = {
+  dashboard: 'Dashboard',
+  journey: 'Journey',
+  services: 'Services',
+  capital: 'Capital'
+};
+
+function switchView(name){
+  document.querySelectorAll('.view-panel').forEach(p => p.style.display = (p.id === 'view-' + name) ? 'block' : 'none');
+  document.querySelectorAll('.sidebar-main-nav-btn').forEach(b => b.classList.toggle('active', b.dataset.view === name));
+  document.querySelectorAll('.sidebar-nav-item').forEach(b => b.classList.toggle('active', b.dataset.nav === name));
+  $('canvasTitle').innerHTML = HEADLINES[name] || 'York Console';
+  const curView = $('topbarCurrentView');
+  if (curView) curView.textContent = VIEW_NAMES[name] || 'Dashboard';
+  closeMobileSidebar();
+  renderIcons();
+}
+
+/* ——— MOBILE & FLOATING SIDEBAR TOGGLE ——— */
+const permSidebar = $('permanentSidebar'), sidebarBackdrop = $('sidebarBackdrop');
+function openMobileSidebar(){
+  permSidebar.classList.add('mobile-open');
+  sidebarBackdrop.classList.add('show');
+}
+function closeMobileSidebar(){
+  permSidebar.classList.remove('mobile-open');
+  sidebarBackdrop.classList.remove('show');
+}
+if (sidebarBackdrop) sidebarBackdrop.addEventListener('click', closeMobileSidebar);
+
+// Toggle Expand / Collapse on Floating Sidebar
+const sidebarCollapseBtn = $('sidebarCollapseBtn');
+if (sidebarCollapseBtn) {
+  sidebarCollapseBtn.addEventListener('click', () => {
+    permSidebar.classList.toggle('collapsed');
+    const isCollapsed = permSidebar.classList.contains('collapsed');
+    sidebarCollapseBtn.setAttribute('title', isCollapsed ? 'Expand sidebar' : 'Collapse sidebar');
+    sidebarCollapseBtn.setAttribute('aria-expanded', !isCollapsed);
+    sidebarCollapseBtn.innerHTML = isCollapsed 
+      ? '<i data-lucide="panel-left-open"></i>' 
+      : '<i data-lucide="panel-left-close"></i>';
+    renderIcons();
+    showToast(isCollapsed ? 'Sidebar collapsed' : 'Sidebar expanded');
+  });
+}
+
+/* ——— CLICK ACTIONS ——— */
 document.addEventListener('click', e => {
   const soon = e.target.closest('[data-soon]');
-  if (soon){ toast(`${soon.dataset.soon} opens in the full console`); return; }
+  if (soon){ showToast(`${soon.dataset.soon} opens in full console`); return; }
   const v = e.target.closest('[data-view]');
-  if (v && !v.closest('.cmdk')){
+  if (v && !v.closest('.cmdk-card')){
     e.preventDefault();
-    showView(v.dataset.view);
-    if (v.dataset.stageJump != null) selectStage(v.dataset.stageJump);
+    switchView(v.dataset.view);
     return;
   }
   const n = e.target.closest('[data-nav]');
-  if (n){ e.preventDefault(); navToService(n.dataset.nav); return; }
-  const svc = e.target.closest('.svc[data-svc-name]');
-  if (svc) navToService(svc.dataset.svcName);
-});
-document.addEventListener('keydown', e => {
-  const svc = e.target.closest && e.target.closest('.svc[data-svc-name]');
-  if (svc && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); navToService(svc.dataset.svcName); }
-});
-
-/* ——— Collapsible product sidebar ——— */
-const rootEl = document.documentElement, side = $('side'), scrim = $('scrim');
-const isDesktop = () => matchMedia('(min-width:861px)').matches;
-function setNavOpen(open){
-  const side = $('side');
-  if (side){
-    if (open){ side.removeAttribute('inert'); side.setAttribute('aria-hidden','false'); }
-    else { side.setAttribute('inert',''); side.setAttribute('aria-hidden','true'); }
+  if (n){
+    e.preventDefault();
+    closeMobileSidebar();
+    document.querySelectorAll('.sidebar-nav-item').forEach(item => {
+      item.classList.toggle('active', item.dataset.nav === n.dataset.nav);
+    });
+    showToast(`Opening ${n.dataset.nav}`);
+    return;
   }
-  $('tbToggle')?.setAttribute('aria-expanded', String(open));
-  $('hamburger')?.setAttribute('aria-expanded', String(open));
-  rootEl.classList.toggle('nav-collapsed', !open);
-  try { localStorage.setItem('york-nav-open', open ? 'true' : 'false'); } catch(e){}
-  $('sideToggle').setAttribute('aria-expanded', String(open));
-}
-$('sideToggle').addEventListener('click', () => setNavOpen(false));
-$('tbToggle').addEventListener('click', () => { if (isDesktop()) setNavOpen(true); else openDrawer(); });
-function openDrawer(){
-  side.classList.add('drawer');
-  scrim.classList.add('show');
-  scrim.removeAttribute('hidden');
-  side.removeAttribute('inert');
-  side.setAttribute('aria-hidden','false');
-  $('hamburger')?.setAttribute('aria-expanded','true');
-}
-function closeDrawer(){
-  side.classList.remove('drawer');
-  scrim.classList.remove('show');
-  scrim.setAttribute('hidden','');
-  $('hamburger')?.setAttribute('aria-expanded','false');
-  if (rootEl.classList.contains('nav-collapsed') && isDesktop()){
-    side.setAttribute('inert','');
-    side.setAttribute('aria-hidden','true');
+  const tile = e.target.closest('.service-deck-card[data-svc-name]');
+  if (tile){
+    showToast(`Launching ${tile.dataset.svcName}`);
   }
-}
-$('hamburger').addEventListener('click', openDrawer);
-scrim.addEventListener('click', closeDrawer);
-addEventListener('resize', () => { if (isDesktop()) closeDrawer(); });
-$('sideToggle').setAttribute('aria-expanded', String(!rootEl.classList.contains('nav-collapsed')));
+});
 
-/* ——— Topbar actions ——— */
-$('bellBtn').addEventListener('click', () => toast('You have 3 unread notifications'));
-$('helpBtn').addEventListener('click', () => toast('Help Center opens in the full console'));
-$('wsBtn').addEventListener('click', () => toast('Workspace: Acme Inc'));
-$('userBtn').addEventListener('click', () => toast('Alex Kim · Admin'));
+/* ——— THEME SWITCHER ——— */
+$('themeSwitchBtn').addEventListener('click', () => {
+  const cur = document.documentElement.getAttribute('data-theme') || 'light';
+  const target = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', target);
+  try { localStorage.setItem('york-theme', target); } catch(e){}
+  showToast(`Switched to ${target} mode`);
+});
 
-/* ——— Command palette ——— */
-const cmdk = $('cmdk'), cmdkInput = $('cmdkInput'), cmdkList = $('cmdkList');
-let selIdx = 0, flat = [];
+/* ——— QUICK ACTIONS ——— */
+if ($('shareWorkspaceBtn')) $('shareWorkspaceBtn').addEventListener('click', () => showToast('Workspace link copied'));
+$('topBellBtn').addEventListener('click', () => showToast('3 unread alerts'));
+$('topUserBtn').addEventListener('click', () => showToast('Alex Kim (Admin & Founder)'));
+$('funnelToggleBtn').addEventListener('click', () => showToast('Filter applied'));
+$('sidebarBrandBtn').addEventListener('click', (e) => {
+  e.preventDefault();
+  try { sessionStorage.removeItem('york_session_active'); } catch(err){}
+  window.location.href = 'index.html';
+});
+document.querySelectorAll('.v-tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    try { sessionStorage.setItem('york_session_active', 'true'); } catch(err){}
+  });
+});
+$('sidebarWsBtn').addEventListener('click', () => showToast('Workspace: Acme Inc (PROD)'));
+$('sidebarFuelBtn').addEventListener('click', () => showToast('Fuel compute: 152,400 / 250,000 used'));
+$('sidebarUserTile').addEventListener('click', () => showToast('User profile: Alex Kim'));
+$('stripManageBtn').addEventListener('click', () => showToast('Opening billing & plan management…'));
+
+/* ——— COMMAND PALETTE (⌘K) ——— */
+const cmdk = $('cmdkModal'), cmdkInput = $('cmdkInput'), cmdkResults = $('cmdkResults');
 const CMDS = [
-  { group:'Navigate', items:[
-    { label:'Dashboard', view:'dashboard', key:'G D', icon:'layout-dashboard' },
-    { label:'Product Journey', view:'journey', key:'G J', icon:'map' },
-    { label:'All Services', view:'services', key:'G S', icon:'layout-grid' },
+  { group:'Navigation', items:[
+    { label:'Dashboard Overview', view:'dashboard', key:'G D', icon:'layout-dashboard' },
+    { label:'Product Journey', view:'journey', key:'G J', icon:'git-merge' },
+    { label:'Services Registry', view:'services', key:'G S', icon:'layers' },
+    { label:'Capital & Runway', view:'capital', key:'G C', icon:'database' },
   ]},
-  { group:'Services', items: allServices.map(s => ({ label:s.name, service:s.name, icon:s.icon })) },
-  { group:'Platform', items:[
-    { label:'Billing & Usage', soon:'Billing & Usage', icon:'credit-card' },
-    { label:'Team & Access', soon:'Team & Access', icon:'users' },
-    { label:'Connector Hub', soon:'Connector Hub', icon:'plug' },
+  { group:'Quick Actions', items:[
+    { label:'Export Sprint Summary CSV', key:'E S', icon:'arrow-up-right', toast:'Exporting CSV…' },
+    { label:'Toggle Dark/Light Mode', icon:'sun', action: () => $('themeSwitchBtn').click() },
   ]},
-  { group:'Actions', items:[
-    { label:'Create new initiative', key:'N I', icon:'plus-circle', toast:'New initiative draft created' },
-    { label:'Invite team member', key:'I T', icon:'user-plus', toast:'Invite link copied' },
-    { label:'Schedule GTM campaign', key:'N C', icon:'send', toast:'Campaign draft created' },
-    { label:'Prepare investor update', key:'N U', icon:'file-text', toast:'Investor update draft created' },
-  ]},
+  { group:'Services (23)', items: allServices.map(s => ({ label:s.name, toast:`Launching ${s.name}`, icon:s.icon })) }
 ];
-function runCmd(it){
-  closeCmdk(); if (!it) return;
-  if (it.view) showView(it.view);
-  else if (it.service) navToService(it.service);
-  else if (it.soon) toast(`${it.soon} opens in the full console`);
-  else if (it.toast) toast(it.toast);
-}
-function renderCmdk(filter = ''){
-  const f = filter.toLowerCase().trim();
-  let html = ''; flat = [];
-  CMDS.forEach(g => {
-    const items = g.items.filter(i => i.label.toLowerCase().includes(f));
-    if (!items.length) return;
-    html += `<div class="cmdk-group">${esc(g.group)}</div>`;
-    items.forEach(i => {
-      html += `<div class="cmdk-item" data-idx="${flat.length}"><i data-lucide="${i.icon||'box'}"></i>${esc(i.label)}${i.key ? `<span class="kbd">${i.key}</span>` : ''}</div>`;
-      flat.push(i);
+
+let flatCmds = [], curSel = 0;
+function renderCmdk(term = ''){
+  const q = term.toLowerCase().trim();
+  let html = ''; flatCmds = [];
+  CMDS.forEach(grp => {
+    const matches = grp.items.filter(i => i.label.toLowerCase().includes(q));
+    if (!matches.length) return;
+    html += `<div class="cmdk-group-title">${esc(grp.group)}</div>`;
+    matches.forEach(m => {
+      html += `<div class="cmdk-item-row" data-idx="${flatCmds.length}"><i data-lucide="${m.icon}"></i><span>${esc(m.label)}</span>${m.key ? `<span class="kbd" style="font-size:11px;padding:2px 6px;border-radius:4px;border:1px solid var(--line);margin-left:auto">${m.key}</span>` : ''}</div>`;
+      flatCmds.push(m);
     });
   });
-  cmdkList.innerHTML = html || '<div class="cmdk-group">No results</div>';
-  paintIcons();
-  cmdkList.querySelectorAll('.cmdk-item').forEach(el => el.addEventListener('click', () => runCmd(flat[+el.dataset.idx])));
-  setSel(0);
+  cmdkResults.innerHTML = html || '<div class="cmdk-group-title" style="padding:16px;text-align:center">No matching commands</div>';
+  renderIcons();
+  cmdkResults.querySelectorAll('.cmdk-item-row').forEach(row => {
+    row.addEventListener('click', () => runCmd(flatCmds[+row.dataset.idx]));
+  });
+  setSelection(0);
 }
-function setSel(i){
-  const els = [...cmdkList.querySelectorAll('.cmdk-item')];
-  els.forEach(x => x.classList.remove('sel'));
-  selIdx = Math.max(0, Math.min(i, els.length - 1));
-  if (els[selIdx]){ els[selIdx].classList.add('sel'); els[selIdx].scrollIntoView({ block:'nearest' }); }
+
+function setSelection(idx){
+  const rows = [...cmdkResults.querySelectorAll('.cmdk-item-row')];
+  rows.forEach(r => r.classList.remove('selected'));
+  curSel = Math.max(0, Math.min(idx, rows.length - 1));
+  if (rows[curSel]){
+    rows[curSel].classList.add('selected');
+    rows[curSel].scrollIntoView({ block:'nearest' });
+  }
 }
+
+function runCmd(item){
+  closeCmdk();
+  if (!item) return;
+  if (item.action) item.action();
+  else if (item.view) switchView(item.view);
+  else if (item.toast) showToast(item.toast);
+}
+
 function openCmdk(){
   cmdk.classList.add('open');
-  cmdk.removeAttribute('hidden');
-  cmdk.setAttribute('aria-hidden','false');
   cmdkInput.value = '';
   renderCmdk();
   cmdkInput.focus();
 }
 function closeCmdk(){
   cmdk.classList.remove('open');
-  cmdk.setAttribute('hidden','');
-  cmdk.setAttribute('aria-hidden','true');
-  $('openCmdk')?.focus();
 }
-$('openCmdk').addEventListener('click', openCmdk);
+
+$('topSearchBtn').addEventListener('click', openCmdk);
 cmdk.addEventListener('click', e => { if (e.target === cmdk) closeCmdk(); });
 cmdkInput.addEventListener('input', () => renderCmdk(cmdkInput.value));
 cmdkInput.addEventListener('keydown', e => {
-  if (e.key === 'ArrowDown'){ e.preventDefault(); setSel(selIdx + 1); }
-  else if (e.key === 'ArrowUp'){ e.preventDefault(); setSel(selIdx - 1); }
-  else if (e.key === 'Enter'){ runCmd(flat[selIdx]); }
+  if (e.key === 'ArrowDown'){ e.preventDefault(); setSelection(curSel + 1); }
+  else if (e.key === 'ArrowUp'){ e.preventDefault(); setSelection(curSel - 1); }
+  else if (e.key === 'Enter'){ runCmd(flatCmds[curSel]); }
   else if (e.key === 'Escape') closeCmdk();
 });
-addEventListener('keydown', e => {
-  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); openCmdk(); return; }
-  if (e.key === '/' && !e.metaKey && !e.ctrlKey && !e.altKey){
-    const a = document.activeElement, tag = a && a.tagName;
-    if (tag === 'INPUT' || tag === 'TEXTAREA' || (a && a.isContentEditable)) return;
-    e.preventDefault(); openCmdk(); return;
+
+window.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); openCmdk(); }
+  if (e.key === 'Escape'){
+    if (cmdk.classList.contains('open')) closeCmdk();
+    else closeMobileSidebar();
   }
-  if (e.key === 'Escape'){ if (cmdk.classList.contains('open')) closeCmdk(); else closeDrawer(); }
 });
 
-/* ——— Init ——— */
-setActive('dashboard');
-paintIcons();
+/* ——— INIT ——— */
+renderIcons();
 </script>
 </body>
 </html>

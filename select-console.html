@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In & Choose Console Experience · York Foundation</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --ink-primary: #0F172A;
+      --ink-secondary: #475569;
+      --ink-muted: #64748B;
+      --line: #E2E8F0;
+      --brand: #00B389;
+      --brand-dark: #047857;
+      --brand-subtle: #ECFDF5;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    :root[data-theme="dark"] {
+      --bg-page: #0B0F19;
+      --bg-card: #131A29;
+      --ink-primary: #F8FAFC;
+      --ink-secondary: #94A3B8;
+      --ink-muted: #64748B;
+      --line: #1E293B;
+      --brand: #00B389;
+      --brand-dark: #34D399;
+      --brand-subtle: rgba(0, 179, 137, 0.12);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--ink-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    .top-nav {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: calc(100% - 48px);
+    }
+    .back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      transition: all 0.15s ease;
+    }
+    .back-home:hover {
+      color: var(--brand-dark);
+      border-color: var(--brand);
+      transform: translateX(-2px);
+    }
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      color: var(--ink-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .theme-toggle:hover {
+      color: var(--ink-primary);
+      border-color: var(--brand);
+    }
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      animation: fadeIn 0.3s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .brand-badge img {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+    }
+    .brand-badge span {
+      font-size: 13.5px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--ink-primary);
+    }
+    .title {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--ink-primary);
+      line-height: 1.2;
+    }
+    .subtitle {
+      font-size: 15px;
+      color: var(--ink-secondary);
+      line-height: 1.5;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 768px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .title {
+        font-size: 26px;
+      }
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--line);
+      border-radius: 20px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #00B389;
+      box-shadow: 0 16px 36px rgba(0, 179, 137, 0.12);
+    }
+    .card.featured {
+      border-color: rgba(0, 179, 137, 0.45);
+      background: linear-gradient(180deg, rgba(0, 179, 137, 0.04) 0%, var(--bg-card) 100%);
+    }
+    .badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(15, 23, 42, 0.06);
+      color: var(--ink-primary);
+    }
+    :root[data-theme="dark"] .tag {
+      background: rgba(255, 255, 255, 0.1);
+      color: #F8FAFC;
+    }
+    .tag-pro {
+      background: #ECFDF5;
+      color: #047857;
+      border: 1px solid rgba(0, 179, 137, 0.3);
+    }
+    .rec-badge {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ink-muted);
+    }
+    .rec-badge.highlight {
+      color: #047857;
+      font-weight: 700;
+    }
+    :root[data-theme="dark"] .rec-badge.highlight {
+      color: #34D399;
+    }
+    .icon-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .icon-bubble {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .icon-meta h2 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink-primary);
+    }
+    .icon-meta span {
+      font-size: 12.5px;
+      color: var(--ink-secondary);
+    }
+    .desc {
+      font-size: 13.5px;
+      color: var(--ink-secondary);
+      line-height: 1.5;
+    }
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--line);
+    }
+    .feature-list li {
+      font-size: 13px;
+      color: var(--ink-secondary);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .feature-list svg {
+      flex-shrink: 0;
+    }
+    .launch-btn {
+      margin-top: auto;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-v1 {
+      background: var(--bg-page);
+      color: var(--ink-primary);
+      border: 1px solid var(--line);
+    }
+    .card:hover .btn-v1 {
+      background: var(--ink-primary);
+      color: #FFFFFF;
+      border-color: var(--ink-primary);
+    }
+    :root[data-theme="dark"] .card:hover .btn-v1 {
+      background: #FFFFFF;
+      color: #0F172A;
+      border-color: #FFFFFF;
+    }
+    .btn-v2 {
+      background: #00B389;
+      color: #0F172A;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(0, 179, 137, 0.25);
+    }
+    .card:hover .btn-v2 {
+      background: #009975;
+      transform: translateY(-1px);
+    }
+    .footer-note {
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--ink-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <div class="top-nav">
+    <a href="index.html" class="back-home">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span>Back to Website</span>
+    </a>
+    <button type="button" class="theme-toggle" id="themeToggleBtn" aria-label="Toggle dark mode">
+      <span id="themeLabel">Dark Mode</span>
+    </button>
+  </div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand-badge">
+        <img src="favicon.png" alt="York logo">
+        <span>York Foundation Console</span>
+      </div>
+      <h1 class="title">Choose Your Console Experience</h1>
+      <p class="subtitle">Select your preferred layout to view corporate metrics, live services, product quality gates, and role perspectives.</p>
+    </header>
+
+    <!-- 2 Cards -->
+    <div class="cards-grid">
+      <!-- Card 1: Minimal Console -->
+      <a href="dashboard-v1.html" class="card" id="cardV1">
+        <div class="badge-row">
+          <span class="tag">Version 1 · Minimal</span>
+          <span class="rec-badge">Original Folder Design</span>
+        </div>
+        <div class="icon-row">
+          <div class="icon-bubble" style="background:#ECFDF5;color:#047857;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          </div>
+          <div class="icon-meta">
+            <h2>Minimal Operations</h2>
+            <span>Compact &amp; low distraction</span>
+          </div>
+        </div>
+        <p class="desc">The authentic original York console design with a 240px collapsible sidebar, 4 key KPI cards, integrated product journey timeline, and initiatives progress.</p>
+        <ul class="feature-list">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Compact 240px sidebar with all 23 live services</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 7-stage Product Journey timeline flow</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Active initiatives progress &amp; compute meter</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-header layout toggle to switch anytime</li>
+        </ul>
+        <div class="launch-btn btn-v1">
+          <span>Launch Minimal Console</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- Card 2: Executive Pro -->
+      <a href="dashboard.html" class="card featured" id="cardV2">
+        <div class="badge-row">
+          <span class="tag tag-pro">Version 2 · Modern Pro</span>
+          <span class="rec-badge highlight">Executive Perspectives</span>
+        </div>
+        <div class="icon-row">
+          <div class="icon-bubble" style="background:#EFF6FF;color:#1D4ED8;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="icon-meta">
+            <h2>Executive Pro Console</h2>
+            <span>Collapsible Sidebar &amp; Executive Strip</span>
+          </div>
+        </div>
+        <p class="desc">Modern enterprise layout with collapsible floating sidebar, executive billing resource strip, and full 8-gate product quality telemetry.</p>
+        <ul class="feature-list">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Collapsible floating sidebar with icon collapse mode</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Executive billing &amp; compute resource strip</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Interactive 8-gate product quality drawer</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Live telemetry heatmap &amp; multi-channel stream</li>
+        </ul>
+        <div class="launch-btn btn-v2">
+          <span>Launch Executive Pro</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+    </div>
+
+    <!-- Foot -->
+    <p class="footer-note">Tip: You can freely switch between both layouts anytime from the top bar switcher.</p>
+  </div>
+
+  <script>
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeLabel = document.getElementById('themeLabel');
+    function updateTheme() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      themeLabel.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+    }
+    themeBtn.addEventListener('click', () => {
+      const cur = document.documentElement.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateTheme();
+    });
+    // Restore preference
+    const saved = localStorage.getItem('theme');
+    if (saved) {
+      document.documentElement.setAttribute('data-theme', saved);
+      updateTheme();
+    }
+  </script>
+</body>
+</html>

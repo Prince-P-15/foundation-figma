@@ -6503,8 +6503,265 @@
     .slider-controls { flex-direction: column; align-items: stretch; text-align: center; }
     .stage-bullets-row { justify-content: center; }
   }
-  @media (max-width: 560px) {
-    .ref-grid { grid-template-columns: 1fr; }
+  /* ═════════════════════════════════════════════════════════════════
+     CONSOLE SELECTION SCREEN MODAL (v1 Minimal vs v2 Executive Pro)
+     ═════════════════════════════════════════════════════════════════ */
+  .console-select-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(11, 15, 25, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 99999;
+    animation: fadeInModal 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes fadeInModal {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .console-select-dialog {
+    background: var(--bg-surface);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    width: min(940px, 94vw);
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 36px 40px 32px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+  :root[data-theme="light"] .console-select-dialog {
+    background: #FFFFFF;
+    border-color: #E2E8F0;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.16);
+  }
+  .console-select-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--bg-surface-elevated);
+    color: var(--ink-secondary);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .console-select-close:hover {
+    background: var(--line);
+    color: var(--ink-primary);
+  }
+  .console-select-header {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .console-select-brand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .console-select-title {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--ink-primary);
+    line-height: 1.2;
+  }
+  .console-select-sub {
+    font-size: 14px;
+    color: var(--ink-secondary);
+    line-height: 1.45;
+  }
+  .console-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  @media (max-width: 760px) {
+    .console-cards-grid {
+      grid-template-columns: 1fr;
+    }
+    .console-select-dialog {
+      padding: 28px 20px 24px;
+    }
+  }
+  .console-choice-card {
+    background: var(--bg-surface-elevated);
+    border: 1.5px solid var(--line);
+    border-radius: 18px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+  }
+  .console-choice-card:hover {
+    transform: translateY(-3px);
+    border-color: #00B389;
+    box-shadow: 0 12px 30px rgba(0, 179, 137, 0.12);
+  }
+  .console-choice-card.featured {
+    border-color: rgba(0, 179, 137, 0.45);
+    background: var(--bg-surface-elevated);
+  }
+  .console-choice-badge {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .choice-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .tag-minimal {
+    background: rgba(15, 23, 42, 0.08);
+    color: var(--ink-primary);
+  }
+  :root[data-theme="dark"] .tag-minimal {
+    background: rgba(255, 255, 255, 0.1);
+    color: #F8FAFC;
+  }
+  .tag-pro {
+    background: #ECFDF5;
+    color: #047857;
+  }
+  :root[data-theme="dark"] .tag-pro {
+    background: rgba(0, 179, 137, 0.2);
+    color: #34D399;
+  }
+  .choice-rec {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-secondary);
+  }
+  .choice-rec.highlight {
+    color: #047857;
+  }
+  :root[data-theme="dark"] .choice-rec.highlight {
+    color: #6EE7B7;
+  }
+  .console-choice-icon-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .choice-ic-bubble {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .choice-ic-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .choice-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink-primary);
+    letter-spacing: -0.02em;
+  }
+  .choice-flavor {
+    font-size: 12px;
+    color: var(--ink-secondary);
+    font-weight: 500;
+  }
+  .choice-desc {
+    font-size: 13px;
+    color: var(--ink-secondary);
+    line-height: 1.45;
+  }
+  .choice-features-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 4px 0 8px;
+    padding: 0;
+    flex: 1;
+  }
+  .choice-features-list li {
+    font-size: 12.5px;
+    color: var(--ink-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.35;
+  }
+  .choice-launch-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: none;
+    width: 100%;
+    margin-top: auto;
+  }
+  .choice-launch-btn.btn-v1 {
+    background: var(--bg-surface);
+    color: var(--ink-primary);
+    border: 1px solid var(--line);
+  }
+  .choice-launch-btn.btn-v1:hover {
+    background: var(--line);
+  }
+  .choice-launch-btn.btn-v2 {
+    background: #047857;
+    color: #FFFFFF;
+    box-shadow: 0 4px 14px rgba(0, 179, 137, 0.28);
+  }
+  .choice-launch-btn.btn-v2:hover {
+    background: #065F46;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 179, 137, 0.38);
+  }
+  :root[data-theme="dark"] .choice-launch-btn.btn-v2 {
+    background: #00B389;
+    color: #FFFFFF;
+  }
+  .console-select-foot {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-muted);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    margin-top: -6px;
   }
 </style>
 </head>
@@ -6547,8 +6804,8 @@
             <button type="button" class="hero-layout-tab" role="tab" aria-selected="false" data-hero-layout="icons">version-3</button>
           </div>
         </div>
-        <a href="dashboard.html" class="signin">Sign in</a>
-        <a href="dashboard.html" class="btn btn-primary btn-shimmer" style="padding: 8px 18px; font-size: 0.85rem;">
+        <a href="login.html" class="signin" id="openConsoleBtnNav">Sign in</a>
+        <a href="login.html" class="btn btn-primary btn-shimmer" id="openConsoleBtnGetStarted" style="padding: 8px 18px; font-size: 0.85rem;">
           Get started
         </a>
       </div>
@@ -8975,8 +9232,145 @@
     }
 
     renderServices();
+
+    /* ─── CONSOLE SELECTION SCREEN MODAL LOGIC ─── */
+    const consoleModal = document.getElementById('consoleSelectModal');
+    const closeConsoleBtn = document.getElementById('closeConsoleSelectBtn');
+    
+    function openConsoleModal(e) {
+      if (e) e.preventDefault();
+      if (consoleModal) {
+        consoleModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    
+    function closeConsoleModal() {
+      if (consoleModal) {
+        consoleModal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    }
+
+    if (closeConsoleBtn) closeConsoleBtn.addEventListener('click', closeConsoleModal);
+    if (consoleModal) {
+      consoleModal.addEventListener('click', (e) => {
+        if (e.target === consoleModal) closeConsoleModal();
+      });
+    }
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && consoleModal && consoleModal.style.display === 'flex') {
+        closeConsoleModal();
+      }
+    });
+
+    // Reset console session on website home so hard refresh / direct entry always stays on the website
+    try {
+      sessionStorage.removeItem('york_session_active');
+    } catch (e) {}
+
+    function handleSignInRedirect(e) {
+      if (e) e.preventDefault();
+      try {
+        sessionStorage.setItem('york_session_active', 'true');
+      } catch (err) {}
+      window.location.href = 'login.html';
+    }
+
+    const navSignIn = document.getElementById('openConsoleBtnNav');
+    const navGetStarted = document.getElementById('openConsoleBtnGetStarted');
+    if (navSignIn) navSignIn.addEventListener('click', handleSignInRedirect);
+    if (navGetStarted) navGetStarted.addEventListener('click', handleSignInRedirect);
+
+    // Also wire any .signin or data-open-console elements to redirect to login.html
+    document.querySelectorAll('.signin, [data-open-console]').forEach(el => {
+      el.addEventListener('click', handleSignInRedirect);
+    });
   })();
 </script>
 
+<!-- ================= CONSOLE SELECTION SCREEN MODAL ================= -->
+<div id="consoleSelectModal" class="console-select-backdrop" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="consoleSelectTitle">
+  <div class="console-select-dialog">
+    <!-- Close button -->
+    <button type="button" class="console-select-close" id="closeConsoleSelectBtn" aria-label="Close selection screen">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    
+    <!-- Header -->
+    <div class="console-select-header">
+      <div class="console-select-brand">
+        <img src="favicon.png" alt="York" style="width:28px;height:28px;border-radius:7px;">
+        <span style="font-weight:700;font-size:16px;color:var(--ink-primary);letter-spacing:-0.02em">York Foundation</span>
+      </div>
+      <h2 id="consoleSelectTitle" class="console-select-title">Choose Console Version</h2>
+      <p class="console-select-sub">Select between Version 1 (Minimal) and Version 2 (Executive Pro) to launch your workspace console.</p>
+    </div>
+
+    <!-- 2 Version Selection Cards Grid -->
+    <div class="console-cards-grid">
+      <!-- Card 1: Version 1 Minimal Layout -->
+      <a href="dashboard-v1.html" class="console-choice-card" id="choiceCardV1">
+        <div class="console-choice-badge">
+          <span class="choice-tag tag-minimal">version-1</span>
+          <span class="choice-rec">Minimal Console</span>
+        </div>
+        <div class="console-choice-icon-row">
+          <div class="choice-ic-bubble" style="background:#ECFDF5;color:#047857;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          </div>
+          <div class="choice-ic-meta">
+            <h3 class="choice-title">Version 1</h3>
+            <span class="choice-flavor">Clean · Compact · Low Distraction</span>
+          </div>
+        </div>
+        <p class="choice-desc">Minimal operations console with 240px collapsible sidebar, 4 key KPI cards, integrated product journey stage rail, and fast operations stream.</p>
+        <ul class="choice-features-list">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 240px sidebar with all 23 live services</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 7-stage Product Journey timeline flow</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Active initiatives progress &amp; straight dividers</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-header v1 / v2 tabs to switch anytime</li>
+        </ul>
+        <span class="choice-launch-btn btn-v1">
+          <span>Launch Version 1</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <!-- Card 2: Version 2 Modern Executive Pro Layout -->
+      <a href="dashboard.html" class="console-choice-card featured" id="choiceCardV2">
+        <div class="console-choice-badge">
+          <span class="choice-tag tag-pro">version-2</span>
+          <span class="choice-rec highlight">Executive Pro Console</span>
+        </div>
+        <div class="console-choice-icon-row">
+          <div class="choice-ic-bubble" style="background:#EFF6FF;color:#1D4ED8;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="choice-ic-meta">
+            <h3 class="choice-title">Version 2</h3>
+            <span class="choice-flavor">Collapsible Sidebar · Executive Resource Strip</span>
+          </div>
+        </div>
+        <p class="choice-desc">Modern enterprise layout with collapsible floating sidebar, executive billing resource strip, and full 8-gate product quality telemetry.</p>
+        <ul class="choice-features-list">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Collapsible floating sidebar with icon collapse mode</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Executive billing &amp; compute resource strip</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Initiatives velocity column chart &amp; live stream</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-header v1 / v2 tabs to switch anytime</li>
+        </ul>
+        <span class="choice-launch-btn btn-v2">
+          <span>Launch Version 2</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+    </div>
+
+    <!-- Footer helper -->
+    <div class="console-select-foot">
+      <span>You can freely toggle between v1 Minimal and v2 Executive Pro inside either dashboard.</span>
+    </div>
+  </div>
+</div>
 </body>
 </html>

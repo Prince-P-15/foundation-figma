@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>York Foundation — Dashboard</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>try{var _n=localStorage.getItem('york-nav-open');if(_n==='false'||_n==='0')document.documentElement.classList.add('nav-collapsed')}catch(e){}</script>
+<script src="https://unpkg.com/lucide@0.468.0"></script>
+<style>
+:root{
+  --bg:#F4F5F7; --bg-2:#F8FAFC; --card:#FFFFFF;
+  --line:#E5E7EB; --line-2:#EEF0F3;
+  /* WCAG AA: muted ≥4.5:1 on white; faint only for large/non-essential */
+  --ink:#0F172A; --ink-2:#1E293B; --muted:#475569; --faint:#64748B;
+  --em:#059669; --em-d:#047857; --em-50:#ECFDF5; --em-100:#D1FAE5;
+  --rose:#DC2626; --amber:#B45309; --blue:#1D4ED8; --violet:#6D28D9; --orange:#C2410C;
+  --shadow:0 1px 2px rgba(15,23,42,.04), 0 1px 3px rgba(15,23,42,.05);
+  --shadow-md:0 4px 14px rgba(15,23,42,.07);
+  --side-w:240px; --top-h:56px;
+  --focus:#047857; --focus-on-dark:#6EE7B7;
+  --sans:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{height:100%}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+input{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+i[data-lucide],svg.lucide{width:16px;height:16px;flex-shrink:0;stroke-width:1.75;pointer-events:none}
+:focus{outline:none}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{
+  position:absolute;left:12px;top:0;z-index:9999;padding:10px 16px;border-radius:0 0 10px 10px;
+  background:var(--em-d);color:#fff;font-weight:600;font-size:14px;
+  transform:translateY(-120%);transition:transform .15s;
+}
+.skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid var(--focus-on-dark);outline-offset:2px}
+.mono{font-family:var(--mono)}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+@media (prefers-contrast:more){
+  :root{--line:#94A3B8; --muted:#334155; --faint:#475569}
+  .card,.svc,.panel,.search,.ws{border-width:2px}
+}
+
+/* ———— App shell ———— */
+.app{display:grid;grid-template-columns:var(--side-w) 1fr;height:100vh;transition:grid-template-columns .22s ease}
+.nav-collapsed .app{grid-template-columns:0px 1fr}
+
+/* Product sidebar */
+.side{background:var(--card);border-right:1px solid var(--line);display:flex;flex-direction:column;min-width:0;overflow:hidden;z-index:30}
+.nav-collapsed .side{border-right-color:transparent;visibility:hidden;pointer-events:none;transition:visibility 0s .22s}
+.side-inner{width:var(--side-w);display:flex;flex-direction:column;height:100%}
+.side-head{display:flex;align-items:center;gap:9px;padding:14px 14px 10px}
+.brand-mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--em),var(--em-d));display:grid;place-items:center;color:#fff;flex-shrink:0}
+.brand-mark i{width:15px;height:15px;fill:#fff;stroke-width:1.5}
+.brand-word{font-weight:700;font-size:15px;letter-spacing:-.02em;flex:1;white-space:nowrap}
+.brand-word span{color:var(--muted);font-weight:500}
+.icon-btn{width:40px;height:40px;min-width:40px;min-height:40px;border-radius:8px;display:grid;place-items:center;color:var(--muted);flex-shrink:0;transition:background .15s,color .15s}
+.icon-btn:hover{background:var(--bg);color:var(--ink)}
+.ws{margin:2px 14px 10px;display:flex;align-items:center;gap:9px;padding:8px 10px;min-height:44px;border:1px solid var(--line);border-radius:10px;background:var(--bg-2);width:calc(100% - 28px);transition:border-color .15s}
+.ws:hover{border-color:#94A3B8}
+.ws-mark{width:24px;height:24px;border-radius:7px;background:var(--orange);color:#fff;font-weight:700;font-size:12px;display:grid;place-items:center;flex-shrink:0}
+.ws-name{font-weight:600;font-size:13px;flex:1;color:var(--ink)}
+.ws i{width:14px;height:14px;color:var(--muted)}
+.side-scroll{flex:1;overflow-y:auto;padding:0 10px 10px;scrollbar-width:thin;scrollbar-color:#CBD5E1 transparent}
+.grp{margin-top:14px}
+.grp:first-child{margin-top:4px}
+.grp-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:0 10px 5px}
+.nav-item{display:flex;align-items:center;gap:10px;width:100%;padding:7px 8px;min-height:40px;border-radius:9px;font-size:13.5px;font-weight:500;color:var(--ink-2);transition:background .12s,color .12s}
+.nav-ic{width:28px;height:28px;border-radius:7px;background:#F1F5F9;color:#475569;display:grid;place-items:center;flex-shrink:0;transition:background .12s,color .12s}
+.nav-ic i,.nav-ic svg{width:15px;height:15px}
+.nav-item:hover{background:var(--bg)}
+.nav-item:hover .nav-ic{background:#E2E8F0;color:var(--ink)}
+.nav-item.active{background:var(--em-50);color:var(--em-d);font-weight:600}
+.nav-item.active .nav-ic{background:var(--em-100);color:var(--em-d)}
+.nav-lbl{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nbadge{font-family:var(--mono);font-size:10px;font-weight:500;padding:1px 6px;border-radius:99px;background:var(--bg);color:var(--muted)}
+.nbadge.new{background:var(--em-100);color:var(--em-d);font-family:var(--sans);font-weight:700;letter-spacing:.04em}
+.side-foot{border-top:1px solid var(--line);padding:10px 12px}
+.user{display:flex;align-items:center;gap:10px;padding:6px;border-radius:10px;width:100%}
+.user:hover{background:var(--bg)}
+.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#334155,#0F172A);color:#fff;font-size:12px;font-weight:600;display:grid;place-items:center;flex-shrink:0}
+.user b{display:block;font-size:13px;font-weight:600;line-height:1.2}
+.user small{font-size:11.5px;color:var(--muted)}
+.user .meta{flex:1;min-width:0}
+.user i{width:14px;height:14px;color:var(--faint)}
+
+/* Main column */
+.col{display:flex;flex-direction:column;min-width:0;height:100vh}
+.topbar{height:var(--top-h);flex-shrink:0;background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 24px}
+.tb-toggle{display:none}
+.nav-collapsed .tb-toggle{display:grid}
+.hamburger{display:none}
+.crumbs{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);white-space:nowrap;min-width:0}
+.crumbs i{width:14px;height:14px;color:var(--faint)}
+.crumbs b{color:var(--ink);font-weight:600;overflow:hidden;text-overflow:ellipsis}
+.tb-spacer{flex:1}
+.search{display:flex;align-items:center;gap:9px;width:min(420px,38vw);height:36px;padding:0 8px 0 13px;border:1px solid var(--line);border-radius:99px;background:var(--bg-2);color:var(--faint);font-size:13px;transition:border-color .15s,box-shadow .15s}
+.search:hover{border-color:#CBD5E1;background:#fff}
+.search span{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.kbd{font-family:var(--mono);font-size:11px;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:6px;padding:2px 6px}
+.bell{position:relative}
+.bell .dot{position:absolute;top:6px;right:7px;width:8px;height:8px;border-radius:50%;background:var(--rose);border:2px solid #fff}
+.tb-avatar{width:32px;height:32px;border-radius:50%;background:var(--em-50);color:var(--em-d);border:1px solid var(--em-100);font-size:12px;font-weight:700;display:grid;place-items:center}
+.main{flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#CBD5E1 transparent}
+.page{max-width:1280px;margin:0 auto;padding:26px 28px 48px}
+.view{display:none}
+.view.active{display:block;animation:fade .25s ease}
+.view[hidden]{display:none!important}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* Common */
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.page-head{margin-bottom:20px}
+.page-title{font-size:24px;font-weight:700;letter-spacing:-.025em}
+.page-lede{color:var(--muted);margin-top:3px;font-size:14px}
+.sec-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.sec-title{font-size:15px;font-weight:700;letter-spacing:-.01em}
+.link{font-size:13px;font-weight:600;color:var(--em-d);display:inline-flex;align-items:center;gap:4px;text-decoration:underline;text-underline-offset:3px;text-decoration-color:transparent}
+.link:hover,.link:focus-visible{color:#065F46;text-decoration-color:currentColor}
+.tag{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.03em;padding:3px 8px;border-radius:6px;white-space:nowrap;border:1px solid #E2E8F0;background:#F8FAFC;color:#475569}
+.tag.capital{background:var(--em-50);color:var(--em-d);border-color:#A7F3D0}
+
+/* Greeting + KPIs */
+.hello h1{font-size:26px;font-weight:700;letter-spacing:-.03em}
+.hello p{color:var(--muted);margin-top:3px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:20px 0 14px}
+.kpi{padding:16px 18px 15px;display:flex;flex-direction:column;gap:4px}
+.kpi-top{display:flex;align-items:center;justify-content:space-between}
+.kpi-lbl{font-size:13px;font-weight:600;color:var(--muted)}
+.kpi-ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:#F1F5F9;color:#475569}
+.kpi-ic.g{background:var(--em-50);color:var(--em-d)}
+.kpi-val{font-size:32px;font-weight:700;letter-spacing:-.035em;line-height:1.15;margin-top:4px}
+.kpi-val small{font-size:15px;font-weight:500;color:var(--muted);letter-spacing:0;margin-left:2px}
+.kpi-sub{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.kpi-sub.up{color:var(--em-d);font-weight:600}
+.kpi-sub.up::before{content:'↑ ';font-weight:700}
+.kpi-role{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em;margin-top:6px;padding-top:8px;border-top:1px dashed var(--line)}
+
+/* Billing strip */
+.strip{display:flex;align-items:center;gap:18px;padding:10px 16px;margin-bottom:20px;font-size:12.5px;flex-wrap:wrap}
+.strip .st-ic{width:26px;height:26px;border-radius:7px;background:var(--em-50);color:var(--em-d);display:grid;place-items:center}
+.strip .st-ic i{width:14px;height:14px}
+.strip b{font-weight:600}
+.strip .sep{width:1px;height:18px;background:var(--line)}
+.strip .mono{color:var(--ink-2)}
+.meter{width:90px;height:5px;border-radius:99px;background:var(--line-2);overflow:hidden;display:inline-block;vertical-align:middle;margin:0 6px}
+.meter i{display:block;height:100%;background:var(--em);border-radius:99px}
+.strip .grow{flex:1}
+
+/* Two columns */
+.two{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;margin-bottom:24px}
+.panel{padding:18px 20px}
+.init{display:grid;grid-template-columns:1fr auto 130px 40px;align-items:center;gap:14px;padding:11px 8px;margin:0 -8px;border-radius:10px;width:calc(100% + 16px);transition:background .12s}
+.init:hover{background:var(--bg-2)}
+.init + .init{border-top:1px solid var(--line-2)}
+.init b{display:block;font-size:13.5px;font-weight:600}
+.init small{font-size:12px;color:var(--muted)}
+.bar{height:6px;background:var(--line-2);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;background:#94A3B8}
+.bar.capital i{background:var(--em)}
+.pct{font-family:var(--mono);font-size:12px;color:var(--ink-2);text-align:right}
+.ra{display:flex;align-items:flex-start;gap:12px;padding:10px 8px;margin:0 -8px;border-radius:10px;width:calc(100% + 16px);transition:background .12s}
+.ra:hover{background:var(--bg-2)}
+.ra + .ra{border-top:1px solid var(--line-2)}
+.ra-dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0;background:#94A3B8;box-shadow:0 0 0 3px #F1F5F9}
+.ra-dot.g{background:var(--em);box-shadow:0 0 0 3px var(--em-50)}
+.ra-dot.r,.ra-dot.o{background:var(--amber);box-shadow:0 0 0 3px #FFFBEB}
+.ra-txt{flex:1;min-width:0}
+.ra-txt b{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
+.ra-txt small{font-size:12.5px;color:var(--muted)}
+.ra time{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap;padding-top:2px}
+
+/* Service cards */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.svc{display:flex;flex-direction:column;gap:5px;padding:16px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s;font:inherit;color:inherit}
+.svc:hover{border-color:#CBD5E1;box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.svc:hover .svc-ic{background:var(--em-50);color:var(--em-d)}
+.svc-ic{width:36px;height:36px;border-radius:10px;background:#F1F5F9;color:#334155;display:grid;place-items:center;margin-bottom:6px;transition:background .15s,color .15s}
+.svc-ic i{width:18px;height:18px}
+.svc-name{font-weight:600;font-size:14px}
+.svc-desc{font-size:12.5px;color:var(--muted);min-height:36px}
+.svc-foot{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.status{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--em-d)}
+.status .d{width:7px;height:7px;border-radius:50%;background:var(--em);box-shadow:0 0 0 3px var(--em-100);flex-shrink:0}
+.status.new{color:#1D4ED8}.status.new .d{background:var(--blue);box-shadow:0 0 0 3px #DBEAFE}
+.status.beta{color:#92400E}.status.beta .d{background:#D97706;box-shadow:0 0 0 3px #FEF3C7}
+@media (prefers-reduced-motion:no-preference){
+  .status:not(.new):not(.beta) .d{animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 3px var(--em-100)}50%{box-shadow:0 0 0 5px rgba(5,150,105,.18)}}
+}
+.arrow{color:var(--faint);font-size:15px;transition:transform .15s,color .15s}
+.svc:hover .arrow{transform:translateX(3px);color:var(--em-d)}
+
+/* Journey strip on Overview */
+.journey-strip{padding:18px 20px;margin-bottom:20px}
+.journey-strip-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.journey-strip-head h2{font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.journey-flow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
+.stage{
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;
+  padding:12px 8px;border:1px solid var(--line);border-radius:12px;background:var(--bg-2);
+  min-height:96px;transition:border-color .15s,background .15s,transform .15s;
+}
+.stage:hover,.stage:focus-visible{border-color:#A7F3D0;background:var(--em-50);transform:translateY(-1px)}
+.stage:hover .stage-ic,.stage:focus-visible .stage-ic{background:var(--em);color:#fff}
+.stage-ic{
+  width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:#E2E8F0;color:#334155;margin-bottom:2px;transition:background .15s,color .15s;
+}
+.stage-ic i,.stage-ic svg{width:16px;height:16px}
+.stage-name{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.25}
+.stage-count{font-size:11px;color:var(--muted);font-family:var(--mono)}
+
+/* Journey full view */
+.flow-row{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;position:relative}
+.flow{display:flex;flex-direction:column;gap:3px;padding:14px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card);transition:all .15s;position:relative}
+.flow:hover{border-color:#A7F3D0}
+.flow.active{border-color:var(--em);background:var(--em-50);box-shadow:0 0 0 3px rgba(16,185,129,.1)}
+.flow-num{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.flow.active .flow-num{color:var(--em-d)}
+.flow-ic{width:32px;height:32px;border-radius:9px;background:var(--bg);color:var(--ink-2);display:grid;place-items:center;margin:6px 0 4px}
+.flow.active .flow-ic{background:var(--em);color:#fff}
+.flow-name{font-weight:600;font-size:13.5px}
+.flow-desc{font-size:11.5px;color:var(--muted)}
+.flow-detail{margin-top:16px;padding:22px 24px}
+.flow-panel{display:none}.flow-panel.on{display:block;animation:fade .2s}
+.flow-panel h3{font-size:17px;font-weight:700;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.flow-panel p{color:var(--ink-2);margin:8px 0 14px;max-width:720px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chipbtn{padding:6px 13px;border:1px solid var(--line);border-radius:99px;background:#fff;font-size:12.5px;font-weight:500;transition:all .15s}
+.chipbtn:hover{border-color:var(--em);color:var(--em-d);background:var(--em-50)}
+.chipbtn.active{background:var(--em-d);color:#fff;border-color:var(--em-d)}
+.chipbtn[aria-pressed="true"]{background:var(--em-d);color:#fff;border-color:var(--em-d)}
+
+/* Services view */
+.filter-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filter-bar .grow{flex:1}
+.fsearch{display:flex;align-items:center;gap:8px;height:34px;padding:0 12px;border:1px solid var(--line);border-radius:99px;background:#fff;color:var(--faint);min-width:230px}
+.fsearch input{border:0;outline:0;background:none;flex:1;font-size:13px;color:var(--ink)}
+.cat{margin-bottom:26px}
+.cat-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.cat-name{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.cat-count{font-family:var(--mono);font-size:10.5px;background:var(--line-2);color:var(--muted);padding:1px 7px;border-radius:99px}
+.empty{display:none;text-align:center;color:var(--muted);padding:48px 0}
+.empty.show{display:block}
+
+/* cmdk */
+.cmdk{position:fixed;inset:0;background:rgba(15,23,42,.5);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;padding-top:14vh;z-index:200}
+.cmdk.open{display:flex}
+.cmdk[aria-hidden="false"]{display:flex}
+.cmdk-box{width:min(600px,92vw);background:#fff;border-radius:16px;box-shadow:0 24px 70px rgba(15,23,42,.28);overflow:hidden;border:1px solid var(--line)}
+.cmdk-in{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);color:var(--faint)}
+.cmdk-in input{flex:1;border:0;outline:0;font-size:15px;color:var(--ink);background:none}
+.cmdk-list{max-height:380px;overflow-y:auto;padding:8px}
+.cmdk-group{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);padding:10px 10px 4px}
+.cmdk-item{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:9px;cursor:pointer;font-size:13.5px;color:var(--ink-2)}
+.cmdk-item i{color:var(--muted)}
+.cmdk-item.sel{background:var(--em-50);color:var(--em-d)}
+.cmdk-item.sel i{color:var(--em-d)}
+.cmdk-item .kbd{margin-left:auto}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-size:13px;display:flex;align-items:center;gap:9px;opacity:0;pointer-events:none;transition:all .25s;z-index:300;box-shadow:var(--shadow-md)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast i{color:#34D399}
+.scrim{display:none}
+
+/* Responsive */
+@media (max-width:1180px){
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .two{grid-template-columns:1fr}
+  .journey-flow{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:10px}
+  .flow-row{grid-template-columns:repeat(4,1fr)}
+}
+@media (max-width:860px){
+  .app,.nav-collapsed .app{grid-template-columns:1fr}
+  .side{position:fixed;left:0;top:0;bottom:0;width:var(--side-w);transform:translateX(-120%);transition:transform .22s;box-shadow:var(--shadow-md);visibility:visible!important}
+  .side.drawer{transform:none}
+  .scrim.show{display:block;position:fixed;inset:0;background:rgba(15,23,42,.35);z-index:25}
+  .hamburger,.nav-collapsed .tb-toggle{display:grid}
+  .side-head .icon-btn{display:none}
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .topbar{padding:0 14px}.page{padding:20px 16px 40px}
+  .search{width:auto;flex:1;max-width:none}.search .kbd{display:none}
+  .help-btn{display:none}
+}
+@media (max-width:560px){
+  .kpis,.svc-grid{grid-template-columns:1fr}
+  .journey-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flow-row{grid-template-columns:repeat(2,1fr)}
+  .init{grid-template-columns:1fr 40px;row-gap:6px}.init .bar{grid-column:1/-1;order:5}.init .tag{display:none}
+  .crumbs .root{display:none}.crumbs .root + i{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="app" id="appShell">
+
+  <!-- Product sidebar -->
+  <aside class="side" id="side" aria-label="Product navigation">
+    <div class="side-inner">
+      <div class="side-head">
+        <div class="brand-mark" aria-hidden="true"><i data-lucide="zap"></i></div>
+        <div class="brand-word" id="sideBrand">York <span>Foundation</span></div>
+        <button class="icon-btn" type="button" id="sideToggle" aria-label="Collapse product navigation" aria-expanded="true" aria-controls="side"><i data-lucide="panel-left-close" aria-hidden="true"></i></button>
+      </div>
+      <button class="ws" type="button" id="wsBtn" aria-label="Current workspace Acme Inc. Switch workspace">
+        <span class="ws-mark" aria-hidden="true">A</span><span class="ws-name">Acme Inc</span><i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+      </button>
+      <div class="side-scroll" id="sideNav" role="navigation" aria-label="Product areas"></div>
+      <div class="side-foot">
+        <button class="user" type="button" id="userBtn" aria-label="Alex Kim, Admin. Account menu">
+          <span class="avatar" aria-hidden="true">AK</span>
+          <span class="meta"><b>Alex Kim</b><small>Admin</small></span>
+          <i data-lucide="more-horizontal" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim" hidden></div>
+
+  <!-- Main -->
+  <div class="col">
+    <header class="topbar">
+      <button class="icon-btn hamburger" type="button" id="hamburger" aria-label="Open product navigation" aria-controls="side" aria-expanded="false"><i data-lucide="menu" aria-hidden="true"></i></button>
+      <button class="icon-btn tb-toggle" type="button" id="tbToggle" aria-label="Expand product navigation" aria-expanded="false" aria-controls="side"><i data-lucide="panel-left-open" aria-hidden="true"></i></button>
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol style="display:flex;align-items:center;gap:8px;list-style:none;margin:0;padding:0">
+          <li class="root">Acme Inc</li>
+          <li aria-hidden="true"><i data-lucide="chevron-right"></i></li>
+          <li><b id="crumbCur" aria-current="page">Dashboard</b></li>
+        </ol>
+      </nav>
+      <div class="tb-spacer" aria-hidden="true"></div>
+      <button class="search" type="button" id="openCmdk" aria-label="Search services and actions. Keyboard shortcut Command K">
+        <i data-lucide="search" aria-hidden="true"></i><span>Search services, actions…</span><kbd class="kbd" style="flex:none" aria-hidden="true">⌘K</kbd>
+      </button>
+      <button class="icon-btn bell" type="button" id="bellBtn" aria-label="Notifications, 3 unread"><i data-lucide="bell" aria-hidden="true"></i><span class="dot" aria-hidden="true"></span></button>
+      <button class="icon-btn help-btn" type="button" id="helpBtn" aria-label="Help and documentation"><i data-lucide="circle-help" aria-hidden="true"></i></button>
+      <div class="tb-avatar" aria-label="Signed in as Alex Kim" title="Alex Kim" role="img">AK</div>
+    </header>
+
+    <main class="main" id="main" tabindex="-1">
+      <div class="page">
+        <div id="liveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+        <!-- ============ OVERVIEW ============ -->
+        <section class="view active" id="view-dashboard" aria-labelledby="dash-heading">
+          <div class="hello">
+            <h1 id="dash-heading">Good morning, Alex.</h1>
+            <p>Here's your workspace at a glance — from ideation through investment.</p>
+          </div>
+
+          <div class="kpis" role="list" aria-label="Key performance indicators">
+            <div class="card kpi" role="listitem">
+              <div class="kpi-top"><span class="kpi-lbl">Active Initiatives</span><span class="kpi-ic g" aria-hidden="true"><i data-lucide="layers"></i></span></div>
+              <div class="kpi-val" aria-label="18 active initiatives">18</div>
+              <div class="kpi-sub">across R&amp;D, GTM &amp; Finance</div>
+              <div class="kpi-role">Relevant for Admin and Founder</div>
+            </div>
+            <div class="card kpi" role="listitem">
+              <div class="kpi-top"><span class="kpi-lbl">R&amp;D Health</span><span class="kpi-ic" aria-hidden="true"><i data-lucide="heart-pulse"></i></span></div>
+              <div class="kpi-val" aria-label="87 out of 100">87<small>/100</small></div>
+              <div class="kpi-sub up"><span class="sr-only">Up </span>4.2 vs last sprint</div>
+              <div class="kpi-role">Relevant for Tech and Founder</div>
+            </div>
+            <div class="card kpi" role="listitem">
+              <div class="kpi-top"><span class="kpi-lbl">GTM Reach</span><span class="kpi-ic" aria-hidden="true"><i data-lucide="megaphone"></i></span></div>
+              <div class="kpi-val" aria-label="184 thousand">184K</div>
+              <div class="kpi-sub up"><span class="sr-only">Up </span>12.6% this month</div>
+              <div class="kpi-role">Relevant for Founder and GTM</div>
+            </div>
+            <div class="card kpi" role="listitem">
+              <div class="kpi-top"><span class="kpi-lbl">Runway</span><span class="kpi-ic" aria-hidden="true"><i data-lucide="circle-dollar-sign"></i></span></div>
+              <div class="kpi-val" aria-label="22 months">22<small>mo</small></div>
+              <div class="kpi-sub">at current burn rate</div>
+              <div class="kpi-role">Relevant for Finance and Founder</div>
+            </div>
+          </div>
+
+          <button class="card strip" type="button" data-soon="Billing & Usage" style="width:100%" aria-label="Billing and Usage. Fuel tokens 61 percent used. Seats 42 of 60. Next invoice November 1. Open details.">
+            <span class="st-ic" aria-hidden="true"><i data-lucide="credit-card"></i></span>
+            <b>Billing &amp; Usage</b>
+            <span class="sep" aria-hidden="true"></span>
+            <span>Fuel tokens <span class="meter" role="progressbar" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100" aria-label="Fuel tokens 61 percent used"><i style="width:61%"></i></span><span class="mono">61%</span></span>
+            <span class="sep" aria-hidden="true"></span>
+            <span>Seats <span class="mono">42 / 60</span></span>
+            <span class="sep" aria-hidden="true"></span>
+            <span>Next invoice <span class="mono">Nov 1</span></span>
+            <span class="grow" aria-hidden="true"></span>
+            <span class="link" aria-hidden="true">Details <i data-lucide="arrow-right" style="width:13px;height:13px"></i></span>
+          </button>
+
+          <div class="card journey-strip" aria-labelledby="journey-strip-heading">
+            <div class="journey-strip-head">
+              <h2 id="journey-strip-heading">Your product journey</h2>
+              <button type="button" class="link" data-view="journey" aria-label="View full product journey">View full journey <i data-lucide="arrow-right" style="width:13px;height:13px" aria-hidden="true"></i></button>
+            </div>
+            <div class="journey-flow" id="journeyStrip" role="list" aria-label="Product journey stages"></div>
+          </div>
+
+          <div class="two">
+            <div class="card panel">
+              <div class="sec-head"><h2 class="sec-title" id="init-heading">Active initiatives</h2><button type="button" class="link" data-view="services">View all <i data-lucide="arrow-right" style="width:13px;height:13px" aria-hidden="true"></i></button></div>
+              <div id="initList" role="list" aria-labelledby="init-heading"></div>
+            </div>
+            <div class="card panel">
+              <div class="sec-head"><h2 class="sec-title" id="recent-heading">Recent activity</h2><span class="mono" style="font-size:12px;color:var(--muted)">LAST 24H</span></div>
+              <div id="recentList" role="list" aria-labelledby="recent-heading"></div>
+            </div>
+          </div>
+
+          <div class="sec-head">
+            <h2 class="sec-title" id="svc-heading">Your services</h2>
+            <a class="link" href="#view-services" data-view="services">View all <span id="svcCount">24</span> →</a>
+          </div>
+          <div class="svc-grid" id="featured" role="list" aria-labelledby="svc-heading"></div>
+        </section>
+
+        <!-- ============ JOURNEY ============ -->
+        <section class="view" id="view-journey" aria-labelledby="journey-title" hidden>
+          <div class="page-head">
+            <h2 class="page-title" id="journey-title">Product Journey</h2>
+            <p class="page-lede">The full lifecycle, from first idea to investor update — every stage connected.</p>
+          </div>
+          <div class="flow-row" id="flowRow" role="tablist" aria-label="Journey stages"></div>
+          <div class="card flow-detail" id="flowDetail"></div>
+        </section>
+
+        <!-- ============ SERVICES ============ -->
+        <section class="view" id="view-services" aria-labelledby="services-title" hidden>
+          <div class="page-head">
+            <h2 class="page-title">All Services</h2>
+            <p class="page-lede"><span id="svcCount2">23</span> products across build, quality, market, signal, capital, people, and support.</p>
+          </div>
+          <div class="filter-bar" id="svcFilterBar">
+            <button class="chipbtn active" type="button" data-filter="all">All</button>
+            <button class="chipbtn" type="button" data-filter="Build &amp; Ship">Build</button>
+            <button class="chipbtn" type="button" data-filter="Quality &amp; Audit">Quality</button>
+            <button class="chipbtn" type="button" data-filter="Go-to-Market">GTM</button>
+            <button class="chipbtn" type="button" data-filter="Signal &amp; Analytics">Signal</button>
+            <button class="chipbtn" type="button" data-filter="capital">Capital</button>
+            <button class="chipbtn" type="button" data-filter="People &amp; Learning">People</button>
+            <button class="chipbtn" type="button" data-filter="Support">Support</button>
+            <span class="grow"></span>
+            <label class="fsearch"><i data-lucide="search"></i><input type="text" id="svcFilter" placeholder="Filter services…" autocomplete="off"></label>
+          </div>
+          <div id="svcCatalog"></div>
+          <div class="empty" id="svcEmpty">No services match your filters.</div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<div class="cmdk" id="cmdk" role="dialog" aria-modal="true" aria-label="Command palette" aria-hidden="true" hidden>
+  <div class="cmdk-box">
+    <div class="cmdk-in"><i data-lucide="search" aria-hidden="true"></i><label class="sr-only" for="cmdkInput">Search services and actions</label><input type="text" id="cmdkInput" placeholder="Search services, actions…" autocomplete="off" aria-autocomplete="list" aria-controls="cmdkList"></div>
+    <div class="cmdk-list" id="cmdkList" role="listbox" aria-label="Search results"></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"><i data-lucide="check-circle-2" aria-hidden="true"></i><span id="toastMsg"></span></div>
+
+<script>
+/* ——— Data ——— */
+const CATEGORIES = [
+  { name:'Build & Ship', services:[
+    { name:'R&D Launchpad', desc:'AI-native fullstack product development platform.', icon:'rocket', status:'live' },
+    { name:'Gerrit', desc:'Code review platform for structured peer review.', icon:'git-pull-request', status:'live' },
+    { name:'Design Library', desc:'Centralized design assets and component registry.', icon:'component', status:'live' },
+    { name:'PMT', desc:'Project management for R&D and GTM initiatives.', icon:'square-kanban', status:'live' },
+  ]},
+  { name:'Quality & Audit', services:[
+    { name:'QA Usage Dashboard', desc:'Playwright run analytics across every project.', icon:'flask-conical', status:'live' },
+    { name:'Internal Audit Platform', desc:'Structured internal auditing across controls.', icon:'clipboard-check', status:'live' },
+    { name:'External Audit Platform', desc:'External compliance and regulatory readiness.', icon:'scale', status:'live' },
+    { name:'UI/UX Audit Platform', desc:'UI/UX auditing against design guidelines.', icon:'scan-eye', status:'beta' },
+    { name:'Prowler', desc:'Cloud security posture scanning and compliance.', icon:'shield-alert', status:'live' },
+  ]},
+  { name:'Go-to-Market', services:[
+    { name:'GTM Launchpad', desc:'Plan and schedule campaigns across social + CRM.', icon:'megaphone', status:'live' },
+    { name:'GTM Pulse', desc:'Market performance — impressions, engagement, pipeline.', icon:'line-chart', status:'live' },
+  ]},
+  { name:'Signal & Analytics', services:[
+    { name:'R&D Pulse', desc:'Project health and engineering metrics tracking.', icon:'heart-pulse', status:'live' },
+    { name:'Finance Pulse', desc:'Burn, runway, unit economics, and initiative ROI.', icon:'circle-dollar-sign', status:'beta' },
+    { name:'Prompt Dashboard', desc:'AI prompt tracking, evaluation, and version analytics.', icon:'bot-message-square', status:'live' },
+  ]},
+  { name:'AI & Advisory', services:[
+    { name:'Fuel', desc:'AI advisor connected to Slack, Granola, and HubSpot.', icon:'brain-circuit', status:'live' },
+    { name:'Investment Advisor', desc:'Investor matching, updates, and data room management.', icon:'landmark', status:'new' },
+  ]},
+  { name:'People & Learning', services:[
+    { name:'Hub', desc:'HRMS and people management, teams, and projects.', icon:'building-2', status:'live' },
+    { name:'LMS', desc:'Learning management system for onboarding & training.', icon:'book-open', status:'live' },
+    { name:'Assessment Platform', desc:'Org-wide assessments and skill tracking.', icon:'clipboard-list', status:'live' },
+    { name:'Walk in Drive', desc:'Recruitment event platform for walk-in hiring.', icon:'door-open', status:'live' },
+    { name:'Internship Drive', desc:'Internship recruitment and program management.', icon:'backpack', status:'live' },
+  ]},
+  { name:'Support', services:[
+    { name:'Support Ticket', desc:'Unified ticketing across every product and team.', icon:'life-buoy', status:'live' },
+    { name:'Survey Ticket', desc:'Survey and feedback for internal and external users.', icon:'messages-square', status:'live' },
+  ]},
+];
+const allServices = CATEGORIES.flatMap(c => c.services);
+const svcByName = Object.fromEntries(allServices.map(s => [s.name, s]));
+
+const INITIATIVES = [
+  { name:'york-api v2',           sub:'R&D Launchpad · 6 contributors', tag:'R&D',     cls:'rd',      pct:72, svc:'R&D Launchpad' },
+  { name:'Q1 brand campaign',     sub:'GTM Launchpad · 3 channels',     tag:'GTM',     cls:'gtm',     pct:48, svc:'GTM Launchpad' },
+  { name:'Series A data room',    sub:'Investment Advisor · 14 docs',   tag:'CAPITAL', cls:'capital', pct:85, svc:'Investment Advisor' },
+  { name:'Q1 internal audit',     sub:'Internal Audit · 32 controls',   tag:'AUDIT',   cls:'audit',   pct:61, svc:'Internal Audit Platform' },
+  { name:'Onboarding LMS',        sub:'LMS · 4 cohorts',                tag:'PEOPLE',  cls:'people',  pct:34, svc:'LMS' },
+];
+const RECENT = [
+  { dot:'b', t:'R&D Pulse score up 4.2 points',       s:'Pulse · sprint 24 closed',        svc:'R&D Pulse',          when:'12m' },
+  { dot:'p', t:'3 posts scheduled for Oct 16',        s:'GTM · LinkedIn, X, newsletter',   svc:'GTM Launchpad',      when:'38m' },
+  { dot:'o', t:'onboarding-summary v14 evaluated',    s:'Prompt · 120-case eval',          svc:'Prompt Dashboard',   when:'1h' },
+  { dot:'g', t:'3 investor matches surfaced',         s:'Investment Advisor · Series A',   svc:'Investment Advisor', when:'2h' },
+  { dot:'r', t:'Control AC-14 evidence missing',      s:'Internal Audit · due Fri Oct 16', svc:'Internal Audit Platform', when:'3h' },
+  { dot:'k', t:'4 new hires added to onboarding',     s:'Hub · People ops',                svc:'Hub',                when:'5h' },
+];
+const FEATURED = ['R&D Launchpad','Fuel','GTM Launchpad','R&D Pulse','Investment Advisor','Hub'];
+const STAGES = [
+  { n:'Ideate', d:'Research & framing', ic:'lightbulb', chip:'FUEL', p:'Research, frame, and pressure-test ideas. Fuel pulls context from Slack, Granola, HubSpot, and your workspace history — so decisions start informed, not blank.', tools:['Fuel','Design Library','Competitor Analysis'] },
+  { n:'Build', d:'Code & ship', ic:'code-2', chip:'R&D', p:'Ship in R&D Launchpad. Code review flows through Gerrit, tasks through PMT, design assets through the Design Library — every artifact linked to the initiative.', tools:['R&D Launchpad','Gerrit','PMT','Design Library'] },
+  { n:'QA & Audit', d:'Quality gates', ic:'shield-check', chip:'QUALITY', p:'Automated QA, internal audit, external compliance, UI/UX review, and cloud security — five gates, one signal. Failures roll up into R&D Pulse automatically.', tools:['QA Usage Dashboard','Internal Audit Platform','External Audit Platform','UI/UX Audit Platform','Prowler'] },
+  { n:'Launch', d:'Campaigns & CRM', ic:'send', chip:'GTM', p:'Coordinate campaigns across social, CRM, and ads from one calendar. Approval flows, connector health, and scheduling — all in GTM Launchpad.', tools:['GTM Launchpad','Survey Ticket'] },
+  { n:'Measure', d:'Signal & pulse', ic:'gauge', chip:'SIGNAL', p:'R&D Pulse tracks engineering health. GTM Pulse tracks market performance. Prompt Dashboard tracks AI quality. All three roll up into one workspace signal.', tools:['R&D Pulse','GTM Pulse','Prompt Dashboard'] },
+  { n:'Finance', d:'Burn, runway, ROI', ic:'wallet', chip:'CAPITAL', p:'Burn, runway, unit economics, per-initiative ROI. Finance Pulse connects engineering spend and GTM spend to outcomes — so you know which products are actually working.', tools:['Finance Pulse'] },
+  { n:'Invest', d:'Raise & report', ic:'trending-up', chip:'CAPITAL', p:'Investment Advisor identifies investor fit, prepares updates, manages the data room, and tracks engagement — from first outreach to signed term sheet.', tools:['Investment Advisor','Data Room','Investor Updates'] },
+  { n:'People', d:'Hire, learn, assess', ic:'users-round', chip:'HRMS', p:'Hub manages HR, teams, and projects. LMS delivers learning. Assessment Platform runs org-wide evaluations. Walk-in and Internship Drives handle recruitment events.', tools:['Hub','LMS','Assessment Platform','Walk in Drive','Internship Drive'] },
+];
+const NAV = [
+  { items:[
+    { label:'Dashboard', icon:'layout-dashboard', view:'dashboard' },
+    { label:'Product Journey', icon:'map', view:'journey' },
+    { label:'All Services', icon:'layout-grid', view:'services', badge:String(allServices.length) },
+  ]},
+  ...CATEGORIES.map(c => ({
+    group: c.name,
+    items: c.services.map(s => ({
+      label: s.name,
+      icon: s.icon,
+      svc: 1,
+      badge: s.status === 'new' ? 'NEW' : undefined,
+    })),
+  })),
+  { group:'Platform', items:[
+    { label:'Connector Hub', icon:'cable', soon:1 },
+    { label:'Team & Access', icon:'user-cog', soon:1 },
+    { label:'Billing & Usage', icon:'receipt', soon:1 },
+    { label:'Settings', icon:'sliders-horizontal', soon:1 },
+  ]},
+];
+
+/* ——— Helpers ——— */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const paintIcons = () => { if (window.lucide) lucide.createIcons({ attrs:{ 'stroke-width':1.75 } }); };
+let toastT;
+function toast(msg){ $('toastMsg').textContent = msg; $('toast').classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => $('toast').classList.remove('show'), 2400); }
+
+/* ——— Render: product sidebar ——— */
+function navItem(it){
+  const badge = it.badge ? `<span class="nbadge${it.badge==='NEW'?' new':''}">${esc(it.badge)}</span>` : '';
+  const inner = `<span class="nav-ic" aria-hidden="true"><i data-lucide="${it.icon}"></i></span><span class="nav-lbl">${esc(it.label)}</span>${badge}`;
+  const attrs = it.view ? `data-view="${it.view}" data-key="${it.view}"` : it.svc ? `data-nav="${esc(it.label)}" data-key="${esc(it.label)}"` : `data-soon="${esc(it.label)}"`;
+  return `<button type="button" class="nav-item" ${attrs}>${inner}</button>`;
+}
+$('sideNav').innerHTML = NAV.map(g => `<div class="grp">${g.group ? `<div class="grp-label">${esc(g.group)}</div>` : ''}${g.items.map(navItem).join('')}</div>`).join('');
+
+/* ——— Render: overview ——— */
+const DOT_LABEL = { g:'Success', p:'Advisory', b:'Info', o:'Warning', r:'Alert', k:'People' };
+$('initList').innerHTML = INITIATIVES.map(i => `
+  <button type="button" class="init" role="listitem" data-nav="${esc(i.svc)}" aria-label="${esc(i.name)}, ${i.tag}, ${i.pct} percent complete. Open ${esc(i.svc)}.">
+    <span><b>${esc(i.name)}</b><small>${esc(i.sub)}</small></span>
+    <span class="tag ${i.cls}">${i.tag}</span>
+    <span class="bar ${i.cls}" role="progressbar" aria-valuenow="${i.pct}" aria-valuemin="0" aria-valuemax="100" aria-label="${i.pct} percent complete"><i style="width:${i.pct}%"></i></span>
+    <span class="pct" aria-hidden="true">${i.pct}%</span>
+  </button>`).join('');
+$('recentList').innerHTML = RECENT.map(r => `
+  <button type="button" class="ra" role="listitem" data-nav="${esc(r.svc)}" aria-label="${DOT_LABEL[r.dot] || 'Update'}: ${esc(r.t)}. ${esc(r.s)}. ${r.when} ago.">
+    <span class="ra-dot ${r.dot}" aria-hidden="true"></span>
+    <span class="ra-txt"><b>${esc(r.t)}</b><small>${esc(r.s)}</small></span>
+    <time datetime="">${r.when} ago</time>
+  </button>`).join('');
+
+function svcCard(s){
+  const st = s.status === 'new' ? 'NEW' : s.status === 'beta' ? 'BETA' : 'LIVE';
+  return `<button type="button" class="svc" data-svc-name="${esc(s.name)}" aria-label="${esc(s.name)}, status ${st}. ${esc(s.desc)}">
+    <div class="svc-ic" aria-hidden="true"><i data-lucide="${s.icon}"></i></div>
+    <div class="svc-name">${esc(s.name)}</div>
+    <div class="svc-desc">${esc(s.desc)}</div>
+    <div class="svc-foot"><span class="status ${s.status}"><span class="d" aria-hidden="true"></span><span class="sr-only">Status </span>${st}</span><span class="arrow" aria-hidden="true">→</span></div>
+  </button>`;
+}
+$('featured').innerHTML = FEATURED.map(n => svcCard(svcByName[n])).join('');
+$('svcCount').textContent = allServices.length;
+$('svcCount2').textContent = allServices.length;
+
+/* ——— Render: services ——— */
+$('svcCatalog').innerHTML = CATEGORIES.map(c => `
+  <div class="cat" data-cat="${esc(c.name)}">
+    <div class="cat-head"><span class="cat-name">${esc(c.name)}</span><span class="cat-count">${c.services.length}</span></div>
+    <div class="svc-grid">${c.services.map(svcCard).join('')}</div>
+  </div>`).join('');
+
+function applySvcFilters(){
+  const chip = document.querySelector('#svcFilterBar .chipbtn.active');
+  const filter = chip?.dataset.filter || 'all';
+  const q = $('svcFilter').value.toLowerCase().trim();
+  let total = 0;
+  document.querySelectorAll('#svcCatalog .cat').forEach(cat => {
+    const name = cat.dataset.cat;
+    let catOk = filter === 'all' || name === filter;
+    if (filter === 'capital') catOk = name === 'AI & Advisory' || name === 'Signal & Analytics';
+    let any = false;
+    cat.querySelectorAll('.svc').forEach(s => {
+      let ok = catOk;
+      if (filter === 'capital' && name === 'Signal & Analytics') ok = s.dataset.svcName === 'Finance Pulse';
+      if (filter === 'capital' && name === 'AI & Advisory') ok = s.dataset.svcName === 'Investment Advisor';
+      ok = ok && (!q || s.textContent.toLowerCase().includes(q));
+      s.style.display = ok ? '' : 'none';
+      if (ok){ any = true; total++; }
+    });
+    cat.style.display = any ? '' : 'none';
+  });
+  $('svcEmpty').classList.toggle('show', total === 0);
+}
+document.querySelectorAll('#svcFilterBar .chipbtn').forEach(c => {
+  c.setAttribute('aria-pressed', c.classList.contains('active') ? 'true' : 'false');
+  c.addEventListener('click', () => {
+    document.querySelectorAll('#svcFilterBar .chipbtn').forEach(x => {
+      x.classList.remove('active');
+      x.setAttribute('aria-pressed', 'false');
+    });
+    c.classList.add('active');
+    c.setAttribute('aria-pressed', 'true');
+    applySvcFilters();
+  });
+});
+$('svcFilter').addEventListener('input', applySvcFilters);
+
+/* ——— Render: overview journey strip ——— */
+const STRIP_COUNTS = [12, 8, 5, 3, 7, 4, 2];
+$('journeyStrip').innerHTML = STAGES.slice(0, 7).map((s, i) => `
+  <button type="button" class="stage" role="listitem" data-view="journey" data-stage-jump="${i}" aria-label="${esc(s.n)} stage, ${STRIP_COUNTS[i]} active items. Open product journey.">
+    <span class="stage-ic" aria-hidden="true"><i data-lucide="${s.ic}"></i></span>
+    <span class="stage-name">${esc(s.n === 'Ideate' ? 'Ideation' : s.n)}</span>
+    <span class="stage-count">${STRIP_COUNTS[i]}</span>
+  </button>`).join('');
+
+/* ——— Render: journey ——— */
+$('flowRow').innerHTML = STAGES.map((s,i) => `
+  <button type="button" class="flow${i===0?' active':''}" role="tab" aria-selected="${i===0?'true':'false'}" data-stage="${i}" id="stage-tab-${i}" aria-controls="stage-panel-${i}">
+    <span class="flow-num">${String(i+1).padStart(2,'0')}</span>
+    <span class="flow-ic" aria-hidden="true"><i data-lucide="${s.ic}"></i></span>
+    <span class="flow-name">${esc(s.n)}</span>
+    <span class="flow-desc">${esc(s.d)}</span>
+  </button>`).join('');
+$('flowDetail').innerHTML = STAGES.map((s,i) => `
+  <div class="flow-panel${i===0?' on':''}" role="tabpanel" id="stage-panel-${i}" data-panel="${i}" aria-labelledby="stage-tab-${i}" ${i===0?'':'hidden'}>
+    <h3>Stage ${String(i+1).padStart(2,'0')} — ${esc(s.n)} <span class="tag capital" style="background:var(--bg);color:var(--muted)">${s.chip}</span></h3>
+    <p>${esc(s.p)}</p>
+    <div class="chips">${s.tools.map(t => svcByName[t]
+      ? `<button type="button" class="chipbtn" data-nav="${esc(t)}">${esc(t)}</button>`
+      : `<button type="button" class="chipbtn" data-soon="${esc(t)}">${esc(t)}</button>`).join('')}</div>
+  </div>`).join('');
+function selectStage(idx){
+  const i = String(idx);
+  document.querySelectorAll('.flow').forEach(x => {
+    const on = x.dataset.stage === i;
+    x.classList.toggle('active', on);
+    x.setAttribute('aria-selected', on ? 'true' : 'false');
+  });
+  document.querySelectorAll('.flow-panel').forEach(p => {
+    const on = p.dataset.panel === i;
+    p.classList.toggle('on', on);
+    if (on) p.removeAttribute('hidden'); else p.setAttribute('hidden','');
+  });
+}
+document.querySelectorAll('.flow').forEach(f => f.addEventListener('click', () => selectStage(f.dataset.stage)));
+
+/* ——— Views & nav ——— */
+const VIEW_TITLES = { dashboard:'Dashboard', journey:'Product Journey', services:'All Services' };
+function setActive(key){
+  document.querySelectorAll('#sideNav .nav-item').forEach(b => {
+    const on = b.dataset.key === key;
+    b.classList.toggle('active', on);
+    on ? b.setAttribute('aria-current','page') : b.removeAttribute('aria-current');
+  });
+}
+function announce(msg){ const lr = $('liveRegion'); if (lr){ lr.textContent = ''; requestAnimationFrame(() => { lr.textContent = msg; }); } }
+function showView(name, opts = {}){
+  document.querySelectorAll('.view').forEach(v => {
+    const on = v.id === 'view-' + name;
+    v.classList.toggle('active', on);
+    if (on){ v.removeAttribute('hidden'); v.setAttribute('aria-hidden','false'); }
+    else { v.setAttribute('hidden',''); v.setAttribute('aria-hidden','true'); }
+  });
+  setActive(name);
+  $('crumbCur').textContent = VIEW_TITLES[name] || name;
+  if (name === 'services' && !opts.keepFilter){
+    $('svcFilter').value = '';
+    document.querySelectorAll('#svcFilterBar .chipbtn').forEach((x,i) => {
+      const on = i === 0;
+      x.classList.toggle('active', on);
+      x.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    applySvcFilters();
+  }
+  $('main').scrollTop = 0;
+  announce(`Navigated to ${VIEW_TITLES[name] || name}`);
+  closeDrawer();
+  paintIcons();
+}
+function navToService(label){
+  if (!svcByName[label]){ toast(`${label} opens in the full console`); return; }
+  showView('services', { keepFilter:true });
+  $('svcFilter').value = label;
+  document.querySelectorAll('#svcFilterBar .chipbtn').forEach((x,i) => x.classList.toggle('active', i === 0));
+  applySvcFilters();
+  const inNav = !!document.querySelector(`#sideNav .nav-item[data-key="${CSS.escape(label)}"]`);
+  setActive(inNav ? label : 'services');
+  $('crumbCur').textContent = label;
+}
+document.addEventListener('click', e => {
+  const soon = e.target.closest('[data-soon]');
+  if (soon){ toast(`${soon.dataset.soon} opens in the full console`); return; }
+  const v = e.target.closest('[data-view]');
+  if (v && !v.closest('.cmdk')){
+    e.preventDefault();
+    showView(v.dataset.view);
+    if (v.dataset.stageJump != null) selectStage(v.dataset.stageJump);
+    return;
+  }
+  const n = e.target.closest('[data-nav]');
+  if (n){ e.preventDefault(); navToService(n.dataset.nav); return; }
+  const svc = e.target.closest('.svc[data-svc-name]');
+  if (svc) navToService(svc.dataset.svcName);
+});
+document.addEventListener('keydown', e => {
+  const svc = e.target.closest && e.target.closest('.svc[data-svc-name]');
+  if (svc && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); navToService(svc.dataset.svcName); }
+});
+
+/* ——— Collapsible product sidebar ——— */
+const rootEl = document.documentElement, side = $('side'), scrim = $('scrim');
+const isDesktop = () => matchMedia('(min-width:861px)').matches;
+function setNavOpen(open){
+  const side = $('side');
+  if (side){
+    if (open){ side.removeAttribute('inert'); side.setAttribute('aria-hidden','false'); }
+    else { side.setAttribute('inert',''); side.setAttribute('aria-hidden','true'); }
+  }
+  $('tbToggle')?.setAttribute('aria-expanded', String(open));
+  $('hamburger')?.setAttribute('aria-expanded', String(open));
+  rootEl.classList.toggle('nav-collapsed', !open);
+  try { localStorage.setItem('york-nav-open', open ? 'true' : 'false'); } catch(e){}
+  $('sideToggle').setAttribute('aria-expanded', String(open));
+}
+$('sideToggle').addEventListener('click', () => setNavOpen(false));
+$('tbToggle').addEventListener('click', () => { if (isDesktop()) setNavOpen(true); else openDrawer(); });
+function openDrawer(){
+  side.classList.add('drawer');
+  scrim.classList.add('show');
+  scrim.removeAttribute('hidden');
+  side.removeAttribute('inert');
+  side.setAttribute('aria-hidden','false');
+  $('hamburger')?.setAttribute('aria-expanded','true');
+}
+function closeDrawer(){
+  side.classList.remove('drawer');
+  scrim.classList.remove('show');
+  scrim.setAttribute('hidden','');
+  $('hamburger')?.setAttribute('aria-expanded','false');
+  if (rootEl.classList.contains('nav-collapsed') && isDesktop()){
+    side.setAttribute('inert','');
+    side.setAttribute('aria-hidden','true');
+  }
+}
+$('hamburger').addEventListener('click', openDrawer);
+scrim.addEventListener('click', closeDrawer);
+addEventListener('resize', () => { if (isDesktop()) closeDrawer(); });
+$('sideToggle').setAttribute('aria-expanded', String(!rootEl.classList.contains('nav-collapsed')));
+
+/* ——— Topbar actions ——— */
+$('bellBtn').addEventListener('click', () => toast('You have 3 unread notifications'));
+$('helpBtn').addEventListener('click', () => toast('Help Center opens in the full console'));
+$('wsBtn').addEventListener('click', () => toast('Workspace: Acme Inc'));
+$('userBtn').addEventListener('click', () => toast('Alex Kim · Admin'));
+
+/* ——— Command palette ——— */
+const cmdk = $('cmdk'), cmdkInput = $('cmdkInput'), cmdkList = $('cmdkList');
+let selIdx = 0, flat = [];
+const CMDS = [
+  { group:'Navigate', items:[
+    { label:'Dashboard', view:'dashboard', key:'G D', icon:'layout-dashboard' },
+    { label:'Product Journey', view:'journey', key:'G J', icon:'map' },
+    { label:'All Services', view:'services', key:'G S', icon:'layout-grid' },
+  ]},
+  { group:'Services', items: allServices.map(s => ({ label:s.name, service:s.name, icon:s.icon })) },
+  { group:'Platform', items:[
+    { label:'Billing & Usage', soon:'Billing & Usage', icon:'credit-card' },
+    { label:'Team & Access', soon:'Team & Access', icon:'users' },
+    { label:'Connector Hub', soon:'Connector Hub', icon:'plug' },
+  ]},
+  { group:'Actions', items:[
+    { label:'Create new initiative', key:'N I', icon:'plus-circle', toast:'New initiative draft created' },
+    { label:'Invite team member', key:'I T', icon:'user-plus', toast:'Invite link copied' },
+    { label:'Schedule GTM campaign', key:'N C', icon:'send', toast:'Campaign draft created' },
+    { label:'Prepare investor update', key:'N U', icon:'file-text', toast:'Investor update draft created' },
+  ]},
+];
+function runCmd(it){
+  closeCmdk(); if (!it) return;
+  if (it.view) showView(it.view);
+  else if (it.service) navToService(it.service);
+  else if (it.soon) toast(`${it.soon} opens in the full console`);
+  else if (it.toast) toast(it.toast);
+}
+function renderCmdk(filter = ''){
+  const f = filter.toLowerCase().trim();
+  let html = ''; flat = [];
+  CMDS.forEach(g => {
+    const items = g.items.filter(i => i.label.toLowerCase().includes(f));
+    if (!items.length) return;
+    html += `<div class="cmdk-group">${esc(g.group)}</div>`;
+    items.forEach(i => {
+      html += `<div class="cmdk-item" data-idx="${flat.length}"><i data-lucide="${i.icon||'box'}"></i>${esc(i.label)}${i.key ? `<span class="kbd">${i.key}</span>` : ''}</div>`;
+      flat.push(i);
+    });
+  });
+  cmdkList.innerHTML = html || '<div class="cmdk-group">No results</div>';
+  paintIcons();
+  cmdkList.querySelectorAll('.cmdk-item').forEach(el => el.addEventListener('click', () => runCmd(flat[+el.dataset.idx])));
+  setSel(0);
+}
+function setSel(i){
+  const els = [...cmdkList.querySelectorAll('.cmdk-item')];
+  els.forEach(x => x.classList.remove('sel'));
+  selIdx = Math.max(0, Math.min(i, els.length - 1));
+  if (els[selIdx]){ els[selIdx].classList.add('sel'); els[selIdx].scrollIntoView({ block:'nearest' }); }
+}
+function openCmdk(){
+  cmdk.classList.add('open');
+  cmdk.removeAttribute('hidden');
+  cmdk.setAttribute('aria-hidden','false');
+  cmdkInput.value = '';
+  renderCmdk();
+  cmdkInput.focus();
+}
+function closeCmdk(){
+  cmdk.classList.remove('open');
+  cmdk.setAttribute('hidden','');
+  cmdk.setAttribute('aria-hidden','true');
+  $('openCmdk')?.focus();
+}
+$('openCmdk').addEventListener('click', openCmdk);
+cmdk.addEventListener('click', e => { if (e.target === cmdk) closeCmdk(); });
+cmdkInput.addEventListener('input', () => renderCmdk(cmdkInput.value));
+cmdkInput.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown'){ e.preventDefault(); setSel(selIdx + 1); }
+  else if (e.key === 'ArrowUp'){ e.preventDefault(); setSel(selIdx - 1); }
+  else if (e.key === 'Enter'){ runCmd(flat[selIdx]); }
+  else if (e.key === 'Escape') closeCmdk();
+});
+addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); openCmdk(); return; }
+  if (e.key === '/' && !e.metaKey && !e.ctrlKey && !e.altKey){
+    const a = document.activeElement, tag = a && a.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || (a && a.isContentEditable)) return;
+    e.preventDefault(); openCmdk(); return;
+  }
+  if (e.key === 'Escape'){ if (cmdk.classList.contains('open')) closeCmdk(); else closeDrawer(); }
+});
+
+/* ——— Init ——— */
+setActive('dashboard');
+paintIcons();
+</script>
+</body>
+</html>
