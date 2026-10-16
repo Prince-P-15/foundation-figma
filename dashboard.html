@@ -56,6 +56,15 @@
   --btn-primary-bg: #007A5A;   /* 5.34:1 accessible button fill for white text (WCAG AA) */
   --btn-primary-hover: #005E44;
   
+  /* Unified Website CTA Button Tokens (Exact Website Navbar & Flagship CTA) */
+  --cta-primary-bg: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  --cta-primary-hover-bg: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+  --cta-primary-color: #FFFFFF;
+  --cta-primary-border: rgba(255, 255, 255, 0.22);
+  --cta-primary-shadow: 0 4px 16px rgba(16, 185, 129, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  --cta-primary-shadow-hover: 0 8px 28px rgba(16, 185, 129, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  --cta-radius: 8px;
+  
   --shadow-dock: 0 1px 3px rgba(15, 23, 42, 0.05);
   --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
   --shadow-pill: 0 1px 2px rgba(15, 23, 42, 0.04);
@@ -95,6 +104,14 @@
   --emerald-accent: #34D399;
   --btn-primary-bg: #00B48A;   /* Primary action button on dark */
   --btn-primary-hover: #00D6A4;
+  
+  /* Unified Website CTA Button Tokens (Dark Mode) */
+  --cta-primary-bg: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  --cta-primary-hover-bg: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+  --cta-primary-color: #FFFFFF;
+  --cta-primary-border: rgba(255, 255, 255, 0.25);
+  --cta-primary-shadow: 0 4px 20px rgba(16, 185, 129, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  --cta-primary-shadow-hover: 0 8px 30px rgba(16, 185, 129, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.5);
   
   --shadow-dock: 0 4px 24px rgba(0, 0, 0, 0.4);
   --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.35);
@@ -891,37 +908,57 @@ i[data-lucide], svg.lucide {
   color: var(--text-main);
 }
 
-/* Export / Action Pill - Standardized 38px Height */
+/* Export / Action CTA Button - Standardized 38px Height matching Website CTA System */
 .export-pill-btn {
   height: 38px;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: 8px;
   padding: 0 16px;
-  background: var(--btn-primary-bg);
-  color: #FFFFFF;
-  border-radius: var(--radius-pill);
-  font-size: 12.5px;
+  background: var(--cta-primary-bg) !important;
+  color: var(--cta-primary-color) !important;
+  border-radius: var(--cta-radius) !important; /* Strict 8px crisp corners matching website */
+  font-size: 13px;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(0, 179, 137, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.2s ease;
+  letter-spacing: -0.01em;
+  box-shadow: var(--cta-primary-shadow) !important;
+  border: 1px solid var(--cta-primary-border) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   box-sizing: border-box;
   white-space: nowrap;
+  position: relative;
+  overflow: hidden;
 }
 .export-pill-btn:hover {
-  background: var(--btn-primary-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(0, 179, 137, 0.35);
+  background: var(--cta-primary-hover-bg) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: var(--cta-primary-shadow-hover) !important;
 }
-:root[data-theme="dark"] .export-pill-btn {
-  background: var(--btn-primary-bg);
-  color: #FFFFFF;
+.export-pill-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
 }
-.export-pill-btn i {
+.export-pill-btn:hover::after {
+  left: 140%;
+}
+.export-pill-btn i, .export-pill-btn svg {
   width: 14px;
   height: 14px;
+  transition: transform 0.2s ease;
+}
+.export-pill-btn:hover i, .export-pill-btn:hover svg {
+  transform: translate(1px, -1px);
 }
 
 /* ─── 4-CARD METRIC DECK (COMPLETE KPI TELEMETRY) ─── */
@@ -1230,42 +1267,52 @@ i[data-lucide], svg.lucide {
 .billing-manage-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: 8px;
   height: 36px;
-  padding: 0 14px;
-  border-radius: var(--radius-pill);
-  background: var(--bg-card);
-  border: 1px solid var(--line);
-  font-size: 12px;
+  padding: 0 16px;
+  border-radius: var(--cta-radius) !important; /* Strict 8px crisp corners matching website */
+  background: var(--cta-primary-bg) !important;
+  color: var(--cta-primary-color) !important;
+  border: 1px solid var(--cta-primary-border) !important;
+  box-shadow: var(--cta-primary-shadow) !important;
+  font-size: 12.5px;
   font-weight: 600;
-  color: var(--text-secondary);
+  letter-spacing: -0.01em;
   cursor: pointer;
-  transition: all 0.15s ease;
-  box-shadow: var(--shadow-sm);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
+  position: relative;
+  overflow: hidden;
 }
 .billing-manage-btn:hover {
-  background: var(--emerald-subtle);
-  color: var(--emerald-dark);
-  border-color: rgba(0, 179, 137, 0.35);
-  transform: translateY(-1px);
+  background: var(--cta-primary-hover-bg) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: var(--cta-primary-shadow-hover) !important;
 }
-:root[data-theme="dark"] .billing-manage-btn {
-  background: #1B2337;
-  color: #E2E8F0;
-  border-color: rgba(255, 255, 255, 0.12);
+.billing-manage-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
 }
-:root[data-theme="dark"] .billing-manage-btn:hover {
-  background: rgba(0, 179, 137, 0.2);
-  color: #34D399;
+.billing-manage-btn:hover::after {
+  left: 140%;
 }
 .billing-manage-btn svg, .billing-manage-btn i {
   width: 13px;
   height: 13px;
-  transition: transform 0.15s ease;
+  transition: transform 0.2s ease;
 }
 .billing-manage-btn:hover svg, .billing-manage-btn:hover i {
-  transform: translateX(2px);
+  transform: translateX(3px);
 }
 @media (max-width: 1100px) {
   .billing-executive-card {
@@ -2056,72 +2103,273 @@ i[data-lucide], svg.lucide {
   margin-top: 2px;
 }
 
-/* Service Grid inside Canvas */
+/* ─── SERVICE GRID & UNIFIED PRODUCT CARD VISUALS (MATCHING WEBSITE) ─── */
 .service-cards-deck-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  gap: 16px;
 }
+@media (max-width: 1024px) {
+  .service-cards-deck-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .service-cards-deck-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.svc-card,
 .service-deck-card {
-  padding: 18px 20px;
-  border-radius: 18px;
+  background: var(--bg-card);
   border: 1px solid var(--line);
-  background: var(--bg-subtle);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 20px;
+  padding: 22px 20px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 130px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   cursor: pointer;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 250px;
+  text-align: left;
+  box-sizing: border-box;
 }
+
+/* Minimal, pleasant cyan-to-teal ambient shadow on hover (Website match) */
+.svc-card:hover,
+.svc-card.highlighted,
 .service-deck-card:hover {
   background: var(--bg-card);
-  border-color: var(--line-strong);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-card);
+  border-color: rgba(6, 184, 178, 0.45);
+  box-shadow: 
+    0 14px 32px -8px rgba(6, 184, 178, 0.22),
+    0 4px 14px -2px rgba(1, 160, 207, 0.16),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+  transform: translateY(-3px);
 }
+
+:root[data-theme="dark"] .svc-card,
+:root[data-theme="dark"] .service-deck-card {
+  background: #0E1626;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="dark"] .svc-card:hover,
+:root[data-theme="dark"] .svc-card.highlighted,
+:root[data-theme="dark"] .service-deck-card:hover {
+  background: #141E32;
+  border-color: rgba(6, 184, 178, 0.52);
+  box-shadow: 
+    0 16px 36px -8px rgba(6, 184, 178, 0.32),
+    0 6px 18px -2px rgba(1, 160, 207, 0.22),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3px);
+}
+
+.svc-card-tag-row,
 .service-deck-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
-.service-deck-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  background: var(--bg-card);
-  display: grid;
-  place-items: center;
-  color: var(--text-main);
-  border: 1px solid var(--line);
+
+/* Decent solid/pastel tag colors instead of gradient (User explicit requirement) */
+.svc-cat-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid transparent;
+  white-space: nowrap;
 }
+
+/* Category-specific decent solid tints - light mode */
+.svc-cat-tag.build { background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE; }
+.svc-cat-tag.quality { background: #F5F3FF; color: #6D28D9; border-color: #DDD6FE; }
+.svc-cat-tag.gtm { background: #ECFDF5; color: #047857; border-color: #A7F3D0; }
+.svc-cat-tag.signal { background: #FFFBEB; color: #B45309; border-color: #FDE68A; }
+.svc-cat-tag.capital, .svc-cat-tag.ai { background: #ECFDF5; color: #065F46; border-color: #A7F3D0; }
+.svc-cat-tag.people { background: #F1F5F9; color: #334155; border-color: #CBD5E1; }
+.svc-cat-tag.support { background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE; }
+
+/* Category-specific decent subtle tints - dark mode */
+:root[data-theme="dark"] .svc-cat-tag.build { background: rgba(59, 130, 246, 0.16); color: #93C5FD; border-color: rgba(147, 197, 253, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.quality { background: rgba(139, 92, 246, 0.16); color: #DDD6FE; border-color: rgba(221, 214, 254, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.gtm { background: rgba(0, 180, 138, 0.16); color: #6EE7B7; border-color: rgba(110, 231, 183, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.signal { background: rgba(245, 158, 11, 0.16); color: #FDE68A; border-color: rgba(253, 230, 138, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.capital, :root[data-theme="dark"] .svc-cat-tag.ai { background: rgba(16, 185, 129, 0.16); color: #34D399; border-color: rgba(52, 211, 153, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.people { background: rgba(99, 102, 241, 0.16); color: #A5B4FC; border-color: rgba(99, 102, 241, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.support { background: rgba(59, 130, 246, 0.16); color: #93C5FD; border-color: rgba(147, 197, 253, 0.3); }
+
+/* Right-aligned status pill inside card top row */
+.svc-status-pill,
 .service-deck-badge {
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 700;
   padding: 2px 7px;
-  border-radius: var(--radius-pill);
+  border-radius: 9999px;
   border: 1px solid var(--line);
   background: var(--bg-card);
   color: var(--text-muted);
+  letter-spacing: 0.03em;
 }
-.service-deck-badge.live { color: var(--emerald-dark); background: var(--emerald-subtle); border-color: var(--emerald-light); }
-.service-deck-badge.beta { color: #B45309; background: #FFFBEB; border-color: #FDE68A; }
-.service-deck-badge.new { color: #1D4ED8; background: #EFF6FF; border-color: #BFDBFE; }
-:root[data-theme="dark"] .service-deck-badge.beta { color: #FDE68A; background: rgba(245, 158, 11, 0.16); border-color: rgba(253, 230, 138, 0.3); }
-:root[data-theme="dark"] .service-deck-badge.new { color: #93C5FD; background: rgba(59, 130, 246, 0.16); border-color: rgba(147, 197, 253, 0.3); }
+.svc-status-pill.live, .service-deck-badge.live { color: #047857; background: #ECFDF5; border-color: #A7F3D0; }
+.svc-status-pill.beta, .service-deck-badge.beta { color: #B45309; background: #FFFBEB; border-color: #FDE68A; }
+.svc-status-pill.new, .service-deck-badge.new { color: #1D4ED8; background: #EFF6FF; border-color: #BFDBFE; }
 
-.service-deck-name {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 3px;
-}
-.service-deck-desc {
+:root[data-theme="dark"] .svc-status-pill.live, :root[data-theme="dark"] .service-deck-badge.live { color: #34D399; background: rgba(0, 180, 138, 0.16); border-color: rgba(52, 211, 153, 0.3); }
+:root[data-theme="dark"] .svc-status-pill.beta, :root[data-theme="dark"] .service-deck-badge.beta { color: #FDE68A; background: rgba(245, 158, 11, 0.16); border-color: rgba(253, 230, 138, 0.3); }
+:root[data-theme="dark"] .svc-status-pill.new, :root[data-theme="dark"] .service-deck-badge.new { color: #93C5FD; background: rgba(59, 130, 246, 0.16); border-color: rgba(147, 197, 253, 0.3); }
+
+.svc-plan-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+.svc-plan-tag svg {
   color: var(--text-muted);
-  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+.svc-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.svc-mini-icon,
+.service-deck-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #FFF;
+  flex-shrink: 0;
+  position: relative;
+  background: var(--icon-gradient, linear-gradient(135deg, #10B981 0%, #06B6D4 100%));
+  box-shadow: 0 4px 12px -2px var(--icon-bloom, rgba(16, 185, 129, 0.35)), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.svc-mini-icon i, .svc-mini-icon svg,
+.service-deck-icon i, .service-deck-icon svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+.svc-card:hover .svc-mini-icon,
+.service-deck-card:hover .svc-mini-icon,
+.service-deck-card:hover .service-deck-icon {
+  transform: scale(1.1) translateY(-1px);
+  box-shadow: 0 8px 18px -2px var(--icon-bloom, rgba(16, 185, 129, 0.5)), inset 0 1px 1.5px rgba(255, 255, 255, 0.65);
+}
+
+.svc-card h3,
+.service-deck-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.svc-card p.svc-desc,
+.service-deck-desc {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0 0 18px 0;
+  flex-grow: 1;
+}
+
+.svc-card-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  margin-top: auto;
+}
+.svc-link-wrap {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: all 0.25s ease;
+}
+.svc-learn-label {
+  display: inline-block;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, margin-right 0.25s ease;
+}
+.svc-card:hover .svc-learn-label,
+.service-deck-card:hover .svc-learn-label {
+  max-width: 90px;
+  opacity: 1;
+  margin-right: 6px;
+}
+.svc-arrow-glyph {
+  display: inline-block;
+  transition: transform 0.25s ease, color 0.2s ease;
+  font-size: 14px;
+}
+.svc-card:hover .svc-arrow-glyph,
+.service-deck-card:hover .svc-arrow-glyph {
+  transform: translateX(4px);
+  color: #06B8B2;
+}
+
+.svc-plus-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+}
+.svc-card:hover .svc-plus-btn,
+.service-deck-card:hover .svc-plus-btn {
+  border-color: var(--text-secondary);
+  color: var(--text-main);
+}
+.svc-plus-btn:hover {
+  background: var(--line);
+  transform: scale(1.1);
+}
+:root[data-theme="dark"] .svc-plus-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #94A3B8;
+}
+:root[data-theme="dark"] .svc-card:hover .svc-plus-btn,
+:root[data-theme="dark"] .service-deck-card:hover .svc-plus-btn {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #F8FAFC;
 }
 
 /* Category Filter Pills in Registry */
@@ -3537,6 +3785,51 @@ const CATEGORIES = [
   ]},
 ];
 
+CATEGORIES.forEach(c => {
+  const slug = c.name.toLowerCase().includes('build') ? 'build' :
+               c.name.toLowerCase().includes('quality') ? 'quality' :
+               c.name.toLowerCase().includes('market') ? 'gtm' :
+               c.name.toLowerCase().includes('signal') ? 'signal' :
+               c.name.toLowerCase().includes('ai') ? 'capital' :
+               c.name.toLowerCase().includes('people') ? 'people' : 'support';
+  c.slug = slug;
+  c.services.forEach(s => {
+    s.catName = c.name;
+    s.catSlug = slug;
+  });
+});
+
+const CATEGORY_STYLES = {
+  build: {
+    gradient: 'linear-gradient(135deg, #0284C7 0%, #06B6D4 50%, #10B981 100%)',
+    bloom: 'rgba(6, 182, 212, 0.35)',
+  },
+  quality: {
+    gradient: 'linear-gradient(135deg, #0284C7 0%, #06B6D4 45%, #10B981 100%)',
+    bloom: 'rgba(6, 182, 212, 0.35)',
+  },
+  gtm: {
+    gradient: 'linear-gradient(135deg, #0D9488 0%, #10B981 45%, #6366F1 100%)',
+    bloom: 'rgba(139, 92, 246, 0.35)',
+  },
+  signal: {
+    gradient: 'linear-gradient(135deg, #F59E0B 0%, #D97706 45%, #EF4444 100%)',
+    bloom: 'rgba(245, 158, 11, 0.35)',
+  },
+  capital: {
+    gradient: 'linear-gradient(135deg, #059669 0%, #10B981 45%, #06B6D4 100%)',
+    bloom: 'rgba(16, 185, 129, 0.35)',
+  },
+  people: {
+    gradient: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%)',
+    bloom: 'rgba(139, 92, 246, 0.35)',
+  },
+  support: {
+    gradient: 'linear-gradient(135deg, #3B82F6 0%, #6366F1 50%, #8B5CF6 100%)',
+    bloom: 'rgba(99, 102, 241, 0.35)',
+  }
+};
+
 const allServices = CATEGORIES.flatMap(c => c.services);
 const svcMap = Object.fromEntries(allServices.map(s => [s.name, s]));
 const CORE_KEYS = ['R&D Launchpad', 'Fuel', 'GTM Launchpad', 'R&D Pulse', 'Investment Advisor', 'Hub'];
@@ -3625,24 +3918,54 @@ $('telemetryStreamFeed').innerHTML = RECENT_UPDATES.map(r => `
     <span class="stream-time-val">${r.time}</span>
   </div>`).join('');
 
-/* ——— RENDER SERVICE TILES ——— */
+/* ——— RENDER SERVICE TILES (MATCHING WEBSITE PRODUCT CARDS) ——— */
 function serviceCardMarkup(s){
+  if (!s) return '';
   const st = s.status === 'new' ? 'NEW' : s.status === 'beta' ? 'BETA' : 'LIVE';
+  const catSlug = s.catSlug || 'build';
+  const catName = s.catName || 'Build & Ship';
+  const catStyle = CATEGORY_STYLES[catSlug] || CATEGORY_STYLES.build;
   return `
-    <div class="service-deck-card" data-svc-name="${esc(s.name)}" role="button">
-      <div>
-        <div class="service-deck-top">
-          <div class="service-deck-icon"><i data-lucide="${s.icon}"></i></div>
-          <span class="service-deck-badge ${s.status}">${st}</span>
+    <div class="svc-card service-deck-card" data-svc-name="${esc(s.name)}" role="button" tabindex="0">
+      <div class="svc-card-tag-row">
+        <span class="svc-cat-tag ${catSlug}">${esc(catName)}</span>
+        <span class="svc-status-pill ${s.status}">${st}</span>
+      </div>
+      
+      <div class="svc-plan-tag">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82zM7 7h.01"/>
+        </svg>
+        <span>Available on both plans</span>
+      </div>
+
+      <div class="svc-title-row">
+        <div class="svc-mini-icon" style="background: ${catStyle.gradient}; --icon-gradient: ${catStyle.gradient}; --icon-bloom: ${catStyle.bloom};">
+          <i data-lucide="${s.icon}"></i>
         </div>
-        <div class="service-deck-name">${esc(s.name)}</div>
-        <div class="service-deck-desc">${esc(s.desc)}</div>
+        <h3 class="service-deck-name">${esc(s.name)}</h3>
+      </div>
+
+      <p class="svc-desc service-deck-desc">${esc(s.desc)}</p>
+
+      <div class="svc-card-foot">
+        <div class="svc-link-wrap">
+          <span class="svc-learn-label">Learn more</span>
+          <span class="svc-arrow-glyph">→</span>
+        </div>
+        <button class="svc-plus-btn" type="button" title="Launch ${esc(s.name)}" aria-label="Launch ${esc(s.name)}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </button>
       </div>
     </div>`;
 }
 
 $('coreFeaturedGrid').innerHTML = CORE_KEYS.map(k => serviceCardMarkup(svcMap[k])).join('');
 $('allServicesDeckGrid').innerHTML = allServices.map(serviceCardMarkup).join('');
+renderIcons();
 
 /* ——— RENDER JOURNEY TABS & DETAILS (VIEW & DASHBOARD) ——— */
 $('journeyPillTray').innerHTML = STAGES.map((s, i) => `
@@ -4219,7 +4542,19 @@ document.addEventListener('click', e => {
     showToast(`Opening ${n.dataset.nav}`);
     return;
   }
-  const tile = e.target.closest('.service-deck-card[data-svc-name]');
+  const plusBtn = e.target.closest('.svc-plus-btn');
+  if (plusBtn){
+    e.stopPropagation();
+    const card = plusBtn.closest('[data-svc-name]');
+    const name = card ? card.dataset.svcName : 'Service';
+    plusBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
+    showToast(`Added ${name} to workspace`);
+    setTimeout(() => {
+      plusBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>`;
+    }, 1800);
+    return;
+  }
+  const tile = e.target.closest('.service-deck-card[data-svc-name], .svc-card[data-svc-name]');
   if (tile){
     showToast(`Launching ${tile.dataset.svcName}`);
   }
