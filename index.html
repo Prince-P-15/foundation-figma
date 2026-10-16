@@ -4384,9 +4384,8 @@
     width: 100%;
     max-width: 820px; /* Stretched so it covers half the little card (150px) */
     min-height: 520px;
-    background: var(--stage-bg, #E7F7F0) !important;
-    background-image: none !important;
-    border: none !important;
+    background: var(--stage-bg, #E7F7F0);
+    border: 1px solid var(--stage-border, rgba(0, 0, 0, 0.05));
     border-radius: 28px;
     padding: 30px 32px 22px;
     position: relative;
@@ -4395,12 +4394,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: background 0.35s ease, box-shadow 0.35s ease;
+    transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
   }
   :root[data-theme="dark"] .copilot-stage-box {
-    background: var(--stage-dark-bg, #0A1F18) !important;
-    border: none !important;
-    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.55);
+    background: var(--stage-dark-bg, radial-gradient(circle at 18% 18%, rgba(18, 168, 131, 0.16) 0%, transparent 60%), radial-gradient(circle at 82% 82%, rgba(70, 107, 216, 0.10) 0%, transparent 55%), #0D1522) !important;
+    border: 1px solid var(--stage-dark-border, rgba(18, 168, 131, 0.35)) !important;
+    box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 0 28px rgba(0, 0, 0, 0.4) !important;
   }
 
   /* Top Prompt Pill */
@@ -4421,14 +4420,23 @@
     font-family: var(--font-primary) !important;
   }
   :root[data-theme="dark"] .stage-prompt-bubble {
-    background: var(--bubble-dark-bg, rgba(16, 185, 129, 0.16));
-    color: var(--bubble-dark-color, #6EE7B7);
-    border-color: var(--bubble-dark-border, rgba(16, 185, 129, 0.3));
+    background: var(--bubble-dark-bg, rgba(18, 168, 131, 0.16)) !important;
+    color: var(--bubble-dark-color, #A7F3D0) !important;
+    border: 1px solid var(--bubble-dark-border, rgba(52, 211, 153, 0.35)) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  }
+  :root[data-theme="dark"] .stage-prompt-bubble strong {
+    color: #FFFFFF !important;
+    font-weight: 700;
   }
   .bubble-spark-icon {
     font-size: 0.95rem;
     color: inherit;
     line-height: 1;
+  }
+  :root[data-theme="dark"] .bubble-spark-icon {
+    color: #34D399;
+    filter: drop-shadow(0 0 6px rgba(52, 211, 153, 0.75));
   }
 
   /* Light SaaS Application Window */
@@ -4503,6 +4511,11 @@
     border: 1px solid transparent;
     transition: all 0.2s ease;
   }
+  :root[data-theme="dark"] .app-status-badge {
+    background: rgba(16, 185, 129, 0.16) !important;
+    color: #34D399 !important;
+    border: 1px solid rgba(52, 211, 153, 0.35) !important;
+  }
 
   /* App Window Body (Dynamic via JS) */
   .app-window-body {
@@ -4540,6 +4553,23 @@
     font-family: var(--font-primary) !important;
     white-space: nowrap;
     flex-shrink: 0;
+  }
+  :root[data-theme="dark"] .prod-card-badge {
+    background: rgba(16, 185, 129, 0.16) !important;
+    color: #34D399 !important;
+    border: 1px solid rgba(52, 211, 153, 0.35) !important;
+  }
+  :root[data-theme="dark"] .prod-card-badge[style*="#FEF2F2"],
+  :root[data-theme="dark"] .prod-card-badge[style*="#DC2626"] {
+    background: rgba(239, 68, 68, 0.16) !important;
+    color: #F87171 !important;
+    border-color: rgba(248, 113, 113, 0.35) !important;
+  }
+  :root[data-theme="dark"] .prod-card-badge[style*="#F5F3FF"],
+  :root[data-theme="dark"] .prod-card-badge[style*="#6D28D9"] {
+    background: rgba(139, 92, 246, 0.16) !important;
+    color: #C4B5FD !important;
+    border-color: rgba(167, 139, 250, 0.35) !important;
   }
   .prod-card-desc {
     font-size: 0.82rem;
@@ -4580,18 +4610,17 @@
   .prod-row-item:hover {
     filter: brightness(0.985);
   }
-  :root[data-theme="dark"] .prod-row-item {
-    background: rgba(22, 94, 80, 0.28);
-    border-color: transparent;
-  }
-  :root[data-theme="dark"] .prod-row-item:nth-child(2) {
-    background: rgba(51, 65, 85, 0.45);
-  }
+  :root[data-theme="dark"] .prod-row-item,
+  :root[data-theme="dark"] .prod-row-item:nth-child(1),
+  :root[data-theme="dark"] .prod-row-item:nth-child(2),
   :root[data-theme="dark"] .prod-row-item:nth-child(3) {
-    background: rgba(128, 84, 0, 0.28);
+    background: rgba(255, 255, 255, 0.035) !important;
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
   }
   :root[data-theme="dark"] .prod-row-item:hover {
-    filter: brightness(1.08);
+    background: rgba(255, 255, 255, 0.065) !important;
+    border-color: rgba(255, 255, 255, 0.14) !important;
+    filter: none;
   }
   .prod-row-left {
     font-size: 0.82rem;
@@ -4615,6 +4644,9 @@
     color: #64748B;
     font-size: 0.76rem;
   }
+  :root[data-theme="dark"] .prod-row-meta {
+    color: #94A3B8 !important;
+  }
   .prod-row-status {
     font-size: 0.70rem;
     font-weight: 700;
@@ -4624,6 +4656,29 @@
     font-family: var(--font-primary) !important;
     white-space: nowrap;
     flex-shrink: 0;
+  }
+  :root[data-theme="dark"] .prod-row-status {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #F8FAFC !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  }
+  :root[data-theme="dark"] .prod-row-status[style*="#E4F2F0"],
+  :root[data-theme="dark"] .prod-row-status[style*="#165E50"] {
+    background: rgba(16, 185, 129, 0.16) !important;
+    color: #34D399 !important;
+    border: 1px solid rgba(52, 211, 153, 0.32) !important;
+  }
+  :root[data-theme="dark"] .prod-row-status[style*="#E8EEF5"],
+  :root[data-theme="dark"] .prod-row-status[style*="#1E3A5F"] {
+    background: rgba(59, 130, 246, 0.16) !important;
+    color: #60A5FA !important;
+    border: 1px solid rgba(96, 165, 250, 0.32) !important;
+  }
+  :root[data-theme="dark"] .prod-row-status[style*="#EDE6FD"],
+  :root[data-theme="dark"] .prod-row-status[style*="#5B21B6"] {
+    background: rgba(139, 92, 246, 0.16) !important;
+    color: #C4B5FD !important;
+    border: 1px solid rgba(167, 139, 250, 0.32) !important;
   }
 
   .prod-metrics-strip {
@@ -7727,10 +7782,10 @@
       </div>
 
       <!-- CENTER STAGE BOX: Wider Solid Pastel Background Card Matching Design System -->
-      <div class="copilot-stage-box" id="copilotStageBox" style="--stage-bg: #E7F7F0; background: #E7F7F0; --stage-dark-bg: #0A1F18;">
+      <div class="copilot-stage-box" id="copilotStageBox" style="--stage-bg: #E7F7F0; --stage-dark-bg: radial-gradient(circle at 18% 18%, rgba(18, 168, 131, 0.16) 0%, transparent 60%), radial-gradient(circle at 82% 82%, rgba(70, 107, 216, 0.10) 0%, transparent 55%), #0D1522; --stage-dark-border: rgba(18, 168, 131, 0.35);">
 
         <!-- Top Prompt Pill -->
-        <div class="stage-prompt-bubble" id="copilotPromptBubble" style="--bubble-bg: #FFFFFF; --bubble-color: #006056; --bubble-border: rgba(0, 96, 86, 0.25);">
+        <div class="stage-prompt-bubble" id="copilotPromptBubble" style="--bubble-bg: #FFFFFF; --bubble-color: #006056; --bubble-border: rgba(0, 96, 86, 0.25); --bubble-dark-bg: rgba(18, 168, 131, 0.16); --bubble-dark-color: #A7F3D0; --bubble-dark-border: rgba(52, 211, 153, 0.35);">
           <span class="bubble-spark-icon">✦</span>
           <span id="copilotBubbleText">Coordinate <strong>cross-team deliverables</strong> across R&amp;D, GTM, and Finance?</span>
         </div>
@@ -7745,7 +7800,7 @@
               <span class="traffic-dot dot-green"></span>
             </div>
             <div class="app-url-pill" id="elementsWindowUrl">york.platform / work / sprint-42</div>
-            <div class="app-status-badge" id="elementsStatusPill" style="color: #047857; background: #ECFDF5; border-color: #A7F3D0;">● SPRINT 42 ACTIVE</div>
+            <div class="app-status-badge" id="elementsStatusPill">● SPRINT 42 ACTIVE</div>
           </div>
 
           <!-- Window Content Body (Dynamic via JS) -->
@@ -8285,20 +8340,23 @@
           name: 'Agentic Work Management',
           stageBg: '#E7F7F0',
           stageBorder: '#C6EADB',
-          stageDarkBg: '#0A1F18',
-          stageDarkBorder: 'rgba(16, 185, 129, 0.28)',
+          stageDarkBg: 'radial-gradient(circle at 18% 18%, rgba(18, 168, 131, 0.16) 0%, transparent 60%), radial-gradient(circle at 82% 82%, rgba(70, 107, 216, 0.10) 0%, transparent 55%), #0D1522',
+          stageDarkBorder: 'rgba(18, 168, 131, 0.35)',
           bubble: 'Coordinate <strong>cross-team deliverables</strong> across R&amp;D, GTM, and Finance?',
           bubbleBg: '#FFFFFF',
           bubbleColor: '#065F46',
           bubbleBorder: 'rgba(5, 150, 105, 0.22)',
-          bubbleDarkBg: 'rgba(16, 185, 129, 0.16)',
-          bubbleDarkColor: '#6EE7B7',
-          bubbleDarkBorder: 'rgba(16, 185, 129, 0.35)',
+          bubbleDarkBg: 'rgba(18, 168, 131, 0.16)',
+          bubbleDarkColor: '#A7F3D0',
+          bubbleDarkBorder: 'rgba(52, 211, 153, 0.35)',
           url: 'york.platform / work / sprint-42',
           status: '● SPRINT 42 ACTIVE',
           statusColor: '#047857',
           statusBg: '#ECFDF5',
           statusBorder: '#A7F3D0',
+          statusDarkColor: '#34D399',
+          statusDarkBg: 'rgba(16, 185, 129, 0.16)',
+          statusDarkBorder: 'rgba(52, 211, 153, 0.35)',
           badgeText: 'MVP CAPABILITY',
           badgeBg: '#ECFDF5',
           badgeColor: '#047857',
@@ -8359,20 +8417,23 @@
           name: 'York Service Management',
           stageBg: '#EBF3FE',
           stageBorder: '#CEE0FD',
-          stageDarkBg: '#0D192E',
-          stageDarkBorder: 'rgba(59, 130, 246, 0.28)',
+          stageDarkBg: 'radial-gradient(circle at 18% 18%, rgba(14, 184, 171, 0.16) 0%, transparent 60%), radial-gradient(circle at 82% 82%, rgba(76, 109, 232, 0.10) 0%, transparent 55%), #0C1628',
+          stageDarkBorder: 'rgba(14, 184, 171, 0.35)',
           bubble: 'Auto-triage <strong>INC-4402</strong> &amp; execute canary rollback on Cluster-08?',
           bubbleBg: '#FFFFFF',
           bubbleColor: '#1E40AF',
           bubbleBorder: 'rgba(37, 99, 235, 0.22)',
-          bubbleDarkBg: 'rgba(59, 130, 246, 0.16)',
-          bubbleDarkColor: '#93C5FD',
-          bubbleDarkBorder: 'rgba(59, 130, 246, 0.35)',
+          bubbleDarkBg: 'rgba(14, 184, 171, 0.16)',
+          bubbleDarkColor: '#99F6E4',
+          bubbleDarkBorder: 'rgba(45, 212, 191, 0.35)',
           url: 'york.platform / service / inc-4402',
           status: '● 99.999% SLA ACTIVE',
           statusColor: '#1D4ED8',
           statusBg: '#EFF6FF',
           statusBorder: '#BFDBFE',
+          statusDarkColor: '#60A5FA',
+          statusDarkBg: 'rgba(59, 130, 246, 0.16)',
+          statusDarkBorder: 'rgba(96, 165, 250, 0.35)',
           badgeText: 'MVP CAPABILITY',
           badgeBg: '#EFF6FF',
           badgeColor: '#1D4ED8',
@@ -8433,20 +8494,23 @@
           name: 'StackAI by York',
           stageBg: '#F2EEFE',
           stageBorder: '#DCDBFC',
-          stageDarkBg: '#17112B',
-          stageDarkBorder: 'rgba(139, 92, 246, 0.28)',
+          stageDarkBg: 'radial-gradient(circle at 18% 18%, rgba(11, 183, 194, 0.16) 0%, transparent 60%), radial-gradient(circle at 82% 82%, rgba(5, 174, 120, 0.10) 0%, transparent 55%), #0E1626',
+          stageDarkBorder: 'rgba(11, 183, 194, 0.35)',
           bubble: 'Deploy <strong>240-agent mesh</strong> with MCP protocol bridges &amp; sub-40ms latency?',
           bubbleBg: '#FFFFFF',
           bubbleColor: '#5B21B6',
           bubbleBorder: 'rgba(124, 58, 237, 0.22)',
-          bubbleDarkBg: 'rgba(139, 92, 246, 0.16)',
-          bubbleDarkColor: '#C4B5FD',
-          bubbleDarkBorder: 'rgba(139, 92, 246, 0.35)',
+          bubbleDarkBg: 'rgba(11, 183, 194, 0.16)',
+          bubbleDarkColor: '#A5F3FC',
+          bubbleDarkBorder: 'rgba(34, 211, 238, 0.35)',
           url: 'york.platform / runtime / mesh-v4',
           status: '● 240 AGENTS ACTIVE',
           statusColor: '#6D28D9',
           statusBg: '#F5F3FF',
           statusBorder: '#DDD6FE',
+          statusDarkColor: '#C4B5FD',
+          statusDarkBg: 'rgba(139, 92, 246, 0.16)',
+          statusDarkBorder: 'rgba(167, 139, 250, 0.35)',
           badgeText: 'MVP CAPABILITY',
           badgeBg: '#F5F3FF',
           badgeColor: '#6D28D9',
@@ -8539,13 +8603,11 @@
         // Stage Box solid pastel background & border per platform
         const stageBox = document.getElementById('copilotStageBox');
         if (stageBox) {
-          if (p.stageBg) {
-            stageBox.style.setProperty('--stage-bg', p.stageBg);
-            stageBox.style.setProperty('background', p.stageBg, 'important');
-          }
+          if (p.stageBg) stageBox.style.setProperty('--stage-bg', p.stageBg);
           if (p.stageBorder) stageBox.style.setProperty('--stage-border', p.stageBorder);
           if (p.stageDarkBg) stageBox.style.setProperty('--stage-dark-bg', p.stageDarkBg);
           if (p.stageDarkBorder) stageBox.style.setProperty('--stage-dark-border', p.stageDarkBorder);
+          stageBox.style.removeProperty('background'); // Remove inline override so dark theme styles always work!
         }
 
         // Prompt Bubble styling & text
@@ -8563,9 +8625,15 @@
         if (windowUrl) windowUrl.textContent = p.url;
         if (statusPill) {
           statusPill.textContent = p.status;
-          statusPill.style.color = p.statusColor;
-          if (p.statusBg) statusPill.style.background = p.statusBg;
-          if (p.statusBorder) statusPill.style.borderColor = p.statusBorder;
+          statusPill.style.removeProperty('color');
+          statusPill.style.removeProperty('background');
+          statusPill.style.removeProperty('border-color');
+          statusPill.style.setProperty('--status-pill-color', p.statusColor);
+          statusPill.style.setProperty('--status-pill-bg', p.statusBg);
+          statusPill.style.setProperty('--status-pill-border', p.statusBorder);
+          statusPill.style.setProperty('--status-pill-dark-color', p.statusDarkColor || '#34D399');
+          statusPill.style.setProperty('--status-pill-dark-bg', p.statusDarkBg || 'rgba(16, 185, 129, 0.16)');
+          statusPill.style.setProperty('--status-pill-dark-border', p.statusDarkBorder || 'rgba(52, 211, 153, 0.35)');
         }
 
         // Dynamic Product Cards Transition
