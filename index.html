@@ -4340,6 +4340,20 @@
     box-shadow: 0 0 0 2px #0B0F19, 0 8px 28px -2px var(--item-bloom, rgba(18, 168, 131, 0.65)), inset 0 1px 1px rgba(255, 255, 255, 0.5);
   }
 
+  /* Exact Defined Gradients for the 3 Flagship Platform Icons */
+  .copilot-nav-item[data-index="0"] .copilot-icon-box {
+    background: linear-gradient(135deg, #12A883 0%, #1EA190 45%, #466BD8 100%) !important;
+    --item-bloom: rgba(18, 168, 131, 0.55);
+  }
+  .copilot-nav-item[data-index="1"] .copilot-icon-box {
+    background: linear-gradient(135deg, #0EB8AB 0%, #12A1CE 45%, #4C6DE8 100%) !important;
+    --item-bloom: rgba(14, 184, 171, 0.55);
+  }
+  .copilot-nav-item[data-index="2"] .copilot-icon-box {
+    background: linear-gradient(135deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%) !important;
+    --item-bloom: rgba(5, 174, 120, 0.55);
+  }
+
   .copilot-item-label {
     font-size: 0.92rem;
     font-weight: 500;
@@ -7676,8 +7690,8 @@
         </button>
 
         <div class="copilot-nav-items" id="copilotNavItems">
-          <!-- Item 0: Agentic Work Management -->
-          <button class="copilot-nav-item active" data-index="0" style="--item-gradient: linear-gradient(135deg, #10B981 0%, #059669 45%, #047857 100%); --item-bloom: rgba(16, 185, 129, 0.45);">
+          <!-- Item 0: Agentic Work Management (Defined Gradient 1: Jade to Royal Blue) -->
+          <button class="copilot-nav-item active" data-index="0" style="--item-gradient: linear-gradient(135deg, #12A883 0%, #1EA190 45%, #466BD8 100%); --item-bloom: rgba(18, 168, 131, 0.5);">
             <div class="copilot-icon-wrap">
               <div class="copilot-icon-box">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
@@ -7686,8 +7700,8 @@
             <span class="copilot-item-label">Agentic Work Management</span>
           </button>
 
-          <!-- Item 1: York Service Management -->
-          <button class="copilot-nav-item" data-index="1" style="--item-gradient: linear-gradient(135deg, #3B82F6 0%, #2563EB 45%, #1D4ED8 100%); --item-bloom: rgba(59, 130, 246, 0.45);">
+          <!-- Item 1: York Service Management (Defined Gradient 2: Aqua to Electric Blue) -->
+          <button class="copilot-nav-item" data-index="1" style="--item-gradient: linear-gradient(135deg, #0EB8AB 0%, #12A1CE 45%, #4C6DE8 100%); --item-bloom: rgba(14, 184, 171, 0.5);">
             <div class="copilot-icon-wrap">
               <div class="copilot-icon-box">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -7696,8 +7710,8 @@
             <span class="copilot-item-label">York Service Management</span>
           </button>
 
-          <!-- Item 2: StackAI by York -->
-          <button class="copilot-nav-item" data-index="2" style="--item-gradient: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 50%, #6D28D9 100%); --item-bloom: rgba(139, 92, 246, 0.45);">
+          <!-- Item 2: StackAI by York (Defined Gradient 3: Emerald to Turquoise) -->
+          <button class="copilot-nav-item" data-index="2" style="--item-gradient: linear-gradient(135deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%); --item-bloom: rgba(5, 174, 120, 0.5);">
             <div class="copilot-icon-wrap">
               <div class="copilot-icon-box">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><circle cx="5" cy="18" r="2"/><path d="M7 7l3.5 3.5m3 3l3.5 3.5m0-10l-3.5 3.5m-3 3L7 17"/></svg>
@@ -8368,9 +8382,9 @@
           cardActionLink: '#services',
           actionColor: '#1D4ED8',
           cardInnerBg: '#FFFFFF',
-          borderGradient: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 45%, #1D4ED8 100%)',
-          borderGradientHover: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 45%, #1D4ED8 100%)',
-          glowColor: 'rgba(59, 130, 246, 0.25)',
+          borderGradient: 'linear-gradient(135deg, #0EB8AB 0%, #12A1CE 45%, #4C6DE8 100%)',
+          borderGradientHover: 'linear-gradient(135deg, #0EB8AB 0%, #12A1CE 45%, #4C6DE8 100%)',
+          glowColor: 'rgba(14, 184, 171, 0.25)',
           metricColors: [
             { bg: '#E4EFFE', ink: '#1E40AF' },
             { bg: '#E9F1FE', ink: '#2563EB' },
@@ -8442,9 +8456,9 @@
           cardActionLink: '#services',
           actionColor: '#6D28D9',
           cardInnerBg: '#FFFFFF',
-          borderGradient: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 50%, #10B981 100%)',
-          borderGradientHover: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 50%, #10B981 100%)',
-          glowColor: 'rgba(139, 92, 246, 0.25)',
+          borderGradient: 'linear-gradient(135deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%)',
+          borderGradientHover: 'linear-gradient(135deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%)',
+          glowColor: 'rgba(5, 174, 120, 0.25)',
           metricColors: [
             { bg: '#EDE6FD', ink: '#5B21B6' },
             { bg: '#EAF1FE', ink: '#1E40AF' },
