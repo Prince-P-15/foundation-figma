@@ -2132,7 +2132,7 @@ i[data-lucide], svg.lucide {
   cursor: pointer;
   position: relative;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  min-height: 250px;
+  min-height: 180px;
   text-align: left;
   box-sizing: border-box;
 }
@@ -2294,82 +2294,8 @@ i[data-lucide], svg.lucide {
   font-size: 12.5px;
   color: var(--text-muted);
   line-height: 1.5;
-  margin: 0 0 18px 0;
+  margin: 0;
   flex-grow: 1;
-}
-
-.svc-card-foot {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
-  margin-top: auto;
-}
-.svc-link-wrap {
-  display: flex;
-  align-items: center;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-main);
-  transition: all 0.25s ease;
-}
-.svc-learn-label {
-  display: inline-block;
-  max-width: 0;
-  opacity: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  transition: max-width 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, margin-right 0.25s ease;
-}
-.svc-card:hover .svc-learn-label,
-.service-deck-card:hover .svc-learn-label {
-  max-width: 90px;
-  opacity: 1;
-  margin-right: 6px;
-}
-.svc-arrow-glyph {
-  display: inline-block;
-  transition: transform 0.25s ease, color 0.2s ease;
-  font-size: 14px;
-}
-.svc-card:hover .svc-arrow-glyph,
-.service-deck-card:hover .svc-arrow-glyph {
-  transform: translateX(4px);
-  color: #06B8B2;
-}
-
-.svc-plus-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--bg-subtle);
-  border: 1px solid var(--line);
-  display: grid;
-  place-items: center;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 0;
-}
-.svc-card:hover .svc-plus-btn,
-.service-deck-card:hover .svc-plus-btn {
-  border-color: var(--text-secondary);
-  color: var(--text-main);
-}
-.svc-plus-btn:hover {
-  background: var(--line);
-  transform: scale(1.1);
-}
-:root[data-theme="dark"] .svc-plus-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
-  color: #94A3B8;
-}
-:root[data-theme="dark"] .svc-card:hover .svc-plus-btn,
-:root[data-theme="dark"] .service-deck-card:hover .svc-plus-btn {
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #F8FAFC;
 }
 
 /* Category Filter Pills in Registry */
@@ -3947,19 +3873,6 @@ function serviceCardMarkup(s){
       </div>
 
       <p class="svc-desc service-deck-desc">${esc(s.desc)}</p>
-
-      <div class="svc-card-foot">
-        <div class="svc-link-wrap">
-          <span class="svc-learn-label">Learn more</span>
-          <span class="svc-arrow-glyph">→</span>
-        </div>
-        <button class="svc-plus-btn" type="button" title="Launch ${esc(s.name)}" aria-label="Launch ${esc(s.name)}">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-          </svg>
-        </button>
-      </div>
     </div>`;
 }
 
@@ -4540,18 +4453,6 @@ document.addEventListener('click', e => {
       item.classList.toggle('active', item.dataset.nav === n.dataset.nav);
     });
     showToast(`Opening ${n.dataset.nav}`);
-    return;
-  }
-  const plusBtn = e.target.closest('.svc-plus-btn');
-  if (plusBtn){
-    e.stopPropagation();
-    const card = plusBtn.closest('[data-svc-name]');
-    const name = card ? card.dataset.svcName : 'Service';
-    plusBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
-    showToast(`Added ${name} to workspace`);
-    setTimeout(() => {
-      plusBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>`;
-    }, 1800);
     return;
   }
   const tile = e.target.closest('.service-deck-card[data-svc-name], .svc-card[data-svc-name]');
