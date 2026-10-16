@@ -1376,6 +1376,10 @@ i[data-lucide], svg.lucide {
 .card-filter-dropdown-wrap {
   position: relative;
 }
+/* Ensure [hidden] always hides regardless of flex/grid/block on classes */
+[hidden] {
+  display: none !important;
+}
 .card-filter-popover {
   position: absolute;
   top: calc(100% + 8px);
@@ -1391,6 +1395,9 @@ i[data-lucide], svg.lucide {
   flex-direction: column;
   gap: 12px;
   animation: filterPop 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-filter-popover[hidden] {
+  display: none !important;
 }
 :root[data-theme="dark"] .card-filter-popover {
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
@@ -1441,6 +1448,7 @@ i[data-lucide], svg.lucide {
 .filter-popover-close i, .filter-popover-close svg {
   width: 13px;
   height: 13px;
+  pointer-events: none;
 }
 .filter-popover-section {
   display: flex;
@@ -1543,6 +1551,7 @@ i[data-lucide], svg.lucide {
 .services-filter-close-btn i, .services-filter-close-btn svg {
   width: 12px;
   height: 12px;
+  pointer-events: none;
 }
 
 /* ─── LEFT CARD: INITIATIVES DELIVERY COLUMN BARS + DATA LIST ─── */
@@ -2215,6 +2224,9 @@ i[data-lucide], svg.lucide {
   gap: 2px;
   z-index: 100;
   animation: popFade 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.services-filter-dropdown-menu[hidden] {
+  display: none !important;
 }
 .services-filter-menu-head {
   display: flex;
