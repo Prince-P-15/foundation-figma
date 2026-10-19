@@ -831,27 +831,26 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    align-items: flex-end;
-    gap: 6px;
-    margin: 16px auto 28px;
+    align-items: center;
+    gap: 10px;
+    margin: 16px auto 26px;
     width: fit-content;
     max-width: calc(100% - 24px);
-    padding: 12px 18px 10px;
-    border-radius: 24px;
+    padding: 8px 12px;
+    border-radius: 22px;
     background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.45) 0%,
-      rgba(236, 253, 245, 0.28) 55%,
-      rgba(224, 242, 254, 0.22) 100%
+      rgba(255, 255, 255, 0.65) 0%,
+      rgba(236, 253, 245, 0.4) 55%,
+      rgba(224, 242, 254, 0.35) 100%
     );
-    border: 1px solid rgba(255, 255, 255, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.75);
     box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.75) inset,
-      0 -1px 0 rgba(15, 23, 42, 0.04) inset,
-      0 12px 32px -14px rgba(15, 23, 42, 0.2),
-      0 4px 12px rgba(15, 23, 42, 0.06);
-    backdrop-filter: blur(22px) saturate(1.6);
-    -webkit-backdrop-filter: blur(22px) saturate(1.6);
+      0 1px 0 rgba(255, 255, 255, 0.85) inset,
+      0 14px 34px -12px rgba(15, 23, 42, 0.16),
+      0 4px 12px rgba(15, 23, 42, 0.05);
+    backdrop-filter: blur(24px) saturate(1.6);
+    -webkit-backdrop-filter: blur(24px) saturate(1.6);
     position: relative;
     isolation: isolate;
   }
@@ -863,9 +862,9 @@
     pointer-events: none;
     background: linear-gradient(
       165deg,
-      rgba(255, 255, 255, 0.55) 0%,
-      rgba(255, 255, 255, 0.12) 42%,
-      rgba(255, 255, 255, 0.04) 100%
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.15) 42%,
+      rgba(255, 255, 255, 0.05) 100%
     );
     z-index: 0;
   }
@@ -875,20 +874,28 @@
   }
   .hero-product-logo-btn {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 7px;
-    width: 68px;
-    padding: 4px 2px 2px;
-    border: none;
+    gap: 11px;
+    padding: 7px 18px 7px 9px;
+    border: 1px solid transparent;
     background: transparent;
     cursor: pointer;
     font-family: var(--font-primary) !important;
-    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-    border-radius: 14px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 16px;
+    text-align: left;
   }
   .hero-product-logo-btn:hover {
-    transform: translateY(-4px) scale(1.04);
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .hero-product-logo-btn.active {
+    background: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow:
+      0 10px 24px -8px rgba(15, 23, 42, 0.14),
+      0 0 0 1px rgba(15, 23, 42, 0.06);
   }
   .hero-product-logo-btn:hover .hero-product-logo-mark,
   .hero-product-logo-btn.active .hero-product-logo-mark {
@@ -897,14 +904,38 @@
       0 0 0 2px rgba(255, 255, 255, 0.9),
       0 0 0 4px color-mix(in srgb, var(--logo-accent, #12A883) 28%, transparent);
   }
+  .hero-product-btn-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .hero-product-logo-name {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #1E293B;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    transition: color 0.2s ease;
+  }
+  .hero-product-logo-sub {
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: #64748B;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+    transition: color 0.2s ease;
+  }
   .hero-product-logo-btn.active .hero-product-logo-name {
     color: #0F172A;
-    font-weight: 650;
+  }
+  .hero-product-logo-btn.active .hero-product-logo-sub {
+    color: #059669;
+    font-weight: 600;
   }
   .hero-product-logo-mark {
-    width: 48px;
-    height: 48px;
-    border-radius: 13px;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
     display: grid;
     place-items: center;
     color: #FFFFFF;
@@ -916,51 +947,44 @@
     transition: box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .hero-product-logo-btn.active .hero-product-logo-mark {
-    transform: scale(1.08);
+    transform: scale(1.06);
   }
   .hero-product-logo-mark svg {
-    width: 21px;
-    height: 21px;
-  }
-  .hero-product-logo-name {
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: #64748B;
-    letter-spacing: -0.01em;
-    line-height: 1.15;
-    text-align: center;
-    transition: color 0.2s ease;
-  }
-  .hero-product-logo-btn:hover .hero-product-logo-name {
-    color: #0F172A;
+    width: 20px;
+    height: 20px;
   }
   @media (max-width: 640px) {
     .hero-product-logos {
-      gap: 4px;
-      padding: 10px 12px 8px;
-      border-radius: 18px;
+      gap: 6px;
+      padding: 6px 8px;
+      border-radius: 16px;
+      flex-wrap: wrap;
     }
     .hero-product-logo-btn {
-      width: 56px;
-      gap: 5px;
+      padding: 6px 10px;
+      gap: 8px;
     }
     .hero-product-logo-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 11px;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
     }
     .hero-product-logo-mark svg {
-      width: 18px;
-      height: 18px;
+      width: 17px;
+      height: 17px;
     }
     .hero-product-logo-name {
-      font-size: 0.65rem;
+      font-size: 0.8rem;
+    }
+    .hero-product-logo-sub {
+      display: none;
     }
   }
   .hero-product-preview {
     position: relative;
-    max-width: 840px;
-    margin: 4px auto 0;
+    max-width: 1140px;
+    width: 100%;
+    margin: 8px auto 0;
     min-height: 0;
     padding: 0;
     border-radius: 0;
@@ -968,30 +992,60 @@
     border: none;
     box-shadow: none;
   }
+  .hero-product-preview::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 65%;
+    background: radial-gradient(ellipse 70% 50% at 50% 25%, rgba(18, 168, 131, 0.22), rgba(14, 184, 171, 0.12), transparent 70%);
+    filter: blur(55px);
+    pointer-events: none;
+    z-index: 0;
+  }
   .hero-preview-screen {
     display: none;
     position: relative;
     z-index: 1;
-    animation: heroPreviewIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: heroPreviewIn 0.32s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .hero-preview-screen.active {
     display: block;
   }
   @keyframes heroPreviewIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(10px) scale(0.99); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
   }
   .hero-screen-device {
     position: relative;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(226,232,240,0.85) 40%, rgba(148,163,184,0.45) 100%);
+    box-shadow:
+      0 26px 70px -18px rgba(15, 23, 42, 0.18),
+      0 10px 28px -10px rgba(15, 23, 42, 0.1),
+      0 0 0 1px rgba(15, 23, 42, 0.06);
   }
-  .hero-screen-device::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: 18px;
-    background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(226,232,240,0.85) 40%, rgba(148,163,184,0.55) 100%);
-    z-index: 0;
-    pointer-events: none;
+  .hero-preview-screen .hero-screen-body.hero-screenshot-body {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #0B0F19 !important;
+    overflow: hidden !important;
+    display: block !important;
+    min-height: auto !important;
+    width: 100%;
+    cursor: zoom-in;
+  }
+  .hero-preview-screen .hero-screenshot-img {
+    width: 100%;
+    aspect-ratio: 1024 / 570;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.4s ease;
   }
   /* Browser window — clean product screen */
   .hero-preview-screen .hero-window-frame {
@@ -999,8 +1053,7 @@
     z-index: 1;
     margin: 0;
     height: auto;
-    min-height: 372px;
-    border-radius: 17px;
+    border-radius: 19px;
     background: #FFFFFF;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -1788,8 +1841,22 @@
     ) !important;
   }
 
+  :root[data-theme="dark"] .hero-product-logo-btn:hover {
+    background: rgba(255, 255, 255, 0.06) !important;
+  }
+  :root[data-theme="dark"] .hero-product-logo-btn.active {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.6) !important;
+  }
   :root[data-theme="dark"] .hero-product-logo-name {
     color: #94A3B8 !important;
+  }
+  :root[data-theme="dark"] .hero-product-logo-sub {
+    color: #64748B !important;
+  }
+  :root[data-theme="dark"] .hero-product-logo-btn.active .hero-product-logo-sub {
+    color: #34D399 !important;
   }
 
   :root[data-theme="dark"] .hero-product-logo-btn:hover .hero-product-logo-name,
@@ -2196,8 +2263,8 @@
 
   .hero-mvp-grid {
     display: grid;
-    grid-template-columns: 410px 1fr;
-    gap: 40px;
+    grid-template-columns: 390px 1fr;
+    gap: 36px;
     align-items: center;
     max-width: 100%;
   }
@@ -2207,7 +2274,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 495px;
+    min-height: 590px;
     padding-right: 12px;
   }
 
@@ -2444,15 +2511,15 @@
      HERO MVP GREEN CARDS (ALL GREEN-TYPE GRADIENTS, NO SHARP BOTTOM)
      ═════════════════════════════════════════════════════════════════ */
   .hero-green-card {
-    flex: 0 0 clamp(320px, 22vw, 348px);
-    width: clamp(320px, 22vw, 348px);
-    height: 505px;
-    border-radius: 24px;
+    flex: 0 0 clamp(580px, 42vw, 700px);
+    width: clamp(580px, 42vw, 700px);
+    height: 605px;
+    border-radius: 28px;
     scroll-snap-align: start;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 18px 18px 22px;
+    padding: 22px 22px 26px;
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
@@ -2480,13 +2547,22 @@
   }
 
   @media (max-width: 640px) {
+    .hero-green-card {
+      flex: 0 0 min(92vw, 420px);
+      width: min(92vw, 420px);
+      height: 520px;
+    }
+    .hero-window-frame,
+    .hero-card-media {
+      height: 290px;
+    }
     .hero-green-card.hero-card-down,
     .hero-green-card:nth-child(2) {
-      margin-top: 28px;
+      margin-top: 24px;
     }
     .hero-green-card.hero-card-center,
     .hero-green-card:nth-child(3) {
-      margin-top: 14px;
+      margin-top: 12px;
     }
   }
 
@@ -2513,9 +2589,147 @@
     box-shadow: 0 30px 65px -12px rgba(0, 0, 0, 0.38), 0 0 0 1.5px rgba(255, 255, 255, 0.4) inset;
   }
 
+  /* Direct High-Resolution Screen Presentation (No browser mockup frame or header) */
+  .hero-card-media {
+    width: 100%;
+    height: 385px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #0B0F19;
+    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+    position: relative;
+    flex-shrink: 0;
+    cursor: zoom-in;
+  }
+
+  .hero-card-zoom-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 9999px;
+    background: rgba(11, 15, 25, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #F8FAFC;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    z-index: 5;
+  }
+
+  .hero-card-media:hover .hero-card-zoom-badge {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-card-screenshot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+    display: block;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hero-green-card:hover .hero-card-screenshot {
+    transform: scale(1.025);
+  }
+
+  /* Screenshot Lightbox Modal */
+  .screenshot-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(5, 10, 20, 0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 0.28s ease;
+  }
+  .screenshot-lightbox.active {
+    display: flex;
+    opacity: 1;
+  }
+  .lightbox-content {
+    position: relative;
+    max-width: 1240px;
+    width: 100%;
+    max-height: 92vh;
+    background: #0B0F19;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 35px 80px -20px rgba(0, 0, 0, 0.85);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: lightboxPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes lightboxPop {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .lightbox-header {
+    height: 48px;
+    background: #111827;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .lightbox-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #F8FAFC;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lightbox-close-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    color: #94A3B8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lightbox-close-btn:hover {
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.15);
+  }
+  .lightbox-img-wrap {
+    overflow-y: auto;
+    max-height: calc(92vh - 48px);
+    background: #0B0F19;
+  }
+  .lightbox-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   /* Top Window Mockup Frame: Ultra-Sleek Glass Cockpit */
   .hero-window-frame {
-    height: 240px;
+    height: 320px;
     border-radius: 18px;
     background: rgba(11, 17, 32, 0.92);
     backdrop-filter: blur(16px);
@@ -4533,26 +4747,40 @@
     filter: drop-shadow(0 0 6px rgba(52, 211, 153, 0.75));
   }
 
-  /* Light SaaS Application Window */
+  /* Full Screenshot Display replacing the old white window card */
   .stage-app-window {
     width: 100%;
-    max-width: 580px; /* Kept fixed inner element width as requested */
+    max-width: 620px;
     align-self: flex-start;
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
+    background: transparent;
+    border: none;
     border-radius: 16px;
-    padding: 18px 20px;
-    box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.06), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+    padding: 0;
+    box-shadow: 0 20px 48px -12px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(15, 23, 42, 0.08);
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    min-height: 330px;
-    transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    min-height: auto;
+    overflow: hidden;
+    transition: box-shadow 0.25s ease;
   }
   :root[data-theme="dark"] .stage-app-window {
-    background: #0B111E;
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.5);
+    background: transparent;
+    border: none;
+    box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  }
+
+  .copilot-screenshot-img {
+    width: 100%;
+    height: 460px;
+    object-fit: cover;
+    object-position: top left;
+    display: block;
+    border-radius: 16px;
+  }
+  @media (max-width: 640px) {
+    .copilot-screenshot-img {
+      height: 280px;
+    }
   }
 
   /* App Window Header Bar */
@@ -7376,7 +7604,6 @@
           <div class="hero-layout-tabs" role="tablist" aria-label="Hero section versions">
             <button type="button" class="hero-layout-tab active" role="tab" aria-selected="true" data-hero-layout="split">version-1</button>
             <button type="button" class="hero-layout-tab" role="tab" aria-selected="false" data-hero-layout="stacked">version-2</button>
-            <button type="button" class="hero-layout-tab" role="tab" aria-selected="false" data-hero-layout="icons">version-3</button>
           </div>
         </div>
         <button type="button" class="site-theme-toggle" id="themeToggleBtn" aria-label="Toggle dark/light theme" title="Toggle theme">
@@ -7445,440 +7672,173 @@
         </div>
       </div>
 
-      <!-- Top-down: product logos + interactive screen preview -->
+      <!-- Top-down: product logos + interactive screen preview (Version-2) -->
       <div class="hero-stacked-panel" aria-label="Product previews">
         <div class="hero-product-logos" id="heroProductLogos" role="tablist" aria-label="Select a product">
-          <button type="button" class="hero-product-logo-btn active" role="tab" aria-selected="true" data-preview="work" style="--logo-grad: linear-gradient(145deg, #12A883 0%, #1EA190 50%, #3B82F6 100%); --logo-accent: #12A883;">
-            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
-            <span class="hero-product-logo-name">Work</span>
+          <button type="button" class="hero-product-logo-btn active" role="tab" aria-selected="true" data-preview="lms" style="--logo-grad: linear-gradient(145deg, #12A883 0%, #1EA190 50%, #3B82F6 100%); --logo-accent: #12A883;">
+            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+            <div class="hero-product-btn-text">
+              <span class="hero-product-logo-name">LMS</span>
+              <span class="hero-product-logo-sub">Corporate Learning</span>
+            </div>
           </button>
-          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="service" style="--logo-grad: linear-gradient(145deg, #0EB8AB 0%, #12A1CE 55%, #4C6DE8 100%); --logo-accent: #12A1CE;">
-            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-            <span class="hero-product-logo-name">Service</span>
+          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="hub" style="--logo-grad: linear-gradient(145deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%); --logo-accent: #05AE78;">
+            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <div class="hero-product-btn-text">
+              <span class="hero-product-logo-name">Hub</span>
+              <span class="hero-product-logo-sub">Employee Workspace</span>
+            </div>
           </button>
-          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="stackai" style="--logo-grad: linear-gradient(145deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%); --logo-accent: #05AE78;">
-            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><circle cx="5" cy="18" r="2"/><path d="M7 7l3.5 3.5m3 3l3.5 3.5m0-10l-3.5 3.5m-3 3L7 17"/></svg></span>
-            <span class="hero-product-logo-name">StackAI</span>
-          </button>
-          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="fuel" style="--logo-grad: linear-gradient(145deg, #059669 0%, #10B981 50%, #06B6D4 100%); --logo-accent: #059669;">
+          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="fuel" style="--logo-grad: linear-gradient(145deg, #0EB8AB 0%, #12A1CE 55%, #4C6DE8 100%); --logo-accent: #12A1CE;">
             <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c.5 4.5 2.5 6.5 7 7-4.5.5-6.5 2.5-7 7-.5-4.5-2.5-6.5-7-7 4.5-.5 6.5-2.5 7-7z"/></svg></span>
-            <span class="hero-product-logo-name">Fuel</span>
-          </button>
-          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="gerrit" style="--logo-grad: linear-gradient(145deg, #0284C7 0%, #06B6D4 50%, #10B981 100%); --logo-accent: #0284C7;">
-            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v2c0 2-2 4-6 4s-6-2-6-4V9"/></svg></span>
-            <span class="hero-product-logo-name">Gerrit</span>
-          </button>
-          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="gtm" style="--logo-grad: linear-gradient(145deg, #0D9488 0%, #10B981 50%, #6366F1 100%); --logo-accent: #0D9488;">
-            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg></span>
-            <span class="hero-product-logo-name">GTM</span>
+            <div class="hero-product-btn-text">
+              <span class="hero-product-logo-name">Fuel</span>
+              <span class="hero-product-logo-sub">Founder &amp; Investor</span>
+            </div>
           </button>
         </div>
 
         <div class="hero-product-preview" id="heroProductPreview">
-          <!-- Work: sprint board -->
-          <div class="hero-preview-screen active" data-preview="work">
+          <!-- 1. LMS: Corporate Learning Platform -->
+          <div class="hero-preview-screen active" data-preview="lms">
             <div class="hero-screen-device">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
-                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / work / sprint-42</span></div>
-                <div class="hero-status-pill">● SPRINT 42 ACTIVE</div>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hp-toolbar">
-                  <div>
-                    <div class="hp-title">Sprint board · Engineering</div>
-                    <div class="hp-sub">18 tasks routed across R&amp;D and Growth</div>
+              <div class="hero-window-frame">
+                <div class="hero-window-header">
+                  <div class="hero-window-dots">
+                    <span class="hero-dot dot-red"></span>
+                    <span class="hero-dot dot-yellow"></span>
+                    <span class="hero-dot dot-green"></span>
                   </div>
-                  <span class="hero-task-tag tag-slate">Board</span>
+                  <div class="hero-url-bar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                    <span>york.lms / dashboard / overview</span>
+                  </div>
+                  <a href="#flagship" class="hero-status-pill" style="text-decoration: none;">● 250 EMPLOYEES · 80 COURSES ↗</a>
                 </div>
-                <div class="hp-list">
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Stripe v4 API Gateway Migration</span><span class="hero-task-meta">R&amp;D · PR #842 Approved</span></div><span class="hero-task-tag tag-green">AUTO-ROUTED ✓</span></div>
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">GTM Enterprise Launch Assets</span><span class="hero-task-meta">Growth · 12 Assets Synced</span></div><span class="hero-task-tag tag-blue">DISPATCHED ✓</span></div>
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Design Library · Token Sync</span><span class="hero-task-meta">Design · Ready for QA</span></div><span class="hero-task-tag tag-amber">IN REVIEW</span></div>
+                <div class="hero-screen-body hero-screenshot-body" data-zoom-src="/images/lms-screenshot.png" data-zoom-title="York.IE LMS Corporate Learning Platform" title="Click to view full screenshot">
+                  <img src="/images/lms-screenshot.png" alt="York.IE LMS Corporate Learning Dashboard" class="hero-screenshot-img">
                 </div>
-                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">+38%</span><span class="hero-metric-lbl">Velocity</span></div><div class="hero-metric-cell"><span class="hero-metric-val">0.4s</span><span class="hero-metric-lbl">Handoff</span></div><div class="hero-metric-cell"><span class="hero-metric-val">0.0%</span><span class="hero-metric-lbl">Blockers</span></div></div>
               </div>
-            </div>
             </div>
           </div>
 
-          <!-- Service: reliability / incident -->
-          <div class="hero-preview-screen" data-preview="service">
+          <!-- 2. Hub: Employee Management System -->
+          <div class="hero-preview-screen" data-preview="hub">
             <div class="hero-screen-device">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
-                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / service / inc-4402</span></div>
-                <div class="hero-status-pill">● 99.999% SLA</div>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hp-toolbar">
-                  <div>
-                    <div class="hp-title">Incident INC-4402 · Edge-EU</div>
-                    <div class="hp-sub">Auto-triage + canary rollback in progress</div>
+              <div class="hero-window-frame">
+                <div class="hero-window-header">
+                  <div class="hero-window-dots">
+                    <span class="hero-dot dot-red"></span>
+                    <span class="hero-dot dot-yellow"></span>
+                    <span class="hero-dot dot-green"></span>
                   </div>
-                  <span class="hero-task-tag tag-amber">Mitigating</span>
+                  <div class="hero-url-bar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                    <span>hub.york.ie / home / dashboard</span>
+                  </div>
+                  <a href="#flagship" class="hero-status-pill" style="text-decoration: none;">● YORK.IE HUB · ACTIVE ↗</a>
                 </div>
-                <div class="hp-bars">
-                  <div class="hp-bar-row"><span>P99 latency</span><div class="hp-bar-track"><div class="hp-bar-fill is-ok" style="width:22%"></div></div><span>16ms</span></div>
-                  <div class="hp-bar-row"><span>CPU load</span><div class="hp-bar-track"><div class="hp-bar-fill is-warn" style="width:48%"></div></div><span>18%</span></div>
-                  <div class="hp-bar-row"><span>Canary</span><div class="hp-bar-track"><div class="hp-bar-fill is-ok" style="width:100%"></div></div><span>6/6</span></div>
+                <div class="hero-screen-body hero-screenshot-body" data-zoom-src="/images/hub-screenshot.png" data-zoom-title="York.IE Hub Employee Workspace" title="Click to view full screenshot">
+                  <img src="/images/hub-screenshot.png" alt="York.IE Hub Employee Management System" class="hero-screenshot-img">
                 </div>
-                <div class="hp-list">
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Traffic shunted to Edge-EU replica</span><span class="hero-task-meta">0 packet loss · 140ms ago</span></div><span class="hero-task-tag tag-green">VERIFIED ✓</span></div>
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Canary rollback v2.14.8</span><span class="hero-task-meta">Runbook executed</span></div><span class="hero-task-tag tag-blue">EXECUTED ✓</span></div>
-                </div>
-                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">16.4ms</span><span class="hero-metric-lbl">P99</span></div><div class="hero-metric-cell"><span class="hero-metric-val">18%</span><span class="hero-metric-lbl">CPU</span></div><div class="hero-metric-cell"><span class="hero-metric-val">100%</span><span class="hero-metric-lbl">Canary</span></div></div>
               </div>
-            </div>
             </div>
           </div>
 
-          <!-- StackAI: model mesh -->
-          <div class="hero-preview-screen" data-preview="stackai">
-            <div class="hero-screen-device">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
-                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / stackai / mesh-v4</span></div>
-                <div class="hero-status-pill">● 240 AGENTS ACTIVE</div>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hp-toolbar">
-                  <div>
-                    <div class="hp-title">Model mesh · Live routing</div>
-                    <div class="hp-sub">Guardrailed requests across the agent fleet</div>
-                  </div>
-                  <span class="hero-task-tag tag-green">Healthy</span>
-                </div>
-                <div class="hp-chip-row">
-                  <span class="hp-chip">Claude 3.5</span>
-                  <span class="hp-chip">GPT-4o</span>
-                  <span class="hp-chip">Gemini</span>
-                  <span class="hp-chip">Local · 8B</span>
-                </div>
-                <div class="hp-list">
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Claude 3.5 Sonnet</span><span class="hero-task-meta">Complex code refactoring · 38ms</span></div><span class="hero-task-tag tag-green">ROUTED ✓</span></div>
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">GPT-4o Omnimodal</span><span class="hero-task-meta">Visual document reasoning · 42ms</span></div><span class="hero-task-tag tag-blue">ROUTED ✓</span></div>
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Policy guardrail pass</span><span class="hero-task-meta">PII scrub · tool allowlist</span></div><span class="hero-task-tag tag-slate">100%</span></div>
-                </div>
-                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">14.2k</span><span class="hero-metric-lbl">tok/sec</span></div><div class="hero-metric-cell"><span class="hero-metric-val">100%</span><span class="hero-metric-lbl">Guardrail</span></div><div class="hero-metric-cell"><span class="hero-metric-val">&lt;38ms</span><span class="hero-metric-lbl">Latency</span></div></div>
-              </div>
-            </div>
-            </div>
-          </div>
-
-          <!-- Fuel: company scorecard -->
+          <!-- 3. Fuel: Founder & Investor Platform -->
           <div class="hero-preview-screen" data-preview="fuel">
             <div class="hero-screen-device">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
-                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / fuel / company-score</span></div>
-                <div class="hero-status-pill">● SCORECARD LIVE</div>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hp-toolbar">
-                  <div>
-                    <div class="hp-title">Company health scorecard</div>
-                    <div class="hp-sub">Peer benchmark · top quartile</div>
+              <div class="hero-window-frame">
+                <div class="hero-window-header">
+                  <div class="hero-window-dots">
+                    <span class="hero-dot dot-red"></span>
+                    <span class="hero-dot dot-yellow"></span>
+                    <span class="hero-dot dot-green"></span>
                   </div>
-                  <span class="hero-task-tag tag-green">Weekly pulse</span>
-                </div>
-                <div class="hp-score-row">
-                  <div class="hp-score-ring">
-                    <div style="text-align:center;">
-                      <div class="hp-score-num">98.4</div>
-                      <div class="hp-score-lbl">Score</div>
-                    </div>
+                  <div class="hero-url-bar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                    <span>fuel.york.ie / company / volura</span>
                   </div>
-                  <div class="hp-list" style="margin:0;">
-                    <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">GTM conversion gap</span><span class="hero-task-meta">Ranked #1 priority</span></div><span class="hero-task-tag tag-amber">ACTION</span></div>
-                    <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Engineering velocity</span><span class="hero-task-meta">Above peer median</span></div><span class="hero-task-tag tag-green">STRONG</span></div>
-                  </div>
+                  <a href="#flagship" class="hero-status-pill" style="text-decoration: none;">● $42.8M PIPELINE · VOLURA ↗</a>
                 </div>
-                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">12</span><span class="hero-metric-lbl">Signals</span></div><div class="hero-metric-cell"><span class="hero-metric-val">5</span><span class="hero-metric-lbl">Gaps</span></div><div class="hero-metric-cell"><span class="hero-metric-val">3</span><span class="hero-metric-lbl">Bets</span></div></div>
+                <div class="hero-screen-body hero-screenshot-body" data-zoom-src="/images/fuel-screenshot.png" data-zoom-title="Fuel Founder & Investor Platform" title="Click to view full screenshot">
+                  <img src="/images/fuel-screenshot.png" alt="Fuel Founder and Investor Platform" class="hero-screenshot-img">
+                </div>
               </div>
-            </div>
-            </div>
-          </div>
-
-          <!-- Gerrit: code review -->
-          <div class="hero-preview-screen" data-preview="gerrit">
-            <div class="hero-screen-device">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
-                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / gerrit / change-8842</span></div>
-                <div class="hero-status-pill">● REVIEW PIPELINE</div>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hp-toolbar">
-                  <div>
-                    <div class="hp-title">change-8842 · Auth middleware</div>
-                    <div class="hp-sub">2 reviewers · +186 / −42</div>
-                  </div>
-                  <span class="hero-task-tag tag-green">+2</span>
-                </div>
-                <div class="hp-diff">
-                  <div class="hp-diff-line">@@ auth/middleware.ts @@</div>
-                  <div class="hp-diff-line del">- if (!token) return next()</div>
-                  <div class="hp-diff-line add">+ if (!token) throw new AuthError(401)</div>
-                  <div class="hp-diff-line add">+ await verifySession(token)</div>
-                </div>
-                <div class="hp-list">
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">CI · Build &amp; unit suite</span><span class="hero-task-meta">All checks green</span></div><span class="hero-task-tag tag-blue">PASSED</span></div>
-                </div>
-                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">14m</span><span class="hero-metric-lbl">Review lag</span></div><div class="hero-metric-cell"><span class="hero-metric-val">100%</span><span class="hero-metric-lbl">Coverage</span></div><div class="hero-metric-cell"><span class="hero-metric-val">0</span><span class="hero-metric-lbl">Blockers</span></div></div>
-              </div>
-            </div>
-            </div>
-          </div>
-
-          <!-- GTM: launch calendar -->
-          <div class="hero-preview-screen" data-preview="gtm">
-            <div class="hero-screen-device">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
-                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / gtm / launch-q2</span></div>
-                <div class="hero-status-pill">● CAMPAIGN SYNCED</div>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hp-toolbar">
-                  <div>
-                    <div class="hp-title">Enterprise launch calendar</div>
-                    <div class="hp-sub">LinkedIn · CRM · Email · Ads</div>
-                  </div>
-                  <span class="hero-task-tag tag-green">Live</span>
-                </div>
-                <div class="hp-calendar">
-                  <div class="hp-day"><strong>Mon</strong><span>Teaser</span></div>
-                  <div class="hp-day is-live"><strong>Tue</strong><span>Launch</span></div>
-                  <div class="hp-day"><strong>Wed</strong><span>Nurture</span></div>
-                  <div class="hp-day"><strong>Thu</strong><span>SQL push</span></div>
-                </div>
-                <div class="hp-chip-row">
-                  <span class="hp-chip">LinkedIn</span>
-                  <span class="hp-chip">HubSpot</span>
-                  <span class="hp-chip">Email</span>
-                  <span class="hp-chip">Paid</span>
-                </div>
-                <div class="hp-list">
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Enterprise launch sequence</span><span class="hero-task-meta">12 assets · 3 channels</span></div><span class="hero-task-tag tag-green">LIVE</span></div>
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Pipeline attribution</span><span class="hero-task-meta">Synced to CRM</span></div><span class="hero-task-tag tag-blue">SYNCED</span></div>
-                </div>
-                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">2.4x</span><span class="hero-metric-lbl">Pipeline</span></div><div class="hero-metric-cell"><span class="hero-metric-val">38%</span><span class="hero-metric-lbl">Open rate</span></div><div class="hero-metric-cell"><span class="hero-metric-val">9</span><span class="hero-metric-lbl">SQLs</span></div></div>
-              </div>
-            </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Icon: concentric rotating arcs of all 22 product logos -->
-      <div class="hero-icon-panel" aria-label="York Foundation connected products">
-        <div class="hero-arc-fan" id="heroArcFan" aria-hidden="false"></div>
-      </div>
 
       <!-- RIGHT COLUMN: Horizontal Carousel Viewport -->
       <div class="hero-cards-viewport" id="heroCardsViewport">
         <div class="hero-cards-track">
 
-          <!-- 1. Agentic Work Management (Emerald Mint) - LEFT (UP) -->
+          <!-- 1. LMS (Corporate Learning Platform) - LEFT (UP) -->
           <div class="hero-green-card card-gradient-1 hero-card-up" style="background: linear-gradient(160deg, #12A883 0%, #1EA190 45%, #466BD8 100%);">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots">
-                  <span class="hero-dot dot-red"></span>
-                  <span class="hero-dot dot-yellow"></span>
-                  <span class="hero-dot dot-green"></span>
-                </div>
-                <div class="hero-status-pill">● ACTIVE SPRINT 42</div>
-              </div>
-              <div class="hero-url-bar">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                <span>york.platform / work / sprint-42</span>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hero-task-row">
-                  <div class="hero-task-info">
-                    <span class="hero-task-name">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M18 9a9 9 0 0 0-9 9"/><path d="M6 9v12"/></svg>
-                      <span>Stripe v4 API Gateway Migration</span>
-                    </span>
-                    <span class="hero-task-meta">R&amp;D Team · PR #842 Approved · 12ms</span>
-                  </div>
-                  <span class="hero-task-tag tag-green">AUTO-ROUTED ✓</span>
-                </div>
-                <div class="hero-task-row">
-                  <div class="hero-task-info">
-                    <span class="hero-task-name">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-                      <span>GTM Enterprise Launch Assets</span>
-                    </span>
-                    <span class="hero-task-meta">Growth · 12 Assets Synced · 0 Blockers</span>
-                  </div>
-                  <span class="hero-task-tag tag-blue">DISPATCHED ✓</span>
-                </div>
-                <div class="hero-micro-metrics">
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">+38%</span>
-                    <span class="hero-metric-lbl">Velocity</span>
-                  </div>
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">0.4s</span>
-                    <span class="hero-metric-lbl">Handoff</span>
-                  </div>
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">0.0%</span>
-                    <span class="hero-metric-lbl">Blocker Rate</span>
-                  </div>
-                </div>
+            <div class="hero-card-media" data-zoom-src="/images/lms-screenshot.png" data-zoom-title="York.IE LMS · Corporate Learning Platform" title="Click to enlarge screenshot">
+              <img src="/images/lms-screenshot.png" alt="York.IE LMS Corporate Learning Platform" class="hero-card-screenshot">
+              <div class="hero-card-zoom-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+                <span>Enlarge</span>
               </div>
             </div>
 
             <div class="hero-card-bottom">
               <div class="hero-card-tag-pill">
                 <span class="hero-tag-glow-dot"></span>
-                <span>Work Coordination</span>
+                <span>Corporate Learning Platform</span>
               </div>
-              <h3 class="hero-card-title">Nurture cross-team velocity and eliminate handoff latency</h3>
+              <h3 class="hero-card-title">Automated assessments, personalized learning paths &amp; capability tracks</h3>
               <div class="hero-card-actions">
-                <a href="#flagship" class="hero-card-action-btn">Open workspace ↗</a>
+                <a href="#flagship" class="hero-card-action-btn">Explore LMS ↗</a>
                 <a href="#flagship" class="hero-card-action-link">Learn more ›</a>
               </div>
             </div>
           </div>
 
-          <!-- 2. StackAI by York (Lush Forest) - IN CENTER (DOWN/CENTER) -->
-          <div class="hero-green-card card-gradient-3 hero-card-down">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots">
-                  <span class="hero-dot dot-red"></span>
-                  <span class="hero-dot dot-yellow"></span>
-                  <span class="hero-dot dot-green"></span>
-                </div>
-                <div class="hero-status-pill">● 240 AGENTS ACTIVE</div>
-              </div>
-              <div class="hero-url-bar">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                <span>york.platform / runtime / mesh-v4</span>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hero-task-row">
-                  <div class="hero-task-info">
-                    <span class="hero-task-name">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><circle cx="5" cy="19" r="2"/><line x1="7" y1="6" x2="10" y2="10"/><line x1="17" y1="6" x2="14" y2="10"/><line x1="7" y1="18" x2="10" y2="14"/><line x1="17" y1="18" x2="14" y2="14"/></svg>
-                      <span>Zero-Trust Swarm Mesh</span>
-                    </span>
-                    <span class="hero-task-meta">Claude 3.5 Sonnet · Complex Refactor</span>
-                  </div>
-                  <span class="hero-task-tag tag-purple">ROUTED ✓</span>
-                </div>
-                <div class="hero-task-row">
-                  <div class="hero-task-info">
-                    <span class="hero-task-name">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg>
-                      <span>GPT-4o Omnimodal Reasoning</span>
-                    </span>
-                    <span class="hero-task-meta">Document Analysis · 42ms runtime</span>
-                  </div>
-                  <span class="hero-task-tag tag-cyan">ROUTED ✓</span>
-                </div>
-                <div class="hero-micro-metrics">
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">14,200</span>
-                    <span class="hero-metric-lbl">Throughput</span>
-                  </div>
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">100%</span>
-                    <span class="hero-metric-lbl">Guardrail</span>
-                  </div>
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">&lt;38ms</span>
-                    <span class="hero-metric-lbl">Mesh Latency</span>
-                  </div>
-                </div>
+          <!-- 2. Hub (Employee Management System) - IN CENTER (DOWN/CENTER) -->
+          <div class="hero-green-card card-gradient-3 hero-card-down" style="background: linear-gradient(160deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%);">
+            <div class="hero-card-media" data-zoom-src="/images/hub-screenshot.png" data-zoom-title="York.IE Hub · Employee Management System" title="Click to enlarge screenshot">
+              <img src="/images/hub-screenshot.png" alt="York.IE Hub Employee Management System" class="hero-card-screenshot">
+              <div class="hero-card-zoom-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+                <span>Enlarge</span>
               </div>
             </div>
 
             <div class="hero-card-bottom">
               <div class="hero-card-tag-pill">
                 <span class="hero-tag-glow-dot"></span>
-                <span>Agentic Mesh</span>
+                <span>Employee Management System</span>
               </div>
-              <h3 class="hero-card-title">Deploy autonomous multi-agent swarms with MCP context mesh</h3>
+              <h3 class="hero-card-title">Unified employee portal, schedule, timesheet, leave &amp; organization workspace</h3>
               <div class="hero-card-actions">
-                <a href="#flagship" class="hero-card-action-btn">Explore StackAI ↗</a>
+                <a href="#flagship" class="hero-card-action-btn">Explore Hub ↗</a>
                 <a href="#flagship" class="hero-card-action-link">Learn more ›</a>
               </div>
             </div>
           </div>
 
-          <!-- 3. York Service Management (Deep Jade) - RIGHT (CENTER CASCADE) -->
-          <div class="hero-green-card card-gradient-2 hero-card-center">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots">
-                  <span class="hero-dot dot-red"></span>
-                  <span class="hero-dot dot-yellow"></span>
-                  <span class="hero-dot dot-green"></span>
-                </div>
-                <div class="hero-status-pill">● 99.999% SLA</div>
-              </div>
-              <div class="hero-url-bar">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                <span>york.platform / service / inc-4402</span>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hero-task-row">
-                  <div class="hero-task-info">
-                    <span class="hero-task-name">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                      <span>INC-4402 · Buffer Saturation</span>
-                    </span>
-                    <span class="hero-task-meta">Cluster-08 Gateway Pods · Edge-EU</span>
-                  </div>
-                  <span class="hero-task-tag tag-cyan">MITIGATED ✓</span>
-                </div>
-                <div class="hero-task-row">
-                  <div class="hero-task-info">
-                    <span class="hero-task-name">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-                      <span>Canary Rollback to Release v2.14.8</span>
-                    </span>
-                    <span class="hero-task-meta">6/6 pods nominal · 0 packet loss</span>
-                  </div>
-                  <span class="hero-task-tag tag-green">VERIFIED ✓</span>
-                </div>
-                <div class="hero-micro-metrics">
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">16.4ms</span>
-                    <span class="hero-metric-lbl">P99 Latency</span>
-                  </div>
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">18%</span>
-                    <span class="hero-metric-lbl">CPU Load</span>
-                  </div>
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">100%</span>
-                    <span class="hero-metric-lbl">Canary Health</span>
-                  </div>
-                </div>
+          <!-- 3. Fuel (Founder & Investor Platform) - RIGHT (CENTER CASCADE) -->
+          <div class="hero-green-card card-gradient-2 hero-card-center" style="background: linear-gradient(160deg, #0EB8AB 0%, #12A1CE 45%, #4C6DE8 100%);">
+            <div class="hero-card-media" data-zoom-src="/images/fuel-screenshot.png" data-zoom-title="Fuel · Founder &amp; Investor Platform" title="Click to enlarge screenshot">
+              <img src="/images/fuel-screenshot.png" alt="Fuel Founder and Investor Platform" class="hero-card-screenshot">
+              <div class="hero-card-zoom-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+                <span>Enlarge</span>
               </div>
             </div>
 
             <div class="hero-card-bottom">
               <div class="hero-card-tag-pill">
                 <span class="hero-tag-glow-dot"></span>
-                <span>Service Reliability</span>
+                <span>Founder &amp; Investor Platform</span>
               </div>
-              <h3 class="hero-card-title">Sub-second incident triage with automated canary rollbacks</h3>
+              <h3 class="hero-card-title">Scorecards, peer benchmarks, deal flow pipelines &amp; investor data room</h3>
               <div class="hero-card-actions">
-                <a href="#flagship" class="hero-card-action-btn">Launch Service Hub ↗</a>
+                <a href="#flagship" class="hero-card-action-btn">Launch Fuel ↗</a>
                 <a href="#flagship" class="hero-card-action-link">Learn more ›</a>
               </div>
             </div>
@@ -7890,6 +7850,24 @@
     </div>
   </div>
 </section>
+
+<!-- Screenshot Lightbox Modal (Click-to-Enlarge high-resolution inspection) -->
+<div class="screenshot-lightbox" id="screenshotLightbox" role="dialog" aria-modal="true" aria-label="Screenshot Preview">
+  <div class="lightbox-content">
+    <div class="lightbox-header">
+      <div class="lightbox-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span id="lightboxTitle">Platform Overview</span>
+      </div>
+      <button type="button" class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Close preview" title="Close (Esc)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="lightbox-img-wrap">
+      <img src="" alt="" id="lightboxImg" class="lightbox-img">
+    </div>
+  </div>
+</div>
 
 
 <!-- ═════════════════════════════════════════════════════════════════
@@ -7972,11 +7950,11 @@
     <div class="section-header-unified">
       <div class="flagship-kicker">
         <span class="kicker-dot">●</span>
-        <span>FLAGSHIP · FUEL</span>
+        <span>FLAGSHIP PRODUCTS · LMS · HUB · FUEL</span>
       </div>
-      <h2>The workspace that replaces the<br>guesswork.</h2>
+      <h2>Three flagship products.<br>One unified operating system.</h2>
       <p>
-        Board deck. Spreadsheet. Gut feel. Fuel replaces all three with a company scorecard, real peer benchmarks, and operating history you can actually trust.
+        Corporate learning, full employee workforce management, and founder &amp; investor intelligence — purpose-built platforms running together seamlessly under York Foundation.
       </p>
     </div>
 
@@ -7990,34 +7968,34 @@
         </button>
 
         <div class="copilot-nav-items" id="copilotNavItems">
-          <!-- Item 0: Agentic Work Management (Defined Gradient 1: Jade to Royal Blue) -->
+          <!-- Item 0: York.IE LMS (Corporate Learning Platform) -->
           <button class="copilot-nav-item active" data-index="0" style="--item-gradient: linear-gradient(135deg, #12A883 0%, #1EA190 45%, #466BD8 100%); --item-bloom: rgba(18, 168, 131, 0.5);">
             <div class="copilot-icon-wrap">
               <div class="copilot-icon-box">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
               </div>
             </div>
-            <span class="copilot-item-label">Agentic Work Management</span>
+            <span class="copilot-item-label">York.IE LMS · Learning</span>
           </button>
 
-          <!-- Item 1: York Service Management (Defined Gradient 2: Aqua to Electric Blue) -->
-          <button class="copilot-nav-item" data-index="1" style="--item-gradient: linear-gradient(135deg, #0EB8AB 0%, #12A1CE 45%, #4C6DE8 100%); --item-bloom: rgba(14, 184, 171, 0.5);">
+          <!-- Item 1: York.IE Hub (Employee Management System) -->
+          <button class="copilot-nav-item" data-index="1" style="--item-gradient: linear-gradient(135deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%); --item-bloom: rgba(5, 174, 120, 0.5);">
             <div class="copilot-icon-wrap">
               <div class="copilot-icon-box">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               </div>
             </div>
-            <span class="copilot-item-label">York Service Management</span>
+            <span class="copilot-item-label">York.IE Hub · People</span>
           </button>
 
-          <!-- Item 2: StackAI by York (Defined Gradient 3: Emerald to Turquoise) -->
-          <button class="copilot-nav-item" data-index="2" style="--item-gradient: linear-gradient(135deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%); --item-bloom: rgba(5, 174, 120, 0.5);">
+          <!-- Item 2: Fuel by York IE (Founder & Investor Platform) -->
+          <button class="copilot-nav-item" data-index="2" style="--item-gradient: linear-gradient(135deg, #0EB8AB 0%, #12A1CE 45%, #4C6DE8 100%); --item-bloom: rgba(14, 184, 171, 0.5);">
             <div class="copilot-icon-wrap">
               <div class="copilot-icon-box">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><circle cx="5" cy="18" r="2"/><path d="M7 7l3.5 3.5m3 3l3.5 3.5m0-10l-3.5 3.5m-3 3L7 17"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M12 3c.5 4.5 2.5 6.5 7 7-4.5.5-6.5 2.5-7 7-.5-4.5-2.5-6.5-7-7 4.5-.5 6.5-2.5 7-7z"/></svg>
               </div>
             </div>
-            <span class="copilot-item-label">StackAI by York</span>
+            <span class="copilot-item-label">Fuel by York IE · Capital</span>
           </button>
         </div>
 
@@ -8032,78 +8010,32 @@
         <!-- Top Prompt Pill -->
         <div class="stage-prompt-bubble" id="copilotPromptBubble" style="--bubble-bg: #FFFFFF; --bubble-color: #006056; --bubble-border: rgba(0, 96, 86, 0.25); --bubble-dark-bg: rgba(18, 168, 131, 0.16); --bubble-dark-color: #A7F3D0; --bubble-dark-border: rgba(52, 211, 153, 0.35);">
           <span class="bubble-spark-icon">✦</span>
-          <span id="copilotBubbleText">Coordinate <strong>cross-team deliverables</strong> across R&amp;D, GTM, and Finance?</span>
+          <span id="copilotBubbleText">Assess <strong>org-wide capability</strong> across engineering tracks, courses &amp; employee levels?</span>
         </div>
 
-        <!-- Center Light Application Window -->
+        <!-- Center Application Showcase: Direct Full Screenshot Replacing the White Card -->
         <div class="stage-app-window" id="stageAppWindow">
-          <!-- Window Header Bar -->
-          <div class="app-window-header">
-            <div class="traffic-lights">
-              <span class="traffic-dot dot-red"></span>
-              <span class="traffic-dot dot-yellow"></span>
-              <span class="traffic-dot dot-green"></span>
-            </div>
-            <div class="app-url-pill" id="elementsWindowUrl">york.platform / work / sprint-42</div>
-            <div class="app-status-badge" id="elementsStatusPill">● SPRINT 42 ACTIVE</div>
-          </div>
-
-          <!-- Window Content Body (Dynamic via JS) -->
-          <div class="app-window-body" id="copilotCardsStack">
-            <div class="prod-card-header">
-              <span class="prod-card-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:5px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Sprint 42 Autonomous Task Routing</span>
-              <span class="prod-card-badge" style="background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0;">18 TASKS ROUTED</span>
-            </div>
-            <div class="prod-card-desc">York Foundation eliminated cross-functional handoff bottlenecks across 3 departments.</div>
-            <div class="prod-rows-list">
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">Stripe v4 API Gateway Migration</span>
-                  <span class="prod-row-meta"> · R&amp;D Team · PR #842 Approved</span>
-                </div>
-                <span class="prod-row-status" style="background: #E4F2F0; color: #165E50; border: 1px solid #C5E4DF;">AUTO-ROUTED ✓</span>
-              </div>
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">GTM Enterprise Launch Assets</span>
-                  <span class="prod-row-meta"> · Growth · 12 Assets Synced</span>
-                </div>
-                <span class="prod-row-status" style="background: #E8EEF5; color: #1E3A5F; border: 1px solid #D0D9E6;">DISPATCHED ✓</span>
-              </div>
-            </div>
-            <div class="prod-metrics-strip">
-              <div class="prod-metric-box">
-                <span class="metric-val">+38%</span>
-                <span class="metric-lbl">Sprint Velocity</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">0.4s</span>
-                <span class="metric-lbl">Handoff Latency</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">0.0%</span>
-                <span class="metric-lbl">Blocker Rate</span>
-              </div>
-            </div>
+          <div class="app-window-body" id="copilotCardsStack" style="padding: 0; margin: 0; overflow: hidden; width: 100%;">
+            <img src="/images/lms-screenshot.png" alt="York.IE LMS Corporate Learning Platform" class="copilot-screenshot-img">
           </div>
         </div>
 
         <!-- Bottom Footer of the Box -->
         <div class="stage-box-footer">
-          <div class="footer-brand"><strong>York</strong> Platform</div>
-          <div class="footer-caption" id="copilotCompanionText">Zero handoff latency across all teams</div>
+          <div class="footer-brand" id="copilotFooterBrand"><strong>York</strong> Learning</div>
+          <div class="footer-caption" id="copilotCompanionText">Automated assessments and talent capability mapping</div>
         </div>
 
         <!-- EXTREME RIGHT RECTANGULAR CARD: Pure white card with 100% opaque vivid gradient border -->
         <div class="copilot-floating-card" id="copilotFloatingCard" style="--card-gradient-border: linear-gradient(135deg, #12A883 0%, #1EA190 45%, #466BD8 100%); --card-gradient-border-hover: linear-gradient(135deg, #12A883 0%, #1EA190 45%, #466BD8 100%); --card-glow-color: rgba(18, 168, 131, 0.25);">
           <div class="copilot-card-badge" id="copilotCardBadge">
             <span class="badge-dot">●</span>
-            <span id="copilotBadgeText">MVP CAPABILITY</span>
+            <span id="copilotBadgeText">FLAGSHIP PRODUCT</span>
           </div>
-          <h4 id="copilotCardTitle">Autonomous Workflows</h4>
-          <p id="copilotCardDesc">Auto-routes tasks and sprint dependencies with zero handoff latency.</p>
+          <h4 id="copilotCardTitle">Corporate Learning</h4>
+          <p id="copilotCardDesc">Automated assessments, personalized learning paths &amp; capability tracks.</p>
           <a href="#services" id="copilotCardAction" class="copilot-card-action">
-            <span>Explore Workflows</span>
+            <span>Explore LMS</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
           </a>
         </div>
@@ -8413,7 +8345,7 @@
 
       function applyHeroTitleSize(layout) {
         if (!headline) return;
-        if (layout === 'stacked' || layout === 'icons') {
+        if (layout === 'stacked') {
           headline.style.setProperty('font-size', '72px', 'important');
           headline.style.setProperty('line-height', '1.08', 'important');
           if (gradientTitle) {
@@ -8525,6 +8457,46 @@
       if (!hero || hero.getAttribute('data-hero-layout') === 'stacked') startAuto();
     })();
 
+    // ─── 2.48 SCREENSHOT LIGHTBOX MODAL CONTROLLER ───
+    (function initScreenshotLightbox() {
+      const lightbox = document.getElementById('screenshotLightbox');
+      const lbImg = document.getElementById('lightboxImg');
+      const lbTitle = document.getElementById('lightboxTitle');
+      const closeBtn = document.getElementById('lightboxCloseBtn');
+      if (!lightbox || !lbImg) return;
+
+      function openLightbox(src, title) {
+        lbImg.src = src;
+        lbImg.alt = title || 'Platform Screenshot';
+        if (lbTitle) lbTitle.textContent = title || 'Platform Overview';
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.removeProperty('overflow');
+        setTimeout(() => { lbImg.src = ''; }, 200);
+      }
+
+      document.querySelectorAll('[data-zoom-src]').forEach((el) => {
+        el.addEventListener('click', (e) => {
+          if (e.target.closest('a')) return;
+          const src = el.getAttribute('data-zoom-src');
+          const title = el.getAttribute('data-zoom-title');
+          if (src) openLightbox(src, title);
+        });
+      });
+
+      if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+      });
+    })();
+
         // ─── 2.5 HERO MVP PLATFORMS CAROUSEL CONTROLLER ───
     (function initHeroMvpCarousel() {
       const viewport = document.getElementById('heroCardsViewport');
@@ -8586,32 +8558,32 @@
     (function initCopilotShowcase() {
       const PLATFORMS = [
         {
-          name: 'Agentic Work Management',
+          name: 'York.IE LMS · Learning',
           stageBg: '#E7F7F0',
           stageBorder: '#C6EADB',
           stageDarkBg: 'radial-gradient(circle at 18% 18%, rgba(18, 168, 131, 0.16) 0%, transparent 60%), radial-gradient(circle at 82% 82%, rgba(70, 107, 216, 0.10) 0%, transparent 55%), #0D1522',
           stageDarkBorder: 'rgba(18, 168, 131, 0.35)',
-          bubble: 'Coordinate <strong>cross-team deliverables</strong> across R&amp;D, GTM, and Finance?',
+          bubble: 'Assess <strong>org-wide capability</strong> across engineering tracks, courses &amp; employee levels?',
           bubbleBg: '#FFFFFF',
           bubbleColor: '#065F46',
           bubbleBorder: 'rgba(5, 150, 105, 0.22)',
           bubbleDarkBg: 'rgba(18, 168, 131, 0.16)',
           bubbleDarkColor: '#A7F3D0',
           bubbleDarkBorder: 'rgba(52, 211, 153, 0.35)',
-          url: 'york.platform / work / sprint-42',
-          status: '● SPRINT 42 ACTIVE',
+          url: 'york.lms / dashboard / overview',
+          status: '● 250 EMPLOYEES · 80 COURSES',
           statusColor: '#047857',
           statusBg: '#ECFDF5',
           statusBorder: '#A7F3D0',
           statusDarkColor: '#34D399',
           statusDarkBg: 'rgba(16, 185, 129, 0.16)',
           statusDarkBorder: 'rgba(52, 211, 153, 0.35)',
-          badgeText: 'MVP CAPABILITY',
+          badgeText: 'FLAGSHIP PRODUCT',
           badgeBg: '#ECFDF5',
           badgeColor: '#047857',
-          cardTitle: 'Autonomous Workflows',
-          cardDesc: 'Auto-routes tasks and sprint dependencies with zero handoff latency.',
-          cardActionText: 'Explore Workflows',
+          cardTitle: 'Corporate Learning',
+          cardDesc: 'Automated assessments, personalized learning paths &amp; capability tracks.',
+          cardActionText: 'Explore LMS',
           cardActionLink: '#services',
           actionColor: '#047857',
           cardInnerBg: '#FFFFFF',
@@ -8623,72 +8595,83 @@
             { bg: '#E6F8F1', ink: '#047857' },
             { bg: '#EAF3FE', ink: '#1D4ED8' }
           ],
-          companion: 'Zero handoff latency across all teams',
+          brand: '<strong>York</strong> Learning',
+          companion: 'Automated assessments and talent capability mapping',
           cardsHtml: `
-            <div class="prod-card-header">
-              <span class="prod-card-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:5px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Sprint 42 Autonomous Task Routing</span>
-              <span class="prod-card-badge" style="background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0;">18 TASKS ROUTED</span>
-            </div>
-            <div class="prod-card-desc">York Foundation eliminated cross-functional handoff bottlenecks across 3 departments.</div>
-            <div class="prod-rows-list">
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">Stripe v4 API Gateway Migration</span>
-                  <span class="prod-row-meta"> · R&amp;D Team · PR #842 Approved</span>
-                </div>
-                <span class="prod-row-status" style="background: #E4F2F0; color: #165E50; border: 1px solid #C5E4DF;">AUTO-ROUTED ✓</span>
-              </div>
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">GTM Enterprise Launch Assets</span>
-                  <span class="prod-row-meta"> · Growth · 12 Assets Synced</span>
-                </div>
-                <span class="prod-row-status" style="background: #E8EEF5; color: #1E3A5F; border: 1px solid #D0D9E6;">DISPATCHED ✓</span>
-              </div>
-            </div>
-            <div class="prod-metrics-strip">
-              <div class="prod-metric-box">
-                <span class="metric-val">+38%</span>
-                <span class="metric-lbl">Sprint Velocity</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">0.4s</span>
-                <span class="metric-lbl">Handoff Latency</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">0.0%</span>
-                <span class="metric-lbl">Blocker Rate</span>
-              </div>
-            </div>
+            <img src="/images/lms-screenshot.png" alt="York.IE LMS Corporate Learning Platform" class="copilot-screenshot-img">
           `
         },
         {
-          name: 'York Service Management',
+          name: 'York.IE Hub · People',
+          stageBg: '#EBF7F2',
+          stageBorder: '#C8E8DC',
+          stageDarkBg: 'radial-gradient(circle at 18% 18%, rgba(5, 174, 120, 0.16) 0%, transparent 60%), radial-gradient(circle at 82% 82%, rgba(14, 184, 171, 0.10) 0%, transparent 55%), #0C171F',
+          stageDarkBorder: 'rgba(5, 174, 120, 0.35)',
+          bubble: 'Coordinate <strong>schedules, timesheets, leave &amp; org tools</strong> in one workspace?',
+          bubbleBg: '#FFFFFF',
+          bubbleColor: '#065F46',
+          bubbleBorder: 'rgba(5, 150, 105, 0.22)',
+          bubbleDarkBg: 'rgba(5, 174, 120, 0.16)',
+          bubbleDarkColor: '#A7F3D0',
+          bubbleDarkBorder: 'rgba(52, 211, 153, 0.35)',
+          url: 'hub.york.ie / home / dashboard',
+          status: '● YORK.IE HUB · ACTIVE',
+          statusColor: '#059669',
+          statusBg: '#ECFDF5',
+          statusBorder: '#A7F3D0',
+          statusDarkColor: '#34D399',
+          statusDarkBg: 'rgba(16, 185, 129, 0.16)',
+          statusDarkBorder: 'rgba(52, 211, 153, 0.35)',
+          badgeText: 'FLAGSHIP PRODUCT',
+          badgeBg: '#ECFDF5',
+          badgeColor: '#059669',
+          cardTitle: 'Employee Management',
+          cardDesc: 'Unified employee portal for timesheets, leave &amp; WFH, schedules, and org tools.',
+          cardActionText: 'Explore Hub',
+          cardActionLink: '#services',
+          actionColor: '#059669',
+          cardInnerBg: '#FFFFFF',
+          borderGradient: 'linear-gradient(135deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%)',
+          borderGradientHover: 'linear-gradient(135deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%)',
+          glowColor: 'rgba(5, 174, 120, 0.25)',
+          metricColors: [
+            { bg: '#E2F7EE', ink: '#065F46' },
+            { bg: '#E6F8F1', ink: '#047857' },
+            { bg: '#EAF3FE', ink: '#1D4ED8' }
+          ],
+          brand: '<strong>York</strong> Hub',
+          companion: 'Unified employee management and team synchronization',
+          cardsHtml: `
+            <img src="/images/hub-screenshot.png" alt="York.IE Hub Employee Management System" class="copilot-screenshot-img">
+          `
+        },
+        {
+          name: 'Fuel by York IE · Capital',
           stageBg: '#EBF3FE',
           stageBorder: '#CEE0FD',
           stageDarkBg: 'radial-gradient(circle at 18% 18%, rgba(14, 184, 171, 0.16) 0%, transparent 60%), radial-gradient(circle at 82% 82%, rgba(76, 109, 232, 0.10) 0%, transparent 55%), #0C1628',
           stageDarkBorder: 'rgba(14, 184, 171, 0.35)',
-          bubble: 'Auto-triage <strong>INC-4402</strong> &amp; execute canary rollback on Cluster-08?',
+          bubble: 'Access <strong>Volura scorecard</strong>, peer benchmarks &amp; $42.8M deal flow pipeline?',
           bubbleBg: '#FFFFFF',
           bubbleColor: '#1E40AF',
           bubbleBorder: 'rgba(37, 99, 235, 0.22)',
           bubbleDarkBg: 'rgba(14, 184, 171, 0.16)',
           bubbleDarkColor: '#99F6E4',
           bubbleDarkBorder: 'rgba(45, 212, 191, 0.35)',
-          url: 'york.platform / service / inc-4402',
-          status: '● 99.999% SLA ACTIVE',
+          url: 'fuel.york.ie / company / volura',
+          status: '● $42.8M PIPELINE ACTIVE',
           statusColor: '#1D4ED8',
           statusBg: '#EFF6FF',
           statusBorder: '#BFDBFE',
           statusDarkColor: '#60A5FA',
           statusDarkBg: 'rgba(59, 130, 246, 0.16)',
           statusDarkBorder: 'rgba(96, 165, 250, 0.35)',
-          badgeText: 'MVP CAPABILITY',
+          badgeText: 'FLAGSHIP PRODUCT',
           badgeBg: '#EFF6FF',
           badgeColor: '#1D4ED8',
-          cardTitle: 'Sub-Second Triage',
-          cardDesc: 'Preempts anomalies and auto-executes remediation runbooks in real time.',
-          cardActionText: 'Explore Service Hub',
+          cardTitle: 'Founder & Investor Platform',
+          cardDesc: 'Scorecards, peer benchmarks, deal flow pipelines & investor data room.',
+          cardActionText: 'Explore Fuel',
           cardActionLink: '#services',
           actionColor: '#1D4ED8',
           cardInnerBg: '#FFFFFF',
@@ -8700,120 +8683,10 @@
             { bg: '#E9F1FE', ink: '#2563EB' },
             { bg: '#EDE9FE', ink: '#5B21B6' }
           ],
-          companion: 'Zero-downtime autonomous reliability',
+          brand: '<strong>York</strong> Fuel',
+          companion: 'Market intelligence, investor matching and deal room',
           cardsHtml: `
-            <div class="prod-card-header">
-              <span class="prod-card-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:5px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Buffer Contention in Cluster-08 (Edge-EU)</span>
-              <span class="prod-card-badge" style="background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA;">INC-4402 · 140ms ago</span>
-            </div>
-            <div class="prod-card-desc">Autonomous agent detected TCP buffer saturation across 6 gateway pods.</div>
-            <div class="prod-rows-list">
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">Traffic Shunted to Edge-EU Replica</span>
-                  <span class="prod-row-meta"> · 0 packet loss · 18ms latency</span>
-                </div>
-                <span class="prod-row-status" style="background: #E4F2F0; color: #165E50; border: 1px solid #C5E4DF;">VERIFIED ✓</span>
-              </div>
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">Canary Rollback to Stable Release v2.14.8</span>
-                  <span class="prod-row-meta"> · 6/6 pods healthy · 32ms</span>
-                </div>
-                <span class="prod-row-status" style="background: #E8EEF5; color: #1E3A5F; border: 1px solid #D0D9E6;">EXECUTED ✓</span>
-              </div>
-            </div>
-            <div class="prod-metrics-strip">
-              <div class="prod-metric-box">
-                <span class="metric-val">16.4ms</span>
-                <span class="metric-lbl">P99 Latency</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">18%</span>
-                <span class="metric-lbl">CPU Load (Nominal)</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">100%</span>
-                <span class="metric-lbl">Canary Health</span>
-              </div>
-            </div>
-          `
-        },
-        {
-          name: 'StackAI by York',
-          stageBg: '#F2EEFE',
-          stageBorder: '#DCDBFC',
-          stageDarkBg: 'radial-gradient(circle at 18% 18%, rgba(11, 183, 194, 0.16) 0%, transparent 60%), radial-gradient(circle at 82% 82%, rgba(5, 174, 120, 0.10) 0%, transparent 55%), #0E1626',
-          stageDarkBorder: 'rgba(11, 183, 194, 0.35)',
-          bubble: 'Deploy <strong>240-agent mesh</strong> with MCP protocol bridges &amp; sub-40ms latency?',
-          bubbleBg: '#FFFFFF',
-          bubbleColor: '#5B21B6',
-          bubbleBorder: 'rgba(124, 58, 237, 0.22)',
-          bubbleDarkBg: 'rgba(11, 183, 194, 0.16)',
-          bubbleDarkColor: '#A5F3FC',
-          bubbleDarkBorder: 'rgba(34, 211, 238, 0.35)',
-          url: 'york.platform / runtime / mesh-v4',
-          status: '● 240 AGENTS ACTIVE',
-          statusColor: '#6D28D9',
-          statusBg: '#F5F3FF',
-          statusBorder: '#DDD6FE',
-          statusDarkColor: '#C4B5FD',
-          statusDarkBg: 'rgba(139, 92, 246, 0.16)',
-          statusDarkBorder: 'rgba(167, 139, 250, 0.35)',
-          badgeText: 'MVP CAPABILITY',
-          badgeBg: '#F5F3FF',
-          badgeColor: '#6D28D9',
-          cardTitle: 'Enterprise Agent Mesh',
-          cardDesc: 'Routes models across a zero-trust mesh at sub-40ms latency.',
-          cardActionText: 'Explore StackAI',
-          cardActionLink: '#services',
-          actionColor: '#6D28D9',
-          cardInnerBg: '#FFFFFF',
-          borderGradient: 'linear-gradient(135deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%)',
-          borderGradientHover: 'linear-gradient(135deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%)',
-          glowColor: 'rgba(5, 174, 120, 0.25)',
-          metricColors: [
-            { bg: '#EDE6FD', ink: '#5B21B6' },
-            { bg: '#EAF1FE', ink: '#1E40AF' },
-            { bg: '#E2F7EE', ink: '#065F46' }
-          ],
-          companion: 'Enterprise frontier agentic mesh',
-          cardsHtml: `
-            <div class="prod-card-header">
-              <span class="prod-card-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:5px;"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><circle cx="5" cy="19" r="2"/><line x1="7" y1="6" x2="10" y2="10"/><line x1="17" y1="6" x2="14" y2="10"/><line x1="7" y1="18" x2="10" y2="14"/><line x1="17" y1="18" x2="14" y2="14"/></svg>Zero-Trust Autonomous Agent Swarm</span>
-              <span class="prod-card-badge" style="background: #F5F3FF; color: #6D28D9; border: 1px solid #DDD6FE;">240 AGENTS · SUB-40ms</span>
-            </div>
-            <div class="prod-card-desc">High-concurrency model routing &amp; zero-trust MCP context mesh across cloud clusters.</div>
-            <div class="prod-rows-list">
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">Claude 3.5 Sonnet</span>
-                  <span class="prod-row-meta"> · Complex Code Refactoring · 38ms</span>
-                </div>
-                <span class="prod-row-status" style="background: #EDE6FD; color: #5B21B6; border: 1px solid #DDD6FE;">ROUTED ✓</span>
-              </div>
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">GPT-4o Omnimodal</span>
-                  <span class="prod-row-meta"> · Visual Document Reasoning · 42ms</span>
-                </div>
-                <span class="prod-row-status" style="background: #E8EEF5; color: #1E3A5F; border: 1px solid #D0D9E6;">ROUTED ✓</span>
-              </div>
-            </div>
-            <div class="prod-metrics-strip">
-              <div class="prod-metric-box">
-                <span class="metric-val">14,200</span>
-                <span class="metric-lbl">tok/sec Throughput</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">100%</span>
-                <span class="metric-lbl">Guardrail Pass</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">&lt;38ms</span>
-                <span class="metric-lbl">P99 Mesh Latency</span>
-              </div>
-            </div>
+            <img src="/images/fuel-screenshot.png" alt="Fuel Founder and Investor Platform" class="copilot-screenshot-img">
           `
         }
       ];
@@ -8928,7 +8801,9 @@
           if (labelSpan) labelSpan.textContent = p.cardActionText;
         }
 
-        // Footnote
+        // Footnote & footer brand
+        const footerBrand = document.getElementById('copilotFooterBrand') || document.querySelector('.stage-box-footer .footer-brand');
+        if (footerBrand && p.brand) footerBrand.innerHTML = p.brand;
         if (companionText) companionText.textContent = p.companion;
       }
 
@@ -9988,38 +9863,10 @@
           <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Collapsible floating sidebar with icon collapse mode</li>
           <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Executive billing &amp; compute resource strip</li>
           <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Initiatives velocity column chart &amp; live stream</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-header v1 / v2 / v3 tabs to switch anytime</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-header v1 / v2 tabs to switch anytime</li>
         </ul>
         <span class="choice-launch-btn btn-v2">
           <span>Launch Version 2</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </span>
-      </a>
-
-      <!-- Card 3: Version 3 Website-Matched Theme Layout -->
-      <a href="dashboard-v3.html" class="console-choice-card featured" id="choiceCardV3">
-        <div class="console-choice-badge">
-          <span class="choice-tag tag-pro" style="background:#ECFDF5;color:#047857;border-color:rgba(16,185,129,0.35)">version-3</span>
-          <span class="choice-rec highlight" style="color:#059669">Website Matched · New</span>
-        </div>
-        <div class="console-choice-icon-row">
-          <div class="choice-ic-bubble" style="background:linear-gradient(135deg, #10B981, #059669);color:#FFFFFF;box-shadow:0 4px 12px rgba(16,185,129,0.3)">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          </div>
-          <div class="choice-ic-meta">
-            <h3 class="choice-title">Version 3</h3>
-            <span class="choice-flavor">Website Design Theme · Dual Light &amp; Dark</span>
-          </div>
-        </div>
-        <p class="choice-desc">Identical console features styled in the York website visual language: crisp pure white light mode, rich deep-navy dark mode (#0B0F19), ambient glow orbs, and unified CTA system.</p>
-        <ul class="choice-features-list">
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1:1 Website color tokens (#FFFFFF light / #0B0F19 dark)</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Soft ambient aurora background glow &amp; 20px card radii</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Complete feature parity with Executive Pro &amp; all 23 services</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-header v1 / v2 / v3 tabs to switch anytime</li>
-        </ul>
-        <span class="choice-launch-btn btn-v2" style="background:linear-gradient(135deg, #10B981 0%, #059669 100%);box-shadow:0 4px 16px rgba(16,185,129,0.35)">
-          <span>Launch Version 3</span>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </span>
       </a>
@@ -10027,7 +9874,7 @@
 
     <!-- Footer helper -->
     <div class="console-select-foot">
-      <span>You can freely toggle between Version 1, Version 2, and Version 3 inside any dashboard topbar.</span>
+      <span>You can freely toggle between Version 1 and Version 2 inside any dashboard topbar.</span>
     </div>
   </div>
 </div>

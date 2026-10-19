@@ -1,1 +1,108 @@
 @import 'tailwindcss';
+
+@theme {
+  --color-primary: #4F46E5;
+  --color-primary-dark: #4338CA;
+  --color-primary-light: #818CF8;
+  --color-secondary: #F59E0B;
+  --color-secondary-dark: #D97706;
+  --color-accent-pink: #EC4899;
+  --color-accent-teal: #14B8A6;
+  --color-accent-purple: #8B5CF6;
+  --color-surface: #F8FAFC;
+  --color-surface-dark: #0F172A;
+  --color-surface-card: #FFFFFF;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94A3B8;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #4F46E5 0%, #EC4899 50%, #F59E0B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Device mockup styles */
+.device-laptop {
+  position: relative;
+  padding: 12px 12px 0;
+  background: linear-gradient(135deg, #1e1e2e, #2d2d3f);
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.device-laptop::after {
+  content: '';
+  display: block;
+  width: 120%;
+  height: 12px;
+  background: linear-gradient(135deg, #374151, #4B5563);
+  border-radius: 0 0 8px 8px;
+  margin: 0 -10%;
+}
+
+.device-laptop .screen {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 6s ease-in-out 2s infinite;
+}
+
+.animate-float-delayed-2 {
+  animation: float 6s ease-in-out 4s infinite;
+}
+
+/* Glow effect */
+.glow-primary {
+  box-shadow: 0 0 60px rgba(79, 70, 229, 0.3), 0 0 120px rgba(79, 70, 229, 0.1);
+}
+
+.glow-amber {
+  box-shadow: 0 0 60px rgba(245, 158, 11, 0.3), 0 0 120px rgba(245, 158, 11, 0.1);
+}
+
+.glow-teal {
+  box-shadow: 0 0 60px rgba(20, 184, 166, 0.3), 0 0 120px rgba(20, 184, 166, 0.1);
+}
+
+.glow-pink {
+  box-shadow: 0 0 60px rgba(236, 72, 153, 0.3), 0 0 120px rgba(236, 72, 153, 0.1);
+}
