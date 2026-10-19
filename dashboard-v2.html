@@ -4449,6 +4449,10 @@ document.addEventListener('click', e => {
   }
   const n = e.target.closest('[data-nav]');
   if (n){
+    if (n.dataset.nav === 'LMS' || n.dataset.nav === 'Onboarding LMS') {
+      window.location.href = 'lms.html';
+      return;
+    }
     e.preventDefault();
     closeMobileSidebar();
     document.querySelectorAll('.sidebar-nav-item').forEach(item => {
@@ -4459,6 +4463,10 @@ document.addEventListener('click', e => {
   }
   const tile = e.target.closest('.service-deck-card[data-svc-name], .svc-card[data-svc-name]');
   if (tile){
+    if (tile.dataset.svcName === 'LMS') {
+      window.location.href = 'lms.html';
+      return;
+    }
     showToast(`Launching ${tile.dataset.svcName}`);
   }
 });

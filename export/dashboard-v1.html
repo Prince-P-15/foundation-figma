@@ -1663,6 +1663,10 @@ function showView(name, opts = {}){
   paintIcons();
 }
 function navToService(label){
+  if (label === 'LMS' || label === 'Onboarding LMS') {
+    window.location.href = 'lms.html';
+    return;
+  }
   if (!svcByName[label]){ toast(`${label} opens in the full console`); return; }
   showView('services', { keepFilter:true });
   $('svcFilter').value = label;
