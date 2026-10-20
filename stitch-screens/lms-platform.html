@@ -1,0 +1,2348 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>York.IE LMS — Corporate Learning & Capability Platform</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg-app: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #F1F5F9;
+      --bg-hover: #F8FAFC;
+      --line: #E2E8F0;
+      --line-subtle: #EEF2F6;
+      --text-main: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #64748B;
+      --text-faint: #94A3B8;
+
+      --emerald: #10B981;
+      --emerald-dark: #047857;
+      --emerald-light: #ECFDF5;
+      --emerald-border: #A7F3D0;
+
+      --blue: #3B82F6;
+      --blue-light: #EFF6FF;
+      --amber: #F59E0B;
+      --amber-dark: #D97706;
+      --amber-light: #FEF3C7;
+      --rose: #EF4444;
+      --rose-light: #FEE2E2;
+      --purple: #8B5CF6;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-pill: 9999px;
+
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 4px -1px rgba(15, 23, 42, 0.03);
+      --shadow-lg: 0 12px 30px -8px rgba(15, 23, 42, 0.12), 0 4px 10px -2px rgba(15, 23, 42, 0.05);
+
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    :root[data-theme="dark"] {
+      --bg-app: #080C14;
+      --bg-surface: #0F1626;
+      --bg-card: #0F1626;
+      --bg-subtle: #172033;
+      --bg-hover: #1E2B45;
+      --line: rgba(255, 255, 255, 0.10);
+      --line-subtle: rgba(255, 255, 255, 0.06);
+      --text-main: #F8FAFC;
+      --text-secondary: #E2E8F0;
+      --text-muted: #94A3B8;
+      --text-faint: #64748B;
+
+      --emerald: #34D399;
+      --emerald-dark: #34D399;
+      --emerald-light: rgba(16, 185, 129, 0.16);
+      --emerald-border: rgba(52, 211, 153, 0.35);
+
+      --blue-light: rgba(59, 130, 246, 0.16);
+      --amber-light: rgba(245, 158, 11, 0.16);
+      --rose-light: rgba(239, 68, 68, 0.16);
+
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-app);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SIDEBAR ─── */
+    .lms-sidebar {
+      width: 240px;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      flex-shrink: 0;
+      z-index: 50;
+      transition: width 0.25s ease;
+    }
+
+    .sidebar-header {
+      padding: 20px 18px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line-subtle);
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand-icon-box {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      display: grid;
+      place-items: center;
+      color: #FFF;
+      box-shadow: 0 3px 8px -2px rgba(16, 185, 129, 0.4);
+    }
+
+    .brand-text-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .brand-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--emerald);
+      text-transform: uppercase;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 16px 12px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .nav-group-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      padding: 0 10px;
+      margin-bottom: 6px;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .nav-item-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .nav-item-btn:hover {
+      background: var(--bg-subtle);
+      color: var(--text-main);
+    }
+
+    .nav-item-btn.active {
+      background: var(--emerald-light);
+      color: var(--emerald-dark);
+      font-weight: 600;
+    }
+
+    .nav-item-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-item-btn svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 2;
+    }
+
+    .nav-item-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 1px 7px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-subtle);
+      color: var(--text-muted);
+    }
+
+    .nav-item-btn.active .nav-item-badge {
+      background: var(--emerald-border);
+      color: var(--emerald-dark);
+    }
+
+    .sidebar-footer {
+      padding: 14px 14px;
+      border-top: 1px solid var(--line-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #0F172A;
+      color: #FFF;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+    }
+
+    .user-meta b {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .user-meta small {
+      font-size: 0.7rem;
+      color: var(--text-faint);
+    }
+
+    /* ─── MAIN CONTENT ─── */
+    .lms-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow-x: hidden;
+    }
+
+    /* Top Navigation Bar */
+    .lms-topbar {
+      height: 62px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--line);
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .topbar-breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .breadcrumb-root {
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .search-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input-wrap svg {
+      position: absolute;
+      left: 11px;
+      width: 15px;
+      height: 15px;
+      color: var(--text-faint);
+    }
+
+    .search-input {
+      padding: 7px 12px 7px 34px;
+      background: var(--bg-app);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      color: var(--text-main);
+      width: 220px;
+      transition: all 0.2s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--emerald);
+      box-shadow: 0 0 0 3px var(--emerald-light);
+      width: 260px;
+    }
+
+    .search-kbd {
+      position: absolute;
+      right: 9px;
+      font-size: 0.68rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 5px;
+      color: var(--text-faint);
+      font-family: var(--font-mono);
+    }
+
+    .top-icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.15s;
+    }
+
+    .top-icon-btn:hover {
+      background: var(--bg-subtle);
+      color: var(--text-main);
+    }
+
+    .top-bell-dot {
+      position: absolute;
+      top: 7px;
+      right: 8px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rose);
+      border: 1.5px solid var(--bg-surface);
+    }
+
+    .console-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      background: var(--emerald-light);
+      border: 1px solid var(--emerald-border);
+      color: var(--emerald-dark);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .console-link-btn:hover {
+      background: var(--emerald);
+      color: #FFF;
+      border-color: var(--emerald);
+    }
+
+    /* ─── PAGE BODY ─── */
+    .lms-content {
+      padding: 28px;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Overview Header with Filters */
+    .overview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .overview-title-box h1 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .overview-filters {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-select {
+      background: var(--bg-surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-select:hover {
+      border-color: var(--text-muted);
+    }
+
+    /* ─── KPI CARDS ─── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+    }
+
+    .kpi-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .kpi-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .kpi-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      line-height: 1.25;
+    }
+
+    .kpi-icon-pill {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .kpi-icon-pill.green { background: var(--emerald-light); color: var(--emerald-dark); }
+    .kpi-icon-pill.blue { background: var(--blue-light); color: var(--blue); }
+    .kpi-icon-pill.amber { background: var(--amber-light); color: var(--amber-dark); }
+    .kpi-icon-pill.rose { background: var(--rose-light); color: var(--rose); }
+
+    .kpi-value {
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .kpi-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.74rem;
+      color: var(--text-faint);
+      margin-top: auto;
+      padding-top: 6px;
+      border-top: 1px dashed var(--line-subtle);
+    }
+
+    .kpi-action-link {
+      color: var(--emerald-dark);
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      transition: transform 0.15s;
+    }
+
+    .kpi-action-link:hover {
+      transform: translateX(2px);
+    }
+
+    /* ─── DUAL SPLIT ANALYTICS CARDS ─── */
+    .analytics-split-row {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 18px;
+    }
+
+    .surface-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .card-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .card-headline {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-main);
+    }
+
+    .card-subtext {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .card-badge-pill {
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-subtle);
+      color: var(--text-secondary);
+      border: 1px solid var(--line);
+    }
+
+    /* Donut Split Visual */
+    .donut-visual-wrap {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 10px 0;
+    }
+
+    .donut-ring {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #10B981 0% 58%,
+        #475569 58% 92%,
+        #94A3B8 92% 100%
+      );
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .donut-hole {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .donut-hole small {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    .donut-hole b {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .donut-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .legend-label-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .legend-color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .legend-val-box {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    .legend-val-box small {
+      font-weight: 500;
+      color: var(--text-faint);
+      margin-left: 4px;
+    }
+
+    /* Bar Histogram Visual */
+    .histogram-bars-wrap {
+      display: flex;
+      align-items: flex-end;
+      gap: 32px;
+      height: 130px;
+      padding: 10px 10px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hist-group {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 4px;
+      height: 100%;
+    }
+
+    .hist-bar {
+      width: 14px;
+      border-radius: 3px 3px 0 0;
+      transition: height 0.3s ease;
+      position: relative;
+    }
+
+    .hist-bar:hover::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: 105%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0F172A;
+      color: #FFF;
+      font-size: 0.68rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .hist-labels {
+      display: flex;
+      justify-content: space-around;
+      padding-top: 8px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* ─── HIERARCHICAL DRILL-DOWN STAGE ─── */
+    .drilldown-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drilldown-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-surface);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .drilldown-title-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .layer-badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: #E7F7F0;
+      color: #047857;
+      border: 1px solid #A7F3D0;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    :root[data-theme="dark"] .layer-badge {
+      background: rgba(16, 185, 129, 0.18);
+      color: #34D399;
+      border-color: rgba(52, 211, 153, 0.35);
+    }
+
+    .drilldown-heading {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .drilldown-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Breadcrumb Trail */
+    .drilldown-breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 10px 24px;
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .crumb-step {
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.15s;
+    }
+
+    .crumb-step:hover {
+      color: var(--emerald-dark);
+      text-decoration: underline;
+    }
+
+    .crumb-step.current {
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: default;
+      text-decoration: none;
+    }
+
+    .crumb-sep {
+      color: var(--text-faint);
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 11px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--line);
+      color: var(--text-secondary);
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-right: 8px;
+    }
+
+    .back-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-main);
+      border-color: var(--emerald);
+    }
+
+    /* ─── TABLE DESIGN SYSTEM (MATCHING FIGMA AND REFERENCE) ─── */
+    .lms-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .lms-table th {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-surface);
+    }
+
+    .lms-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line-subtle);
+      font-size: 0.86rem;
+      vertical-align: middle;
+      transition: background 0.15s;
+    }
+
+    .lms-table tr.clickable-row {
+      cursor: pointer;
+    }
+
+    .lms-table tr.clickable-row:hover td {
+      background: var(--bg-subtle);
+    }
+
+    .lms-table tr.is-expanded td {
+      background: var(--emerald-light) !important;
+    }
+
+    /* Track/Entity Name Box */
+    .entity-name-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .entity-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--bg-subtle);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: var(--emerald-dark);
+      flex-shrink: 0;
+      border: 1px solid var(--line);
+    }
+
+    .entity-text-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .entity-title {
+      font-weight: 700;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      letter-spacing: -0.01em;
+    }
+
+    .entity-subtitle {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    .team-count-badge {
+      display: inline-block;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+    }
+
+    /* Progress bar with percentage */
+    .completion-cell-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 150px;
+    }
+
+    .completion-track {
+      flex: 1;
+      height: 7px;
+      background: #D1FAE5;
+      border-radius: 9999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    :root[data-theme="dark"] .completion-track {
+      background: rgba(16, 185, 129, 0.2);
+    }
+
+    .completion-fill {
+      height: 100%;
+      background: #10B981;
+      border-radius: 9999px;
+      transition: width 0.4s ease;
+    }
+
+    .completion-pct {
+      font-weight: 700;
+      font-size: 0.84rem;
+      min-width: 36px;
+      text-align: right;
+      font-family: var(--font-mono);
+    }
+
+    /* Overdue & Not started count colors */
+    .val-neutral {
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+    }
+
+    .val-warning {
+      font-weight: 700;
+      color: #EA580C;
+      font-family: var(--font-mono);
+    }
+
+    /* ─── ACTION OPEN BUTTON (USER'S EXACT SPECIFICATION) ─── */
+    .action-open-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      color: #1D4ED8;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 1px 2px rgba(29, 78, 216, 0.08);
+      white-space: nowrap;
+    }
+
+    :root[data-theme="dark"] .action-open-btn {
+      background: rgba(59, 130, 246, 0.16);
+      border-color: rgba(96, 165, 250, 0.35);
+      color: #93C5FD;
+    }
+
+    .action-open-btn:hover {
+      background: #2563EB;
+      color: #FFFFFF;
+      border-color: #2563EB;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px -2px rgba(37, 99, 235, 0.35);
+    }
+
+    .action-open-btn.active {
+      background: #10B981;
+      border-color: #10B981;
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px -2px rgba(16, 185, 129, 0.4);
+    }
+
+    .action-open-btn svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s;
+    }
+
+    .action-open-btn.active svg {
+      transform: rotate(180deg);
+    }
+
+    /* Nested Drawer/Sub-table Expansion */
+    .nested-expand-row {
+      background: var(--bg-hover);
+    }
+
+    .nested-expand-box {
+      padding: 16px 20px 22px 52px;
+      border-left: 3px solid var(--emerald);
+      margin: 8px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      animation: fadeInSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .nested-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nested-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sub-layer-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      background: #EFF6FF;
+      color: #1D4ED8;
+      border: 1px solid #BFDBFE;
+    }
+
+    /* Sub-lead card */
+    .sublead-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sublead-header {
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .sublead-header:hover {
+      background: var(--bg-subtle);
+    }
+
+    .sublead-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sublead-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: #EBF3FE;
+      color: #1D4ED8;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    /* Employee Direct Roster (Layer 5) */
+    .employee-roster-wrap {
+      padding: 14px 18px;
+      background: var(--bg-hover);
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .employee-row {
+      background: var(--bg-surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: all 0.15s;
+    }
+
+    .employee-row:hover {
+      border-color: var(--emerald-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .emp-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 200px;
+    }
+
+    .emp-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+      color: var(--text-secondary);
+    }
+
+    .emp-name b {
+      display: block;
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    .emp-name small {
+      font-size: 0.7rem;
+      color: var(--text-faint);
+    }
+
+    .emp-level-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--bg-subtle);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .emp-status-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .status-completed { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
+    .status-progress { background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
+    .status-notstarted { background: #F1F5F9; color: #64748B; border: 1px solid #E2E8F0; }
+    .status-overdue { background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; }
+
+    .nudge-btn {
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #FEF3C7;
+      border: 1px solid #FDE68A;
+      color: #B45309;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .nudge-btn:hover {
+      background: #F59E0B;
+      color: #FFF;
+      border-color: #F59E0B;
+    }
+
+    /* Toast Pill */
+    .lms-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 28px;
+      background: #0F172A;
+      color: #FFF;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 0.84rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.35);
+      z-index: 1000;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .lms-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 1024px) {
+      .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+      .analytics-split-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .lms-sidebar { display: none; }
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+      .completion-cell-wrap { min-width: 100px; }
+      .lms-content { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LEFT NAVIGATION SIDEBAR -->
+  <aside class="lms-sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="brand-logo" title="Back to York.IE Website">
+        <div class="brand-icon-box">
+          <i data-lucide="book-open"></i>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-name">York.IE</span>
+          <span class="brand-badge">LMS PLATFORM</span>
+        </div>
+      </a>
+      <button type="button" class="top-icon-btn" id="themeToggleBtn" title="Toggle Dark/Light Mode">
+        <i data-lucide="sun"></i>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div>
+        <div class="nav-group-title">LEARNING</div>
+        <ul class="nav-list">
+          <li>
+            <button class="nav-item-btn active" id="navDashboardBtn">
+              <span class="nav-item-left"><i data-lucide="layout-dashboard"></i> Dashboard</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-item-btn" onclick="showToast('Courses directory: 40 active tracks')">
+              <span class="nav-item-left"><i data-lucide="book-copy"></i> Courses</span>
+              <span class="nav-item-badge">40</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-item-btn" onclick="showToast('Employees roster: 250 registered')">
+              <span class="nav-item-left"><i data-lucide="users"></i> Employees</span>
+              <span class="nav-item-badge">90</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-item-btn" onclick="showToast('Capability levels: L1 to L5 framework')">
+              <span class="nav-item-left"><i data-lucide="layers"></i> Levels</span>
+              <span class="nav-item-badge">5</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="nav-group-title">SUPPORT</div>
+        <ul class="nav-list">
+          <li>
+            <button class="nav-item-btn" onclick="showToast('Analytics & telemetry insights')">
+              <span class="nav-item-left"><i data-lucide="trending-up"></i> Insights</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-item-btn" onclick="showToast('Documentation & support desk')">
+              <span class="nav-item-left"><i data-lucide="help-circle"></i> Help</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-pill">
+        <div class="user-avatar">AK</div>
+        <div class="user-meta">
+          <b>Alex Kim</b>
+          <small>Admin</small>
+        </div>
+      </div>
+      <a href="dashboard.html" class="top-icon-btn" title="Open York Console">
+        <i data-lucide="external-link"></i>
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN VIEWPORT -->
+  <main class="lms-main">
+    
+    <!-- TOP NAVIGATION BAR -->
+    <header class="lms-topbar">
+      <div class="topbar-breadcrumbs">
+        <a href="index.html" class="breadcrumb-root">York.IE LMS</a>
+        <span>›</span>
+        <span id="breadcrumbCurrent">Dashboard</span>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="search-input-wrap">
+          <i data-lucide="search"></i>
+          <input type="text" class="search-input" id="globalSearchInput" placeholder="Search tracks, managers..." />
+          <span class="search-kbd">⌘K</span>
+        </div>
+
+        <button type="button" class="top-icon-btn" onclick="showToast('3 course overdue alerts')" title="Notifications">
+          <i data-lucide="bell"></i>
+          <span class="top-bell-dot"></span>
+        </button>
+
+        <a href="dashboard.html" class="console-link-btn" title="Switch to York Foundation Console">
+          <i data-lucide="layout-grid"></i>
+          <span>Foundation Console</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- CONTENT BODY -->
+    <div class="lms-content">
+
+      <!-- Overview Header -->
+      <section class="overview-header">
+        <div class="overview-title-box">
+          <h1>Overview</h1>
+        </div>
+        <div class="overview-filters">
+          <select class="filter-select" id="filterTag" onchange="showToast('Filtered by tag')">
+            <option>Tag: All</option>
+            <option>Engineering</option>
+            <option>Product</option>
+            <option>Design</option>
+          </select>
+          <select class="filter-select" id="filterTrack" onchange="handleTrackFilterChange(this.value)">
+            <option value="all">Track: All Tracks</option>
+            <option value="prod-exp">Product Experience Engineer</option>
+            <option value="platform">Platform Engineer</option>
+            <option value="fullstack">Full Stack Engineer</option>
+          </select>
+          <select class="filter-select" id="filterLevel" onchange="showToast('Filtered by level')">
+            <option>Level: All Levels</option>
+            <option>L1 Junior</option>
+            <option>L2 Associate</option>
+            <option>L3 Mid</option>
+            <option>L4 Senior</option>
+            <option>L5 Principal</option>
+          </select>
+          <select class="filter-select" onchange="showToast('Date window set to Q3 2026')">
+            <option>Date: Q3 2026</option>
+            <option>Date: Q2 2026</option>
+            <option>Date: Year 2026</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- 6 Top KPI Metrics -->
+      <section class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Orgwide employees</span>
+            <span class="kpi-icon-pill green"><i data-lucide="users"></i></span>
+          </div>
+          <div class="kpi-value">250</div>
+          <div class="kpi-footer">
+            <span>Full roster</span>
+            <span style="color:var(--emerald);font-weight:700;">100% active</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Gave assessment</span>
+            <span class="kpi-icon-pill green"><i data-lucide="check-circle-2"></i></span>
+          </div>
+          <div class="kpi-value">200</div>
+          <div class="kpi-footer">
+            <span>80% completed</span>
+            <a href="#drilldownStage" class="kpi-action-link" onclick="openTrackView('prod-exp')">Open ›</a>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Awaiting assessment</span>
+            <span class="kpi-icon-pill blue"><i data-lucide="clock"></i></span>
+          </div>
+          <div class="kpi-value">50</div>
+          <div class="kpi-footer">
+            <span>20% awaiting eval</span>
+            <a href="#drilldownStage" class="kpi-action-link" onclick="openTrackView('platform')">Open ›</a>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Total courses</span>
+            <span class="kpi-icon-pill green"><i data-lucide="book-open"></i></span>
+          </div>
+          <div class="kpi-value">80</div>
+          <div class="kpi-footer">
+            <span>Across 3 tracks</span>
+            <a href="#drilldownStage" class="kpi-action-link" onclick="openTrackView('fullstack')">Open ›</a>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Assessment not started</span>
+            <span class="kpi-icon-pill rose"><i data-lucide="clipboard-x"></i></span>
+          </div>
+          <div class="kpi-value" style="color:var(--rose);">22</div>
+          <div class="kpi-footer">
+            <span>Needs attention</span>
+            <a href="#drilldownStage" class="kpi-action-link" style="color:var(--rose);" onclick="filterByOverdueOnly()">Who? ›</a>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Overdue courses</span>
+            <span class="kpi-icon-pill amber"><i data-lucide="alert-triangle"></i></span>
+          </div>
+          <div class="kpi-value" style="color:var(--amber-dark);">60</div>
+          <div class="kpi-footer">
+            <span>Needs nudge</span>
+            <a href="#drilldownStage" class="kpi-action-link" style="color:var(--amber-dark);" onclick="filterByOverdueOnly()">Who? ›</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Placement Split & Level by Track (from Reference Screenshot) -->
+      <section class="analytics-split-row">
+        <!-- Placement Split Donut -->
+        <div class="surface-card">
+          <div class="card-header-row">
+            <div class="card-header-left">
+              <span class="card-headline">Placement split &amp; capability</span>
+              <span class="card-subtext">Final placement across 3 capability tracks</span>
+            </div>
+            <span class="card-badge-pill">193 placed</span>
+          </div>
+
+          <div class="donut-visual-wrap">
+            <div class="donut-ring">
+              <div class="donut-hole">
+                <small>Total</small>
+                <b>193</b>
+              </div>
+            </div>
+
+            <div class="donut-legend">
+              <div class="legend-row">
+                <span class="legend-label-box"><span class="legend-color-dot" style="background:#10B981"></span> Product Exp</span>
+                <span class="legend-val-box">112 <small>58%</small></span>
+              </div>
+              <div class="legend-row">
+                <span class="legend-label-box"><span class="legend-color-dot" style="background:#475569"></span> Platform</span>
+                <span class="legend-val-box">66 <small>34%</small></span>
+              </div>
+              <div class="legend-row">
+                <span class="legend-label-box"><span class="legend-color-dot" style="background:#94A3B8"></span> Full Stack</span>
+                <span class="legend-val-box">15 <small>8%</small></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Level By Track Bar Chart -->
+        <div class="surface-card">
+          <div class="card-header-row">
+            <div class="card-header-left">
+              <span class="card-headline">Level by track</span>
+              <span class="card-subtext">L1–L5 headcount by cohort distribution</span>
+            </div>
+            <span class="card-badge-pill">Peak L2 Senior · 36 in Prod Exp</span>
+          </div>
+
+          <div class="histogram-bars-wrap">
+            <!-- Prod Exp -->
+            <div class="hist-group">
+              <div class="hist-bar" style="height:48%;background:#CBD5E1" data-tip="L1: 18"></div>
+              <div class="hist-bar" style="height:90%;background:#94A3B8" data-tip="L2: 36"></div>
+              <div class="hist-bar" style="height:76%;background:#475569" data-tip="L3: 28"></div>
+              <div class="hist-bar" style="height:52%;background:#10B981" data-tip="L4: 20"></div>
+              <div class="hist-bar" style="height:25%;background:#047857" data-tip="L5: 10"></div>
+            </div>
+            <!-- Platform -->
+            <div class="hist-group">
+              <div class="hist-bar" style="height:35%;background:#CBD5E1" data-tip="L1: 13"></div>
+              <div class="hist-bar" style="height:58%;background:#94A3B8" data-tip="L2: 22"></div>
+              <div class="hist-bar" style="height:45%;background:#475569" data-tip="L3: 16"></div>
+              <div class="hist-bar" style="height:30%;background:#10B981" data-tip="L4: 10"></div>
+              <div class="hist-bar" style="height:15%;background:#047857" data-tip="L5: 5"></div>
+            </div>
+            <!-- Full Stack -->
+            <div class="hist-group">
+              <div class="hist-bar" style="height:12%;background:#CBD5E1" data-tip="L1: 4"></div>
+              <div class="hist-bar" style="height:18%;background:#94A3B8" data-tip="L2: 6"></div>
+              <div class="hist-bar" style="height:14%;background:#475569" data-tip="L3: 5"></div>
+              <div class="hist-bar" style="height:12%;background:#10B981" data-tip="L4: 4"></div>
+              <div class="hist-bar" style="height:8%;background:#047857" data-tip="L5: 2"></div>
+            </div>
+          </div>
+          <div class="hist-labels">
+            <span>Product Experience</span>
+            <span>Platform</span>
+            <span>Full Stack</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════════
+           HIERARCHICAL DRILL-DOWN CONTAINER
+           LAYER 2: Tracks Roster
+           LAYER 3: By Manager (Figma Screenshot Specification)
+           LAYER 4: Team Leads under Manager
+           LAYER 5: Direct Team Members / Employees under Lead
+           ══════════════════════════════════════════════════════════════ -->
+      <section class="drilldown-container" id="drilldownStage">
+        
+        <!-- Drilldown Top Header -->
+        <div class="drilldown-header">
+          <div class="drilldown-title-box">
+            <button type="button" class="back-btn" id="drilldownBackBtn" style="display:none;" onclick="navigateBack()">
+              <i data-lucide="arrow-left"></i> Back
+            </button>
+            <span class="layer-badge" id="drilldownLayerBadge">
+              <span>●</span> <span id="layerBadgeText">LAYER 2</span>
+            </span>
+            <div>
+              <h2 class="drilldown-heading" id="drilldownHeading">Tracks roster</h2>
+              <p class="drilldown-subtitle" id="drilldownSubtitle">Click on any team below to view managers, leads, and direct employees</p>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:10px;">
+            <button type="button" class="action-open-btn" id="nudgeAllOverdueBtn" style="display:none;background:#FEF3C7;border-color:#FDE68A;color:#B45309;" onclick="nudgeAllOverdue()">
+              <i data-lucide="zap"></i> Nudge Overdue (17)
+            </button>
+            <span class="card-badge-pill" id="drilldownCountBadge">3 Capability Tracks · 170 Total Roster</span>
+          </div>
+        </div>
+
+        <!-- Breadcrumb Navigation Bar for Multi-level Drilldown -->
+        <div class="drilldown-breadcrumbs" id="drilldownBreadcrumbBar">
+          <span class="crumb-step current" id="crumbTrack" onclick="showTracksLevel()">Tracks roster</span>
+          <span class="crumb-sep" id="crumbSep1" style="display:none;">/</span>
+          <span class="crumb-step" id="crumbManager" style="display:none;" onclick="showManagerLevel()">By manager</span>
+          <span class="crumb-sep" id="crumbSep2" style="display:none;">/</span>
+          <span class="crumb-step current" id="crumbLead" style="display:none;">Team lead &amp; employees</span>
+        </div>
+
+        <!-- DYNAMIC CONTENT CONTAINER: Switches between Tracks table and Manager drilldown table -->
+        <div id="drilldownBody">
+          <!-- Populated by JavaScript -->
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Notification Toast -->
+  <div class="lms-toast" id="lmsToast">
+    <i data-lucide="check-circle" style="color:#34D399;width:18px;height:18px;"></i>
+    <span id="toastMsg">Ready</span>
+  </div>
+
+  <script>
+    /* ══════════════════════════════════════════════════════════════
+       DATA SYSTEM: TRACKS -> MANAGERS -> LEADS -> EMPLOYEES
+       Matched precisely to user's uploaded screenshot & reference
+       ══════════════════════════════════════════════════════════════ */
+    const TRACKS_DATA = {
+      'prod-exp': {
+        id: 'prod-exp',
+        name: 'Product Experience Engineer',
+        subtitle: '4 managers · Core UI, Design Systems & Frontend',
+        totalEmp: 70,
+        levels: { l1: 8, l2: 17, l3: 18, l4: 18, l5: 9 },
+        courses: 36,
+        notStarted: 6,
+        inProgress: 13,
+        completed: 17,
+        overdue: 17,
+        completionPct: 48,
+        managers: [
+          {
+            id: 'neha-kapoor',
+            name: 'Neha Kapoor',
+            role: 'Engineering Manager',
+            teamSize: 27,
+            completionPct: 48,
+            notStarted: 1,
+            overdue: 3,
+            leads: [
+              {
+                id: 'lead-priya',
+                name: 'Priya Nair',
+                role: 'Team Lead · Frontend Platform',
+                teamSize: 15,
+                completionPct: 56,
+                notStarted: 0,
+                overdue: 1,
+                employees: [
+                  { name: 'Aarav Mehta', role: 'Senior Frontend Dev', level: 'L4', courses: '12/12', pct: 100, status: 'completed', overdue: 0 },
+                  { name: 'Sneha Patel', role: 'UI Engineer', level: 'L3', courses: '9/12', pct: 75, status: 'progress', overdue: 0 },
+                  { name: 'Devendra Rao', role: 'Associate UI Dev', level: 'L2', courses: '4/12', pct: 33, status: 'overdue', overdue: 1 },
+                  { name: 'Kavita Desai', role: 'Design Technologist', level: 'L3', courses: '11/12', pct: 92, status: 'progress', overdue: 0 },
+                  { name: 'Aman Saxena', role: 'Frontend Engineer', level: 'L2', courses: '8/12', pct: 67, status: 'progress', overdue: 0 }
+                ]
+              },
+              {
+                id: 'lead-rohan',
+                name: 'Rohan Varma',
+                role: 'Team Lead · Design Systems & Mobile',
+                teamSize: 12,
+                completionPct: 38,
+                notStarted: 1,
+                overdue: 2,
+                employees: [
+                  { name: 'Tanvi Shirodkar', role: 'Component Architect', level: 'L4', courses: '8/10', pct: 80, status: 'progress', overdue: 0 },
+                  { name: 'Mohit Bhatia', role: 'Mobile UI Dev', level: 'L2', courses: '3/10', pct: 30, status: 'overdue', overdue: 1 },
+                  { name: 'Alia Khan', role: 'Junior Mobile Dev', level: 'L1', courses: '0/10', pct: 0, status: 'notstarted', overdue: 1 },
+                  { name: 'Varun Joshi', role: 'Design System Dev', level: 'L3', courses: '6/10', pct: 60, status: 'progress', overdue: 0 }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'arjun-malhotra',
+            name: 'Arjun Malhotra',
+            role: 'Product Lead',
+            teamSize: 14,
+            completionPct: 38,
+            notStarted: 1,
+            overdue: 6,
+            leads: [
+              {
+                id: 'lead-siddharth',
+                name: 'Siddharth Roy',
+                role: 'Technical Product Lead',
+                teamSize: 14,
+                completionPct: 38,
+                notStarted: 1,
+                overdue: 6,
+                employees: [
+                  { name: 'Naveen Kumar', role: 'Product Architect', level: 'L4', courses: '6/10', pct: 60, status: 'progress', overdue: 1 },
+                  { name: 'Megha Singhania', role: 'Growth UI Specialist', level: 'L3', courses: '2/10', pct: 20, status: 'overdue', overdue: 2 },
+                  { name: 'Ishaan Chopra', role: 'Associate Feature Dev', level: 'L2', courses: '1/10', pct: 10, status: 'overdue', overdue: 3 },
+                  { name: 'Pooja Reddy', role: 'Junior QA Engineer', level: 'L1', courses: '0/10', pct: 0, status: 'notstarted', overdue: 0 }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'ritu-sharma',
+            name: 'Ritu Sharma',
+            role: 'Engineering Manager',
+            teamSize: 12,
+            completionPct: 0,
+            notStarted: 2,
+            overdue: 4,
+            leads: [
+              {
+                id: 'lead-ananya',
+                name: 'Ananya Bose',
+                role: 'Lead UI/UX Engineer',
+                teamSize: 12,
+                completionPct: 0,
+                notStarted: 2,
+                overdue: 4,
+                employees: [
+                  { name: 'Sameer Qureshi', role: 'Frontend Specialist', level: 'L3', courses: '0/8', pct: 0, status: 'notstarted', overdue: 2 },
+                  { name: 'Ritika Guha', role: 'Interface Dev', level: 'L2', courses: '0/8', pct: 0, status: 'notstarted', overdue: 2 }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'vikram-sethi',
+            name: 'Vikram Sethi',
+            role: 'Group Lead',
+            teamSize: 17,
+            completionPct: 38,
+            notStarted: 2,
+            overdue: 4,
+            leads: [
+              {
+                id: 'lead-karan',
+                name: 'Karan Mehra',
+                role: 'Lead Full Stack Specialist',
+                teamSize: 17,
+                completionPct: 38,
+                notStarted: 2,
+                overdue: 4,
+                employees: [
+                  { name: 'Gaurav Gill', role: 'Senior Experience Dev', level: 'L4', courses: '7/10', pct: 70, status: 'progress', overdue: 1 },
+                  { name: 'Bhavna Menon', role: 'Full Stack Engineer', level: 'L3', courses: '3/10', pct: 30, status: 'overdue', overdue: 2 },
+                  { name: 'Aditya Sen', role: 'Junior Dev', level: 'L1', courses: '0/10', pct: 0, status: 'notstarted', overdue: 1 }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      'platform': {
+        id: 'platform',
+        name: 'Platform Engineer',
+        subtitle: '3 managers · Cloud Infra, Microservices & APIs',
+        totalEmp: 55,
+        levels: { l1: 13, l2: 16, l3: 10, l4: 10, l5: 6 },
+        courses: 29,
+        notStarted: 8,
+        inProgress: 9,
+        completed: 12,
+        overdue: 27,
+        completionPct: 41,
+        managers: [
+          {
+            id: 'deepak-verma',
+            name: 'Deepak Verma',
+            role: 'Platform Engineering Manager',
+            teamSize: 22,
+            completionPct: 45,
+            notStarted: 2,
+            overdue: 11,
+            leads: [
+              {
+                id: 'lead-harish',
+                name: 'Harish Nair',
+                role: 'Team Lead · Cloud Infrastructure',
+                teamSize: 12,
+                completionPct: 50,
+                notStarted: 1,
+                overdue: 5,
+                employees: [
+                  { name: 'Kunal Trivedi', role: 'Kubernetes Specialist', level: 'L4', courses: '9/10', pct: 90, status: 'progress', overdue: 0 },
+                  { name: 'Ankita Roy', role: 'Cloud Engineer', level: 'L3', courses: '4/10', pct: 40, status: 'overdue', overdue: 2 }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'swati-kulkarni',
+            name: 'Swati Kulkarni',
+            role: 'Infra Lead',
+            teamSize: 18,
+            completionPct: 36,
+            notStarted: 3,
+            overdue: 9,
+            leads: [
+              {
+                id: 'lead-rahul',
+                name: 'Rahul Ghosh',
+                role: 'Team Lead · Observability',
+                teamSize: 18,
+                completionPct: 36,
+                notStarted: 3,
+                overdue: 9,
+                employees: [
+                  { name: 'Manish Pandey', role: 'SRE Engineer', level: 'L3', courses: '3/8', pct: 37, status: 'overdue', overdue: 4 }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'tarun-sharma',
+            name: 'Tarun Sharma',
+            role: 'Group Lead',
+            teamSize: 15,
+            completionPct: 40,
+            notStarted: 3,
+            overdue: 7,
+            leads: [
+              {
+                id: 'lead-dinesh',
+                name: 'Dinesh Pillai',
+                role: 'Team Lead · Microservices',
+                teamSize: 15,
+                completionPct: 40,
+                notStarted: 3,
+                overdue: 7,
+                employees: [
+                  { name: 'Sanjay Dutt', role: 'API Dev', level: 'L3', courses: '5/8', pct: 62, status: 'progress', overdue: 1 }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      'fullstack': {
+        id: 'fullstack',
+        name: 'Full Stack Engineer',
+        subtitle: '3 managers · End-to-end Web & Distributed Systems',
+        totalEmp: 45,
+        levels: { l1: 10, l2: 10, l3: 11, l4: 9, l5: 5 },
+        courses: 35,
+        notStarted: 8,
+        inProgress: 11,
+        completed: 16,
+        overdue: 16,
+        completionPct: 46,
+        managers: [
+          {
+            id: 'anil-kapoor',
+            name: 'Anil Kapoor',
+            role: 'Full Stack Engineering Manager',
+            teamSize: 18,
+            completionPct: 52,
+            notStarted: 2,
+            overdue: 4,
+            leads: [
+              {
+                id: 'lead-prateek',
+                name: 'Prateek Jain',
+                role: 'Team Lead · Web Services',
+                teamSize: 18,
+                completionPct: 52,
+                notStarted: 2,
+                overdue: 4,
+                employees: [
+                  { name: 'Vimal Shah', role: 'Full Stack Architect', level: 'L4', courses: '10/12', pct: 83, status: 'progress', overdue: 1 }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'priyanka-sen',
+            name: 'Priyanka Sen',
+            role: 'Delivery Manager',
+            teamSize: 15,
+            completionPct: 44,
+            notStarted: 3,
+            overdue: 6,
+            leads: [
+              {
+                id: 'lead-ashwin',
+                name: 'Ashwin Nair',
+                role: 'Team Lead · Integration & APIs',
+                teamSize: 15,
+                completionPct: 44,
+                notStarted: 3,
+                overdue: 6,
+                employees: [
+                  { name: 'Meera Iyer', role: 'Integration Dev', level: 'L2', courses: '4/10', pct: 40, status: 'overdue', overdue: 3 }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'manish-gupta',
+            name: 'Manish Gupta',
+            role: 'Lead Architect',
+            teamSize: 12,
+            completionPct: 41,
+            notStarted: 3,
+            overdue: 6,
+            leads: [
+              {
+                id: 'lead-sunil',
+                name: 'Sunil Rao',
+                role: 'Team Lead · Core Services',
+                teamSize: 12,
+                completionPct: 41,
+                notStarted: 3,
+                overdue: 6,
+                employees: [
+                  { name: 'Deepa Roy', role: 'Backend Engineer', level: 'L3', courses: '5/10', pct: 50, status: 'progress', overdue: 1 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    };
+
+    /* ══════════════════════════════════════════════════════════════
+       STATE MANAGEMENT
+       ══════════════════════════════════════════════════════════════ */
+    let currentLevel = 'tracks'; // 'tracks' | 'managers' | 'leads'
+    let currentTrackId = 'prod-exp';
+    let expandedManagers = new Set();
+    let expandedLeads = new Set();
+
+    const drilldownBody = document.getElementById('drilldownBody');
+    const drilldownLayerBadge = document.getElementById('drilldownLayerBadge');
+    const layerBadgeText = document.getElementById('layerBadgeText');
+    const drilldownHeading = document.getElementById('drilldownHeading');
+    const drilldownSubtitle = document.getElementById('drilldownSubtitle');
+    const drilldownCountBadge = document.getElementById('drilldownCountBadge');
+    const drilldownBackBtn = document.getElementById('drilldownBackBtn');
+    const nudgeAllOverdueBtn = document.getElementById('nudgeAllOverdueBtn');
+
+    const crumbTrack = document.getElementById('crumbTrack');
+    const crumbSep1 = document.getElementById('crumbSep1');
+    const crumbManager = document.getElementById('crumbManager');
+    const crumbSep2 = document.getElementById('crumbSep2');
+    const crumbLead = document.getElementById('crumbLead');
+
+    /* ─── RENDER LEVEL 1: TRACKS ROSTER (From lms-screenshot.png) ─── */
+    function renderTracksTable() {
+      currentLevel = 'tracks';
+      expandedManagers.clear();
+      expandedLeads.clear();
+
+      layerBadgeText.textContent = 'LAYER 2';
+      drilldownHeading.textContent = 'Tracks roster';
+      drilldownSubtitle.textContent = 'Click on any team below to view managers, leads, and direct employees';
+      drilldownCountBadge.textContent = '3 Capability Tracks · 170 Total Roster';
+      drilldownBackBtn.style.display = 'none';
+      nudgeAllOverdueBtn.style.display = 'none';
+
+      crumbTrack.className = 'crumb-step current';
+      crumbSep1.style.display = 'none';
+      crumbManager.style.display = 'none';
+      crumbSep2.style.display = 'none';
+      crumbLead.style.display = 'none';
+
+      const tracks = Object.values(TRACKS_DATA);
+      
+      let html = `
+        <table class="lms-table">
+          <thead>
+            <tr>
+              <th style="width: 28%;">TRACK / FUNCTION</th>
+              <th style="width: 8%;">EMP</th>
+              <th style="width: 22%;">EMPLOYEES BY LEVEL</th>
+              <th style="width: 10%;">COURSES</th>
+              <th style="width: 10%;">NOT STARTED</th>
+              <th style="width: 10%;">IN PROGRESS</th>
+              <th style="width: 12%; text-align: right;">ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      tracks.forEach(t => {
+        html += `
+          <tr class="clickable-row" onclick="openTrackView('${t.id}')">
+            <td>
+              <div class="entity-name-cell">
+                <div class="entity-avatar"><i data-lucide="layers"></i></div>
+                <div class="entity-text-box">
+                  <span class="entity-title">${t.name}</span>
+                  <span class="entity-subtitle">${t.subtitle}</span>
+                </div>
+              </div>
+            </td>
+            <td><span class="team-count-badge">${t.totalEmp}</span></td>
+            <td>
+              <div style="display:flex;gap:4px;font-size:0.75rem;font-family:var(--font-mono);">
+                <span class="emp-level-tag" title="L1: ${t.levels.l1}">L1: ${t.levels.l1}</span>
+                <span class="emp-level-tag" title="L2: ${t.levels.l2}">L2: ${t.levels.l2}</span>
+                <span class="emp-level-tag" title="L3: ${t.levels.l3}">L3: ${t.levels.l3}</span>
+                <span class="emp-level-tag" title="L4: ${t.levels.l4}">L4: ${t.levels.l4}</span>
+                <span class="emp-level-tag" title="L5: ${t.levels.l5}">L5: ${t.levels.l5}</span>
+              </div>
+            </td>
+            <td><span class="val-neutral">${t.courses}</span></td>
+            <td><span class="val-neutral">${t.notStarted}</span></td>
+            <td><span class="val-neutral">${t.inProgress}</span></td>
+            <td style="text-align: right;">
+              <button type="button" class="action-open-btn" onclick="event.stopPropagation(); openTrackView('${t.id}')">
+                Open Team <i data-lucide="arrow-right"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      });
+
+      html += `
+          </tbody>
+        </table>
+      `;
+
+      drilldownBody.innerHTML = html;
+      lucide.createIcons();
+    }
+
+    /* ─── RENDER LEVEL 2: BY MANAGER (Matches User's Uploaded media_1792404761491_9092a8cb.png) ─── */
+    function renderManagersTable(trackId) {
+      currentLevel = 'managers';
+      currentTrackId = trackId;
+      const track = TRACKS_DATA[trackId] || TRACKS_DATA['prod-exp'];
+
+      layerBadgeText.textContent = 'LAYER 3';
+      drilldownHeading.textContent = 'By manager';
+      drilldownSubtitle.textContent = `For engineering managers and leads to follow up with their own teams · ${track.name}`;
+      drilldownCountBadge.textContent = `${track.managers.length} Managers · ${track.totalEmp} Team Members`;
+      drilldownBackBtn.style.display = 'inline-flex';
+      nudgeAllOverdueBtn.style.display = 'inline-flex';
+      nudgeAllOverdueBtn.innerHTML = `<i data-lucide="zap"></i> Nudge Overdue (${track.overdue})`;
+
+      crumbTrack.className = 'crumb-step';
+      crumbSep1.style.display = 'inline';
+      crumbManager.style.display = 'inline';
+      crumbManager.className = 'crumb-step current';
+      crumbManager.textContent = `By manager (${track.name})`;
+      crumbSep2.style.display = 'none';
+      crumbLead.style.display = 'none';
+
+      let html = `
+        <table class="lms-table">
+          <thead>
+            <tr>
+              <th style="width: 26%;">MANAGER</th>
+              <th style="width: 8%;">TEAM</th>
+              <th style="width: 24%;">COMPLETION</th>
+              <th style="width: 16%;">NOT STARTED ANY COURSE</th>
+              <th style="width: 14%;">WITH OVERDUE COURSES</th>
+              <th style="width: 12%; text-align: right;">ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      track.managers.forEach(mgr => {
+        const isExpanded = expandedManagers.has(mgr.id);
+        html += `
+          <tr class="clickable-row ${isExpanded ? 'is-expanded' : ''}" onclick="toggleManagerAccordion('${mgr.id}')">
+            <td>
+              <div class="entity-name-cell">
+                <div class="entity-avatar" style="background:#EBF7F2;color:#047857;">
+                  ${mgr.name.split(' ').map(n=>n[0]).join('')}
+                </div>
+                <div class="entity-text-box">
+                  <span class="entity-title">${mgr.name}</span>
+                  <span class="entity-subtitle">${mgr.role}</span>
+                </div>
+              </div>
+            </td>
+            <td><span class="team-count-badge">${mgr.teamSize}</span></td>
+            <td>
+              <div class="completion-cell-wrap">
+                <div class="completion-track">
+                  <div class="completion-fill" style="width: ${mgr.completionPct}%;"></div>
+                </div>
+                <span class="completion-pct">${mgr.completionPct}%</span>
+              </div>
+            </td>
+            <td><span class="val-neutral">${mgr.notStarted}</span></td>
+            <td><span class="val-warning">${mgr.overdue}</span></td>
+            <td style="text-align: right;">
+              <button type="button" class="action-open-btn ${isExpanded ? 'active' : ''}" 
+                      title="Open team leads reporting to ${mgr.name}" 
+                      onclick="event.stopPropagation(); toggleManagerAccordion('${mgr.id}')">
+                <span>${isExpanded ? 'Close' : 'Open'}</span>
+                <i data-lucide="chevron-down"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+
+        // If manager is expanded, render Layer 4 (Team Leads) and Layer 5 (Employees)
+        if (isExpanded) {
+          html += `
+            <tr class="nested-expand-row">
+              <td colspan="6" style="padding: 0;">
+                <div class="nested-expand-box">
+                  <div class="nested-title-row">
+                    <span class="nested-title">
+                      <span class="sub-layer-badge">LAYER 4 · TEAM LEADS</span>
+                      Direct Leads under ${mgr.name} (${mgr.leads.length})
+                    </span>
+                    <span style="font-size:0.75rem;color:var(--text-muted);">Click <strong>Open</strong> on any lead below to inspect direct employees</span>
+                  </div>
+
+                  <!-- Lead cards container -->
+                  <div style="display:flex;flex-direction:column;gap:10px;">
+          `;
+
+          mgr.leads.forEach(lead => {
+            const isLeadExpanded = expandedLeads.has(lead.id);
+            html += `
+              <div class="sublead-card">
+                <div class="sublead-header" onclick="toggleLeadAccordion('${lead.id}')">
+                  <div class="sublead-info">
+                    <div class="sublead-avatar">${lead.name.split(' ').map(n=>n[0]).join('')}</div>
+                    <div class="entity-text-box">
+                      <span class="entity-title" style="font-size:0.86rem;">${lead.name}</span>
+                      <span class="entity-subtitle">${lead.role} · <strong>${lead.teamSize} employees</strong></span>
+                    </div>
+                  </div>
+
+                  <div style="display:flex;align-items:center;gap:24px;">
+                    <div class="completion-cell-wrap" style="min-width:120px;">
+                      <div class="completion-track" style="height:6px;">
+                        <div class="completion-fill" style="width:${lead.completionPct}%;"></div>
+                      </div>
+                      <span class="completion-pct" style="font-size:0.78rem;">${lead.completionPct}%</span>
+                    </div>
+
+                    <span style="font-size:0.78rem;color:var(--text-muted);">
+                      Overdue: <strong style="color:#EA580C;">${lead.overdue}</strong>
+                    </span>
+
+                    <button type="button" class="action-open-btn ${isLeadExpanded ? 'active' : ''}" 
+                            style="padding:6px 12px;font-size:0.78rem;" 
+                            onclick="event.stopPropagation(); toggleLeadAccordion('${lead.id}')">
+                      <span>${isLeadExpanded ? 'Hide Team' : 'Open Employees'}</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- LAYER 5: EMPLOYEES UNDER TEAM LEAD -->
+                ${isLeadExpanded ? `
+                  <div class="employee-roster-wrap">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+                      <span style="font-size:0.75rem;font-weight:700;color:var(--text-muted);display:flex;align-items:center;gap:6px;">
+                        <span class="sub-layer-badge" style="background:#ECFDF5;color:#047857;border-color:#A7F3D0;">LAYER 5</span>
+                        EMPLOYEES UNDER ${lead.name.toUpperCase()} (${lead.employees.length} ROSTER MEMBERS)
+                      </span>
+                      <button type="button" class="nudge-btn" onclick="nudgeLeadOverdue('${lead.name}', ${lead.overdue})">
+                        ⚡ Nudge Overdue (${lead.overdue})
+                      </button>
+                    </div>
+
+                    ${lead.employees.map(emp => `
+                      <div class="employee-row">
+                        <div class="emp-left">
+                          <div class="emp-avatar">${emp.name.split(' ').map(n=>n[0]).join('')}</div>
+                          <div class="emp-name">
+                            <b>${emp.name}</b>
+                            <small>${emp.role}</small>
+                          </div>
+                        </div>
+
+                        <span class="emp-level-tag">${emp.level}</span>
+
+                        <div style="display:flex;align-items:center;gap:10px;min-width:120px;">
+                          <div class="completion-track" style="height:5px;">
+                            <div class="completion-fill" style="width:${emp.pct}%;"></div>
+                          </div>
+                          <span style="font-size:0.74rem;font-weight:700;font-family:var(--font-mono);">${emp.courses}</span>
+                        </div>
+
+                        <div>
+                          ${emp.status === 'completed' ? '<span class="emp-status-badge status-completed">✓ Completed</span>' : ''}
+                          ${emp.status === 'progress' ? '<span class="emp-status-badge status-progress">⏳ In Progress</span>' : ''}
+                          ${emp.status === 'notstarted' ? '<span class="emp-status-badge status-notstarted">○ Not Started</span>' : ''}
+                          ${emp.status === 'overdue' ? `<span class="emp-status-badge status-overdue">⚠ Overdue (${emp.overdue})</span>` : ''}
+                        </div>
+
+                        <div>
+                          ${emp.overdue > 0 || emp.status === 'notstarted' ? `
+                            <button type="button" class="nudge-btn" onclick="nudgeEmployee('${emp.name}')">
+                              Nudge
+                            </button>
+                          ` : `
+                            <span style="font-size:0.74rem;color:var(--text-faint);">On track</span>
+                          `}
+                        </div>
+                      </div>
+                    `).join('')}
+                  </div>
+                ` : ''}
+
+              </div>
+            `;
+          });
+
+          html += `
+                  </div>
+                </div>
+              </td>
+            </tr>
+          `;
+        }
+      });
+
+      html += `
+          </tbody>
+        </table>
+      `;
+
+      drilldownBody.innerHTML = html;
+      lucide.createIcons();
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       NAVIGATION & ACCORDION INTERACTIONS
+       ══════════════════════════════════════════════════════════════ */
+    function openTrackView(trackId) {
+      renderManagersTable(trackId);
+      const stage = document.getElementById('drilldownStage');
+      if (stage) stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      showToast(`Opened ${TRACKS_DATA[trackId].name} · Layer 3: By manager`);
+    }
+
+    function showTracksLevel() {
+      renderTracksTable();
+      showToast('Viewing all capability tracks');
+    }
+
+    function showManagerLevel() {
+      renderManagersTable(currentTrackId);
+    }
+
+    function navigateBack() {
+      if (currentLevel === 'managers') {
+        showTracksLevel();
+      }
+    }
+
+    function toggleManagerAccordion(mgrId) {
+      if (expandedManagers.has(mgrId)) {
+        expandedManagers.delete(mgrId);
+      } else {
+        expandedManagers.add(mgrId);
+      }
+      renderManagersTable(currentTrackId);
+    }
+
+    function toggleLeadAccordion(leadId) {
+      if (expandedLeads.has(leadId)) {
+        expandedLeads.delete(leadId);
+      } else {
+        expandedLeads.add(leadId);
+      }
+      renderManagersTable(currentTrackId);
+    }
+
+    function handleTrackFilterChange(val) {
+      if (val === 'all') {
+        showTracksLevel();
+      } else {
+        openTrackView(val);
+      }
+    }
+
+    function filterByOverdueOnly() {
+      openTrackView('prod-exp');
+      expandedManagers.add('neha-kapoor');
+      expandedLeads.add('lead-priya');
+      renderManagersTable('prod-exp');
+      showToast('Showing members with overdue courses');
+    }
+
+    function nudgeAllOverdue() {
+      showToast('⚡ Reminder nudges sent to all 17 employees with overdue courses');
+    }
+
+    function nudgeLeadOverdue(leadName, count) {
+      showToast(`⚡ Reminder notification sent to ${count} overdue members under ${leadName}`);
+    }
+
+    function nudgeEmployee(empName) {
+      showToast(`⚡ Direct reminder nudge sent to ${empName}`);
+    }
+
+    /* ─── TOAST CONTROLLER ─── */
+    let toastTimer = null;
+    function showToast(msg) {
+      const toast = document.getElementById('lmsToast');
+      const toastMsg = document.getElementById('toastMsg');
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2400);
+    }
+
+    /* ─── THEME TOGGLE ─── */
+    const themeBtn = document.getElementById('themeToggleBtn');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const root = document.documentElement;
+        const cur = root.getAttribute('data-theme') || 'light';
+        const target = cur === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', target);
+        themeBtn.innerHTML = target === 'dark' ? '<i data-lucide="moon"></i>' : '<i data-lucide="sun"></i>';
+        lucide.createIcons();
+        showToast(`Theme switched to ${target} mode`);
+      });
+    }
+
+    /* ─── GLOBAL KEYBOARD SHORTCUT (⌘K) ─── */
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        const search = document.getElementById('globalSearchInput');
+        if (search) search.focus();
+      }
+    });
+
+    // Initial render
+    renderTracksTable();
+  </script>
+</body>
+</html>
