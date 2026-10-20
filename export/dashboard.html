@@ -2909,6 +2909,319 @@ i[data-lucide], svg.lucide {
   .page-headline-lead { font-size: 20px; }
   .controls-pill-row { width: 100%; justify-content: flex-start; }
 }
+
+/* ─── TEAM & ACCESS VIEW STYLES (EXECUTIVE DIRECTORY & DRILLDOWN) ─── */
+.team-drilldown-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-top: 18px;
+}
+.team-drilldown-head {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.team-drilldown-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.team-layer-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border: 1px solid var(--emerald-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.team-drilldown-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+.team-drilldown-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.team-breadcrumb-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 10px 24px;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--line);
+}
+.team-crumb-link {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.15s;
+}
+.team-crumb-link:hover {
+  color: var(--emerald-dark);
+  text-decoration: underline;
+}
+.team-crumb-link.current {
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: default;
+  text-decoration: none;
+}
+.team-crumb-sep {
+  color: var(--text-faint);
+}
+.team-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: var(--radius-btn);
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-right: 8px;
+}
+.team-back-btn:hover {
+  background: var(--bg-subtle-2);
+  color: var(--text-main);
+  border-color: var(--emerald);
+}
+.team-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.team-table th {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-card);
+}
+.team-table td {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.86rem;
+  vertical-align: middle;
+  transition: background 0.15s;
+}
+.team-table tr.clickable-row {
+  cursor: pointer;
+}
+.team-table tr.clickable-row:hover td {
+  background: var(--bg-subtle);
+}
+.team-table tr.is-expanded td {
+  background: var(--emerald-subtle) !important;
+}
+.team-entity-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.team-entity-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--emerald-subtle);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: var(--emerald-dark);
+  flex-shrink: 0;
+  border: 1px solid var(--emerald-light);
+}
+.team-entity-info {
+  display: flex;
+  flex-direction: column;
+}
+.team-entity-name {
+  font-weight: 700;
+  color: var(--text-main);
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
+}
+.team-entity-role {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+.team-headcount-badge {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+  font-family: var(--font-mono);
+}
+.team-progress-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 150px;
+}
+.team-progress-track {
+  flex: 1;
+  height: 7px;
+  background: var(--bg-subtle-2);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.team-progress-fill {
+  height: 100%;
+  background: var(--emerald);
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}
+.team-progress-pct {
+  font-weight: 700;
+  font-size: 0.84rem;
+  min-width: 36px;
+  text-align: right;
+  font-family: var(--font-mono);
+}
+.team-action-open-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: var(--bg-subtle-2);
+  border: 1px solid var(--line);
+  color: var(--text-main);
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+.team-action-open-btn:hover {
+  background: var(--emerald-dark);
+  color: #FFFFFF;
+  border-color: var(--emerald-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px -2px rgba(16, 185, 129, 0.4);
+}
+.team-action-open-btn.active {
+  background: var(--emerald);
+  border-color: var(--emerald);
+  color: #FFFFFF;
+}
+.team-action-open-btn svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s;
+}
+.team-action-open-btn.active svg {
+  transform: rotate(180deg);
+}
+.team-nested-box {
+  padding: 16px 20px 22px 52px;
+  border-left: 3px solid var(--emerald);
+  margin: 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: teamSlideDown 0.22s ease-out;
+}
+@keyframes teamSlideDown {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.team-sublead-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+.team-sublead-head {
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.team-sublead-head:hover {
+  background: var(--bg-subtle);
+}
+.team-emp-wrap {
+  padding: 14px 18px;
+  background: var(--bg-subtle);
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.team-emp-row {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-btn);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: all 0.15s;
+}
+.team-emp-row:hover {
+  border-color: var(--emerald);
+  box-shadow: var(--shadow-sm);
+}
+.team-status-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.status-done { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
+.status-prog { background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
+.status-block { background: #F1F5F9; color: #64748B; border: 1px solid #E2E8F0; }
+.status-over { background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; }
+.team-nudge-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #FEF3C7;
+  border: 1px solid #FDE68A;
+  color: #B45309;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.team-nudge-btn:hover {
+  background: #F59E0B;
+  color: #FFF;
+}
 </style>
 </head>
 <body>
@@ -3649,6 +3962,79 @@ i[data-lucide], svg.lucide {
         </div>
       </div>
 
+      <!-- ============ TEAM & ACCESS VIEW ============ -->
+      <div class="view-panel" id="view-teams" style="display:none">
+        <div class="full-width-deck-section">
+          <div class="full-section-head">
+            <div>
+              <h2 class="full-section-title">Team Directory, Cohorts &amp; Organization Hierarchy</h2>
+              <p class="full-section-lede">Follow up with engineering managers, team leads, and direct contributors across delivery tracks</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <button type="button" class="action-btn-pill" onclick="showToast('⚡ Reminder nudges sent to all 17 overdue tasks')">
+                <i data-lucide="zap"></i> Nudge Overdue Tasks
+              </button>
+              <button type="button" class="action-btn-pill" onclick="showToast('Team roster CSV exported')">
+                <i data-lucide="download"></i> Export Roster
+              </button>
+            </div>
+          </div>
+
+          <!-- Top Metric Deck for Teams -->
+          <div class="metrics-card-deck">
+            <div class="deck-card primary-accent-card">
+              <div class="deck-card-top"><span class="deck-card-label">Total Engineering Headcount</span><div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div></div>
+              <div class="deck-card-value">170</div>
+              <div class="deck-card-caption">Across 3 capability tracks</div>
+            </div>
+            <div class="deck-card">
+              <div class="deck-card-top"><span class="deck-card-label">Overall Sprint Completion</span><div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div></div>
+              <div class="deck-card-value">84%</div>
+              <div class="deck-card-caption">+6.4% vs previous sprint</div>
+            </div>
+            <div class="deck-card">
+              <div class="deck-card-top"><span class="deck-card-label">Blocked / Not Started</span><div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div></div>
+              <div class="deck-card-value">6</div>
+              <div class="deck-card-caption">Awaiting design review</div>
+            </div>
+            <div class="deck-card">
+              <div class="deck-card-top"><span class="deck-card-label">Tasks Overdue</span><div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div></div>
+              <div class="deck-card-value" style="color:var(--amber-dark);">17</div>
+              <div class="deck-card-caption">Requires manager follow-up</div>
+            </div>
+          </div>
+
+          <!-- Hierarchical Drilldown Card -->
+          <div class="team-drilldown-card" id="teamDrilldownStage">
+            <div class="team-drilldown-head">
+              <div class="team-drilldown-left">
+                <button type="button" class="team-back-btn" id="teamBackBtn" style="display:none;" onclick="consoleShowTracks()">
+                  <i data-lucide="arrow-left"></i> Back
+                </button>
+                <span class="team-layer-badge" id="teamLayerBadge">● <span id="teamLayerText">LAYER 2</span></span>
+                <div>
+                  <h3 class="team-drilldown-title" id="teamTitle">Delivery Tracks Roster</h3>
+                  <p class="team-drilldown-sub" id="teamSubtitle">Click on any team below to inspect managers, team leads, and direct employees</p>
+                </div>
+              </div>
+              <span class="card-badge-pill" id="teamCountPill" style="font-size:0.75rem;padding:4px 10px;border-radius:9999px;background:var(--bg-subtle-2);border:1px solid var(--line);font-weight:600;">3 Teams · 170 Members</span>
+            </div>
+
+            <div class="team-breadcrumb-bar">
+              <span class="team-crumb-link current" id="teamCrumbRoot" onclick="consoleShowTracks()">Teams Roster</span>
+              <span class="team-crumb-sep" id="teamCrumbSep1" style="display:none;">/</span>
+              <span class="team-crumb-link" id="teamCrumbManager" style="display:none;" onclick="consoleShowManager()">By Manager</span>
+              <span class="team-crumb-sep" id="teamCrumbSep2" style="display:none;">/</span>
+              <span class="team-crumb-link current" id="teamCrumbLead" style="display:none;">Leads &amp; Members</span>
+            </div>
+
+            <div id="consoleTeamTableBody">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </main>
 </div>
@@ -3817,7 +4203,7 @@ $('sidebarNavScroll').innerHTML = CATEGORIES.map(cat => `
   <div class="sidebar-category-group">
     <div class="sidebar-category-title">Platform &amp; Tools</div>
     <button type="button" class="sidebar-nav-item" data-soon="Connector Hub"><i data-lucide="cable"></i><span class="sidebar-nav-label">Connector Hub</span></button>
-    <button type="button" class="sidebar-nav-item" data-soon="Team &amp; Access"><i data-lucide="user-cog"></i><span class="sidebar-nav-label">Team &amp; Access</span></button>
+    <button type="button" class="sidebar-nav-item" data-view="teams"><i data-lucide="users"></i><span class="sidebar-nav-label">Team &amp; Access</span></button>
     <button type="button" class="sidebar-nav-item" data-soon="Billing &amp; Usage"><i data-lucide="receipt"></i><span class="sidebar-nav-label">Billing &amp; Usage</span></button>
   </div>`;
 
@@ -4389,24 +4775,604 @@ const HEADLINES = {
   dashboard: 'Your Initiatives &amp; Operations',
   journey: 'Product Lifecycle &amp; Quality Gates',
   services: 'Enterprise Registry &amp; 23 Live Services',
-  capital: 'Capital Runway &amp; Investor Signal'
+  capital: 'Capital Runway &amp; Investor Signal',
+  teams: 'Team Directory &amp; Organization Hierarchy'
 };
 const VIEW_NAMES = {
   dashboard: 'Dashboard',
   journey: 'Journey',
   services: 'Services',
-  capital: 'Capital'
+  capital: 'Capital',
+  teams: 'Team & Access'
 };
 
 function switchView(name){
   document.querySelectorAll('.view-panel').forEach(p => p.style.display = (p.id === 'view-' + name) ? 'block' : 'none');
   document.querySelectorAll('.sidebar-main-nav-btn').forEach(b => b.classList.toggle('active', b.dataset.view === name));
-  document.querySelectorAll('.sidebar-nav-item').forEach(b => b.classList.toggle('active', b.dataset.nav === name));
+  document.querySelectorAll('.sidebar-nav-item').forEach(b => b.classList.toggle('active', b.dataset.nav === name || b.dataset.view === name));
   $('canvasTitle').innerHTML = HEADLINES[name] || 'York Console';
   const curView = $('topbarCurrentView');
   if (curView) curView.textContent = VIEW_NAMES[name] || 'Dashboard';
+  if (name === 'teams') {
+    consoleRenderTracks();
+  }
   closeMobileSidebar();
   renderIcons();
+}
+
+/* ——— TEAM & ACCESS HIERARCHY CONTROLLER (CONSOLE / HUB DIRECTORY) ——— */
+const CONSOLE_TEAMS = {
+  'prod-exp': {
+    id: 'prod-exp',
+    name: 'Product Experience Engineering',
+    desc: '4 managers · Core UI, Design Systems & Frontend',
+    totalEmp: 70,
+    completionPct: 48,
+    notStarted: 1,
+    overdue: 3,
+    managers: [
+      {
+        id: 'neha-kapoor',
+        name: 'Neha Kapoor',
+        role: 'Engineering Manager',
+        teamSize: 27,
+        completionPct: 48,
+        notStarted: 1,
+        overdue: 3,
+        leads: [
+          {
+            id: 'lead-priya',
+            name: 'Priya Nair',
+            role: 'Team Lead · Frontend Platform',
+            teamSize: 15,
+            completionPct: 56,
+            notStarted: 0,
+            overdue: 1,
+            employees: [
+              { name: 'Aarav Mehta', role: 'Senior Frontend Dev', level: 'L4', tasks: '12/12', pct: 100, status: 'done', overdue: 0 },
+              { name: 'Sneha Patel', role: 'UI Engineer', level: 'L3', tasks: '9/12', pct: 75, status: 'prog', overdue: 0 },
+              { name: 'Devendra Rao', role: 'Associate UI Dev', level: 'L2', tasks: '4/12', pct: 33, status: 'over', overdue: 1 },
+              { name: 'Kavita Desai', role: 'Design Technologist', level: 'L3', tasks: '11/12', pct: 92, status: 'prog', overdue: 0 },
+              { name: 'Aman Saxena', role: 'Frontend Engineer', level: 'L2', tasks: '8/12', pct: 67, status: 'prog', overdue: 0 }
+            ]
+          },
+          {
+            id: 'lead-rohan',
+            name: 'Rohan Varma',
+            role: 'Team Lead · Design Systems & Mobile',
+            teamSize: 12,
+            completionPct: 38,
+            notStarted: 1,
+            overdue: 2,
+            employees: [
+              { name: 'Tanvi Shirodkar', role: 'Component Architect', level: 'L4', tasks: '8/10', pct: 80, status: 'prog', overdue: 0 },
+              { name: 'Mohit Bhatia', role: 'Mobile UI Dev', level: 'L2', tasks: '3/10', pct: 30, status: 'over', overdue: 1 },
+              { name: 'Alia Khan', role: 'Junior Mobile Dev', level: 'L1', tasks: '0/10', pct: 0, status: 'block', overdue: 1 },
+              { name: 'Varun Joshi', role: 'Design System Dev', level: 'L3', tasks: '6/10', pct: 60, status: 'prog', overdue: 0 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'arjun-malhotra',
+        name: 'Arjun Malhotra',
+        role: 'Product Lead',
+        teamSize: 14,
+        completionPct: 38,
+        notStarted: 1,
+        overdue: 6,
+        leads: [
+          {
+            id: 'lead-siddharth',
+            name: 'Siddharth Roy',
+            role: 'Technical Product Lead',
+            teamSize: 14,
+            completionPct: 38,
+            notStarted: 1,
+            overdue: 6,
+            employees: [
+              { name: 'Naveen Kumar', role: 'Product Architect', level: 'L4', tasks: '6/10', pct: 60, status: 'prog', overdue: 1 },
+              { name: 'Megha Singhania', role: 'Growth UI Specialist', level: 'L3', tasks: '2/10', pct: 20, status: 'over', overdue: 2 },
+              { name: 'Ishaan Chopra', role: 'Feature Dev', level: 'L2', tasks: '1/10', pct: 10, status: 'over', overdue: 3 },
+              { name: 'Pooja Reddy', role: 'Junior QA', level: 'L1', tasks: '0/10', pct: 0, status: 'block', overdue: 0 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'ritu-sharma',
+        name: 'Ritu Sharma',
+        role: 'Engineering Manager',
+        teamSize: 12,
+        completionPct: 0,
+        notStarted: 2,
+        overdue: 4,
+        leads: [
+          {
+            id: 'lead-ananya',
+            name: 'Ananya Bose',
+            role: 'Lead UI/UX Engineer',
+            teamSize: 12,
+            completionPct: 0,
+            notStarted: 2,
+            overdue: 4,
+            employees: [
+              { name: 'Sameer Qureshi', role: 'Frontend Specialist', level: 'L3', tasks: '0/8', pct: 0, status: 'block', overdue: 2 },
+              { name: 'Ritika Guha', role: 'Interface Dev', level: 'L2', tasks: '0/8', pct: 0, status: 'block', overdue: 2 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'vikram-sethi',
+        name: 'Vikram Sethi',
+        role: 'Group Lead',
+        teamSize: 17,
+        completionPct: 38,
+        notStarted: 2,
+        overdue: 4,
+        leads: [
+          {
+            id: 'lead-karan',
+            name: 'Karan Mehra',
+            role: 'Lead Full Stack Specialist',
+            teamSize: 17,
+            completionPct: 38,
+            notStarted: 2,
+            overdue: 4,
+            employees: [
+              { name: 'Gaurav Gill', role: 'Senior Dev', level: 'L4', tasks: '7/10', pct: 70, status: 'prog', overdue: 1 },
+              { name: 'Bhavna Menon', role: 'Full Stack Engineer', level: 'L3', tasks: '3/10', pct: 30, status: 'over', overdue: 2 },
+              { name: 'Aditya Sen', role: 'Junior Dev', level: 'L1', tasks: '0/10', pct: 0, status: 'block', overdue: 1 }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  'platform': {
+    id: 'platform',
+    name: 'Platform Engineering',
+    desc: '3 managers · Cloud Infra, Microservices & Core APIs',
+    totalEmp: 55,
+    completionPct: 41,
+    notStarted: 2,
+    overdue: 11,
+    managers: [
+      {
+        id: 'deepak-verma',
+        name: 'Deepak Verma',
+        role: 'Platform Engineering Manager',
+        teamSize: 22,
+        completionPct: 45,
+        notStarted: 2,
+        overdue: 11,
+        leads: [
+          {
+            id: 'lead-harish',
+            name: 'Harish Nair',
+            role: 'Team Lead · Cloud Infrastructure',
+            teamSize: 12,
+            completionPct: 50,
+            notStarted: 1,
+            overdue: 5,
+            employees: [
+              { name: 'Kunal Trivedi', role: 'Kubernetes Specialist', level: 'L4', tasks: '9/10', pct: 90, status: 'prog', overdue: 0 },
+              { name: 'Ankita Roy', role: 'Cloud Engineer', level: 'L3', tasks: '4/10', pct: 40, status: 'over', overdue: 2 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'swati-kulkarni',
+        name: 'Swati Kulkarni',
+        role: 'Infra Lead',
+        teamSize: 18,
+        completionPct: 36,
+        notStarted: 3,
+        overdue: 9,
+        leads: [
+          {
+            id: 'lead-rahul',
+            name: 'Rahul Ghosh',
+            role: 'Team Lead · Observability',
+            teamSize: 18,
+            completionPct: 36,
+            notStarted: 3,
+            overdue: 9,
+            employees: [
+              { name: 'Manish Pandey', role: 'SRE Engineer', level: 'L3', tasks: '3/8', pct: 37, status: 'over', overdue: 4 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'tarun-sharma',
+        name: 'Tarun Sharma',
+        role: 'Group Lead',
+        teamSize: 15,
+        completionPct: 40,
+        notStarted: 3,
+        overdue: 7,
+        leads: [
+          {
+            id: 'lead-dinesh',
+            name: 'Dinesh Pillai',
+            role: 'Team Lead · Microservices',
+            teamSize: 15,
+            completionPct: 40,
+            notStarted: 3,
+            overdue: 7,
+            employees: [
+              { name: 'Sanjay Dutt', role: 'API Dev', level: 'L3', tasks: '5/8', pct: 62, status: 'prog', overdue: 1 }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  'fullstack': {
+    id: 'fullstack',
+    name: 'Full Stack Engineering',
+    desc: '3 managers · End-to-end Web & Distributed Systems',
+    totalEmp: 45,
+    completionPct: 46,
+    notStarted: 2,
+    overdue: 4,
+    managers: [
+      {
+        id: 'anil-kapoor',
+        name: 'Anil Kapoor',
+        role: 'Full Stack Engineering Manager',
+        teamSize: 18,
+        completionPct: 52,
+        notStarted: 2,
+        overdue: 4,
+        leads: [
+          {
+            id: 'lead-prateek',
+            name: 'Prateek Jain',
+            role: 'Team Lead · Web Services',
+            teamSize: 18,
+            completionPct: 52,
+            notStarted: 2,
+            overdue: 4,
+            employees: [
+              { name: 'Vimal Shah', role: 'Full Stack Architect', level: 'L4', tasks: '10/12', pct: 83, status: 'prog', overdue: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'priyanka-sen',
+        name: 'Priyanka Sen',
+        role: 'Delivery Manager',
+        teamSize: 15,
+        completionPct: 44,
+        notStarted: 3,
+        overdue: 6,
+        leads: [
+          {
+            id: 'lead-ashwin',
+            name: 'Ashwin Nair',
+            role: 'Team Lead · Integration & APIs',
+            teamSize: 15,
+            completionPct: 44,
+            notStarted: 3,
+            overdue: 6,
+            employees: [
+              { name: 'Meera Iyer', role: 'Integration Dev', level: 'L2', tasks: '4/10', pct: 40, status: 'over', overdue: 3 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'manish-gupta',
+        name: 'Manish Gupta',
+        role: 'Lead Architect',
+        teamSize: 12,
+        completionPct: 41,
+        notStarted: 3,
+        overdue: 6,
+        leads: [
+          {
+            id: 'lead-sunil',
+            name: 'Sunil Rao',
+            role: 'Team Lead · Core Services',
+            teamSize: 12,
+            completionPct: 41,
+            notStarted: 3,
+            overdue: 6,
+            employees: [
+              { name: 'Deepa Roy', role: 'Backend Engineer', level: 'L3', tasks: '5/10', pct: 50, status: 'prog', overdue: 1 }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+};
+
+let activeConsoleTrack = 'prod-exp';
+let consoleExpManagers = new Set();
+let consoleExpLeads = new Set();
+
+function consoleRenderTracks() {
+  if (!$('teamBackBtn')) return;
+  $('teamBackBtn').style.display = 'none';
+  $('teamLayerText').textContent = 'LAYER 2';
+  $('teamTitle').textContent = 'Delivery Tracks Roster';
+  $('teamSubtitle').textContent = 'Click on any team below to inspect managers, team leads, and direct employees';
+  $('teamCountPill').textContent = '3 Teams · 170 Members';
+
+  $('teamCrumbRoot').className = 'team-crumb-link current';
+  $('teamCrumbSep1').style.display = 'none';
+  $('teamCrumbManager').style.display = 'none';
+  $('teamCrumbSep2').style.display = 'none';
+  $('teamCrumbLead').style.display = 'none';
+
+  const tracks = Object.values(CONSOLE_TEAMS);
+  let html = `
+    <table class="team-table">
+      <thead>
+        <tr>
+          <th style="width: 32%;">TEAM / CAPABILITY TRACK</th>
+          <th style="width: 10%;">HEADCOUNT</th>
+          <th style="width: 26%;">SPRINT COMPLETION</th>
+          <th style="width: 14%;">BLOCKED TASKS</th>
+          <th style="width: 18%; text-align: right;">ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+  tracks.forEach(t => {
+    html += `
+      <tr class="clickable-row" onclick="consoleOpenTrack('${t.id}')">
+        <td>
+          <div class="team-entity-cell">
+            <div class="team-entity-avatar"><i data-lucide="users"></i></div>
+            <div class="team-entity-info">
+              <span class="team-entity-name">${esc(t.name)}</span>
+              <span class="team-entity-role">${esc(t.desc)}</span>
+            </div>
+          </div>
+        </td>
+        <td><span class="team-headcount-badge">${t.totalEmp}</span></td>
+        <td>
+          <div class="team-progress-cell">
+            <div class="team-progress-track">
+              <div class="team-progress-fill" style="width:${t.completionPct}%"></div>
+            </div>
+            <span class="team-progress-pct">${t.completionPct}%</span>
+          </div>
+        </td>
+        <td><span style="font-weight:700;color:${t.overdue > 0 ? '#EA580C' : 'inherit'};font-family:var(--font-mono);">${t.overdue} overdue</span></td>
+        <td style="text-align: right;">
+          <button type="button" class="team-action-open-btn" onclick="event.stopPropagation(); consoleOpenTrack('${t.id}')">
+            Open Team <i data-lucide="arrow-right"></i>
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+  html += `</tbody></table>`;
+  $('consoleTeamTableBody').innerHTML = html;
+  renderIcons();
+}
+
+function consoleOpenTrack(trackId) {
+  activeConsoleTrack = trackId;
+  consoleRenderManagers(trackId);
+  const stage = $('teamDrilldownStage');
+  if (stage) stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function consoleRenderManagers(trackId) {
+  const track = CONSOLE_TEAMS[trackId] || CONSOLE_TEAMS['prod-exp'];
+  if (!$('teamBackBtn')) return;
+  $('teamBackBtn').style.display = 'inline-flex';
+  $('teamLayerText').textContent = 'LAYER 3';
+  $('teamTitle').textContent = 'By manager';
+  $('teamSubtitle').textContent = `For engineering managers and leads to follow up with their own teams · ${track.name}`;
+  $('teamCountPill').textContent = `${track.managers.length} Managers · ${track.totalEmp} Team Members`;
+
+  $('teamCrumbRoot').className = 'team-crumb-link';
+  $('teamCrumbSep1').style.display = 'inline';
+  $('teamCrumbManager').style.display = 'inline';
+  $('teamCrumbManager').className = 'team-crumb-link current';
+  $('teamCrumbManager').textContent = `By manager (${track.name})`;
+  $('teamCrumbSep2').style.display = 'none';
+  $('teamCrumbLead').style.display = 'none';
+
+  let html = `
+    <table class="team-table">
+      <thead>
+        <tr>
+          <th style="width: 26%;">MANAGER</th>
+          <th style="width: 8%;">TEAM</th>
+          <th style="width: 24%;">COMPLETION</th>
+          <th style="width: 16%;">NOT STARTED / BLOCKED</th>
+          <th style="width: 14%;">WITH OVERDUE TASKS</th>
+          <th style="width: 12%; text-align: right;">ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  track.managers.forEach(mgr => {
+    const isExpanded = consoleExpManagers.has(mgr.id);
+    html += `
+      <tr class="clickable-row ${isExpanded ? 'is-expanded' : ''}" onclick="consoleToggleManager('${mgr.id}')">
+        <td>
+          <div class="team-entity-cell">
+            <div class="team-entity-avatar">
+              ${mgr.name.split(' ').map(n=>n[0]).join('')}
+            </div>
+            <div class="team-entity-info">
+              <span class="team-entity-name">${esc(mgr.name)}</span>
+              <span class="team-entity-role">${esc(mgr.role)}</span>
+            </div>
+          </div>
+        </td>
+        <td><span class="team-headcount-badge">${mgr.teamSize}</span></td>
+        <td>
+          <div class="team-progress-cell">
+            <div class="team-progress-track">
+              <div class="team-progress-fill" style="width:${mgr.completionPct}%"></div>
+            </div>
+            <span class="team-progress-pct">${mgr.completionPct}%</span>
+          </div>
+        </td>
+        <td><span style="font-weight:600;font-family:var(--font-mono);">${mgr.notStarted}</span></td>
+        <td><span style="font-weight:700;color:#EA580C;font-family:var(--font-mono);">${mgr.overdue}</span></td>
+        <td style="text-align: right;">
+          <button type="button" class="team-action-open-btn ${isExpanded ? 'active' : ''}" onclick="event.stopPropagation(); consoleToggleManager('${mgr.id}')">
+            <span>${isExpanded ? 'Close' : 'Open'}</span>
+            <i data-lucide="chevron-down"></i>
+          </button>
+        </td>
+      </tr>
+    `;
+
+    if (isExpanded) {
+      html += `
+        <tr style="background:var(--bg-subtle);">
+          <td colspan="6" style="padding: 0;">
+            <div class="team-nested-box">
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:0.86rem;font-weight:700;display:flex;align-items:center;gap:8px;">
+                  <span class="team-layer-badge">LAYER 4 · TEAM LEADS</span>
+                  Direct Leads under ${esc(mgr.name)} (${mgr.leads.length})
+                </span>
+                <span style="font-size:0.75rem;color:var(--text-muted);">Click <strong>Open Employees</strong> to inspect members</span>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:10px;">
+      `;
+
+      mgr.leads.forEach(lead => {
+        const isLeadExpanded = consoleExpLeads.has(lead.id);
+        html += `
+          <div class="team-sublead-card">
+            <div class="team-sublead-head" onclick="consoleToggleLead('${lead.id}')">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div class="team-entity-avatar" style="width:32px;height:32px;font-size:0.8rem;">
+                  ${lead.name.split(' ').map(n=>n[0]).join('')}
+                </div>
+                <div class="team-entity-info">
+                  <span class="team-entity-name" style="font-size:0.86rem;">${esc(lead.name)}</span>
+                  <span class="team-entity-role">${esc(lead.role)} · <strong>${lead.teamSize} employees</strong></span>
+                </div>
+              </div>
+
+              <div style="display:flex;align-items:center;gap:20px;">
+                <div class="team-progress-cell" style="min-width:120px;">
+                  <div class="team-progress-track" style="height:6px;">
+                    <div class="team-progress-fill" style="width:${lead.completionPct}%"></div>
+                  </div>
+                  <span class="team-progress-pct" style="font-size:0.78rem;">${lead.completionPct}%</span>
+                </div>
+
+                <span style="font-size:0.78rem;color:var(--text-muted);">
+                  Overdue: <strong style="color:#EA580C;">${lead.overdue}</strong>
+                </span>
+
+                <button type="button" class="team-action-open-btn ${isLeadExpanded ? 'active' : ''}" style="padding:6px 12px;font-size:0.78rem;" onclick="event.stopPropagation(); consoleToggleLead('${lead.id}')">
+                  <span>${isLeadExpanded ? 'Hide' : 'Open Employees'}</span>
+                  <i data-lucide="chevron-down"></i>
+                </button>
+              </div>
+            </div>
+
+            ${isLeadExpanded ? `
+              <div class="team-emp-wrap">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+                  <span style="font-size:0.75rem;font-weight:700;color:var(--text-muted);display:flex;align-items:center;gap:6px;">
+                    <span class="team-layer-badge">LAYER 5</span>
+                    DIRECT EMPLOYEES UNDER ${esc(lead.name.toUpperCase())} (${lead.employees.length} MEMBERS)
+                  </span>
+                  <button type="button" class="team-nudge-btn" onclick="showToast('⚡ Reminder sent to overdue members under ${esc(lead.name)}')">
+                    ⚡ Nudge Overdue (${lead.overdue})
+                  </button>
+                </div>
+
+                ${lead.employees.map(emp => `
+                  <div class="team-emp-row">
+                    <div style="display:flex;align-items:center;gap:10px;min-width:200px;">
+                      <div class="team-entity-avatar" style="width:28px;height:28px;font-size:0.72rem;border-radius:50%;">
+                        ${emp.name.split(' ').map(n=>n[0]).join('')}
+                      </div>
+                      <div class="team-entity-info">
+                        <b style="font-size:0.84rem;">${esc(emp.name)}</b>
+                        <small style="font-size:0.7rem;color:var(--text-muted);">${esc(emp.role)}</small>
+                      </div>
+                    </div>
+
+                    <span style="font-size:0.72rem;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--bg-subtle-2);font-family:var(--font-mono);">${emp.level}</span>
+
+                    <div style="display:flex;align-items:center;gap:10px;min-width:120px;">
+                      <div class="team-progress-track" style="height:5px;">
+                        <div class="team-progress-fill" style="width:${emp.pct}%"></div>
+                      </div>
+                      <span style="font-size:0.74rem;font-weight:700;font-family:var(--font-mono);">${emp.tasks}</span>
+                    </div>
+
+                    <div>
+                      ${emp.status === 'done' ? '<span class="team-status-badge status-done">✓ Completed</span>' : ''}
+                      ${emp.status === 'prog' ? '<span class="team-status-badge status-prog">⏳ In Progress</span>' : ''}
+                      ${emp.status === 'block' ? '<span class="team-status-badge status-block">○ Blocked</span>' : ''}
+                      ${emp.status === 'over' ? `<span class="team-status-badge status-over">⚠ Overdue (${emp.overdue})</span>` : ''}
+                    </div>
+
+                    <div>
+                      ${emp.overdue > 0 || emp.status === 'block' ? `
+                        <button type="button" class="team-nudge-btn" onclick="showToast('⚡ Direct nudge sent to ${esc(emp.name)}')">Nudge</button>
+                      ` : `
+                        <span style="font-size:0.74rem;color:var(--text-muted);">On track</span>
+                      `}
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+        `;
+      });
+
+      html += `
+              </div>
+            </div>
+          </td>
+        </tr>
+      `;
+    }
+  });
+
+  html += `</tbody></table>`;
+  $('consoleTeamTableBody').innerHTML = html;
+  renderIcons();
+}
+
+function consoleShowTracks() {
+  consoleExpManagers.clear();
+  consoleExpLeads.clear();
+  consoleRenderTracks();
+}
+
+function consoleShowManager() {
+  consoleRenderManagers(activeConsoleTrack);
+}
+
+function consoleToggleManager(mgrId) {
+  if (consoleExpManagers.has(mgrId)) consoleExpManagers.delete(mgrId);
+  else consoleExpManagers.add(mgrId);
+  consoleRenderManagers(activeConsoleTrack);
+}
+
+function consoleToggleLead(leadId) {
+  if (consoleExpLeads.has(leadId)) consoleExpLeads.delete(leadId);
+  else consoleExpLeads.add(leadId);
+  consoleRenderManagers(activeConsoleTrack);
 }
 
 /* ——— MOBILE & FLOATING SIDEBAR TOGGLE ——— */
@@ -4449,8 +5415,8 @@ document.addEventListener('click', e => {
   }
   const n = e.target.closest('[data-nav]');
   if (n){
-    if (n.dataset.nav === 'LMS' || n.dataset.nav === 'Onboarding LMS') {
-      window.location.href = 'lms.html';
+    if (n.dataset.nav === 'Team & Access' || n.dataset.nav === 'Hub' || n.dataset.nav === 'Team Capacity' || n.dataset.nav === 'Teams') {
+      switchView('teams');
       return;
     }
     e.preventDefault();
@@ -4463,8 +5429,8 @@ document.addEventListener('click', e => {
   }
   const tile = e.target.closest('.service-deck-card[data-svc-name], .svc-card[data-svc-name]');
   if (tile){
-    if (tile.dataset.svcName === 'LMS') {
-      window.location.href = 'lms.html';
+    if (tile.dataset.svcName === 'Hub') {
+      switchView('teams');
       return;
     }
     showToast(`Launching ${tile.dataset.svcName}`);
@@ -4508,6 +5474,7 @@ const CMDS = [
     { label:'Product Journey', view:'journey', key:'G J', icon:'git-merge' },
     { label:'Services Registry', view:'services', key:'G S', icon:'layers' },
     { label:'Capital & Runway', view:'capital', key:'G C', icon:'database' },
+    { label:'Team & Access Hierarchy', view:'teams', key:'G T', icon:'users' },
   ]},
   { group:'Quick Actions', items:[
     { label:'Export Sprint Summary CSV', key:'E S', icon:'arrow-up-right', toast:'Exporting CSV…' },
