@@ -5556,6 +5556,11 @@ window.addEventListener('keydown', e => {
 
 /* ——— INIT ——— */
 renderIcons();
+try {
+  if (window.location.hash === '#teams' || window.location.search.indexOf('view=teams') !== -1) {
+    switchView('teams');
+  }
+} catch(e){}
 </script>
 </body>
 </html>

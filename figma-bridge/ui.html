@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>York Foundation Canvas Bridge</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body {
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 16px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge {
+      background: rgba(37,99,235,0.25);
+      color: #60A5FA;
+      border: 1px solid rgba(96,165,250,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      background: rgba(255,255,255,0.06);
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #EAB308;
+    }
+    .dot.connected {
+      background: #10B981;
+      box-shadow: 0 0 8px #10B981;
+    }
+    .banner {
+      background: linear-gradient(135deg, rgba(37,99,235,0.2), rgba(99,102,241,0.15));
+      border: 1px solid rgba(96,165,250,0.3);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 14px;
+    }
+    .banner-title {
+      font-weight: 600;
+      color: #93C5FD;
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+    .banner-desc {
+      color: #94A3B8;
+      font-size: 11px;
+    }
+    .section-title {
+      color: #94A3B8;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    button {
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.15s ease;
+      background: #1E293B;
+      color: #F8FAFC;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    button:hover {
+      background: #334155;
+      border-color: rgba(255,255,255,0.2);
+    }
+    button.primary {
+      background: #2563EB;
+      color: #FFFFFF;
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba(37,99,235,0.4);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    button.primary:hover {
+      background: #1D4ED8;
+    }
+    .btn-tag {
+      font-size: 10px;
+      background: rgba(0,0,0,0.25);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #CBD5E1;
+    }
+    #log {
+      background: #020617;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      padding: 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 10px;
+      color: #94A3B8;
+      max-height: 110px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+    .log-entry { margin-bottom: 4px; }
+    .log-entry.success { color: #34D399; }
+    .log-entry.info { color: #60A5FA; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="brand">
+      <span style="font-weight: 700; font-size: 13px;">York Foundation</span>
+      <span class="badge">1440px</span>
+    </div>
+    <div class="status-pill">
+      <span class="dot" id="status-dot"></span>
+      <span id="status-text">Connecting...</span>
+    </div>
+  </div>
+
+  <div class="banner">
+    <div class="banner-title">⚡ Local AI Live Bridge</div>
+    <div class="banner-desc">Connected to local workspace. Screens are generated at 1440px with responsive Auto Layout.</div>
+  </div>
+
+  <div class="section-title">Quick Actions</div>
+  <div class="btn-group">
+    <button class="primary" id="btn-all">
+      <span>⚡ Push All Screens to Canvas</span>
+      <span class="btn-tag">1440px</span>
+    </button>
+  </div>
+
+  <div class="section-title">Individual Screens</div>
+  <div class="btn-group">
+    <button id="btn-landing">
+      <span>1. York Landing Page</span>
+      <span class="btn-tag">Full</span>
+    </button>
+    <button id="btn-console">
+      <span>2. Executive Pro Console</span>
+      <span class="btn-tag">KPIs</span>
+    </button>
+    <button id="btn-hierarchy">
+      <span>3. Console Team Hierarchy Table</span>
+      <span class="btn-tag">3 Layers</span>
+    </button>
+    <button id="btn-lms">
+      <span>4. York.IE LMS Platform</span>
+      <span class="btn-tag">Courses</span>
+    </button>
+  </div>
+
+  <div class="section-title">Activity Log</div>
+  <div id="log">Waiting for bridge connection...</div>
+
+  <script>
+    const dot = document.getElementById('status-dot');
+    const statusText = document.getElementById('status-text');
+    const logBox = document.getElementById('log');
+
+    function log(msg, type = '') {
+      const el = document.createElement('div');
+      el.className = 'log-entry ' + type;
+      el.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+      logBox.appendChild(el);
+      logBox.scrollTop = logBox.scrollHeight;
+    }
+
+    // Connect to Server-Sent Events on localhost:3055
+    function connectBridge() {
+      try {
+        const evtSource = new EventSource('http://localhost:3055/events');
+        
+        evtSource.onopen = () => {
+          dot.className = 'dot connected';
+          statusText.textContent = 'Bridge Online';
+          log('Connected to AI Bridge on localhost:3055', 'success');
+        };
+
+        evtSource.onmessage = (event) => {
+          try {
+            const data = JSON.parse(event.data);
+            log(`Received command from AI: ${data.action || 'push'}`, 'info');
+            parent.postMessage({ pluginMessage: data }, '*');
+          } catch(e) {
+            console.error(e);
+          }
+        };
+
+        evtSource.onerror = () => {
+          dot.className = 'dot';
+          statusText.textContent = 'Standby (Offline)';
+        };
+      } catch (err) {
+        dot.className = 'dot';
+        statusText.textContent = 'Standby';
+        log('Could not connect to SSE, fallback to manual triggers.', '');
+      }
+    }
+
+    connectBridge();
+
+    // Button event listeners
+    document.getElementById('btn-all').addEventListener('click', () => {
+      log('Triggering: Push All Screens...', 'info');
+      parent.postMessage({ pluginMessage: { action: 'GENERATE_ALL' } }, '*');
+    });
+
+    document.getElementById('btn-landing').addEventListener('click', () => {
+      log('Triggering: Landing Page (1440px)...', 'info');
+      parent.postMessage({ pluginMessage: { action: 'GENERATE_LANDING' } }, '*');
+    });
+
+    document.getElementById('btn-console').addEventListener('click', () => {
+      log('Triggering: Executive Pro Console (1440px)...', 'info');
+      parent.postMessage({ pluginMessage: { action: 'GENERATE_CONSOLE' } }, '*');
+    });
+
+    document.getElementById('btn-hierarchy').addEventListener('click', () => {
+      log('Triggering: Team Hierarchy Table (1440px)...', 'info');
+      parent.postMessage({ pluginMessage: { action: 'GENERATE_HIERARCHY' } }, '*');
+    });
+
+    document.getElementById('btn-lms').addEventListener('click', () => {
+      log('Triggering: York.IE LMS Platform (1440px)...', 'info');
+      parent.postMessage({ pluginMessage: { action: 'GENERATE_LMS' } }, '*');
+    });
+
+    // Listen to messages back from code.js
+    window.onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      if (!msg) return;
+      if (msg.type === 'LOG') {
+        log(msg.message, msg.level || '');
+      }
+    };
+  </script>
+</body>
+</html>
