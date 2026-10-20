@@ -11,9 +11,13 @@
 <script>
   (function(){
     try {
+      var search = window.location.search || '';
+      if (search.indexOf('preview') !== -1 || search.indexOf('direct') !== -1 || search.indexOf('figma') !== -1) {
+        sessionStorage.setItem('york_session_active', 'true');
+      }
       var nav = (window.performance && performance.getEntriesByType) ? performance.getEntriesByType('navigation')[0] : null;
       var isReload = (nav && nav.type === 'reload') || (window.performance && performance.navigation && performance.navigation.type === 1);
-      if (isReload || !sessionStorage.getItem('york_session_active')) {
+      if ((isReload || !sessionStorage.getItem('york_session_active')) && search.indexOf('preview') === -1 && search.indexOf('direct') === -1 && search.indexOf('figma') === -1) {
         sessionStorage.removeItem('york_session_active');
         window.location.replace('index.html');
         return;
