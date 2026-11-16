@@ -7395,8 +7395,8 @@
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
-        <a href="login.html" class="signin" id="openConsoleBtnNav">Sign in</a>
-        <a href="login.html" class="btn btn-primary btn-shimmer" id="openConsoleBtnGetStarted" style="padding: 8px 18px; font-size: 0.85rem;">
+        <a href="dashboard-v3.html" class="signin" id="openConsoleBtnNav">Sign in</a>
+        <a href="dashboard-v3.html" class="btn btn-primary btn-shimmer" id="openConsoleBtnGetStarted" style="padding: 8px 18px; font-size: 0.85rem;">
           Get started
         </a>
       </div>
@@ -9864,37 +9864,6 @@
 
     renderServices();
 
-    /* ─── CONSOLE SELECTION SCREEN MODAL LOGIC ─── */
-    const consoleModal = document.getElementById('consoleSelectModal');
-    const closeConsoleBtn = document.getElementById('closeConsoleSelectBtn');
-    
-    function openConsoleModal(e) {
-      if (e) e.preventDefault();
-      if (consoleModal) {
-        consoleModal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-      }
-    }
-    
-    function closeConsoleModal() {
-      if (consoleModal) {
-        consoleModal.style.display = 'none';
-        document.body.style.overflow = '';
-      }
-    }
-
-    if (closeConsoleBtn) closeConsoleBtn.addEventListener('click', closeConsoleModal);
-    if (consoleModal) {
-      consoleModal.addEventListener('click', (e) => {
-        if (e.target === consoleModal) closeConsoleModal();
-      });
-    }
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && consoleModal && consoleModal.style.display === 'flex') {
-        closeConsoleModal();
-      }
-    });
-
     // Reset console session on website home so hard refresh / direct entry always stays on the website
     try {
       sessionStorage.removeItem('york_session_active');
@@ -9905,7 +9874,7 @@
       try {
         sessionStorage.setItem('york_session_active', 'true');
       } catch (err) {}
-      window.location.href = 'login.html';
+      window.location.href = 'dashboard-v3.html';
     }
 
     const navSignIn = document.getElementById('openConsoleBtnNav');
@@ -9913,123 +9882,11 @@
     if (navSignIn) navSignIn.addEventListener('click', handleSignInRedirect);
     if (navGetStarted) navGetStarted.addEventListener('click', handleSignInRedirect);
 
-    // Also wire any .signin or data-open-console elements to redirect to login.html
+    // Also wire any .signin or data-open-console elements to redirect to dashboard-v3.html
     document.querySelectorAll('.signin, [data-open-console]').forEach(el => {
       el.addEventListener('click', handleSignInRedirect);
     });
   })();
 </script>
-
-<!-- ================= CONSOLE SELECTION SCREEN MODAL ================= -->
-<div id="consoleSelectModal" class="console-select-backdrop" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="consoleSelectTitle">
-  <div class="console-select-dialog">
-    <!-- Close button -->
-    <button type="button" class="console-select-close" id="closeConsoleSelectBtn" aria-label="Close selection screen">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-    
-    <!-- Header -->
-    <div class="console-select-header">
-      <div class="console-select-brand">
-        <img src="favicon.png" alt="York" style="width:28px;height:28px;border-radius:7px;">
-        <span style="font-weight:700;font-size:16px;color:var(--ink-primary);letter-spacing:-0.02em">York Foundation</span>
-      </div>
-      <h2 id="consoleSelectTitle" class="console-select-title">Choose Console Version</h2>
-      <p class="console-select-sub">Select between Version 1 (Minimal) and Version 2 (Executive Pro) to launch your workspace console.</p>
-    </div>
-
-    <!-- 2 Version Selection Cards Grid -->
-    <div class="console-cards-grid">
-      <!-- Card 1: Version 1 Minimal Layout -->
-      <a href="dashboard-v1.html" class="console-choice-card" id="choiceCardV1">
-        <div class="console-choice-badge">
-          <span class="choice-tag tag-minimal">version-1</span>
-          <span class="choice-rec">Minimal Console</span>
-        </div>
-        <div class="console-choice-icon-row">
-          <div class="choice-ic-bubble" style="background:#ECFDF5;color:#047857;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
-          </div>
-          <div class="choice-ic-meta">
-            <h3 class="choice-title">Version 1</h3>
-            <span class="choice-flavor">Clean · Compact · Low Distraction</span>
-          </div>
-        </div>
-        <p class="choice-desc">Minimal operations console with 240px collapsible sidebar, 4 key KPI cards, integrated product journey stage rail, and fast operations stream.</p>
-        <ul class="choice-features-list">
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 240px sidebar with all 23 live services</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 7-stage Product Journey timeline flow</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Active initiatives progress &amp; straight dividers</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-header v1 / v2 tabs to switch anytime</li>
-        </ul>
-        <span class="choice-launch-btn btn-v1">
-          <span>Launch Version 1</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </span>
-      </a>
-
-      <!-- Card 2: Version 2 Modern Executive Pro Layout -->
-      <a href="dashboard.html" class="console-choice-card" id="choiceCardV2">
-        <div class="console-choice-badge">
-          <span class="choice-tag tag-pro">version-2</span>
-          <span class="choice-rec highlight">Executive Pro Console</span>
-        </div>
-        <div class="console-choice-icon-row">
-          <div class="choice-ic-bubble" style="background:#EFF6FF;color:#1D4ED8;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <div class="choice-ic-meta">
-            <h3 class="choice-title">Version 2</h3>
-            <span class="choice-flavor">Collapsible Sidebar · Resource Strip</span>
-          </div>
-        </div>
-        <p class="choice-desc">Modern enterprise layout with collapsible floating sidebar, executive billing resource strip, and full 8-gate product quality telemetry.</p>
-        <ul class="choice-features-list">
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Collapsible floating sidebar with icon collapse mode</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Executive billing &amp; compute resource strip</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Initiatives velocity column chart &amp; live stream</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-header v1 / v2 / v3 tabs to switch anytime</li>
-        </ul>
-        <span class="choice-launch-btn btn-v2">
-          <span>Launch Version 2</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </span>
-      </a>
-
-      <!-- Card 3: Version 3 Website-Matched Theme Layout -->
-      <a href="dashboard-v3.html" class="console-choice-card featured" id="choiceCardV3">
-        <div class="console-choice-badge">
-          <span class="choice-tag tag-pro" style="background:#ECFDF5;color:#047857;border-color:rgba(16,185,129,0.35)">version-3</span>
-          <span class="choice-rec highlight" style="color:#059669">Website Matched · New</span>
-        </div>
-        <div class="console-choice-icon-row">
-          <div class="choice-ic-bubble" style="background:linear-gradient(135deg, #10B981, #059669);color:#FFFFFF;box-shadow:0 4px 12px rgba(16,185,129,0.3)">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          </div>
-          <div class="choice-ic-meta">
-            <h3 class="choice-title">Version 3</h3>
-            <span class="choice-flavor">Website Design Theme · Dual Light &amp; Dark</span>
-          </div>
-        </div>
-        <p class="choice-desc">Identical console features styled in the York website visual language: crisp pure white light mode, rich deep-navy dark mode (#0B0F19), ambient glow orbs, and unified CTA system.</p>
-        <ul class="choice-features-list">
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1:1 Website color tokens (#FFFFFF light / #0B0F19 dark)</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Soft ambient aurora background glow &amp; 20px card radii</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Complete feature parity with Executive Pro &amp; all 23 services</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-header v1 / v2 / v3 tabs to switch anytime</li>
-        </ul>
-        <span class="choice-launch-btn btn-v2" style="background:linear-gradient(135deg, #10B981 0%, #059669 100%);box-shadow:0 4px 16px rgba(16,185,129,0.35)">
-          <span>Launch Version 3</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </span>
-      </a>
-    </div>
-
-    <!-- Footer helper -->
-    <div class="console-select-foot">
-      <span>You can freely toggle between Version 1, Version 2, and Version 3 inside any dashboard topbar.</span>
-    </div>
-  </div>
-</div>
 </body>
 </html>
