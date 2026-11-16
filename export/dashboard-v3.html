@@ -7,6 +7,7 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://unpkg.com/lucide@0.468.0"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -47,206 +48,2889 @@
 
   <style>
 
-/* ─── ULTRA-PREMIUM YORK IE DESIGN SYSTEM ─── */
+/* ─── YORK DESIGN TOKENS (EXECUTIVE PRO CONSOLE — WCAG AA/AAA COMPLIANT) ─── */
 :root, :root[data-theme="light"] {
-  --york-forest: #083e2e;
-  --york-forest-dark: #052b20;
-  --york-emerald: #0b5e43;
-  --york-emerald-light: #059669;
-  --york-accent: #10b981;
-  --york-mint: #34d399;
-  --york-light-green: #e6f7ef;
-  --york-text-green: #065f46;
-  --york-dark: #0f172a;
-  --york-slate: #334155;
-  --york-muted: #64748b;
-  --york-border: #e2e8f0;
-  --york-border-subtle: rgba(226, 232, 240, 0.85);
-  --york-bg: #f8fafc;
-  --york-card: #ffffff;
-  --york-glass: rgba(255, 255, 255, 0.88);
+  --bg-app: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-pill: #FFFFFF;
+  --bg-pill-hover: #F1F5F9;
+  --bg-subtle: #F8FAFC;
+  --bg-subtle-2: #F1F5F9;
+  --bg-drawer: rgba(255, 255, 255, 0.98);
+  
+  --line: #E2E8F0;
+  --line-strong: #CBD5E1;
+  
+  --text-main: #0F172A;        /* 15.8:1 contrast on white (WCAG AAA) */
+  --text-secondary: #334155;   /* 10.35:1 contrast on white (WCAG AAA) */
+  --text-muted: #475569;       /* 7.58:1 contrast on white (WCAG AAA) */
+  --text-faint: #64748B;       /* 4.76:1 contrast on white (WCAG AA) */
+  
+  /* York Signature Brand Palette (Calibrated directly from official York logo #00B48A) */
+  --emerald: #00B48A;          /* Official York Logo Green (Graphic/UI accent) */
+  --emerald-dark: #005E44;     /* 7.82:1 contrast on white for text/badges (WCAG AAA) */
+  --emerald-accent: #007A5A;   /* 5.34:1 contrast on white for interactive links/focus (WCAG AA) */
+  --emerald-light: #D1FAE5;    /* 10% tint for badge backgrounds */
+  --emerald-subtle: #ECFDF5;   /* 5% tint for subtle highlights */
+  --btn-primary-bg: #007A5A;   /* 5.34:1 accessible button fill for white text (WCAG AA) */
+  --btn-primary-hover: #005E44;
+  
+  /* Unified Website CTA Button Tokens (Exact Website Navbar & Flagship CTA) */
+  --cta-primary-bg: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  --cta-primary-hover-bg: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+  --cta-primary-color: #FFFFFF;
+  --cta-primary-border: rgba(255, 255, 255, 0.22);
+  --cta-primary-shadow: 0 4px 16px rgba(16, 185, 129, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  --cta-primary-shadow-hover: 0 8px 28px rgba(16, 185, 129, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  --cta-radius: 8px;
+  
+  --shadow-dock: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+  --shadow-pill: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-drawer: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+  
+  --radius-card: 16px;
+  --radius-pill: 9999px;
+  --radius-btn: 10px;
+  
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 :root[data-theme="dark"] {
-  --york-forest: #10b981;
-  --york-forest-dark: #059669;
-  --york-emerald: #10b981;
-  --york-emerald-light: #34d399;
-  --york-accent: #34d399;
-  --york-mint: #6ee7b7;
-  --york-light-green: rgba(16, 185, 129, 0.15);
-  --york-text-green: #6ee7b7;
-  --york-dark: #f8fafc;
-  --york-slate: #cbd5e1;
-  --york-muted: #94a3b8;
-  --york-border: #1e293b;
-  --york-border-subtle: rgba(30, 41, 59, 0.9);
-  --york-bg: #0b1120;
-  --york-card: #131d31;
-  --york-glass: rgba(19, 29, 49, 0.88);
+  --bg-app: #080C14;
+  --bg-card: #0F1626;
+  --bg-card-dark: #070B12;
+  --bg-pill: #172033;
+  --bg-pill-hover: #1E2B45;
+  --bg-subtle: #131C2E;
+  --bg-subtle-2: #1B2842;
+  --bg-drawer: rgba(15, 22, 38, 0.98);
+  
+  --line: rgba(255, 255, 255, 0.10);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  
+  --text-main: #F8FAFC;        /* 16.5:1 contrast on dark base (WCAG AAA) */
+  --text-secondary: #E2E8F0;   /* 13.8:1 contrast on dark base (WCAG AAA) */
+  --text-muted: #94A3B8;       /* 7.3:1 contrast on dark base (WCAG AAA) */
+  --text-faint: #CBD5E1;       /* 11.4:1 contrast on dark base (WCAG AAA) */
+  
+  /* York Signature Brand Palette (Dark Mode: calibrated for high contrast on dark surfaces) */
+  --emerald: #00D6A4;          /* Bright York Logo Green (10.2:1 contrast on dark canvas) */
+  --emerald-dark: #00D6A4;     /* Legible high-contrast green for dark mode text */
+  --emerald-light: rgba(0, 180, 138, 0.22);
+  --emerald-subtle: rgba(0, 180, 138, 0.14);
+  --emerald-accent: #34D399;
+  --btn-primary-bg: #00B48A;   /* Primary action button on dark */
+  --btn-primary-hover: #00D6A4;
+  
+  /* Unified Website CTA Button Tokens (Dark Mode) */
+  --cta-primary-bg: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  --cta-primary-hover-bg: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+  --cta-primary-color: #FFFFFF;
+  --cta-primary-border: rgba(255, 255, 255, 0.25);
+  --cta-primary-shadow: 0 4px 20px rgba(16, 185, 129, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  --cta-primary-shadow-hover: 0 8px 30px rgba(16, 185, 129, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  
+  --shadow-dock: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --shadow-pill: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-drawer: 0 24px 60px rgba(0, 0, 0, 0.6);
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: var(--font-sans);
 }
 
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background-color: var(--york-bg);
-  color: var(--york-dark);
-  line-height: 1.5;
+html, body {
+  height: 100%;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-size: 13.5px;
+  line-height: 1.45;
   -webkit-font-smoothing: antialiased;
-  background-image: 
-    radial-gradient(circle at 10% 10%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 90% 90%, rgba(8, 62, 46, 0.06) 0%, transparent 45%);
-  background-attachment: fixed;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.font-mono-numbers {
-  font-family: 'JetBrains Mono', monospace;
-  font-feature-settings: 'tnum' on, 'zero' on;
+/* WCAG Accessible Focus Rings */
+:focus-visible {
+  outline: 2px solid var(--emerald-accent);
+  outline-offset: 2px;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
 }
 
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
+input {
+  font: inherit;
+  color: inherit;
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-/* Scrollbars */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+i[data-lucide], svg.lucide {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  stroke-width: 1.8;
+  pointer-events: none;
 }
-::-webkit-scrollbar-track {
+
+.mono { font-family: var(--font-mono); }
+
+/* ─── SHELL STRUCTURE (FLOATING SIDEBAR + CANVAS) ─── */
+.canvas-wrapper {
+  display: flex;
+  min-height: 100vh;
+  padding: 16px;
+  gap: 16px;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   FLOATING SIDEBAR NAVIGATION WITH EXPAND & COLLAPSE
+   ═════════════════════════════════════════════════════════════════ */
+.permanent-sidebar {
+  width: 260px;
+  min-width: 260px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 16px;
+  left: 16px;
+  height: calc(100vh - 32px);
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 40;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), min-width 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s ease;
+}
+
+/* Collapsed Floating Sidebar - Strictly Show Icons Only */
+.permanent-sidebar.collapsed {
+  width: 72px;
+  min-width: 72px;
+}
+.permanent-sidebar.collapsed .sidebar-header {
+  padding: 14px 6px 12px;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+.permanent-sidebar.collapsed .sidebar-brand-box {
+  justify-content: center;
+  width: 100%;
+}
+.permanent-sidebar.collapsed .sidebar-brand-logo {
+  height: 26px;
+  width: auto;
+}
+.permanent-sidebar.collapsed .sidebar-brand-box span,
+.permanent-sidebar.collapsed .sidebar-workspace-pill span,
+.permanent-sidebar.collapsed .sidebar-ws-tag,
+.permanent-sidebar.collapsed .sidebar-workspace-pill svg,
+.permanent-sidebar.collapsed .sidebar-workspace-pill i,
+.permanent-sidebar.collapsed .sidebar-main-nav-btn span,
+.permanent-sidebar.collapsed .sidebar-category-title,
+.permanent-sidebar.collapsed .sidebar-nav-item .sidebar-nav-label,
+.permanent-sidebar.collapsed .sidebar-nav-item .sidebar-badge,
+.permanent-sidebar.collapsed .sidebar-compute-meter,
+.permanent-sidebar.collapsed .sidebar-user-tile div:not(.sidebar-user-avatar),
+.permanent-sidebar.collapsed .sidebar-user-tile svg,
+.permanent-sidebar.collapsed .sidebar-user-tile i {
+  display: none !important;
+}
+.permanent-sidebar.collapsed .sidebar-workspace-pill {
+  margin: 10px 8px 6px;
+  padding: 8px 0;
+  justify-content: center;
+  width: calc(100% - 16px);
+}
+.permanent-sidebar.collapsed .sidebar-primary-nav {
+  padding: 8px 4px;
+  align-items: center;
+}
+.permanent-sidebar.collapsed .sidebar-main-nav-btn {
+  justify-content: center;
+  padding: 0;
+  width: 44px;
+  height: 40px;
+  margin: 0 auto;
+}
+.permanent-sidebar.collapsed .sidebar-main-nav-btn i,
+.permanent-sidebar.collapsed .sidebar-main-nav-btn svg {
+  margin: 0 auto;
+  width: 18px;
+  height: 18px;
+}
+.permanent-sidebar.collapsed .sidebar-nav-scroll {
+  padding: 6px 4px;
+}
+.permanent-sidebar.collapsed .sidebar-category-group {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.permanent-sidebar.collapsed .sidebar-nav-item {
+  justify-content: center;
+  padding: 0;
+  width: 44px;
+  height: 40px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+.permanent-sidebar.collapsed .sidebar-nav-item i,
+.permanent-sidebar.collapsed .sidebar-nav-item svg {
+  margin: 0 auto;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.permanent-sidebar.collapsed .sidebar-footer {
+  padding: 12px 6px;
+}
+.permanent-sidebar.collapsed .sidebar-user-tile {
+  justify-content: center;
+  padding: 4px 0;
+}
+.permanent-sidebar.collapsed .sidebar-user-avatar {
+  margin: 0 auto;
+}
+
+.sidebar-header {
+  padding: 16px 18px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+.sidebar-brand-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.sidebar-brand-logo {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+.sidebar-brand-logo.logo-dark-mode { display: none; }
+.sidebar-brand-logo.logo-light-mode { display: block; }
+:root[data-theme="dark"] .sidebar-brand-logo.logo-dark-mode { display: block; }
+:root[data-theme="dark"] .sidebar-brand-logo.logo-light-mode { display: none; }
+.sidebar-collapse-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.sidebar-collapse-btn:hover {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+}
+
+.sidebar-workspace-pill {
+  margin: 12px 14px 6px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-subtle);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.sidebar-workspace-pill:hover {
+  border-color: var(--line-strong);
+  background: var(--bg-pill-hover);
+}
+.sidebar-ws-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+}
+
+/* Primary Top 4 Navigation in Sidebar */
+.sidebar-primary-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 12px 10px;
+  border-bottom: 1px solid var(--line);
+}
+.sidebar-main-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
   background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
 }
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+.sidebar-main-nav-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+}
+.sidebar-main-nav-btn.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: rgba(0, 179, 137, 0.3);
+}
+.sidebar-main-nav-btn i {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar-nav-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 12px 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+.sidebar-category-group {
+  margin-top: 16px;
+}
+.sidebar-category-group:first-child {
+  margin-top: 4px;
+}
+.sidebar-category-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 6px 10px 4px;
+}
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.12s;
+  cursor: pointer;
+}
+.sidebar-nav-item:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+}
+.sidebar-nav-item.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  font-weight: 600;
+}
+:root[data-theme="dark"] .sidebar-nav-item.active {
+  background: rgba(0, 179, 137, 0.2);
+  color: #34D399;
+}
+.sidebar-nav-item i {
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+}
+.sidebar-nav-item.active i {
+  color: var(--emerald-dark);
+}
+:root[data-theme="dark"] .sidebar-nav-item.active i {
+  color: #34D399;
+}
+.sidebar-nav-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sidebar-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+}
+.sidebar-badge.new {
+  background: var(--emerald-light);
+  color: var(--emerald-dark);
+}
+
+.sidebar-footer {
+  border-top: 1px solid var(--line);
+  padding: 12px 14px;
+  background: var(--bg-card);
+}
+.sidebar-compute-meter {
+  padding: 9px 12px;
+  border-radius: 12px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.sidebar-compute-meter:hover {
+  border-color: var(--line-strong);
+}
+.sidebar-compute-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.sidebar-compute-bar {
+  height: 5px;
+  background: var(--bg-subtle-2);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.sidebar-compute-bar i {
+  display: block;
+  height: 100%;
+  width: 61%;
+  background: var(--emerald);
+  border-radius: 99px;
+}
+
+.sidebar-user-tile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.sidebar-user-tile:hover {
+  background: var(--bg-subtle);
+}
+.sidebar-user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #00B389;
+  color: #FFFFFF;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+
+/* ─── MAIN DESK CANVAS ─── */
+.desk-canvas {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 6px 12px 36px 6px;
+  max-width: 1560px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ─── SINGLE UNIFIED ROUNDED TOPBAR TAB / CAPSULE DOCK ─── */
+.floating-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  position: relative;
+  width: 100%;
+  height: 56px;
+  padding: 6px 8px 6px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.03);
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+:root[data-theme="dark"] .floating-topbar {
+  background: var(--bg-card);
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* Left Group: Breadcrumbs + Vertical Divider + Theme Switcher */
+.topbar-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.topbar-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+
+.topbar-crumb-org {
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.topbar-crumb-slash {
+  color: var(--text-muted);
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+.topbar-crumb-view {
+  font-weight: 600;
+  color: var(--emerald-dark);
+}
+
+:root[data-theme="dark"] .topbar-crumb-view {
+  color: #00D6A4;
+}
+
+.topbar-v-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--line);
+  flex-shrink: 0;
+}
+
+/* Version Switcher embedded seamlessly */
+.version-switch-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: var(--bg-subtle);
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+}
+
+:root[data-theme="dark"] .version-switch-pill {
+  background: #080C14;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.version-switch-lbl {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 0 6px 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.v-tab-btn {
+  padding: 4px 11px;
+  border-radius: var(--radius-pill);
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.v-tab-btn:hover {
+  color: var(--text-main);
+  background: var(--bg-pill-hover);
+}
+
+.v-tab-btn.active {
+  font-weight: 700;
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border: 1px solid rgba(0, 179, 137, 0.35);
+}
+
+:root[data-theme="dark"] .v-tab-btn.active {
+  background: rgba(0, 180, 138, 0.18);
+  color: #00D6A4;
+  border-color: rgba(0, 180, 138, 0.35);
+}
+
+/* WIDE SEARCH BAR (Generous width, single line, no overlap) */
+.top-search-pill {
+  flex: 1;
+  min-width: 240px;
+  max-width: 440px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 14px 0 16px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+.top-search-pill:hover {
+  background: var(--bg-pill-hover);
+  border-color: var(--line-strong);
+  color: var(--text-main);
+}
+
+:root[data-theme="dark"] .top-search-pill {
+  background: #080C14;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+}
+
+:root[data-theme="dark"] .top-search-pill:hover {
+  background: #101827;
+  border-color: rgba(0, 180, 138, 0.35);
+  color: var(--text-main);
+}
+
+.top-search-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.top-search-inner i, .top-search-inner svg {
+  width: 15px;
+  height: 15px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.top-search-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.top-search-kbd {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+:root[data-theme="dark"] .top-search-kbd {
+  background: #141E32;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--text-muted);
+}
+
+/* Right Actions Group (Buttons neatly seated inside dock) */
+.topbar-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.topbar-action-btn, .top-circle-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.topbar-action-btn:hover, .top-circle-btn:hover {
+  background: var(--bg-pill-hover);
+  color: var(--text-main);
+  border-color: var(--line-strong);
+}
+
+:root[data-theme="dark"] .topbar-action-btn,
+:root[data-theme="dark"] .top-circle-btn {
+  background: #080C14;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="dark"] .topbar-action-btn:hover,
+:root[data-theme="dark"] .top-circle-btn:hover {
+  background: #141E32;
+  color: #F8FAFC;
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.topbar-bell-dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #EF4444;
+  border: 1.5px solid var(--bg-card);
+}
+
+.topbar-user-avatar, .top-user-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--emerald-dark);
+  color: #FFFFFF;
+  font-size: 12.5px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border: 2px solid var(--bg-card);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.15s;
+  box-sizing: border-box;
+}
+
+:root[data-theme="dark"] .topbar-user-avatar,
+:root[data-theme="dark"] .top-user-avatar {
+  background: rgba(0, 180, 138, 0.22);
+  color: #00D6A4;
+  border-color: rgba(0, 180, 138, 0.35);
+}
+
+/* ─── PAGE TITLE & PILL CONTROLS ROW ─── */
+.title-controls-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.page-headline-wrap {
+  display: flex;
+  flex-direction: column;
+}
+.page-headline-lead {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.controls-pill-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Date Range Pill - Standardized 38px Height */
+.date-pill {
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-pill);
+  box-sizing: border-box;
+  font-size: 12.5px;
+  color: var(--text-main);
+}
+.date-pill i {
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.date-pill-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.date-pill-label {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.date-pill-val {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* Export / Action CTA Button - Standardized 38px Height matching Website CTA System */
+.export-pill-btn {
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 16px;
+  background: var(--cta-primary-bg) !important;
+  color: var(--cta-primary-color) !important;
+  border-radius: var(--cta-radius) !important; /* Strict 8px crisp corners matching website */
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  box-shadow: var(--cta-primary-shadow) !important;
+  border: 1px solid var(--cta-primary-border) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+.export-pill-btn:hover {
+  background: var(--cta-primary-hover-bg) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: var(--cta-primary-shadow-hover) !important;
+}
+.export-pill-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+}
+.export-pill-btn:hover::after {
+  left: 140%;
+}
+.export-pill-btn i, .export-pill-btn svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+.export-pill-btn:hover i, .export-pill-btn:hover svg {
+  transform: translate(1px, -1px);
+}
+
+/* ─── 4-CARD METRIC DECK (COMPLETE KPI TELEMETRY) ─── */
+.metrics-card-deck {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.deck-card {
+  padding: 22px 24px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+  background: var(--bg-card);
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+}
+.deck-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+/* Card 1: Featured Primary Accent */
+.deck-card.primary-accent-card {
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1.5px solid var(--emerald-light);
+}
+.deck-card.primary-accent-card .deck-arrow-btn {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+}
+:root[data-theme="dark"] .deck-card.primary-accent-card {
+  border-color: rgba(0, 179, 137, 0.4);
+}
+:root[data-theme="dark"] .deck-card.primary-accent-card .deck-arrow-btn {
+  background: rgba(0, 179, 137, 0.22);
+  color: #34D399;
+}
+
+.deck-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.deck-card-label {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.deck-card.primary-accent-card .deck-card-label {
+  color: var(--text-main);
+  font-weight: 600;
+}
+.deck-arrow-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.deck-card:hover .deck-arrow-btn {
+  transform: translate(2px, -2px);
+}
+.deck-arrow-btn i {
+  width: 15px;
+  height: 15px;
+}
+
+.deck-card-value {
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin: 10px 0 4px;
+}
+.deck-card-value small {
+  font-size: 18px;
+  font-weight: 500;
+  opacity: 0.65;
+}
+
+.deck-card-caption {
+  font-size: 12.5px;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.deck-card-caption b {
+  font-weight: 600;
+  color: var(--emerald-dark);
+}
+.deck-card-caption .dot-sep {
+  opacity: 0.5;
+}
+
+/* ─── EXECUTIVE BILLING & COMPUTE RESOURCE CARD ─── */
+.billing-executive-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 14px 0 20px;
+  transition: all 0.2s ease;
+}
+:root[data-theme="dark"] .billing-executive-card {
+  background: #172033;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.billing-segment {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.billing-plan-seg {
+  flex: 0 0 auto;
+}
+.billing-plan-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border: 1px solid rgba(0, 179, 137, 0.25);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+:root[data-theme="dark"] .billing-plan-icon {
+  background: rgba(0, 179, 137, 0.18);
+  color: #34D399;
+}
+.billing-plan-icon svg, .billing-plan-icon i {
+  width: 18px;
+  height: 18px;
+}
+.billing-seg-content {
+  display: flex;
+  flex-direction: column;
+}
+.billing-plan-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.billing-plan-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+.billing-live-tag {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 1.5px 6px;
+  border-radius: 4px;
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border: 1px solid rgba(0, 179, 137, 0.3);
+  letter-spacing: 0.05em;
+}
+:root[data-theme="dark"] .billing-live-tag {
+  background: rgba(0, 179, 137, 0.15);
+  color: #34D399;
+  border-color: rgba(52, 211, 153, 0.3);
+}
+.billing-plan-meta {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+.billing-v-divider {
+  width: 1px;
+  height: 30px;
+  background: var(--line);
+  flex-shrink: 0;
+}
+.billing-compute-seg {
+  flex: 1 1 320px;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.billing-compute-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+}
+.billing-compute-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.billing-compute-title svg, .billing-compute-title i {
+  width: 13px;
+  height: 13px;
+  color: var(--emerald);
+}
+.billing-compute-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.billing-pct-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--emerald-dark);
+  background: var(--emerald-subtle);
+  border: 1px solid rgba(0, 179, 137, 0.25);
+  padding: 0 6px;
+  border-radius: 99px;
+}
+:root[data-theme="dark"] .billing-pct-pill {
+  background: rgba(0, 179, 137, 0.18);
+  color: #34D399;
+}
+.billing-tokens-count {
+  font-size: 11.5px;
+  color: var(--text-main);
+  font-weight: 600;
+}
+.billing-tokens-total {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 11px;
+}
+.billing-progress-track {
+  height: 6px;
+  background: var(--bg-subtle-2);
+  border-radius: 99px;
+  overflow: hidden;
+  width: 100%;
+}
+.billing-progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--emerald);
+  transition: width 0.4s ease;
+}
+.billing-stats-seg {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+.billing-mini-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.billing-stat-caption {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.billing-stat-value {
+  font-size: 13px;
+  color: var(--text-main);
+}
+.billing-stat-max {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-left: 2px;
+}
+.billing-tier-chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  border: 1px solid var(--line);
+}
+.billing-action-seg {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.billing-manage-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: var(--cta-radius) !important; /* Strict 8px crisp corners matching website */
+  background: var(--cta-primary-bg) !important;
+  color: var(--cta-primary-color) !important;
+  border: 1px solid var(--cta-primary-border) !important;
+  box-shadow: var(--cta-primary-shadow) !important;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+.billing-manage-btn:hover {
+  background: var(--cta-primary-hover-bg) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: var(--cta-primary-shadow-hover) !important;
+}
+.billing-manage-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+}
+.billing-manage-btn:hover::after {
+  left: 140%;
+}
+.billing-manage-btn svg, .billing-manage-btn i {
+  width: 13px;
+  height: 13px;
+  transition: transform 0.2s ease;
+}
+.billing-manage-btn:hover svg, .billing-manage-btn:hover i {
+  transform: translateX(3px);
+}
+@media (max-width: 1100px) {
+  .billing-executive-card {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+}
+@media (max-width: 768px) {
+  .billing-executive-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .billing-v-divider { display: none; }
+  .billing-compute-seg { max-width: 100%; }
+  .billing-stats-seg { justify-content: space-between; }
+  .billing-action-seg { justify-content: flex-end; }
+}
+
+/* ─── 2-CARD BOTTOM SECTION (SPACIOUS EXECUTIVE SPLIT) ─── */
+.bottom-cards-row {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.feature-large-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 24px 26px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.feature-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.feature-card-heading-box {
+  display: flex;
+  flex-direction: column;
+}
+.feature-card-title {
+  font-size: 17.5px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+.feature-card-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.feature-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-filter-pill {
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-subtle);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.card-filter-pill:hover, .card-filter-pill.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+}
+.card-round-icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.card-round-icon-btn:hover {
+  background: var(--bg-subtle-2);
+  color: var(--text-main);
+}
+.card-round-icon-btn.open {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+  box-shadow: 0 0 0 3px var(--emerald-subtle);
+}
+.card-round-icon-btn.has-filter {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald);
+}
+.card-filter-dropdown-wrap {
+  position: relative;
+}
+/* Ensure [hidden] always hides regardless of flex/grid/block on classes */
+[hidden] {
+  display: none !important;
+}
+.card-filter-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 290px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+  z-index: 100;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: filterPop 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-filter-popover[hidden] {
+  display: none !important;
+}
+:root[data-theme="dark"] .card-filter-popover {
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  background: #141E32;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+@keyframes filterPop {
+  from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.filter-popover-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.filter-popover-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.filter-popover-title i, .filter-popover-title svg {
+  width: 13px;
+  height: 13px;
+  color: var(--emerald);
+}
+.filter-popover-close {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.filter-popover-close:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+  border-color: var(--line);
+}
+.filter-popover-close i, .filter-popover-close svg {
+  width: 13px;
+  height: 13px;
+  pointer-events: none;
+}
+.filter-popover-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.filter-popover-subhead {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+}
+.filter-popover-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.popover-chip {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.popover-chip:hover {
+  background: var(--bg-subtle-2);
+  color: var(--text-main);
+}
+.popover-chip.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+  font-weight: 700;
+}
+:root[data-theme="dark"] .popover-chip.active {
+  background: rgba(0, 180, 138, 0.2);
+  color: #34D399;
+  border-color: rgba(0, 180, 138, 0.4);
+}
+.filter-popover-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.filter-popover-reset {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 6px;
   border-radius: 4px;
 }
-.dark ::-webkit-scrollbar-thumb {
-  background: #334155;
+.filter-popover-reset:hover {
+  color: var(--text-main);
+  background: var(--bg-subtle);
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+.filter-popover-apply {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: var(--emerald);
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.filter-popover-apply:hover {
+  opacity: 0.9;
 }
 
-/* Elevated Glass Cards */
-.clean-card {
-  background: var(--york-card);
-  border: 1px solid var(--york-border-subtle);
-  border-radius: 16px;
-  padding: 1.25rem 1.4rem;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03), 0 4px 16px -4px rgba(15, 23, 42, 0.03);
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+/* Services filter close button */
+.services-filter-close-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.services-filter-close-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+  border-color: var(--line);
+}
+.services-filter-close-btn i, .services-filter-close-btn svg {
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+
+/* ─── LEFT CARD: INITIATIVES DELIVERY COLUMN BARS + DATA LIST ─── */
+.chart-columns-visual {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  align-items: flex-end;
+  padding: 44px 16px 22px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.bar-column-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+.bar-column-pill-track {
+  width: 100%;
+  max-width: 44px;
+  height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  background: rgba(15, 23, 42, 0.04);
+  border-radius: 8px;
+  border: 1px solid rgba(15, 23, 42, 0.04);
+}
+:root[data-theme="dark"] .bar-column-pill-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.bar-pillar {
+  width: 100%;
+  border-radius: 6px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+.bar-column-item:hover .bar-pillar {
+  transform: scaleY(1.03);
+}
+
+/* Decent, High-Craft Solid Colors for Bars (Strictly No Gradients) */
+.bar-pillar.col-rd {
+  background: #3B82F6;
+  border: 1px solid #3B82F6;
+  box-shadow: none;
+}
+.bar-pillar.col-gtm {
+  background: #8B5CF6;
+  border: 1px solid #8B5CF6;
+  box-shadow: none;
+}
+.bar-pillar.col-capital {
+  background: #00B389;
+  border: 1px solid #00B389;
+  box-shadow: none;
+}
+.bar-pillar.col-audit {
+  background: #F59E0B;
+  border: 1px solid #F59E0B;
+  box-shadow: none;
+}
+.bar-pillar.col-people {
+  background: #6366F1;
+  border: 1px solid #6366F1;
+  box-shadow: none;
+}
+
+/* Dark mode decent solid tints */
+:root[data-theme="dark"] .bar-pillar.col-rd {
+  background: #60A5FA;
+  border: 1px solid #60A5FA;
+}
+:root[data-theme="dark"] .bar-pillar.col-gtm {
+  background: #A78BFA;
+  border: 1px solid #A78BFA;
+}
+:root[data-theme="dark"] .bar-pillar.col-capital {
+  background: #34D399;
+  border: 1px solid #34D399;
+}
+:root[data-theme="dark"] .bar-pillar.col-audit {
+  background: #FBBF24;
+  border: 1px solid #FBBF24;
+}
+:root[data-theme="dark"] .bar-pillar.col-people {
+  background: #818CF8;
+  border: 1px solid #818CF8;
+}
+
+/* Light Floating Value Tags */
+.column-value-floating-tag {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2.5px 7.5px;
+  border-radius: 99px;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+.column-value-floating-tag.col-rd { background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
+.column-value-floating-tag.col-gtm { background: #F5F3FF; color: #6D28D9; border: 1px solid #DDD6FE; }
+.column-value-floating-tag.col-capital { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
+.column-value-floating-tag.col-audit { background: #FFFBEB; color: #B45309; border: 1px solid #FDE68A; }
+.column-value-floating-tag.col-people { background: #EEF2FF; color: #4338CA; border: 1px solid #C7D2FE; }
+
+:root[data-theme="dark"] .column-value-floating-tag.col-rd { background: rgba(59, 130, 246, 0.15); color: #93C5FD; border-color: rgba(59, 130, 246, 0.25); }
+:root[data-theme="dark"] .column-value-floating-tag.col-gtm { background: rgba(139, 92, 246, 0.15); color: #DDD6FE; border-color: rgba(139, 92, 246, 0.25); }
+:root[data-theme="dark"] .column-value-floating-tag.col-capital { background: rgba(0, 180, 138, 0.15); color: #6EE7B7; border-color: rgba(0, 180, 138, 0.25); }
+:root[data-theme="dark"] .column-value-floating-tag.col-audit { background: rgba(245, 158, 11, 0.15); color: #FDE68A; border-color: rgba(245, 158, 11, 0.25); }
+:root[data-theme="dark"] .column-value-floating-tag.col-people { background: rgba(99, 102, 241, 0.15); color: #A5B4FC; border-color: rgba(99, 102, 241, 0.25); }
+
+.bar-column-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: center;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+.bar-column-sub {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+/* Sub-section Header linking analytics chart to detailed list */
+.initiatives-sub-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px 10px 4px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 4px;
+}
+.sub-head-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+}
+.sub-head-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 99px;
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border: 1px solid var(--emerald-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.stream-pulse-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 0 2px rgba(0, 180, 138, 0.25);
+}
+
+/* Integrated Initiatives Table List - Spacious & Clear */
+.initiatives-table-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.initiative-data-row {
+  display: grid;
+  grid-template-columns: 1fr auto 120px 42px;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 12px;
+  border-radius: 0 !important;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.initiative-data-row:last-child {
+  border-bottom: none;
+}
+.initiative-data-row:hover {
+  background: var(--bg-subtle);
+}
+.init-title-box b {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+.init-title-box small {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  display: block;
+}
+.init-tag-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.init-tag-badge.rd { color: #1D4ED8; background: #EFF6FF; border-color: #BFDBFE; }
+.init-tag-badge.gtm { color: #6D28D9; background: #F5F3FF; border-color: #DDD6FE; }
+.init-tag-badge.capital { color: var(--emerald-dark); background: var(--emerald-subtle); border-color: var(--emerald-light); }
+.init-tag-badge.audit { color: #B45309; background: #FFFBEB; border-color: #FDE68A; }
+.init-tag-badge.people { color: var(--text-secondary); background: var(--bg-subtle); border-color: var(--line); }
+
+:root[data-theme="dark"] .init-tag-badge.rd { color: #93C5FD; background: rgba(59, 130, 246, 0.16); border-color: rgba(147, 197, 253, 0.3); }
+:root[data-theme="dark"] .init-tag-badge.gtm { color: #DDD6FE; background: rgba(139, 92, 246, 0.16); border-color: rgba(221, 214, 254, 0.3); }
+:root[data-theme="dark"] .init-tag-badge.capital { color: #6EE7B7; background: rgba(0, 180, 138, 0.16); border-color: rgba(110, 231, 183, 0.3); }
+:root[data-theme="dark"] .init-tag-badge.audit { color: #FDE68A; background: rgba(245, 158, 11, 0.16); border-color: rgba(253, 230, 138, 0.3); }
+:root[data-theme="dark"] .init-tag-badge.people { color: #A5B4FC; background: rgba(99, 102, 241, 0.16); border-color: rgba(99, 102, 241, 0.3); }
+
+.init-mini-bar {
+  height: 6px;
+  background: var(--bg-subtle-2);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.init-mini-bar div,
+.init-mini-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 99px !important;
+}
+.init-bar-fill.col-rd { background: #3B82F6; }
+.init-bar-fill.col-gtm { background: #8B5CF6; }
+.init-bar-fill.col-capital { background: #00B389; }
+.init-bar-fill.col-audit { background: #F59E0B; }
+.init-bar-fill.col-people { background: #6366F1; }
+
+:root[data-theme="dark"] .init-bar-fill.col-rd { background: #60A5FA; }
+:root[data-theme="dark"] .init-bar-fill.col-gtm { background: #A78BFA; }
+:root[data-theme="dark"] .init-bar-fill.col-capital { background: #34D399; }
+:root[data-theme="dark"] .init-bar-fill.col-audit { background: #FBBF24; }
+:root[data-theme="dark"] .init-bar-fill.col-people { background: #818CF8; }
+.init-pct-val {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  font-weight: 700;
+  text-align: right;
+}
+
+/* ─── RIGHT CARD: MULTI-STREAM OPERATIONAL TELEMETRY SPECTRUM (PLEASANT COLORS) ─── */
+.telemetry-spectrum-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 14px 14px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.telemetry-stream-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+  cursor: pointer;
+}
+.telemetry-stream-row:hover {
+  background: var(--bg-card);
+}
+
+.tel-cat-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 145px;
+  flex-shrink: 0;
+}
+.tel-cat-ic {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+}
+.tel-cat-ic i, .tel-cat-ic svg {
+  width: 14px;
+  height: 14px;
+}
+.tel-cat-ic.col-rd { background: #EFF6FF; color: #2563EB; border-color: #DBEAFE; }
+.tel-cat-ic.col-gtm { background: #F5F3FF; color: #7C3AED; border-color: #EDE9FE; }
+.tel-cat-ic.col-capital { background: #ECFDF5; color: #047857; border-color: #A7F3D0; }
+.tel-cat-ic.col-audit { background: #FFFBEB; color: #D97706; border-color: #FEF3C7; }
+
+:root[data-theme="dark"] .tel-cat-ic.col-rd { background: rgba(59, 130, 246, 0.15); color: #93C5FD; border-color: rgba(59, 130, 246, 0.25); }
+:root[data-theme="dark"] .tel-cat-ic.col-gtm { background: rgba(139, 92, 246, 0.15); color: #DDD6FE; border-color: rgba(139, 92, 246, 0.25); }
+:root[data-theme="dark"] .tel-cat-ic.col-capital { background: rgba(0, 180, 138, 0.15); color: #6EE7B7; border-color: rgba(0, 180, 138, 0.25); }
+:root[data-theme="dark"] .tel-cat-ic.col-audit { background: rgba(245, 158, 11, 0.15); color: #FDE68A; border-color: rgba(245, 158, 11, 0.25); }
+
+.tel-cat-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.tel-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  line-height: 1.25;
+}
+.tel-role {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* 12-Segment Activity Spectrum Strip */
+.tel-bars-spectrum {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 5px;
+  height: 28px;
+  padding: 0 8px;
+}
+.t-bar {
+  width: 6px;
+  border-radius: 3px;
+  opacity: 1 !important; /* Solid color throughout, no fade/gradient */
+  transition: transform 0.2s ease;
+}
+.telemetry-stream-row:hover .t-bar {
+  transform: scaleY(1.08);
+}
+
+.tel-bars-spectrum.col-rd .t-bar { background: #2563EB; }
+.tel-bars-spectrum.col-gtm .t-bar { background: #7C3AED; }
+.tel-bars-spectrum.col-capital .t-bar { background: #059669; }
+.tel-bars-spectrum.col-audit .t-bar { background: #D97706; }
+
+:root[data-theme="dark"] .tel-bars-spectrum.col-rd .t-bar { background: #3B82F6; }
+:root[data-theme="dark"] .tel-bars-spectrum.col-gtm .t-bar { background: #8B5CF6; }
+:root[data-theme="dark"] .tel-bars-spectrum.col-capital .t-bar { background: #10B981; }
+:root[data-theme="dark"] .tel-bars-spectrum.col-audit .t-bar { background: #F59E0B; }
+
+.t-bar.active {
+  opacity: 1 !important;
+  box-shadow: none !important;
+}
+
+/* Metric Badges on right - Clean & Light */
+.tel-metric-badge {
+  width: 68px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.tel-val {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.tel-caption {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+}
+
+.tel-metric-badge.col-rd .tel-val { color: #2563EB; }
+.tel-metric-badge.col-gtm .tel-val { color: #7C3AED; }
+.tel-metric-badge.col-capital .tel-val { color: #0284C7; }
+.tel-metric-badge.col-audit .tel-val { color: #B45309; }
+
+:root[data-theme="dark"] .tel-metric-badge.col-rd .tel-val { color: #93C5FD; }
+:root[data-theme="dark"] .tel-metric-badge.col-gtm .tel-val { color: #DDD6FE; }
+:root[data-theme="dark"] .tel-metric-badge.col-capital .tel-val { color: #7DD3FC; }
+:root[data-theme="dark"] .tel-metric-badge.col-audit .tel-val { color: #FDE68A; }
+
+/* Integrated Activity Stream - Clean Vertical Micro-Timeline */
+.telemetry-stream-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.stream-event-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 12px;
+  border-radius: 0 !important;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.stream-event-item:last-child {
+  border-bottom: none;
+}
+.stream-event-item:hover {
+  background: var(--bg-subtle);
+}
+.stream-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+:root[data-theme="dark"] .stream-dot {
+  box-shadow: 0 0 0 2px rgba(15, 22, 38, 0.8);
+}
+.stream-dot.b { background: #2563EB; }
+.stream-dot.g { background: var(--emerald); }
+.stream-dot.o { background: #D97706; }
+.stream-dot.r { background: #DC2626; }
+.stream-dot.p { background: #7C3AED; }
+.stream-meta-box {
+  flex: 1;
+  min-width: 0;
+}
+.stream-meta-box b {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+.stream-meta-box small {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  display: block;
+}
+.stream-time-val {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ─── FULL-WIDTH DECK (SERVICES REGISTRY) ─── */
+.full-width-deck-section {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 26px 28px;
+  box-shadow: var(--shadow-card);
+}
+.full-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.full-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+.full-section-lede {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ─── SERVICE GRID & UNIFIED PRODUCT CARD VISUALS (MATCHING WEBSITE) ─── */
+.service-cards-deck-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .service-cards-deck-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .service-cards-deck-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.svc-card,
+.service-deck-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 22px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 180px;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+/* Minimal, pleasant cyan-to-teal ambient shadow on hover (Website match) */
+.svc-card:hover,
+.svc-card.highlighted,
+.service-deck-card:hover {
+  background: var(--bg-card);
+  border-color: rgba(6, 184, 178, 0.45);
+  box-shadow: 
+    0 14px 32px -8px rgba(6, 184, 178, 0.22),
+    0 4px 14px -2px rgba(1, 160, 207, 0.16),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+  transform: translateY(-3px);
+}
+
+:root[data-theme="dark"] .svc-card,
+:root[data-theme="dark"] .service-deck-card {
+  background: #0E1626;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="dark"] .svc-card:hover,
+:root[data-theme="dark"] .svc-card.highlighted,
+:root[data-theme="dark"] .service-deck-card:hover {
+  background: #141E32;
+  border-color: rgba(6, 184, 178, 0.52);
+  box-shadow: 
+    0 16px 36px -8px rgba(6, 184, 178, 0.32),
+    0 6px 18px -2px rgba(1, 160, 207, 0.22),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3px);
+}
+
+.svc-card-tag-row,
+.service-deck-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+/* Decent solid/pastel tag colors instead of gradient (User explicit requirement) */
+.svc-cat-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+/* Category-specific decent solid tints - light mode */
+.svc-cat-tag.build { background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE; }
+.svc-cat-tag.quality { background: #F5F3FF; color: #6D28D9; border-color: #DDD6FE; }
+.svc-cat-tag.gtm { background: #ECFDF5; color: #047857; border-color: #A7F3D0; }
+.svc-cat-tag.signal { background: #FFFBEB; color: #B45309; border-color: #FDE68A; }
+.svc-cat-tag.capital, .svc-cat-tag.ai { background: #ECFDF5; color: #065F46; border-color: #A7F3D0; }
+.svc-cat-tag.people { background: #F1F5F9; color: #334155; border-color: #CBD5E1; }
+.svc-cat-tag.support { background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE; }
+
+/* Category-specific decent subtle tints - dark mode */
+:root[data-theme="dark"] .svc-cat-tag.build { background: rgba(59, 130, 246, 0.16); color: #93C5FD; border-color: rgba(147, 197, 253, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.quality { background: rgba(139, 92, 246, 0.16); color: #DDD6FE; border-color: rgba(221, 214, 254, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.gtm { background: rgba(0, 180, 138, 0.16); color: #6EE7B7; border-color: rgba(110, 231, 183, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.signal { background: rgba(245, 158, 11, 0.16); color: #FDE68A; border-color: rgba(253, 230, 138, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.capital, :root[data-theme="dark"] .svc-cat-tag.ai { background: rgba(16, 185, 129, 0.16); color: #34D399; border-color: rgba(52, 211, 153, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.people { background: rgba(99, 102, 241, 0.16); color: #A5B4FC; border-color: rgba(99, 102, 241, 0.3); }
+:root[data-theme="dark"] .svc-cat-tag.support { background: rgba(59, 130, 246, 0.16); color: #93C5FD; border-color: rgba(147, 197, 253, 0.3); }
+
+/* Right-aligned status pill inside card top row */
+.svc-status-pill,
+.service-deck-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+.svc-status-pill.live, .service-deck-badge.live { color: #047857; background: #ECFDF5; border-color: #A7F3D0; }
+.svc-status-pill.beta, .service-deck-badge.beta { color: #B45309; background: #FFFBEB; border-color: #FDE68A; }
+.svc-status-pill.new, .service-deck-badge.new { color: #1D4ED8; background: #EFF6FF; border-color: #BFDBFE; }
+
+:root[data-theme="dark"] .svc-status-pill.live, :root[data-theme="dark"] .service-deck-badge.live { color: #34D399; background: rgba(0, 180, 138, 0.16); border-color: rgba(52, 211, 153, 0.3); }
+:root[data-theme="dark"] .svc-status-pill.beta, :root[data-theme="dark"] .service-deck-badge.beta { color: #FDE68A; background: rgba(245, 158, 11, 0.16); border-color: rgba(253, 230, 138, 0.3); }
+:root[data-theme="dark"] .svc-status-pill.new, :root[data-theme="dark"] .service-deck-badge.new { color: #93C5FD; background: rgba(59, 130, 246, 0.16); border-color: rgba(147, 197, 253, 0.3); }
+
+.svc-plan-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+.svc-plan-tag svg {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.svc-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.svc-mini-icon,
+.service-deck-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #FFF;
+  flex-shrink: 0;
+  position: relative;
+  background: var(--icon-gradient, linear-gradient(135deg, #10B981 0%, #06B6D4 100%));
+  box-shadow: 0 4px 12px -2px var(--icon-bloom, rgba(16, 185, 129, 0.35)), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.svc-mini-icon i, .svc-mini-icon svg,
+.service-deck-icon i, .service-deck-icon svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+.svc-card:hover .svc-mini-icon,
+.service-deck-card:hover .svc-mini-icon,
+.service-deck-card:hover .service-deck-icon {
+  transform: scale(1.1) translateY(-1px);
+  box-shadow: 0 8px 18px -2px var(--icon-bloom, rgba(16, 185, 129, 0.5)), inset 0 1px 1.5px rgba(255, 255, 255, 0.65);
+}
+
+.svc-card h3,
+.service-deck-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.svc-card p.svc-desc,
+.service-deck-desc {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* Category Filter Pills in Registry */
+.category-pill-tray {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.category-pill-btn {
+  padding: 7px 15px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.category-pill-btn:hover {
+  background: var(--bg-subtle-2);
+  color: var(--text-main);
+}
+.category-pill-btn.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+}
+:root[data-theme="dark"] .category-pill-btn.active {
+  background: rgba(0, 179, 137, 0.2);
+  color: #34D399;
+  border-color: rgba(0, 179, 137, 0.4);
+}
+
+/* Filter bar & Dropdown in Services Registry */
+.services-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  position: relative;
+  z-index: 30;
+}
+.services-filter-bar .grow { flex: 1; }
+.services-filter-dropdown-wrap { position: relative; }
+.services-filter-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+.services-filter-trigger-btn i { width: 14px; height: 14px; color: var(--text-muted); transition: color 0.15s; }
+.services-filter-trigger-btn:hover { background: var(--bg-subtle); border-color: var(--line-strong); }
+.services-filter-trigger-btn:hover i { color: var(--text-main); }
+.services-filter-trigger-btn.open { border-color: var(--emerald); box-shadow: 0 0 0 3px var(--emerald-subtle); }
+.services-filter-trigger-btn.open .filter-chevron { transform: rotate(180deg); }
+.services-filter-active-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--bg-subtle-2);
+  color: var(--text-muted);
+  transition: all 0.15s;
+}
+.services-filter-trigger-btn.has-filter .services-filter-active-pill {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+}
+:root[data-theme="dark"] .services-filter-trigger-btn.has-filter .services-filter-active-pill {
+  background: rgba(0, 180, 138, 0.2);
+  color: #34D399;
+}
+
+.services-filter-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 280px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.04);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 100;
+  animation: popFade 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.services-filter-dropdown-menu[hidden] {
+  display: none !important;
+}
+.services-filter-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px 6px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 4px;
+}
+.services-filter-menu-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.services-filter-menu-title i { width: 12px; height: 12px; }
+.services-filter-reset-action {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+.services-filter-reset-action:hover { color: var(--text-main); background: var(--bg-subtle); }
+.services-filter-menu-items { display: flex; flex-direction: column; gap: 2px; }
+.services-filter-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-main);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: all 0.12s ease;
+}
+.services-filter-item:hover { background: var(--bg-subtle); }
+.services-filter-item.active { background: var(--emerald-subtle); color: var(--emerald-dark); font-weight: 600; }
+:root[data-theme="dark"] .services-filter-item.active { background: rgba(0, 180, 138, 0.2); color: #34D399; }
+.services-f-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; background: var(--text-muted); }
+.services-f-dot.rd { background: #2563EB; }
+.services-f-dot.audit { background: #D97706; }
+.services-f-dot.gtm { background: #7C3AED; }
+.services-f-dot.signal { background: #0284C7; }
+.services-f-dot.ai { background: var(--emerald); }
+.services-f-dot.people { background: #6366F1; }
+.services-f-dot.support { background: #0D9488; }
+.services-f-name { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.services-f-count { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); background: var(--bg-subtle-2); padding: 1px 6px; border-radius: 99px; }
+.services-f-check { width: 14px; height: 14px; color: var(--emerald); opacity: 0; transition: opacity 0.15s ease; }
+.services-filter-item.active .services-f-check { opacity: 1; }
+
+.services-active-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 10px;
+  background: var(--emerald-subtle);
+  border: 1px solid var(--emerald-light);
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--emerald-dark);
+}
+:root[data-theme="dark"] .services-active-filter-chip { background: rgba(0, 180, 138, 0.2); border-color: rgba(0, 180, 138, 0.4); color: #34D399; }
+.services-active-chip-clear { background: none; border: none; cursor: pointer; display: grid; place-items: center; color: var(--emerald-dark); padding: 2px; border-radius: 50%; }
+.services-active-chip-clear:hover { background: rgba(0, 180, 138, 0.2); }
+.services-active-chip-clear i { width: 12px; height: 12px; }
+
+.services-fsearch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: var(--bg-card);
+  color: var(--text-muted);
+  min-width: 240px;
+}
+.services-fsearch:focus-within { border-color: var(--emerald); box-shadow: 0 0 0 3px var(--emerald-subtle); }
+.services-fsearch input { border: 0; outline: 0; background: none; flex: 1; font-size: 13px; color: var(--text-main); }
+
+/* ─── INTEGRATED DASHBOARD PRODUCT JOURNEY SECTION ─── */
+/* ─── INTEGRATED DASHBOARD PRODUCT JOURNEY SECTION (REFINED EXECUTIVE LIFECYCLE FLOW) ─── */
+.journey-pipeline-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 24px 26px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   position: relative;
   overflow: hidden;
 }
 
-.clean-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, rgba(16, 185, 129, 0.4) 50%, transparent 100%);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.clean-card:hover {
-  border-color: rgba(16, 185, 129, 0.35);
-  box-shadow: 0 10px 24px -4px rgba(8, 62, 46, 0.08), 0 4px 8px -2px rgba(15, 23, 42, 0.04);
-  transform: translateY(-2px);
-}
-
-.clean-card:hover::before {
-  opacity: 1;
-}
-
-.product-card {
-  background: var(--york-card);
-  border: 1px solid var(--york-border-subtle);
-  border-radius: 16px;
-  padding: 1.35rem;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
-}
-
-.product-card:hover {
-  border-color: rgba(16, 185, 129, 0.35);
-  box-shadow: 0 12px 28px -4px rgba(8, 62, 46, 0.1);
-  transform: translateY(-2px);
-}
-
-.product-card.active-granted {
-  border-color: #a7f3d0;
-  background: linear-gradient(180deg, var(--york-card) 0%, rgba(244, 251, 247, 0.6) 100%);
-  position: relative;
-}
-
-.dark .product-card.active-granted {
-  background: linear-gradient(180deg, #131d31 0%, rgba(16, 185, 129, 0.06) 100%);
-  border-color: rgba(16, 185, 129, 0.3);
-}
-
-.product-card.active-granted::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #0b5e43, #10b981);
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-}
-
-/* Modals */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(8px);
+.journey-pipeline-header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 1rem;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-.modal-content {
-  background: var(--york-card);
-  color: var(--york-dark);
-  border-radius: 20px;
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--york-border-subtle);
+.journey-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.journey-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.journey-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: var(--emerald-subtle);
+  border: 1px solid var(--emerald-light);
+  color: var(--emerald-dark);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.journey-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 0 2px rgba(0, 180, 138, 0.25);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.journey-pipeline-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+
+.journey-pipeline-sub {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+/* 8-Stage Interactive Timeline Rail - Sculpted & Connected */
+.journey-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+  position: relative;
+  align-items: stretch;
+}
+
+@media (max-width: 1200px) {
+  .journey-steps-grid {
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 14px;
+  }
+}
+@media (max-width: 640px) {
+  .journey-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.journey-step-btn {
+  padding: 14px 12px 12px;
+  border-radius: 14px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+  text-align: left;
+  min-height: 152px;
+  height: 152px;
+  box-sizing: border-box;
+}
+
+.journey-step-btn:hover {
+  background: var(--bg-card);
+  border-color: var(--line-strong);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+.journey-step-btn.active {
+  background: #FFFFFF;
+  border-color: var(--emerald);
+  box-shadow: 0 2px 8px rgba(0, 180, 138, 0.08);
+}
+
+:root[data-theme="dark"] .journey-step-btn.active {
+  background: #141E30;
+  border-color: var(--emerald);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.journey-step-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  max-width: 620px;
-  max-height: 90vh;
-  overflow-y: auto;
-  border: 1px solid var(--york-border);
-  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  height: 20px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
 }
 
-/* Copilot Trigger & Panel */
+.journey-step-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-faint);
+  letter-spacing: 0.02em;
+}
+
+.journey-step-btn.active .journey-step-num {
+  color: var(--emerald-dark);
+}
+
+:root[data-theme="dark"] .journey-step-btn.active .journey-step-num {
+  color: var(--emerald);
+}
+
+.journey-step-chip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--bg-card);
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+}
+
+.journey-step-btn.active .journey-step-chip {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+}
+
+:root[data-theme="dark"] .journey-step-btn.active .journey-step-chip {
+  background: rgba(0, 214, 164, 0.15);
+  color: #34D399;
+  border-color: rgba(0, 214, 164, 0.3);
+}
+
+.journey-step-icon-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.journey-step-btn:hover .journey-step-icon-wrap {
+  border-color: var(--line-strong);
+  color: var(--text-main);
+}
+
+.journey-step-btn.active .journey-step-icon-wrap {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: rgba(0, 180, 138, 0.35);
+  box-shadow: 0 1px 3px rgba(0, 180, 138, 0.12);
+}
+
+:root[data-theme="dark"] .journey-step-btn.active .journey-step-icon-wrap {
+  background: rgba(0, 180, 138, 0.16);
+  color: #34D399;
+  border-color: rgba(0, 214, 164, 0.35);
+  box-shadow: none;
+}
+
+.journey-step-icon-wrap i,
+.journey-step-icon-wrap svg {
+  width: 18px;
+  height: 18px;
+}
+
+.journey-step-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.journey-step-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 3px;
+}
+
+.journey-step-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.35;
+  min-height: 29px;
+  max-height: 29px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.journey-step-btn.active .journey-step-name {
+  color: var(--text-main);
+}
+
+.journey-step-btn.active .journey-step-desc {
+  color: var(--text-secondary);
+}
+
+.journey-step-indicator {
+  display: none;
+}
+
+
+/* ─── COMMAND PALETTE (⌘K) ─── */
+.cmdk-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 14vh;
+  z-index: 200;
+}
+.cmdk-backdrop.open { display: flex; }
+.cmdk-card {
+  width: min(580px, 92vw);
+  background: var(--bg-card);
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.2);
+  overflow: hidden;
+}
+.cmdk-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+.cmdk-search-bar input {
+  flex: 1;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 14.5px;
+  color: var(--text-main);
+}
+.cmdk-results-list {
+  max-height: 380px;
+  overflow-y: auto;
+  padding: 8px;
+}
+.cmdk-group-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 8px 12px 4px;
+}
+.cmdk-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.cmdk-item-row.selected, .cmdk-item-row:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+}
+.cmdk-item-row .kbd { margin-left: auto; }
+
+/* Toast */
+.toast-pill {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--line-strong);
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 300;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+}
+:root[data-theme="dark"] .toast-pill {
+  background: #1B2337;
+  color: #F8FAFC;
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.toast-pill.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.toast-pill i { color: var(--emerald-accent); }
+
+.theme-sun-icon { display: none !important; }
+.theme-moon-icon { display: block !important; }
+:root[data-theme="dark"] .theme-sun-icon { display: block !important; color: #FDE047; }
+:root[data-theme="dark"] .theme-moon-icon { display: none !important; }
+
+/* ─── RESPONSIVE BREAKPOINTS ─── */
+@media (max-width: 1200px) {
+  .metrics-card-deck { grid-template-columns: repeat(2, 1fr); }
+  .bottom-cards-row { grid-template-columns: 1fr; }
+  .service-cards-deck-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 992px) {
+  .permanent-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    border-radius: 0;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 200;
+  }
+  .permanent-sidebar.mobile-open {
+    transform: translateX(0);
+    box-shadow: var(--shadow-drawer);
+  }
+  .sidebar-mobile-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(4px);
+    z-index: 199;
+  }
+  .sidebar-mobile-backdrop.show { display: block; }
+}
+@media (max-width: 820px) {
+  .canvas-wrapper { padding: 14px; flex-direction: column; }
+  .service-cards-deck-grid { grid-template-columns: 1fr; }
+  .page-headline-lead { font-size: 20px; }
+  .controls-pill-row { width: 100%; justify-content: flex-start; }
+}
+
+
+/* ─── V3 DUAL-PERSPECTIVE CUSTOM EXTENSIONS ─── */
 .copilot-trigger {
   position: fixed;
   bottom: 1.5rem;
@@ -266,13 +2950,6 @@ body {
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
-
-.copilot-trigger:hover {
-  background: linear-gradient(135deg, #052b20 0%, #084c36 100%);
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 15px 32px -5px rgba(8, 62, 46, 0.55);
-}
-
 .copilot-panel {
   position: fixed;
   bottom: 5.5rem;
@@ -291,7 +2968,6 @@ body {
   overflow: hidden;
   animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
 .copilot-header {
   background: linear-gradient(135deg, #083e2e 0%, #0b5e43 100%);
   color: #ffffff;
@@ -301,7 +2977,6 @@ body {
   justify-content: space-between;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
-
 .copilot-messages {
   flex: 1;
   overflow-y: auto;
@@ -311,7 +2986,6 @@ body {
   gap: 1rem;
   background: var(--york-bg);
 }
-
 .copilot-msg-ai {
   background: var(--york-card);
   border: 1px solid var(--york-border);
@@ -322,7 +2996,6 @@ body {
   color: var(--york-dark);
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
 }
-
 .copilot-msg-user {
   background: #083e2e;
   color: #ffffff;
@@ -334,7 +3007,6 @@ body {
   max-width: 85%;
   box-shadow: 0 3px 10px rgba(8, 62, 46, 0.25);
 }
-
 .copilot-quick-chip {
   background: var(--york-card);
   border: 1px solid var(--york-border);
@@ -347,79 +3019,6 @@ body {
   transition: all 0.15s ease;
   white-space: nowrap;
 }
-
-.copilot-quick-chip:hover {
-  background: var(--york-light-green);
-  color: var(--york-text-green);
-  border-color: #6ee7b7;
-  transform: translateY(-1px);
-}
-
-/* Sidebar Navigation */
-.sidebar-nav-btn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.65rem 0.9rem;
-  border-radius: 0.85rem;
-  font-size: 0.83rem;
-  font-weight: 600;
-  transition: all 0.18s ease;
-  color: var(--york-muted);
-  background: transparent;
-  cursor: pointer;
-  border: 1px solid transparent;
-  text-align: left;
-}
-
-.sidebar-nav-btn:hover {
-  background: rgba(241, 245, 249, 0.8);
-  color: var(--york-dark);
-}
-
-.dark .sidebar-nav-btn:hover {
-  background: #1e293b;
-}
-
-.sidebar-nav-btn.active {
-  background: #083e2e;
-  color: #ffffff;
-  border-color: #083e2e;
-  box-shadow: 0 3px 10px rgba(8, 62, 46, 0.3);
-}
-
-.dark .sidebar-nav-btn.active {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-  color: #ffffff;
-  border-color: transparent;
-  box-shadow: 0 3px 12px rgba(16, 185, 129, 0.3);
-}
-
-.sidebar-nav-btn .sidebar-badge {
-  padding: 0.15rem 0.55rem;
-  border-radius: 9999px;
-  font-size: 0.68rem;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.sidebar-nav-btn.active .sidebar-badge {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-}
-
-.sidebar-nav-btn:not(.active) .sidebar-badge {
-  background: #f1f5f9;
-  color: #475569;
-}
-
-.dark .sidebar-nav-btn:not(.active) .sidebar-badge {
-  background: #1e293b;
-  color: #94a3b8;
-}
-
-/* Presentation Viewer */
 .deck-modal {
   position: fixed;
   inset: 0;
@@ -431,7 +3030,6 @@ body {
   justify-content: center;
   padding: 1.5rem;
 }
-
 .deck-container {
   width: 100%;
   max-width: 980px;
@@ -442,7 +3040,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 .deck-slide {
   aspect-ratio: 16 / 9;
   background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
@@ -453,13 +3050,11 @@ body {
   position: relative;
   border-bottom: 1px solid #e2e8f0;
 }
-
 .deck-slide-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
-
 .deck-slide-footer {
   display: flex;
   justify-content: space-between;
@@ -469,8 +3064,6 @@ body {
   color: #94a3b8;
   font-size: 0.75rem;
 }
-
-/* Perks & Threat Radar */
 .perk-card {
   background: var(--york-card);
   border: 1px solid var(--york-border-subtle);
@@ -481,13 +3074,6 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
-
-.perk-card:hover {
-  transform: translateY(-2px);
-  border-color: #0b5e43;
-  box-shadow: 0 12px 28px -5px rgba(8, 62, 46, 0.09), 0 8px 10px -6px rgba(8, 62, 46, 0.04);
-}
-
 .savings-bar-container {
   height: 10px;
   background: rgba(226, 232, 240, 0.8);
@@ -495,39 +3081,22 @@ body {
   overflow: hidden;
   position: relative;
 }
-
 .savings-bar-fill {
   height: 100%;
   background: linear-gradient(90deg, #083e2e 0%, #10b981 100%);
   border-radius: 9999px;
   transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-.threat-card {
-  background: var(--york-card);
-  border: 1px solid var(--york-border-subtle);
-  border-radius: 1.15rem;
-  padding: 1.35rem;
-  transition: all 0.2s ease;
-}
-
-.threat-card:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
-}
-
 .counter-strategy-box {
   background: linear-gradient(135deg, rgba(240, 253, 244, 0.9) 0%, rgba(236, 253, 245, 0.9) 100%);
   border: 1px solid #a7f3d0;
   border-radius: 0.85rem;
   padding: 1.1rem;
 }
-
-.dark .counter-strategy-box {
+.counter-strategy-box {
   background: rgba(16, 185, 129, 0.08);
   border-color: rgba(16, 185, 129, 0.3);
 }
-
 .radar-pulse-dot {
   position: relative;
   display: inline-flex;
@@ -535,104 +3104,159 @@ body {
   justify-content: center;
 }
 
-.radar-pulse-dot::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 9999px;
-  background: inherit;
-  opacity: 0.6;
-  animation: radarPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-@keyframes radarPing {
-  75%, 100% {
-    transform: scale(2.2);
-    opacity: 0;
-  }
-}
-
-/* Badge styles */
-.badge-in-path {
-  background-color: var(--york-light-green);
-  color: var(--york-text-green);
-  font-size: 0.72rem;
-  font-weight: 600;
-  padding: 2px 9px;
-  border-radius: 9999px;
+/* Modern Copilot Floating Drawer */
+.copilot-trigger {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 50;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-}
-
-.badge-in-path::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #10b981;
-}
-
-.badge-member-access {
-  background-color: #eff6ff;
-  color: #1e40af;
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 2px 8px;
+  gap: 8px;
+  padding: 10px 18px;
   border-radius: 9999px;
-}
-
-.dark .badge-member-access {
-  background-color: rgba(30, 64, 175, 0.2);
-  color: #93c5fd;
-}
-
-.cadence-widget {
-  background: linear-gradient(135deg, #063828 0%, #0a4f3b 50%, #0d634b 100%);
+  background: var(--cta-primary-bg);
   color: #ffffff;
-  border-radius: 18px;
-  padding: 1.45rem;
-  box-shadow: 0 12px 25px -5px rgba(6, 56, 40, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.cadence-tag {
-  background: rgba(255, 255, 255, 0.18);
-  color: #a7f3d0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 2px 10px;
-  border-radius: 9999px;
-  font-size: 0.7rem;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.copilot-trigger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(16, 185, 129, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
-.pipeline-col {
-  background: var(--york-card-subtle);
-  border: 1px solid var(--york-border);
-  border-radius: 14px;
-  padding: 1rem;
-  min-height: 280px;
+.copilot-panel {
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  width: 440px;
+  max-width: calc(100vw - 48px);
+  height: 580px;
+  max-height: calc(100vh - 120px);
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow-drawer);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
 }
 
-.milestone-card {
-  background: var(--york-card);
-  border: 1px solid var(--york-border);
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-  transition: all 0.18s ease;
+.copilot-header {
+  padding: 16px 20px;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.milestone-card:hover {
-  border-color: rgba(16, 185, 129, 0.4);
-  box-shadow: 0 4px 12px -1px rgba(0, 0, 0, 0.06);
-  transform: translateY(-1px);
+.copilot-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-  </style>
+.copilot-msg-ai {
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  color: var(--text-main);
+  border-radius: 14px 14px 14px 2px;
+  padding: 12px 14px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  max-width: 90%;
+}
+
+.copilot-msg-user {
+  background: var(--cta-primary-bg);
+  color: #ffffff;
+  border-radius: 14px 14px 2px 14px;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  align-self: flex-end;
+  max-width: 85%;
+}
+
+.copilot-quick-chip {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.copilot-quick-chip:hover {
+  border-color: var(--emerald);
+  color: var(--emerald-dark);
+  background: var(--emerald-subtle);
+}
+
+/* Executive Board Deck Presentation Modal */
+.deck-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.deck-container {
+  width: 100%;
+  max-width: 1020px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow-drawer);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.deck-slide {
+  aspect-ratio: 16 / 9;
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--bg-card);
+}
+
+.deck-slide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 20px;
+}
+
+.deck-slide-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+
+</style>
 </head>
 <body class="bg-[#f8fafc] text-[#0f172a] min-h-screen">
   <div id="app-root"></div>
@@ -2924,58 +5548,53 @@ class YorkConsoleApp {
 const app = new YorkConsoleApp();
 
 // SVG Icons
+// High-Fidelity Lucide Icon Provider
 function getIconSvg(name, size = 18, color = 'currentColor') {
-  const icons = {
-    BrainCircuit: `<path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M12 13v8"/>`,
-    Rocket: `<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 9v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>`,
-    Code2: `<path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/>`,
-    Send: `<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>`,
-    Palette: `<circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>`,
-    FolderKanban: `<path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="M8 10v4"/><path d="M12 10v2"/><path d="M16 10v6"/>`,
-    Activity: `<path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.48 12H2"/>`,
-    BarChart3: `<path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>`,
-    Sparkles: `<path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>`,
-    CheckCircle2: `<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>`,
-    ShieldCheck: `<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>`,
-    FileBadge: `<path d="M4 7V4a2 2 0 0 1 2-2h8.5L20 7.5V20a2 2 0 0 1-2 2h-6"/><polyline points="14 2 14 8 20 8"/><path d="M5 17a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M7 16.5 8 22l-3-1-3 1 1-5.5"/>`,
-    Eye: `<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/>`,
-    ClipboardCheck: `<rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/>`,
-    Lock: `<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>`,
-    Users: `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
-    GraduationCap: `<path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>`,
-    LifeBuoy: `<circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/><circle cx="12" cy="12" r="4"/>`,
-    Search: `<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>`,
-    Plus: `<path d="M5 12h14"/><path d="M12 5v14"/>`,
-    Hubspot: `<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/>`,
-    ArrowRight: `<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>`,
-    Check: `<polyline points="20 6 9 17 4 12"/>`,
-    LogOut: `<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>`,
-    FileText: `<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>`,
-    Download: `<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>`,
-    Video: `<polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>`,
-    UploadCloud: `<polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/><polyline points="16 16 12 12 8 16"/>`,
-    RefreshCw: `<path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/>`,
-    Flame: `<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>`,
-    Zap: `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>`,
-    AlertTriangle: `<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>`,
-    Presentation: `<path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/>`,
-    Bot: `<path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>`,
-    MessageSquare: `<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>`,
-    Radar: `<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path d="M12 12m-5 0a5 5 0 1 0 10 0a5 5 0 1 0 -10 0"/><path d="M12 3v9l4 4"/>`,
-    Gift: `<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/>`,
-    Tag: `<path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><circle cx="7" cy="7" r=".5" fill="currentColor"/>`,
-    Cloud: `<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>`,
-    CreditCard: `<rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/>`,
-    Server: `<rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/>`,
-    Target: `<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>`,
-    GitBranch: `<line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/>`,
-    ExternalLink: `<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>`,
-    Copy: `<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>`,
-    Trash2: `<path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" x2="17"/><line x1="14" x2="14" y1="11" x2="17"/>`
+  const lucideMap = {
+    Activity: 'activity',
+    ArrowRight: 'arrow-right',
+    Building: 'building-2',
+    Check: 'check',
+    Download: 'download',
+    ExternalLink: 'external-link',
+    Gift: 'gift',
+    LifeBuoy: 'life-buoy',
+    LogOut: 'log-out',
+    Mail: 'mail',
+    Presentation: 'presentation',
+    Radar: 'radio',
+    RefreshCw: 'refresh-cw',
+    Rocket: 'rocket',
+    Search: 'search',
+    Send: 'send',
+    Sliders: 'sliders-horizontal',
+    Sparkles: 'sparkles',
+    Target: 'target',
+    Users: 'users',
+    Video: 'video',
+    Layers: 'layers',
+    Zap: 'zap',
+    ShieldAlert: 'shield-alert',
+    ChevronRight: 'chevron-right',
+    Plus: 'plus',
+    X: 'x'
   };
 
-  const body = icons[name] || icons.Rocket;
-  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle;">${body}</svg>`;
+  const lucideName = lucideMap[name] || (name.includes('-') ? name : name.toLowerCase());
+  return `<i data-lucide="${lucideName}" style="width:${size}px;height:${size}px;color:${color};display:inline-block;vertical-align:middle;stroke-width:2;"></i>`;
+}
+
+function toggleSidebarCollapse() {
+  const sidebar = document.getElementById('permanentSidebar');
+  if (sidebar) {
+    sidebar.classList.toggle('collapsed');
+    try {
+      localStorage.setItem('york_sidebar_collapsed', sidebar.classList.contains('collapsed') ? 'true' : 'false');
+    } catch(e){}
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  }
 }
 
 function closeModal() {
@@ -3036,6 +5655,9 @@ function render() {
   if (!app.currentUser) {
     root.innerHTML = renderLoginScreen();
     renderGlobalWidgets();
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
     return;
   }
 
@@ -3046,6 +5668,9 @@ function render() {
   }
 
   renderGlobalWidgets();
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
 }
 
 // -------------------------------------------------------------------------------------------------
@@ -3616,74 +6241,102 @@ function renderBoardDeckModal() {
 // -------------------------------------------------------------------------------------------------
 function renderLoginScreen() {
   return `
-    <div class="min-h-screen flex flex-col justify-center items-center px-4 py-12 bg-gradient-to-b from-slate-50 to-slate-100 animate-fade-in">
-      <div class="text-center mb-8">
-        <div class="w-14 h-14 rounded-2xl bg-[#084c36] text-white flex items-center justify-center font-bold text-2xl mx-auto shadow-md mb-3">
-          Y
+    <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; background: var(--bg-app); position: relative;">
+      
+      <!-- Top Right: Version Switcher & Theme Switcher -->
+      <div style="position: absolute; top: 20px; right: 24px; display: flex; align-items: center; gap: 12px;">
+        <div class="version-switch-pill" role="navigation" aria-label="Console version">
+          <span class="version-switch-lbl">Console:</span>
+          <a href="dashboard-v1.html" class="v-tab-btn">v1</a>
+          <a href="dashboard.html" class="v-tab-btn">v2</a>
+          <a href="dashboard-v3.html" class="v-tab-btn active">v3</a>
         </div>
-        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">York IE Console</h1>
-        <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
-          Simplified Growth Platform & Operating Management Portal.
-        </p>
+
+        <button class="topbar-action-btn" onclick="toggleTheme()" type="button" aria-label="Toggle Color Theme" title="Toggle dark/light mode">
+          <svg class="theme-sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
       </div>
 
-      <div class="w-full max-w-md bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-4">
-        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 text-center mb-2">Select Login:</h2>
+      <div style="width: 100%; max-width: 480px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow-drawer); padding: 40px 36px; display: flex; flex-direction: column; gap: 24px;" class="animate-fade-in">
         
-        <div class="space-y-3">
-          <!-- 1. Admin Login Card -->
-          <div 
-            onclick="app.login('user-admin')"
-            class="p-4 rounded-xl border-2 border-slate-200 hover:border-[#084c36] hover:bg-emerald-50/20 cursor-pointer transition-all flex items-center justify-between group shadow-2xs"
-          >
-            <div class="flex items-center gap-3.5">
-              <div class="w-10 h-10 rounded-xl bg-[#084c36] text-white flex items-center justify-center font-bold text-sm shadow-xs">
-                Y
-              </div>
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="font-bold text-slate-900 text-sm group-hover:text-emerald-900">York IE Admin</span>
-                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">Admin</span>
-                </div>
-                <div class="text-[11px] text-slate-500 mt-0.5">Companies, HubSpot Connect & Invites</div>
-              </div>
-            </div>
-            <div class="text-slate-300 group-hover:text-emerald-700 group-hover:translate-x-1 transition-all">
-              ${getIconSvg("ArrowRight", 16)}
-            </div>
+        <!-- Brand Header with Official Vector SVG -->
+        <div style="text-align: center;">
+          <a href="index.html" style="display: inline-block; text-decoration: none; margin-bottom: 16px;">
+            <img src="logo-light.svg" alt="York IE" class="sidebar-brand-logo logo-light-mode" style="height: 34px; margin: 0 auto;" />
+            <img src="logo-dark.svg" alt="York IE" class="sidebar-brand-logo logo-dark-mode" style="height: 34px; margin: 0 auto;" />
+          </a>
+          <h1 style="font-size: 20px; font-weight: 700; color: var(--text-main); letter-spacing: -0.02em;">York IE Console</h1>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+            Dual-Perspective Enterprise OS &amp; Portfolio Growth Platform
+          </p>
+        </div>
+
+        <!-- Persona Selection Tiles -->
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); text-align: center;">
+            Select Access Persona
           </div>
 
-          <!-- 2. Client Login Card -->
-          <div 
-            onclick="app.login('user-client')"
-            class="p-4 rounded-xl border-2 border-slate-200 hover:border-slate-800 hover:bg-slate-50 cursor-pointer transition-all flex items-center justify-between group shadow-2xs"
-          >
-            <div class="flex items-center gap-3.5">
-              <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm shadow-xs">
-                CS
+          <!-- 1. Operating Lead (Admin) Tile -->
+          <div onclick="app.login('user-admin')" style="padding: 16px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--bg-subtle); cursor: pointer; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; justify-content: space-between;" onmouseover="this.style.borderColor='var(--emerald)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--line)'; this.style.transform='none'">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <div style="width: 42px; height: 42px; border-radius: 10px; background: var(--emerald-dark); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 14px;">
+                KY
               </div>
               <div>
-                <div class="flex items-center gap-2">
-                  <span class="font-bold text-slate-900 text-sm group-hover:text-slate-950">Client Portal</span>
-                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700">CloudScale AI</span>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-weight: 700; font-size: 14px; color: var(--text-main);">York IE Operating Lead</span>
+                  <span style="font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 9999px; background: var(--emerald-subtle); color: var(--emerald-dark); border: 1px solid rgba(0,180,138,0.3);">ADMIN</span>
                 </div>
-                <div class="text-[11px] text-slate-500 mt-0.5">Workspaces, Milestones & Vault</div>
+                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">
+                  Portfolio Directory, Token Burn &amp; Service Management
+                </div>
               </div>
             </div>
-            <div class="text-slate-300 group-hover:text-slate-700 group-hover:translate-x-1 transition-all">
-              ${getIconSvg("ArrowRight", 16)}
+            <i data-lucide="arrow-right" style="width: 16px; height: 16px; color: var(--text-muted);"></i>
+          </div>
+
+          <!-- 2. Client Owner Tile -->
+          <div onclick="app.login('user-client')" style="padding: 16px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--bg-subtle); cursor: pointer; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; justify-content: space-between;" onmouseover="this.style.borderColor='var(--emerald)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--line)'; this.style.transform='none'">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <div style="width: 42px; height: 42px; border-radius: 10px; background: #0F172A; color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 14px;">
+                AK
+              </div>
+              <div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-weight: 700; font-size: 14px; color: var(--text-main);">Portfolio Company Team</span>
+                  <span style="font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 9999px; background: var(--bg-pill-hover); color: var(--text-secondary); border: 1px solid var(--line);">CLIENT</span>
+                </div>
+                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">
+                  Workspaces, SOW Milestones, Perks &amp; AI Co-Pilot
+                </div>
+              </div>
             </div>
+            <i data-lucide="arrow-right" style="width: 16px; height: 16px; color: var(--text-muted);"></i>
           </div>
         </div>
 
-        <div class="pt-4 border-t border-slate-100 text-center">
-          <span class="text-[11px] text-slate-400">Secure 2-Role Console Access</span>
+        <div style="text-align: center; border-top: 1px solid var(--line); padding-top: 16px; font-size: 11.5px; color: var(--text-faint);">
+          Strict Role Partitioning &bull; Zero Disruptive Alerts &bull; Clean Numbers
         </div>
+
       </div>
     </div>
   `;
 }
-
 function getAdminTabTitle(tabId) {
   const titles = {
     'clients': 'Portfolio Health, Retainers & Telemetry',
@@ -3727,211 +6380,250 @@ function getTabTitle(tabId) {
 function renderAdminConsole() {
   if (!app.adminTab) app.adminTab = "clients";
 
-  // Count open tickets across entire portfolio
+  // Calculate portfolio metrics
   const allTickets = [];
+  let totalAssignedServices = 0;
+  let totalBlockersCount = 0;
+  let totalTokensAllocated = 0;
+  let totalTokensUsed = 0;
+
   app.clients.forEach(c => {
     (c.supportTickets || []).forEach(t => {
       allTickets.push({ ...t, clientName: c.name, clientId: c.id });
     });
+    totalAssignedServices += (c.assignedServices || (c.grantedProducts || []).length || 0);
+    totalBlockersCount += (c.blockersCount || 0);
+    totalTokensAllocated += (c.tokensAllocated || 50000);
+    totalTokensUsed += (c.tokensUsed || 0);
   });
   const openTicketsCount = allTickets.filter(t => t.status !== "resolved").length;
+  const activeClientsCount = app.clients.filter(c => c.status === "active").length;
 
   return `
-    <div class="flex h-screen bg-[#f8fafc] overflow-hidden font-sans">
+    <div class="canvas-wrapper">
       
-      <!-- Left Menu Bar (Admin Sidebar) -->
-      <aside class="w-64 lg:w-72 bg-white border-r border-slate-200 flex flex-col flex-shrink-0 h-screen select-none">
-        
-        <!-- Top Brand Header -->
-        <div class="p-4 border-b border-slate-200 flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-xl bg-[#084c36] text-white flex items-center justify-center font-bold text-sm shadow-xs">
-              Y
-            </div>
-            <div>
-              <div class="font-bold text-slate-900 text-sm leading-tight">York IE Admin</div>
-              <div class="text-slate-400 text-[10px]">Operating Management</div>
-            </div>
-          </div>
-          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">
-            Admin
-          </span>
-        </div>
-
-        <!-- HubSpot CRM Status Strip in Sidebar -->
-        <div class="px-3.5 py-2.5 bg-slate-50 border-b border-slate-200 text-xs flex items-center justify-between">
-          <div class="flex items-center gap-1.5 font-medium text-slate-700">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span class="text-[11px] font-semibold">HubSpot: Connected</span>
-          </div>
-          <button 
-            onclick="app.syncHubSpot()" 
-            class="px-2 py-0.5 rounded text-[10px] font-bold bg-white text-emerald-800 hover:bg-emerald-100 border border-emerald-300 transition-all flex items-center gap-1 shadow-2xs"
-            title="Sync CRM deals & contacts"
-          >
-            ${getIconSvg("RefreshCw", 10, "#084c36")}
-            <span>Sync</span>
+      <!-- PERMANENT FLOATING SIDEBAR NAVIGATION -->
+      <aside class="permanent-sidebar" id="permanentSidebar" aria-label="Admin Sidebar Navigation">
+        <!-- Brand Header with Official Vector SVG -->
+        <div class="sidebar-header">
+          <a href="index.html" class="sidebar-brand-box" title="Return to York Website" style="text-decoration:none">
+            <img src="logo-light.svg" alt="York IE" class="sidebar-brand-logo logo-light-mode" height="28" />
+            <img src="logo-dark.svg" alt="York IE" class="sidebar-brand-logo logo-dark-mode" height="28" />
+          </a>
+          <button class="sidebar-collapse-btn" onclick="toggleSidebarCollapse()" title="Toggle sidebar navigation width">
+            <i data-lucide="panel-left-close"></i>
           </button>
         </div>
 
-        <!-- Vertical Navigation Menu -->
-        <nav class="flex-1 overflow-y-auto px-3 py-3 space-y-1">
-          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-3 py-1.5">Management</div>
+        <!-- Role & Perspective Selector Card -->
+        <div class="sidebar-workspace-pill" onclick="app.login('user-client')" title="Click to switch to Client Portal view">
+          <div style="width:24px;height:24px;border-radius:6px;background:var(--emerald);color:#fff;display:grid;place-items:center;font-weight:700;font-size:12px">Y</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:700;font-size:12.5px;color:var(--text-main);line-height:1.2">York IE Admin</div>
+            <div style="font-size:10.5px;color:var(--text-muted)">Operating Management</div>
+          </div>
+          <span class="sidebar-ws-tag">OPERATOR</span>
+        </div>
 
-          <!-- 1. Company Portfolio (3-column high-level directory) -->
-          <button 
-            onclick="app.adminTab = 'clients'; app.adminFilterStatus = 'all'; app.saveState(); render();"
-            class="sidebar-nav-btn ${app.adminTab === 'clients' ? "active" : ""}"
-          >
-            <div class="flex items-center gap-2.5">
-              ${getIconSvg("Building", 16, app.adminTab === 'clients' ? "#ffffff" : "#084c36")}
-              <span>1. Company Portfolio</span>
-            </div>
-            <span class="sidebar-badge">
-              ${app.clients.length}
-            </span>
+        <!-- HubSpot CRM Sync Strip -->
+        <div style="margin: 4px 14px 10px; padding: 7px 12px; background: var(--bg-subtle); border: 1px solid var(--line); border-radius: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 11px;">
+          <div style="display: flex; align-items: center; gap: 6px; font-weight: 600; color: var(--text-secondary);">
+            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; display: inline-block;" class="animate-pulse"></span>
+            <span style="font-size: 11px;">HubSpot: Connected</span>
+          </div>
+          <button onclick="app.syncHubSpot()" style="font-size: 10.5px; font-weight: 700; color: var(--emerald-dark); background: var(--bg-card); border: 1px solid var(--line); padding: 2px 7px; border-radius: 6px; cursor: pointer;" title="Sync CRM Deals & Pipeline">
+            Sync
           </button>
+        </div>
 
-          <!-- 2. Active Accounts (Only accepted active clients) -->
-          <button 
-            onclick="app.adminTab = 'active_accounts'; app.adminFilterStatus = 'all'; app.saveState(); render();"
-            class="sidebar-nav-btn ${app.adminTab === 'active_accounts' ? "active" : ""}"
-          >
-            <div class="flex items-center gap-2.5">
-              ${getIconSvg("Activity", 16, app.adminTab === 'active_accounts' ? "#ffffff" : "#084c36")}
-              <span>2. Active Accounts</span>
-            </div>
-            <span class="sidebar-badge">
-              ${app.clients.filter(c => c.status === "active").length}
-            </span>
+        <!-- Primary Top Navigation -->
+        <nav class="sidebar-primary-nav" aria-label="Main Navigation">
+          <button type="button" class="sidebar-main-nav-btn ${app.adminTab === 'clients' ? 'active' : ''}" onclick="app.adminTab = 'clients'; app.adminFilterStatus = 'all'; app.saveState(); render();">
+            <i data-lucide="building"></i>
+            <span style="flex:1;text-align:left;">Company Portfolio</span>
+            <span class="sidebar-badge">${app.clients.length}</span>
           </button>
-
-          <!-- 3. Support Tickets Queue -->
-          <button 
-            onclick="app.adminTab = 'tickets'; app.saveState(); render();"
-            class="sidebar-nav-btn ${app.adminTab === 'tickets' ? "active" : ""}"
-          >
-            <div class="flex items-center gap-2.5">
-              ${getIconSvg("LifeBuoy", 16, app.adminTab === 'tickets' ? "#ffffff" : "#b45309")}
-              <span>3. Support Tickets</span>
-            </div>
-            ${openTicketsCount > 0 ? `
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${app.adminTab === 'tickets' ? "bg-amber-400 text-slate-900" : "bg-amber-100 text-amber-800"}">
-                ${openTicketsCount} Open
-              </span>
-            ` : `
-              <span class="sidebar-badge">0</span>
-            `}
+          <button type="button" class="sidebar-main-nav-btn ${app.adminTab === 'active_accounts' ? 'active' : ''}" onclick="app.adminTab = 'active_accounts'; app.adminFilterStatus = 'all'; app.saveState(); render();">
+            <i data-lucide="activity"></i>
+            <span style="flex:1;text-align:left;">Active Accounts</span>
+            <span class="sidebar-badge">${activeClientsCount}</span>
           </button>
-
-          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-3 pt-3 pb-1.5">Ecosystem & Catalog</div>
-
-          <!-- 4. Explore Products -->
-          <button 
-            onclick="app.adminTab = 'products'; app.saveState(); render();"
-            class="sidebar-nav-btn ${app.adminTab === 'products' ? "active" : ""}"
-          >
-            <div class="flex items-center gap-2.5">
-              ${getIconSvg("Sparkles", 16, app.adminTab === 'products' ? "#ffffff" : "#084c36")}
-              <span>4. Explore Products</span>
-            </div>
-            <span class="sidebar-badge">
-              18
-            </span>
+          <button type="button" class="sidebar-main-nav-btn ${app.adminTab === 'tickets' ? 'active' : ''}" onclick="app.adminTab = 'tickets'; app.saveState(); render();">
+            <i data-lucide="life-buoy"></i>
+            <span style="flex:1;text-align:left;">Support Incidents</span>
+            ${openTicketsCount > 0 ? `<span class="sidebar-badge" style="background: rgba(245, 158, 11, 0.2); color: #B45309;">${openTicketsCount} Open</span>` : `<span class="sidebar-badge">0</span>`}
           </button>
         </nav>
 
-        <!-- User Profile & Switcher Footer -->
-        <div class="p-3.5 border-t border-slate-200 bg-slate-50/70">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
-                Y
-              </div>
-              <div class="min-w-0">
-                <div class="text-xs font-bold text-slate-900 truncate">York IE Admin</div>
-                <div class="text-[10px] text-slate-500 truncate">Platform Administrator</div>
-              </div>
-            </div>
-            <button 
-              onclick="app.logout()" 
-              class="p-1.5 text-slate-400 hover:text-slate-700 transition-colors rounded-lg hover:bg-slate-200"
-              title="Switch User / Logout"
-            >
-              ${getIconSvg("LogOut", 14)}
+        <!-- Catalog Section -->
+        <div class="sidebar-nav-scroll">
+          <div class="sidebar-category-group">
+            <div class="sidebar-category-title">Ecosystem & Catalog</div>
+            <button type="button" class="sidebar-nav-item ${app.adminTab === 'products' ? 'active' : ''}" onclick="app.adminTab = 'products'; app.saveState(); render();">
+              <i data-lucide="layers"></i>
+              <span class="sidebar-nav-label">Explore Products</span>
+              <span class="sidebar-badge">${PRODUCTS_CATALOG.length}</span>
             </button>
+          </div>
+        </div>
+
+        <!-- Compute / Fuel Tokens & User Info Footer -->
+        <div class="sidebar-footer">
+          <div class="sidebar-compute-meter" title="Total token burn across portfolio (Plain numbers only as per PRD)">
+            <div class="sidebar-compute-top">
+              <span style="display:inline-flex;align-items:center;gap:5px"><i data-lucide="zap" style="width:12px;height:12px;color:var(--emerald)"></i> Total Tokens Used</span>
+              <span class="mono" style="color:var(--emerald-dark);font-weight:700;">${totalTokensUsed.toLocaleString()}</span>
+            </div>
+            <div class="sidebar-compute-bar"><i style="width: 48%; background: var(--emerald);"></i></div>
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);margin-top:5px">
+              <span>Across ${app.clients.length} portfolio companies</span>
+              <span>Active</span>
+            </div>
+          </div>
+
+          <div class="sidebar-user-tile" onclick="app.logout()" title="Logout / Switch User">
+            <div class="sidebar-user-avatar">KY</div>
+            <div style="flex:1;min-width:0">
+              <b style="font-size:12px;display:block;line-height:1.2;color:var(--text-main)">Kyle York</b>
+              <small style="font-size:11px;color:var(--text-muted)">Operating Lead · Admin</small>
+            </div>
+            <i data-lucide="log-out" style="width:14px;height:14px;color:var(--text-muted)"></i>
           </div>
         </div>
       </aside>
 
-      <!-- Right Panel: Main Content View -->
-      <main class="flex-1 h-screen overflow-y-auto flex flex-col bg-[#f8fafc]">
-                <!-- Top Sticky Header -->
-        <header class="bg-white/85 dark:bg-slate-900/85 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 py-3.5 sticky top-0 z-20 flex items-center justify-between transition-colors">
-          <div class="flex items-center gap-2.5">
-            <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>Admin Console</span>
+      <!-- MAIN DESK CANVAS -->
+      <main class="desk-canvas" id="mainDesk">
+        
+        <!-- Floating Top Navigation Bar (Dock Capsule) -->
+        <header class="floating-topbar">
+          <!-- Left: Breadcrumb + Theme Version Switcher -->
+          <div class="topbar-nav-group">
+            <div class="topbar-breadcrumb">
+              <span class="topbar-crumb-org">York IE Admin</span>
+              <span class="topbar-crumb-slash">/</span>
+              <span class="topbar-crumb-view">${getAdminTabTitle(app.adminTab)}</span>
             </div>
-            <span class="text-slate-300 dark:text-slate-600">/</span>
-            <h1 class="text-sm font-bold text-slate-900 dark:text-white">
-              ${app.adminTab === "products" 
-                ? "Explore Products & Services Catalog" 
-                : app.adminTab === "tickets" 
-                ? "Support Incident Queue" 
-                : app.adminTab === "active_accounts"
-                ? "Active Accounts & Service Operations"
-                : "Company Portfolio Directory"}
-            </h1>
-          </div>
 
-          <div class="flex items-center gap-3 text-xs">
-            <!-- Dual Perspective Segmented Switcher -->
-            <div class="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700 shadow-inner">
-              <button 
-                onclick="app.login('user-admin')"
-                class="px-3 py-1 rounded-lg font-bold text-xs transition-all ${app.currentUser?.role === 'admin' ? 'bg-[#083e2e] text-white shadow-xs' : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'}"
-                title="Switch to York IE Administrator View"
-              >
+            <div class="topbar-v-divider" aria-hidden="true"></div>
+
+            <!-- Version Switcher -->
+            <div class="version-switch-pill" role="navigation" aria-label="Console version">
+              <span class="version-switch-lbl">Console:</span>
+              <a href="dashboard-v1.html" class="v-tab-btn">v1</a>
+              <a href="dashboard.html" class="v-tab-btn">v2</a>
+              <a href="dashboard-v3.html" class="v-tab-btn active">v3</a>
+            </div>
+
+            <div class="topbar-v-divider" aria-hidden="true"></div>
+
+            <!-- Dual Perspective Switcher Pill -->
+            <div class="version-switch-pill" role="navigation" aria-label="Perspective Switcher">
+              <button type="button" onclick="app.login('user-admin')" class="v-tab-btn ${app.currentUser?.role === 'admin' ? 'active' : ''}">
                 👑 Admin
               </button>
-              <button 
-                onclick="app.login('user-client')"
-                class="px-3 py-1 rounded-lg font-bold text-xs transition-all ${app.currentUser?.role !== 'admin' ? 'bg-[#083e2e] text-white shadow-xs' : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'}"
-                title="Switch to Client Portal View"
-              >
-                🏢 Client Portal
+              <button type="button" onclick="app.login('user-client')" class="v-tab-btn ${app.currentUser?.role !== 'admin' ? 'active' : ''}">
+                🏢 Client
               </button>
             </div>
+          </div>
 
-            <!-- HubSpot CRM indicator -->
-            <div class="hidden md:flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 px-3 py-1.5 rounded-xl font-medium text-emerald-800 dark:text-emerald-300">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span class="text-[11px] font-semibold">HubSpot: Synced</span>
+          <!-- Center-Right: Wide Search Bar -->
+          <div class="top-search-pill" onclick="document.getElementById('admin-search-input')?.focus() || showToast('Filter companies or services with search bar below', 'info')">
+            <div class="top-search-inner">
+              <i data-lucide="search"></i>
+              <span class="top-search-text">Search portfolio, products, incidents…</span>
             </div>
+            <kbd class="top-search-kbd">⌘K</kbd>
+          </div>
 
-            <!-- Theme Toggle -->
-            <button 
-              onclick="toggleTheme()" 
-              class="p-2 rounded-xl text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition shadow-2xs"
-              title="Toggle Light / Dark Theme"
-            >
-              <svg class="w-4 h-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-              <svg class="w-4 h-4 hidden dark:block text-amber-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <!-- Right Action Cluster: Theme, CRM Sync, Notifications, Avatar -->
+          <div class="topbar-actions-group">
+            <button class="topbar-action-btn" onclick="toggleTheme()" type="button" aria-label="Toggle Color Theme" title="Toggle dark/light mode">
+              <svg class="theme-sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <svg class="theme-moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
             </button>
 
-            <button 
-              onclick="app.logout()" 
-              class="text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white font-medium flex items-center gap-1 transition-colors text-xs px-2.5 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
-              title="Logout"
-            >
-              ${getIconSvg("LogOut", 13)}
+            <button class="topbar-action-btn" onclick="showToast('CRM sync active. All accounts up to date.', 'info')" type="button" aria-label="Notifications" title="Notifications">
+              <i data-lucide="bell"></i>
+              <span class="topbar-bell-dot"></span>
             </button>
+
+            <div class="topbar-user-avatar" onclick="app.logout()" role="button" tabindex="0" title="Kyle York (Operating Lead · Admin)" aria-label="Kyle York">
+              KY
+            </div>
           </div>
         </header>
 
+        <!-- KPI Telemetry Cards Row -->
+        <section class="metrics-card-deck">
+          <div class="deck-card primary-accent-card" onclick="app.adminTab = 'clients'; app.saveState(); render();">
+            <div class="deck-card-top">
+              <span class="deck-card-label">Portfolio Companies</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div>
+              <div class="deck-card-value mono">${app.clients.length}</div>
+              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+                <span style="color: var(--emerald); font-weight: 700;">+${app.hubspotDeals.filter(d => d.stage === 'closed_won').length}</span> In Onboarding Queue
+              </div>
+            </div>
+          </div>
+
+          <div class="deck-card" onclick="app.adminTab = 'active_accounts'; app.saveState(); render();">
+            <div class="deck-card-top">
+              <span class="deck-card-label">Active Accounts</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div>
+              <div class="deck-card-value mono">${activeClientsCount}</div>
+              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+                <span style="color: var(--emerald); font-weight: 700;">100%</span> SOW Health Rate
+              </div>
+            </div>
+          </div>
+
+          <div class="deck-card" onclick="app.adminTab = 'tickets'; app.saveState(); render();">
+            <div class="deck-card-top">
+              <span class="deck-card-label">Open Incidents</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div>
+              <div class="deck-card-value mono" style="${openTicketsCount > 0 ? 'color: #F59E0B;' : ''}">${openTicketsCount}</div>
+              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+                <span>Portfolio Support Queue</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="deck-card" onclick="app.adminTab = 'products'; app.saveState(); render();">
+            <div class="deck-card-top">
+              <span class="deck-card-label">York IE Products</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div>
+              <div class="deck-card-value mono">${PRODUCTS_CATALOG.length}</div>
+              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+                <span>Active Software Tools</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- Main Tab Content Area -->
-        <div class="flex-1 p-6 lg:p-8 max-w-6xl w-full mx-auto space-y-6 animate-fade-in">
+        <div class="canvas-content-flow animate-fade-in" style="margin-top: 4px;">
           ${app.adminTab === "products" 
             ? renderAdminProductsCatalogTab() 
             : app.adminTab === "tickets" 
@@ -3946,10 +6638,6 @@ function renderAdminConsole() {
     </div>
   `;
 }
-
-// -------------------------------------------------------------------------------------------------
-// TAB 1: COMPANY PORTFOLIO (SIMPLIFIED 3-COLUMN DIRECTORY: COMPANY NAME, PRIMARY CONTACT, ACTIONS)
-// -------------------------------------------------------------------------------------------------
 function renderAdminCompaniesTab() {
   const query = (app.adminSearchQuery || "").toLowerCase().trim();
   const filter = app.adminFilterStatus || "all";
@@ -4829,214 +7517,250 @@ function renderClientDashboard() {
   const tab = app.clientTab || "workspaces";
 
   return `
-    <div class="flex h-screen bg-[#f8fafc] overflow-hidden font-sans">
+    <div class="canvas-wrapper">
       
-      <!-- Client Left Sidebar -->
-      <aside class="w-64 lg:w-72 bg-white border-r border-slate-200 flex flex-col flex-shrink-0 h-screen select-none">
-        
-        <div class="p-4 border-b border-slate-200 flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm shadow-xs">
-              ${client.name.substring(0, 2).toUpperCase()}
-            </div>
-            <div>
-              <div class="font-bold text-slate-900 text-sm leading-tight">${client.name}</div>
-              <div class="text-slate-400 text-[10px]">Client Portal · ${client.domain}</div>
-            </div>
-          </div>
-          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700">
-            Client
-          </span>
+      <!-- PERMANENT FLOATING SIDEBAR NAVIGATION (CLIENT) -->
+      <aside class="permanent-sidebar" id="permanentSidebar" aria-label="Client Sidebar Navigation">
+        <!-- Brand Header with Official Vector SVG -->
+        <div class="sidebar-header">
+          <a href="index.html" class="sidebar-brand-box" title="Return to York Website" style="text-decoration:none">
+            <img src="logo-light.svg" alt="York IE" class="sidebar-brand-logo logo-light-mode" height="28" />
+            <img src="logo-dark.svg" alt="York IE" class="sidebar-brand-logo logo-dark-mode" height="28" />
+          </a>
+          <button class="sidebar-collapse-btn" onclick="toggleSidebarCollapse()" title="Toggle sidebar navigation width">
+            <i data-lucide="panel-left-close"></i>
+          </button>
         </div>
 
-        <nav class="flex-1 overflow-y-auto px-3 py-3 space-y-1">
-          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-3 py-1.5">Workspace</div>
+        <!-- Client Workspace Indicator Pill -->
+        <div class="sidebar-workspace-pill" onclick="app.login('user-admin')" title="Click to switch to Admin Console view">
+          <div style="width:24px;height:24px;border-radius:6px;background:var(--emerald);color:#fff;display:grid;place-items:center;font-weight:700;font-size:12px">${client.name.substring(0, 2).toUpperCase()}</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:700;font-size:12.5px;color:var(--text-main);line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${client.name}</div>
+            <div style="font-size:10.5px;color:var(--text-muted)">${client.domain}</div>
+          </div>
+          <span class="sidebar-ws-tag">CLIENT</span>
+        </div>
 
-          <button 
-            onclick="app.clientTab = 'workspaces'; app.saveState(); render();"
-            class="sidebar-nav-btn ${tab === 'workspaces' ? "active" : ""}"
-          >
-            <div class="flex items-center gap-2.5">
-              ${getIconSvg("Rocket", 16, tab === 'workspaces' ? "#ffffff" : "#084c36")}
-              <span>1. Workspaces Hub</span>
-            </div>
+        <!-- Primary Top Navigation for Client -->
+        <nav class="sidebar-primary-nav" aria-label="Client Main Navigation">
+          <button type="button" class="sidebar-main-nav-btn ${tab === 'workspaces' ? 'active' : ''}" onclick="app.clientTab = 'workspaces'; app.saveState(); render();">
+            <i data-lucide="rocket"></i>
+            <span style="flex:1;text-align:left;">Workspaces Hub</span>
             <span class="sidebar-badge">${(client.grantedProducts || []).length} Active</span>
           </button>
-
-          <button 
-            onclick="app.clientTab = 'milestones'; app.saveState(); render();"
-            class="sidebar-nav-btn ${tab === 'milestones' ? "active" : ""}"
-          >
-            <div class="flex items-center gap-2.5">
-              ${getIconSvg("Target", 16, tab === 'milestones' ? "#ffffff" : "#084c36")}
-              <span>2. SOW Milestones</span>
-            </div>
+          <button type="button" class="sidebar-main-nav-btn ${tab === 'milestones' ? 'active' : ''}" onclick="app.clientTab = 'milestones'; app.saveState(); render();">
+            <i data-lucide="target"></i>
+            <span style="flex:1;text-align:left;">SOW Milestones</span>
             <span class="sidebar-badge">${(client.milestones || []).filter(m => m.stage === 'approved').length}/${(client.milestones || []).length}</span>
           </button>
-
-          <button 
-            onclick="app.clientTab = 'perks'; app.saveState(); render();"
-            class="sidebar-nav-btn ${tab === 'perks' ? "active" : ""}"
-          >
-            <div class="flex items-center gap-2.5">
-              ${getIconSvg("Gift", 16, tab === 'perks' ? "#ffffff" : "#7c3aed")}
-              <span>3. Syndicate Perks</span>
-            </div>
-            <span class="sidebar-badge bg-purple-100 text-purple-800">$250k+</span>
+          <button type="button" class="sidebar-main-nav-btn ${tab === 'perks' ? 'active' : ''}" onclick="app.clientTab = 'perks'; app.saveState(); render();">
+            <i data-lucide="gift"></i>
+            <span style="flex:1;text-align:left;">Syndicate Perks</span>
+            <span class="sidebar-badge" style="background: rgba(147, 51, 234, 0.15); color: #7C3AED;">$250k+</span>
           </button>
-
-          <button 
-            onclick="app.clientTab = 'threat-radar'; app.saveState(); render();"
-            class="sidebar-nav-btn ${tab === 'threat-radar' ? "active" : ""}"
-          >
-            <div class="flex items-center gap-2.5">
-              ${getIconSvg("Radar", 16, tab === 'threat-radar' ? "#ffffff" : "#ea580c")}
-              <span>4. Market Threat Radar</span>
-            </div>
-            <span class="sidebar-badge bg-orange-100 text-orange-800">Live</span>
-          </button>
-
-          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-3 pt-3 pb-1.5">Collaboration</div>
-
-          <button 
-            onclick="app.clientTab = 'tickets'; app.saveState(); render();"
-            class="sidebar-nav-btn ${tab === 'tickets' ? "active" : ""}"
-          >
-            <div class="flex items-center gap-2.5">
-              ${getIconSvg("LifeBuoy", 16, tab === 'tickets' ? "#ffffff" : "#084c36")}
-              <span>5. Support Desk</span>
-            </div>
-            <span class="sidebar-badge">${(client.supportTickets || []).length}</span>
-          </button>
-
-          <button 
-            onclick="app.clientTab = 'team'; app.saveState(); render();"
-            class="sidebar-nav-btn ${tab === 'team' ? "active" : ""}"
-          >
-            <div class="flex items-center gap-2.5">
-              ${getIconSvg("Users", 16, tab === 'team' ? "#ffffff" : "#084c36")}
-              <span>6. Team & Permissions</span>
-            </div>
-            <span class="sidebar-badge">${(client.team || []).length}</span>
-          </button>
-
-          <button 
-            onclick="app.clientTab = 'ecosystem'; app.saveState(); render();"
-            class="sidebar-nav-btn ${tab === 'ecosystem' ? "active" : ""}"
-          >
-            <div class="flex items-center gap-2.5">
-              ${getIconSvg("Sparkles", 16, tab === 'ecosystem' ? "#ffffff" : "#084c36")}
-              <span>7. York Ecosystem</span>
-            </div>
-            <span class="sidebar-badge">18</span>
+          <button type="button" class="sidebar-main-nav-btn ${tab === 'threat-radar' ? 'active' : ''}" onclick="app.clientTab = 'threat-radar'; app.saveState(); render();">
+            <i data-lucide="radar"></i>
+            <span style="flex:1;text-align:left;">Market Threat Radar</span>
+            <span class="sidebar-badge" style="background: rgba(234, 88, 12, 0.15); color: #C2410C;">Live</span>
           </button>
         </nav>
 
-        <div class="p-3.5 border-t border-slate-200 bg-slate-50/70">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <div class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
-                ${(client.ownerName || 'C').substring(0, 1)}
-              </div>
-              <div class="min-w-0">
-                <div class="text-xs font-bold text-slate-900 truncate">${client.ownerName || "Marcus Vance"}</div>
-                <div class="text-[10px] text-slate-500 truncate">${client.ownerEmail || client.domain}</div>
-              </div>
-            </div>
-            <button 
-              onclick="app.logout()" 
-              class="p-1.5 text-slate-400 hover:text-slate-700 transition-colors rounded-lg hover:bg-slate-200"
-              title="Switch User / Logout"
-            >
-              ${getIconSvg("LogOut", 14)}
+        <!-- Secondary Collaboration Navigation -->
+        <div class="sidebar-nav-scroll">
+          <div class="sidebar-category-group">
+            <div class="sidebar-category-title">Collaboration</div>
+            <button type="button" class="sidebar-nav-item ${tab === 'tickets' ? 'active' : ''}" onclick="app.clientTab = 'tickets'; app.saveState(); render();">
+              <i data-lucide="life-buoy"></i>
+              <span class="sidebar-nav-label">Support Desk</span>
+              <span class="sidebar-badge">${(client.supportTickets || []).length}</span>
             </button>
+            <button type="button" class="sidebar-nav-item ${tab === 'team' ? 'active' : ''}" onclick="app.clientTab = 'team'; app.saveState(); render();">
+              <i data-lucide="users"></i>
+              <span class="sidebar-nav-label">Team &amp; Access</span>
+              <span class="sidebar-badge">${(client.team || []).length}</span>
+            </button>
+            <button type="button" class="sidebar-nav-item ${tab === 'ecosystem' ? 'active' : ''}" onclick="app.clientTab = 'ecosystem'; app.saveState(); render();">
+              <i data-lucide="sparkles"></i>
+              <span class="sidebar-nav-label">York Ecosystem</span>
+              <span class="sidebar-badge">18</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sidebar Footer: User Profile Tile (PRD: Tokens strictly HIDDEN from Client view!) -->
+        <div class="sidebar-footer">
+          <div class="sidebar-user-tile" onclick="app.logout()" title="Logout / Switch User">
+            <div class="sidebar-user-avatar">${(client.ownerName || 'C').substring(0, 2).toUpperCase()}</div>
+            <div style="flex:1;min-width:0">
+              <b style="font-size:12px;display:block;line-height:1.2;color:var(--text-main);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${client.ownerName || 'Alex Kim'}</b>
+              <small style="font-size:11px;color:var(--text-muted)">${client.name} · Founder</small>
+            </div>
+            <i data-lucide="log-out" style="width:14px;height:14px;color:var(--text-muted)"></i>
           </div>
         </div>
       </aside>
 
-      <!-- Main Client Content Panel -->
-      <main class="flex-1 h-screen overflow-y-auto flex flex-col bg-[#f8fafc]">
-                <!-- Client Top Sticky Header -->
-        <header class="bg-white/85 dark:bg-slate-900/85 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 py-3.5 sticky top-0 z-20 flex items-center justify-between transition-colors">
-          <div class="flex items-center gap-2.5">
-            <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>Client Portal</span>
+      <!-- MAIN DESK CANVAS -->
+      <main class="desk-canvas" id="mainDesk">
+        
+        <!-- Floating Top Navigation Bar (Dock Capsule) -->
+        <header class="floating-topbar">
+          <!-- Left: Breadcrumb + Theme Version Switcher -->
+          <div class="topbar-nav-group">
+            <div class="topbar-breadcrumb">
+              <span class="topbar-crumb-org">${client.name}</span>
+              <span class="topbar-crumb-slash">/</span>
+              <span class="topbar-crumb-view">${getTabTitle(tab)}</span>
             </div>
-            <span class="text-slate-300 dark:text-slate-600">/</span>
-            <h1 class="text-sm font-bold text-slate-900 dark:text-white">
-              ${getTabTitle(tab)}
-            </h1>
-          </div>
 
-          <div class="flex items-center gap-3 text-xs">
-            <!-- Dual Perspective Segmented Switcher -->
-            <div class="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700 shadow-inner">
-              <button 
-                onclick="app.login('user-admin')"
-                class="px-3 py-1 rounded-lg font-bold text-xs transition-all ${app.currentUser?.role === 'admin' ? 'bg-[#083e2e] text-white shadow-xs' : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'}"
-                title="Switch to York IE Administrator View"
-              >
+            <div class="topbar-v-divider" aria-hidden="true"></div>
+
+            <!-- Version Switcher -->
+            <div class="version-switch-pill" role="navigation" aria-label="Console version">
+              <span class="version-switch-lbl">Console:</span>
+              <a href="dashboard-v1.html" class="v-tab-btn">v1</a>
+              <a href="dashboard.html" class="v-tab-btn">v2</a>
+              <a href="dashboard-v3.html" class="v-tab-btn active">v3</a>
+            </div>
+
+            <div class="topbar-v-divider" aria-hidden="true"></div>
+
+            <!-- Dual Perspective Switcher Pill -->
+            <div class="version-switch-pill" role="navigation" aria-label="Perspective Switcher">
+              <button type="button" onclick="app.login('user-admin')" class="v-tab-btn ${app.currentUser?.role === 'admin' ? 'active' : ''}">
                 👑 Admin
               </button>
-              <button 
-                onclick="app.login('user-client')"
-                class="px-3 py-1 rounded-lg font-bold text-xs transition-all ${app.currentUser?.role !== 'admin' ? 'bg-[#083e2e] text-white shadow-xs' : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'}"
-                title="Switch to Client Portal View"
-              >
-                🏢 Client Portal
+              <button type="button" onclick="app.login('user-client')" class="v-tab-btn ${app.currentUser?.role !== 'admin' ? 'active' : ''}">
+                🏢 Client
               </button>
             </div>
+          </div>
 
+          <!-- Center-Right: Wide Search Bar -->
+          <div class="top-search-pill" onclick="showToast('Use search inside each tab below to filter workspaces and deliverables', 'info')">
+            <div class="top-search-inner">
+              <i data-lucide="search"></i>
+              <span class="top-search-text">Search workspaces, SOW milestones, perks…</span>
+            </div>
+            <kbd class="top-search-kbd">⌘K</kbd>
+          </div>
+
+          <!-- Right Action Cluster -->
+          <div class="topbar-actions-group">
             <!-- Board ROI Deck Button -->
-            <button 
-              onclick="openBoardDeckModal('${client.id}')"
-              class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 font-semibold transition shadow-2xs"
-            >
-              ${getIconSvg('Presentation', 13)}
-              <span>Board ROI Deck</span>
+            <button type="button" class="export-pill-btn" onclick="openBoardDeckModal('${client.id}')" title="Open 5-Slide Executive Board Presentation Deck" style="height: 34px; padding: 0 12px; font-size: 12px;">
+              <i data-lucide="presentation"></i>
+              <span>Board Deck</span>
             </button>
 
-            <!-- Theme Toggle -->
-            <button 
-              onclick="toggleTheme()" 
-              class="p-2 rounded-xl text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition shadow-2xs"
-              title="Toggle Light / Dark Theme"
-            >
-              <svg class="w-4 h-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-              <svg class="w-4 h-4 hidden dark:block text-amber-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            <!-- Theme Switcher Button -->
+            <button class="topbar-action-btn" onclick="toggleTheme()" type="button" aria-label="Toggle Color Theme" title="Toggle dark/light mode">
+              <svg class="theme-sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <svg class="theme-moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
             </button>
 
-            <button 
-              onclick="app.logout()" 
-              class="text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white font-medium flex items-center gap-1 transition-colors text-xs px-2.5 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
-              title="Logout"
-            >
-              ${getIconSvg("LogOut", 13)}
+            <button class="topbar-action-btn" onclick="showToast('All SOW deliverables and workspace access current', 'info')" type="button" aria-label="Notifications" title="Notifications">
+              <i data-lucide="bell"></i>
+              <span class="topbar-bell-dot"></span>
             </button>
+
+            <div class="topbar-user-avatar" onclick="app.logout()" role="button" tabindex="0" title="${client.ownerName || 'Alex Kim'} (${client.name})" aria-label="${client.ownerName || 'Alex Kim'}">
+              ${(client.ownerName || 'AK').substring(0, 2).toUpperCase()}
+            </div>
           </div>
         </header>
 
-        <div class="flex-1 p-6 lg:p-8 max-w-6xl w-full mx-auto space-y-6 animate-fade-in">
-          ${
-            tab === 'milestones' ? renderClientMilestonesTab(client)
-            : tab === 'perks' ? renderClientPerksTab(client)
-            : tab === 'threat-radar' ? renderClientThreatRadarTab(client)
-            : tab === 'tickets' ? renderClientSupportTab(client)
-            : tab === 'team' ? renderClientTeamTab(client)
-            : tab === 'ecosystem' ? renderClientEcosystemTab(client)
-            : renderClientWorkspacesTab(client)
-          }
+        <!-- KPI Telemetry Cards Row for Client -->
+        <section class="metrics-card-deck">
+          <div class="deck-card primary-accent-card" onclick="app.clientTab = 'workspaces'; app.saveState(); render();">
+            <div class="deck-card-top">
+              <span class="deck-card-label">Active Workspaces</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div>
+              <div class="deck-card-value mono">${(client.grantedProducts || []).length}</div>
+              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+                <span style="color: var(--emerald); font-weight: 700;">Live</span> Ready for Single Sign-On
+              </div>
+            </div>
+          </div>
+
+          <div class="deck-card" onclick="app.clientTab = 'milestones'; app.saveState(); render();">
+            <div class="deck-card-top">
+              <span class="deck-card-label">SOW Milestones</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div>
+              <div class="deck-card-value mono">${(client.milestones || []).filter(m => m.stage === 'approved').length}/${(client.milestones || []).length}</div>
+              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+                <span style="color: var(--emerald); font-weight: 700;">${Math.round(((client.milestones || []).filter(m => m.stage === 'approved').length / Math.max((client.milestones || []).length, 1)) * 100)}%</span> Delivered &amp; Approved
+              </div>
+            </div>
+          </div>
+
+          <div class="deck-card" onclick="app.clientTab = 'perks'; app.saveState(); render();">
+            <div class="deck-card-top">
+              <span class="deck-card-label">Syndicate Perks</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div>
+              <div class="deck-card-value mono" style="color: #8B5CF6;">$250k+</div>
+              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+                <span>Cloud &amp; SaaS Partner Credits</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="deck-card" onclick="app.clientTab = 'threat-radar'; app.saveState(); render();">
+            <div class="deck-card-top">
+              <span class="deck-card-label">Threat Radar Signals</span>
+              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div>
+              <div class="deck-card-value mono" style="color: #F97316;">${(client.threatSignals || []).length}</div>
+              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #F97316; display: inline-block;" class="animate-pulse"></span>
+                <span>Active Market Counter-Strategies</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Main Tab Content Area -->
+        <div class="canvas-content-flow animate-fade-in" style="margin-top: 4px;">
+          ${tab === "milestones"
+            ? renderClientMilestonesTab(client)
+            : tab === "perks"
+            ? renderClientPerksTab(client)
+            : tab === "threat-radar"
+            ? renderClientThreatRadarTab(client)
+            : tab === "tickets"
+            ? renderClientTicketsTab(client)
+            : tab === "team"
+            ? renderClientTeamTab(client)
+            : tab === "ecosystem"
+            ? renderClientEcosystemTab(client)
+            : renderClientWorkspacesTab(client)}
         </div>
       </main>
 
+      <div id="modal-root"></div>
     </div>
   `;
 }
-
-// -------------------------------------------------------------------------------------------------
-// CLIENT TAB 1: WORKSPACES HUB
-// -------------------------------------------------------------------------------------------------
 function renderClientWorkspacesTab(client) {
   const granted = client.grantedProducts || [];
   const products = PRODUCTS_CATALOG.filter(p => granted.includes(p.id));
