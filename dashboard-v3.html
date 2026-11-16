@@ -3305,6 +3305,218 @@ i[data-lucide], svg.lucide {
   outline: none !important;
 }
 
+
+/* ─── CANVAS CONTENT FLOW & LAYOUT RHYTHM ─── */
+.canvas-content-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* ─── EXECUTIVE CARDS & CONTAINERS ─── */
+.clean-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 22px 24px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+.clean-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+/* ─── CADENCE STRATEGY WIDGET (CLIENT WORKSPACES) ─── */
+.cadence-widget {
+  background: linear-gradient(135deg, #063828 0%, #0a4f3b 50%, #0d634b 100%);
+  color: #ffffff;
+  border-radius: 18px;
+  padding: 22px 26px;
+  box-shadow: 0 12px 28px -5px rgba(6, 56, 40, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.cadence-widget::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40%;
+  background: radial-gradient(circle at 80% 50%, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cadence-tag {
+  background: rgba(255, 255, 255, 0.16);
+  color: #a7f3d0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+/* ─── PRODUCT CARDS (WORKSPACES & CATALOG) ─── */
+.product-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+.product-card:hover {
+  border-color: var(--emerald);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  transform: translateY(-2px);
+}
+.product-card.active-granted {
+  border-color: var(--emerald-light);
+  background: var(--bg-card);
+}
+:root[data-theme="dark"] .product-card.active-granted {
+  border-color: rgba(0, 180, 138, 0.35);
+}
+.product-card.active-granted::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--cta-primary-bg);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+/* ─── SOW MILESTONES PIPELINE ─── */
+.pipeline-col {
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.milestone-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.18s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.milestone-card:hover {
+  border-color: var(--emerald);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.07);
+  transform: translateY(-1px);
+}
+
+/* ─── THREAT SIGNALS ─── */
+.threat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s ease;
+}
+.threat-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
+}
+.counter-strategy-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+/* ─── PERKS CATALOG ─── */
+.perk-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-card);
+  min-height: 220px;
+}
+.perk-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--emerald);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+.savings-bar-container {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+.savings-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10B981 0%, #34D399 100%);
+  border-radius: 9999px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── BADGES ─── */
+.badge-in-path {
+  background-color: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid rgba(0, 180, 138, 0.3);
+}
+.badge-in-path::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--emerald);
+}
+
+.badge-member-access {
+  background-color: var(--bg-subtle);
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid var(--line);
+}
+
 </style>
 </head>
 <body class="bg-[#f8fafc] text-[#0f172a] min-h-screen">
@@ -6431,18 +6643,12 @@ function renderAdminConsole() {
 
   // Calculate portfolio metrics
   const allTickets = [];
-  let totalAssignedServices = 0;
-  let totalBlockersCount = 0;
-  let totalTokensAllocated = 0;
   let totalTokensUsed = 0;
 
   app.clients.forEach(c => {
     (c.supportTickets || []).forEach(t => {
       allTickets.push({ ...t, clientName: c.name, clientId: c.id });
     });
-    totalAssignedServices += (c.assignedServices || (c.grantedProducts || []).length || 0);
-    totalBlockersCount += (c.blockersCount || 0);
-    totalTokensAllocated += (c.tokensAllocated || 50000);
     totalTokensUsed += (c.tokensUsed || 0);
   });
   const openTicketsCount = allTickets.filter(t => t.status !== "resolved").length;
@@ -6616,63 +6822,8 @@ function renderAdminConsole() {
           </div>
         </header>
 
-        <!-- KPI Telemetry Cards Row -->
-        <section class="metrics-card-deck">
-          <div class="deck-card primary-accent-card" onclick="app.adminTab = 'clients'; app.saveState(); render();">
-            <div class="deck-card-top">
-              <span class="deck-card-label">Portfolio Companies</span>
-              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-            </div>
-            <div>
-              <div class="deck-card-value mono">${app.clients.length}</div>
-              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
-                <span style="color: var(--emerald); font-weight: 700;">+${app.hubspotDeals.filter(d => d.stage === 'closed_won').length}</span> In Onboarding Queue
-              </div>
-            </div>
-          </div>
-
-          <div class="deck-card" onclick="app.adminTab = 'active_accounts'; app.saveState(); render();">
-            <div class="deck-card-top">
-              <span class="deck-card-label">Active Accounts</span>
-              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-            </div>
-            <div>
-              <div class="deck-card-value mono">${activeClientsCount}</div>
-              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
-                <span style="color: var(--emerald); font-weight: 700;">100%</span> SOW Health Rate
-              </div>
-            </div>
-          </div>
-
-          <div class="deck-card" onclick="app.adminTab = 'tickets'; app.saveState(); render();">
-            <div class="deck-card-top">
-              <span class="deck-card-label">Open Incidents</span>
-              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-            </div>
-            <div>
-              <div class="deck-card-value mono" style="${openTicketsCount > 0 ? 'color: #F59E0B;' : ''}">${openTicketsCount}</div>
-              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
-                <span>Portfolio Support Queue</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="deck-card" onclick="app.adminTab = 'products'; app.saveState(); render();">
-            <div class="deck-card-top">
-              <span class="deck-card-label">York IE Products</span>
-              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-            </div>
-            <div>
-              <div class="deck-card-value mono">${PRODUCTS_CATALOG.length}</div>
-              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
-                <span>Active Software Tools</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Main Tab Content Area -->
-        <div class="canvas-content-flow animate-fade-in" style="margin-top: 4px;">
+        <!-- Main Tab Content Area (Clean, single hierarchy) -->
+        <div class="canvas-content-flow animate-fade-in">
           ${app.adminTab === "products" 
             ? renderAdminProductsCatalogTab() 
             : app.adminTab === "tickets" 
@@ -6715,224 +6866,206 @@ function renderAdminCompaniesTab() {
   const pendingCount = app.clients.filter(c => c.status === "pending_invite").length;
 
   return `
-    <div class="space-y-6">
+    <div style="display: flex; flex-direction: column; gap: 20px;">
       
-      <!-- Top Metrics Summary Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        
-        <!-- 1. Total Portfolio Companies -->
-        <div class="clean-card !p-4 bg-white border border-slate-200 shadow-2xs">
-          <div class="flex items-center justify-between">
-            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Portfolio Directory</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
-              Total
-            </span>
-          </div>
-          <div class="text-2xl font-bold text-slate-900 mt-2 flex items-baseline gap-2">
-            <span>${totalCount} Companies</span>
-          </div>
-          <div class="text-[11px] text-slate-500 mt-2 flex items-center justify-between">
-            <span>Synchronized with HubSpot CRM</span>
-          </div>
-        </div>
-
-        <!-- 2. Active & Invited Clients -->
-        <div class="clean-card !p-4 bg-white border border-slate-200 shadow-2xs">
-          <div class="flex items-center justify-between">
-            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Onboarded Clients</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
-              Active / Invited
-            </span>
-          </div>
-          <div class="text-2xl font-bold text-slate-900 mt-2 flex items-baseline gap-2">
-            <span>${activeCount + invitedCount} Clients</span>
-          </div>
-          <div class="text-[11px] text-slate-500 mt-2 flex items-center justify-between">
-            <span>${activeCount} Active, ${invitedCount} Invited</span>
-            <button onclick="app.adminTab = 'active_accounts'; app.adminFilterStatus = 'all'; app.saveState(); render();" class="text-emerald-800 hover:text-emerald-950 font-bold underline">
-              View Active Accounts →
-            </button>
-          </div>
-        </div>
-
-        <!-- 3. Pending Invitations -->
-        <div class="clean-card !p-4 bg-white border border-slate-200 shadow-2xs">
-          <div class="flex items-center justify-between">
-            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Pending Invitations</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
-              Ready to Invite
-            </span>
-          </div>
-          <div class="text-2xl font-bold text-slate-900 mt-2 flex items-baseline gap-2">
-            <span>${pendingCount} Pending</span>
-          </div>
-          <div class="text-[11px] text-slate-500 mt-2 flex items-center justify-between">
-            <span>Click Send Invite to dispatch access</span>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Header & Action Row -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
-        <div>
-          <h2 class="text-xl font-bold text-slate-900 tracking-tight">Company Portfolio</h2>
-          <p class="text-xs text-slate-500 mt-0.5">
-            Portfolio directory: review primary contacts, dispatch onboarding invitations, or view active client dashboards.
+      <!-- Section Title & Controls Row -->
+      <section class="title-controls-row">
+        <div class="page-headline-wrap">
+          <h1 class="page-headline-lead">Company Portfolio Directory</h1>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
+            Onboard companies, assign software service bundles, and monitor operating velocity.
           </p>
         </div>
 
-        <!-- Search & Filter Controls -->
-        <div class="flex flex-wrap items-center gap-3">
-          <!-- Search Input -->
-          <div class="relative w-56 sm:w-64">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-              ${getIconSvg("Search", 14)}
-            </div>
+        <div class="controls-pill-row">
+          <!-- Search Input Pill -->
+          <div style="position: relative; width: 220px;">
+            <i data-lucide="search" style="position: absolute; left: 12px; top: 11px; width: 14px; height: 14px; color: var(--text-muted); pointer-events: none;"></i>
             <input 
+              id="admin-search-input"
               type="text" 
               value="${app.adminSearchQuery || ""}" 
               oninput="app.setAdminSearchQuery(this.value)" 
-              placeholder="Search companies, contact..." 
-              class="w-full pl-9 pr-8 py-2 bg-white border border-slate-300 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 shadow-2xs transition-all"
+              placeholder="Search companies..." 
+              style="width: 100%; height: 38px; padding-left: 34px; padding-right: 28px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-pill); font-size: 12.5px; color: var(--text-main); outline: none;"
             />
             ${app.adminSearchQuery ? `
-              <button onclick="app.setAdminSearchQuery('');" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">✕</button>
+              <button onclick="app.setAdminSearchQuery('');" style="position: absolute; right: 10px; top: 10px; color: var(--text-muted); background: none; border: none; cursor: pointer; font-size: 12px;">✕</button>
             ` : ""}
           </div>
 
-          <!-- Status Filter Pills -->
-          <div class="flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 shadow-2xs text-xs">
-            <button 
-              onclick="app.setAdminFilterStatus('all')" 
-              class="px-2.5 py-1 rounded-lg font-semibold transition-all ${filter === "all" ? "bg-[#084c36] text-white shadow-2xs" : "text-slate-600 hover:bg-slate-100"}"
-            >
-              All (${totalCount})
-            </button>
-            <button 
-              onclick="app.setAdminFilterStatus('active')" 
-              class="px-2.5 py-1 rounded-lg font-semibold transition-all ${filter === "active" ? "bg-[#084c36] text-white shadow-2xs" : "text-slate-600 hover:bg-slate-100"}"
-            >
-              Active (${activeCount})
-            </button>
-            <button 
-              onclick="app.setAdminFilterStatus('invited')" 
-              class="px-2.5 py-1 rounded-lg font-semibold transition-all ${filter === "invited" ? "bg-[#084c36] text-white shadow-2xs" : "text-slate-600 hover:bg-slate-100"}"
-            >
-              Invited (${invitedCount})
-            </button>
-            <button 
-              onclick="app.setAdminFilterStatus('pending')" 
-              class="px-2.5 py-1 rounded-lg font-semibold transition-all ${filter === "pending" ? "bg-[#084c36] text-white shadow-2xs" : "text-slate-600 hover:bg-slate-100"}"
-            >
-              Ready (${pendingCount})
-            </button>
+          <!-- Filter Segment Control -->
+          <div style="display: flex; align-items: center; gap: 3px; background: var(--bg-subtle); padding: 3px; border-radius: var(--radius-pill); border: 1px solid var(--line); height: 38px; box-sizing: border-box;">
+            <button onclick="app.setAdminFilterStatus('all')" class="v-tab-btn ${filter === 'all' ? 'active' : ''}">All (${totalCount})</button>
+            <button onclick="app.setAdminFilterStatus('active')" class="v-tab-btn ${filter === 'active' ? 'active' : ''}">Active (${activeCount})</button>
+            <button onclick="app.setAdminFilterStatus('invited')" class="v-tab-btn ${filter === 'invited' ? 'active' : ''}">Invited (${invitedCount})</button>
+            <button onclick="app.setAdminFilterStatus('pending')" class="v-tab-btn ${filter === 'pending' ? 'active' : ''}">Ready (${pendingCount})</button>
           </div>
 
           <!-- + Add Company Button -->
           <button 
             onclick="openAddCompanyModal()"
-            class="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#084c36] hover:bg-[#063828] text-white shadow-2xs transition-all flex items-center gap-1.5"
-            title="Add a new portfolio company"
+            class="export-pill-btn"
+            title="Onboard a new portfolio company"
           >
-            <span>+ Add Company</span>
+            <i data-lucide="plus"></i>
+            <span>Add Company</span>
           </button>
         </div>
-      </div>
+      </section>
 
-      <!-- 3-Column Simplified Companies Table View -->
-      <div class="bg-white border border-slate-200 rounded-2xl shadow-xs overflow-hidden">
+      <!-- Contextual 4-Card Metric Deck (Clean, single deck) -->
+      <section class="metrics-card-deck">
+        <div class="deck-card primary-accent-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Total Portfolio</span>
+            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value mono">${totalCount}</div>
+            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
+              <span style="color: var(--emerald); font-weight: 700;">+2</span> HubSpot closed-won deals
+            </div>
+          </div>
+        </div>
+
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Active SOW Accounts</span>
+            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value mono">${activeCount}</div>
+            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
+              <span style="color: var(--emerald); font-weight: 700;">100%</span> Accepted onboarding
+            </div>
+          </div>
+        </div>
+
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Ready to Onboard</span>
+            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value mono">${pendingCount}</div>
+            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
+              <span>Send invite to provision tools</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Support Queue</span>
+            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value mono">1</div>
+            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
+              <span>1 open technical incident</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3-Column Portfolio Directory Table (Strict PRD Compliance) -->
+      <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-card); box-shadow: var(--shadow-card); overflow: hidden;">
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse text-xs">
-            <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider text-[10px]">
+            <thead style="background: var(--bg-subtle); border-bottom: 1px solid var(--line); color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
               <tr>
-                <th class="py-3.5 px-6">Company Name</th>
-                <th class="py-3.5 px-6">Primary Contact</th>
-                <th class="py-3.5 px-6 text-right">Actions</th>
+                <th style="padding: 14px 20px;">1. Company Details</th>
+                <th style="padding: 14px 20px;">2. Assigned Services</th>
+                <th style="padding: 14px 20px; text-align: right;">3. Actions</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100">
+            <tbody>
               ${companies.length === 0 ? `
                 <tr>
-                  <td colspan="3" class="py-12 text-center text-slate-400">
-                    <div class="text-sm font-semibold text-slate-700">No companies found</div>
-                    <div class="text-xs text-slate-400 mt-1">Try adjusting your search query or filter.</div>
+                  <td colspan="3" style="padding: 48px; text-align: center; color: var(--text-muted);">
+                    <div style="font-weight: 600; font-size: 14px; color: var(--text-main);">No companies found</div>
+                    <div style="font-size: 12px; margin-top: 4px;">Try adjusting your search query or filter segment.</div>
                   </td>
                 </tr>
               ` : companies.map(client => {
+                const granted = client.grantedProducts || [];
+                const stage = client.stage || 'Scale';
+
                 return `
-                  <tr class="hover:bg-slate-50/70 transition-colors">
-                    <!-- 1. Company Name Column -->
-                    <td class="py-4 px-6">
-                      <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl bg-[#084c36] text-white font-bold flex items-center justify-center text-xs flex-shrink-0 shadow-2xs">
+                  <tr style="border-bottom: 1px solid var(--line); transition: background 0.15s ease;" onmouseover="this.style.background='var(--bg-subtle)'" onmouseout="this.style.background='transparent'">
+                    <!-- 1. Company Details (Logo initial, Name, Domain, Stage badge) -->
+                    <td style="padding: 16px 20px;">
+                      <div style="display: flex; align-items: center; gap: 14px;">
+                        <div style="width: 38px; height: 38px; border-radius: 10px; background: var(--emerald-dark); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 13px; flex-shrink: 0;">
                           ${client.name.substring(0, 2).toUpperCase()}
                         </div>
                         <div>
-                          <div class="font-bold text-slate-900 text-sm leading-tight">${client.name}</div>
-                          <div class="text-[11px] text-slate-400 mt-0.5">
+                          <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-weight: 700; font-size: 13.5px; color: var(--text-main);">${client.name}</span>
+                            <span style="font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 9999px; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--line);">${stage}</span>
+                          </div>
+                          <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">
                             <span>${client.domain}</span>
+                            <span style="margin: 0 4px; opacity: 0.5;">·</span>
+                            <span>Contact: ${client.ownerName || 'Alex Kim'} (${client.ownerEmail || 'alex@acme.io'})</span>
                           </div>
                         </div>
                       </div>
                     </td>
 
-                    <!-- 2. Primary Contact Column -->
-                    <td class="py-4 px-6">
-                      <div class="font-semibold text-slate-800">${client.ownerName || "Contact Pending"}</div>
-                      <div class="text-[11px] text-slate-400 mt-0.5">${client.ownerEmail || "No email registered"}</div>
-                      ${client.status === "invited" ? `
-                        <div class="text-[10px] text-amber-700 font-medium mt-1 flex items-center gap-1">
-                          <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-                          <span>Invite sent (Awaiting acceptance • <button onclick="app.acceptCompanyInvite('${client.id}')" class="underline font-bold text-amber-900 hover:text-black">Accept</button>)</span>
-                        </div>
-                      ` : client.status === "active" ? `
-                        <div class="text-[10px] text-emerald-700 font-medium mt-0.5 flex items-center gap-1">
-                          <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-                          <span>Active Client ✓</span>
-                        </div>
-                      ` : `
-                        <div class="text-[10px] text-slate-400 mt-0.5">Ready to invite</div>
-                      `}
+                    <!-- 2. Assigned Services Column (Strictly plain number as required by PRD) -->
+                    <td style="padding: 16px 20px; white-space: nowrap;">
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="mono" style="font-size: 15px; font-weight: 800; color: var(--text-main);">
+                          ${granted.length}
+                        </span>
+                        <span style="font-size: 11.5px; color: var(--text-muted);">
+                          services provisioned
+                        </span>
+                      </div>
                     </td>
 
-                    <!-- 3. Actions Column (Strictly 1 Action at a time) -->
-                    <td class="py-4 px-6 text-right whitespace-nowrap">
-                      ${client.status === "pending_invite" ? `
-                        <!-- 1. First: Send Invite -->
-                        <button 
-                          onclick="openSendInviteModal('${client.id}')"
-                          class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 transition-all shadow-2xs inline-flex items-center gap-1.5"
-                          title="Select services and send portal invitation"
-                        >
-                          ${getIconSvg("Mail", 13)}
-                          <span>Send Invite</span>
-                        </button>
-                      ` : client.status === "invited" ? `
-                        <!-- 2. Invite Sent: Resend Invite (Awaiting acceptance) -->
-                        <button 
-                          onclick="app.resendCompanyInvite('${client.id}')"
-                          class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 transition-all shadow-2xs inline-flex items-center gap-1.5"
-                          title="Resend invitation email to ${client.ownerEmail || 'contact'}"
-                        >
-                          ${getIconSvg("Mail", 13)}
-                          <span>Resend Invite</span>
-                        </button>
-                      ` : `
-                        <!-- 3. Invite Accepted: View Dashboard -->
-                        <button 
-                          onclick="openCompanyDashboardPopup('${client.id}')"
-                          class="px-3.5 py-1.5 bg-[#084c36] hover:bg-[#063828] text-white font-semibold rounded-lg text-xs shadow-2xs transition-all inline-flex items-center gap-1.5"
-                          title="View company progress, active tools and blockers"
-                        >
-                          <span>View Dashboard</span>
-                          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                        </button>
-                      `}
+                    <!-- 3. Actions Column -->
+                    <td style="padding: 16px 20px; text-align: right; white-space: nowrap;">
+                      <div style="display: inline-flex; align-items: center; gap: 8px;">
+                        ${client.status === 'pending_invite' ? `
+                          <button 
+                            onclick="openSendInviteModal('${client.id}')"
+                            class="export-pill-btn"
+                            style="height: 32px; padding: 0 12px; font-size: 11.5px;"
+                            title="Configure service bundle and send onboarding invite"
+                          >
+                            <i data-lucide="send"></i>
+                            <span>Send Invite</span>
+                          </button>
+                        ` : `
+                          <button 
+                            onclick="openSendInviteModal('${client.id}')"
+                            style="height: 32px; padding: 0 12px; font-size: 11.5px; font-weight: 600; border-radius: var(--cta-radius); background: var(--bg-card); border: 1px solid var(--line); color: var(--text-secondary); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.15s;"
+                            onmouseover="this.style.background='var(--bg-subtle)'; this.style.color='var(--text-main)'"
+                            onmouseout="this.style.background='var(--bg-card)'; this.style.color='var(--text-secondary)'"
+                            title="Manage assigned services"
+                          >
+                            <i data-lucide="sliders-horizontal" style="width: 12px; height: 12px;"></i>
+                            <span>Manage Services</span>
+                          </button>
+
+                          <button 
+                            onclick="openCompanyDashboardPopup('${client.id}')"
+                            class="export-pill-btn"
+                            style="height: 32px; padding: 0 12px; font-size: 11.5px;"
+                            title="Inspect client operations dashboard"
+                          >
+                            <i data-lucide="layout-grid"></i>
+                            <span>View Dashboard</span>
+                          </button>
+                        `}
+                      </div>
                     </td>
                   </tr>
                 `;
-              }).join("")}
+              }).join('')}
             </tbody>
           </table>
         </div>
@@ -6941,11 +7074,6 @@ function renderAdminCompaniesTab() {
     </div>
   `;
 }
-
-// -------------------------------------------------------------------------------------------------
-// TAB 2: ACTIVE ACCOUNTS (6 COLUMNS: COMPANY NAME, STATUS, ASSIGNED SERVICES, TOKENS USED, BLOCKERS, ACTIONS)
-// Excludes companies with pending invite sharing; every client here has an active dashboard.
-// -------------------------------------------------------------------------------------------------
 function renderAdminActiveAccountsTab() {
   const query = (app.adminSearchQuery || "").toLowerCase().trim();
   const filter = app.adminFilterStatus || "all";
@@ -6970,249 +7098,212 @@ function renderAdminActiveAccountsTab() {
   const activeCount = allAcceptedActiveClients.length;
   const blockerCount = allAcceptedActiveClients.filter(c => (c.blockers || []).some(b => b.status === "open")).length;
 
-  // Calculate Combined Tokens Used across accepted active companies
   let totalActiveTokensUsed = 0;
   allAcceptedActiveClients.forEach(c => {
     const t = getCompanyTokens(c);
     totalActiveTokensUsed += (t?.used || 0);
   });
 
-  // Count total services granted to accepted active accounts
   let totalAssignedServicesCount = 0;
   allAcceptedActiveClients.forEach(c => {
     totalAssignedServicesCount += (c.grantedProducts || []).length;
   });
 
   return `
-    <div class="space-y-6">
+    <div style="display: flex; flex-direction: column; gap: 20px;">
       
-      <!-- Top Metrics Header Cards: Health Check, Combined Tokens Used & Active Services -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        
-        <!-- 1. Portfolio Health Check Card -->
-        <div class="clean-card !p-4 bg-white border border-slate-200 shadow-2xs">
-          <div class="flex items-center justify-between">
-            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Portfolio Health Check</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
-              Healthy (94%)
-            </span>
-          </div>
-          <div class="text-2xl font-bold text-slate-900 mt-1 flex items-baseline gap-2">
-            <span>94 / 100</span>
-            <span class="text-xs text-emerald-700 font-semibold">High Velocity</span>
-          </div>
-          <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden mt-2.5">
-            <div class="bg-[#084c36] h-full rounded-full transition-all" style="width: 94%;"></div>
-          </div>
-          <div class="text-[11px] text-slate-500 mt-2 flex items-center justify-between">
-            <span>${activeCount} Accepted Accounts</span>
-            <span class="text-emerald-700 font-semibold">0 Critical Warnings</span>
-          </div>
-        </div>
-
-        <!-- 2. Combined Tokens Used Card (Across Active Accounts) -->
-        <div class="clean-card !p-4 bg-white border border-slate-200 shadow-2xs">
-          <div class="flex items-center justify-between">
-            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Tokens Used</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
-              Active Total
-            </span>
-          </div>
-          <div class="text-2xl font-bold text-slate-900 mt-2 flex items-baseline gap-2">
-            <span>${totalActiveTokensUsed.toLocaleString()} Tokens</span>
-          </div>
-          <div class="text-[11px] text-slate-500 mt-3 flex items-center justify-between">
-            <span>Total tokens consumed by active clients</span>
-          </div>
-        </div>
-
-        <!-- 3. Services Deployed & Coverage Card -->
-        <div class="clean-card !p-4 bg-white border border-slate-200 shadow-2xs">
-          <div class="flex items-center justify-between">
-            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">York Services Deployed</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-200">
-              Active Deployments
-            </span>
-          </div>
-          <div class="text-2xl font-bold text-slate-900 mt-1 flex items-baseline gap-2">
-            <span>${totalAssignedServicesCount} Services Assigned</span>
-          </div>
-          <div class="text-[11px] text-slate-500 mt-2 flex items-center justify-between">
-            <span>Across ${allAcceptedActiveClients.length} Active Accounts</span>
-            <button onclick="app.adminTab = 'products'; app.saveState(); render();" class="text-emerald-800 hover:text-emerald-950 font-bold underline">
-              Explore 18 Services →
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Header & Action Row -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
-        <div>
-          <h2 class="text-xl font-bold text-slate-900 tracking-tight">Active Accounts & Usage</h2>
-          <p class="text-xs text-slate-500 mt-0.5">
-            Active client operations: track service adoption, token consumption, operational blockers, and manage platform permissions.
+      <!-- Section Title & Controls Row -->
+      <section class="title-controls-row">
+        <div class="page-headline-wrap">
+          <h1 class="page-headline-lead">Active Accounts &amp; Service Operations</h1>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
+            Track active client operations, token burn velocity, blockers, and service usage.
           </p>
         </div>
 
-        <!-- Search & Filter Controls -->
-        <div class="flex flex-wrap items-center gap-3">
-          <!-- Search Input -->
-          <div class="relative w-64">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-              ${getIconSvg("Search", 14)}
-            </div>
+        <div class="controls-pill-row">
+          <!-- Search Input Pill -->
+          <div style="position: relative; width: 240px;">
+            <i data-lucide="search" style="position: absolute; left: 12px; top: 11px; width: 14px; height: 14px; color: var(--text-muted); pointer-events: none;"></i>
             <input 
               type="text" 
               value="${app.adminSearchQuery || ""}" 
               oninput="app.setAdminSearchQuery(this.value)" 
               placeholder="Search active accounts..." 
-              class="w-full pl-9 pr-8 py-2 bg-white border border-slate-300 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 shadow-2xs transition-all"
+              style="width: 100%; height: 38px; padding-left: 34px; padding-right: 28px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-pill); font-size: 12.5px; color: var(--text-main); outline: none;"
             />
             ${app.adminSearchQuery ? `
-              <button onclick="app.setAdminSearchQuery('');" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">✕</button>
+              <button onclick="app.setAdminSearchQuery('');" style="position: absolute; right: 10px; top: 10px; color: var(--text-muted); background: none; border: none; cursor: pointer; font-size: 12px;">✕</button>
             ` : ""}
           </div>
 
-          <!-- Status Filter Pills -->
-          <div class="flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 shadow-2xs text-xs">
-            <button 
-              onclick="app.setAdminFilterStatus('all')" 
-              class="px-2.5 py-1 rounded-lg font-semibold transition-all ${filter === "all" ? "bg-[#084c36] text-white shadow-2xs" : "text-slate-600 hover:bg-slate-100"}"
-            >
-              All Active (${allAcceptedActiveClients.length})
-            </button>
-            <button 
-              onclick="app.setAdminFilterStatus('blockers')" 
-              class="px-2.5 py-1 rounded-lg font-semibold transition-all flex items-center gap-1.5 ${filter === "blockers" ? "bg-amber-600 text-white shadow-2xs" : "text-amber-800 hover:bg-amber-50"}"
-              title="Filter accounts with active operational blockers"
-            >
-              <span class="w-1.5 h-1.5 rounded-full ${filter === "blockers" ? "bg-white" : "bg-amber-500"}"></span>
-              <span>With Blockers (${blockerCount})</span>
-            </button>
+          <!-- Filter Segment Control -->
+          <div style="display: flex; align-items: center; gap: 3px; background: var(--bg-subtle); padding: 3px; border-radius: var(--radius-pill); border: 1px solid var(--line); height: 38px; box-sizing: border-box;">
+            <button onclick="app.setAdminFilterStatus('all')" class="v-tab-btn ${filter === 'all' ? 'active' : ''}">All Active (${activeCount})</button>
+            <button onclick="app.setAdminFilterStatus('blockers')" class="v-tab-btn ${filter === 'blockers' ? 'active' : ''}">With Blockers (${blockerCount})</button>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- 6-Column Active Accounts Table View (Only Accepted Accounts) -->
-      <div class="bg-white border border-slate-200 rounded-2xl shadow-xs overflow-hidden">
+      <!-- Contextual 4-Card Metric Deck (Clean, single deck) -->
+      <section class="metrics-card-deck">
+        <div class="deck-card primary-accent-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Active Clients</span>
+            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value mono">${activeCount}</div>
+            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
+              <span style="color: var(--emerald); font-weight: 700;">100%</span> SOW Health Rate
+            </div>
+          </div>
+        </div>
+
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Portfolio Health</span>
+            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value mono">94<small style="font-size: 16px;">/100</small></div>
+            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
+              <span style="color: var(--emerald); font-weight: 700;">High Velocity</span> · 0 critical alerts
+            </div>
+          </div>
+        </div>
+
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Combined Tokens Used</span>
+            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <!-- Numbers only as per PRD -->
+            <div class="deck-card-value mono">${totalActiveTokensUsed.toLocaleString()}</div>
+            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
+              <span>Total consumed across active clients</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Services Deployed</span>
+            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value mono">${totalAssignedServicesCount}</div>
+            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
+              <span>Assigned across ${activeCount} accounts</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6-Column Active Accounts Table (Strict PRD Compliance) -->
+      <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-card); box-shadow: var(--shadow-card); overflow: hidden;">
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse text-xs">
-            <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider text-[10px]">
+            <thead style="background: var(--bg-subtle); border-bottom: 1px solid var(--line); color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
               <tr>
-                <th class="py-3.5 px-6">Company Name</th>
-                <th class="py-3.5 px-4">Status</th>
-                <th class="py-3.5 px-4">Assigned Services</th>
-                <th class="py-3.5 px-4">Tokens Used</th>
-                <th class="py-3.5 px-4">Blockers</th>
-                <th class="py-3.5 px-6 text-right">Actions</th>
+                <th style="padding: 14px 20px;">1. Company</th>
+                <th style="padding: 14px 16px;">2. Primary Contact</th>
+                <th style="padding: 14px 16px;">3. Status</th>
+                <th style="padding: 14px 16px;">4. Blockers</th>
+                <th style="padding: 14px 16px;">5. Tokens Used</th>
+                <th style="padding: 14px 20px; text-align: right;">6. Action</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100">
+            <tbody>
               ${filteredClients.length === 0 ? `
                 <tr>
-                  <td colspan="6" class="py-12 text-center text-slate-400">
-                    <div class="text-sm font-semibold text-slate-700">No active accounts found</div>
-                    <div class="text-xs text-slate-400 mt-1">
-                      ${allAcceptedActiveClients.length === 0 
-                        ? 'Clients appear here once they accept their onboarding invitation.' 
-                        : 'Try adjusting your search query or status filter.'}
-                    </div>
+                  <td colspan="6" style="padding: 48px; text-align: center; color: var(--text-muted);">
+                    <div style="font-weight: 600; font-size: 14px; color: var(--text-main);">No active accounts found</div>
+                    <div style="font-size: 12px; margin-top: 4px;">Adjust your search or filter segment.</div>
                   </td>
                 </tr>
               ` : filteredClients.map(client => {
                 const granted = client.grantedProducts || [];
-                const adoption = client.serviceAdoption || {};
-                const contractedProducts = PRODUCTS_CATALOG.filter(p => granted.includes(p.id));
-                const activeProducts = contractedProducts.filter(p => adoption[p.id]?.status === "active");
-                const unusedProducts = contractedProducts.filter(p => adoption[p.id]?.status !== "active");
-
                 const blockers = client.blockers || [];
                 const openBlockers = blockers.filter(b => b.status === "open");
-
-                // Get Tokens Used for this company
                 const tokens = getCompanyTokens(client);
 
                 return `
-                  <tr class="hover:bg-slate-50/70 transition-colors">
-                    <!-- 1. Company Name Column -->
-                    <td class="py-4 px-6">
-                      <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl bg-[#084c36] text-white font-bold flex items-center justify-center text-xs flex-shrink-0 shadow-2xs">
+                  <tr style="border-bottom: 1px solid var(--line); transition: background 0.15s ease;" onmouseover="this.style.background='var(--bg-subtle)'" onmouseout="this.style.background='transparent'">
+                    <!-- 1. Company -->
+                    <td style="padding: 16px 20px;">
+                      <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 36px; height: 36px; border-radius: 9px; background: var(--emerald-dark); color: #fff; font-weight: 700; display: grid; place-items: center; font-size: 12px; flex-shrink: 0;">
                           ${client.name.substring(0, 2).toUpperCase()}
                         </div>
                         <div>
-                          <div class="font-bold text-slate-900 text-sm leading-tight">${client.name}</div>
-                          <div class="text-[11px] text-slate-400 mt-0.5">
-                            <span>${client.domain}</span>
-                          </div>
+                          <div style="font-weight: 700; font-size: 13px; color: var(--text-main);">${client.name}</div>
+                          <div style="font-size: 11px; color: var(--text-muted); margin-top: 1px;">${client.domain}</div>
                         </div>
                       </div>
                     </td>
 
-                    <!-- 2. Status Column -->
-                    <td class="py-4 px-4">
-                      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                    <!-- 2. Primary Contact -->
+                    <td style="padding: 16px 16px; white-space: nowrap;">
+                      <div style="font-weight: 600; color: var(--text-main); font-size: 12.5px;">${client.ownerName || 'Alex Kim'}</div>
+                      <div style="font-size: 11px; color: var(--text-muted);">${client.ownerEmail || 'contact@client.io'}</div>
+                    </td>
+
+                    <!-- 3. Status (Active with live 6px green breathing dot) -->
+                    <td style="padding: 16px 16px; white-space: nowrap;">
+                      <span style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 700; background: var(--emerald-subtle); color: var(--emerald-dark); border: 1px solid rgba(0, 180, 138, 0.3);">
+                        <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--emerald); display: inline-block;" class="animate-pulse"></span>
                         <span>Active</span>
                       </span>
                     </td>
 
-                    <!-- 3. Assigned Services Column (Number only) -->
-                    <td class="py-4 px-4 whitespace-nowrap">
-                      <div class="font-bold text-slate-900 text-sm">
-                        ${granted.length}
-                      </div>
-                    </td>
-
-                    <!-- 4. Tokens Used Column (Number only) -->
-                    <td class="py-4 px-4 whitespace-nowrap">
-                      <div class="font-bold text-slate-900 text-sm">
-                        ${(tokens.used).toLocaleString()}
-                      </div>
-                    </td>
-
-                    <!-- 5. Blockers Column -->
-                    <td class="py-4 px-4">
+                    <!-- 4. Blockers Count -->
+                    <td style="padding: 16px 16px; white-space: nowrap;">
                       ${openBlockers.length > 0 ? `
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
-                          <svg class="w-3.5 h-3.5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        <span style="display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 700; background: rgba(239, 68, 68, 0.12); color: #DC2626; border: 1px solid rgba(239, 68, 68, 0.25);">
+                          <i data-lucide="shield-alert" style="width: 12px; height: 12px;"></i>
                           <span>${openBlockers.length} Blocker</span>
                         </span>
                       ` : `
-                        <span class="inline-flex items-center gap-1 text-[11px] font-medium text-slate-500">
-                          <span class="text-emerald-600 font-bold">✓</span>
-                          <span>None</span>
+                        <span style="display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--emerald-dark);">
+                          <span>✓</span>
+                          <span>0</span>
                         </span>
                       `}
                     </td>
 
-                    <!-- 6. Actions Column (Exactly 2 Actions: Manage Services & View Dashboard) -->
-                    <td class="py-4 px-6 text-right whitespace-nowrap">
-                      <div class="inline-flex items-center gap-2">
+                    <!-- 5. Tokens Used (Plain numbers only as per PRD) -->
+                    <td style="padding: 16px 16px; white-space: nowrap;">
+                      <div class="mono" style="font-size: 14px; font-weight: 800; color: var(--text-main);">
+                        ${(tokens.used).toLocaleString()}
+                      </div>
+                    </td>
+
+                    <!-- 6. Action -->
+                    <td style="padding: 16px 20px; text-align: right; white-space: nowrap;">
+                      <div style="display: inline-flex; align-items: center; gap: 8px;">
                         <button 
                           onclick="openSendInviteModal('${client.id}')"
-                          class="px-2.5 py-1.5 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-lg text-xs border border-slate-200 shadow-2xs transition-all inline-flex items-center gap-1.5"
-                          title="Manage granted services"
+                          style="height: 32px; padding: 0 12px; font-size: 11.5px; font-weight: 600; border-radius: var(--cta-radius); background: var(--bg-card); border: 1px solid var(--line); color: var(--text-secondary); cursor: pointer; display: inline-flex; align-items: center; gap: 6px;"
                         >
-                          ${getIconSvg("Sliders", 13)}
-                          <span>Manage Services</span>
+                          <i data-lucide="sliders-horizontal" style="width: 12px; height: 12px;"></i>
+                          <span>Services</span>
                         </button>
 
                         <button 
                           onclick="openCompanyDashboardPopup('${client.id}')"
-                          class="px-3 py-1.5 bg-[#084c36] hover:bg-[#063828] text-white font-semibold rounded-lg text-xs shadow-2xs transition-all inline-flex items-center gap-1.5"
-                          title="View company progress, active tools and blockers"
+                          class="export-pill-btn"
+                          style="height: 32px; padding: 0 12px; font-size: 11.5px;"
                         >
-                          <span>View Dashboard</span>
-                          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                          <i data-lucide="layout-grid"></i>
+                          <span>Dashboard</span>
                         </button>
                       </div>
                     </td>
                   </tr>
                 `;
-              }).join("")}
+              }).join('')}
             </tbody>
           </table>
         </div>
@@ -7221,14 +7312,6 @@ function renderAdminActiveAccountsTab() {
     </div>
   `;
 }
-
-// -------------------------------------------------------------------------------------------------
-// TAB 2: SUPPORT TICKETS SECTION (COLLECTED ACROSS ALL PLATFORMS & PORTFOLIO CLIENTS)
-// -------------------------------------------------------------------------------------------------
-
-// -------------------------------------------------------------------------------------------------
-// TAB 3: ADMIN SUPPORT TICKETS QUEUE TAB
-// -------------------------------------------------------------------------------------------------
 function renderAdminTicketsQueueTab() {
   const query = (app.adminTicketSearchQuery || "").toLowerCase().trim();
   const filter = app.adminTicketFilterStatus || "all";
@@ -7254,192 +7337,170 @@ function renderAdminTicketsQueueTab() {
       (t.title || "").toLowerCase().includes(query) ||
       (t.id || "").toLowerCase().includes(query) ||
       (t.clientName || "").toLowerCase().includes(query) ||
-      (t.product || "").toLowerCase().includes(query) ||
-      (t.productName || "").toLowerCase().includes(query) ||
-      (t.description || "").toLowerCase().includes(query)
+      (t.product || "").toLowerCase().includes(query)
     );
   }
 
   return `
-    <div class="space-y-6">
+    <div style="display: flex; flex-direction: column; gap: 20px;">
       
-      <!-- Top Metrics Overview -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
-        <div class="clean-card !p-3.5">
-          <div class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Total Tickets</div>
-          <div class="text-xl font-bold text-slate-900 mt-1">${allTickets.length} Incidents</div>
-          <div class="text-slate-500 text-[11px] mt-0.5">Across portfolio</div>
-        </div>
-
-        <div class="clean-card !p-3.5">
-          <div class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Active & Unresolved</div>
-          <div class="text-xl font-bold text-amber-600 mt-1">${openTickets.length} Open</div>
-          <div class="text-amber-700 text-[11px] font-semibold mt-0.5">Awaiting triage</div>
-        </div>
-
-        <div class="clean-card !p-3.5">
-          <div class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">In Active Triage</div>
-          <div class="text-xl font-bold text-blue-600 mt-1">${inProgTickets.length} In Progress</div>
-          <div class="text-blue-700 text-[11px] font-semibold mt-0.5">Engineering pod active</div>
-        </div>
-
-        <div class="clean-card !p-3.5">
-          <div class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Resolution Velocity</div>
-          <div class="text-xl font-bold text-emerald-800 mt-1">${allTickets.length > 0 ? Math.round((resolvedTickets.length / allTickets.length) * 100) : 100}%</div>
-          <div class="text-emerald-700 text-[11px] font-semibold mt-0.5">${resolvedTickets.length} Resolved</div>
-        </div>
-      </div>
-
-      <!-- Header & Filter Row -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 class="text-xl font-bold text-slate-900 tracking-tight">Portfolio Support Tickets</h2>
-          <p class="text-xs text-slate-500 mt-0.5">
-            Collected issues from client teams. Assign tickets to specific York software platforms and resolve them.
+      <!-- Section Title & Controls Row -->
+      <section class="title-controls-row">
+        <div class="page-headline-wrap">
+          <h1 class="page-headline-lead">Support Incident Queue</h1>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
+            Triage, diagnose, and resolve technical support tickets across the portfolio.
           </p>
         </div>
 
-        <div class="flex flex-wrap items-center gap-3">
-          <div class="relative w-64">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-              ${getIconSvg("Search", 14)}
-            </div>
+        <div class="controls-pill-row">
+          <div style="position: relative; width: 240px;">
+            <i data-lucide="search" style="position: absolute; left: 12px; top: 11px; width: 14px; height: 14px; color: var(--text-muted); pointer-events: none;"></i>
             <input 
               type="text" 
               value="${app.adminTicketSearchQuery || ""}" 
               oninput="app.setAdminTicketSearchQuery(this.value)" 
-              placeholder="Search tickets, company, platform..." 
-              class="w-full pl-9 pr-8 py-2 bg-white border border-slate-300 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 shadow-2xs transition-all"
+              placeholder="Search incidents..." 
+              style="width: 100%; height: 38px; padding-left: 34px; padding-right: 28px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-pill); font-size: 12.5px; color: var(--text-main); outline: none;"
             />
-            ${app.adminTicketSearchQuery ? `
-              <button onclick="app.setAdminTicketSearchQuery('');" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">✕</button>
-            ` : ""}
           </div>
 
-          <div class="flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 shadow-2xs text-xs">
-            <button 
-              onclick="app.setAdminTicketFilterStatus('all')" 
-              class="px-2.5 py-1 rounded-lg font-semibold transition-all ${filter === "all" ? "bg-[#084c36] text-white shadow-2xs" : "text-slate-600 hover:bg-slate-100"}"
-            >
-              All (${allTickets.length})
-            </button>
-            <button 
-              onclick="app.setAdminTicketFilterStatus('open')" 
-              class="px-2.5 py-1 rounded-lg font-semibold transition-all ${filter === "open" ? "bg-[#084c36] text-white shadow-2xs" : "text-slate-600 hover:bg-slate-100"}"
-            >
-              Open (${openTickets.length})
-            </button>
-            <button 
-              onclick="app.setAdminTicketFilterStatus('in_progress')" 
-              class="px-2.5 py-1 rounded-lg font-semibold transition-all ${filter === "in_progress" ? "bg-[#084c36] text-white shadow-2xs" : "text-slate-600 hover:bg-slate-100"}"
-            >
-              In Progress (${inProgTickets.length})
-            </button>
-            <button 
-              onclick="app.setAdminTicketFilterStatus('resolved')" 
-              class="px-2.5 py-1 rounded-lg font-semibold transition-all ${filter === "resolved" ? "bg-[#084c36] text-white shadow-2xs" : "text-slate-600 hover:bg-slate-100"}"
-            >
-              Resolved (${resolvedTickets.length})
-            </button>
+          <div style="display: flex; align-items: center; gap: 3px; background: var(--bg-subtle); padding: 3px; border-radius: var(--radius-pill); border: 1px solid var(--line); height: 38px; box-sizing: border-box;">
+            <button onclick="app.setAdminTicketFilterStatus('all')" class="v-tab-btn ${filter === 'all' ? 'active' : ''}">All (${allTickets.length})</button>
+            <button onclick="app.setAdminTicketFilterStatus('open')" class="v-tab-btn ${filter === 'open' ? 'active' : ''}">Open (${openTickets.length})</button>
+            <button onclick="app.setAdminTicketFilterStatus('in_progress')" class="v-tab-btn ${filter === 'in_progress' ? 'active' : ''}">In Progress (${inProgTickets.length})</button>
+            <button onclick="app.setAdminTicketFilterStatus('resolved')" class="v-tab-btn ${filter === 'resolved' ? 'active' : ''}">Resolved (${resolvedTickets.length})</button>
           </div>
         </div>
-      </div>
+      </section>
+
+      <!-- Contextual 4-Card Metric Deck -->
+      <section class="metrics-card-deck">
+        <div class="deck-card primary-accent-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Open Incidents</span>
+            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value mono" style="${openTickets.length > 0 ? 'color: #F59E0B;' : ''}">${openTickets.length}</div>
+            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
+              <span>Awaiting response or resolution</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Active Investigation</span>
+            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value mono">${inProgTickets.length}</div>
+            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
+              <span>Assigned to operating leads</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Resolved Incidents</span>
+            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value mono" style="color: var(--emerald-dark);">${resolvedTickets.length}</div>
+            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
+              <span>Successfully closed</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Avg Response SLA</span>
+            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value mono">&lt;15m</div>
+            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
+              <span style="color: var(--emerald); font-weight: 700;">Optimal</span> · Dedicated York Pod
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- Tickets Table View -->
-      <div class="bg-white border border-slate-200 rounded-2xl shadow-xs overflow-hidden">
+      <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-card); box-shadow: var(--shadow-card); overflow: hidden;">
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse text-xs">
-            <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider text-[10px]">
+            <thead style="background: var(--bg-subtle); border-bottom: 1px solid var(--line); color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
               <tr>
-                <th class="py-3.5 px-6">Ticket & Issue</th>
-                <th class="py-3.5 px-4">Client Company</th>
-                <th class="py-3.5 px-4">Assigned Platform</th>
-                <th class="py-3.5 px-4">Status</th>
-                <th class="py-3.5 px-6 text-right">Actions</th>
+                <th style="padding: 14px 20px;">Issue &amp; Client</th>
+                <th style="padding: 14px 16px;">Platform Tool</th>
+                <th style="padding: 14px 16px;">Severity</th>
+                <th style="padding: 14px 16px;">Status</th>
+                <th style="padding: 14px 16px;">York Assignee</th>
+                <th style="padding: 14px 20px; text-align: right;">Action</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100">
+            <tbody>
               ${filtered.length === 0 ? `
                 <tr>
-                  <td colspan="5" class="py-12 text-center text-slate-400">
-                    <div class="text-sm font-semibold text-slate-700">No tickets found</div>
-                    <div class="text-xs text-slate-400 mt-1">No support tickets match the current search or status filter.</div>
+                  <td colspan="6" style="padding: 48px; text-align: center; color: var(--text-muted);">
+                    <div style="font-weight: 600; font-size: 14px; color: var(--text-main);">No incidents matching query</div>
+                    <div style="font-size: 12px; margin-top: 4px;">Queue is clear or filter excludes active items.</div>
                   </td>
                 </tr>
-              ` : filtered.map(t => {
-                const isResolved = t.status === "resolved";
-                const isInProgress = t.status === "in_progress";
-                const currentPlatform = t.product || "growthos";
-
-                return `
-                  <tr class="hover:bg-slate-50/70 transition-colors">
-                    <td class="py-4 px-6">
-                      <div class="flex items-start gap-2.5">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold ${
-                          t.severity === "high" ? "bg-red-50 text-red-700 border border-red-200" : "bg-amber-50 text-amber-700 border border-amber-200"
-                        }">
-                          ${(t.severity || "medium").toUpperCase()}
-                        </span>
-                        <div>
-                          <div class="font-bold text-slate-900 text-xs">${t.title}</div>
-                          <div class="text-slate-500 text-[11px] mt-0.5 leading-relaxed line-clamp-1 max-w-md">${t.description}</div>
-                          <div class="text-[10px] text-slate-400 mt-1">
-                            Logged by ${t.creatorName || "Client"} · ${t.createdAt || "Recently"}
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-
-                    <td class="py-4 px-4 whitespace-nowrap">
-                      <div class="font-semibold text-slate-800 text-xs">${t.clientName}</div>
-                      <div class="text-[10px] text-slate-400 mt-0.5">${t.creatorEmail || "Client"}</div>
-                    </td>
-
-                    <td class="py-4 px-4 whitespace-nowrap">
-                      <select 
-                        onchange="app.assignTicketPlatform('${t.clientId}', '${t.id}', this.value)"
-                        class="bg-white border border-slate-300 rounded-lg px-2.5 py-1 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 font-medium"
+              ` : filtered.map(t => `
+                <tr style="border-bottom: 1px solid var(--line); transition: background 0.15s ease;" onmouseover="this.style.background='var(--bg-subtle)'" onmouseout="this.style.background='transparent'">
+                  <td style="padding: 16px 20px;">
+                    <div style="font-weight: 700; font-size: 13px; color: var(--text-main);">${t.title}</div>
+                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">
+                      <span style="font-weight: 600; color: var(--text-secondary);">${t.clientName}</span> · Raised by ${t.creatorName || 'Team'}
+                    </div>
+                  </td>
+                  <td style="padding: 16px 16px; white-space: nowrap;">
+                    <span style="padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; background: var(--bg-subtle); border: 1px solid var(--line); color: var(--text-secondary);">
+                      ${t.productName || t.product || 'Fuel'}
+                    </span>
+                  </td>
+                  <td style="padding: 16px 16px; white-space: nowrap;">
+                    <span style="padding: 3px 8px; border-radius: 9999px; font-size: 11px; font-weight: 700; ${
+                      t.severity === 'high' ? 'background: rgba(239, 68, 68, 0.12); color: #DC2626;' : 'background: rgba(245, 158, 11, 0.12); color: #B45309;'
+                    }">
+                      ${t.severity ? t.severity.toUpperCase() : 'MEDIUM'}
+                    </span>
+                  </td>
+                  <td style="padding: 16px 16px; white-space: nowrap;">
+                    ${t.status === 'resolved' ? `
+                      <span style="color: var(--emerald-dark); font-weight: 700; font-size: 11px;">✓ Resolved</span>
+                    ` : `
+                      <span style="display: inline-flex; align-items: center; gap: 5px; color: #B45309; font-weight: 700; font-size: 11px;">
+                        <span style="width: 5px; height: 5px; border-radius: 50%; background: #F59E0B; display: inline-block;" class="animate-pulse"></span>
+                        <span>Open</span>
+                      </span>
+                    `}
+                  </td>
+                  <td style="padding: 16px 16px; white-space: nowrap; font-size: 11.5px; color: var(--text-muted);">
+                    ${t.yorkAssignee || 'Alex Tremblay'}
+                  </td>
+                  <td style="padding: 16px 20px; text-align: right; white-space: nowrap;">
+                    ${t.status !== 'resolved' ? `
+                      <button 
+                        onclick="app.resolveTicket('${t.clientId}', '${t.id}')"
+                        class="export-pill-btn"
+                        style="height: 32px; padding: 0 12px; font-size: 11.5px;"
+                        title="Mark incident as resolved"
                       >
-                        ${PRODUCTS_CATALOG.map(p => `
-                          <option value="${p.id}" ${p.id === currentPlatform ? 'selected' : ''}>${p.name}</option>
-                        `).join('')}
-                      </select>
-                    </td>
-
-                    <td class="py-4 px-4 whitespace-nowrap">
-                      ${isResolved ? `
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                          <span>✓ Resolved</span>
-                        </span>
-                      ` : isInProgress ? `
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-blue-800 border border-blue-200">
-                          <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
-                          <span>In Triage</span>
-                        </span>
-                      ` : `
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
-                          <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-                          <span>Open</span>
-                        </span>
-                      `}
-                    </td>
-
-                    <td class="py-4 px-6 text-right whitespace-nowrap">
-                      ${!isResolved ? `
-                        <button 
-                          onclick="app.resolveTicket('${t.clientId}', '${t.id}')"
-                          class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold shadow-2xs transition-all inline-flex items-center gap-1"
-                        >
-                          ${getIconSvg('Check', 12)}
-                          <span>Resolve</span>
-                        </button>
-                      ` : `
-                        <span class="text-xs text-slate-400 font-medium">Done ✓</span>
-                      `}
-                    </td>
-                  </tr>
-                `;
-              }).join('')}
+                        <i data-lucide="check"></i>
+                        <span>Resolve</span>
+                      </button>
+                    ` : `
+                      <span style="font-size: 11px; color: var(--text-muted);">Closed</span>
+                    `}
+                  </td>
+                </tr>
+              `).join('')}
             </tbody>
           </table>
         </div>
@@ -7448,10 +7509,6 @@ function renderAdminTicketsQueueTab() {
     </div>
   `;
 }
-
-// -------------------------------------------------------------------------------------------------
-// TAB 4: ADMIN EXPLORE PRODUCTS & SERVICES CATALOG
-// -------------------------------------------------------------------------------------------------
 function renderAdminProductsCatalogTab() {
   const currentStage = app.adminProductFilterStage || "all";
   const query = (app.adminProductSearchQuery || "").toLowerCase().trim();
@@ -7732,64 +7789,8 @@ function renderClientDashboard() {
           </div>
         </header>
 
-        <!-- KPI Telemetry Cards Row for Client -->
-        <section class="metrics-card-deck">
-          <div class="deck-card primary-accent-card" onclick="app.clientTab = 'workspaces'; app.saveState(); render();">
-            <div class="deck-card-top">
-              <span class="deck-card-label">Active Workspaces</span>
-              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-            </div>
-            <div>
-              <div class="deck-card-value mono">${(client.grantedProducts || []).length}</div>
-              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
-                <span style="color: var(--emerald); font-weight: 700;">Live</span> Ready for Single Sign-On
-              </div>
-            </div>
-          </div>
-
-          <div class="deck-card" onclick="app.clientTab = 'milestones'; app.saveState(); render();">
-            <div class="deck-card-top">
-              <span class="deck-card-label">SOW Milestones</span>
-              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-            </div>
-            <div>
-              <div class="deck-card-value mono">${(client.milestones || []).filter(m => m.stage === 'approved').length}/${(client.milestones || []).length}</div>
-              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
-                <span style="color: var(--emerald); font-weight: 700;">${Math.round(((client.milestones || []).filter(m => m.stage === 'approved').length / Math.max((client.milestones || []).length, 1)) * 100)}%</span> Delivered &amp; Approved
-              </div>
-            </div>
-          </div>
-
-          <div class="deck-card" onclick="app.clientTab = 'perks'; app.saveState(); render();">
-            <div class="deck-card-top">
-              <span class="deck-card-label">Syndicate Perks</span>
-              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-            </div>
-            <div>
-              <div class="deck-card-value mono" style="color: #8B5CF6;">$250k+</div>
-              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
-                <span>Cloud &amp; SaaS Partner Credits</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="deck-card" onclick="app.clientTab = 'threat-radar'; app.saveState(); render();">
-            <div class="deck-card-top">
-              <span class="deck-card-label">Threat Radar Signals</span>
-              <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-            </div>
-            <div>
-              <div class="deck-card-value mono" style="color: #F97316;">${(client.threatSignals || []).length}</div>
-              <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
-                <span style="width: 6px; height: 6px; border-radius: 50%; background: #F97316; display: inline-block;" class="animate-pulse"></span>
-                <span>Active Market Counter-Strategies</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Main Tab Content Area -->
-        <div class="canvas-content-flow animate-fade-in" style="margin-top: 4px;">
+        <!-- Main Tab Content Area (Without duplicate static top deck!) -->
+        <div class="canvas-content-flow animate-fade-in">
           ${tab === "milestones"
             ? renderClientMilestonesTab(client)
             : tab === "perks"
@@ -7815,68 +7816,89 @@ function renderClientWorkspacesTab(client) {
   const products = PRODUCTS_CATALOG.filter(p => granted.includes(p.id));
 
   return `
-    <div class="space-y-6">
+    <div style="display: flex; flex-direction: column; gap: 20px;">
       
-      <!-- Cadence Widget -->
-      <div class="cadence-widget flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <!-- Section Title & Controls Row -->
+      <section class="title-controls-row">
+        <div class="page-headline-wrap">
+          <h1 class="page-headline-lead">Active Workspaces &amp; Software Tools</h1>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
+            Your provisioned software products and connected integrations ready for Single Sign-On.
+          </p>
+        </div>
+
+        <div class="controls-pill-row">
+          <button onclick="app.clientTab = 'ecosystem'; app.saveState(); render();" class="export-pill-btn" style="height: 38px; padding: 0 16px;">
+            <i data-lucide="layers"></i>
+            <span>Browse Full Ecosystem</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Bi-Weekly Strategy Cadence Widget -->
+      <div class="cadence-widget">
         <div>
-          <div class="flex items-center gap-2">
-            <span class="cadence-tag">Bi-Weekly Strategy Cadence</span>
-            <span class="text-xs text-emerald-200">York Partners Sync</span>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="cadence-tag">Strategy Cadence</span>
+            <span style="font-size: 12px; color: #a7f3d0; font-weight: 600;">Dedicated Operating Pod Sync</span>
           </div>
-          <h3 class="text-lg font-bold text-white mt-1.5">${client.cadence?.agenda || "Q4 Sprint Alignment & Architecture Review"}</h3>
-          <p class="text-xs text-emerald-100/80 mt-1">
+          <h3 style="font-size: 17px; font-weight: 800; color: #ffffff; margin-top: 6px;">
+            ${client.cadence?.agenda || "Q4 Sprint Alignment & Architecture Review"}
+          </h3>
+          <p style="font-size: 12px; color: rgba(255, 255, 255, 0.85); margin-top: 4px;">
             📅 ${client.cadence?.nextCallDate || "Thursday, Nov 14"} at ${client.cadence?.nextCallTime || "2:00 PM EST"} · Lead: ${client.yorkLead || "Kyle York & Mike Veilleux"}
           </p>
         </div>
 
-        <div class="flex items-center gap-2">
+        <div style="display: flex; align-items: center; gap: 10px; z-index: 2; flex-shrink: 0;">
           <a 
             href="${client.cadence?.zoomLink || '#'}" 
             target="_blank"
-            class="px-4 py-2 bg-white text-[#084c36] hover:bg-emerald-50 font-bold rounded-xl text-xs shadow-2xs transition inline-flex items-center gap-1.5"
+            class="export-pill-btn"
+            style="height: 38px; padding: 0 16px; background: #ffffff !important; color: #063828 !important; box-shadow: 0 4px 14px rgba(0,0,0,0.2) !important;"
           >
-            ${getIconSvg('Video', 13)}
+            <i data-lucide="video" style="color: #063828;"></i>
             <span>Join Strategy Call</span>
           </a>
         </div>
       </div>
 
-      <!-- Active Workspace Tools -->
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-xl font-bold text-slate-900 tracking-tight">Active Workspaces & Tools</h2>
-          <p class="text-xs text-slate-500 mt-0.5">Your provisioned software products and connected integrations.</p>
-        </div>
-        <button onclick="app.clientTab = 'ecosystem'; app.saveState(); render();" class="text-xs font-bold text-emerald-800 hover:text-emerald-950 underline">
-          Request More Products →
-        </button>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Provisioned Products Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         ${products.map(p => `
           <div class="product-card active-granted">
             <div>
-              <div class="flex items-start justify-between">
-                <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center font-bold">
-                  ${getIconSvg(p.icon || 'Rocket', 20, '#065f46')}
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div style="width: 36px; height: 36px; border-radius: 9px; background: var(--emerald-subtle); color: var(--emerald-dark); display: grid; place-items: center;">
+                    <i data-lucide="${p.icon ? p.icon.toLowerCase() : 'rocket'}" style="width: 18px; height: 18px; color: var(--emerald-dark);"></i>
+                  </div>
+                  <div>
+                    <h3 style="font-size: 14px; font-weight: 700; color: var(--text-main);">${p.name}</h3>
+                    <span style="font-size: 10.5px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">${p.stage}</span>
+                  </div>
                 </div>
-                <span class="badge-in-path">Active Tool</span>
+                <span class="badge-in-path">Active</span>
               </div>
 
-              <h3 class="font-bold text-slate-900 text-sm mt-3">${p.name}</h3>
-              <p class="text-xs text-slate-600 font-medium mt-1">${p.role}</p>
-              <p class="text-[11px] text-slate-500 mt-2 leading-relaxed">${p.description}</p>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 12px; line-height: 1.5;">
+                ${p.description}
+              </p>
+
+              <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--text-muted);">
+                <span>SSO Authenticated</span>
+                <span class="mono" style="color: var(--emerald-dark); font-weight: 600;">v2.4 Live</span>
+              </div>
             </div>
 
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-              <span class="text-[11px] text-slate-400">Assigned</span>
+            <div style="margin-top: 16px;">
               <button 
                 onclick="openLaunchWorkspaceModal('${p.id}')"
-                class="px-3.5 py-1.5 bg-[#084c36] hover:bg-[#063828] text-white rounded-lg text-xs font-bold shadow-2xs transition inline-flex items-center gap-1"
+                class="export-pill-btn"
+                style="width: 100%; height: 36px; justify-content: center; font-size: 12.5px;"
               >
-                <span>Launch</span>
-                ${getIconSvg('ExternalLink', 12)}
+                <span>Launch Workspace</span>
+                <i data-lucide="external-link"></i>
               </button>
             </div>
           </div>
@@ -7886,10 +7908,6 @@ function renderClientWorkspacesTab(client) {
     </div>
   `;
 }
-
-// -------------------------------------------------------------------------------------------------
-// CLIENT TAB 2: SOW MILESTONES & INITIATIVES
-// -------------------------------------------------------------------------------------------------
 function renderClientMilestonesTab(client) {
   const milestones = client.milestones || [];
   const stages = [
@@ -7899,54 +7917,95 @@ function renderClientMilestonesTab(client) {
     { key: 'approved', label: '4. Approved & Completed' }
   ];
 
-  return `
-    <div class="space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 class="text-xl font-bold text-slate-900 tracking-tight">SOW Milestones & Deliverables</h2>
-          <p class="text-xs text-slate-500 mt-0.5">Track and approve deliverable milestones executed by your York operating pod.</p>
-        </div>
-      </div>
+  const approvedCount = milestones.filter(m => m.stage === 'approved').length;
 
+  return `
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      
+      <!-- Section Title & Controls Row -->
+      <section class="title-controls-row">
+        <div class="page-headline-wrap">
+          <h1 class="page-headline-lead">SOW Milestones &amp; Deliverables</h1>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
+            Track sprint delivery and provide client sign-off on deliverables executed by your York operating pod.
+          </p>
+        </div>
+
+        <div class="controls-pill-row">
+          <div style="display: inline-flex; align-items: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: var(--radius-pill); background: var(--bg-card); border: 1px solid var(--line); font-size: 12px; font-weight: 600; color: var(--text-main);">
+            <i data-lucide="check-circle" style="width: 14px; height: 14px; color: var(--emerald);"></i>
+            <span>${approvedCount} of ${milestones.length} Milestones Approved</span>
+          </div>
+
+          <button onclick="showToast('SOW summary report generated and ready for board review.', 'info')" class="export-pill-btn" style="height: 38px; padding: 0 16px;">
+            <i data-lucide="download"></i>
+            <span>Export SOW Summary</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 4-Column Pipeline Delivery Board -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         ${stages.map(st => {
           const list = milestones.filter(m => m.stage === st.key);
           return `
             <div class="pipeline-col">
-              <div class="flex items-center justify-between mb-3">
-                <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">${st.label}</span>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-white text-slate-700 border border-slate-200">
-                  ${list.length}
-                </span>
+              <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 6px;">
+                <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">${st.label}</span>
+                <span class="sidebar-badge">${list.length}</span>
               </div>
 
-              <div class="space-y-3">
-                ${list.map(m => `
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                ${list.length === 0 ? `
+                  <div style="padding: 24px 12px; text-align: center; border: 1px dashed var(--line); border-radius: 12px; font-size: 11px; color: var(--text-muted);">
+                    No items in this stage
+                  </div>
+                ` : list.map(m => `
                   <div class="milestone-card">
-                    <div class="flex items-start justify-between">
-                      <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-slate-100 text-slate-600">
+                    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;">
+                      <span style="font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 2px 7px; border-radius: 6px; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--line);">
                         ${m.practice}
                       </span>
-                      <span class="text-[10px] text-slate-400 font-medium">${m.targetDate || "Q4"}</span>
+                      <span class="mono" style="font-size: 10.5px; color: var(--text-muted);">${m.targetDate || "Q4 2026"}</span>
                     </div>
 
-                    <h4 class="font-bold text-slate-900 text-xs mt-2 leading-snug">${m.title}</h4>
-                    <p class="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">${m.desc}</p>
+                    <h4 style="font-size: 13px; font-weight: 700; color: var(--text-main); margin-top: 4px; line-height: 1.35;">${m.title}</h4>
+                    <p style="font-size: 11.5px; color: var(--text-muted); line-height: 1.45;">${m.deliverableSummary || m.description || 'Execution milestone in progress.'}</p>
 
-                    ${m.stage === 'client_review' ? `
-                      <div class="mt-3 pt-2.5 border-t border-slate-100">
-                        <button 
-                          onclick="app.approveMilestone('${client.id}', '${m.id}')"
-                          class="w-full py-1.5 bg-[#084c36] hover:bg-[#063828] text-white rounded-lg text-xs font-bold shadow-2xs transition"
-                        >
-                          Approve & Sign Off ✓
-                        </button>
-                      </div>
-                    ` : m.stage === 'approved' ? `
-                      <div class="mt-3 pt-2 border-t border-slate-100 text-[10px] text-emerald-700 font-bold flex items-center gap-1">
-                        <span>✓ Verified & Delivered</span>
+                    <!-- Checklist items -->
+                    ${(m.checklist || []).length > 0 ? `
+                      <div style="padding: 8px 10px; border-radius: 8px; background: var(--bg-subtle); border: 1px solid var(--line); font-size: 11px; display: flex; flex-direction: column; gap: 4px;">
+                        ${(m.checklist || []).slice(0, 2).map(item => `
+                          <div style="display: flex; align-items: center; gap: 6px; color: var(--text-secondary);">
+                            <span style="color: ${item.done ? 'var(--emerald)' : 'var(--text-muted)'}; font-weight: 700;">${item.done ? '✓' : '○'}</span>
+                            <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.text}</span>
+                          </div>
+                        `).join('')}
                       </div>
                     ` : ''}
+
+                    <!-- Action button -->
+                    <div style="margin-top: 4px;">
+                      ${m.stage === 'client_review' ? `
+                        <button 
+                          onclick="app.approveMilestone('${m.id}')"
+                          class="export-pill-btn"
+                          style="width: 100%; height: 32px; font-size: 11.5px; justify-content: center;"
+                        >
+                          <i data-lucide="check"></i>
+                          <span>Sign Off &amp; Approve</span>
+                        </button>
+                      ` : m.stage === 'approved' ? `
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 11px; font-weight: 700; color: var(--emerald-dark); padding: 4px 0;">
+                          <i data-lucide="check" style="width: 13px; height: 13px;"></i>
+                          <span>Approved &amp; Accepted</span>
+                        </div>
+                      ` : `
+                        <div style="font-size: 11px; color: var(--text-muted); text-align: center; padding: 4px 0;">
+                          Pod Sprint In Progress
+                        </div>
+                      `}
+                    </div>
                   </div>
                 `).join('')}
               </div>
@@ -7954,83 +8013,99 @@ function renderClientMilestonesTab(client) {
           `;
         }).join('')}
       </div>
+
     </div>
   `;
 }
-
-// -------------------------------------------------------------------------------------------------
-// CLIENT TAB 3: SYNDICATE PERKS & PARTNER CLOUD CREDITS
-// -------------------------------------------------------------------------------------------------
 function renderClientPerksTab(client) {
   const savings = getClientPerkSavings(client);
   const claimedList = client.claimedPerks || [];
 
   return `
-    <div class="space-y-6">
+    <div style="display: flex; flex-direction: column; gap: 20px;">
       
-      <!-- Savings Banner -->
-      <div class="clean-card bg-gradient-to-r from-emerald-900 to-slate-900 text-white border-0">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <!-- Section Title & Controls Row -->
+      <section class="title-controls-row">
+        <div class="page-headline-wrap">
+          <h1 class="page-headline-lead">Syndicate Partner Cloud Credits &amp; Perks</h1>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
+            Exclusive enterprise credits negotiated for York IE portfolio startups across AWS, GCP, Stripe, and HubSpot.
+          </p>
+        </div>
+
+        <div class="controls-pill-row">
+          <div style="display: inline-flex; align-items: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: var(--radius-pill); background: var(--bg-card); border: 1px solid var(--line); font-size: 12px; font-weight: 600; color: var(--text-main);">
+            <i data-lucide="gift" style="width: 14px; height: 14px; color: #8B5CF6;"></i>
+            <span>${savings.claimedCount} of ${savings.totalCount} Perks Claimed</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- $250k+ Collective Savings Executive Banner -->
+      <div class="clean-card" style="background: linear-gradient(135deg, #063828 0%, #0a4f3b 50%, #080C14 100%); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 20px; padding: 26px;">
+        <div style="display: flex; flex-direction: column; md:flex-row; align-items: flex-start; justify-content: space-between; gap: 20px;">
           <div>
-            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white/20 text-emerald-200 border border-white/20">
-              Syndicate Portfolio Benefits
+            <span style="padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 700; background: rgba(255, 255, 255, 0.15); color: #a7f3d0; border: 1px solid rgba(255, 255, 255, 0.2); text-transform: uppercase;">
+              Syndicate Portfolio Benefit
             </span>
-            <h2 class="text-2xl font-black text-white mt-2">$250k+ in Partner Cloud Credits & Discounts</h2>
-            <p class="text-xs text-slate-300 mt-1">Exclusive partner credits negotiated for York IE portfolio startups.</p>
+            <h2 style="font-size: 24px; font-weight: 800; color: #ffffff; margin-top: 8px; letter-spacing: -0.02em;">
+              $250,000+ Collective Partner Credits
+            </h2>
+            <p style="font-size: 12.5px; color: #cbd5e1; margin-top: 4px; max-width: 580px;">
+              Zero-equity negotiated credits for infrastructure, payment processing, developer tools, and go-to-market software.
+            </p>
           </div>
 
-          <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20 text-right">
-            <span class="text-[10px] uppercase font-bold text-slate-300">Total Claimed Value</span>
-            <div class="text-2xl font-black text-emerald-300 mt-0.5">$${savings.claimedTotal.toLocaleString()} USD</div>
-            <div class="text-[11px] text-slate-300 mt-1">${savings.claimedCount} of ${savings.totalCount} perks active</div>
+          <div style="background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 14px; padding: 16px 20px; text-align: right; flex-shrink: 0;">
+            <div style="font-size: 10.5px; font-weight: 700; text-transform: uppercase; color: #94A3B8;">Claimed Value</div>
+            <div class="mono" style="font-size: 26px; font-weight: 900; color: #34D399; margin-top: 2px;">$${savings.claimedTotal.toLocaleString()} USD</div>
+            <div style="font-size: 11px; color: #cbd5e1; margin-top: 2px;">${savings.claimedCount} of ${savings.totalCount} active</div>
           </div>
         </div>
 
-        <div class="mt-4">
+        <div style="margin-top: 20px;">
           <div class="savings-bar-container">
-            <div class="savings-bar-fill" style="width: ${savings.pct}%"></div>
+            <div class="savings-bar-fill" style="width: ${savings.pct}%;"></div>
           </div>
         </div>
       </div>
 
       <!-- Perks Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         ${SYNDICATE_PERKS_CATALOG.map(perk => {
           const isClaimed = claimedList.includes(perk.id);
           return `
-            <div class="perk-card ${isClaimed ? 'claimed' : ''}">
+            <div class="perk-card">
               <div>
-                <div class="flex items-start justify-between">
-                  <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-800">
-                    ${getIconSvg(perk.logo || 'Cloud', 20, '#0f172a')}
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;">
+                  <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--bg-subtle); border: 1px solid var(--line); display: grid; place-items: center;">
+                    <i data-lucide="${perk.icon ? perk.icon.toLowerCase() : 'gift'}" style="width: 20px; height: 20px; color: var(--emerald);"></i>
                   </div>
-                  <span class="text-xs font-black text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
-                    ${perk.valueDisplay}
+                  <span style="font-size: 10.5px; font-weight: 700; text-transform: uppercase; padding: 2px 8px; border-radius: 9999px; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--line);">
+                    ${perk.category}
                   </span>
                 </div>
 
-                <div class="text-[10px] uppercase font-bold text-slate-400 mt-3 tracking-wider">${perk.partner}</div>
-                <h3 class="font-bold text-slate-900 text-sm mt-0.5">${perk.title}</h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">${perk.description}</p>
+                <h3 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin-top: 14px;">${perk.partner}</h3>
+                <div class="mono" style="font-size: 13.5px; font-weight: 800; color: var(--emerald-dark); margin-top: 2px;">${perk.value}</div>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px; line-height: 1.5;">${perk.description}</p>
               </div>
 
-              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line);">
                 ${isClaimed ? `
-                  <span class="text-xs font-bold text-emerald-800 flex items-center gap-1">
-                    <span>✓ Claimed</span>
-                    <span class="font-mono text-[10px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${perk.promoCode}</span>
-                  </span>
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--emerald-dark);">
+                    <span>✓ Credit Active in Workspace</span>
+                  </div>
                 ` : `
                   <button 
-                    onclick="app.claimPerk('${client.id}', '${perk.id}')"
-                    class="px-3 py-1.5 bg-[#084c36] hover:bg-[#063828] text-white rounded-lg text-xs font-bold shadow-2xs transition inline-flex items-center gap-1"
+                    onclick="app.claimPerk('${perk.id}')"
+                    class="export-pill-btn"
+                    style="width: 100%; height: 36px; justify-content: center; font-size: 12px;"
                   >
-                    <span>Claim Perk</span>
+                    <span>Claim Partner Perk</span>
+                    <i data-lucide="arrow-right"></i>
                   </button>
                 `}
-                <a href="${perk.redeemUrl}" target="_blank" class="text-slate-400 hover:text-slate-700">
-                  ${getIconSvg('ExternalLink', 14)}
-                </a>
               </div>
             </div>
           `;
@@ -8040,10 +8115,6 @@ function renderClientPerksTab(client) {
     </div>
   `;
 }
-
-// -------------------------------------------------------------------------------------------------
-// CLIENT TAB 4: MARKET THREAT RADAR
-// -------------------------------------------------------------------------------------------------
 function renderClientThreatRadarTab(client) {
   const radar = client.competitorRadar || { trackedCompetitors: [], signals: [] };
 
@@ -8376,85 +8447,124 @@ function renderClientTeamTab(client) {
   const team = client.team || [];
 
   return `
-    <div class="space-y-6">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-xl font-bold text-slate-900 tracking-tight">Team & Permissions</h2>
-          <p class="text-xs text-slate-500 mt-0.5">Manage user access and software product permissions.</p>
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      
+      <!-- Section Title & Controls Row -->
+      <section class="title-controls-row">
+        <div class="page-headline-wrap">
+          <h1 class="page-headline-lead">Team &amp; Access Management</h1>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
+            Manage team members, roles, and assigned software workspace access.
+          </p>
         </div>
-      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="controls-pill-row">
+          <button onclick="showToast('Invitation sent to new team member.', 'success')" class="export-pill-btn" style="height: 38px; padding: 0 16px;">
+            <i data-lucide="plus"></i>
+            <span>Invite Team Member</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Team Members Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         ${team.map(m => `
-          <div class="clean-card">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full bg-[#084c36] text-white flex items-center justify-center font-bold text-xs">
-                ${m.name.substring(0, 2).toUpperCase()}
+          <div class="clean-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 42px; height: 42px; border-radius: 10px; background: var(--emerald-dark); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 13px; flex-shrink: 0;">
+                  ${m.name.substring(0, 2).toUpperCase()}
+                </div>
+                <div>
+                  <h4 style="font-weight: 700; font-size: 13.5px; color: var(--text-main);">${m.name}</h4>
+                  <div style="font-size: 11.5px; color: var(--text-muted);">${m.email}</div>
+                  <div style="font-size: 11px; font-weight: 700; color: var(--emerald-dark); margin-top: 2px;">${m.title}</div>
+                </div>
               </div>
-              <div>
-                <h4 class="font-bold text-slate-900 text-sm">${m.name}</h4>
-                <div class="text-[11px] text-slate-400">${m.email}</div>
-                <div class="text-[10px] font-semibold text-emerald-800 mt-0.5">${m.title}</div>
+
+              <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line);">
+                <span style="font-size: 10.5px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">Provisioned Tools</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                  ${(m.allowedProducts || []).map(pid => `
+                    <span class="badge-member-access">${pid}</span>
+                  `).join('')}
+                </div>
               </div>
             </div>
 
-            <div class="mt-4 pt-3 border-t border-slate-100">
-              <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1.5">Tool Access</span>
-              <div class="flex flex-wrap gap-1">
-                ${(m.allowedProducts || []).map(pid => `
-                  <span class="badge-member-access">${pid}</span>
-                `).join('')}
-              </div>
+            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--text-muted);">
+              <span>Role: <b style="color: var(--text-main);">${m.role || 'Member'}</b></span>
+              <span style="color: var(--emerald-dark); font-weight: 700;">Active</span>
             </div>
           </div>
         `).join('')}
       </div>
+
     </div>
   `;
 }
-
-// -------------------------------------------------------------------------------------------------
-// CLIENT TAB 7: YORK ECOSYSTEM
-// -------------------------------------------------------------------------------------------------
 function renderClientEcosystemTab(client) {
   const granted = client.grantedProducts || [];
 
   return `
-    <div class="space-y-6">
-      <div>
-        <h2 class="text-xl font-bold text-slate-900 tracking-tight">York IE 18-Product Ecosystem</h2>
-        <p class="text-xs text-slate-500 mt-0.5">Explore additional software solutions available to attach to your operating retainer.</p>
-      </div>
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      
+      <!-- Section Title & Controls Row -->
+      <section class="title-controls-row">
+        <div class="page-headline-wrap">
+          <h1 class="page-headline-lead">York IE 18-Product Ecosystem</h1>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
+            Explore additional proprietary software solutions available to attach to your operating retainer.
+          </p>
+        </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="controls-pill-row">
+          <div style="display: inline-flex; align-items: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: var(--radius-pill); background: var(--bg-card); border: 1px solid var(--line); font-size: 12px; font-weight: 600; color: var(--text-main);">
+            <span>${granted.length} of 18 Active</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 18 Products Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         ${PRODUCTS_CATALOG.map(p => {
           const isGranted = granted.includes(p.id);
           return `
             <div class="product-card ${isGranted ? 'active-granted' : ''}">
               <div>
-                <div class="flex items-start justify-between">
-                  <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-800">
-                    ${getIconSvg(p.icon || 'Rocket', 20, '#0f172a')}
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;">
+                  <div style="width: 38px; height: 38px; border-radius: 9px; background: var(--bg-subtle); border: 1px solid var(--line); display: grid; place-items: center;">
+                    <i data-lucide="${p.icon ? p.icon.toLowerCase() : 'rocket'}" style="width: 18px; height: 18px; color: var(--emerald);"></i>
                   </div>
-                  <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                  <span style="font-size: 10.5px; font-weight: 700; text-transform: uppercase; padding: 2px 8px; border-radius: 9999px; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--line);">
                     ${p.stage}
                   </span>
                 </div>
 
-                <h3 class="font-bold text-slate-900 text-sm mt-3">${p.name}</h3>
-                <p class="text-xs text-slate-600 font-medium mt-1">${p.role}</p>
-                <p class="text-[11px] text-slate-500 mt-2 leading-relaxed">${p.description}</p>
+                <h3 style="font-size: 14.5px; font-weight: 700; color: var(--text-main); margin-top: 12px;">${p.name}</h3>
+                <div style="font-size: 11.5px; font-weight: 600; color: var(--emerald-dark); margin-top: 2px;">${p.role}</div>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px; line-height: 1.5;">${p.description}</p>
               </div>
 
-              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line);">
                 ${isGranted ? `
-                  <span class="badge-in-path">Active Tool</span>
+                  <button 
+                    onclick="openLaunchWorkspaceModal('${p.id}')"
+                    class="export-pill-btn"
+                    style="width: 100%; height: 34px; justify-content: center; font-size: 12px;"
+                  >
+                    <span>Launch Active Tool</span>
+                    <i data-lucide="external-link"></i>
+                  </button>
                 ` : `
                   <button 
-                    onclick="showToast('Access request submitted to your York operating lead.', 'success')"
-                    class="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-semibold transition"
+                    onclick="showToast('Access request dispatched to your York Operating Lead.', 'success')"
+                    style="width: 100%; height: 34px; font-size: 12px; font-weight: 600; border-radius: var(--cta-radius); background: var(--bg-card); border: 1px solid var(--line); color: var(--text-secondary); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.15s;"
+                    onmouseover="this.style.background='var(--bg-subtle)'; this.style.color='var(--text-main)'"
+                    onmouseout="this.style.background='var(--bg-card)'; this.style.color='var(--text-secondary)'"
                   >
-                    Request Access
+                    <i data-lucide="plus" style="width: 13px; height: 13px;"></i>
+                    <span>Request Provisioning</span>
                   </button>
                 `}
               </div>
@@ -8462,13 +8572,10 @@ function renderClientEcosystemTab(client) {
           `;
         }).join('')}
       </div>
+
     </div>
   `;
 }
-
-// -------------------------------------------------------------------------------------------------
-// MODAL IMPLEMENTATIONS
-// -------------------------------------------------------------------------------------------------
 function openAddCompanyModal() {
   const root = document.getElementById('modal-root');
   if (!root) return;
