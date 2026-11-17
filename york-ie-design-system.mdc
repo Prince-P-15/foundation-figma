@@ -1,0 +1,82 @@
+---
+description: York IE Hub Design System v2.1. Mandatory UI rules for every York IE application (Hub, Fuel 2.0, LMS, EMS, Support, Survey, Launchpad, york.ie).
+globs: ["**/*.{tsx,jsx,ts,js,vue,svelte,html,css,scss}"]
+alwaysApply: true
+---
+
+# York IE Design System — Rules
+
+Source of truth: Figma "Design System" (R72QOBwCvMwxWrBRK7CdlX). Tokens: `tokens.css` + `tailwind.preset.js`.
+These are hard rules. If a rule blocks you, use the nearest token and say so in your reply. Don't work around the rule.
+
+## R1 · Tokens only
+- R1.1 Never write hex, rgb, hsl, or named colors in component code. Use semantic tokens (`var(--color-*)` or preset classes like `bg-surface`, `text-fg-secondary`, `border-line`).
+- R1.2 Never use primitive tokens (`--prim-*`, Green/500, Neutral/200) in components. Primitives only feed semantic tokens.
+- R1.3 Never use Tailwind arbitrary values for color, spacing, radius, font size, or shadow (`bg-[#…]`, `p-[13px]`, `text-[15px]`, `rounded-[10px]`).
+- R1.4 Use the token that matches the purpose, even if another token has the same hex: text tokens for text, icon tokens for icons, border tokens for borders.
+- R1.5 Need a new value? Don't invent one. Use the closest token and flag the gap for the design team.
+
+## R2 · Color
+- R2.1 The only brand accent is `interactive-primary` (#00B189). No other teals or greens (#0D9488, #10B981, and similar are banned).
+- R2.2 Status colors carry meaning only: success = green, warning = amber, error = red, info = blue, neutral = gray. Status UI uses the matching `-bg`, `-border`, `-text`, and `-icon` tokens together.
+- R2.3 Chart series use `chart-1` … `chart-5` in order.
+- R2.4 Celebration colors are only for kudos and milestones. Doc Status colors are only for document workflows. AI gradient and accent are only for AI features.
+- R2.5 Keep a ratio of 80–90% neutral solid UI to 10–20% accent.
+
+## R3 · Light & dark
+- R3.1 Every screen supports both themes via `data-theme="dark"` / `.dark`. Test both before finishing.
+- R3.2 Never hardcode a color for one mode, and never use `filter: invert()` or similar hacks.
+- R3.3 In dark mode, create depth with surface steps (background → default → elevated) and borders.
+
+## R4 · Typography
+- R4.1 Use only Inter (all UI) and Space Grotesk (display, KPIs, numbers, metrics, with `tabular-nums`). No third font. Never set body paragraphs in Space Grotesk.
+- R4.2 Use the type scale only: 48/36/30 display · H1 36 · H2 24 · H3 18 · H4 16 · Body 18/16/14 · Label 14/12 · Caption 12. The button SM font of 13px is the only exception.
+- R4.3 Text is never smaller than 12px. 10px and 11px are banned, including table headers and overlines.
+- R4.4 Default UI text is Body/Small (14/20). Mobile inputs use 16px.
+- R4.5 One H1 per page. Copy is in sentence case. Uppercase is only for overlines, section labels, and table headers (12px, 600, tracked).
+
+## R5 · Spacing, radius, elevation
+- R5.1 Spacing comes only from 2, 4, 6, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96.
+- R5.2 Defaults: icon–text 8 · button gap 12 · card gap 16 · field stack 24 · card padding 24 · section gap 48.
+- R5.3 Radius comes only from 0, 2, 4, 8, 12, 16, 24, 9999. Buttons, inputs, and nav items 8 · cards, menus, toasts, and tables 12 · modals 16 · badges and avatars full.
+- R5.4 Inner radius is never larger than the outer radius (outer 12 → inner 8).
+- R5.5 Shadows: flat cards and tables use none, dropdowns `shadow-2`, modals and drawers `shadow-4`, toasts `shadow-5`. Don't write custom box-shadows.
+- R5.6 Sibling components (cards in a grid) share identical padding, radius, and gaps.
+
+## R6 · Layout & responsive
+- R6.1 Every screen works at 375, 768, and 1440 (breakpoints 640/768/1024/1280/1440), in portrait and landscape. The page body never scrolls horizontally.
+- R6.2 App shell: 280px side nav → icon rail below 1024 → off-canvas drawer below 768.
+- R6.3 Parents own the gutters. Children fill their parent and never add their own page padding.
+- R6.4 Right-side detail drawers are 40vw by default (30–45% range) and never above 50%. Full width below 768.
+- R6.5 Wide tables scroll inside their container with a sticky first column, or collapse to cards on mobile.
+
+## R7 · Components
+- R7.1 Buttons come in variants Primary / Secondary / Outline / Ghost / Tertiary / Link / Destructive and sizes XS 28 · SM 32 · MD 40 (default) · LG 48 · XL 56. Use one primary per region, placed on the right. Labels are verb-first sentence case.
+- R7.2 Every interactive element implements default, hover, active, focus-visible, disabled, and (for async actions) loading states.
+- R7.3 Inputs: label above (never placeholder-as-label), height 40, radius 8, helper or error below at 12px. Errors show text plus an icon plus a red border.
+- R7.4 Tables: toolbar 56 · header 48 on `surface-subtle` · rows 64 (48 compact / 72 spacious) · pagination 52. Numbers are right-aligned and tabular, statuses are badges, and empty cells show "—".
+- R7.5 Every data view ships loading (skeleton), empty (no data / no match / no access), and error (retry) states.
+- R7.6 The active side-nav item is a solid `interactive-primary` background with `text-on-primary`.
+- R7.7 Toasts appear top-right on desktop and at the bottom on mobile, with max 3 stacked. They auto-dismiss after 4–6s, except errors and toasts with actions, which persist.
+- R7.8 Breadcrumbs match the page H1, truncate instead of wrapping, and collapse beyond 4 levels.
+- R7.9 Before building any component, reuse the app's existing implementation if one exists. Otherwise follow `components.md`.
+
+## R8 · Icons
+- R8.1 Use Lucide only, with a 2px stroke. Sizes are 16 (inline/table), 20 (nav/inputs), 24 (toolbar), and 32+ (empty states).
+- R8.2 Icon colors come from icon tokens. Icon-only buttons need an `aria-label` and a tooltip.
+
+## R9 · Accessibility
+- R9.1 Contrast meets WCAG 2.1 AA (4.5:1 text, 3:1 large text and UI).
+- R9.2 Focus is visible everywhere: 2px `ring` with a 2px offset. Never remove an outline without replacing it.
+- R9.3 Touch targets are at least 40px on mobile.
+- R9.4 Status is never conveyed by color alone.
+- R9.5 Use native semantic elements. Don't use positive tabindex. Modals and drawers trap focus and close on Esc.
+- R9.6 Respect `prefers-reduced-motion`. Motion runs 150–250ms.
+
+## R10 · Content formats
+- R10.1 Dates are `DD MMM YYYY` (18 Aug 2026), ranges `01 Jul — 31 Jul 2026`, times `09:30 AM`.
+- R10.2 Count summaries read "Showing 1–10 of 56 results". Loading labels are progressive ("Saving…").
+- R10.3 AI-generated content is labeled, visually distinct (AI accent), and editable or dismissible.
+
+## Before you finish
+Search the diff for `#`, `rgb(`, `hsl(`, `-[`, `px` literals outside token files, `font-family`, and `outline: none`. Fix every hit, or justify it in your reply.
