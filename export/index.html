@@ -7398,11 +7398,11 @@
 
 <main>
 <!-- HERO WITH MINTLIFY-INSPIRED 3D PARAMETRIC GRADIENT LINES -->
-<section class="hero-mvp-section" id="hero" data-hero-layout="icons">
+<section class="hero-mvp-section" id="hero" data-hero-layout="split">
   <div class="hero-mvp-wrap">
     <div class="hero-mvp-grid">
 
-      <!-- LEFT COLUMN: Editorial Copy -->
+      <!-- LEFT COLUMN: Editorial Copy & Carousel Navigation -->
       <div class="hero-editorial-col">
         <div>
           <h1 class="hero-editorial-headline">
@@ -7420,6 +7420,253 @@
             </a>
           </div>
         </div>
+
+        <!-- Controls: Circular Arrows + Scrubber Track -->
+        <div class="hero-carousel-controls">
+          <div class="hero-control-buttons">
+            <button class="hero-arrow-btn" id="heroCarPrevBtn" aria-label="Previous platform" title="Previous platform">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="hero-arrow-btn" id="heroCarNextBtn" aria-label="Next platform" title="Next platform">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+          <div class="hero-track-container" id="heroTrackContainer">
+            <div class="hero-track-thumb" id="heroTrackThumb"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top-down: product logos + interactive screen preview -->
+      <div class="hero-stacked-panel" aria-label="Product previews">
+        <div class="hero-product-logos" id="heroProductLogos" role="tablist" aria-label="Select a product">
+          <button type="button" class="hero-product-logo-btn active" role="tab" aria-selected="true" data-preview="work" style="--logo-grad: linear-gradient(145deg, #12A883 0%, #1EA190 50%, #3B82F6 100%); --logo-accent: #12A883;">
+            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+            <span class="hero-product-logo-name">Work</span>
+          </button>
+          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="service" style="--logo-grad: linear-gradient(145deg, #0EB8AB 0%, #12A1CE 55%, #4C6DE8 100%); --logo-accent: #12A1CE;">
+            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+            <span class="hero-product-logo-name">Service</span>
+          </button>
+          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="stackai" style="--logo-grad: linear-gradient(145deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%); --logo-accent: #05AE78;">
+            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><circle cx="5" cy="18" r="2"/><path d="M7 7l3.5 3.5m3 3l3.5 3.5m0-10l-3.5 3.5m-3 3L7 17"/></svg></span>
+            <span class="hero-product-logo-name">StackAI</span>
+          </button>
+          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="fuel" style="--logo-grad: linear-gradient(145deg, #059669 0%, #10B981 50%, #06B6D4 100%); --logo-accent: #059669;">
+            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c.5 4.5 2.5 6.5 7 7-4.5.5-6.5 2.5-7 7-.5-4.5-2.5-6.5-7-7 4.5-.5 6.5-2.5 7-7z"/></svg></span>
+            <span class="hero-product-logo-name">Fuel</span>
+          </button>
+          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="gerrit" style="--logo-grad: linear-gradient(145deg, #0284C7 0%, #06B6D4 50%, #10B981 100%); --logo-accent: #0284C7;">
+            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v2c0 2-2 4-6 4s-6-2-6-4V9"/></svg></span>
+            <span class="hero-product-logo-name">Gerrit</span>
+          </button>
+          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="gtm" style="--logo-grad: linear-gradient(145deg, #0D9488 0%, #10B981 50%, #6366F1 100%); --logo-accent: #0D9488;">
+            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg></span>
+            <span class="hero-product-logo-name">GTM</span>
+          </button>
+        </div>
+
+        <div class="hero-product-preview" id="heroProductPreview">
+          <!-- Work: sprint board -->
+          <div class="hero-preview-screen active" data-preview="work">
+            <div class="hero-screen-device">
+            <div class="hero-window-frame">
+              <div class="hero-window-header">
+                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
+                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / work / sprint-42</span></div>
+                <div class="hero-status-pill">● SPRINT 42 ACTIVE</div>
+              </div>
+              <div class="hero-screen-body">
+                <div class="hp-toolbar">
+                  <div>
+                    <div class="hp-title">Sprint board · Engineering</div>
+                    <div class="hp-sub">18 tasks routed across R&amp;D and Growth</div>
+                  </div>
+                  <span class="hero-task-tag tag-slate">Board</span>
+                </div>
+                <div class="hp-list">
+                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Stripe v4 API Gateway Migration</span><span class="hero-task-meta">R&amp;D · PR #842 Approved</span></div><span class="hero-task-tag tag-green">AUTO-ROUTED ✓</span></div>
+                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">GTM Enterprise Launch Assets</span><span class="hero-task-meta">Growth · 12 Assets Synced</span></div><span class="hero-task-tag tag-blue">DISPATCHED ✓</span></div>
+                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Design Library · Token Sync</span><span class="hero-task-meta">Design · Ready for QA</span></div><span class="hero-task-tag tag-amber">IN REVIEW</span></div>
+                </div>
+                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">+38%</span><span class="hero-metric-lbl">Velocity</span></div><div class="hero-metric-cell"><span class="hero-metric-val">0.4s</span><span class="hero-metric-lbl">Handoff</span></div><div class="hero-metric-cell"><span class="hero-metric-val">0.0%</span><span class="hero-metric-lbl">Blockers</span></div></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <!-- Service: reliability / incident -->
+          <div class="hero-preview-screen" data-preview="service">
+            <div class="hero-screen-device">
+            <div class="hero-window-frame">
+              <div class="hero-window-header">
+                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
+                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / service / inc-4402</span></div>
+                <div class="hero-status-pill">● 99.999% SLA</div>
+              </div>
+              <div class="hero-screen-body">
+                <div class="hp-toolbar">
+                  <div>
+                    <div class="hp-title">Incident INC-4402 · Edge-EU</div>
+                    <div class="hp-sub">Auto-triage + canary rollback in progress</div>
+                  </div>
+                  <span class="hero-task-tag tag-amber">Mitigating</span>
+                </div>
+                <div class="hp-bars">
+                  <div class="hp-bar-row"><span>P99 latency</span><div class="hp-bar-track"><div class="hp-bar-fill is-ok" style="width:22%"></div></div><span>16ms</span></div>
+                  <div class="hp-bar-row"><span>CPU load</span><div class="hp-bar-track"><div class="hp-bar-fill is-warn" style="width:48%"></div></div><span>18%</span></div>
+                  <div class="hp-bar-row"><span>Canary</span><div class="hp-bar-track"><div class="hp-bar-fill is-ok" style="width:100%"></div></div><span>6/6</span></div>
+                </div>
+                <div class="hp-list">
+                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Traffic shunted to Edge-EU replica</span><span class="hero-task-meta">0 packet loss · 140ms ago</span></div><span class="hero-task-tag tag-green">VERIFIED ✓</span></div>
+                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Canary rollback v2.14.8</span><span class="hero-task-meta">Runbook executed</span></div><span class="hero-task-tag tag-blue">EXECUTED ✓</span></div>
+                </div>
+                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">16.4ms</span><span class="hero-metric-lbl">P99</span></div><div class="hero-metric-cell"><span class="hero-metric-val">18%</span><span class="hero-metric-lbl">CPU</span></div><div class="hero-metric-cell"><span class="hero-metric-val">100%</span><span class="hero-metric-lbl">Canary</span></div></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <!-- StackAI: model mesh -->
+          <div class="hero-preview-screen" data-preview="stackai">
+            <div class="hero-screen-device">
+            <div class="hero-window-frame">
+              <div class="hero-window-header">
+                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
+                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / stackai / mesh-v4</span></div>
+                <div class="hero-status-pill">● 240 AGENTS ACTIVE</div>
+              </div>
+              <div class="hero-screen-body">
+                <div class="hp-toolbar">
+                  <div>
+                    <div class="hp-title">Model mesh · Live routing</div>
+                    <div class="hp-sub">Guardrailed requests across the agent fleet</div>
+                  </div>
+                  <span class="hero-task-tag tag-green">Healthy</span>
+                </div>
+                <div class="hp-chip-row">
+                  <span class="hp-chip">Claude 3.5</span>
+                  <span class="hp-chip">GPT-4o</span>
+                  <span class="hp-chip">Gemini</span>
+                  <span class="hp-chip">Local · 8B</span>
+                </div>
+                <div class="hp-list">
+                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Claude 3.5 Sonnet</span><span class="hero-task-meta">Complex code refactoring · 38ms</span></div><span class="hero-task-tag tag-green">ROUTED ✓</span></div>
+                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">GPT-4o Omnimodal</span><span class="hero-task-meta">Visual document reasoning · 42ms</span></div><span class="hero-task-tag tag-blue">ROUTED ✓</span></div>
+                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Policy guardrail pass</span><span class="hero-task-meta">PII scrub · tool allowlist</span></div><span class="hero-task-tag tag-slate">100%</span></div>
+                </div>
+                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">14.2k</span><span class="hero-metric-lbl">tok/sec</span></div><div class="hero-metric-cell"><span class="hero-metric-val">100%</span><span class="hero-metric-lbl">Guardrail</span></div><div class="hero-metric-cell"><span class="hero-metric-val">&lt;38ms</span><span class="hero-metric-lbl">Latency</span></div></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <!-- Fuel: company scorecard -->
+          <div class="hero-preview-screen" data-preview="fuel">
+            <div class="hero-screen-device">
+            <div class="hero-window-frame">
+              <div class="hero-window-header">
+                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
+                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / fuel / company-score</span></div>
+                <div class="hero-status-pill">● SCORECARD LIVE</div>
+              </div>
+              <div class="hero-screen-body">
+                <div class="hp-toolbar">
+                  <div>
+                    <div class="hp-title">Company health scorecard</div>
+                    <div class="hp-sub">Peer benchmark · top quartile</div>
+                  </div>
+                  <span class="hero-task-tag tag-green">Weekly pulse</span>
+                </div>
+                <div class="hp-score-row">
+                  <div class="hp-score-ring">
+                    <div style="text-align:center;">
+                      <div class="hp-score-num">98.4</div>
+                      <div class="hp-score-lbl">Score</div>
+                    </div>
+                  </div>
+                  <div class="hp-list" style="margin:0;">
+                    <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">GTM conversion gap</span><span class="hero-task-meta">Ranked #1 priority</span></div><span class="hero-task-tag tag-amber">ACTION</span></div>
+                    <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Engineering velocity</span><span class="hero-task-meta">Above peer median</span></div><span class="hero-task-tag tag-green">STRONG</span></div>
+                  </div>
+                </div>
+                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">12</span><span class="hero-metric-lbl">Signals</span></div><div class="hero-metric-cell"><span class="hero-metric-val">5</span><span class="hero-metric-lbl">Gaps</span></div><div class="hero-metric-cell"><span class="hero-metric-val">3</span><span class="hero-metric-lbl">Bets</span></div></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <!-- Gerrit: code review -->
+          <div class="hero-preview-screen" data-preview="gerrit">
+            <div class="hero-screen-device">
+            <div class="hero-window-frame">
+              <div class="hero-window-header">
+                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
+                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / gerrit / change-8842</span></div>
+                <div class="hero-status-pill">● REVIEW PIPELINE</div>
+              </div>
+              <div class="hero-screen-body">
+                <div class="hp-toolbar">
+                  <div>
+                    <div class="hp-title">change-8842 · Auth middleware</div>
+                    <div class="hp-sub">2 reviewers · +186 / −42</div>
+                  </div>
+                  <span class="hero-task-tag tag-green">+2</span>
+                </div>
+                <div class="hp-diff">
+                  <div class="hp-diff-line">@@ auth/middleware.ts @@</div>
+                  <div class="hp-diff-line del">- if (!token) return next()</div>
+                  <div class="hp-diff-line add">+ if (!token) throw new AuthError(401)</div>
+                  <div class="hp-diff-line add">+ await verifySession(token)</div>
+                </div>
+                <div class="hp-list">
+                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">CI · Build &amp; unit suite</span><span class="hero-task-meta">All checks green</span></div><span class="hero-task-tag tag-blue">PASSED</span></div>
+                </div>
+                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">14m</span><span class="hero-metric-lbl">Review lag</span></div><div class="hero-metric-cell"><span class="hero-metric-val">100%</span><span class="hero-metric-lbl">Coverage</span></div><div class="hero-metric-cell"><span class="hero-metric-val">0</span><span class="hero-metric-lbl">Blockers</span></div></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <!-- GTM: launch calendar -->
+          <div class="hero-preview-screen" data-preview="gtm">
+            <div class="hero-screen-device">
+            <div class="hero-window-frame">
+              <div class="hero-window-header">
+                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
+                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / gtm / launch-q2</span></div>
+                <div class="hero-status-pill">● CAMPAIGN SYNCED</div>
+              </div>
+              <div class="hero-screen-body">
+                <div class="hp-toolbar">
+                  <div>
+                    <div class="hp-title">Enterprise launch calendar</div>
+                    <div class="hp-sub">LinkedIn · CRM · Email · Ads</div>
+                  </div>
+                  <span class="hero-task-tag tag-green">Live</span>
+                </div>
+                <div class="hp-calendar">
+                  <div class="hp-day"><strong>Mon</strong><span>Teaser</span></div>
+                  <div class="hp-day is-live"><strong>Tue</strong><span>Launch</span></div>
+                  <div class="hp-day"><strong>Wed</strong><span>Nurture</span></div>
+                  <div class="hp-day"><strong>Thu</strong><span>SQL push</span></div>
+                </div>
+                <div class="hp-chip-row">
+                  <span class="hp-chip">LinkedIn</span>
+                  <span class="hp-chip">HubSpot</span>
+                  <span class="hp-chip">Email</span>
+                  <span class="hp-chip">Paid</span>
+                </div>
+                <div class="hp-list">
+                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Enterprise launch sequence</span><span class="hero-task-meta">12 assets · 3 channels</span></div><span class="hero-task-tag tag-green">LIVE</span></div>
+                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Pipeline attribution</span><span class="hero-task-meta">Synced to CRM</span></div><span class="hero-task-tag tag-blue">SYNCED</span></div>
+                </div>
+                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">2.4x</span><span class="hero-metric-lbl">Pipeline</span></div><div class="hero-metric-cell"><span class="hero-metric-val">38%</span><span class="hero-metric-lbl">Open rate</span></div><div class="hero-metric-cell"><span class="hero-metric-val">9</span><span class="hero-metric-lbl">SQLs</span></div></div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Icon: concentric rotating arcs of all 22 product logos -->
@@ -7427,9 +7674,210 @@
         <div class="hero-arc-fan" id="heroArcFan" aria-hidden="false"></div>
       </div>
 
-    </div>
-  </div>
-</section>
+      <!-- RIGHT COLUMN: Horizontal Carousel Viewport -->
+      <div class="hero-cards-viewport" id="heroCardsViewport">
+        <div class="hero-cards-track">
+
+          <!-- 1. Agentic Work Management (Emerald Mint) - LEFT (UP) -->
+          <div class="hero-green-card card-gradient-1 hero-card-up" style="background: linear-gradient(160deg, #12A883 0%, #1EA190 45%, #466BD8 100%);">
+            <div class="hero-window-frame">
+              <div class="hero-window-header">
+                <div class="hero-window-dots">
+                  <span class="hero-dot dot-red"></span>
+                  <span class="hero-dot dot-yellow"></span>
+                  <span class="hero-dot dot-green"></span>
+                </div>
+                <div class="hero-status-pill">● ACTIVE SPRINT 42</div>
+              </div>
+              <div class="hero-url-bar">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                <span>york.platform / work / sprint-42</span>
+              </div>
+              <div class="hero-screen-body">
+                <div class="hero-task-row">
+                  <div class="hero-task-info">
+                    <span class="hero-task-name">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M18 9a9 9 0 0 0-9 9"/><path d="M6 9v12"/></svg>
+                      <span>Stripe v4 API Gateway Migration</span>
+                    </span>
+                    <span class="hero-task-meta">R&amp;D Team · PR #842 Approved · 12ms</span>
+                  </div>
+                  <span class="hero-task-tag tag-green">AUTO-ROUTED ✓</span>
+                </div>
+                <div class="hero-task-row">
+                  <div class="hero-task-info">
+                    <span class="hero-task-name">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                      <span>GTM Enterprise Launch Assets</span>
+                    </span>
+                    <span class="hero-task-meta">Growth · 12 Assets Synced · 0 Blockers</span>
+                  </div>
+                  <span class="hero-task-tag tag-blue">DISPATCHED ✓</span>
+                </div>
+                <div class="hero-micro-metrics">
+                  <div class="hero-metric-cell">
+                    <span class="hero-metric-val">+38%</span>
+                    <span class="hero-metric-lbl">Velocity</span>
+                  </div>
+                  <div class="hero-metric-cell">
+                    <span class="hero-metric-val">0.4s</span>
+                    <span class="hero-metric-lbl">Handoff</span>
+                  </div>
+                  <div class="hero-metric-cell">
+                    <span class="hero-metric-val">0.0%</span>
+                    <span class="hero-metric-lbl">Blocker Rate</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-card-bottom">
+              <div class="hero-card-tag-pill">
+                <span class="hero-tag-glow-dot"></span>
+                <span>Work Coordination</span>
+              </div>
+              <h3 class="hero-card-title">Nurture cross-team velocity and eliminate handoff latency</h3>
+              <div class="hero-card-actions">
+                <a href="#flagship" class="hero-card-action-btn">Open workspace ↗</a>
+                <a href="#flagship" class="hero-card-action-link">Learn more ›</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. StackAI by York (Lush Forest) - IN CENTER (DOWN/CENTER) -->
+          <div class="hero-green-card card-gradient-3 hero-card-down">
+            <div class="hero-window-frame">
+              <div class="hero-window-header">
+                <div class="hero-window-dots">
+                  <span class="hero-dot dot-red"></span>
+                  <span class="hero-dot dot-yellow"></span>
+                  <span class="hero-dot dot-green"></span>
+                </div>
+                <div class="hero-status-pill">● 240 AGENTS ACTIVE</div>
+              </div>
+              <div class="hero-url-bar">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                <span>york.platform / runtime / mesh-v4</span>
+              </div>
+              <div class="hero-screen-body">
+                <div class="hero-task-row">
+                  <div class="hero-task-info">
+                    <span class="hero-task-name">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><circle cx="5" cy="19" r="2"/><line x1="7" y1="6" x2="10" y2="10"/><line x1="17" y1="6" x2="14" y2="10"/><line x1="7" y1="18" x2="10" y2="14"/><line x1="17" y1="18" x2="14" y2="14"/></svg>
+                      <span>Zero-Trust Swarm Mesh</span>
+                    </span>
+                    <span class="hero-task-meta">Claude 3.5 Sonnet · Complex Refactor</span>
+                  </div>
+                  <span class="hero-task-tag tag-purple">ROUTED ✓</span>
+                </div>
+                <div class="hero-task-row">
+                  <div class="hero-task-info">
+                    <span class="hero-task-name">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg>
+                      <span>GPT-4o Omnimodal Reasoning</span>
+                    </span>
+                    <span class="hero-task-meta">Document Analysis · 42ms runtime</span>
+                  </div>
+                  <span class="hero-task-tag tag-cyan">ROUTED ✓</span>
+                </div>
+                <div class="hero-micro-metrics">
+                  <div class="hero-metric-cell">
+                    <span class="hero-metric-val">14,200</span>
+                    <span class="hero-metric-lbl">Throughput</span>
+                  </div>
+                  <div class="hero-metric-cell">
+                    <span class="hero-metric-val">100%</span>
+                    <span class="hero-metric-lbl">Guardrail</span>
+                  </div>
+                  <div class="hero-metric-cell">
+                    <span class="hero-metric-val">&lt;38ms</span>
+                    <span class="hero-metric-lbl">Mesh Latency</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-card-bottom">
+              <div class="hero-card-tag-pill">
+                <span class="hero-tag-glow-dot"></span>
+                <span>Agentic Mesh</span>
+              </div>
+              <h3 class="hero-card-title">Deploy autonomous multi-agent swarms with MCP context mesh</h3>
+              <div class="hero-card-actions">
+                <a href="#flagship" class="hero-card-action-btn">Explore StackAI ↗</a>
+                <a href="#flagship" class="hero-card-action-link">Learn more ›</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. York Service Management (Deep Jade) - RIGHT (CENTER CASCADE) -->
+          <div class="hero-green-card card-gradient-2 hero-card-center">
+            <div class="hero-window-frame">
+              <div class="hero-window-header">
+                <div class="hero-window-dots">
+                  <span class="hero-dot dot-red"></span>
+                  <span class="hero-dot dot-yellow"></span>
+                  <span class="hero-dot dot-green"></span>
+                </div>
+                <div class="hero-status-pill">● 99.999% SLA</div>
+              </div>
+              <div class="hero-url-bar">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                <span>york.platform / service / inc-4402</span>
+              </div>
+              <div class="hero-screen-body">
+                <div class="hero-task-row">
+                  <div class="hero-task-info">
+                    <span class="hero-task-name">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                      <span>INC-4402 · Buffer Saturation</span>
+                    </span>
+                    <span class="hero-task-meta">Cluster-08 Gateway Pods · Edge-EU</span>
+                  </div>
+                  <span class="hero-task-tag tag-cyan">MITIGATED ✓</span>
+                </div>
+                <div class="hero-task-row">
+                  <div class="hero-task-info">
+                    <span class="hero-task-name">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                      <span>Canary Rollback to Release v2.14.8</span>
+                    </span>
+                    <span class="hero-task-meta">6/6 pods nominal · 0 packet loss</span>
+                  </div>
+                  <span class="hero-task-tag tag-green">VERIFIED ✓</span>
+                </div>
+                <div class="hero-micro-metrics">
+                  <div class="hero-metric-cell">
+                    <span class="hero-metric-val">16.4ms</span>
+                    <span class="hero-metric-lbl">P99 Latency</span>
+                  </div>
+                  <div class="hero-metric-cell">
+                    <span class="hero-metric-val">18%</span>
+                    <span class="hero-metric-lbl">CPU Load</span>
+                  </div>
+                  <div class="hero-metric-cell">
+                    <span class="hero-metric-val">100%</span>
+                    <span class="hero-metric-lbl">Canary Health</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-card-bottom">
+              <div class="hero-card-tag-pill">
+                <span class="hero-tag-glow-dot"></span>
+                <span>Service Reliability</span>
+              </div>
+              <h3 class="hero-card-title">Sub-second incident triage with automated canary rollbacks</h3>
+              <div class="hero-card-actions">
+                <a href="#flagship" class="hero-card-action-btn">Launch Service Hub ↗</a>
+                <a href="#flagship" class="hero-card-action-link">Learn more ›</a>
+              </div>
+            </div>
+          </div>
+
+                  </div>
+      </div>
 
     </div>
   </div>
@@ -7947,14 +8395,183 @@
       if (scrollBar) scrollBar.style.width = `${(window.scrollY / h) * 100}%`;
     });
 
-    // ─── 2.4 HERO HEADLINE STYLING ───
-    (function initHeroHeadline() {
+    // ─── 2.4 HERO LAYOUT TABS (Current / Top-down / Icon) ───
+    (function initHeroLayoutTabs() {
+      const hero = document.getElementById('hero');
+      const tabs = document.querySelectorAll('.hero-layout-tab');
       const headline = document.querySelector('#hero h1.hero-editorial-headline');
       const gradientTitle = headline?.querySelector('.hero-gradient-title');
-      if (!headline) return;
-      headline.style.setProperty('font-size', '72px', 'important');
-      headline.style.setProperty('line-height', '1.08', 'important');
-      if (gradientTitle) gradientTitle.style.setProperty('font-size', '72px', 'important');
+      if (!hero || !tabs.length) return;
+
+      function applyHeroTitleSize(layout) {
+        if (!headline) return;
+        if (layout === 'stacked' || layout === 'icons') {
+          headline.style.setProperty('font-size', '72px', 'important');
+          headline.style.setProperty('line-height', '1.08', 'important');
+          if (gradientTitle) {
+            gradientTitle.style.setProperty('font-size', '72px', 'important');
+          }
+        } else {
+          headline.style.removeProperty('font-size');
+          headline.style.removeProperty('line-height');
+          if (gradientTitle) gradientTitle.style.removeProperty('font-size');
+        }
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const layout = tab.getAttribute('data-hero-layout') || 'split';
+          hero.setAttribute('data-hero-layout', layout);
+          applyHeroTitleSize(layout);
+          tabs.forEach((t) => {
+            const on = t === tab;
+            t.classList.toggle('active', on);
+            t.setAttribute('aria-selected', on ? 'true' : 'false');
+          });
+          window.dispatchEvent(new Event('resize'));
+        });
+      });
+
+      applyHeroTitleSize(hero.getAttribute('data-hero-layout') || 'split');
+    })();
+
+    // ─── 2.45 TOP-DOWN PRODUCT LOGO → SCREEN PREVIEW (gentle auto-rotate) ───
+    (function initHeroStackedPreview() {
+      const logos = Array.from(document.querySelectorAll('.hero-product-logo-btn'));
+      const screens = document.querySelectorAll('.hero-preview-screen');
+      const logosWrap = document.getElementById('heroProductLogos');
+      const previewWrap = document.getElementById('heroProductPreview');
+      const hero = document.getElementById('hero');
+      if (!logos.length || !screens.length) return;
+
+      const ids = logos.map((btn) => btn.getAttribute('data-preview')).filter(Boolean);
+      let index = Math.max(0, ids.indexOf(logos.find((b) => b.classList.contains('active'))?.getAttribute('data-preview')));
+      let timer = null;
+      const INTERVAL = 3800;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function showPreview(id) {
+        const next = ids.indexOf(id);
+        if (next >= 0) index = next;
+        logos.forEach((btn) => {
+          const on = btn.getAttribute('data-preview') === id;
+          btn.classList.toggle('active', on);
+          btn.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        screens.forEach((screen) => {
+          screen.classList.toggle('active', screen.getAttribute('data-preview') === id);
+        });
+      }
+
+      function advance() {
+        if (hero && hero.getAttribute('data-hero-layout') !== 'stacked') return;
+        index = (index + 1) % ids.length;
+        showPreview(ids[index]);
+      }
+
+      function startAuto() {
+        if (reduceMotion || timer) return;
+        timer = window.setInterval(advance, INTERVAL);
+      }
+
+      function stopAuto() {
+        if (!timer) return;
+        window.clearInterval(timer);
+        timer = null;
+      }
+
+      function bumpAuto() {
+        stopAuto();
+        startAuto();
+      }
+
+      logos.forEach((btn) => {
+        const id = btn.getAttribute('data-preview');
+        const select = () => {
+          showPreview(id);
+          bumpAuto();
+        };
+        btn.addEventListener('mouseenter', select);
+        btn.addEventListener('focus', select);
+        btn.addEventListener('click', select);
+      });
+
+      [logosWrap, previewWrap].forEach((el) => {
+        if (!el) return;
+        el.addEventListener('mouseenter', stopAuto);
+        el.addEventListener('mouseleave', startAuto);
+        el.addEventListener('focusin', stopAuto);
+        el.addEventListener('focusout', (e) => {
+          if (!el.contains(e.relatedTarget)) startAuto();
+        });
+      });
+
+      document.querySelectorAll('.hero-layout-tab').forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const layout = tab.getAttribute('data-hero-layout');
+          if (layout === 'stacked') startAuto();
+          else stopAuto();
+        });
+      });
+
+      if (!hero || hero.getAttribute('data-hero-layout') === 'stacked') startAuto();
+    })();
+
+        // ─── 2.5 HERO MVP PLATFORMS CAROUSEL CONTROLLER ───
+    (function initHeroMvpCarousel() {
+      const viewport = document.getElementById('heroCardsViewport');
+      const prevBtn = document.getElementById('heroCarPrevBtn');
+      const nextBtn = document.getElementById('heroCarNextBtn');
+      const trackContainer = document.getElementById('heroTrackContainer');
+      const thumb = document.getElementById('heroTrackThumb');
+
+      if (!viewport || !prevBtn || !nextBtn || !thumb || !trackContainer) return;
+
+      function getStepWidth() {
+        const firstCard = viewport.querySelector('.hero-green-card');
+        const track = viewport.querySelector('.hero-cards-track');
+        const gap = track ? parseFloat(getComputedStyle(track).gap) || 28 : 28;
+        return (firstCard ? firstCard.offsetWidth : 356) + gap;
+      }
+
+      function updateNavAndThumb() {
+        const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+        const currentScroll = viewport.scrollLeft;
+
+        // Button disabled states
+        prevBtn.disabled = currentScroll <= 2;
+        nextBtn.disabled = currentScroll >= maxScroll - 2;
+
+        // Progress scrubber thumb position
+        const containerWidth = trackContainer.clientWidth;
+        const thumbWidth = thumb.offsetWidth;
+        const maxTravel = Math.max(0, containerWidth - thumbWidth);
+
+        if (maxScroll <= 0) {
+          thumb.style.transform = 'translateX(0px)';
+        } else {
+          const ratio = Math.min(1, Math.max(0, currentScroll / maxScroll));
+          thumb.style.transform = 'translateX(' + (ratio * maxTravel) + 'px)';
+        }
+      }
+
+      prevBtn.addEventListener('click', () => {
+        viewport.scrollBy({ left: -getStepWidth(), behavior: 'smooth' });
+      });
+
+      nextBtn.addEventListener('click', () => {
+        viewport.scrollBy({ left: getStepWidth(), behavior: 'smooth' });
+      });
+
+      viewport.addEventListener('scroll', () => {
+        requestAnimationFrame(updateNavAndThumb);
+      }, { passive: true });
+
+      window.addEventListener('resize', () => {
+        updateNavAndThumb();
+      });
+
+      setTimeout(updateNavAndThumb, 100);
     })();
 
     // ─── 3. COPILOT-STYLE 3 MVP PLATFORMS ENGINE (EXACT USER SPEC) ───
