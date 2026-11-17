@@ -60,102 +60,114 @@
    Primary button fills are chosen so white label text stays ≥ 4.5:1. */
 :root, :root[data-theme="light"] {
   --bg-app: #F8FAFC;
+  --bg-base: #FFFFFF;
   --bg-card: #FFFFFF;
+  --bg-card-hover: #F8FAFC;
   --bg-pill: #FFFFFF;
   --bg-pill-hover: #F1F5F9;
-  --bg-subtle: #F8FAFC;
-  --bg-subtle-2: #F1F5F9;
+  --bg-subtle: #F1F5F9;
+  --bg-subtle-2: #E2E8F0;
   --bg-drawer: rgba(255, 255, 255, 0.98);
   
-  --line: #CBD5E1;             /* Stronger than #E2E8F0 for control boundaries */
-  --line-strong: #94A3B8;
+  --line: rgba(0, 0, 0, 0.08);
+  --line-subtle: rgba(0, 0, 0, 0.04);
+  --line-strong: rgba(0, 0, 0, 0.16);
+  --line-active: rgba(5, 150, 105, 0.4);
   
-  --text-main: #0F172A;        /* ~17.9:1 on white */
-  --text-secondary: #334155;   /* ~10.4:1 on white */
-  --text-muted: #475569;       /* ~7.6:1 on white */
-  --text-faint: #64748B;       /* ~4.8:1 on white — AA minimum */
+  --text-main: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --text-faint: #94A3B8;
   
-  /* Brand greens: logo graphic vs AA-safe text/fill */
-  --emerald-graphic: #00B48A;  /* Logo accent only — do not use for small text */
-  --emerald: #007A5A;          /* AA text/icon green on light surfaces (~5.3:1) */
-  --emerald-dark: #005E44;     /* AAA text green (~7.8:1) */
-  --emerald-accent: #007A5A;   /* Links / focus */
+  --emerald-graphic: #10B981;
+  --emerald: #059669;
+  --emerald-dark: #047857;
+  --emerald-accent: #10B981;
+  --emerald-glow: rgba(16, 185, 129, 0.25);
   --emerald-light: #D1FAE5;
   --emerald-subtle: #ECFDF5;
-  --btn-primary-bg: #007A5A;   /* White label ~5.3:1 */
-  --btn-primary-hover: #005E44;
+  --btn-primary-bg: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  --btn-primary-hover: linear-gradient(135deg, #34D399 0%, #10B981 100%);
   --btn-primary-fg: #FFFFFF;
   
-  --cta-primary-bg: #007A5A;
-  --cta-primary-hover-bg: #005E44;
+  --cta-primary-bg: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  --cta-primary-hover-bg: linear-gradient(135deg, #34D399 0%, #10B981 100%);
   --cta-primary-color: #FFFFFF;
-  --cta-primary-border: #007A5A;
-  --cta-primary-shadow: none;
-  --cta-primary-shadow-hover: none;
+  --cta-primary-border: rgba(255, 255, 255, 0.22);
+  --cta-primary-shadow: 0 4px 14px rgba(16, 185, 129, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  --cta-primary-shadow-hover: 0 8px 24px rgba(16, 185, 129, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.45);
   --cta-radius: 8px;
 
-  --focus-ring: #007A5A;
+  --focus-ring: #10B981;
   --focus-ring-offset: #FFFFFF;
-  --warn-text: #92400E;        /* Amber copy ≥ 4.5:1 on white/cream */
+  --warn-text: #92400E;
   --warn-bg: #FEF3C7;
   --danger-text: #9F1239;
   --danger-bg: #FEE2E2;
   --info-text: #1E40AF;
   --info-bg: #DBEAFE;
-  --ok-text: #005E44;
+  --ok-text: #047857;
   --ok-bg: #ECFDF5;
   
-  --shadow-dock: none;
-  --shadow-card: none;
-  --shadow-pill: none;
-  --shadow-drawer: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-dock: 0 4px 20px -4px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.04), 0 8px 20px -4px rgba(15, 23, 42, 0.05);
+  --shadow-card-hover: 0 12px 28px -6px rgba(15, 23, 42, 0.08);
+  --shadow-pill: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-drawer: 0 16px 40px -10px rgba(15, 23, 42, 0.12);
   
-  --radius-card: 16px;
+  --radius-card: 14px;
   --radius-pill: 9999px;
-  --radius-btn: 10px;
+  --radius-btn: 8px;
   
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 :root[data-theme="dark"] {
-  --bg-app: #080C14;
-  --bg-card: #0F1626;
+  --bg-app: #0B0F19;
+  --bg-base: #0B0F19;
+  --bg-surface: #121829;
+  --bg-surface-elevated: #1B2238;
+  --bg-card: rgba(18, 24, 40, 0.85);
+  --bg-card-hover: rgba(25, 34, 56, 0.96);
   --bg-card-dark: #070B12;
-  --bg-pill: #172033;
-  --bg-pill-hover: #1E2B45;
-  --bg-subtle: #131C2E;
-  --bg-subtle-2: #1B2842;
-  --bg-drawer: rgba(15, 22, 38, 0.98);
+  --bg-pill: #1B2238;
+  --bg-pill-hover: #242E4C;
+  --bg-subtle: #141B2D;
+  --bg-subtle-2: #1D263E;
+  --bg-drawer: rgba(11, 15, 25, 0.98);
   
-  --line: rgba(255, 255, 255, 0.18);   /* ≥ visible control edges on dark */
-  --line-strong: rgba(255, 255, 255, 0.28);
+  --line: rgba(255, 255, 255, 0.09);
+  --line-subtle: rgba(255, 255, 255, 0.05);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --line-active: rgba(16, 185, 129, 0.45);
   
   --text-main: #F8FAFC;
-  --text-secondary: #E2E8F0;
-  --text-muted: #A8B6C8;       /* Slightly lifted vs #94A3B8 for card surfaces */
-  --text-faint: #CBD5E1;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-faint: #475569;
   
-  --emerald-graphic: #00D6A4;
-  --emerald: #00D6A4;          /* Text/icon green on dark (~9.6:1 on cards) */
-  --emerald-dark: #00D6A4;     /* Alias for text/icons — NOT a button fill in dark */
-  --emerald-light: rgba(0, 214, 164, 0.28);
-  --emerald-subtle: rgba(0, 214, 164, 0.16);
-  --emerald-accent: #34D399;
-  /* White-on-#00B48A/#00D6A4 fails AA. Primary fills stay AA-safe: */
-  --btn-primary-bg: #007A5A;   /* White label ~5.3:1 */
-  --btn-primary-hover: #005E44;
+  --emerald-graphic: #10B981;
+  --emerald: #10B981;
+  --emerald-dark: #34D399;
+  --emerald-accent: #10B981;
+  --emerald-glow: rgba(16, 185, 129, 0.35);
+  --emerald-light: rgba(16, 185, 129, 0.2);
+  --emerald-subtle: rgba(16, 185, 129, 0.12);
+  --btn-primary-bg: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  --btn-primary-hover: linear-gradient(135deg, #34D399 0%, #10B981 100%);
   --btn-primary-fg: #FFFFFF;
   
-  --cta-primary-bg: #007A5A;
-  --cta-primary-hover-bg: #005E44;
+  --cta-primary-bg: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  --cta-primary-hover-bg: linear-gradient(135deg, #34D399 0%, #10B981 100%);
   --cta-primary-color: #FFFFFF;
-  --cta-primary-border: #007A5A;
-  --cta-primary-shadow: none;
-  --cta-primary-shadow-hover: none;
+  --cta-primary-border: rgba(255, 255, 255, 0.22);
+  --cta-primary-shadow: 0 4px 16px rgba(16, 185, 129, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  --cta-primary-shadow-hover: 0 8px 28px rgba(16, 185, 129, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  --cta-radius: 8px;
 
-  --focus-ring: #34D399;
-  --focus-ring-offset: #080C14;
+  --focus-ring: #10B981;
+  --focus-ring-offset: #0B0F19;
   --warn-text: #FCD34D;
   --warn-bg: rgba(245, 158, 11, 0.18);
   --danger-text: #FDA4AF;
@@ -163,12 +175,13 @@
   --info-text: #93C5FD;
   --info-bg: rgba(59, 130, 246, 0.18);
   --ok-text: #6EE7B7;
-  --ok-bg: rgba(0, 214, 164, 0.16);
+  --ok-bg: rgba(16, 185, 129, 0.18);
   
-  --shadow-dock: none;
-  --shadow-card: none;
-  --shadow-pill: none;
-  --shadow-drawer: 0 16px 40px rgba(0, 0, 0, 0.45);
+  --shadow-dock: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 16px 36px -10px rgba(0, 0, 0, 0.45);
+  --shadow-card-hover: 0 20px 45px -10px rgba(0, 0, 0, 0.6);
+  --shadow-pill: 0 2px 6px rgba(0, 0, 0, 0.3);
+  --shadow-drawer: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
 *, *::before, *::after {
@@ -333,6 +346,7 @@ i[data-lucide], svg.lucide {
 .permanent-sidebar.collapsed {
   width: 68px;
   min-width: 68px;
+  max-width: 68px;
 }
 
 /* Header in collapsed state: Logo icon mark neatly centered + collapse toggle below */
@@ -340,36 +354,51 @@ i[data-lucide], svg.lucide {
   padding: 14px 0 10px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
   justify-content: center;
   border-bottom: none;
 }
 .permanent-sidebar.collapsed .sidebar-brand-box {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
 }
-.permanent-sidebar.collapsed .sidebar-brand-logo {
+.permanent-sidebar.collapsed .sidebar-brand-logo,
+.permanent-sidebar.collapsed .sidebar-brand-logo.logo-light-mode,
+.permanent-sidebar.collapsed .sidebar-brand-logo.logo-dark-mode,
+.permanent-sidebar.collapsed .sidebar-brand-box img.sidebar-brand-logo {
   display: none !important;
 }
 .permanent-sidebar.collapsed .sidebar-brand-icon-only {
   display: block !important;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   margin: 0 auto;
 }
 .permanent-sidebar:not(.collapsed) .sidebar-brand-icon-only {
   display: none !important;
 }
 .permanent-sidebar.collapsed .sidebar-collapse-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   margin: 0 auto;
+  display: grid;
+  place-items: center;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.permanent-sidebar.collapsed .sidebar-collapse-btn:hover {
+  background: var(--bg-card);
+  color: var(--emerald-dark);
+  border-color: var(--line-active);
 }
 
 /* Hide all text, labels, and secondary wrappers in collapsed mode */
@@ -380,57 +409,73 @@ i[data-lucide], svg.lucide {
 .permanent-sidebar.collapsed .sidebar-nav-item .sidebar-badge,
 .permanent-sidebar.collapsed .sidebar-main-nav-btn span:not(.collapsed-dot-indicator),
 .permanent-sidebar.collapsed .sidebar-compute-meter,
-.permanent-sidebar.collapsed .sidebar-workspace-pill > *:not(:first-child),
+.permanent-sidebar.collapsed .sidebar-ws-copy,
+.permanent-sidebar.collapsed .sidebar-ws-tag,
+.permanent-sidebar.collapsed .sidebar-workspace-pill > *:not(.sidebar-ws-avatar),
 .permanent-sidebar.collapsed .sidebar-user-tile > *:not(.sidebar-user-avatar),
 .permanent-sidebar.collapsed .sidebar-logout-btn span {
   display: none !important;
 }
 
 /* Workspace / Account Pill in collapsed mode: Centered compact badge */
-.permanent-sidebar.collapsed .sidebar-workspace-pill {
-  width: 100%;
-  height: 44px;
-  min-height: 44px;
+.permanent-sidebar.collapsed .sidebar-context {
+  width: 44px;
+  margin: 6px auto 10px;
   padding: 0;
-  margin: 0;
-  border-radius: 0;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+.permanent-sidebar.collapsed .sidebar-workspace-pill {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin: 0 auto;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: none;
-  box-shadow: none;
+  border: none !important;
+  box-shadow: none !important;
 }
 .permanent-sidebar.collapsed .sidebar-workspace-pill:hover {
-  background: var(--bg-subtle);
-  border: none;
+  background: var(--bg-subtle) !important;
 }
 .permanent-sidebar.collapsed .sidebar-workspace-pill .sidebar-ws-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  font-size: 11px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
   margin: 0 auto;
+  flex-shrink: 0;
+  background: var(--btn-primary-bg);
+  color: #FFFFFF;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.28);
 }
 
 /* Primary Navigation in collapsed mode */
 .permanent-sidebar.collapsed .sidebar-primary-nav {
-  padding: 8px 0;
+  padding: 6px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   border-bottom: none;
 }
 .permanent-sidebar.collapsed .sidebar-main-nav-btn {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
   margin: 0 auto;
-  border-radius: 6px;
+  border-radius: 10px;
   color: var(--text-muted);
   background: transparent;
   border: 1px solid transparent;
@@ -443,48 +488,48 @@ i[data-lucide], svg.lucide {
   border-color: var(--line);
 }
 .permanent-sidebar.collapsed .sidebar-main-nav-btn.active {
-  background: var(--emerald-subtle);
-  color: var(--emerald-dark);
-  border-color: transparent;
-  box-shadow: none;
+  background: var(--emerald-subtle) !important;
+  color: var(--emerald-dark) !important;
+  border-color: color-mix(in srgb, var(--emerald) 25%, transparent) !important;
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.12);
 }
 :root[data-theme="dark"] .permanent-sidebar.collapsed .sidebar-main-nav-btn.active {
-  background: var(--emerald-subtle);
-  color: var(--emerald-dark);
-  border-color: transparent;
+  background: rgba(16, 185, 129, 0.18) !important;
+  color: #10B981 !important;
+  border-color: rgba(16, 185, 129, 0.35) !important;
 }
 .permanent-sidebar.collapsed .sidebar-main-nav-btn i,
 .permanent-sidebar.collapsed .sidebar-main-nav-btn svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   margin: 0 auto;
 }
 
 /* Secondary Navigation in collapsed mode */
 .permanent-sidebar.collapsed .sidebar-nav-scroll {
-  padding: 8px 0;
+  padding: 6px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 .permanent-sidebar.collapsed .sidebar-category-group {
   margin-top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   width: 100%;
 }
 .permanent-sidebar.collapsed .sidebar-nav-item {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
   margin: 0 auto;
-  border-radius: 6px;
+  border-radius: 10px;
   color: var(--text-muted);
   background: transparent;
   border: 1px solid transparent;
@@ -497,19 +542,20 @@ i[data-lucide], svg.lucide {
   border-color: var(--line);
 }
 .permanent-sidebar.collapsed .sidebar-nav-item.active {
-  background: var(--emerald-subtle);
-  color: var(--emerald-dark);
-  border-color: transparent;
+  background: var(--emerald-subtle) !important;
+  color: var(--emerald-dark) !important;
+  border-color: color-mix(in srgb, var(--emerald) 25%, transparent) !important;
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.12);
 }
 :root[data-theme="dark"] .permanent-sidebar.collapsed .sidebar-nav-item.active {
-  background: var(--emerald-subtle);
-  color: var(--emerald-dark);
-  border-color: transparent;
+  background: rgba(16, 185, 129, 0.18) !important;
+  color: #10B981 !important;
+  border-color: rgba(16, 185, 129, 0.35) !important;
 }
 .permanent-sidebar.collapsed .sidebar-nav-item i,
 .permanent-sidebar.collapsed .sidebar-nav-item svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   margin: 0 auto;
 }
 
@@ -520,8 +566,8 @@ i[data-lucide], svg.lucide {
 .permanent-sidebar.collapsed .collapsed-dot-indicator {
   display: block !important;
   position: absolute;
-  top: 7px;
-  right: 7px;
+  top: 8px;
+  right: 8px;
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -532,12 +578,12 @@ i[data-lucide], svg.lucide {
 
 /* Footer in collapsed mode */
 .permanent-sidebar.collapsed .sidebar-footer {
-  padding: 12px 0;
+  padding: 12px 0 16px;
   border-top: 1px solid var(--line);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
 }
 .permanent-sidebar.collapsed .sidebar-user-block {
   width: 100%;
@@ -548,38 +594,45 @@ i[data-lucide], svg.lucide {
   padding: 0;
 }
 .permanent-sidebar.collapsed .sidebar-user-tile {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: default;
 }
 .permanent-sidebar.collapsed .sidebar-user-tile:hover {
   background: transparent;
 }
 .permanent-sidebar.collapsed .sidebar-user-avatar {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   margin: 0 auto;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   display: grid;
   place-items: center;
   background: var(--btn-primary-bg);
   color: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);
 }
 .permanent-sidebar.collapsed .sidebar-logout-btn {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   padding: 0;
   margin: 0 auto;
-  justify-content: center;
   border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+}
+.permanent-sidebar.collapsed .sidebar-logout-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--danger-text, #EF4444);
 }
 
 .sidebar-header {
@@ -790,12 +843,18 @@ i[data-lucide], svg.lucide {
   transform: none;
 }
 .permanent-sidebar.collapsed .sidebar-context {
-  margin: 8px auto 8px;
+  margin: 6px auto 10px;
   width: 44px;
-  border-radius: 12px;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
   padding: 0;
+  border-radius: 0;
+  overflow: visible;
 }
-.permanent-sidebar.collapsed .sidebar-hubspot-strip {
+.permanent-sidebar.collapsed .sidebar-hubspot-strip,
+.permanent-sidebar.collapsed .sidebar-ws-copy,
+.permanent-sidebar.collapsed .sidebar-ws-tag {
   display: none !important;
 }
 
@@ -2848,30 +2907,31 @@ i[data-lucide], svg.lucide {
   gap: 6px;
   background: var(--bg-card);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--cta-radius, 8px);
   color: var(--text-secondary);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 550;
   letter-spacing: -0.01em;
   white-space: nowrap;
-  box-shadow: none;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
 }
 .btn-saas-secondary:hover {
   background: var(--bg-subtle);
   border-color: var(--line-strong);
   color: var(--text-main);
-  box-shadow: none;
+  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.08);
+  transform: translateY(-1px);
 }
 .btn-saas-secondary:active {
   background: var(--bg-subtle-2);
-  transform: translateY(1px);
+  transform: translateY(0);
 }
 .btn-saas-secondary i, .btn-saas-secondary svg {
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   color: var(--text-muted);
   stroke-width: 1.8;
   transition: color 0.15s ease;
@@ -2882,36 +2942,35 @@ i[data-lucide], svg.lucide {
 
 .btn-saas-primary {
   height: 32px;
-  padding: 0 12px;
+  padding: 0 14px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--btn-primary-bg);
-  border: 1px solid var(--btn-primary-bg);
-  border-radius: 8px;
-  color: var(--btn-primary-fg, #FFFFFF) !important;
-  font-size: 14px;
-  font-weight: 500;
+  background: var(--cta-primary-bg);
+  border: 1px solid var(--cta-primary-border);
+  border-radius: var(--cta-radius, 8px);
+  color: var(--cta-primary-color, #FFFFFF) !important;
+  font-size: 13px;
+  font-weight: 600;
   letter-spacing: -0.01em;
   white-space: nowrap;
-  box-shadow: none;
+  box-shadow: var(--cta-primary-shadow);
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
 }
 .btn-saas-primary:hover {
-  background: var(--btn-primary-hover);
-  border-color: var(--btn-primary-hover);
-  transform: none;
+  background: var(--cta-primary-hover-bg);
+  box-shadow: var(--cta-primary-shadow-hover);
+  transform: translateY(-1px);
 }
 .btn-saas-primary:active {
-  background: var(--btn-primary-hover);
-  transform: none;
+  transform: translateY(0);
 }
 .btn-saas-primary i, .btn-saas-primary svg {
-  width: 13px;
-  height: 13px;
-  color: var(--btn-primary-fg, #FFFFFF) !important;
+  width: 14px;
+  height: 14px;
+  color: var(--cta-primary-color, #FFFFFF) !important;
   stroke-width: 2;
 }
 
@@ -2921,28 +2980,30 @@ i[data-lucide], svg.lucide {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--bg-subtle);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  color: var(--text-secondary);
-  font-size: 14px;
-  font-weight: 500;
+  background: var(--warn-bg);
+  border: 1px solid #FCD34D;
+  border-radius: var(--cta-radius, 8px);
+  color: var(--warn-text);
+  font-size: 13px;
+  font-weight: 600;
   letter-spacing: -0.01em;
   white-space: nowrap;
-  box-shadow: none;
+  box-shadow: 0 1px 2px rgba(245, 158, 11, 0.12);
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
 }
 .btn-saas-amber:hover {
-  background: var(--bg-subtle-2);
-  border-color: var(--line-strong);
-  color: var(--text-main);
+  filter: brightness(0.96);
+  transform: translateY(-1px);
+}
+.btn-saas-amber:active {
+  transform: translateY(0);
 }
 .btn-saas-amber i, .btn-saas-amber svg {
-  width: 13px;
-  height: 13px;
-  color: var(--text-muted);
+  width: 14px;
+  height: 14px;
+  color: var(--warn-text);
   stroke-width: 2;
 }
 
@@ -2950,7 +3011,7 @@ i[data-lucide], svg.lucide {
   background: var(--bg-card);
   border-color: var(--line);
   color: var(--text-secondary);
-  box-shadow: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 :root[data-theme="dark"] .btn-saas-secondary:hover {
   background: var(--bg-subtle);
@@ -2958,25 +3019,25 @@ i[data-lucide], svg.lucide {
   color: var(--text-main);
 }
 :root[data-theme="dark"] .btn-saas-primary {
-  background: var(--btn-primary-bg);
-  border-color: var(--btn-primary-bg);
-  color: var(--btn-primary-fg, #FFFFFF) !important;
-  box-shadow: none;
+  background: var(--cta-primary-bg);
+  border-color: var(--cta-primary-border);
+  color: var(--cta-primary-color, #FFFFFF) !important;
+  box-shadow: var(--cta-primary-shadow);
 }
 :root[data-theme="dark"] .btn-saas-primary:hover {
-  background: var(--btn-primary-hover);
-  border-color: var(--btn-primary-hover);
+  background: var(--cta-primary-hover-bg);
+  box-shadow: var(--cta-primary-shadow-hover);
 }
 :root[data-theme="dark"] .btn-saas-primary i, :root[data-theme="dark"] .btn-saas-primary svg {
-  color: var(--btn-primary-fg, #FFFFFF) !important;
+  color: var(--cta-primary-color, #FFFFFF) !important;
 }
 :root[data-theme="dark"] .btn-saas-amber {
-  background: var(--bg-subtle);
-  border-color: var(--line);
-  color: var(--text-secondary);
+  background: var(--warn-bg);
+  border-color: rgba(245, 158, 11, 0.35);
+  color: var(--warn-text);
 }
 :root[data-theme="dark"] .btn-saas-amber:hover {
-  background: var(--bg-subtle-2);
+  background: rgba(245, 158, 11, 0.28);
 }
 :root[data-theme="dark"] .btn-saas-amber i, :root[data-theme="dark"] .btn-saas-amber svg {
   color: var(--text-muted);
@@ -3115,46 +3176,52 @@ i[data-lucide], svg.lucide {
 
 .deck-card {
   padding: 18px 20px;
-  border-radius: 8px;
+  border-radius: var(--radius-card, 14px);
   border: 1px solid var(--line);
-  box-shadow: none;
+  box-shadow: var(--shadow-card);
   background: var(--bg-card);
   color: var(--text-main);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 130px;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  min-height: 124px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: default;
   position: relative;
 }
 .deck-card:hover {
-  border-color: var(--line-strong);
-  box-shadow: none;
+  border-color: var(--line-active);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
 }
 
 .deck-card-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .deck-card-label {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  letter-spacing: -0.01em;
 }
 .deck-card-icon {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 6px;
   display: grid;
   place-items: center;
   background: var(--bg-subtle);
   color: var(--text-muted);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-subtle);
+  transition: all 0.15s ease;
+}
+.deck-card:hover .deck-card-icon {
+  color: var(--emerald);
+  border-color: var(--emerald-light);
+  background: var(--emerald-subtle);
 }
 .deck-card-icon i, .deck-card-icon svg {
   width: 14px;
@@ -3162,16 +3229,18 @@ i[data-lucide], svg.lucide {
 }
 
 .deck-card-value {
-  font-size: 22px;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
   letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: 1.1;
   font-variant-numeric: tabular-nums;
-  margin: 0 0 4px;
+  color: var(--text-main);
+  margin: 0 0 6px;
 }
 
 .deck-card-caption {
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--text-muted);
   display: flex;
   align-items: center;
@@ -5209,7 +5278,7 @@ i[data-lucide], svg.lucide {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  animation: copilotSlideUp 0.22s ease-out;
+  animation: copilotSlideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 :root[data-theme="dark"] .copilot-panel {
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
@@ -5495,9 +5564,14 @@ i[data-lucide], svg.lucide {
   border: 1px solid color-mix(in srgb, var(--emerald) 18%, transparent);
 }
 .copilot-msg-row.is-user .copilot-msg-face {
-  background: var(--btn-primary-bg);
-  color: #fff;
-  border: none;
+  background: #F1F5F9;
+  color: #475569;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+:root[data-theme="dark"] .copilot-msg-row.is-user .copilot-msg-face {
+  background: rgba(255, 255, 255, 0.08);
+  color: #94A3B8;
+  border-color: rgba(255, 255, 255, 0.12);
 }
 .copilot-msg-face i,
 .copilot-msg-face svg {
@@ -5521,24 +5595,35 @@ i[data-lucide], svg.lucide {
   font-weight: 600;
 }
 .copilot-msg-user {
-  background: var(--btn-primary-bg);
-  color: #ffffff;
-  border-radius: 16px 16px 6px 16px;
-  padding: 12px 14px;
+  background: #FFFFFF;
+  color: #0F172A;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 16px 16px 4px 16px;
+  padding: 12px 15px;
   font-size: 13.5px;
-  font-weight: 400;
+  font-weight: 450;
   line-height: 1.55;
   max-width: calc(100% - 36px);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+:root[data-theme="dark"] .copilot-msg-user {
+  background: #F1F5F9;
+  color: #0F172A;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 .copilot-msg-meta {
-  margin-top: 8px;
+  margin-top: 6px;
   font-size: 11px;
   font-weight: 500;
   color: var(--text-muted);
 }
 .copilot-msg-user .copilot-msg-meta {
-  color: rgba(255, 255, 255, 0.7);
+  color: #64748B;
   text-align: right;
+}
+:root[data-theme="dark"] .copilot-msg-user .copilot-msg-meta {
+  color: #64748B;
 }
 .copilot-msg-action {
   margin-top: 10px;
@@ -5571,8 +5656,11 @@ i[data-lucide], svg.lucide {
   padding: 5px 5px 5px 14px;
   border: 1px solid var(--line);
   border-radius: 9999px;
-  background: var(--bg-subtle);
+  background: var(--bg-card, #FFFFFF);
   transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+:root[data-theme="dark"] .copilot-composer-form {
+  background: rgba(255, 255, 255, 0.05);
 }
 .copilot-composer-form:focus-within {
   background: var(--bg-card);
@@ -6614,13 +6702,13 @@ i[data-lucide], svg.lucide {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .workspace-card:hover {
-  border-color: var(--line-strong);
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
-  transform: none;
+  border-color: var(--line-active);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
 }
 .workspace-card-top {
   display: flex;
@@ -7728,17 +7816,18 @@ i[data-lucide], svg.lucide {
   background: var(--bg-card);
   border: 1px solid var(--line);
   border-radius: 12px;
-  padding: 16px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   gap: 8px;
   min-height: 168px;
-  box-shadow: none;
-  transition: border-color 0.15s ease;
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .eco-card:hover {
-  border-color: var(--line-strong);
-  box-shadow: none;
+  border-color: var(--line-active);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
 }
 .eco-card-stage {
   font-size: 12px;
@@ -9877,15 +9966,35 @@ class YorkConsoleApp {
       this.initCopilotGreeting();
     }
     renderGlobalWidgets();
+    if (this.copilotOpen) {
+      requestAnimationFrame(() => {
+        const input = document.getElementById('copilot-input');
+        if (input) input.focus();
+        const msgBox = document.getElementById('copilot-msg-container');
+        if (msgBox) msgBox.scrollTop = msgBox.scrollHeight;
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+          window.lucide.createIcons();
+        }
+      });
+    }
   }
 
   initCopilotGreeting() {
     const client = this.getCurrentClient() || this.clients[0];
+    const clientName = client ? client.name : 'CloudScale AI';
+    let userName = 'Marcus';
+    if (this.currentUser?.name) {
+      if (this.currentUser.name.includes('(')) {
+        userName = client?.primaryContact?.name?.split(' ')[0] || 'Marcus';
+      } else {
+        userName = this.currentUser.name.split(' ')[0];
+      }
+    }
     let greeting = "";
     if (this.currentUser?.role === 'admin') {
-      greeting = `<strong>Hello ${this.currentUser.name}!</strong> I am your <strong>York Operating AI Co-Pilot</strong>. I have live visibility across <strong>${this.clients.length} portfolio accounts</strong>, milestone sign-off queues, credit burn telemetry, and HubSpot Closed-Won contracts.<br><br>What would you like to review or analyze?`;
+      greeting = `<strong>Hello ${userName}!</strong> I am your <strong>York Operating AI Co-Pilot</strong>. I have live visibility across <strong>${this.clients.length} portfolio accounts</strong>, milestone sign-off queues, credit burn telemetry, and HubSpot Closed-Won contracts.<br><br>What would you like to review or analyze?`;
     } else {
-      greeting = `<strong>Hello ${this.currentUser?.name || 'there'}!</strong> I am your <strong>York IE Contextual Co-Pilot</strong>. I am actively synced with <strong>${client.name}</strong>'s <strong>${client.retainerTier || 'Tier 2: Scale Acceleration'}</strong> pod, your verified SOW milestones, <strong>$420,000 GTM pipeline</strong>, and credit runway telemetry.<br><br>How can I assist you with your operations today?`;
+      greeting = `<strong>Hello ${userName}!</strong> I am your <strong>York IE Contextual Co-Pilot</strong>. I am actively synced with <strong>${clientName}</strong>'s <strong>${client?.retainerTier || 'Tier 2: Scale Acceleration'}</strong> pod, your verified SOW milestones, <strong>$420,000 GTM pipeline</strong>, and credit runway telemetry.<br><br>How can I assist you with your operations today?`;
     }
     this.copilotMessages = [
       { sender: 'ai', text: greeting, timestamp: 'Just now' }
@@ -9898,14 +10007,18 @@ class YorkConsoleApp {
     if (!this.copilotMessages) this.copilotMessages = [];
     this.copilotMessages.push({ sender: 'user', text, timestamp: 'Just now' });
     renderGlobalWidgets();
+    const input = document.getElementById('copilot-input');
+    if (input) input.value = '';
+    const msgBox = document.getElementById('copilot-msg-container');
+    if (msgBox) msgBox.scrollTop = msgBox.scrollHeight;
 
     setTimeout(() => {
       const reply = this.generateCopilotReply(text);
       this.copilotMessages.push({ sender: 'ai', text: reply.text, actionBtn: reply.actionBtn, timestamp: 'Just now' });
       this.saveState();
       renderGlobalWidgets();
-      const msgBox = document.getElementById('copilot-msg-container');
-      if (msgBox) msgBox.scrollTop = msgBox.scrollHeight;
+      const mb = document.getElementById('copilot-msg-container');
+      if (mb) mb.scrollTop = mb.scrollHeight;
     }, 200);
   }
 
@@ -10046,6 +10159,10 @@ class YorkConsoleApp {
     this.currentUser = { ...preset };
     if (this.currentUser.role === 'admin') {
       this.copilotOpen = false;
+    } else {
+      if (!this.copilotMessages || this.copilotMessages.length === 0) {
+        this.initCopilotGreeting();
+      }
     }
     this.saveState();
     render();
@@ -10680,13 +10797,8 @@ const YorkTour = {
   },
 
   maybeAutoStart() {
-    if (this.active || !app.currentUser) return;
-    const role = this.currentRole();
-    if (!role) return;
-    try {
-      if (localStorage.getItem(this.storageKey(role)) === '1') return;
-    } catch (e) {}
-    setTimeout(() => this.start(false), 450);
+    // Keep tour strictly on-demand via header "? Tour" button to maintain pristine executive canvas
+    return;
   },
 
   start(manual = true) {
@@ -10939,6 +11051,10 @@ function renderGlobalWidgets() {
   if (copilotRoot) {
     copilotRoot.innerHTML = (app.currentUser && app.currentUser.role !== 'admin') ? renderCopilotWidget() : '';
   }
+
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
 }
 
 function renderCopilotWidget() {
@@ -11009,7 +11125,10 @@ function renderCopilotWidget() {
               return `
                 <div class="copilot-msg-row is-user">
                   <div class="copilot-msg-face" aria-hidden="true">${getIconSvg('User', 14)}</div>
-                  <div class="copilot-msg-user">${m.text}</div>
+                  <div class="copilot-msg-user">
+                    <div>${m.text}</div>
+                    <div class="copilot-msg-meta">${m.timestamp || ''}</div>
+                  </div>
                 </div>
               `;
             }
@@ -11937,94 +12056,245 @@ function renderAdminCompaniesTab() {
   const invitedCount = app.clients.filter(c => c.status === "invited").length;
   const pendingCount = app.clients.filter(c => c.status === "pending_invite").length;
   let openIncidents = 0;
-  let totalTokens = 0;
-  let healthSum = 0;
-  let healthN = 0;
   app.clients.forEach(c => {
     openIncidents += (c.supportTickets || []).filter(t => t.status !== "resolved").length;
-    totalTokens += (c.tokensUsed || 0);
-    if (c.healthTelemetry?.score) {
-      healthSum += c.healthTelemetry.score;
-      healthN += 1;
-    }
   });
-  const avgHealth = healthN ? Math.round(healthSum / healthN) : 94;
-  const operatorName = getBentoFirstName("Kyle");
 
   return `
-    <div class="bento-page">
-      ${renderBentoGreeting({
-        title: `Hey ${operatorName}, need a portfolio pulse?`,
-        subtitle: "Onboard companies, assign software, and monitor operating velocity.",
-        primaryCta: `<button type="button" class="bento-cta" onclick="openAddCompanyModal()"><i data-lucide="plus" style="width:14px;height:14px"></i><span>Add Company</span></button>`
-      })}
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      
+      <!-- Section Title & Controls Row -->
+      <section class="title-controls-row">
+        <div class="page-headline-wrap">
+          <h1 class="page-headline-lead">Portfolio Directory</h1>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+            Onboard companies, assign software service bundles, and monitor operating velocity across the York IE ecosystem.
+          </p>
+        </div>
 
-      ${renderBentoMetrics([
-        { value: totalCount, label: 'Portfolio companies', hint: `${activeCount} live · ${pendingCount} ready` },
-        { value: activeCount, label: 'Active SOW', hint: 'Accepted & operating', tone: 'ok' },
-        { value: pendingCount + invitedCount, label: 'Onboarding queue', hint: `${pendingCount} ready · ${invitedCount} invited` },
-        { value: openIncidents, label: 'Open incidents', hint: openIncidents ? 'Needs operator attention' : 'Queue clear', tone: openIncidents ? 'warn' : 'ok' }
-      ])}
+        <div class="controls-pill-row">
+          <!-- Search Input Pill -->
+          <div style="position: relative; width: 230px;">
+            <i data-lucide="search" style="position: absolute; left: 11px; top: 11px; width: 14px; height: 14px; color: var(--text-muted); pointer-events: none;"></i>
+            <input 
+              id="admin-search-input"
+              type="text" 
+              value="${app.adminSearchQuery || ""}" 
+              oninput="app.setAdminSearchQuery(this.value)" 
+              placeholder="Search companies..." 
+              style="width: 100%; height: 36px; padding-left: 32px; padding-right: 28px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; font-size: 13px; color: var(--text-main); outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease;"
+              onfocus="this.style.borderColor='var(--emerald-accent)'; this.style.boxShadow='0 0 0 3px color-mix(in srgb, var(--emerald) 16%, transparent)'"
+              onblur="this.style.borderColor='var(--line)'; this.style.boxShadow='none'"
+            />
+            ${app.adminSearchQuery ? `
+              <button onclick="app.setAdminSearchQuery('');" style="position: absolute; right: 8px; top: 9px; color: var(--text-muted); background: none; border: none; cursor: pointer; font-size: 12px; width: 18px; height: 18px; display: grid; place-items: center;">✕</button>
+            ` : ""}
+          </div>
 
-      <div class="bento-surface">
-        <div class="bento-panel-head">
-          <h2 class="bento-panel-title">Portfolio</h2>
-          <div class="bento-search" style="max-width:260px">
-            <i data-lucide="search" class="bento-search-icon"></i>
-            <input id="admin-search-input" type="text" value="${app.adminSearchQuery || ""}" oninput="app.setAdminSearchQuery(this.value)" placeholder="Search companies..." aria-label="Search companies" />
+          <!-- Filter Segment Control -->
+          <div class="filter-segmented-control">
+            <button onclick="app.setAdminFilterStatus('all')" class="filter-tab-btn ${filter === 'all' ? 'active' : ''}">
+              <span>All</span>
+              <span class="filter-tab-count">${totalCount}</span>
+            </button>
+            <button onclick="app.setAdminFilterStatus('active')" class="filter-tab-btn ${filter === 'active' ? 'active' : ''}">
+              <span>Active</span>
+              <span class="filter-tab-count">${activeCount}</span>
+            </button>
+            <button onclick="app.setAdminFilterStatus('invited')" class="filter-tab-btn ${filter === 'invited' ? 'active' : ''}">
+              <span>Invited</span>
+              <span class="filter-tab-count">${invitedCount}</span>
+            </button>
+            <button onclick="app.setAdminFilterStatus('pending')" class="filter-tab-btn ${filter === 'pending' ? 'active' : ''}">
+              <span>Ready</span>
+              <span class="filter-tab-count">${pendingCount}</span>
+            </button>
+          </div>
+
+          <!-- + Add Company Button -->
+          <button 
+            onclick="openAddCompanyModal()"
+            class="btn-saas-primary"
+            style="height: 36px; padding: 0 14px; font-size: 13px; font-weight: 600;"
+            title="Onboard a new portfolio company"
+          >
+            <i data-lucide="plus" style="width: 14px; height: 14px;"></i>
+            <span>+ Add Company</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Contextual 4-Card Metric Deck (Executive Cards with Website Theme) -->
+      <section class="metrics-card-deck">
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Total Portfolio</span>
+            <div class="deck-card-icon"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value">${totalCount}</div>
+            <div class="deck-card-caption">
+              <span>+2 HubSpot closed-won deals</span>
+            </div>
           </div>
         </div>
 
-        <div class="bento-chip-row" role="tablist" aria-label="Company status filter">
-          <button type="button" class="bento-chip ${filter === 'all' ? 'active' : ''}" onclick="app.setAdminFilterStatus('all')"><span>All</span><span class="bento-chip-count">${totalCount}</span></button>
-          <button type="button" class="bento-chip ${filter === 'active' ? 'active' : ''}" onclick="app.setAdminFilterStatus('active')"><span>Active</span><span class="bento-chip-count">${activeCount}</span></button>
-          <button type="button" class="bento-chip ${filter === 'invited' ? 'active' : ''}" onclick="app.setAdminFilterStatus('invited')"><span>Invited</span><span class="bento-chip-count">${invitedCount}</span></button>
-          <button type="button" class="bento-chip ${filter === 'pending' ? 'active' : ''}" onclick="app.setAdminFilterStatus('pending')"><span>Ready</span><span class="bento-chip-count">${pendingCount}</span></button>
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Active SOW Accounts</span>
+            <div class="deck-card-icon" style="color: var(--emerald-dark);"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value">${activeCount}</div>
+            <div class="deck-card-caption">
+              <span style="color: var(--emerald-dark); font-weight: 600;">100%</span>
+              <span>Accepted onboarding</span>
+            </div>
+          </div>
         </div>
 
-        <div class="bento-list">
-          ${companies.length === 0 ? `
-            <div class="bento-empty">
-              <div class="bento-empty-title">No companies found</div>
-              <div class="bento-empty-copy">Try adjusting your search or filter.</div>
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Ready to Onboard</span>
+            <div class="deck-card-icon"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value">${pendingCount}</div>
+            <div class="deck-card-caption">
+              <span>Send invite to provision tools</span>
             </div>
-          ` : companies.map(client => {
-            const granted = client.grantedProducts || [];
-            const stage = client.stage || 'Scale';
-            const statusLabel = client.status === 'active' ? 'Active' : client.status === 'invited' ? 'Invited' : 'Ready';
-            const statusClass = client.status === 'active' ? 'status-active' : client.status === 'invited' ? 'status-invited' : 'status-pending';
-            const dotClass = client.status === 'active' ? 'status-dot-active' : client.status === 'invited' ? 'status-dot-invited' : 'status-dot-pending';
-            return `
-              <div class="bento-row">
-                <div class="bento-row-main">
-                  <div class="company-monogram">${client.name.substring(0, 2).toUpperCase()}</div>
-                  <div style="min-width:0">
-                    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-                      <span class="bento-row-title">${client.name}</span>
-                      <span class="stage-tag">${stage}</span>
-                      <span class="status-pill ${statusClass}"><span class="status-dot ${dotClass}"></span>${statusLabel}</span>
-                    </div>
-                    <div class="bento-row-meta">
-                      ${client.domain} · ${client.ownerName || 'Contact'} · ${granted.length} services
-                    </div>
-                  </div>
-                </div>
-                <div class="bento-row-actions">
-                  ${client.status === 'pending_invite' ? `
-                    <button onclick="openSendInviteModal('${client.id}')" class="btn-saas-primary" title="Send onboarding invite"><i data-lucide="send"></i><span>Send Invite</span></button>
-                  ` : client.status === 'invited' ? `
-                    <button onclick="openSendInviteModal('${client.id}')" class="btn-saas-secondary" title="Adjust services"><i data-lucide="sliders-horizontal"></i><span>Services</span></button>
-                    <button onclick="showToast('Invitation resent to ${client.ownerEmail}', 'info')" class="btn-saas-secondary" title="Resend invite"><i data-lucide="refresh-cw"></i><span>Resend</span></button>
-                  ` : `
-                    <button onclick="openSendInviteModal('${client.id}')" class="btn-saas-secondary" title="Manage services"><i data-lucide="sliders-horizontal"></i><span>Manage</span></button>
-                    <button onclick="openCompanyDashboardPopup('${client.id}')" class="btn-saas-secondary" title="View dashboard"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></button>
-                  `}
-                </div>
-              </div>
-            `;
-          }).join('')}
+          </div>
+        </div>
+
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Support Queue</span>
+            <div class="deck-card-icon"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value">${openIncidents}</div>
+            <div class="deck-card-caption">
+              <span>${openIncidents ? `${openIncidents} open technical incident` : 'All incidents clear'}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Portfolio Directory Table (Institutional Enterprise Grade) -->
+      <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow-card); overflow: hidden;">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead style="background: var(--bg-subtle); border-bottom: 1px solid var(--line); color: var(--text-muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
+              <tr>
+                <th style="padding: 14px 20px; width: 40%;">Company</th>
+                <th style="padding: 14px 20px; width: 28%;">Assigned Services</th>
+                <th style="padding: 14px 20px; text-align: right; width: 32%;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${companies.length === 0 ? `
+                <tr>
+                  <td colspan="3" style="padding: 48px; text-align: center; color: var(--text-muted);">
+                    <div style="font-weight: 600; font-size: 14px; color: var(--text-main);">No companies found</div>
+                    <div style="font-size: 12px; margin-top: 4px;">Try adjusting your search query or filter segment.</div>
+                  </td>
+                </tr>
+              ` : companies.map(client => {
+                const granted = client.grantedProducts || [];
+                const stage = client.stage || 'Scale';
+
+                return `
+                  <tr style="border-bottom: 1px solid var(--line); transition: background 0.15s ease;" onmouseover="this.style.background='var(--bg-subtle)'" onmouseout="this.style.background='transparent'">
+                    <!-- 1. Company Column -->
+                    <td style="padding: 14px 20px;">
+                      <div style="display: flex; align-items: center; gap: 12px;">
+                        <div class="company-monogram">
+                          ${client.name.substring(0, 2).toUpperCase()}
+                        </div>
+                        <div>
+                          <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-weight: 600; font-size: 14px; color: var(--text-main);">${client.name}</span>
+                            <span class="stage-tag">${stage}</span>
+                          </div>
+                          <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
+                            <span>${client.domain}</span>
+                            <span style="margin: 0 4px;">·</span>
+                            <span>Contact: ${client.ownerName || 'Contact'} (${client.ownerEmail || 'contact@' + client.domain})</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+
+                    <!-- 2. Assigned Services Column -->
+                    <td style="padding: 14px 20px; white-space: nowrap;">
+                      <div style="display: flex; align-items: baseline; gap: 5px;">
+                        <span style="font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--text-main);">
+                          ${granted.length}
+                        </span>
+                        <span style="font-size: 12px; color: var(--text-muted);">
+                          services provisioned
+                        </span>
+                      </div>
+                    </td>
+
+                    <!-- 3. Actions Column -->
+                    <td style="padding: 14px 20px; text-align: right; white-space: nowrap;">
+                      <div style="display: inline-flex; align-items: center; justify-content: flex-end; gap: 8px;">
+                        ${client.status === 'pending_invite' ? `
+                          <button 
+                            onclick="openSendInviteModal('${client.id}')"
+                            class="btn-saas-primary"
+                            title="Configure service bundle and send onboarding invite"
+                          >
+                            <i data-lucide="send"></i>
+                            <span>Send Invite</span>
+                          </button>
+                        ` : client.status === 'invited' ? `
+                          <button 
+                            onclick="openSendInviteModal('${client.id}')"
+                            class="btn-saas-secondary"
+                            title="Adjust service bundle"
+                          >
+                            <i data-lucide="sliders-horizontal"></i>
+                            <span>Manage Services</span>
+                          </button>
+                          <button 
+                            onclick="showToast('Invitation resent to ${client.ownerEmail}', 'info')"
+                            class="btn-saas-amber"
+                            title="Resend onboarding invite"
+                          >
+                            <i data-lucide="refresh-cw"></i>
+                            <span>Resend Invite</span>
+                          </button>
+                        ` : `
+                          <button 
+                            onclick="openSendInviteModal('${client.id}')"
+                            class="btn-saas-secondary"
+                            title="Manage assigned services"
+                          >
+                            <i data-lucide="sliders-horizontal"></i>
+                            <span>Manage Services</span>
+                          </button>
+
+                          <button 
+                            onclick="openCompanyDashboardPopup('${client.id}')"
+                            class="btn-saas-primary"
+                            title="Inspect client operations dashboard"
+                          >
+                            <i data-lucide="layout-dashboard"></i>
+                            <span>View Dashboard</span>
+                          </button>
+                        `}
+                      </div>
+                    </td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
         </div>
       </div>
+
     </div>
   `;
 }
@@ -12066,60 +12336,216 @@ function renderAdminActiveAccountsTab() {
   const operatorName = getBentoFirstName("Kyle");
 
   return `
-    <div class="bento-page">
-      ${renderBentoGreeting({
-        title: `Hey ${operatorName}, review active operations`,
-        subtitle: "Track SOW accounts, token burn, blockers, and service usage."
-      })}
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      
+      <!-- Section Title & Controls Row -->
+      <section class="title-controls-row">
+        <div class="page-headline-wrap">
+          <h1 class="page-headline-lead">Active Accounts</h1>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+            Track active client operations, token burn velocity, blockers, and service usage.
+          </p>
+        </div>
 
-      ${renderBentoMetrics([
-        { value: activeCount, label: 'Active accounts', hint: 'Invite accepted', tone: 'ok' },
-        { value: blockerCount, label: 'Accounts with blockers', hint: blockerCount ? 'Open operational risk' : 'No open blockers', tone: blockerCount ? 'warn' : 'ok' },
-        { value: totalAssignedServicesCount, label: 'Services live', hint: 'Across active accounts' },
-        { value: totalActiveTokensUsed.toLocaleString(), label: 'Tokens consumed', hint: 'Portfolio burn' }
-      ])}
+        <div class="controls-pill-row">
+          <!-- Search Input Pill -->
+          <div style="position: relative; width: 240px;">
+            <i data-lucide="search" style="position: absolute; left: 11px; top: 11px; width: 14px; height: 14px; color: var(--text-muted); pointer-events: none;"></i>
+            <input 
+              type="text" 
+              value="${app.adminSearchQuery || ""}" 
+              oninput="app.setAdminSearchQuery(this.value)" 
+              placeholder="Search active accounts..." 
+              style="width: 100%; height: 36px; padding-left: 32px; padding-right: 28px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; font-size: 13px; color: var(--text-main); outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease;"
+              onfocus="this.style.borderColor='var(--emerald-accent)'; this.style.boxShadow='0 0 0 3px color-mix(in srgb, var(--emerald) 16%, transparent)'"
+              onblur="this.style.borderColor='var(--line)'; this.style.boxShadow='none'"
+            />
+            ${app.adminSearchQuery ? `
+              <button onclick="app.setAdminSearchQuery('');" style="position: absolute; right: 8px; top: 9px; color: var(--text-muted); background: none; border: none; cursor: pointer; font-size: 12px; width: 18px; height: 18px; display: grid; place-items: center;">✕</button>
+            ` : ""}
+          </div>
 
-      <div class="bento-surface">
-        <div class="bento-panel-head">
-          <h2 class="bento-panel-title">Active accounts</h2>
-          <div class="bento-search" style="max-width:240px">
-            <i data-lucide="search" class="bento-search-icon"></i>
-            <input type="text" value="${app.adminSearchQuery || ""}" oninput="app.setAdminSearchQuery(this.value)" placeholder="Search accounts..." />
+          <!-- Filter Segment Control -->
+          <div class="filter-segmented-control">
+            <button onclick="app.setAdminFilterStatus('all')" class="filter-tab-btn ${filter === 'all' ? 'active' : ''}">
+              <span>All Active</span>
+              <span class="filter-tab-count">${activeCount}</span>
+            </button>
+            <button onclick="app.setAdminFilterStatus('blockers')" class="filter-tab-btn ${filter === 'blockers' ? 'active' : ''}">
+              <span>With Blockers</span>
+              <span class="filter-tab-count">${blockerCount}</span>
+            </button>
           </div>
         </div>
-        <div class="bento-chip-row">
-          <button type="button" class="bento-chip ${filter === 'all' ? 'active' : ''}" onclick="app.setAdminFilterStatus('all')"><span>All</span><span class="bento-chip-count">${activeCount}</span></button>
-          <button type="button" class="bento-chip ${filter === 'blockers' ? 'active' : ''}" onclick="app.setAdminFilterStatus('blockers')"><span>Blockers</span><span class="bento-chip-count">${blockerCount}</span></button>
+      </section>
+
+      <!-- Contextual 4-Card Metric Deck -->
+      <section class="metrics-card-deck">
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Active Clients</span>
+            <div class="deck-card-icon"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value">${activeCount}</div>
+            <div class="deck-card-caption">
+              <span style="color: var(--emerald-dark); font-weight: 600;">100%</span>
+              <span>SOW Health Rate</span>
+            </div>
+          </div>
         </div>
-        <div class="bento-list">
-          ${filteredClients.length === 0 ? `
-            <div class="bento-empty"><div class="bento-empty-title">No active accounts found</div></div>
-          ` : filteredClients.map(client => {
-            const granted = client.grantedProducts || [];
-            const openBlockers = (client.blockers || []).filter(b => b.status === "open");
-            const tokens = getCompanyTokens(client);
-            return `
-              <div class="bento-row">
-                <div class="bento-row-main">
-                  <div class="company-monogram">${client.name.substring(0, 2).toUpperCase()}</div>
-                  <div style="min-width:0">
-                    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-                      <span class="bento-row-title">${client.name}</span>
-                      <span class="status-pill status-active"><span class="status-dot status-dot-active"></span>Active</span>
-                      ${openBlockers.length ? `<span style="font-size:12px;font-weight:650;color:var(--warn-text)">${openBlockers.length} blocker${openBlockers.length>1?'s':''}</span>` : `<span style="font-size:12px;font-weight:500;color:var(--ok-text)">Clear</span>`}
-                    </div>
-                    <div class="bento-row-meta">${client.domain} · ${granted.length} services · ${(tokens.used||0).toLocaleString()} tokens</div>
-                  </div>
-                </div>
-                <div class="bento-row-actions">
-                  <button onclick="openSendInviteModal('${client.id}')" class="btn-saas-secondary"><i data-lucide="sliders-horizontal"></i><span>Manage</span></button>
-                  <button onclick="openCompanyDashboardPopup('${client.id}')" class="btn-saas-secondary"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></button>
-                </div>
-              </div>
-            `;
-          }).join('')}
+
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Portfolio Health</span>
+            <div class="deck-card-icon"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value">94</div>
+            <div class="deck-card-caption">
+              <span style="color: var(--emerald-dark); font-weight: 600;">High Velocity</span>
+              <span>· 0 critical alerts</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Tokens Used</span>
+            <div class="deck-card-icon"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <!-- Numbers only as per PRD -->
+            <div class="deck-card-value">${totalActiveTokensUsed.toLocaleString()}</div>
+            <div class="deck-card-caption">
+              <span>Across active clients</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="deck-card">
+          <div class="deck-card-top">
+            <span class="deck-card-label">Services Deployed</span>
+            <div class="deck-card-icon"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div>
+            <div class="deck-card-value">${totalAssignedServicesCount}</div>
+            <div class="deck-card-caption">
+              <span>Assigned across ${activeCount} accounts</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6-Column Active Accounts Table (Strict PRD Compliance) -->
+      <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow-card); overflow: hidden;">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead style="background: var(--bg-subtle); border-bottom: 1px solid var(--line); color: var(--text-muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
+              <tr>
+                <th style="padding: 14px 20px; width: 28%;">Company</th>
+                <th style="padding: 14px 16px; width: 14%;">Status</th>
+                <th style="padding: 14px 16px; width: 14%;">Assigned Services</th>
+                <th style="padding: 14px 16px; width: 14%;">Tokens Used</th>
+                <th style="padding: 14px 16px; width: 12%;">Blockers</th>
+                <th style="padding: 14px 20px; text-align: right; width: 18%;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${filteredClients.length === 0 ? `
+                <tr>
+                  <td colspan="6" style="padding: 48px; text-align: center; color: var(--text-muted);">
+                    <div style="font-weight: 600; font-size: 14px; color: var(--text-main);">No active accounts found</div>
+                    <div style="font-size: 12px; margin-top: 4px;">Adjust your search or filter segment.</div>
+                  </td>
+                </tr>
+              ` : filteredClients.map(client => {
+                const granted = client.grantedProducts || [];
+                const blockers = client.blockers || [];
+                const openBlockers = blockers.filter(b => b.status === "open");
+                const tokens = getCompanyTokens(client);
+
+                return `
+                  <tr style="border-bottom: 1px solid var(--line); transition: background 0.15s ease;" onmouseover="this.style.background='var(--bg-subtle)'" onmouseout="this.style.background='transparent'">
+                    <!-- 1. Company -->
+                    <td style="padding: 14px 20px;">
+                      <div style="display: flex; align-items: center; gap: 12px;">
+                        <div class="company-monogram">
+                          ${client.name.substring(0, 2).toUpperCase()}
+                        </div>
+                        <div>
+                          <div style="font-weight: 600; font-size: 14px; color: var(--text-main);">${client.name}</div>
+                          <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">${client.domain}</div>
+                        </div>
+                      </div>
+                    </td>
+
+                    <!-- 2. Status -->
+                    <td style="padding: 14px 16px; white-space: nowrap;">
+                      <span class="status-pill status-active">
+                        <span class="status-dot status-dot-active"></span>
+                        <span>Active Client</span>
+                      </span>
+                    </td>
+
+                    <!-- 3. Assigned Services (Plain number per PRD) -->
+                    <td style="padding: 14px 16px; white-space: nowrap;">
+                      <span style="font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--text-main);">
+                        ${granted.length}
+                      </span>
+                    </td>
+
+                    <!-- 4. Tokens Used (Plain number per PRD) -->
+                    <td style="padding: 14px 16px; white-space: nowrap;">
+                      <span style="font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--text-main);">
+                        ${(tokens.used).toLocaleString()}
+                      </span>
+                    </td>
+
+                    <!-- 5. Blockers Count -->
+                    <td style="padding: 14px 16px; white-space: nowrap;">
+                      ${openBlockers.length > 0 ? `
+                        <span style="display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 9999px; font-size: 11px; font-weight: 600; background: rgba(239, 68, 68, 0.12); color: #DC2626; border: 1px solid rgba(239, 68, 68, 0.25);">
+                          <i data-lucide="shield-alert" style="width: 12px; height: 12px;"></i>
+                          <span>${openBlockers.length} Blocker${openBlockers.length > 1 ? 's' : ''}</span>
+                        </span>
+                      ` : `
+                        <span style="display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--ok-text);">
+                          <span>✓ None</span>
+                        </span>
+                      `}
+                    </td>
+
+                    <!-- 6. Actions -->
+                    <td style="padding: 14px 20px; text-align: right; white-space: nowrap;">
+                      <div style="display: inline-flex; align-items: center; justify-content: flex-end; gap: 8px;">
+                        <button 
+                          onclick="openSendInviteModal('${client.id}')"
+                          class="btn-saas-secondary"
+                          title="Manage assigned services"
+                        >
+                          <i data-lucide="sliders-horizontal"></i>
+                          <span>Manage Services</span>
+                        </button>
+
+                        <button 
+                          onclick="openCompanyDashboardPopup('${client.id}')"
+                          class="btn-saas-primary"
+                          title="Inspect client operations dashboard"
+                        >
+                          <i data-lucide="layout-dashboard"></i>
+                          <span>View Dashboard</span>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
         </div>
       </div>
+
     </div>
   `;
 }
