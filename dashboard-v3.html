@@ -10,6 +10,13 @@
   <script src="https://unpkg.com/lucide@0.468.0"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    if (window.tailwind) {
+      tailwind.config = {
+        darkMode: 'class'
+      };
+    }
+  </script>
   
   <script>
     (function(){
@@ -146,9 +153,9 @@
 }
 
 html, body {
-  height: 100%;
-  background-color: var(--bg-app);
-  color: var(--text-main);
+  min-height: 100%;
+  background-color: var(--bg-app) !important;
+  color: var(--text-main) !important;
   font-size: 13.5px;
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
@@ -200,6 +207,7 @@ i[data-lucide], svg.lucide {
   position: relative;
   width: 100%;
   box-sizing: border-box;
+  background-color: var(--bg-app);
 }
 
 /* ═════════════════════════════════════════════════════════════════
@@ -651,34 +659,136 @@ i[data-lucide], svg.lucide {
   flex-shrink: 0;
 }
 
-/* Version Switcher embedded seamlessly */
+/* Perspective Switcher (Realistic Institutional Segmented Control) */
+.perspective-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-subtle);
+  padding: 3px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  gap: 2px;
+}
+.perspective-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  height: 28px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.perspective-btn:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.6);
+}
+.perspective-btn.active {
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-weight: 600;
+  border-color: var(--line);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.perspective-btn i, .perspective-btn svg {
+  width: 13px;
+  height: 13px;
+  color: var(--text-muted);
+}
+.perspective-btn.active i, .perspective-btn.active svg {
+  color: var(--emerald-dark);
+}
+:root[data-theme="dark"] .perspective-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+:root[data-theme="dark"] .perspective-btn.active {
+  background: #172033;
+  color: #F8FAFC;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+:root[data-theme="dark"] .perspective-btn.active i, :root[data-theme="dark"] .perspective-btn.active svg {
+  color: #00D6A4;
+}
+
+/* Filter Segmented Control */
+.filter-segmented-control {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-subtle);
+  padding: 3px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  height: 36px;
+  box-sizing: border-box;
+  gap: 2px;
+}
+.filter-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  height: 28px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.filter-tab-btn:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.6);
+}
+.filter-tab-btn.active {
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-weight: 600;
+  border-color: var(--line);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.filter-tab-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.filter-tab-btn.active .filter-tab-count {
+  color: var(--emerald-dark);
+}
+:root[data-theme="dark"] .filter-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+:root[data-theme="dark"] .filter-tab-btn.active {
+  background: #172033;
+  color: #F8FAFC;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+:root[data-theme="dark"] .filter-tab-btn.active .filter-tab-count {
+  color: #00D6A4;
+}
+
+/* Backward compatibility for version pills */
 .version-switch-pill {
   display: inline-flex;
   align-items: center;
   gap: 3px;
   background: var(--bg-subtle);
   padding: 3px;
-  border-radius: var(--radius-pill);
+  border-radius: 6px;
   border: 1px solid var(--line);
 }
-
-:root[data-theme="dark"] .version-switch-pill {
-  background: #080C14;
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-.version-switch-lbl {
-  font-size: 10.5px;
-  font-weight: 700;
-  color: var(--text-muted);
-  padding: 0 6px 0 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
 .v-tab-btn {
-  padding: 4px 11px;
-  border-radius: var(--radius-pill);
+  padding: 4px 10px;
+  border-radius: 4px;
   font-size: 11.5px;
   font-weight: 500;
   color: var(--text-secondary);
@@ -686,23 +796,15 @@ i[data-lucide], svg.lucide {
   white-space: nowrap;
   display: inline-block;
 }
-
 .v-tab-btn:hover {
   color: var(--text-main);
-  background: var(--bg-pill-hover);
+  background: var(--bg-card);
 }
-
 .v-tab-btn.active {
-  font-weight: 700;
-  background: var(--emerald-subtle);
-  color: var(--emerald-dark);
-  border: 1px solid rgba(0, 179, 137, 0.35);
-}
-
-:root[data-theme="dark"] .v-tab-btn.active {
-  background: rgba(0, 180, 138, 0.18);
-  color: #00D6A4;
-  border-color: rgba(0, 180, 138, 0.35);
+  font-weight: 600;
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--line);
 }
 
 /* WIDE SEARCH BAR (Generous width, single line, no overlap) */
@@ -710,15 +812,15 @@ i[data-lucide], svg.lucide {
   flex: 1;
   min-width: 240px;
   max-width: 440px;
-  height: 36px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 0 14px 0 16px;
+  padding: 0 12px;
   background: var(--bg-subtle);
   border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
+  border-radius: 6px;
   color: var(--text-muted);
   cursor: pointer;
   transition: all 0.15s ease;
@@ -930,60 +1032,274 @@ i[data-lucide], svg.lucide {
   color: var(--text-main);
 }
 
-/* Export / Action CTA Button - Standardized 38px Height matching Website CTA System */
+/* ─── REALISTIC SAAS BUTTON SYSTEM (LINEAR / STRIPE SPEC) ─── */
+.btn-saas-secondary {
+  height: 32px;
+  padding: 0 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+.btn-saas-secondary:hover {
+  background: var(--bg-subtle);
+  border-color: var(--line-strong);
+  color: var(--text-main);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.btn-saas-secondary:active {
+  background: var(--bg-subtle-2);
+  transform: translateY(1px);
+}
+.btn-saas-secondary i, .btn-saas-secondary svg {
+  width: 13px;
+  height: 13px;
+  color: var(--text-muted);
+  stroke-width: 1.8;
+  transition: color 0.15s ease;
+}
+.btn-saas-secondary:hover i, .btn-saas-secondary:hover svg {
+  color: var(--text-main);
+}
+
+.btn-saas-primary {
+  height: 32px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #084C36; /* York signature dark green */
+  border: 1px solid #063828;
+  border-radius: 6px;
+  color: #FFFFFF !important;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(8, 76, 54, 0.2);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+.btn-saas-primary:hover {
+  background: #063828;
+  border-color: #04261B;
+  box-shadow: 0 2px 4px rgba(8, 76, 54, 0.25);
+  transform: translateY(-0.5px);
+}
+.btn-saas-primary:active {
+  background: #04261B;
+  transform: translateY(1px);
+}
+.btn-saas-primary i, .btn-saas-primary svg {
+  width: 13px;
+  height: 13px;
+  color: #FFFFFF !important;
+  stroke-width: 2;
+}
+
+.btn-saas-amber {
+  height: 32px;
+  padding: 0 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FEF3C7;
+  border: 1px solid rgba(217, 119, 6, 0.35);
+  border-radius: 6px;
+  color: #92400E;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(217, 119, 6, 0.08);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+.btn-saas-amber:hover {
+  background: #FDE68A;
+  border-color: rgba(217, 119, 6, 0.5);
+  color: #78350F;
+}
+.btn-saas-amber i, .btn-saas-amber svg {
+  width: 13px;
+  height: 13px;
+  color: #92400E;
+  stroke-width: 2;
+}
+
+:root[data-theme="dark"] .btn-saas-secondary {
+  background: #0F172A;
+  border-color: #334155;
+  color: #E2E8F0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+:root[data-theme="dark"] .btn-saas-secondary:hover {
+  background: #1E293B;
+  border-color: #475569;
+  color: #FFFFFF;
+}
+:root[data-theme="dark"] .btn-saas-primary {
+  background: #00B48A;
+  border-color: #009673;
+  color: #04261B !important;
+  box-shadow: 0 1px 4px rgba(0, 180, 138, 0.3);
+}
+:root[data-theme="dark"] .btn-saas-primary:hover {
+  background: #00D6A4;
+  border-color: #00B48A;
+}
+:root[data-theme="dark"] .btn-saas-primary i, :root[data-theme="dark"] .btn-saas-primary svg {
+  color: #04261B !important;
+}
+:root[data-theme="dark"] .btn-saas-amber {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.35);
+  color: #FBBF24;
+}
+:root[data-theme="dark"] .btn-saas-amber:hover {
+  background: rgba(245, 158, 11, 0.25);
+}
+:root[data-theme="dark"] .btn-saas-amber i, :root[data-theme="dark"] .btn-saas-amber svg {
+  color: #FBBF24;
+}
+
+/* ─── DATA TABLE ASSETS & BADGES ─── */
+.company-monogram {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  background: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+:root[data-theme="dark"] .company-monogram {
+  background: #06281E;
+  color: #34D399;
+  border-color: #0B4F3A;
+}
+
+.stage-tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.status-pill.status-active {
+  background: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+}
+.status-pill.status-invited {
+  background: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+}
+.status-pill.status-pending {
+  background: #F1F5F9;
+  color: #475569;
+  border: 1px solid #E2E8F0;
+}
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.status-dot-active {
+  background: #10B981;
+}
+.status-dot-invited {
+  background: #F59E0B;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.status-dot-pending {
+  background: #94A3B8;
+}
+
+:root[data-theme="dark"] .status-pill.status-active {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+:root[data-theme="dark"] .status-pill.status-invited {
+  background: rgba(245, 158, 11, 0.15);
+  color: #FBBF24;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+:root[data-theme="dark"] .status-pill.status-pending {
+  background: rgba(148, 163, 184, 0.15);
+  color: #CBD5E1;
+  border-color: rgba(148, 163, 184, 0.25);
+}
+
+/* Export / Action CTA Button - Clean Fallback */
 .export-pill-btn {
-  height: 38px;
+  height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 0 16px;
-  background: var(--cta-primary-bg) !important;
-  color: var(--cta-primary-color) !important;
-  border-radius: var(--cta-radius) !important; /* Strict 8px crisp corners matching website */
+  padding: 0 14px;
+  background: #084C36 !important;
+  color: #FFFFFF !important;
+  border-radius: 6px !important;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: -0.01em;
-  box-shadow: var(--cta-primary-shadow) !important;
-  border: 1px solid var(--cta-primary-border) !important;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 2px rgba(8, 76, 54, 0.2) !important;
+  border: 1px solid #063828 !important;
+  transition: all 0.15s ease;
   cursor: pointer;
   box-sizing: border-box;
   white-space: nowrap;
-  position: relative;
-  overflow: hidden;
 }
 .export-pill-btn:hover {
-  background: var(--cta-primary-hover-bg) !important;
+  background: #063828 !important;
   color: #FFFFFF !important;
-  transform: translateY(-2px);
-  box-shadow: var(--cta-primary-shadow-hover) !important;
-}
-.export-pill-btn::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
-  transform: skewX(-20deg);
-  transition: left 0.75s ease;
-  pointer-events: none;
-}
-.export-pill-btn:hover::after {
-  left: 140%;
+  box-shadow: 0 2px 4px rgba(8, 76, 54, 0.25) !important;
 }
 .export-pill-btn i, .export-pill-btn svg {
   width: 14px;
   height: 14px;
-  transition: transform 0.2s ease;
-}
-.export-pill-btn:hover i, .export-pill-btn:hover svg {
-  transform: translate(1px, -1px);
 }
 
-/* ─── 4-CARD METRIC DECK (COMPLETE KPI TELEMETRY) ─── */
+/* ─── 4-CARD METRIC DECK (REALISTIC EXECUTIVE KPI CARDS) ─── */
 .metrics-card-deck {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -991,91 +1307,65 @@ i[data-lucide], svg.lucide {
 }
 
 .deck-card {
-  padding: 22px 24px;
-  border-radius: var(--radius-card);
+  padding: 18px 20px;
+  border-radius: 8px;
   border: 1px solid var(--line);
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   background: var(--bg-card);
   color: var(--text-main);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 180px;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
+  min-height: 130px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  cursor: default;
   position: relative;
 }
 .deck-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-}
-
-/* Card 1: Featured Primary Accent */
-.deck-card.primary-accent-card {
-  background: var(--bg-card);
-  color: var(--text-main);
-  border: 1.5px solid var(--emerald-light);
-}
-.deck-card.primary-accent-card .deck-arrow-btn {
-  background: var(--emerald-subtle);
-  color: var(--emerald-dark);
-}
-:root[data-theme="dark"] .deck-card.primary-accent-card {
-  border-color: rgba(0, 179, 137, 0.4);
-}
-:root[data-theme="dark"] .deck-card.primary-accent-card .deck-arrow-btn {
-  background: rgba(0, 179, 137, 0.22);
-  color: #34D399;
+  border-color: var(--line-strong);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
 }
 
 .deck-card-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 12px;
 }
 .deck-card-label {
-  font-size: 13.5px;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-.deck-card.primary-accent-card .deck-card-label {
-  color: var(--text-main);
+  font-size: 11.5px;
   font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
-.deck-arrow-btn {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
+.deck-card-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
   display: grid;
   place-items: center;
   background: var(--bg-subtle);
-  color: var(--text-secondary);
-  transition: transform 0.2s ease, background 0.2s ease;
+  color: var(--text-muted);
+  border: 1px solid var(--line);
 }
-.deck-card:hover .deck-arrow-btn {
-  transform: translate(2px, -2px);
-}
-.deck-arrow-btn i {
-  width: 15px;
-  height: 15px;
+.deck-card-icon i, .deck-card-icon svg {
+  width: 14px;
+  height: 14px;
 }
 
 .deck-card-value {
-  font-size: 38px;
+  font-size: 28px;
   font-weight: 700;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
   line-height: 1.1;
-  margin: 10px 0 4px;
-}
-.deck-card-value small {
-  font-size: 18px;
-  font-weight: 500;
-  opacity: 0.65;
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 4px;
 }
 
 .deck-card-caption {
-  font-size: 12.5px;
-  opacity: 0.8;
+  font-size: 11.5px;
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   gap: 5px;
@@ -1083,9 +1373,6 @@ i[data-lucide], svg.lucide {
 .deck-card-caption b {
   font-weight: 600;
   color: var(--emerald-dark);
-}
-.deck-card-caption .dot-sep {
-  opacity: 0.5;
 }
 
 /* ─── EXECUTIVE BILLING & COMPUTE RESOURCE CARD ─── */
@@ -5062,7 +5349,20 @@ class YorkConsoleApp {
 
   setAdminSearchQuery(query) {
     this.adminSearchQuery = query;
+    const activeEl = document.activeElement;
+    const activeId = activeEl ? activeEl.id : null;
+    const start = activeEl ? activeEl.selectionStart : null;
+    const end = activeEl ? activeEl.selectionEnd : null;
     render();
+    if (activeId) {
+      const el = document.getElementById(activeId);
+      if (el) {
+        el.focus();
+        if (start !== null && end !== null && el.setSelectionRange) {
+          try { el.setSelectionRange(start, end); } catch(e){}
+        }
+      }
+    }
   }
 
   setAdminFilterStatus(status) {
@@ -6763,13 +7063,15 @@ function renderAdminConsole() {
 
             <div class="topbar-v-divider" aria-hidden="true"></div>
 
-            <!-- Dual Perspective Switcher Pill -->
-            <div class="version-switch-pill" role="navigation" aria-label="Perspective Switcher">
-              <button type="button" onclick="app.login('user-admin')" class="v-tab-btn ${app.currentUser?.role === 'admin' ? 'active' : ''}">
-                👑 Admin
+            <!-- Dual Perspective Switcher Segmented Control -->
+            <div class="perspective-toggle" role="navigation" aria-label="Perspective Switcher">
+              <button type="button" onclick="app.login('user-admin')" class="perspective-btn ${app.currentUser?.role === 'admin' ? 'active' : ''}">
+                <i data-lucide="shield-check"></i>
+                <span>Admin Console</span>
               </button>
-              <button type="button" onclick="app.login('user-client')" class="v-tab-btn ${app.currentUser?.role !== 'admin' ? 'active' : ''}">
-                🏢 Client
+              <button type="button" onclick="app.login('user-client')" class="perspective-btn ${app.currentUser?.role !== 'admin' ? 'active' : ''}">
+                <i data-lucide="building-2"></i>
+                <span>Client Portal</span>
               </button>
             </div>
           </div>
@@ -6870,52 +7172,67 @@ function renderAdminCompaniesTab() {
 
         <div class="controls-pill-row">
           <!-- Search Input Pill -->
-          <div style="position: relative; width: 220px;">
-            <i data-lucide="search" style="position: absolute; left: 12px; top: 11px; width: 14px; height: 14px; color: var(--text-muted); pointer-events: none;"></i>
+          <div style="position: relative; width: 230px;">
+            <i data-lucide="search" style="position: absolute; left: 11px; top: 11px; width: 14px; height: 14px; color: var(--text-muted); pointer-events: none;"></i>
             <input 
               id="admin-search-input"
               type="text" 
               value="${app.adminSearchQuery || ""}" 
               oninput="app.setAdminSearchQuery(this.value)" 
               placeholder="Search companies..." 
-              style="width: 100%; height: 38px; padding-left: 34px; padding-right: 28px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-pill); font-size: 12.5px; color: var(--text-main); outline: none;"
+              style="width: 100%; height: 36px; padding-left: 32px; padding-right: 28px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 6px; font-size: 12.5px; color: var(--text-main); outline: none; transition: border-color 0.15s ease;"
+              onfocus="this.style.borderColor='var(--emerald-accent)'"
+              onblur="this.style.borderColor='var(--line)'"
             />
             ${app.adminSearchQuery ? `
-              <button onclick="app.setAdminSearchQuery('');" style="position: absolute; right: 10px; top: 10px; color: var(--text-muted); background: none; border: none; cursor: pointer; font-size: 12px;">✕</button>
+              <button onclick="app.setAdminSearchQuery('');" style="position: absolute; right: 8px; top: 9px; color: var(--text-muted); background: none; border: none; cursor: pointer; font-size: 12px; width: 18px; height: 18px; display: grid; place-items: center;">✕</button>
             ` : ""}
           </div>
 
           <!-- Filter Segment Control -->
-          <div style="display: flex; align-items: center; gap: 3px; background: var(--bg-subtle); padding: 3px; border-radius: var(--radius-pill); border: 1px solid var(--line); height: 38px; box-sizing: border-box;">
-            <button onclick="app.setAdminFilterStatus('all')" class="v-tab-btn ${filter === 'all' ? 'active' : ''}">All (${totalCount})</button>
-            <button onclick="app.setAdminFilterStatus('active')" class="v-tab-btn ${filter === 'active' ? 'active' : ''}">Active (${activeCount})</button>
-            <button onclick="app.setAdminFilterStatus('invited')" class="v-tab-btn ${filter === 'invited' ? 'active' : ''}">Invited (${invitedCount})</button>
-            <button onclick="app.setAdminFilterStatus('pending')" class="v-tab-btn ${filter === 'pending' ? 'active' : ''}">Ready (${pendingCount})</button>
+          <div class="filter-segmented-control">
+            <button onclick="app.setAdminFilterStatus('all')" class="filter-tab-btn ${filter === 'all' ? 'active' : ''}">
+              <span>All</span>
+              <span class="filter-tab-count">${totalCount}</span>
+            </button>
+            <button onclick="app.setAdminFilterStatus('active')" class="filter-tab-btn ${filter === 'active' ? 'active' : ''}">
+              <span>Active</span>
+              <span class="filter-tab-count">${activeCount}</span>
+            </button>
+            <button onclick="app.setAdminFilterStatus('invited')" class="filter-tab-btn ${filter === 'invited' ? 'active' : ''}">
+              <span>Invited</span>
+              <span class="filter-tab-count">${invitedCount}</span>
+            </button>
+            <button onclick="app.setAdminFilterStatus('pending')" class="filter-tab-btn ${filter === 'pending' ? 'active' : ''}">
+              <span>Ready</span>
+              <span class="filter-tab-count">${pendingCount}</span>
+            </button>
           </div>
 
           <!-- + Add Company Button -->
           <button 
             onclick="openAddCompanyModal()"
-            class="export-pill-btn"
+            class="btn-saas-primary"
+            style="height: 36px; padding: 0 14px; font-size: 13px;"
             title="Onboard a new portfolio company"
           >
-            <i data-lucide="plus"></i>
+            <i data-lucide="plus" style="width: 14px; height: 14px;"></i>
             <span>Add Company</span>
           </button>
         </div>
       </section>
 
-      <!-- Contextual 4-Card Metric Deck (Clean, single deck) -->
+      <!-- Contextual 4-Card Metric Deck (Realistic Executive Cards) -->
       <section class="metrics-card-deck">
-        <div class="deck-card primary-accent-card">
+        <div class="deck-card">
           <div class="deck-card-top">
             <span class="deck-card-label">Total Portfolio</span>
-            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            <div class="deck-card-icon"><i data-lucide="building-2"></i></div>
           </div>
           <div>
-            <div class="deck-card-value mono">${totalCount}</div>
-            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
-              <span style="color: var(--emerald); font-weight: 700;">+2</span> HubSpot closed-won deals
+            <div class="deck-card-value">${totalCount}</div>
+            <div class="deck-card-caption">
+              <span>Active directory accounts</span>
             </div>
           </div>
         </div>
@@ -6923,12 +7240,13 @@ function renderAdminCompaniesTab() {
         <div class="deck-card">
           <div class="deck-card-top">
             <span class="deck-card-label">Active SOW Accounts</span>
-            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            <div class="deck-card-icon" style="color: var(--emerald-dark);"><i data-lucide="check-circle-2"></i></div>
           </div>
           <div>
-            <div class="deck-card-value mono">${activeCount}</div>
-            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
-              <span style="color: var(--emerald); font-weight: 700;">100%</span> Accepted onboarding
+            <div class="deck-card-value">${activeCount}</div>
+            <div class="deck-card-caption">
+              <span style="color: var(--emerald-dark); font-weight: 600;">100%</span>
+              <span>onboarded & provisioned</span>
             </div>
           </div>
         </div>
@@ -6936,45 +7254,46 @@ function renderAdminCompaniesTab() {
         <div class="deck-card">
           <div class="deck-card-top">
             <span class="deck-card-label">Ready to Onboard</span>
-            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            <div class="deck-card-icon"><i data-lucide="user-plus"></i></div>
           </div>
           <div>
-            <div class="deck-card-value mono">${pendingCount}</div>
-            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
-              <span>Send invite to provision tools</span>
+            <div class="deck-card-value">${pendingCount}</div>
+            <div class="deck-card-caption">
+              <span>Pending invitation delivery</span>
             </div>
           </div>
         </div>
 
         <div class="deck-card">
           <div class="deck-card-top">
-            <span class="deck-card-label">Support Queue</span>
-            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
+            <span class="deck-card-label">Support Incidents</span>
+            <div class="deck-card-icon"><i data-lucide="life-buoy"></i></div>
           </div>
           <div>
-            <div class="deck-card-value mono">1</div>
-            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
-              <span>1 open technical incident</span>
+            <div class="deck-card-value">1</div>
+            <div class="deck-card-caption">
+              <span>Open technical ticket</span>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 3-Column Portfolio Directory Table (Strict PRD Compliance) -->
-      <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-card); box-shadow: var(--shadow-card); overflow: hidden;">
+      <!-- Portfolio Directory Table (Institutional Enterprise Grade) -->
+      <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04); overflow: hidden;">
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse text-xs">
-            <thead style="background: var(--bg-subtle); border-bottom: 1px solid var(--line); color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+            <thead style="background: var(--bg-subtle); border-bottom: 1px solid var(--line); color: var(--text-muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
               <tr>
-                <th style="padding: 14px 20px;">Company</th>
-                <th style="padding: 14px 20px;">Assigned Services</th>
-                <th style="padding: 14px 20px; text-align: right;">Actions</th>
+                <th style="padding: 12px 20px; width: 34%;">Company</th>
+                <th style="padding: 12px 20px; width: 26%;">Primary Contact &amp; Status</th>
+                <th style="padding: 12px 20px; width: 14%;">Services</th>
+                <th style="padding: 12px 20px; text-align: right; width: 26%;">Actions</th>
               </tr>
             </thead>
             <tbody>
               ${companies.length === 0 ? `
                 <tr>
-                  <td colspan="3" style="padding: 48px; text-align: center; color: var(--text-muted);">
+                  <td colspan="4" style="padding: 48px; text-align: center; color: var(--text-muted);">
                     <div style="font-weight: 600; font-size: 14px; color: var(--text-main);">No companies found</div>
                     <div style="font-size: 12px; margin-top: 4px;">Try adjusting your search query or filter segment.</div>
                   </td>
@@ -6985,70 +7304,98 @@ function renderAdminCompaniesTab() {
 
                 return `
                   <tr style="border-bottom: 1px solid var(--line); transition: background 0.15s ease;" onmouseover="this.style.background='var(--bg-subtle)'" onmouseout="this.style.background='transparent'">
-                    <!-- 1. Company Details (Logo initial, Name, Domain, Stage badge) -->
-                    <td style="padding: 16px 20px;">
-                      <div style="display: flex; align-items: center; gap: 14px;">
-                        <div style="width: 38px; height: 38px; border-radius: 10px; background: var(--emerald-dark); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 13px; flex-shrink: 0;">
+                    <!-- 1. Company Column -->
+                    <td style="padding: 14px 20px;">
+                      <div style="display: flex; align-items: center; gap: 12px;">
+                        <div class="company-monogram">
                           ${client.name.substring(0, 2).toUpperCase()}
                         </div>
                         <div>
                           <div style="display: flex; align-items: center; gap: 8px;">
-                            <span style="font-weight: 700; font-size: 13.5px; color: var(--text-main);">${client.name}</span>
-                            <span style="font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 9999px; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--line);">${stage}</span>
+                            <span style="font-weight: 600; font-size: 13.5px; color: var(--text-main);">${client.name}</span>
+                            <span class="stage-tag">${stage}</span>
                           </div>
-                          <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">
+                          <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
                             <span>${client.domain}</span>
-                            <span style="margin: 0 4px; opacity: 0.5;">·</span>
-                            <span>Contact: ${client.ownerName || 'Alex Kim'} (${client.ownerEmail || 'alex@acme.io'})</span>
                           </div>
                         </div>
                       </div>
                     </td>
 
-                    <!-- 2. Assigned Services Column (Strictly plain number as required by PRD) -->
-                    <td style="padding: 16px 20px; white-space: nowrap;">
-                      <div style="display: flex; align-items: center; gap: 8px;">
-                        <span class="mono" style="font-size: 15px; font-weight: 800; color: var(--text-main);">
+                    <!-- 2. Primary Contact & Status Column -->
+                    <td style="padding: 14px 20px;">
+                      <div style="display: flex; flex-direction: column; gap: 3px;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                          <span style="font-weight: 600; font-size: 12.5px; color: var(--text-main);">${client.ownerName || 'Alex Kim'}</span>
+                          ${client.status === 'active' ? `
+                            <span class="status-pill status-active"><span class="status-dot status-dot-active"></span>Active Client</span>
+                          ` : client.status === 'invited' ? `
+                            <span class="status-pill status-invited"><span class="status-dot status-dot-invited"></span>Invite Sent</span>
+                          ` : `
+                            <span class="status-pill status-pending"><span class="status-dot status-dot-pending"></span>Ready</span>
+                          `}
+                        </div>
+                        <div style="font-size: 11.5px; color: var(--text-muted);">${client.ownerEmail || 'contact@client.io'}</div>
+                      </div>
+                    </td>
+
+                    <!-- 3. Assigned Services Column -->
+                    <td style="padding: 14px 20px; white-space: nowrap;">
+                      <div style="display: flex; align-items: baseline; gap: 5px;">
+                        <span style="font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--text-main);">
                           ${granted.length}
                         </span>
-                        <span style="font-size: 11.5px; color: var(--text-muted);">
-                          services provisioned
+                        <span style="font-size: 12px; color: var(--text-muted);">
+                          provisioned
                         </span>
                       </div>
                     </td>
 
-                    <!-- 3. Actions Column -->
-                    <td style="padding: 16px 20px; text-align: right; white-space: nowrap;">
-                      <div style="display: inline-flex; align-items: center; gap: 8px;">
+                    <!-- 4. Actions Column -->
+                    <td style="padding: 14px 20px; text-align: right; white-space: nowrap;">
+                      <div style="display: inline-flex; align-items: center; justify-content: flex-end; gap: 8px;">
                         ${client.status === 'pending_invite' ? `
                           <button 
                             onclick="openSendInviteModal('${client.id}')"
-                            class="export-pill-btn"
-                            style="height: 32px; padding: 0 12px; font-size: 11.5px;"
+                            class="btn-saas-primary"
                             title="Configure service bundle and send onboarding invite"
                           >
                             <i data-lucide="send"></i>
                             <span>Send Invite</span>
                           </button>
+                        ` : client.status === 'invited' ? `
+                          <button 
+                            onclick="openSendInviteModal('${client.id}')"
+                            class="btn-saas-secondary"
+                            title="Adjust service bundle"
+                          >
+                            <i data-lucide="sliders-horizontal"></i>
+                            <span>Services</span>
+                          </button>
+                          <button 
+                            onclick="showToast('Invitation resent to ${client.ownerEmail}', 'info')"
+                            class="btn-saas-amber"
+                            title="Resend onboarding invite"
+                          >
+                            <i data-lucide="refresh-cw"></i>
+                            <span>Resend Invite</span>
+                          </button>
                         ` : `
                           <button 
                             onclick="openSendInviteModal('${client.id}')"
-                            style="height: 32px; padding: 0 12px; font-size: 11.5px; font-weight: 600; border-radius: var(--cta-radius); background: var(--bg-card); border: 1px solid var(--line); color: var(--text-secondary); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.15s;"
-                            onmouseover="this.style.background='var(--bg-subtle)'; this.style.color='var(--text-main)'"
-                            onmouseout="this.style.background='var(--bg-card)'; this.style.color='var(--text-secondary)'"
+                            class="btn-saas-secondary"
                             title="Manage assigned services"
                           >
-                            <i data-lucide="sliders-horizontal" style="width: 12px; height: 12px;"></i>
+                            <i data-lucide="sliders-horizontal"></i>
                             <span>Manage Services</span>
                           </button>
 
                           <button 
                             onclick="openCompanyDashboardPopup('${client.id}')"
-                            class="export-pill-btn"
-                            style="height: 32px; padding: 0 12px; font-size: 11.5px;"
+                            class="btn-saas-primary"
                             title="Inspect client operations dashboard"
                           >
-                            <i data-lucide="layout-grid"></i>
+                            <i data-lucide="layout-dashboard"></i>
                             <span>View Dashboard</span>
                           </button>
                         `}
@@ -7272,23 +7619,24 @@ function renderAdminActiveAccountsTab() {
                     </td>
 
                     <!-- 6. Action -->
-                    <td style="padding: 16px 20px; text-align: right; white-space: nowrap;">
-                      <div style="display: inline-flex; align-items: center; gap: 8px;">
+                    <td style="padding: 14px 20px; text-align: right; white-space: nowrap;">
+                      <div style="display: inline-flex; align-items: center; justify-content: flex-end; gap: 8px;">
                         <button 
                           onclick="openSendInviteModal('${client.id}')"
-                          style="height: 32px; padding: 0 12px; font-size: 11.5px; font-weight: 600; border-radius: var(--cta-radius); background: var(--bg-card); border: 1px solid var(--line); color: var(--text-secondary); cursor: pointer; display: inline-flex; align-items: center; gap: 6px;"
+                          class="btn-saas-secondary"
+                          title="Manage assigned services"
                         >
-                          <i data-lucide="sliders-horizontal" style="width: 12px; height: 12px;"></i>
-                          <span>Services</span>
+                          <i data-lucide="sliders-horizontal"></i>
+                          <span>Manage Services</span>
                         </button>
 
                         <button 
                           onclick="openCompanyDashboardPopup('${client.id}')"
-                          class="export-pill-btn"
-                          style="height: 32px; padding: 0 12px; font-size: 11.5px;"
+                          class="btn-saas-primary"
+                          title="Inspect client operations dashboard"
                         >
-                          <i data-lucide="layout-grid"></i>
-                          <span>Dashboard</span>
+                          <i data-lucide="layout-dashboard"></i>
+                          <span>View Dashboard</span>
                         </button>
                       </div>
                     </td>
@@ -7718,13 +8066,15 @@ function renderClientDashboard() {
 
             <div class="topbar-v-divider" aria-hidden="true"></div>
 
-            <!-- Dual Perspective Switcher Pill -->
-            <div class="version-switch-pill" role="navigation" aria-label="Perspective Switcher">
-              <button type="button" onclick="app.login('user-admin')" class="v-tab-btn ${app.currentUser?.role === 'admin' ? 'active' : ''}">
-                👑 Admin
+            <!-- Dual Perspective Switcher Segmented Control -->
+            <div class="perspective-toggle" role="navigation" aria-label="Perspective Switcher">
+              <button type="button" onclick="app.login('user-admin')" class="perspective-btn ${app.currentUser?.role === 'admin' ? 'active' : ''}">
+                <i data-lucide="shield-check"></i>
+                <span>Admin Console</span>
               </button>
-              <button type="button" onclick="app.login('user-client')" class="v-tab-btn ${app.currentUser?.role !== 'admin' ? 'active' : ''}">
-                🏢 Client
+              <button type="button" onclick="app.login('user-client')" class="perspective-btn ${app.currentUser?.role !== 'admin' ? 'active' : ''}">
+                <i data-lucide="building-2"></i>
+                <span>Client Portal</span>
               </button>
             </div>
           </div>
@@ -8647,6 +8997,7 @@ function openSendInviteModal(clientId) {
   const client = app.clients.find(c => c.id === clientId);
   if (!client) return;
   const granted = client.grantedProducts || [];
+  const isActive = client.status === 'active';
 
   const root = document.getElementById('modal-root');
   if (!root) return;
@@ -8655,8 +9006,8 @@ function openSendInviteModal(clientId) {
       <div class="modal-content !max-w-2xl" onclick="event.stopPropagation()">
         <div class="p-6 border-b border-slate-100 flex items-center justify-between">
           <div>
-            <h3 class="text-lg font-bold text-slate-900">Configure Services & Invite</h3>
-            <p class="text-xs text-slate-500 mt-0.5">Select software services to provision for ${client.name}.</p>
+            <h3 class="text-lg font-bold text-slate-900">${isActive ? 'Manage Assigned Services' : 'Configure Services & Invite'}</h3>
+            <p class="text-xs text-slate-500 mt-0.5">${isActive ? 'Update active software workspaces provisioned for ' + client.name : 'Select software services to provision for ' + client.name}.</p>
           </div>
           <button onclick="closeModal()" class="text-slate-400 hover:text-slate-700 text-sm">✕</button>
         </div>
@@ -8687,7 +9038,7 @@ function openSendInviteModal(clientId) {
 
           <div class="pt-4 border-t border-slate-100 flex justify-end gap-2">
             <button onclick="closeModal()" class="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg text-xs font-semibold hover:bg-slate-50">Cancel</button>
-            <button onclick="submitInviteServices('${client.id}')" class="px-4 py-2 bg-[#084c36] hover:bg-[#063828] text-white rounded-lg text-xs font-bold shadow-2xs">Send Invitation</button>
+            <button onclick="submitInviteServices('${client.id}')" class="px-4 py-2 bg-[#084c36] hover:bg-[#063828] text-white rounded-lg text-xs font-bold shadow-2xs">${isActive ? 'Save Service Changes' : 'Send Invitation'}</button>
           </div>
         </div>
       </div>
@@ -8708,7 +9059,27 @@ function submitInviteServices(clientId) {
   const checks = document.querySelectorAll('.invite-prod-check:checked');
   const selected = Array.from(checks).map(c => c.value);
   closeModal();
-  app.sendCompanyInviteWithServices(clientId, selected);
+  const client = app.clients.find(c => c.id === clientId);
+  if (client && client.status === 'active') {
+    client.grantedProducts = selected || [];
+    if (!client.serviceAdoption) client.serviceAdoption = {};
+    client.grantedProducts.forEach(pid => {
+      if (!client.serviceAdoption[pid]) {
+        client.serviceAdoption[pid] = {
+          status: "active",
+          usageRate: "Active workspace",
+          notes: "Access provisioned by York Operating Lead"
+        };
+      }
+    });
+    app.saveState();
+    render();
+    if (typeof showToast === 'function') {
+      showToast(`Updated assigned services for ${client.name} (${selected.length} provisioned)`, 'success');
+    }
+  } else {
+    app.sendCompanyInviteWithServices(clientId, selected);
+  }
 }
 
 function openCompanyDashboardPopup(clientId) {
