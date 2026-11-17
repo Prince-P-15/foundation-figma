@@ -232,101 +232,245 @@ i[data-lucide], svg.lucide {
   transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), min-width 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s ease;
 }
 
-/* Collapsed Floating Sidebar - Strictly Show Icons Only */
+/* ═════════════════════════════════════════════════════════════════
+   COLLAPSED FLOATING SIDEBAR (MINIMAL DENSE ICON RAIL SPEC)
+   ═════════════════════════════════════════════════════════════════ */
 .permanent-sidebar.collapsed {
-  width: 72px;
-  min-width: 72px;
+  width: 68px;
+  min-width: 68px;
 }
-.permanent-sidebar.collapsed .sidebar-hubspot-strip {
-  display: none !important;
-}
+
+/* Header in collapsed state: Logo icon mark neatly centered + collapse toggle below */
 .permanent-sidebar.collapsed .sidebar-header {
-  padding: 14px 6px 12px;
+  padding: 14px 0 10px;
+  display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   align-items: center;
   justify-content: center;
+  border-bottom: 1px solid var(--line);
 }
 .permanent-sidebar.collapsed .sidebar-brand-box {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  width: 100%;
+  margin: 0 auto;
 }
 .permanent-sidebar.collapsed .sidebar-brand-logo {
-  height: 26px;
-  width: auto;
+  display: none !important;
 }
+.permanent-sidebar.collapsed .sidebar-brand-icon-only {
+  display: block !important;
+  width: 28px;
+  height: 28px;
+  margin: 0 auto;
+}
+.permanent-sidebar:not(.collapsed) .sidebar-brand-icon-only {
+  display: none !important;
+}
+.permanent-sidebar.collapsed .sidebar-collapse-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  margin: 0 auto;
+}
+
+/* Hide all text, labels, and secondary wrappers in collapsed mode */
+.permanent-sidebar.collapsed .sidebar-hubspot-strip,
 .permanent-sidebar.collapsed .sidebar-brand-box span,
-.permanent-sidebar.collapsed .sidebar-workspace-pill span,
-.permanent-sidebar.collapsed .sidebar-ws-tag,
-.permanent-sidebar.collapsed .sidebar-workspace-pill svg,
-.permanent-sidebar.collapsed .sidebar-workspace-pill i,
-.permanent-sidebar.collapsed .sidebar-main-nav-btn span,
 .permanent-sidebar.collapsed .sidebar-category-title,
 .permanent-sidebar.collapsed .sidebar-nav-item .sidebar-nav-label,
 .permanent-sidebar.collapsed .sidebar-nav-item .sidebar-badge,
+.permanent-sidebar.collapsed .sidebar-main-nav-btn span:not(.collapsed-dot-indicator),
 .permanent-sidebar.collapsed .sidebar-compute-meter,
-.permanent-sidebar.collapsed .sidebar-user-tile div:not(.sidebar-user-avatar),
-.permanent-sidebar.collapsed .sidebar-user-tile svg,
-.permanent-sidebar.collapsed .sidebar-user-tile i {
+.permanent-sidebar.collapsed .sidebar-workspace-pill > *:not(:first-child),
+.permanent-sidebar.collapsed .sidebar-user-tile > *:not(.sidebar-user-avatar) {
   display: none !important;
 }
+
+/* Workspace / Account Pill in collapsed mode: Centered compact badge */
 .permanent-sidebar.collapsed .sidebar-workspace-pill {
-  margin: 10px 8px 6px;
-  padding: 8px 0;
-  justify-content: center;
-  width: calc(100% - 16px);
-}
-.permanent-sidebar.collapsed .sidebar-primary-nav {
-  padding: 8px 4px;
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+  padding: 0;
+  margin: 10px auto 6px;
+  border-radius: 8px;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.permanent-sidebar.collapsed .sidebar-workspace-pill:hover {
+  background: var(--bg-subtle);
+  border-color: var(--line-strong);
+}
+.permanent-sidebar.collapsed .sidebar-workspace-pill > div:first-child {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+}
+
+/* Primary Navigation in collapsed mode */
+.permanent-sidebar.collapsed .sidebar-primary-nav {
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
 }
 .permanent-sidebar.collapsed .sidebar-main-nav-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
   justify-content: center;
   padding: 0;
-  width: 44px;
-  height: 40px;
   margin: 0 auto;
+  border-radius: 6px;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  position: relative;
+  transition: all 0.15s ease;
+}
+.permanent-sidebar.collapsed .sidebar-main-nav-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+  border-color: var(--line);
+}
+.permanent-sidebar.collapsed .sidebar-main-nav-btn.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: rgba(0, 179, 137, 0.35);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+:root[data-theme="dark"] .permanent-sidebar.collapsed .sidebar-main-nav-btn.active {
+  background: rgba(0, 180, 138, 0.2);
+  color: #34D399;
+  border-color: rgba(0, 180, 138, 0.4);
 }
 .permanent-sidebar.collapsed .sidebar-main-nav-btn i,
 .permanent-sidebar.collapsed .sidebar-main-nav-btn svg {
-  margin: 0 auto;
   width: 18px;
   height: 18px;
+  margin: 0 auto;
 }
+
+/* Secondary Navigation in collapsed mode */
 .permanent-sidebar.collapsed .sidebar-nav-scroll {
-  padding: 6px 4px;
-}
-.permanent-sidebar.collapsed .sidebar-category-group {
-  margin-top: 8px;
+  padding: 8px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
 }
+.permanent-sidebar.collapsed .sidebar-category-group {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
 .permanent-sidebar.collapsed .sidebar-nav-item {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
   justify-content: center;
   padding: 0;
-  width: 44px;
-  height: 40px;
   margin: 0 auto;
-  border-radius: 10px;
+  border-radius: 6px;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  position: relative;
+  transition: all 0.15s ease;
+}
+.permanent-sidebar.collapsed .sidebar-nav-item:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+  border-color: var(--line);
+}
+.permanent-sidebar.collapsed .sidebar-nav-item.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: rgba(0, 179, 137, 0.35);
+}
+:root[data-theme="dark"] .permanent-sidebar.collapsed .sidebar-nav-item.active {
+  background: rgba(0, 180, 138, 0.2);
+  color: #34D399;
+  border-color: rgba(0, 180, 138, 0.4);
 }
 .permanent-sidebar.collapsed .sidebar-nav-item i,
 .permanent-sidebar.collapsed .sidebar-nav-item svg {
-  margin: 0 auto;
   width: 18px;
   height: 18px;
-  flex-shrink: 0;
+  margin: 0 auto;
 }
+
+/* Collapsed indicator dot for active badges */
+.collapsed-dot-indicator {
+  display: none !important;
+}
+.permanent-sidebar.collapsed .collapsed-dot-indicator {
+  display: block !important;
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #F59E0B;
+  box-shadow: 0 0 0 2px var(--bg-card);
+  pointer-events: none;
+}
+
+/* Footer in collapsed mode */
 .permanent-sidebar.collapsed .sidebar-footer {
-  padding: 12px 6px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .permanent-sidebar.collapsed .sidebar-user-tile {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 4px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.permanent-sidebar.collapsed .sidebar-user-tile:hover {
+  background: var(--bg-subtle);
 }
 .permanent-sidebar.collapsed .sidebar-user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   margin: 0 auto;
+  font-size: 11.5px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  background: var(--emerald-dark);
+  color: #FFFFFF;
 }
 
 .sidebar-header {
@@ -6110,6 +6254,9 @@ class YorkConsoleApp {
 }
 
 const app = new YorkConsoleApp();
+if (typeof window !== 'undefined') {
+  window.app = app;
+}
 
 // SVG Icons
 // High-Fidelity Lucide Icon Provider
@@ -6152,13 +6299,29 @@ function toggleSidebarCollapse() {
   const sidebar = document.getElementById('permanentSidebar');
   if (sidebar) {
     sidebar.classList.toggle('collapsed');
+    const isNowCollapsed = sidebar.classList.contains('collapsed');
     try {
-      localStorage.setItem('york_sidebar_collapsed', sidebar.classList.contains('collapsed') ? 'true' : 'false');
+      localStorage.setItem('york_sidebar_collapsed', isNowCollapsed ? 'true' : 'false');
     } catch(e){}
+    const collapseBtns = document.querySelectorAll('.sidebar-collapse-btn');
+    collapseBtns.forEach(btn => {
+      btn.setAttribute('title', isNowCollapsed ? 'Expand sidebar (⌘B)' : 'Collapse sidebar (⌘B)');
+      btn.innerHTML = `<i data-lucide="${isNowCollapsed ? 'panel-left-open' : 'panel-left-close'}"></i>`;
+    });
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
       window.lucide.createIcons();
     }
   }
+}
+
+// Global keyboard shortcut: Cmd+B / Ctrl+B to toggle sidebar width
+if (typeof window !== 'undefined') {
+  window.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'b') {
+      e.preventDefault();
+      toggleSidebarCollapse();
+    }
+  });
 }
 
 function closeModal() {
@@ -6954,19 +7117,24 @@ function renderAdminConsole() {
   const openTicketsCount = allTickets.filter(t => t.status !== "resolved").length;
   const activeClientsCount = app.clients.filter(c => c.status === "active").length;
 
+  const isSidebarCollapsed = (function() {
+    try { return localStorage.getItem('york_sidebar_collapsed') === 'true'; } catch(e) { return false; }
+  })();
+
   return `
     <div class="canvas-wrapper">
       
       <!-- PERMANENT FLOATING SIDEBAR NAVIGATION -->
-      <aside class="permanent-sidebar" id="permanentSidebar" aria-label="Admin Sidebar Navigation">
+      <aside class="permanent-sidebar ${isSidebarCollapsed ? 'collapsed' : ''}" id="permanentSidebar" aria-label="Admin Sidebar Navigation">
         <!-- Brand Header with Official Vector SVG -->
         <div class="sidebar-header">
           <a href="index.html" class="sidebar-brand-box" title="Return to York Website" style="text-decoration:none">
             <img src="logo-light.svg" alt="York IE" class="sidebar-brand-logo logo-light-mode" height="28" />
             <img src="logo-dark.svg" alt="York IE" class="sidebar-brand-logo logo-dark-mode" height="28" />
+            <img src="logo-mark.svg" alt="York IE" class="sidebar-brand-icon-only" height="28" width="28" />
           </a>
-          <button class="sidebar-collapse-btn" onclick="toggleSidebarCollapse()" title="Toggle sidebar navigation width">
-            <i data-lucide="panel-left-close"></i>
+          <button class="sidebar-collapse-btn" onclick="toggleSidebarCollapse()" title="${isSidebarCollapsed ? 'Expand sidebar (⌘B)' : 'Collapse sidebar (⌘B)'}">
+            <i data-lucide="${isSidebarCollapsed ? 'panel-left-open' : 'panel-left-close'}"></i>
           </button>
         </div>
 
@@ -7007,7 +7175,7 @@ function renderAdminConsole() {
           <button type="button" class="sidebar-main-nav-btn ${app.adminTab === 'tickets' ? 'active' : ''}" onclick="app.adminTab = 'tickets'; app.saveState(); render();" title="Support Incident Queue">
             <i data-lucide="life-buoy"></i>
             <span style="flex:1;text-align:left;">Support Incidents</span>
-            ${openTicketsCount > 0 ? `<span class="sidebar-badge" style="background: rgba(245, 158, 11, 0.2); color: #B45309;">${openTicketsCount} Open</span>` : `<span class="sidebar-badge">0</span>`}
+            ${openTicketsCount > 0 ? `<span class="sidebar-badge" style="background: rgba(245, 158, 11, 0.2); color: #B45309;">${openTicketsCount} Open</span><span class="collapsed-dot-indicator" style="display:none"></span>` : `<span class="sidebar-badge">0</span>`}
           </button>
         </nav>
 
@@ -7965,19 +8133,24 @@ function renderClientDashboard() {
   const client = app.getCurrentClient() || app.clients[0];
   const tab = app.clientTab || "workspaces";
 
+  const isSidebarCollapsed = (function() {
+    try { return localStorage.getItem('york_sidebar_collapsed') === 'true'; } catch(e) { return false; }
+  })();
+
   return `
     <div class="canvas-wrapper">
       
       <!-- PERMANENT FLOATING SIDEBAR NAVIGATION (CLIENT) -->
-      <aside class="permanent-sidebar" id="permanentSidebar" aria-label="Client Sidebar Navigation">
+      <aside class="permanent-sidebar ${isSidebarCollapsed ? 'collapsed' : ''}" id="permanentSidebar" aria-label="Client Sidebar Navigation">
         <!-- Brand Header with Official Vector SVG -->
         <div class="sidebar-header">
           <a href="index.html" class="sidebar-brand-box" title="Return to York Website" style="text-decoration:none">
             <img src="logo-light.svg" alt="York IE" class="sidebar-brand-logo logo-light-mode" height="28" />
             <img src="logo-dark.svg" alt="York IE" class="sidebar-brand-logo logo-dark-mode" height="28" />
+            <img src="logo-mark.svg" alt="York IE" class="sidebar-brand-icon-only" height="28" width="28" />
           </a>
-          <button class="sidebar-collapse-btn" onclick="toggleSidebarCollapse()" title="Toggle sidebar navigation width">
-            <i data-lucide="panel-left-close"></i>
+          <button class="sidebar-collapse-btn" onclick="toggleSidebarCollapse()" title="${isSidebarCollapsed ? 'Expand sidebar (⌘B)' : 'Collapse sidebar (⌘B)'}">
+            <i data-lucide="${isSidebarCollapsed ? 'panel-left-open' : 'panel-left-close'}"></i>
           </button>
         </div>
 
@@ -8024,6 +8197,7 @@ function renderClientDashboard() {
               <i data-lucide="life-buoy"></i>
               <span class="sidebar-nav-label">Support Desk</span>
               <span class="sidebar-badge">${(client.supportTickets || []).length}</span>
+              ${(client.supportTickets || []).length > 0 ? `<span class="collapsed-dot-indicator" style="display:none"></span>` : ''}
             </button>
             <button type="button" class="sidebar-nav-item ${tab === 'team' ? 'active' : ''}" onclick="app.clientTab = 'team'; app.saveState(); render();" title="Team &amp; Access Permissions">
               <i data-lucide="users"></i>
