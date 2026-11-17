@@ -539,6 +539,91 @@ i[data-lucide], svg.lucide {
   color: var(--emerald-dark);
 }
 
+/* HubSpot CRM connection strip */
+.sidebar-hubspot-strip {
+  margin: 2px 14px 12px;
+  padding: 8px 10px 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-radius: 10px;
+  background: var(--emerald-subtle);
+  border: 1px solid var(--emerald-light);
+  box-shadow: inset 3px 0 0 var(--emerald);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.sidebar-hubspot-strip:hover {
+  border-color: color-mix(in srgb, var(--emerald) 45%, var(--emerald-light));
+  box-shadow: inset 3px 0 0 var(--emerald), 0 1px 4px rgba(0, 180, 138, 0.12);
+}
+.sidebar-hubspot-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.sidebar-hubspot-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--emerald) 22%, transparent);
+}
+.sidebar-hubspot-dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid var(--emerald);
+  opacity: 0.55;
+  animation: hubspotPulse 1.8s ease-out infinite;
+}
+@keyframes hubspotPulse {
+  0% { transform: scale(0.85); opacity: 0.55; }
+  70% { transform: scale(1.55); opacity: 0; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+.sidebar-hubspot-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  line-height: 1.15;
+}
+.sidebar-hubspot-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.sidebar-hubspot-value {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--emerald-dark);
+}
+.sidebar-hubspot-sync {
+  flex-shrink: 0;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--btn-primary-bg);
+  border: 1px solid transparent;
+  padding: 4px 9px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.12s;
+}
+.sidebar-hubspot-sync:hover {
+  background: var(--btn-primary-hover);
+}
+.sidebar-hubspot-sync:active {
+  transform: scale(0.97);
+}
+
 /* Primary Top 4 Navigation in Sidebar */
 .sidebar-primary-nav {
   display: flex;
@@ -655,6 +740,79 @@ i[data-lucide], svg.lucide {
 .sidebar-badge.new {
   background: var(--emerald-light);
   color: var(--emerald-dark);
+}
+.sidebar-badge.alert {
+  background: rgba(245, 158, 11, 0.18);
+  color: #B45309;
+  border-color: rgba(245, 158, 11, 0.28);
+}
+.sidebar-badge.signoff {
+  background: rgba(124, 58, 237, 0.16);
+  color: #6D28D9;
+  border-color: rgba(124, 58, 237, 0.28);
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 10.5px;
+  letter-spacing: 0.01em;
+}
+
+/* Client portal primary nav — design-system active treatment */
+.client-portal-nav {
+  flex: 1;
+  overflow-y: auto;
+  border-bottom: none;
+  padding: 8px 12px 16px;
+  gap: 4px;
+}
+.client-portal-nav .sidebar-main-nav-btn {
+  padding: 9px 12px;
+}
+.client-portal-nav .sidebar-main-nav-btn i,
+.client-portal-nav .sidebar-main-nav-btn svg {
+  width: 16px;
+  height: 16px;
+  color: var(--emerald-dark);
+}
+.client-portal-nav .sidebar-main-nav-btn.nav-support i,
+.client-portal-nav .sidebar-main-nav-btn.nav-support svg {
+  color: #C2410C;
+}
+.client-portal-nav .sidebar-main-nav-btn.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+  box-shadow: none;
+}
+.client-portal-nav .sidebar-main-nav-btn.active i,
+.client-portal-nav .sidebar-main-nav-btn.active svg {
+  color: var(--emerald-dark);
+}
+.client-portal-nav .sidebar-main-nav-btn.active .sidebar-badge {
+  background: color-mix(in srgb, var(--emerald) 16%, transparent);
+  color: var(--emerald-dark);
+  border-color: transparent;
+}
+.client-portal-nav .sidebar-main-nav-btn.active .sidebar-badge.signoff {
+  background: #7C3AED;
+  color: #FFFFFF;
+  border-color: transparent;
+}
+:root[data-theme="dark"] .client-portal-nav .sidebar-main-nav-btn.active {
+  background: var(--emerald);
+  color: #04261B;
+  border-color: transparent;
+}
+:root[data-theme="dark"] .client-portal-nav .sidebar-main-nav-btn.active i,
+:root[data-theme="dark"] .client-portal-nav .sidebar-main-nav-btn.active svg {
+  color: #04261B;
+}
+:root[data-theme="dark"] .client-portal-nav .sidebar-main-nav-btn.active .sidebar-badge {
+  background: rgba(4, 38, 27, 0.18);
+  color: #04261B;
+}
+:root[data-theme="dark"] .client-portal-nav .sidebar-main-nav-btn.active .sidebar-badge.signoff {
+  background: #7C3AED;
+  color: #FFFFFF;
 }
 
 .sidebar-footer {
@@ -1130,12 +1288,534 @@ i[data-lucide], svg.lucide {
   white-space: nowrap;
   margin: 0;
 }
+.page-headline-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 5px 0 0;
+  max-width: 540px;
+  line-height: 1.45;
+}
 
 .controls-pill-row {
   display: flex;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+/* Portfolio Directory hero header */
+.directory-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  flex-wrap: nowrap;
+}
+.directory-hero-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.directory-hero .page-headline-lead {
+  font-size: 24px !important;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+.directory-hero-cta {
+  height: 38px !important;
+  padding: 0 16px !important;
+  font-size: 13px !important;
+  border-radius: 8px !important;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.directory-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow-pill);
+}
+.directory-search {
+  position: relative;
+  flex: 1 1 220px;
+  min-width: 180px;
+  max-width: 380px;
+}
+.directory-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.directory-search-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 32px 0 34px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text-main);
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+.directory-search-input::placeholder {
+  color: var(--text-faint);
+}
+.directory-search-input:focus {
+  background: var(--bg-card);
+  border-color: var(--emerald-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--emerald) 16%, transparent);
+}
+.directory-search-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+  padding: 0;
+}
+.directory-search-clear:hover {
+  color: var(--text-main);
+  background: var(--bg-subtle-2);
+}
+.directory-toolbar .filter-segmented-control {
+  margin-left: auto;
+  height: 36px;
+  background: var(--bg-subtle);
+  border-radius: 8px;
+  padding: 3px;
+}
+.directory-toolbar .filter-tab-btn {
+  height: 28px;
+  padding: 0 11px;
+  border-radius: 6px;
+  font-size: 12.5px;
+}
+.directory-toolbar .filter-tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 99px;
+  background: var(--bg-subtle-2);
+  font-size: 10.5px;
+  font-weight: 700;
+}
+.directory-toolbar .filter-tab-btn.active .filter-tab-count {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+}
+@media (max-width: 900px) {
+  .directory-hero-top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .directory-hero-cta {
+    align-self: flex-start;
+  }
+  .directory-toolbar .filter-segmented-control {
+    margin-left: 0;
+  }
+}
+
+/* ─── YORK BENTO DASHBOARD SYSTEM ─── */
+/* Flat canvas system — open layout, York logo green primary, quiet hierarchy */
+.bento-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1100px;
+}
+.bento-greeting-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.bento-greeting-copy { min-width: 0; flex: 1; }
+.bento-greeting-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--text-main);
+}
+.bento-greeting-sub {
+  margin: 4px 0 0;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.45;
+  max-width: 540px;
+}
+.bento-greeting-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.bento-date-text {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  font-weight: 400;
+  white-space: nowrap;
+}
+.bento-date-pill { display: none; } /* legacy */
+.bento-cta {
+  height: 34px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 8px;
+  border: 1px solid var(--btn-primary-bg);
+  background: var(--btn-primary-bg);
+  color: #fff !important;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background 0.15s ease;
+}
+.bento-cta:hover { background: var(--btn-primary-hover); border-color: var(--btn-primary-hover); }
+.bento-cta-secondary {
+  background: transparent;
+  color: var(--text-secondary) !important;
+  border-color: var(--line);
+}
+.bento-cta-secondary:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main) !important;
+}
+.bento-metric-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--line);
+}
+.bento-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 20px 14px 0;
+  margin-right: 20px;
+  border-right: 1px solid var(--line);
+  min-width: 0;
+}
+.bento-metric:last-child {
+  border-right: none;
+  margin-right: 0;
+  padding-right: 0;
+}
+.bento-metric-value {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+.bento-metric-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+.bento-metric-value.warn { color: #B45309; }
+.bento-metric-value.ok { color: var(--emerald-dark); }
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 12px;
+}
+.bento-span-3 { grid-column: span 3; }
+.bento-span-4 { grid-column: span 4; }
+.bento-span-5 { grid-column: span 5; }
+.bento-span-6 { grid-column: span 6; }
+.bento-span-7 { grid-column: span 7; }
+.bento-span-8 { grid-column: span 8; }
+.bento-span-12 { grid-column: span 12; }
+.bento-surface {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  min-width: 0;
+}
+.bento-tile {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: none;
+  min-width: 0;
+}
+.bento-tile-soft,
+.bento-tile-dark {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  color: var(--text-main);
+  box-shadow: none;
+}
+.bento-tile-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 4px;
+}
+.bento-kpi-value {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+.bento-kpi-caption {
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+.bento-stack { display: flex; flex-direction: column; gap: 10px; }
+.bento-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.bento-panel-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+.bento-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 4px;
+}
+.bento-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 2px;
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  margin-bottom: -1px;
+}
+.bento-chip:hover { color: var(--text-main); }
+.bento-chip.active {
+  background: transparent;
+  border-bottom-color: var(--emerald);
+  color: var(--text-main);
+  font-weight: 600;
+}
+.bento-chip-count {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-faint);
+}
+.bento-chip.active .bento-chip-count { color: var(--emerald-dark); }
+.bento-search {
+  position: relative;
+  flex: 1;
+  min-width: 180px;
+}
+.bento-search input {
+  width: 100%;
+  height: 34px;
+  padding: 0 12px 0 34px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-size: 12.5px;
+  font-weight: 400;
+  outline: none;
+  box-sizing: border-box;
+}
+.bento-search input:focus {
+  border-color: var(--emerald-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--emerald) 14%, transparent);
+}
+.bento-search-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.bento-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.bento-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.12s ease;
+}
+.bento-row:last-child { border-bottom: none; }
+.bento-row:hover { background: color-mix(in srgb, var(--bg-subtle) 80%, transparent); }
+.bento-row-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+.bento-row-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.bento-progress {
+  height: 3px;
+  border-radius: 9999px;
+  background: var(--bg-subtle-2);
+  overflow: hidden;
+  margin-top: 8px;
+}
+.bento-progress > span {
+  display: block;
+  height: 100%;
+  border-radius: 9999px;
+  background: var(--emerald);
+}
+.bento-meta-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.bento-meta-pills .workspaces-meta-pill,
+.bento-meta-pills .initiatives-awaiting-pill {
+  height: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.bento-page .workspace-card,
+.bento-page .initiative-card,
+.bento-page .eco-card,
+.bento-page .support-ticket-card {
+  box-shadow: none;
+  border-radius: 10px;
+}
+.bento-page .workspace-card-name,
+.bento-page .initiative-title,
+.bento-page .support-ticket-title,
+.bento-page .eco-card-name,
+.bento-page .team-member-name {
+  font-weight: 600;
+  font-size: 14px;
+}
+.bento-page .eco-title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.bento-page .eco-eyebrow {
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.bento-page .team-panel,
+.bento-page .eco-panel {
+  box-shadow: none;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-card);
+}
+.bento-page .support-ticket-card {
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  margin-bottom: 8px;
+}
+.bento-page .workspace-card-icon {
+  background: var(--btn-primary-bg);
+}
+.bento-page .workspace-launch-btn,
+.bento-page .initiative-signoff-btn,
+.bento-page .team-invite-btn,
+.bento-page .support-raise-btn {
+  background: var(--btn-primary-bg) !important;
+  border-color: var(--btn-primary-bg) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+.bento-page .workspace-launch-btn:hover,
+.bento-page .initiative-signoff-btn:hover {
+  background: var(--btn-primary-hover) !important;
+}
+@media (max-width: 1100px) {
+  .bento-span-3, .bento-span-4, .bento-span-5, .bento-span-6, .bento-span-7, .bento-span-8 {
+    grid-column: span 6;
+  }
+  .bento-metric { border-right: none; margin-right: 16px; }
+}
+@media (max-width: 720px) {
+  .bento-greeting-title { font-size: 18px; }
+  .bento-span-3, .bento-span-4, .bento-span-5, .bento-span-6, .bento-span-7, .bento-span-8, .bento-span-12 {
+    grid-column: span 12;
+  }
 }
 
 /* Date Range Pill - Standardized 38px Height */
@@ -1223,28 +1903,27 @@ i[data-lucide], svg.lucide {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #084C36; /* York signature dark green */
-  border: 1px solid #063828;
+  background: var(--btn-primary-bg);
+  border: 1px solid var(--btn-primary-bg);
   border-radius: 6px;
   color: #FFFFFF !important;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: -0.01em;
   white-space: nowrap;
-  box-shadow: 0 1px 2px rgba(8, 76, 54, 0.2);
+  box-shadow: none;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease;
   box-sizing: border-box;
 }
 .btn-saas-primary:hover {
-  background: #063828;
-  border-color: #04261B;
-  box-shadow: 0 2px 4px rgba(8, 76, 54, 0.25);
-  transform: translateY(-0.5px);
+  background: var(--btn-primary-hover);
+  border-color: var(--btn-primary-hover);
+  transform: none;
 }
 .btn-saas-primary:active {
-  background: #04261B;
-  transform: translateY(1px);
+  background: var(--btn-primary-hover);
+  transform: none;
 }
 .btn-saas-primary i, .btn-saas-primary svg {
   width: 13px;
@@ -1420,21 +2099,21 @@ i[data-lucide], svg.lucide {
   justify-content: center;
   gap: 8px;
   padding: 0 14px;
-  background: #084C36 !important;
+  background: var(--btn-primary-bg) !important;
   color: #FFFFFF !important;
   border-radius: 6px !important;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: -0.01em;
-  box-shadow: 0 1px 2px rgba(8, 76, 54, 0.2) !important;
-  border: 1px solid #063828 !important;
-  transition: all 0.15s ease;
+  box-shadow: none !important;
+  border: 1px solid var(--btn-primary-bg) !important;
+  transition: background 0.15s ease;
   cursor: pointer;
   box-sizing: border-box;
   white-space: nowrap;
 }
 .export-pill-btn:hover {
-  background: #063828 !important;
+  background: var(--btn-primary-hover) !important;
   color: #FFFFFF !important;
   box-shadow: 0 2px 4px rgba(8, 76, 54, 0.25) !important;
 }
@@ -3365,94 +4044,6 @@ i[data-lucide], svg.lucide {
 
 
 /* ─── V3 DUAL-PERSPECTIVE CUSTOM EXTENSIONS ─── */
-.copilot-trigger {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 50;
-  background: linear-gradient(135deg, #083e2e 0%, #0b5e43 100%);
-  color: #ffffff;
-  border-radius: 9999px;
-  padding: 0.8rem 1.4rem;
-  font-size: 0.84rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  box-shadow: 0 10px 25px -5px rgba(8, 62, 46, 0.45), 0 4px 10px -2px rgba(8, 62, 46, 0.25);
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-}
-.copilot-panel {
-  position: fixed;
-  bottom: 5.5rem;
-  right: 1.5rem;
-  width: 420px;
-  max-width: calc(100vw - 3rem);
-  height: 600px;
-  max-height: calc(100vh - 8rem);
-  background: var(--york-card);
-  border-radius: 1.5rem;
-  border: 1px solid var(--york-border);
-  box-shadow: 0 25px 60px -12px rgba(15, 23, 42, 0.3);
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.copilot-header {
-  background: linear-gradient(135deg, #083e2e 0%, #0b5e43 100%);
-  color: #ffffff;
-  padding: 1.15rem 1.35rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-}
-.copilot-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  background: var(--york-bg);
-}
-.copilot-msg-ai {
-  background: var(--york-card);
-  border: 1px solid var(--york-border);
-  border-radius: 1.1rem 1.1rem 1.1rem 0.25rem;
-  padding: 0.9rem 1.15rem;
-  font-size: 0.82rem;
-  line-height: 1.55;
-  color: var(--york-dark);
-  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
-}
-.copilot-msg-user {
-  background: #083e2e;
-  color: #ffffff;
-  border-radius: 1.1rem 1.1rem 0.25rem 1.1rem;
-  padding: 0.8rem 1.1rem;
-  font-size: 0.82rem;
-  line-height: 1.45;
-  align-self: flex-end;
-  max-width: 85%;
-  box-shadow: 0 3px 10px rgba(8, 62, 46, 0.25);
-}
-.copilot-quick-chip {
-  background: var(--york-card);
-  border: 1px solid var(--york-border);
-  color: var(--york-slate);
-  font-size: 0.72rem;
-  font-weight: 600;
-  padding: 5px 12px;
-  border-radius: 9999px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  white-space: nowrap;
-}
 .deck-modal {
   position: fixed;
   inset: 0;
@@ -3538,57 +4129,169 @@ i[data-lucide], svg.lucide {
   justify-content: center;
 }
 
-/* Modern Copilot Floating Drawer */
+/* ─── Ask York IE Co-Pilot (design system) ─── */
 .copilot-trigger {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  z-index: 50;
+  z-index: 60;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
+  gap: 10px;
+  height: 44px;
+  padding: 0 18px;
   border-radius: 9999px;
-  background: var(--cta-primary-bg);
+  background: var(--btn-primary-bg);
   color: #ffffff;
-  font-size: 13px;
-  font-weight: 700;
-  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  box-shadow: 0 8px 24px rgba(0, 122, 90, 0.28);
+  border: 1px solid var(--btn-primary-bg);
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.15s ease;
 }
 .copilot-trigger:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(16, 185, 129, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  background: var(--btn-primary-hover);
+  border-color: var(--btn-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(0, 122, 90, 0.34);
+}
+.copilot-trigger-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #34D399;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.28);
+  flex-shrink: 0;
+}
+.copilot-trigger-x {
+  font-size: 12px;
+  opacity: 0.75;
+  margin-left: 2px;
 }
 
 .copilot-panel {
   position: fixed;
   bottom: 80px;
   right: 24px;
-  width: 440px;
-  max-width: calc(100vw - 48px);
-  height: 580px;
+  width: 420px;
+  max-width: calc(100vw - 40px);
+  height: 560px;
   max-height: calc(100vh - 120px);
   background: var(--bg-card);
   border: 1px solid var(--line);
-  border-radius: 20px;
-  box-shadow: var(--shadow-drawer);
-  z-index: 50;
+  border-radius: 18px;
+  box-shadow: 0 24px 60px -16px rgba(15, 23, 42, 0.35), 0 8px 20px rgba(15, 23, 42, 0.08);
+  z-index: 60;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  backdrop-filter: blur(20px);
 }
 
 .copilot-header {
-  padding: 16px 20px;
-  background: var(--bg-subtle);
-  border-bottom: 1px solid var(--line);
+  padding: 14px 16px;
+  background: #084C36;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.copilot-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.copilot-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.copilot-title-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.copilot-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34D399;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.25);
+  flex-shrink: 0;
+}
+.copilot-context {
+  margin-top: 3px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.72);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
+.copilot-close {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.copilot-close:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.copilot-chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+  flex-shrink: 0;
+  scrollbar-width: none;
+}
+.copilot-chips::-webkit-scrollbar { display: none; }
+
+.copilot-quick-chip {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  color: var(--text-secondary);
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 6px 11px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.copilot-quick-chip:hover {
+  border-color: var(--emerald-light);
+  color: var(--emerald-dark);
+  background: var(--emerald-subtle);
 }
 
 .copilot-messages {
@@ -3598,46 +4301,123 @@ i[data-lucide], svg.lucide {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  background: var(--bg-subtle);
 }
 
 .copilot-msg-ai {
-  background: var(--bg-subtle);
+  background: var(--bg-card);
   border: 1px solid var(--line);
   color: var(--text-main);
-  border-radius: 14px 14px 14px 2px;
-  padding: 12px 14px;
-  font-size: 12.5px;
-  line-height: 1.5;
-  max-width: 90%;
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.55;
+  max-width: 100%;
+  box-shadow: var(--shadow-pill);
+}
+.copilot-msg-ai strong {
+  color: var(--text-main);
+  font-weight: 700;
+}
+.copilot-msg-meta {
+  margin-top: 10px;
+  font-size: 10.5px;
+  color: var(--text-faint);
+  text-align: right;
+}
+.copilot-msg-action {
+  margin-top: 10px;
+}
+.copilot-msg-action button {
+  height: 28px;
+  padding: 0 11px;
+  background: #084C36;
+  color: #fff;
+  border: 1px solid #063828;
+  border-radius: 7px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.copilot-msg-action button:hover {
+  background: #063828;
 }
 
 .copilot-msg-user {
-  background: var(--cta-primary-bg);
+  background: #084C36;
   color: #ffffff;
-  border-radius: 14px 14px 2px 14px;
-  padding: 10px 14px;
-  font-size: 12.5px;
-  line-height: 1.4;
+  border-radius: 14px 14px 4px 14px;
+  padding: 11px 14px;
+  font-size: 13px;
+  line-height: 1.45;
   align-self: flex-end;
   max-width: 85%;
+  box-shadow: 0 4px 12px rgba(8, 76, 54, 0.22);
 }
 
-.copilot-quick-chip {
+.copilot-composer {
+  padding: 12px 14px;
   background: var(--bg-card);
-  border: 1px solid var(--line);
-  color: var(--text-secondary);
-  font-size: 11px;
-  font-weight: 600;
-  padding: 5px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
 }
-.copilot-quick-chip:hover {
-  border-color: var(--emerald);
-  color: var(--emerald-dark);
-  background: var(--emerald-subtle);
+.copilot-composer-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.copilot-input {
+  flex: 1;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-subtle);
+  color: var(--text-main);
+  font-size: 12.5px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.copilot-input::placeholder {
+  color: var(--text-faint);
+}
+.copilot-input:focus {
+  background: var(--bg-card);
+  border-color: var(--emerald-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--emerald) 16%, transparent);
+}
+.copilot-send {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: #084C36;
+  border: 1px solid #063828;
+  border-radius: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.copilot-send:hover {
+  background: #063828;
+}
+.copilot-send svg {
+  width: 15px;
+  height: 15px;
+}
+
+@media (max-width: 520px) {
+  .copilot-panel {
+    right: 12px;
+    left: 12px;
+    width: auto;
+    bottom: 72px;
+  }
+  .copilot-trigger {
+    right: 16px;
+    bottom: 16px;
+  }
 }
 
 /* Executive Board Deck Presentation Modal */
@@ -3716,13 +4496,22 @@ i[data-lucide], svg.lucide {
 .modal-content {
   background: var(--bg-card) !important;
   border: 1px solid var(--line) !important;
-  border-radius: 20px !important;
-  box-shadow: var(--shadow-drawer) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.12) !important;
   color: var(--text-main) !important;
   max-width: 560px;
   width: 100%;
   overflow: hidden;
   animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.modal-content h1, 
+.modal-content h2, 
+.modal-content h3, 
+.modal-content h4 {
+  color: var(--text-main) !important;
+}
+.modal-content label {
+  color: var(--text-secondary) !important;
 }
 .modal-content input, 
 .modal-content select, 
@@ -3737,6 +4526,11 @@ i[data-lucide], svg.lucide {
 .modal-content textarea:focus {
   border-color: var(--emerald) !important;
   outline: none !important;
+  box-shadow: 0 0 0 3px rgba(0, 180, 138, 0.15) !important;
+}
+.modal-content .clean-card {
+  background: var(--bg-subtle) !important;
+  border-color: var(--line) !important;
 }
 
 
@@ -3839,6 +4633,206 @@ i[data-lucide], svg.lucide {
   border-top-right-radius: 16px;
 }
 
+/* Workspaces first-screen hero + card system */
+.workspaces-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.workspaces-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--emerald-dark);
+  margin: 0 0 6px;
+}
+.workspaces-hero .page-headline-lead {
+  font-size: 26px !important;
+  letter-spacing: -0.03em;
+  color: #084C36;
+}
+:root[data-theme="dark"] .workspaces-hero .page-headline-lead {
+  color: var(--text-main);
+}
+.workspaces-hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+.workspaces-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 9999px;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  box-shadow: var(--shadow-pill);
+}
+.workspaces-meta-pill .meta-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--emerald) 20%, transparent);
+}
+.workspaces-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+@media (max-width: 900px) {
+  .workspaces-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.workspace-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+.workspace-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
+  transform: translateY(-1px);
+}
+.workspace-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.workspace-card-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.workspace-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #084C36;
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.workspace-card-icon i,
+.workspace-card-icon svg {
+  width: 18px;
+  height: 18px;
+  color: #ffffff !important;
+  stroke: #ffffff;
+}
+.workspace-card-name {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.workspace-card-stage {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.workspace-card-role {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+.workspace-card-desc {
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.workspace-status-block {
+  margin-top: auto;
+  padding-top: 4px;
+}
+.workspace-status-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 8px;
+}
+.workspace-status-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--emerald-dark);
+  margin-bottom: 10px;
+}
+.workspace-status-row .live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--emerald);
+}
+.workspace-status-bar {
+  height: 5px;
+  border-radius: 9999px;
+  background: var(--bg-subtle-2);
+  overflow: hidden;
+}
+.workspace-status-bar > span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 9999px;
+  background: #084C36;
+}
+.workspace-launch-btn {
+  width: 100%;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #084C36;
+  border: 1px solid #063828;
+  border-radius: 10px;
+  color: #ffffff !important;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+.workspace-launch-btn:hover {
+  background: #063828;
+}
+.workspace-launch-btn:active {
+  transform: scale(0.99);
+}
+
 /* ─── SOW MILESTONES PIPELINE ─── */
 .pipeline-col {
   background: var(--bg-subtle);
@@ -3865,6 +4859,632 @@ i[data-lucide], svg.lucide {
   border-color: var(--emerald);
   box-shadow: 0 6px 16px rgba(15, 23, 42, 0.07);
   transform: translateY(-1px);
+}
+
+/* Initiatives page (client portal) */
+.initiatives-banner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+}
+.initiatives-banner-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+}
+.initiatives-banner-desc {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.45;
+  max-width: 640px;
+}
+.initiatives-awaiting-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 9999px;
+  background: rgba(124, 58, 237, 0.12);
+  border: 1px solid rgba(124, 58, 237, 0.28);
+  color: #6D28D9;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.initiatives-awaiting-pill .await-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #7C3AED;
+}
+.initiatives-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .initiatives-banner {
+    flex-direction: column;
+  }
+  .initiatives-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.initiative-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.initiative-card:hover {
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
+}
+.initiative-card.needs-signoff {
+  border-color: rgba(124, 58, 237, 0.55);
+  box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.18), 0 8px 22px rgba(124, 58, 237, 0.08);
+}
+.initiative-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.initiative-practice {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  border: 1px solid var(--line);
+}
+.initiative-status {
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.initiative-status.approved { color: var(--emerald-dark); }
+.initiative-status.signoff { color: #DC2626; }
+.initiative-status.delivery { color: #C2410C; }
+.initiative-status.scoping { color: var(--text-muted); }
+.initiative-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+.initiative-meta {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+.initiative-desc-box {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.initiative-deliverable-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 4px;
+}
+.initiative-deliverable-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+.initiative-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.initiative-footer-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-faint);
+}
+.initiative-footer-status {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--emerald-dark);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.initiative-footer-muted {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.initiative-signoff-btn {
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border: 1px solid #6D28D9;
+  background: #7C3AED;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+.initiative-signoff-btn:hover {
+  background: #6D28D9;
+}
+
+/* Support Desk (client portal) */
+.support-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 24px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #063828 0%, #084C36 55%, #0A5C42 100%);
+  color: #ffffff;
+  box-shadow: 0 12px 28px rgba(8, 76, 54, 0.28);
+}
+.support-hero-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.support-hero-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 9999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #A7F3D0;
+}
+.support-hero-sla {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(52, 211, 153, 0.18);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  color: #D1FAE5;
+}
+.support-hero-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  color: #ffffff;
+}
+.support-hero-desc {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 560px;
+}
+.support-raise-btn {
+  flex-shrink: 0;
+  height: 40px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  border: none;
+  background: #ffffff;
+  color: #063828;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+.support-raise-btn:hover {
+  background: #F0FDF4;
+  transform: translateY(-1px);
+}
+.support-tickets-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.support-tickets-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-subtle);
+}
+.support-tickets-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+.support-tickets-caption {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.support-ticket-list {
+  display: flex;
+  flex-direction: column;
+}
+.support-ticket-card {
+  padding: 18px 18px 16px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.support-ticket-card:last-child {
+  border-bottom: none;
+}
+.support-ticket-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.support-ticket-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.support-status-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.support-status-badge.in_progress {
+  background: rgba(37, 99, 235, 0.12);
+  color: #1D4ED8;
+  border: 1px solid rgba(37, 99, 235, 0.22);
+}
+.support-status-badge.resolved {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border: 1px solid var(--emerald-light);
+}
+.support-status-badge.open,
+.support-status-badge.new {
+  background: rgba(245, 158, 11, 0.14);
+  color: #B45309;
+  border: 1px solid rgba(245, 158, 11, 0.28);
+}
+.support-product-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  border: 1px solid var(--line);
+}
+.support-ticket-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+}
+.support-ticket-id {
+  color: var(--text-faint);
+  font-weight: 600;
+}
+.support-ticket-time {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding-top: 2px;
+  white-space: nowrap;
+}
+.support-ticket-desc {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.support-ticket-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.support-ticket-meta strong {
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+.support-ticket-meta .sev-high { color: #B91C1C; }
+.support-ticket-meta .sev-medium { color: #C2410C; }
+.support-ticket-meta .sev-low { color: var(--emerald-dark); }
+.support-york-response {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--emerald-subtle);
+  border: 1px solid var(--emerald-light);
+}
+.support-york-response-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--emerald-dark);
+  margin-bottom: 4px;
+}
+.support-york-response-text {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.support-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-muted);
+}
+@media (max-width: 800px) {
+  .support-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .support-tickets-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Team & Access (client portal) */
+.team-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+}
+.team-banner-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.015em;
+}
+.team-banner-desc {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.45;
+  max-width: 620px;
+}
+.team-invite-btn {
+  flex-shrink: 0;
+  height: 38px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: 9px;
+  border: 1px solid #063828;
+  background: #084C36;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.team-invite-btn:hover {
+  background: #063828;
+}
+.team-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.team-panel-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-subtle);
+}
+.team-panel-title {
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+.team-member-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--line);
+}
+.team-member-row:last-child {
+  border-bottom: none;
+}
+.team-member-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+.team-member-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #084C36;
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.team-member-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.team-member-name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+.team-role-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 9999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.team-role-badge.owner {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border: 1px solid var(--emerald-light);
+}
+.team-role-badge.member {
+  background: rgba(37, 99, 235, 0.1);
+  color: #1D4ED8;
+  border: 1px solid rgba(37, 99, 235, 0.22);
+}
+.team-member-meta {
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.team-rights {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 7px;
+  max-width: 420px;
+}
+.team-right-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 9999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.team-right-chip.locked {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+}
+.team-right-chip.active {
+  background: var(--emerald-subtle);
+  color: var(--emerald-dark);
+  border-color: var(--emerald-light);
+  cursor: pointer;
+}
+.team-right-chip.active:hover {
+  background: var(--emerald-light);
+}
+.team-right-chip.inactive {
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border-color: var(--line);
+  cursor: pointer;
+}
+.team-right-chip.inactive:hover {
+  border-color: var(--line-strong);
+  color: var(--text-secondary);
+}
+@media (max-width: 900px) {
+  .team-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .team-member-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .team-rights {
+    justify-content: flex-start;
+    max-width: none;
+  }
 }
 
 /* ─── THREAT SIGNALS ─── */
@@ -3951,6 +5571,194 @@ i[data-lucide], svg.lucide {
   border: 1px solid var(--line);
 }
 
+/* York Ecosystem catalog (client portal) */
+.eco-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  padding: 22px 22px 20px;
+}
+.eco-panel-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.eco-eyebrow {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.eco-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+.eco-hint {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  padding-bottom: 4px;
+  white-space: nowrap;
+}
+.eco-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.eco-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 9999px;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.eco-filter-btn:hover {
+  border-color: var(--line-strong);
+  color: var(--text-main);
+}
+.eco-filter-btn.active {
+  background: var(--emerald-subtle);
+  border-color: var(--emerald-light);
+  color: var(--emerald-dark);
+}
+.eco-filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--bg-subtle-2);
+  color: var(--text-muted);
+}
+.eco-filter-btn.active .eco-filter-count {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+.eco-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.eco-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 168px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.eco-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+}
+.eco-card-stage {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.eco-card-name {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+.eco-card-desc {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  flex: 1;
+}
+.eco-card-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.eco-available {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.eco-workspace-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--emerald-dark);
+  cursor: pointer;
+}
+.eco-workspace-link:hover {
+  color: #084C36;
+}
+.eco-request-btn {
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.eco-request-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+  border-color: var(--line-strong);
+}
+@media (max-width: 1100px) {
+  .eco-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 700px) {
+  .eco-panel-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .eco-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
 </head>
 <body class="bg-[#f8fafc] text-[#0f172a] min-h-screen">
@@ -3972,7 +5780,7 @@ const PRODUCTS_CATALOG = [
     defaultGranted: true,
     creditType: 'AI Advisor Credits',
     defaultCredits: 10000,
-    icon: 'BrainCircuit',
+    icon: 'Target',
     description: 'Strategic market telemetry, competitor radar, and AI-prioritized growth actions.'
   },
   {
@@ -4072,7 +5880,7 @@ const PRODUCTS_CATALOG = [
     defaultGranted: false,
     creditType: 'LLM Credits',
     defaultCredits: 20000,
-    icon: 'Sparkles',
+    icon: 'Gauge',
     description: 'LLM token tracking, evaluation benchmarks, and latency monitoring.'
   },
   {
@@ -4332,7 +6140,7 @@ const SYNDICATE_PERKS_CATALOG = [
   {
     id: 'perk-openai',
     partner: 'OpenAI',
-    logo: 'Sparkles',
+    logo: 'Zap',
     badge: 'Frontier AI Partner',
     category: 'ai',
     categoryLabel: 'AI & APIs',
@@ -5308,7 +7116,9 @@ class YorkConsoleApp {
         this.adminFilterStatus = parsed.adminFilterStatus || "all";
         this.adminTab = parsed.adminTab || 'clients'; // 'hubspot', 'clients', 'milestones', 'ecosystem', 'support'
         this.clientTab = parsed.clientTab || 'workspaces';
-      if (['cadence', 'threat-radar', 'deliverables', 'perks'].includes(this.clientTab)) this.clientTab = 'workspaces'; // 'products', 'deliverables', 'milestones', 'team', 'ecosystem', 'threat-radar', 'perks'
+      if (['cadence', 'threat-radar', 'deliverables', 'perks', 'support', 'radar'].includes(this.clientTab)) this.clientTab = 'workspaces';
+      if (this.clientTab === 'products') this.clientTab = 'workspaces';
+      if (this.clientTab === 'initiatives') this.clientTab = 'milestones';
         this.ecosystemFilter = parsed.ecosystemFilter || 'all';
         this.showCatalog = parsed.showCatalog ?? true;
         this.unmaskFinancials = parsed.unmaskFinancials ?? false;
@@ -5748,9 +7558,9 @@ class YorkConsoleApp {
     const client = this.getCurrentClient() || this.clients[0];
     let greeting = "";
     if (this.currentUser?.role === 'admin') {
-      greeting = `**Hello ${this.currentUser.name}!** I am your **York Operating AI Co-Pilot**. I have live visibility across **${this.clients.length} portfolio accounts**, milestone sign-off queues, credit burn telemetry, and HubSpot Closed-Won contracts.<br><br>What would you like to review or analyze?`;
+      greeting = `<strong>Hello ${this.currentUser.name}!</strong> I am your <strong>York Operating AI Co-Pilot</strong>. I have live visibility across <strong>${this.clients.length} portfolio accounts</strong>, milestone sign-off queues, credit burn telemetry, and HubSpot Closed-Won contracts.<br><br>What would you like to review or analyze?`;
     } else {
-      greeting = `**Hello ${this.currentUser?.name || 'there'}!** I am your **York IE Contextual Co-Pilot**. I am actively synced with **${client.name}**'s **${client.retainerTier || 'Scale Acceleration'}** pod, your verified SOW milestones, **$420,000 GTM pipeline**, and credit runway telemetry.<br><br>How can I assist you with your operations today?`;
+      greeting = `<strong>Hello ${this.currentUser?.name || 'there'}!</strong> I am your <strong>York IE Contextual Co-Pilot</strong>. I am actively synced with <strong>${client.name}</strong>'s <strong>${client.retainerTier || 'Tier 2: Scale Acceleration'}</strong> pod, your verified SOW milestones, <strong>$420,000 GTM pipeline</strong>, and credit runway telemetry.<br><br>How can I assist you with your operations today?`;
     }
     this.copilotMessages = [
       { sender: 'ai', text: greeting, timestamp: 'Just now' }
@@ -6265,23 +8075,40 @@ function getIconSvg(name, size = 18, color = 'currentColor') {
     Activity: 'activity',
     ArrowRight: 'arrow-right',
     BarChart3: 'bar-chart-3',
-    BrainCircuit: 'brain-circuit',
+    BrainCircuit: 'target',
     Building: 'building-2',
     Check: 'check',
+    CheckCircle: 'check-circle',
+    CheckCircle2: 'check-circle-2',
+    ClipboardCheck: 'clipboard-check',
+    Cloud: 'cloud',
+    Code2: 'code-2',
+    CreditCard: 'credit-card',
     Download: 'download',
     ExternalLink: 'external-link',
+    Eye: 'eye',
+    FileBadge: 'badge-check',
+    FileText: 'file-text',
+    FolderKanban: 'folder-kanban',
+    Gauge: 'gauge',
     Gift: 'gift',
+    GitBranch: 'git-branch',
+    GraduationCap: 'graduation-cap',
     LifeBuoy: 'life-buoy',
+    Lock: 'lock',
     LogOut: 'log-out',
     Mail: 'mail',
+    Palette: 'palette',
     Presentation: 'presentation',
     Radar: 'radio',
     RefreshCw: 'refresh-cw',
     Rocket: 'rocket',
     Search: 'search',
     Send: 'send',
+    Server: 'server',
+    ShieldCheck: 'shield-check',
     Sliders: 'sliders-horizontal',
-    Sparkles: 'sparkles',
+    Sparkles: 'zap',
     Target: 'target',
     Users: 'users',
     Video: 'video',
@@ -6421,98 +8248,96 @@ function renderCopilotWidget() {
   if (!app.currentUser || app.currentUser.role === 'admin') return '';
   const client = app.getCurrentClient() || app.clients[0];
   const roleLabel = app.currentUser?.role === 'client_owner' ? 'Company Owner' : 'Team Member';
-
   const messages = app.copilotMessages || [];
 
   return `
-    <!-- Floating Trigger Button -->
-    <button onclick="app.toggleCopilot()" class="copilot-trigger" id="ask-york-trigger">
-      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-      <span class="font-bold">Ask York AI</span>
-      <span class="text-[10px] opacity-75">${app.copilotOpen ? '✕' : '✨'}</span>
+    <button type="button" onclick="app.toggleCopilot()" class="copilot-trigger" id="ask-york-trigger" aria-expanded="${app.copilotOpen ? 'true' : 'false'}" aria-controls="ask-york-panel">
+      <span class="copilot-trigger-dot" aria-hidden="true"></span>
+      <span>Ask York AI</span>
+      ${app.copilotOpen ? `<span class="copilot-trigger-x" aria-hidden="true">✕</span>` : ''}
     </button>
 
-    <!-- Slide-Out Copilot Panel -->
     ${app.copilotOpen ? `
-      <div class="copilot-panel animate-fade-in" id="ask-york-panel">
-        
-        <!-- Header -->
+      <div class="copilot-panel animate-fade-in" id="ask-york-panel" role="dialog" aria-label="Ask York IE Co-Pilot">
         <div class="copilot-header">
-          <div class="flex items-center gap-2.5">
-            <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-white flex items-center justify-center font-bold text-xs border border-white/20">
-              Y
-            </div>
-            <div>
-              <div class="font-bold text-xs flex items-center gap-1.5">
+          <div class="copilot-header-left">
+            <div class="copilot-avatar" aria-hidden="true">Y</div>
+            <div style="min-width:0">
+              <div class="copilot-title-row">
                 <span>Ask York IE Co-Pilot</span>
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span class="copilot-live-dot" aria-hidden="true"></span>
               </div>
-              <div class="text-[10px] opacity-80 truncate max-w-[220px]">
-                Context: ${client ? client.name : 'York IE Console'} · ${roleLabel}
-              </div>
+              <div class="copilot-context">Context: ${client ? client.name : 'York IE Console'} · ${roleLabel}</div>
             </div>
           </div>
-          <button onclick="app.toggleCopilot()" class="text-white/80 hover:text-white text-base">✕</button>
+          <button type="button" onclick="app.toggleCopilot()" class="copilot-close" aria-label="Close co-pilot">✕</button>
         </div>
 
-        <!-- Quick Prompt Chips -->
-        <div class="px-3 py-2 bg-slate-100 border-b border-slate-200 overflow-x-auto flex items-center gap-1.5 text-xs">
-          <button onclick="handleCopilotQuickPrompt('Generate Board ROI Deck')" class="copilot-quick-chip">
-            📊 Board ROI Deck
-          </button>
-          <button onclick="handleCopilotQuickPrompt('What are our top GTM milestones?')" class="copilot-quick-chip">
-            🎯 SOW Milestones
-          </button>
-          <button onclick="handleCopilotQuickPrompt('Check credit runway & burn rate')" class="copilot-quick-chip">
-            ⚡ Credit Runway
-          </button>
-          <button onclick="handleCopilotQuickPrompt('When is our next York sync call?')" class="copilot-quick-chip">
-            📅 Strategy Cadence
-          </button>
+        <div class="copilot-chips">
+          <button type="button" onclick="handleCopilotQuickPrompt('Generate Board ROI Deck')" class="copilot-quick-chip">📊 Board ROI Deck</button>
+          <button type="button" onclick="handleCopilotQuickPrompt('What are our top GTM milestones?')" class="copilot-quick-chip">🎯 SOW Milestones</button>
+          <button type="button" onclick="handleCopilotQuickPrompt('Check credit runway & burn rate')" class="copilot-quick-chip">⚡ Credit Runway</button>
         </div>
 
-        <!-- Messages Body -->
         <div class="copilot-messages" id="copilot-msg-container">
-          ${messages.map(m => {
+          ${messages.length === 0 ? `
+            <div style="padding: 32px 18px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; box-sizing: border-box;">
+              <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(0, 179, 137, 0.15); color: var(--emerald-dark); display: grid; place-items: center; font-size: 18px; font-weight: 800; margin-bottom: 12px; border: 1px solid rgba(0, 179, 137, 0.3);">
+                Y
+              </div>
+              <div style="font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Ask York AI Co-Pilot</div>
+              <p style="font-size: 12px; line-height: 1.5; color: var(--text-muted); max-width: 290px; margin: 0 auto 16px;">
+                Directly connected with your dedicated York Operating Pod. Ask questions about your SOW milestones, credit burn, or board deck.
+              </p>
+              <div style="display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 320px;">
+                <button type="button" onclick="handleCopilotQuickPrompt('Generate Board ROI Deck')" style="text-align: left; padding: 10px 12px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--line); font-size: 11.5px; color: var(--text-secondary); cursor: pointer; transition: all 0.15s ease;" onmouseover="this.style.borderColor='var(--emerald)'" onmouseout="this.style.borderColor='var(--line)'">
+                  📊 <strong>Generate Board ROI Deck</strong>
+                  <span style="display: block; font-size: 10.5px; color: var(--text-muted); margin-top: 2px;">Synthesize current SOW velocity & cloud savings</span>
+                </button>
+                <button type="button" onclick="handleCopilotQuickPrompt('What are our top GTM milestones?')" style="text-align: left; padding: 10px 12px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--line); font-size: 11.5px; color: var(--text-secondary); cursor: pointer; transition: all 0.15s ease;" onmouseover="this.style.borderColor='var(--emerald)'" onmouseout="this.style.borderColor='var(--line)'">
+                  🎯 <strong>What are our top GTM milestones?</strong>
+                  <span style="display: block; font-size: 10.5px; color: var(--text-muted); margin-top: 2px;">Review current deliverables with sign-off status</span>
+                </button>
+                <button type="button" onclick="handleCopilotQuickPrompt('Check credit runway & burn rate')" style="text-align: left; padding: 10px 12px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--line); font-size: 11.5px; color: var(--text-secondary); cursor: pointer; transition: all 0.15s ease;" onmouseover="this.style.borderColor='var(--emerald)'" onmouseout="this.style.borderColor='var(--line)'">
+                  ⚡ <strong>Check credit runway & burn rate</strong>
+                  <span style="display: block; font-size: 10.5px; color: var(--text-muted); margin-top: 2px;">Inspect available tool quota across AWS & SaaS</span>
+                </button>
+              </div>
+            </div>
+          ` : messages.map(m => {
             if (m.sender === 'user') {
-              return `
-                <div class="copilot-msg-user">
-                  ${m.text}
-                </div>
-              `;
+              return `<div class="copilot-msg-user">${m.text}</div>`;
             }
+            const formatted = String(m.text || '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
             return `
-              <div class="copilot-msg-ai space-y-2">
-                <div>${m.text}</div>
+              <div class="copilot-msg-ai">
+                <div>${formatted}</div>
                 ${m.actionBtn ? `
-                  <div class="pt-1.5">
-                    <button onclick="${m.actionBtn.action}" class="px-3 py-1 bg-[#084c36] hover:bg-[#063828] text-white text-[11px] font-bold rounded-lg shadow-2xs transition">
-                      ${m.actionBtn.label} &rarr;
-                    </button>
+                  <div class="copilot-msg-action">
+                    <button type="button" onclick="${m.actionBtn.action}">${m.actionBtn.label} →</button>
                   </div>
                 ` : ''}
-                <div class="text-[9px] text-slate-400 text-right">${m.timestamp || ''}</div>
+                <div class="copilot-msg-meta">${m.timestamp || ''}</div>
               </div>
             `;
           }).join('')}
         </div>
 
-        <!-- Input Box -->
-        <div class="p-3 bg-white border-t border-slate-200">
-          <form onsubmit="handleCopilotInputSubmit(event)" class="flex items-center gap-2">
-            <input 
-              type="text" 
-              id="copilot-input" 
-              placeholder="Ask anything about milestones, credits, pipeline..." 
-              class="flex-1 text-xs px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-emerald-600"
+        <div class="copilot-composer">
+          <form onsubmit="handleCopilotInputSubmit(event)" class="copilot-composer-form">
+            <input
+              type="text"
+              id="copilot-input"
+              class="copilot-input"
+              placeholder="Ask anything about milestones, credits, pipeline..."
               autocomplete="off"
+              aria-label="Ask York IE Co-Pilot"
             />
-            <button type="submit" class="p-2 bg-[#084c36] hover:bg-[#063828] text-white rounded-lg transition-colors">
-              ${getIconSvg('Send', 14)}
+            <button type="submit" class="copilot-send" aria-label="Send message">
+              ${getIconSvg('Send', 15)}
             </button>
           </form>
         </div>
-
       </div>
     ` : ''}
   `;
@@ -7084,17 +8909,68 @@ function getAdminRadarSubTabTitle(subTab) {
 
 function getTabTitle(tabId) {
   const titles = {
-    'workspaces': 'Workspaces',
-    'products': 'Workspaces',
-    'milestones': 'SOW Deliverables',
-    'initiatives': 'SOW Deliverables',
-    'threat-radar': 'Market Radar',
-    'perks': 'Partner Perks',
-    'tickets': 'Support Desk',
-    'team': 'Team & Permissions',
-    'ecosystem': 'Ecosystem Catalog'
+    'workspaces': 'Active Workspaces & Tools',
+    'products': 'Active Workspaces & Tools',
+    'milestones': 'Strategic Growth Initiatives & Milestones',
+    'initiatives': 'Strategic Growth Initiatives & Milestones',
+    'tickets': 'Technical Support & Incident Desk',
+    'team': 'Team Members & RBAC Permissions',
+    'ecosystem': 'York IE 18-Product Ecosystem Catalog'
   };
   return titles[tabId] || 'Workspaces';
+}
+
+function getBentoDateParts(date = new Date()) {
+  const day = String(date.getDate());
+  const weekday = date.toLocaleDateString('en-US', { weekday: 'short' });
+  const month = date.toLocaleDateString('en-US', { month: 'long' });
+  return { day, weekday, month };
+}
+
+function getBentoFirstName(fallback = "there") {
+  const user = app.currentUser;
+  const raw = (user?.name || "").trim();
+  if (user?.role === "admin" || raw === "York IE Admin") return "Kyle";
+  if (raw.startsWith("Client Portal")) {
+    const client = (typeof app.getCurrentClient === "function" ? app.getCurrentClient() : null) || app.clients?.[0];
+    return (client?.ownerName || fallback).split(" ")[0];
+  }
+  if (!raw) return fallback;
+  return raw.split(/\s+/)[0] || fallback;
+}
+
+function renderBentoGreeting({ title, subtitle, primaryCta, secondaryCta, metaPills = [] } = {}) {
+  const d = getBentoDateParts();
+  return `
+    <section class="bento-greeting-row">
+      <div class="bento-greeting-copy">
+        <h1 class="bento-greeting-title">${title || ''}</h1>
+        ${subtitle ? `<p class="bento-greeting-sub">${subtitle}</p>` : ''}
+        ${metaPills.length ? `
+          <div class="bento-meta-pills">${metaPills.join('')}</div>
+        ` : ''}
+      </div>
+      <div class="bento-greeting-actions">
+        <span class="bento-date-text">${d.weekday}, ${d.month} ${d.day}</span>
+        ${secondaryCta || ''}
+        ${primaryCta || ''}
+      </div>
+    </section>
+  `;
+}
+
+function renderBentoMetrics(items = []) {
+  if (!items.length) return '';
+  return `
+    <div class="bento-metric-strip" role="group" aria-label="Key metrics">
+      ${items.map(m => `
+        <div class="bento-metric">
+          <div class="bento-metric-value ${m.tone || ''}">${m.value}</div>
+          <div class="bento-metric-label">${m.label}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
 }
 
 // -------------------------------------------------------------------------------------------------
@@ -7151,12 +9027,15 @@ function renderAdminConsole() {
         </div>
 
         <!-- HubSpot CRM Sync Strip -->
-        <div class="sidebar-hubspot-strip" style="margin: 4px 14px 10px; padding: 7px 12px; background: var(--bg-subtle); border: 1px solid var(--line); border-radius: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 11px;">
-          <div style="display: flex; align-items: center; gap: 6px; font-weight: 600; color: var(--text-secondary);">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; display: inline-block;" class="animate-pulse"></span>
-            <span style="font-size: 11px;">HubSpot: Connected</span>
+        <div class="sidebar-hubspot-strip" title="HubSpot CRM connection status">
+          <div class="sidebar-hubspot-status">
+            <span class="sidebar-hubspot-dot" aria-hidden="true"></span>
+            <div class="sidebar-hubspot-copy">
+              <span class="sidebar-hubspot-label">HubSpot</span>
+              <span class="sidebar-hubspot-value">Connected</span>
+            </div>
           </div>
-          <button onclick="app.syncHubSpot()" style="font-size: 10.5px; font-weight: 700; color: var(--emerald-dark); background: var(--bg-card); border: 1px solid var(--line); padding: 2px 7px; border-radius: 6px; cursor: pointer;" title="Sync CRM Deals & Pipeline">
+          <button type="button" class="sidebar-hubspot-sync" onclick="app.syncHubSpot()" title="Sync CRM Deals & Pipeline">
             Sync
           </button>
         </div>
@@ -7227,8 +9106,6 @@ function renderAdminConsole() {
           <div class="topbar-nav-group">
             <div class="topbar-breadcrumb">
               <span class="topbar-crumb-org">York IE Admin</span>
-              <span class="topbar-crumb-slash">/</span>
-              <span class="topbar-crumb-view">${getAdminTabTitle(app.adminTab)}</span>
             </div>
 
             <div class="topbar-v-divider" aria-hidden="true"></div>
@@ -7315,7 +9192,7 @@ function renderAdminCompaniesTab() {
   }
 
   if (query) {
-    companies = companies.filter(c => 
+    companies = companies.filter(c =>
       (c.name || "").toLowerCase().includes(query) ||
       (c.domain || "").toLowerCase().includes(query) ||
       (c.ownerName || "").toLowerCase().includes(query) ||
@@ -7327,258 +9204,100 @@ function renderAdminCompaniesTab() {
   const activeCount = app.clients.filter(c => c.status === "active").length;
   const invitedCount = app.clients.filter(c => c.status === "invited").length;
   const pendingCount = app.clients.filter(c => c.status === "pending_invite").length;
+  let openIncidents = 0;
+  let totalTokens = 0;
+  let healthSum = 0;
+  let healthN = 0;
+  app.clients.forEach(c => {
+    openIncidents += (c.supportTickets || []).filter(t => t.status !== "resolved").length;
+    totalTokens += (c.tokensUsed || 0);
+    if (c.healthTelemetry?.score) {
+      healthSum += c.healthTelemetry.score;
+      healthN += 1;
+    }
+  });
+  const avgHealth = healthN ? Math.round(healthSum / healthN) : 94;
+  const operatorName = getBentoFirstName("Kyle");
+  const hubspotConnected = app.hubspotConnected !== false;
 
   return `
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-      
-      <!-- Section Title & Controls Row -->
-      <section class="title-controls-row">
-        <div class="page-headline-wrap">
-          <h1 class="page-headline-lead">Portfolio Directory</h1>
-          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
-            Onboard companies, assign software service bundles, and monitor operating velocity.
-          </p>
+    <div class="bento-page">
+      ${renderBentoGreeting({
+        title: `Hey ${operatorName}, need a portfolio pulse?`,
+        subtitle: "Onboard companies, assign software, and monitor operating velocity.",
+        secondaryCta: hubspotConnected
+          ? `<button type="button" class="bento-cta bento-cta-secondary" onclick="app.syncHubSpot()">HubSpot · Sync</button>`
+          : `<button type="button" class="bento-cta bento-cta-secondary" onclick="app.syncHubSpot()">Connect HubSpot</button>`,
+        primaryCta: `<button type="button" class="bento-cta" onclick="openAddCompanyModal()"><i data-lucide="plus" style="width:14px;height:14px"></i><span>Add Company</span></button>`
+      })}
+
+      ${renderBentoMetrics([
+        { value: totalCount, label: 'Companies' },
+        { value: activeCount, label: 'Active SOW' },
+        { value: pendingCount, label: 'Ready to onboard' },
+        { value: openIncidents, label: 'Open incidents', tone: openIncidents ? 'warn' : 'ok' },
+        { value: avgHealth + '/100', label: 'Avg health', tone: 'ok' }
+      ])}
+
+      <div class="bento-surface">
+        <div class="bento-panel-head">
+          <h2 class="bento-panel-title">Portfolio</h2>
+          <div class="bento-search" style="max-width:260px">
+            <i data-lucide="search" class="bento-search-icon"></i>
+            <input id="admin-search-input" type="text" value="${app.adminSearchQuery || ""}" oninput="app.setAdminSearchQuery(this.value)" placeholder="Search companies..." aria-label="Search companies" />
+          </div>
         </div>
 
-        <div class="controls-pill-row">
-          <!-- Search Input Pill -->
-          <div style="position: relative; width: 230px;">
-            <i data-lucide="search" style="position: absolute; left: 11px; top: 11px; width: 14px; height: 14px; color: var(--text-muted); pointer-events: none;"></i>
-            <input 
-              id="admin-search-input"
-              type="text" 
-              value="${app.adminSearchQuery || ""}" 
-              oninput="app.setAdminSearchQuery(this.value)" 
-              placeholder="Search companies..." 
-              style="width: 100%; height: 36px; padding-left: 32px; padding-right: 28px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 6px; font-size: 12.5px; color: var(--text-main); outline: none; transition: border-color 0.15s ease;"
-              onfocus="this.style.borderColor='var(--emerald-accent)'"
-              onblur="this.style.borderColor='var(--line)'"
-            />
-            ${app.adminSearchQuery ? `
-              <button onclick="app.setAdminSearchQuery('');" style="position: absolute; right: 8px; top: 9px; color: var(--text-muted); background: none; border: none; cursor: pointer; font-size: 12px; width: 18px; height: 18px; display: grid; place-items: center;">✕</button>
-            ` : ""}
-          </div>
-
-          <!-- Filter Segment Control -->
-          <div class="filter-segmented-control">
-            <button onclick="app.setAdminFilterStatus('all')" class="filter-tab-btn ${filter === 'all' ? 'active' : ''}">
-              <span>All</span>
-              <span class="filter-tab-count">${totalCount}</span>
-            </button>
-            <button onclick="app.setAdminFilterStatus('active')" class="filter-tab-btn ${filter === 'active' ? 'active' : ''}">
-              <span>Active</span>
-              <span class="filter-tab-count">${activeCount}</span>
-            </button>
-            <button onclick="app.setAdminFilterStatus('invited')" class="filter-tab-btn ${filter === 'invited' ? 'active' : ''}">
-              <span>Invited</span>
-              <span class="filter-tab-count">${invitedCount}</span>
-            </button>
-            <button onclick="app.setAdminFilterStatus('pending')" class="filter-tab-btn ${filter === 'pending' ? 'active' : ''}">
-              <span>Ready</span>
-              <span class="filter-tab-count">${pendingCount}</span>
-            </button>
-          </div>
-
-          <!-- + Add Company Button -->
-          <button 
-            onclick="openAddCompanyModal()"
-            class="btn-saas-primary"
-            style="height: 36px; padding: 0 14px; font-size: 13px;"
-            title="Onboard a new portfolio company"
-          >
-            <i data-lucide="plus" style="width: 14px; height: 14px;"></i>
-            <span>Add Company</span>
-          </button>
+        <div class="bento-chip-row" role="tablist" aria-label="Company status filter">
+          <button type="button" class="bento-chip ${filter === 'all' ? 'active' : ''}" onclick="app.setAdminFilterStatus('all')"><span>All</span><span class="bento-chip-count">${totalCount}</span></button>
+          <button type="button" class="bento-chip ${filter === 'active' ? 'active' : ''}" onclick="app.setAdminFilterStatus('active')"><span>Active</span><span class="bento-chip-count">${activeCount}</span></button>
+          <button type="button" class="bento-chip ${filter === 'invited' ? 'active' : ''}" onclick="app.setAdminFilterStatus('invited')"><span>Invited</span><span class="bento-chip-count">${invitedCount}</span></button>
+          <button type="button" class="bento-chip ${filter === 'pending' ? 'active' : ''}" onclick="app.setAdminFilterStatus('pending')"><span>Ready</span><span class="bento-chip-count">${pendingCount}</span></button>
         </div>
-      </section>
 
-      <!-- Contextual 4-Card Metric Deck (Realistic Executive Cards) -->
-      <section class="metrics-card-deck">
-        <div class="deck-card">
-          <div class="deck-card-top">
-            <span class="deck-card-label">Total Portfolio</span>
-            <div class="deck-card-icon"><i data-lucide="building-2"></i></div>
-          </div>
-          <div>
-            <div class="deck-card-value">${totalCount}</div>
-            <div class="deck-card-caption">
-              <span>Active directory accounts</span>
+        <div class="bento-list">
+          ${companies.length === 0 ? `
+            <div style="padding:32px;text-align:center;color:var(--text-muted)">
+              <div style="font-weight:600;color:var(--text-main)">No companies found</div>
+              <div style="font-size:12.5px;margin-top:4px">Try adjusting your search or filter.</div>
             </div>
-          </div>
-        </div>
-
-        <div class="deck-card">
-          <div class="deck-card-top">
-            <span class="deck-card-label">Active SOW Accounts</span>
-            <div class="deck-card-icon" style="color: var(--emerald-dark);"><i data-lucide="check-circle-2"></i></div>
-          </div>
-          <div>
-            <div class="deck-card-value">${activeCount}</div>
-            <div class="deck-card-caption">
-              <span style="color: var(--emerald-dark); font-weight: 600;">100%</span>
-              <span>onboarded & provisioned</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="deck-card">
-          <div class="deck-card-top">
-            <span class="deck-card-label">Ready to Onboard</span>
-            <div class="deck-card-icon"><i data-lucide="user-plus"></i></div>
-          </div>
-          <div>
-            <div class="deck-card-value">${pendingCount}</div>
-            <div class="deck-card-caption">
-              <span>Pending invitation delivery</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="deck-card">
-          <div class="deck-card-top">
-            <span class="deck-card-label">Support Incidents</span>
-            <div class="deck-card-icon"><i data-lucide="life-buoy"></i></div>
-          </div>
-          <div>
-            <div class="deck-card-value">1</div>
-            <div class="deck-card-caption">
-              <span>Open technical ticket</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Portfolio Directory Table (Institutional Enterprise Grade) -->
-      <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04); overflow: hidden;">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse text-xs">
-            <thead style="background: var(--bg-subtle); border-bottom: 1px solid var(--line); color: var(--text-muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
-              <tr>
-                <th style="padding: 12px 20px; width: 34%;">Company</th>
-                <th style="padding: 12px 20px; width: 26%;">Primary Contact &amp; Status</th>
-                <th style="padding: 12px 20px; width: 14%;">Services</th>
-                <th style="padding: 12px 20px; text-align: right; width: 26%;">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${companies.length === 0 ? `
-                <tr>
-                  <td colspan="4" style="padding: 48px; text-align: center; color: var(--text-muted);">
-                    <div style="font-weight: 600; font-size: 14px; color: var(--text-main);">No companies found</div>
-                    <div style="font-size: 12px; margin-top: 4px;">Try adjusting your search query or filter segment.</div>
-                  </td>
-                </tr>
-              ` : companies.map(client => {
-                const granted = client.grantedProducts || [];
-                const stage = client.stage || 'Scale';
-
-                return `
-                  <tr style="border-bottom: 1px solid var(--line); transition: background 0.15s ease;" onmouseover="this.style.background='var(--bg-subtle)'" onmouseout="this.style.background='transparent'">
-                    <!-- 1. Company Column -->
-                    <td style="padding: 14px 20px;">
-                      <div style="display: flex; align-items: center; gap: 12px;">
-                        <div class="company-monogram">
-                          ${client.name.substring(0, 2).toUpperCase()}
-                        </div>
-                        <div>
-                          <div style="display: flex; align-items: center; gap: 8px;">
-                            <span style="font-weight: 600; font-size: 13.5px; color: var(--text-main);">${client.name}</span>
-                            <span class="stage-tag">${stage}</span>
-                          </div>
-                          <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
-                            <span>${client.domain}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-
-                    <!-- 2. Primary Contact & Status Column -->
-                    <td style="padding: 14px 20px;">
-                      <div style="display: flex; flex-direction: column; gap: 3px;">
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                          <span style="font-weight: 600; font-size: 12.5px; color: var(--text-main);">${client.ownerName || 'Alex Kim'}</span>
-                          ${client.status === 'active' ? `
-                            <span class="status-pill status-active"><span class="status-dot status-dot-active"></span>Active Client</span>
-                          ` : client.status === 'invited' ? `
-                            <span class="status-pill status-invited"><span class="status-dot status-dot-invited"></span>Invite Sent</span>
-                          ` : `
-                            <span class="status-pill status-pending"><span class="status-dot status-dot-pending"></span>Ready</span>
-                          `}
-                        </div>
-                        <div style="font-size: 11.5px; color: var(--text-muted);">${client.ownerEmail || 'contact@client.io'}</div>
-                      </div>
-                    </td>
-
-                    <!-- 3. Assigned Services Column -->
-                    <td style="padding: 14px 20px; white-space: nowrap;">
-                      <div style="display: flex; align-items: baseline; gap: 5px;">
-                        <span style="font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--text-main);">
-                          ${granted.length}
-                        </span>
-                        <span style="font-size: 12px; color: var(--text-muted);">
-                          provisioned
-                        </span>
-                      </div>
-                    </td>
-
-                    <!-- 4. Actions Column -->
-                    <td style="padding: 14px 20px; text-align: right; white-space: nowrap;">
-                      <div style="display: inline-flex; align-items: center; justify-content: flex-end; gap: 8px;">
-                        ${client.status === 'pending_invite' ? `
-                          <button 
-                            onclick="openSendInviteModal('${client.id}')"
-                            class="btn-saas-primary"
-                            title="Configure service bundle and send onboarding invite"
-                          >
-                            <i data-lucide="send"></i>
-                            <span>Send Invite</span>
-                          </button>
-                        ` : client.status === 'invited' ? `
-                          <button 
-                            onclick="openSendInviteModal('${client.id}')"
-                            class="btn-saas-secondary"
-                            title="Adjust service bundle"
-                          >
-                            <i data-lucide="sliders-horizontal"></i>
-                            <span>Services</span>
-                          </button>
-                          <button 
-                            onclick="showToast('Invitation resent to ${client.ownerEmail}', 'info')"
-                            class="btn-saas-amber"
-                            title="Resend onboarding invite"
-                          >
-                            <i data-lucide="refresh-cw"></i>
-                            <span>Resend Invite</span>
-                          </button>
-                        ` : `
-                          <button 
-                            onclick="openSendInviteModal('${client.id}')"
-                            class="btn-saas-secondary"
-                            title="Manage assigned services"
-                          >
-                            <i data-lucide="sliders-horizontal"></i>
-                            <span>Manage Services</span>
-                          </button>
-
-                          <button 
-                            onclick="openCompanyDashboardPopup('${client.id}')"
-                            class="btn-saas-primary"
-                            title="Inspect client operations dashboard"
-                          >
-                            <i data-lucide="layout-dashboard"></i>
-                            <span>View Dashboard</span>
-                          </button>
-                        `}
-                      </div>
-                    </td>
-                  </tr>
-                `;
-              }).join('')}
-            </tbody>
-          </table>
+          ` : companies.map(client => {
+            const granted = client.grantedProducts || [];
+            const stage = client.stage || 'Scale';
+            const statusLabel = client.status === 'active' ? 'Active' : client.status === 'invited' ? 'Invited' : 'Ready';
+            const statusClass = client.status === 'active' ? 'status-active' : client.status === 'invited' ? 'status-invited' : 'status-pending';
+            const dotClass = client.status === 'active' ? 'status-dot-active' : client.status === 'invited' ? 'status-dot-invited' : 'status-dot-pending';
+            return `
+              <div class="bento-row">
+                <div class="bento-row-main">
+                  <div class="company-monogram">${client.name.substring(0, 2).toUpperCase()}</div>
+                  <div style="min-width:0">
+                    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                      <span style="font-weight:600;font-size:13.5px;color:var(--text-main)">${client.name}</span>
+                      <span class="stage-tag">${stage}</span>
+                      <span class="status-pill ${statusClass}"><span class="status-dot ${dotClass}"></span>${statusLabel}</span>
+                    </div>
+                    <div style="font-size:12px;color:var(--text-muted);margin-top:3px">
+                      ${client.domain} · ${client.ownerName || 'Contact'} · ${granted.length} services
+                    </div>
+                  </div>
+                </div>
+                <div class="bento-row-actions">
+                  ${client.status === 'pending_invite' ? `
+                    <button onclick="openSendInviteModal('${client.id}')" class="btn-saas-primary" title="Send onboarding invite"><i data-lucide="send"></i><span>Send Invite</span></button>
+                  ` : client.status === 'invited' ? `
+                    <button onclick="openSendInviteModal('${client.id}')" class="btn-saas-secondary" title="Adjust services"><i data-lucide="sliders-horizontal"></i><span>Services</span></button>
+                    <button onclick="showToast('Invitation resent to ${client.ownerEmail}', 'info')" class="btn-saas-secondary" title="Resend invite"><i data-lucide="refresh-cw"></i><span>Resend</span></button>
+                  ` : `
+                    <button onclick="openSendInviteModal('${client.id}')" class="btn-saas-secondary" title="Manage services"><i data-lucide="sliders-horizontal"></i><span>Manage</span></button>
+                    <button onclick="openCompanyDashboardPopup('${client.id}')" class="btn-saas-secondary" title="View dashboard"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></button>
+                  `}
+                </div>
+              </div>
+            `;
+          }).join('')}
         </div>
       </div>
-
     </div>
   `;
 }
@@ -7617,207 +9336,64 @@ function renderAdminActiveAccountsTab() {
     totalAssignedServicesCount += (c.grantedProducts || []).length;
   });
 
+  const operatorName = getBentoFirstName("Kyle");
+
   return `
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-      
-      <!-- Section Title & Controls Row -->
-      <section class="title-controls-row">
-        <div class="page-headline-wrap">
-          <h1 class="page-headline-lead">Active Accounts</h1>
-          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
-            Track active client operations, token burn velocity, blockers, and service usage.
-          </p>
-        </div>
+    <div class="bento-page">
+      ${renderBentoGreeting({
+        title: `Hey ${operatorName}, review active operations`,
+        subtitle: "Track SOW accounts, token burn, blockers, and service usage.",
+        secondaryCta: `<button type="button" class="bento-cta bento-cta-secondary" onclick="app.adminTab='clients';app.saveState();render();">Portfolio →</button>`
+      })}
 
-        <div class="controls-pill-row">
-          <!-- Search Input Pill -->
-          <div style="position: relative; width: 240px;">
-            <i data-lucide="search" style="position: absolute; left: 12px; top: 11px; width: 14px; height: 14px; color: var(--text-muted); pointer-events: none;"></i>
-            <input 
-              type="text" 
-              value="${app.adminSearchQuery || ""}" 
-              oninput="app.setAdminSearchQuery(this.value)" 
-              placeholder="Search active accounts..." 
-              style="width: 100%; height: 38px; padding-left: 34px; padding-right: 28px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-pill); font-size: 12.5px; color: var(--text-main); outline: none;"
-            />
-            ${app.adminSearchQuery ? `
-              <button onclick="app.setAdminSearchQuery('');" style="position: absolute; right: 10px; top: 10px; color: var(--text-muted); background: none; border: none; cursor: pointer; font-size: 12px;">✕</button>
-            ` : ""}
-          </div>
+      ${renderBentoMetrics([
+        { value: activeCount, label: 'Active clients' },
+        { value: blockerCount, label: 'With blockers', tone: blockerCount ? 'warn' : 'ok' },
+        { value: totalActiveTokensUsed.toLocaleString(), label: 'Tokens used' },
+        { value: totalAssignedServicesCount, label: 'Services deployed' }
+      ])}
 
-          <!-- Filter Segment Control -->
-          <div style="display: flex; align-items: center; gap: 3px; background: var(--bg-subtle); padding: 3px; border-radius: var(--radius-pill); border: 1px solid var(--line); height: 38px; box-sizing: border-box;">
-            <button onclick="app.setAdminFilterStatus('all')" class="v-tab-btn ${filter === 'all' ? 'active' : ''}">All Active (${activeCount})</button>
-            <button onclick="app.setAdminFilterStatus('blockers')" class="v-tab-btn ${filter === 'blockers' ? 'active' : ''}">With Blockers (${blockerCount})</button>
+      <div class="bento-surface">
+        <div class="bento-panel-head">
+          <h2 class="bento-panel-title">Active accounts</h2>
+          <div class="bento-search" style="max-width:240px">
+            <i data-lucide="search" class="bento-search-icon"></i>
+            <input type="text" value="${app.adminSearchQuery || ""}" oninput="app.setAdminSearchQuery(this.value)" placeholder="Search accounts..." />
           </div>
         </div>
-      </section>
-
-      <!-- Contextual 4-Card Metric Deck (Clean, single deck) -->
-      <section class="metrics-card-deck">
-        <div class="deck-card primary-accent-card">
-          <div class="deck-card-top">
-            <span class="deck-card-label">Active Clients</span>
-            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-          </div>
-          <div>
-            <div class="deck-card-value mono">${activeCount}</div>
-            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
-              <span style="color: var(--emerald); font-weight: 700;">100%</span> SOW Health Rate
-            </div>
-          </div>
+        <div class="bento-chip-row">
+          <button type="button" class="bento-chip ${filter === 'all' ? 'active' : ''}" onclick="app.setAdminFilterStatus('all')"><span>All</span><span class="bento-chip-count">${activeCount}</span></button>
+          <button type="button" class="bento-chip ${filter === 'blockers' ? 'active' : ''}" onclick="app.setAdminFilterStatus('blockers')"><span>Blockers</span><span class="bento-chip-count">${blockerCount}</span></button>
         </div>
-
-        <div class="deck-card">
-          <div class="deck-card-top">
-            <span class="deck-card-label">Portfolio Health</span>
-            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-          </div>
-          <div>
-            <div class="deck-card-value mono">94<small style="font-size: 16px;">/100</small></div>
-            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
-              <span style="color: var(--emerald); font-weight: 700;">High Velocity</span> · 0 critical alerts
-            </div>
-          </div>
-        </div>
-
-        <div class="deck-card">
-          <div class="deck-card-top">
-            <span class="deck-card-label">Combined Tokens Used</span>
-            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-          </div>
-          <div>
-            <!-- Numbers only as per PRD -->
-            <div class="deck-card-value mono">${totalActiveTokensUsed.toLocaleString()}</div>
-            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
-              <span>Total consumed across active clients</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="deck-card">
-          <div class="deck-card-top">
-            <span class="deck-card-label">Services Deployed</span>
-            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-          </div>
-          <div>
-            <div class="deck-card-value mono">${totalAssignedServicesCount}</div>
-            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
-              <span>Assigned across ${activeCount} accounts</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 6-Column Active Accounts Table (Strict PRD Compliance) -->
-      <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-card); box-shadow: var(--shadow-card); overflow: hidden;">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse text-xs">
-            <thead style="background: var(--bg-subtle); border-bottom: 1px solid var(--line); color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
-              <tr>
-                <th style="padding: 14px 20px;">Company</th>
-                <th style="padding: 14px 16px;">Primary Contact</th>
-                <th style="padding: 14px 16px;">Status</th>
-                <th style="padding: 14px 16px;">Blockers</th>
-                <th style="padding: 14px 16px;">Tokens Used</th>
-                <th style="padding: 14px 20px; text-align: right;">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${filteredClients.length === 0 ? `
-                <tr>
-                  <td colspan="6" style="padding: 48px; text-align: center; color: var(--text-muted);">
-                    <div style="font-weight: 600; font-size: 14px; color: var(--text-main);">No active accounts found</div>
-                    <div style="font-size: 12px; margin-top: 4px;">Adjust your search or filter segment.</div>
-                  </td>
-                </tr>
-              ` : filteredClients.map(client => {
-                const granted = client.grantedProducts || [];
-                const blockers = client.blockers || [];
-                const openBlockers = blockers.filter(b => b.status === "open");
-                const tokens = getCompanyTokens(client);
-
-                return `
-                  <tr style="border-bottom: 1px solid var(--line); transition: background 0.15s ease;" onmouseover="this.style.background='var(--bg-subtle)'" onmouseout="this.style.background='transparent'">
-                    <!-- 1. Company -->
-                    <td style="padding: 16px 20px;">
-                      <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="width: 36px; height: 36px; border-radius: 9px; background: var(--emerald-dark); color: #fff; font-weight: 700; display: grid; place-items: center; font-size: 12px; flex-shrink: 0;">
-                          ${client.name.substring(0, 2).toUpperCase()}
-                        </div>
-                        <div>
-                          <div style="font-weight: 700; font-size: 13px; color: var(--text-main);">${client.name}</div>
-                          <div style="font-size: 11px; color: var(--text-muted); margin-top: 1px;">${client.domain}</div>
-                        </div>
-                      </div>
-                    </td>
-
-                    <!-- 2. Primary Contact -->
-                    <td style="padding: 16px 16px; white-space: nowrap;">
-                      <div style="font-weight: 600; color: var(--text-main); font-size: 12.5px;">${client.ownerName || 'Alex Kim'}</div>
-                      <div style="font-size: 11px; color: var(--text-muted);">${client.ownerEmail || 'contact@client.io'}</div>
-                    </td>
-
-                    <!-- 3. Status (Active with live 6px green breathing dot) -->
-                    <td style="padding: 16px 16px; white-space: nowrap;">
-                      <span style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 700; background: var(--emerald-subtle); color: var(--emerald-dark); border: 1px solid rgba(0, 180, 138, 0.3);">
-                        <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--emerald); display: inline-block;" class="animate-pulse"></span>
-                        <span>Active</span>
-                      </span>
-                    </td>
-
-                    <!-- 4. Blockers Count -->
-                    <td style="padding: 16px 16px; white-space: nowrap;">
-                      ${openBlockers.length > 0 ? `
-                        <span style="display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 700; background: rgba(239, 68, 68, 0.12); color: #DC2626; border: 1px solid rgba(239, 68, 68, 0.25);">
-                          <i data-lucide="shield-alert" style="width: 12px; height: 12px;"></i>
-                          <span>${openBlockers.length} Blocker</span>
-                        </span>
-                      ` : `
-                        <span style="display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--emerald-dark);">
-                          <span>✓</span>
-                          <span>0</span>
-                        </span>
-                      `}
-                    </td>
-
-                    <!-- 5. Tokens Used (Plain numbers only as per PRD) -->
-                    <td style="padding: 16px 16px; white-space: nowrap;">
-                      <div class="mono" style="font-size: 14px; font-weight: 800; color: var(--text-main);">
-                        ${(tokens.used).toLocaleString()}
-                      </div>
-                    </td>
-
-                    <!-- 6. Action -->
-                    <td style="padding: 14px 20px; text-align: right; white-space: nowrap;">
-                      <div style="display: inline-flex; align-items: center; justify-content: flex-end; gap: 8px;">
-                        <button 
-                          onclick="openSendInviteModal('${client.id}')"
-                          class="btn-saas-secondary"
-                          title="Manage assigned services"
-                        >
-                          <i data-lucide="sliders-horizontal"></i>
-                          <span>Manage Services</span>
-                        </button>
-
-                        <button 
-                          onclick="openCompanyDashboardPopup('${client.id}')"
-                          class="btn-saas-primary"
-                          title="Inspect client operations dashboard"
-                        >
-                          <i data-lucide="layout-dashboard"></i>
-                          <span>View Dashboard</span>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                `;
-              }).join('')}
-            </tbody>
-          </table>
+        <div class="bento-list">
+          ${filteredClients.length === 0 ? `
+            <div style="padding:32px;text-align:center;color:var(--text-muted)"><div style="font-weight:600;color:var(--text-main)">No active accounts found</div></div>
+          ` : filteredClients.map(client => {
+            const granted = client.grantedProducts || [];
+            const openBlockers = (client.blockers || []).filter(b => b.status === "open");
+            const tokens = getCompanyTokens(client);
+            return `
+              <div class="bento-row">
+                <div class="bento-row-main">
+                  <div class="company-monogram">${client.name.substring(0, 2).toUpperCase()}</div>
+                  <div style="min-width:0">
+                    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                      <span style="font-weight:600;font-size:13.5px;color:var(--text-main)">${client.name}</span>
+                      <span class="status-pill status-active"><span class="status-dot status-dot-active"></span>Active</span>
+                      ${openBlockers.length ? `<span style="font-size:11px;font-weight:600;color:#B45309">${openBlockers.length} blocker${openBlockers.length>1?'s':''}</span>` : `<span style="font-size:11px;font-weight:500;color:var(--text-muted)">Clear</span>`}
+                    </div>
+                    <div style="font-size:12px;color:var(--text-muted);margin-top:3px">${client.domain} · ${granted.length} services · ${(tokens.used||0).toLocaleString()} tokens</div>
+                  </div>
+                </div>
+                <div class="bento-row-actions">
+                  <button onclick="openSendInviteModal('${client.id}')" class="btn-saas-secondary"><i data-lucide="sliders-horizontal"></i><span>Manage</span></button>
+                  <button onclick="openCompanyDashboardPopup('${client.id}')" class="btn-saas-secondary"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></button>
+                </div>
+              </div>
+            `;
+          }).join('')}
         </div>
       </div>
-
     </div>
   `;
 }
@@ -7850,171 +9426,68 @@ function renderAdminTicketsQueueTab() {
     );
   }
 
+  const highSev = allTickets.filter(t => (t.severity || '').toLowerCase() === 'high' && t.status !== 'resolved').length;
+  const operatorName = getBentoFirstName("Kyle");
+
   return `
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-      
-      <!-- Section Title & Controls Row -->
-      <section class="title-controls-row">
-        <div class="page-headline-wrap">
-          <h1 class="page-headline-lead">Support Incident Queue</h1>
-          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
-            Triage, diagnose, and resolve technical support tickets across the portfolio.
-          </p>
-        </div>
+    <div class="bento-page">
+      ${renderBentoGreeting({
+        title: `Hey ${operatorName}, triage the incident queue`,
+        subtitle: "Diagnose and resolve technical support across the portfolio.",
+        secondaryCta: `<button type="button" class="bento-cta bento-cta-secondary" onclick="app.setAdminTicketFilterStatus('open')">Focus open</button>`
+      })}
 
-        <div class="controls-pill-row">
-          <div style="position: relative; width: 240px;">
-            <i data-lucide="search" style="position: absolute; left: 12px; top: 11px; width: 14px; height: 14px; color: var(--text-muted); pointer-events: none;"></i>
-            <input 
-              type="text" 
-              value="${app.adminTicketSearchQuery || ""}" 
-              oninput="app.setAdminTicketSearchQuery(this.value)" 
-              placeholder="Search incidents..." 
-              style="width: 100%; height: 38px; padding-left: 34px; padding-right: 28px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-pill); font-size: 12.5px; color: var(--text-main); outline: none;"
-            />
-          </div>
+      ${renderBentoMetrics([
+        { value: openTickets.length, label: 'Open', tone: openTickets.length ? 'warn' : 'ok' },
+        { value: inProgTickets.length, label: 'In progress' },
+        { value: resolvedTickets.length, label: 'Resolved', tone: 'ok' },
+        { value: highSev, label: 'High severity', tone: highSev ? 'warn' : '' }
+      ])}
 
-          <div style="display: flex; align-items: center; gap: 3px; background: var(--bg-subtle); padding: 3px; border-radius: var(--radius-pill); border: 1px solid var(--line); height: 38px; box-sizing: border-box;">
-            <button onclick="app.setAdminTicketFilterStatus('all')" class="v-tab-btn ${filter === 'all' ? 'active' : ''}">All (${allTickets.length})</button>
-            <button onclick="app.setAdminTicketFilterStatus('open')" class="v-tab-btn ${filter === 'open' ? 'active' : ''}">Open (${openTickets.length})</button>
-            <button onclick="app.setAdminTicketFilterStatus('in_progress')" class="v-tab-btn ${filter === 'in_progress' ? 'active' : ''}">In Progress (${inProgTickets.length})</button>
-            <button onclick="app.setAdminTicketFilterStatus('resolved')" class="v-tab-btn ${filter === 'resolved' ? 'active' : ''}">Resolved (${resolvedTickets.length})</button>
+      <div class="bento-surface">
+        <div class="bento-panel-head">
+          <h2 class="bento-panel-title">Incidents</h2>
+          <div class="bento-search" style="max-width:240px">
+            <i data-lucide="search" class="bento-search-icon"></i>
+            <input type="text" value="${app.adminTicketSearchQuery || ""}" oninput="app.setAdminTicketSearchQuery(this.value)" placeholder="Search incidents..." />
           </div>
         </div>
-      </section>
-
-      <!-- Contextual 4-Card Metric Deck -->
-      <section class="metrics-card-deck">
-        <div class="deck-card primary-accent-card">
-          <div class="deck-card-top">
-            <span class="deck-card-label">Open Incidents</span>
-            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-          </div>
-          <div>
-            <div class="deck-card-value mono" style="${openTickets.length > 0 ? 'color: #F59E0B;' : ''}">${openTickets.length}</div>
-            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
-              <span>Awaiting response or resolution</span>
+        <div class="bento-chip-row">
+          <button type="button" class="bento-chip ${filter === 'all' ? 'active' : ''}" onclick="app.setAdminTicketFilterStatus('all')"><span>All</span><span class="bento-chip-count">${allTickets.length}</span></button>
+          <button type="button" class="bento-chip ${filter === 'open' ? 'active' : ''}" onclick="app.setAdminTicketFilterStatus('open')"><span>Open</span><span class="bento-chip-count">${openTickets.length}</span></button>
+          <button type="button" class="bento-chip ${filter === 'in_progress' ? 'active' : ''}" onclick="app.setAdminTicketFilterStatus('in_progress')"><span>In progress</span><span class="bento-chip-count">${inProgTickets.length}</span></button>
+          <button type="button" class="bento-chip ${filter === 'resolved' ? 'active' : ''}" onclick="app.setAdminTicketFilterStatus('resolved')"><span>Resolved</span><span class="bento-chip-count">${resolvedTickets.length}</span></button>
+        </div>
+        <div class="bento-list">
+          ${filtered.length === 0 ? `
+            <div style="padding:32px;text-align:center;color:var(--text-muted)">
+              <div style="font-weight:600;color:var(--text-main)">No incidents matching query</div>
             </div>
-          </div>
-        </div>
-
-        <div class="deck-card">
-          <div class="deck-card-top">
-            <span class="deck-card-label">Active Investigation</span>
-            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-          </div>
-          <div>
-            <div class="deck-card-value mono">${inProgTickets.length}</div>
-            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
-              <span>Assigned to operating leads</span>
+          ` : filtered.map(t => {
+            const ticketCode = (t.id || 'TK-101').replace('tkt-', 'TK-');
+            return `
+            <div class="bento-row">
+              <div class="bento-row-main">
+                <div style="min-width:0;flex:1">
+                  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                    <span class="mono" style="font-size:11px;font-weight:600;color:var(--emerald-dark)">${ticketCode}</span>
+                    <span class="support-status-badge ${t.status === 'resolved' ? 'resolved' : t.status === 'in_progress' ? 'in_progress' : 'open'}">${t.status === 'resolved' ? 'Resolved' : t.status === 'in_progress' ? 'In Progress' : 'Open'}</span>
+                    <span style="font-size:11px;color:var(--text-muted)">${t.productName || t.product || 'Fuel'}</span>
+                    <span style="font-size:11px;font-weight:600;${(t.severity||'').toLowerCase()==='high'?'color:#DC2626':'color:#B45309'}">${(t.severity||'medium').toUpperCase()}</span>
+                  </div>
+                  <div style="font-weight:600;font-size:13.5px;color:var(--text-main)">${t.title}</div>
+                  <div style="font-size:12px;color:var(--text-muted);margin-top:3px">${t.clientName} · ${t.yorkAssignee || 'Alex Tremblay'}</div>
+                </div>
+              </div>
+              <div class="bento-row-actions">
+                ${t.status !== 'resolved'
+                  ? `<button type="button" onclick="app.resolveTicket('${t.clientId}', '${t.id}')" class="btn-saas-primary" title="Mark incident as resolved"><i data-lucide="check"></i><span>Resolve</span></button>`
+                  : `<span style="font-size:12px;color:var(--text-muted)">Closed</span>`}
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div class="deck-card">
-          <div class="deck-card-top">
-            <span class="deck-card-label">Resolved Incidents</span>
-            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-          </div>
-          <div>
-            <div class="deck-card-value mono" style="color: var(--emerald-dark);">${resolvedTickets.length}</div>
-            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
-              <span>Successfully closed</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="deck-card">
-          <div class="deck-card-top">
-            <span class="deck-card-label">Avg Response SLA</span>
-            <div class="deck-arrow-btn"><i data-lucide="arrow-up-right"></i></div>
-          </div>
-          <div>
-            <div class="deck-card-value mono">&lt;15m</div>
-            <div style="font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
-              <span style="color: var(--emerald); font-weight: 700;">Optimal</span> · Dedicated York Pod
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Tickets Table View -->
-      <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-card); box-shadow: var(--shadow-card); overflow: hidden;">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse text-xs">
-            <thead style="background: var(--bg-subtle); border-bottom: 1px solid var(--line); color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
-              <tr>
-                <th style="padding: 14px 20px;">Incident &amp; Client</th>
-                <th style="padding: 14px 16px;">Product</th>
-                <th style="padding: 14px 16px;">Severity</th>
-                <th style="padding: 14px 16px;">Status</th>
-                <th style="padding: 14px 16px;">Assignee</th>
-                <th style="padding: 14px 20px; text-align: right;">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${filtered.length === 0 ? `
-                <tr>
-                  <td colspan="6" style="padding: 48px; text-align: center; color: var(--text-muted);">
-                    <div style="font-weight: 600; font-size: 14px; color: var(--text-main);">No incidents matching query</div>
-                    <div style="font-size: 12px; margin-top: 4px;">Queue is clear or filter excludes active items.</div>
-                  </td>
-                </tr>
-              ` : filtered.map(t => `
-                <tr style="border-bottom: 1px solid var(--line); transition: background 0.15s ease;" onmouseover="this.style.background='var(--bg-subtle)'" onmouseout="this.style.background='transparent'">
-                  <td style="padding: 16px 20px;">
-                    <div style="font-weight: 700; font-size: 13px; color: var(--text-main);">${t.title}</div>
-                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">
-                      <span style="font-weight: 600; color: var(--text-secondary);">${t.clientName}</span> · Raised by ${t.creatorName || 'Team'}
-                    </div>
-                  </td>
-                  <td style="padding: 16px 16px; white-space: nowrap;">
-                    <span style="padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; background: var(--bg-subtle); border: 1px solid var(--line); color: var(--text-secondary);">
-                      ${t.productName || t.product || 'Fuel'}
-                    </span>
-                  </td>
-                  <td style="padding: 16px 16px; white-space: nowrap;">
-                    <span style="padding: 3px 8px; border-radius: 9999px; font-size: 11px; font-weight: 700; ${
-                      t.severity === 'high' ? 'background: rgba(239, 68, 68, 0.12); color: #DC2626;' : 'background: rgba(245, 158, 11, 0.12); color: #B45309;'
-                    }">
-                      ${t.severity ? t.severity.toUpperCase() : 'MEDIUM'}
-                    </span>
-                  </td>
-                  <td style="padding: 16px 16px; white-space: nowrap;">
-                    ${t.status === 'resolved' ? `
-                      <span style="color: var(--emerald-dark); font-weight: 700; font-size: 11px;">✓ Resolved</span>
-                    ` : `
-                      <span style="display: inline-flex; align-items: center; gap: 5px; color: #B45309; font-weight: 700; font-size: 11px;">
-                        <span style="width: 5px; height: 5px; border-radius: 50%; background: #F59E0B; display: inline-block;" class="animate-pulse"></span>
-                        <span>Open</span>
-                      </span>
-                    `}
-                  </td>
-                  <td style="padding: 16px 16px; white-space: nowrap; font-size: 11.5px; color: var(--text-muted);">
-                    ${t.yorkAssignee || 'Alex Tremblay'}
-                  </td>
-                  <td style="padding: 16px 20px; text-align: right; white-space: nowrap;">
-                    ${t.status !== 'resolved' ? `
-                      <button 
-                        onclick="app.resolveTicket('${t.clientId}', '${t.id}')"
-                        class="export-pill-btn"
-                        style="height: 32px; padding: 0 12px; font-size: 11.5px;"
-                        title="Mark incident as resolved"
-                      >
-                        <i data-lucide="check"></i>
-                        <span>Resolve</span>
-                      </button>
-                    ` : `
-                      <span style="font-size: 11px; color: var(--text-muted);">Closed</span>
-                    `}
-                  </td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
+          `;}).join('')}
         </div>
       </div>
-
     </div>
   `;
 }
@@ -8042,87 +9515,50 @@ function renderAdminProductsCatalogTab() {
     });
   });
 
+  const operatorName = getBentoFirstName("Kyle");
+  const stageCounts = ['decide','execute','measure','assess','operate'].reduce((acc, s) => {
+    acc[s] = PRODUCTS_CATALOG.filter(p => p.stage.toLowerCase() === s).length;
+    return acc;
+  }, { all: PRODUCTS_CATALOG.length });
+
   return `
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-      
-      <!-- Section Title & Controls Row -->
-      <section class="title-controls-row">
-        <div class="page-headline-wrap">
-          <h1 class="page-headline-lead">Software Catalog</h1>
-          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
-            18 B2B software solutions organized across 5 core stages: Decide, Execute, Measure, Assess, and Operate.
-          </p>
+    <div class="bento-page">
+      ${renderBentoGreeting({
+        title: `Hey ${operatorName}, explore the software catalog`,
+        subtitle: "18 B2B solutions across Decide → Operate.",
+        primaryCta: `<div class="bento-search" style="width:220px"><i data-lucide="search" class="bento-search-icon"></i><input type="text" value="${app.adminProductSearchQuery || ""}" oninput="app.setAdminProductSearchQuery(this.value)" placeholder="Search products..." /></div>`
+      })}
+
+      ${renderBentoMetrics([
+        { value: stageCounts.all, label: 'Products' },
+        { value: Object.values(deploymentCounts).reduce((a,b)=>a+b,0), label: 'Deployments' }
+      ])}
+
+      <div class="bento-surface">
+        <div class="bento-chip-row">
+          ${['all','decide','execute','measure','assess','operate'].map(stage => `
+            <button type="button" class="bento-chip ${currentStage === stage ? 'active' : ''}" onclick="app.setAdminProductFilterStage('${stage}')">
+              <span>${stage === 'all' ? 'All' : stage.charAt(0).toUpperCase() + stage.slice(1)}</span>
+              <span class="bento-chip-count">${stageCounts[stage]}</span>
+            </button>
+          `).join('')}
         </div>
-
-        <div class="controls-pill-row">
-          <div style="position: relative; width: 220px;">
-            <i data-lucide="search" style="position: absolute; left: 12px; top: 11px; width: 14px; height: 14px; color: var(--text-muted); pointer-events: none;"></i>
-            <input 
-              type="text" 
-              value="${app.adminProductSearchQuery || ""}" 
-              oninput="app.setAdminProductSearchQuery(this.value)" 
-              placeholder="Search 18 products..." 
-              style="width: 100%; height: 38px; padding-left: 36px; padding-right: 12px; border-radius: var(--radius-pill); background: var(--bg-card); border: 1px solid var(--line); color: var(--text-main); font-size: 12px; outline: none; transition: border-color 0.15s ease;"
-              onfocus="this.style.borderColor='var(--emerald)'"
-              onblur="this.style.borderColor='var(--line)'"
-            />
-          </div>
-
-          <div style="display: inline-flex; align-items: center; gap: 4px; padding: 3px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-pill);">
-            ${['all', 'decide', 'execute', 'measure', 'assess', 'operate'].map(stage => `
-              <button 
-                onclick="app.setAdminProductFilterStage('${stage}')"
-                style="height: 30px; padding: 0 12px; border-radius: var(--radius-pill); font-size: 11.5px; font-weight: 600; text-transform: capitalize; border: none; cursor: pointer; transition: all 0.15s ease; ${
-                  currentStage === stage 
-                    ? 'background: var(--emerald-dark); color: #ffffff;' 
-                    : 'background: transparent; color: var(--text-secondary);'
-                }"
-              >
-                ${stage === 'all' ? 'All Stages' : stage}
-              </button>
-            `).join('')}
-          </div>
-        </div>
-      </section>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        ${products.map(p => {
-          const count = deploymentCounts[p.id] || 0;
-          return `
-            <div class="product-card">
-              <div>
-                <div class="flex items-start justify-between">
-                  <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-[#084c36]">
-                    ${getIconSvg(p.icon || 'Rocket', 20, '#084c36')}
-                  </div>
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
-                      ${p.stage}
-                    </span>
-                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                      count > 0 ? "bg-emerald-50 text-emerald-800 border border-emerald-200" : "bg-slate-50 text-slate-500"
-                    }">
-                      ${count} Accounts
-                    </span>
-                  </div>
+        <div class="eco-grid" style="margin-top:14px">
+          ${products.map(p => {
+            const count = deploymentCounts[p.id] || 0;
+            return `
+              <article class="eco-card">
+                <div class="eco-card-stage">${p.stage}</div>
+                <h3 class="eco-card-name">${p.name}</h3>
+                <p class="eco-card-desc">${p.description}</p>
+                <div class="eco-card-footer">
+                  <span class="eco-available">${p.creditType}</span>
+                  <span style="font-size:11.5px;color:var(--text-muted)">${count} accounts</span>
                 </div>
-
-                <h3 class="font-bold text-slate-900 text-sm mt-3">${p.name}</h3>
-                <p class="text-xs text-slate-600 font-medium mt-1">${p.role}</p>
-                <p class="text-[11px] text-slate-500 mt-2 leading-relaxed">${p.description}</p>
-              </div>
-
-              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                <span class="text-[11px] text-slate-500">
-                  Credit Type: <strong class="text-slate-700">${p.creditType}</strong>
-                </span>
-                <span class="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded">
-                  GA
-                </span>
-              </div>
-            </div>
-          `;
-        }).join('')}
+              </article>
+            `;
+          }).join('')}
+        </div>
       </div>
     </div>
   `;
@@ -8133,7 +9569,21 @@ function renderAdminProductsCatalogTab() {
 // -------------------------------------------------------------------------------------------------
 function renderClientDashboard() {
   const client = app.getCurrentClient() || app.clients[0];
-  const tab = app.clientTab || "workspaces";
+  let tab = app.clientTab || "workspaces";
+  // Client Portal shows only: Workspaces, Initiatives, Support Desk, Team & Access, York Ecosystem
+  if (tab === "products") tab = "workspaces";
+  if (tab === "initiatives") tab = "milestones";
+  const allowedClientTabs = ["workspaces", "milestones", "tickets", "team", "ecosystem"];
+  if (!allowedClientTabs.includes(tab)) {
+    tab = "workspaces";
+  }
+  app.clientTab = tab;
+
+  const workspaceCount = (client.grantedProducts || []).length;
+  const signOffCount = (client.milestones || []).filter(m => m.stage === "client_review").length;
+  const supportCount = (client.supportTickets || []).length;
+  const teamCount = (client.team || []).length;
+  const ecosystemCount = PRODUCTS_CATALOG.length;
 
   const isSidebarCollapsed = (function() {
     try { return localStorage.getItem('york_sidebar_collapsed') === 'true'; } catch(e) { return false; }
@@ -8166,53 +9616,37 @@ function renderClientDashboard() {
           <span class="sidebar-ws-tag">CLIENT</span>
         </div>
 
-        <!-- Primary Top Navigation for Client -->
-        <nav class="sidebar-primary-nav" aria-label="Client Main Navigation">
-          <div class="sidebar-category-title" style="padding-left: 6px; padding-bottom: 6px;">Growth &amp; Delivery</div>
-          <button type="button" class="sidebar-main-nav-btn ${tab === 'workspaces' ? 'active' : ''}" onclick="app.clientTab = 'workspaces'; app.saveState(); render();" title="Active Workspaces &amp; SSO Launch">
-            <i data-lucide="rocket"></i>
+        <!-- Client Portal Navigation (5 items only) -->
+        <nav class="sidebar-primary-nav client-portal-nav" aria-label="Client Main Navigation">
+          <button type="button" class="sidebar-main-nav-btn ${tab === 'workspaces' || tab === 'products' ? 'active' : ''}" onclick="app.clientTab = 'workspaces'; app.saveState(); render();" title="Workspaces">
+            <i data-lucide="layout-dashboard"></i>
             <span style="flex:1;text-align:left;">Workspaces</span>
-            <span class="sidebar-badge">${(client.grantedProducts || []).length} Active</span>
+            <span class="sidebar-badge">${workspaceCount}</span>
           </button>
-          <button type="button" class="sidebar-main-nav-btn ${tab === 'milestones' ? 'active' : ''}" onclick="app.clientTab = 'milestones'; app.saveState(); render();" title="SOW Deliverables &amp; Milestones">
-            <i data-lucide="target"></i>
-            <span style="flex:1;text-align:left;">SOW Deliverables</span>
-            <span class="sidebar-badge">${(client.milestones || []).filter(m => m.stage === 'approved').length}/${(client.milestones || []).length}</span>
+          <button type="button" class="sidebar-main-nav-btn ${tab === 'milestones' || tab === 'initiatives' ? 'active' : ''}" onclick="app.clientTab = 'milestones'; app.saveState(); render();" title="Initiatives">
+            <i data-lucide="circle-check"></i>
+            <span style="flex:1;text-align:left;">Initiatives</span>
+            ${signOffCount > 0
+              ? `<span class="sidebar-badge signoff">${signOffCount} Sign-Off</span>`
+              : `<span class="sidebar-badge">${(client.milestones || []).length}</span>`}
           </button>
-          <button type="button" class="sidebar-main-nav-btn ${tab === 'threat-radar' ? 'active' : ''}" onclick="app.clientTab = 'threat-radar'; app.saveState(); render();" title="Market Radar &amp; Competitive Intelligence">
-            <i data-lucide="radar"></i>
-            <span style="flex:1;text-align:left;">Market Radar</span>
-            <span class="sidebar-badge" style="background: rgba(234, 88, 12, 0.15); color: #C2410C;">Live</span>
+          <button type="button" class="sidebar-main-nav-btn nav-support ${tab === 'tickets' ? 'active' : ''}" onclick="app.clientTab = 'tickets'; app.saveState(); render();" title="Support Desk">
+            <i data-lucide="life-buoy"></i>
+            <span style="flex:1;text-align:left;">Support Desk</span>
+            <span class="sidebar-badge ${supportCount > 0 ? 'alert' : ''}">${supportCount}</span>
+            ${supportCount > 0 ? `<span class="collapsed-dot-indicator" style="display:none"></span>` : ''}
           </button>
-          <button type="button" class="sidebar-main-nav-btn ${tab === 'perks' ? 'active' : ''}" onclick="app.clientTab = 'perks'; app.saveState(); render();" title="Partner Perks ($250k+ Cloud Credits)">
-            <i data-lucide="gift"></i>
-            <span style="flex:1;text-align:left;">Partner Perks</span>
-            <span class="sidebar-badge" style="background: rgba(147, 51, 234, 0.15); color: #7C3AED;">$250k+</span>
+          <button type="button" class="sidebar-main-nav-btn ${tab === 'team' ? 'active' : ''}" onclick="app.clientTab = 'team'; app.saveState(); render();" title="Team &amp; Access">
+            <i data-lucide="users"></i>
+            <span style="flex:1;text-align:left;">Team &amp; Access</span>
+            <span class="sidebar-badge">${teamCount}</span>
+          </button>
+          <button type="button" class="sidebar-main-nav-btn ${tab === 'ecosystem' ? 'active' : ''}" onclick="app.clientTab = 'ecosystem'; app.saveState(); render();" title="York Ecosystem">
+            <i data-lucide="layers"></i>
+            <span style="flex:1;text-align:left;">York Ecosystem</span>
+            <span class="sidebar-badge">${ecosystemCount}</span>
           </button>
         </nav>
-
-        <!-- Secondary Collaboration Navigation -->
-        <div class="sidebar-nav-scroll">
-          <div class="sidebar-category-group">
-            <div class="sidebar-category-title">Organization &amp; Support</div>
-            <button type="button" class="sidebar-nav-item ${tab === 'tickets' ? 'active' : ''}" onclick="app.clientTab = 'tickets'; app.saveState(); render();" title="Support Desk &amp; Incidents">
-              <i data-lucide="life-buoy"></i>
-              <span class="sidebar-nav-label">Support Desk</span>
-              <span class="sidebar-badge">${(client.supportTickets || []).length}</span>
-              ${(client.supportTickets || []).length > 0 ? `<span class="collapsed-dot-indicator" style="display:none"></span>` : ''}
-            </button>
-            <button type="button" class="sidebar-nav-item ${tab === 'team' ? 'active' : ''}" onclick="app.clientTab = 'team'; app.saveState(); render();" title="Team &amp; Access Permissions">
-              <i data-lucide="users"></i>
-              <span class="sidebar-nav-label">Team &amp; Permissions</span>
-              <span class="sidebar-badge">${(client.team || []).length}</span>
-            </button>
-            <button type="button" class="sidebar-nav-item ${tab === 'ecosystem' ? 'active' : ''}" onclick="app.clientTab = 'ecosystem'; app.saveState(); render();" title="Ecosystem Catalog (18 Products)">
-              <i data-lucide="sparkles"></i>
-              <span class="sidebar-nav-label">Ecosystem Catalog</span>
-              <span class="sidebar-badge">18</span>
-            </button>
-          </div>
-        </div>
 
         <!-- Sidebar Footer: User Profile Tile (PRD: Tokens strictly HIDDEN from Client view!) -->
         <div class="sidebar-footer">
@@ -8301,14 +9735,10 @@ function renderClientDashboard() {
           </div>
         </header>
 
-        <!-- Main Tab Content Area (Without duplicate static top deck!) -->
+        <!-- Main Tab Content Area — 5 Client Portal tabs only -->
         <div class="canvas-content-flow animate-fade-in">
           ${tab === "milestones"
             ? renderClientMilestonesTab(client)
-            : tab === "perks"
-            ? renderClientPerksTab(client)
-            : tab === "threat-radar"
-            ? renderClientThreatRadarTab(client)
             : tab === "tickets"
             ? renderClientTicketsTab(client)
             : tab === "team"
@@ -8326,206 +9756,114 @@ function renderClientDashboard() {
 function renderClientWorkspacesTab(client) {
   const granted = client.grantedProducts || [];
   const products = PRODUCTS_CATALOG.filter(p => granted.includes(p.id));
+  const healthScore = client.healthTelemetry?.score || 94;
+  const firstName = (client.ownerName || app.currentUser?.name || "there").split(" ")[0];
 
   return `
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-      
-      <!-- Section Title & Controls Row -->
-      <section class="title-controls-row">
-        <div class="page-headline-wrap">
-          <h1 class="page-headline-lead">Workspaces</h1>
-          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
-            Your provisioned software products and connected integrations ready for Single Sign-On.
-          </p>
-        </div>
+    <div class="bento-page">
+      ${renderBentoGreeting({
+        title: `Hey ${firstName}, your workspaces are ready`,
+        subtitle: "Launch SSO-authenticated software provisioned for your team.",
+        primaryCta: products.length ? `<button type="button" class="bento-cta" onclick="openLaunchWorkspaceModal('${products[0].id}')"><span>Launch workspace</span></button>` : ''
+      })}
 
-        <div class="controls-pill-row">
-          <button onclick="app.clientTab = 'ecosystem'; app.saveState(); render();" class="export-pill-btn" style="height: 38px; padding: 0 16px;">
-            <i data-lucide="layers"></i>
-            <span>Explore All 18 Products</span>
-          </button>
-        </div>
-      </section>
+      ${renderBentoMetrics([
+        { value: products.length, label: 'Active workspaces' },
+        { value: healthScore + '/100', label: 'Health', tone: 'ok' }
+      ])}
 
-      <!-- Bi-Weekly Strategy Cadence Widget -->
-      <div class="cadence-widget">
-        <div>
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <span class="cadence-tag">Strategy Cadence</span>
-            <span style="font-size: 12px; color: #a7f3d0; font-weight: 600;">Dedicated Operating Pod Sync</span>
+      <div class="bento-grid">
+        ${products.length === 0 ? `
+          <div class="bento-span-12" style="padding:32px 0;color:var(--text-muted)">
+            <div style="font-weight:600;color:var(--text-main)">No workspaces provisioned yet</div>
+            <div style="font-size:13px;margin-top:4px">Your York Operating Lead will grant access soon.</div>
           </div>
-          <h3 style="font-size: 17px; font-weight: 800; color: #ffffff; margin-top: 6px;">
-            ${client.cadence?.agenda || "Q4 Sprint Alignment & Architecture Review"}
-          </h3>
-          <p style="font-size: 12px; color: rgba(255, 255, 255, 0.85); margin-top: 4px;">
-            📅 ${client.cadence?.nextCallDate || "Thursday, Nov 14"} at ${client.cadence?.nextCallTime || "2:00 PM EST"} · Lead: ${client.yorkLead || "Kyle York & Mike Veilleux"}
-          </p>
-        </div>
-
-        <div style="display: flex; align-items: center; gap: 10px; z-index: 2; flex-shrink: 0;">
-          <a 
-            href="${client.cadence?.zoomLink || '#'}" 
-            target="_blank"
-            class="export-pill-btn"
-            style="height: 38px; padding: 0 16px; background: #ffffff !important; color: #063828 !important; box-shadow: 0 4px 14px rgba(0,0,0,0.2) !important;"
-          >
-            <i data-lucide="video" style="color: #063828;"></i>
-            <span>Join Strategy Call</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Provisioned Products Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        ${products.map(p => `
-          <div class="product-card active-granted">
-            <div>
-              <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  <div style="width: 36px; height: 36px; border-radius: 9px; background: var(--emerald-subtle); color: var(--emerald-dark); display: grid; place-items: center;">
-                    <i data-lucide="${p.icon ? p.icon.toLowerCase() : 'rocket'}" style="width: 18px; height: 18px; color: var(--emerald-dark);"></i>
-                  </div>
-                  <div>
-                    <h3 style="font-size: 14px; font-weight: 700; color: var(--text-main);">${p.name}</h3>
-                    <span style="font-size: 10.5px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">${p.stage}</span>
-                  </div>
-                </div>
-                <span class="badge-in-path">Active</span>
+        ` : products.map(p => `
+          <article class="bento-tile bento-span-4 workspace-card" style="display:flex;flex-direction:column;gap:12px">
+            <div class="workspace-card-top">
+              <div class="workspace-card-identity">
+                <div class="workspace-card-icon" aria-hidden="true">${getIconSvg(p.icon || 'Rocket', 16, '#ffffff')}</div>
+                <h3 class="workspace-card-name">${p.name}</h3>
               </div>
-
-              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 12px; line-height: 1.5;">
-                ${p.description}
-              </p>
-
-              <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--text-muted);">
-                <span>SSO Authenticated</span>
-                <span class="mono" style="color: var(--emerald-dark); font-weight: 600;">v2.4 Live</span>
-              </div>
+              <span class="workspace-card-stage">${p.stage}</span>
             </div>
-
-            <div style="margin-top: 16px;">
-              <button 
-                onclick="openLaunchWorkspaceModal('${p.id}')"
-                class="export-pill-btn"
-                style="width: 100%; height: 36px; justify-content: center; font-size: 12.5px;"
-              >
-                <span>Launch Workspace</span>
-                <i data-lucide="external-link"></i>
-              </button>
+            <p class="workspace-card-desc" style="margin:0">${p.description}</p>
+            <div style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:6px">
+              <span class="live-dot" aria-hidden="true"></span> Live
             </div>
-          </div>
+            <button type="button" onclick="openLaunchWorkspaceModal('${p.id}')" class="workspace-launch-btn" title="Launch ${p.name}">
+              <span>Launch ${p.name}</span><span aria-hidden="true">→</span>
+            </button>
+          </article>
         `).join('')}
       </div>
-
     </div>
   `;
 }
 function renderClientMilestonesTab(client) {
-  const milestones = client.milestones || [];
-  const stages = [
-    { key: 'scoping', label: 'Scoping' },
-    { key: 'in_progress', label: 'In Progress' },
-    { key: 'client_review', label: 'Awaiting Sign-Off' },
-    { key: 'approved', label: 'Approved & Completed' }
-  ];
+  const milestones = [...(client.milestones || [])];
+  const signOffCount = milestones.filter(m => m.stage === 'client_review').length;
+  const stageOrder = { approved: 0, client_review: 1, in_progress: 2, scoping: 3 };
+  milestones.sort((a, b) => (stageOrder[a.stage] ?? 9) - (stageOrder[b.stage] ?? 9));
 
-  const approvedCount = milestones.filter(m => m.stage === 'approved').length;
+  const statusMeta = {
+    approved: { label: 'Approved & Completed', className: 'approved', footer: 'signed' },
+    client_review: { label: 'Action Required: Sign-Off', className: 'signoff', footer: 'signoff' },
+    in_progress: { label: 'In Delivery by York', className: 'delivery', footer: 'progress' },
+    scoping: { label: 'Scoping', className: 'scoping', footer: 'progress' }
+  };
+
+  const firstName = (client.ownerName || app.currentUser?.name || "there").split(" ")[0];
 
   return `
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-      
-      <!-- Section Title & Controls Row -->
-      <section class="title-controls-row">
-        <div class="page-headline-wrap">
-          <h1 class="page-headline-lead">SOW Deliverables</h1>
-          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
-            Track sprint delivery and provide client sign-off on deliverables executed by your York operating pod.
-          </p>
-        </div>
+    <div class="bento-page">
+      ${renderBentoGreeting({
+        title: `Hey ${firstName}, review your initiatives`,
+        subtitle: "Sign off deliverables from your York IE practice leads."
+      })}
 
-        <div class="controls-pill-row">
-          <div style="display: inline-flex; align-items: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: var(--radius-pill); background: var(--bg-card); border: 1px solid var(--line); font-size: 12px; font-weight: 600; color: var(--text-main);">
-            <i data-lucide="check-circle" style="width: 14px; height: 14px; color: var(--emerald);"></i>
-            <span>${approvedCount} of ${milestones.length} Milestones Approved</span>
-          </div>
+      ${renderBentoMetrics([
+        { value: milestones.length, label: 'Initiatives' },
+        { value: signOffCount, label: 'Awaiting sign-off', tone: signOffCount ? 'warn' : 'ok' },
+        { value: milestones.filter(m => m.stage === 'approved').length, label: 'Signed off', tone: 'ok' }
+      ])}
 
-          <button onclick="showToast('SOW summary report generated and ready for board review.', 'info')" class="export-pill-btn" style="height: 38px; padding: 0 16px;">
-            <i data-lucide="download"></i>
-            <span>Export SOW Summary</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- 4-Column Pipeline Delivery Board -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        ${stages.map(st => {
-          const list = milestones.filter(m => m.stage === st.key);
+      <div class="bento-grid">
+        ${milestones.length === 0 ? `
+          <div class="bento-span-12" style="padding:32px 0;color:var(--text-muted)">No strategic initiatives yet.</div>
+        ` : milestones.map(m => {
+          const meta = statusMeta[m.stage] || statusMeta.scoping;
+          const description = m.desc || m.deliverableSummary || m.description || 'Execution milestone in progress.';
+          const needsSignoff = m.stage === 'client_review';
           return `
-            <div class="pipeline-col">
-              <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">${st.label}</span>
-                <span class="sidebar-badge">${list.length}</span>
+            <article class="bento-tile bento-span-6 initiative-card ${needsSignoff ? 'needs-signoff' : ''}" style="display:flex;flex-direction:column;gap:12px">
+              <div class="initiative-card-top">
+                <span class="initiative-practice">${m.practice || 'Practice'}</span>
+                <span class="initiative-status ${meta.className}">${meta.label}</span>
               </div>
-
-              <div style="display: flex; flex-direction: column; gap: 12px;">
-                ${list.length === 0 ? `
-                  <div style="padding: 24px 12px; text-align: center; border: 1px dashed var(--line); border-radius: 12px; font-size: 11px; color: var(--text-muted);">
-                    No items in this stage
-                  </div>
-                ` : list.map(m => `
-                  <div class="milestone-card">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;">
-                      <span style="font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 2px 7px; border-radius: 6px; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--line);">
-                        ${m.practice}
-                      </span>
-                      <span class="mono" style="font-size: 10.5px; color: var(--text-muted);">${m.targetDate || "Q4 2026"}</span>
-                    </div>
-
-                    <h4 style="font-size: 13px; font-weight: 700; color: var(--text-main); margin-top: 4px; line-height: 1.35;">${m.title}</h4>
-                    <p style="font-size: 11.5px; color: var(--text-muted); line-height: 1.45;">${m.deliverableSummary || m.description || 'Execution milestone in progress.'}</p>
-
-                    <!-- Checklist items -->
-                    ${(m.checklist || []).length > 0 ? `
-                      <div style="padding: 8px 10px; border-radius: 8px; background: var(--bg-subtle); border: 1px solid var(--line); font-size: 11px; display: flex; flex-direction: column; gap: 4px;">
-                        ${(m.checklist || []).slice(0, 2).map(item => `
-                          <div style="display: flex; align-items: center; gap: 6px; color: var(--text-secondary);">
-                            <span style="color: ${item.done ? 'var(--emerald)' : 'var(--text-muted)'}; font-weight: 700;">${item.done ? '✓' : '○'}</span>
-                            <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.text}</span>
-                          </div>
-                        `).join('')}
-                      </div>
-                    ` : ''}
-
-                    <!-- Action button -->
-                    <div style="margin-top: 4px;">
-                      ${m.stage === 'client_review' ? `
-                        <button 
-                          onclick="app.approveMilestone('${m.id}')"
-                          class="export-pill-btn"
-                          style="width: 100%; height: 32px; font-size: 11.5px; justify-content: center;"
-                        >
-                          <i data-lucide="check"></i>
-                          <span>Sign Off &amp; Approve</span>
-                        </button>
-                      ` : m.stage === 'approved' ? `
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 11px; font-weight: 700; color: var(--emerald-dark); padding: 4px 0;">
-                          <i data-lucide="check" style="width: 13px; height: 13px;"></i>
-                          <span>Approved &amp; Accepted</span>
-                        </div>
-                      ` : `
-                        <div style="font-size: 11px; color: var(--text-muted); text-align: center; padding: 4px 0;">
-                          Pod Sprint In Progress
-                        </div>
-                      `}
-                    </div>
-                  </div>
-                `).join('')}
+              <div>
+                <h3 class="initiative-title">${m.title}</h3>
+                <p class="initiative-meta">Lead: ${m.lead || 'York IE Pod'} · Target: ${m.targetDate || 'TBD'}</p>
               </div>
-            </div>
+              <div class="initiative-desc-box">${description}</div>
+              <div>
+                <div class="initiative-deliverable-label">Deliverable</div>
+                <div class="initiative-deliverable-value">${m.deliverableLinked || 'In progress'}</div>
+              </div>
+              <div class="initiative-footer">
+                <span class="initiative-footer-label">Initiative</span>
+                ${meta.footer === 'signoff' ? `
+                  <button type="button" class="initiative-signoff-btn" onclick="app.approveMilestone('${m.id}')">Review &amp; sign off</button>
+                ` : meta.footer === 'signed' ? `
+                  <span class="initiative-footer-status">Signed off</span>
+                ` : `
+                  <span class="initiative-footer-muted">In delivery</span>
+                `}
+              </div>
+            </article>
           `;
         }).join('')}
       </div>
-
     </div>
   `;
 }
@@ -8591,7 +9929,7 @@ function renderClientPerksTab(client) {
               <div>
                 <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;">
                   <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--bg-subtle); border: 1px solid var(--line); display: grid; place-items: center;">
-                    <i data-lucide="${perk.icon ? perk.icon.toLowerCase() : 'gift'}" style="width: 20px; height: 20px; color: var(--emerald);"></i>
+                    ${getIconSvg(perk.logo || perk.icon || 'Gift', 20, 'var(--emerald)')}
                   </div>
                   <span style="font-size: 10.5px; font-weight: 700; text-transform: uppercase; padding: 2px 8px; border-radius: 9999px; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--line);">
                     ${perk.category}
@@ -8828,160 +10166,67 @@ function renderClientSupportTab(client) {
 function renderClientTicketsTab(client) {
   const tickets = client.supportTickets || [];
   const openCount = tickets.filter(t => t.status !== 'resolved').length;
-  const resolvedCount = tickets.filter(t => t.status === 'resolved').length;
+  const firstName = (client.ownerName || app.currentUser?.name || "there").split(" ")[0];
+
+  const statusLabel = (status) => {
+    if (status === 'resolved') return 'Resolved ✓';
+    if (status === 'in_progress') return 'In Progress';
+    return 'Open';
+  };
 
   return `
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-      
-      <!-- Section Title & Controls Row -->
-      <section class="title-controls-row">
-        <div class="page-headline-wrap">
-          <h1 class="page-headline-lead">Support Desk</h1>
-          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
-            Submit technical requests and track real-time SLA resolution progress.
-          </p>
-        </div>
+    <div class="bento-page">
+      ${renderBentoGreeting({
+        title: `Hey ${firstName}, need help from York?`,
+        subtitle: "Raise tickets and track resolution from your operating pod. SLA &lt; 2 hours.",
+        primaryCta: `<button type="button" class="bento-cta" onclick="openNewTicketModal()"><span>+</span><span>Raise ticket</span></button>`
+      })}
 
-        <div class="controls-pill-row">
-          <button onclick="openNewTicketModal()" class="export-pill-btn" style="height: 38px; padding: 0 16px;">
-            <i data-lucide="plus"></i>
-            <span>Raise Support Ticket</span>
-          </button>
-        </div>
-      </section>
-      
-      <!-- Top Metrics Header Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="clean-card !p-4" style="background: var(--bg-card); border: 1px solid var(--line);">
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] uppercase font-bold tracking-wider" style="color: var(--text-muted);">Active Incidents</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold" style="background: ${openCount > 0 ? 'rgba(245, 158, 11, 0.15)' : 'var(--emerald-subtle)'}; color: ${openCount > 0 ? '#B45309' : 'var(--emerald-dark)'};">
-              ${openCount > 0 ? openCount + ' Open' : 'Clear'}
-            </span>
-          </div>
-          <div class="text-2xl font-bold mt-2 mono" style="color: var(--text-main);">
-            ${openCount}
-          </div>
-          <div class="text-[11px] mt-2" style="color: var(--text-muted);">
-            Avg Response SLA: <span style="font-weight: 700; color: var(--emerald);">&lt; 15 mins</span>
-          </div>
-        </div>
+      ${renderBentoMetrics([
+        { value: openCount, label: 'Open', tone: openCount ? 'warn' : 'ok' },
+        { value: tickets.filter(t => t.status === 'resolved').length, label: 'Resolved', tone: 'ok' },
+        { value: tickets.length, label: 'Total' }
+      ])}
 
-        <div class="clean-card !p-4" style="background: var(--bg-card); border: 1px solid var(--line);">
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] uppercase font-bold tracking-wider" style="color: var(--text-muted);">Resolved Tickets</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold" style="background: var(--emerald-subtle); color: var(--emerald-dark);">
-              Resolved
-            </span>
-          </div>
-          <div class="text-2xl font-bold mt-2 mono" style="color: var(--text-main);">
-            ${resolvedCount}
-          </div>
-          <div class="text-[11px] mt-2" style="color: var(--text-muted);">
-            Total incidents resolved this term
-          </div>
+      <div class="bento-surface">
+        <div class="bento-panel-head">
+          <h2 class="bento-panel-title">Your tickets</h2>
         </div>
-
-        <div class="clean-card !p-4" style="background: var(--bg-card); border: 1px solid var(--line);">
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] uppercase font-bold tracking-wider" style="color: var(--text-muted);">Engineering Lead</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold" style="background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--line);">
-              Dedicated
-            </span>
-          </div>
-          <div class="text-lg font-bold mt-2" style="color: var(--text-main);">
-            Alex Tremblay
-          </div>
-          <div class="text-[11px] mt-2" style="color: var(--text-muted);">
-            VP Engineering · York IE Pod
-          </div>
-        </div>
-      </div>
-
-      <!-- Action Row -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
-        <div>
-          <h2 class="text-xl font-bold tracking-tight" style="color: var(--text-main);">Technical Support Desk</h2>
-          <p class="text-xs mt-0.5" style="color: var(--text-muted);">
-            Direct operational access to your dedicated York IE engineering and operations pod.
-          </p>
-        </div>
-
-        <button 
-          onclick="openNewTicketModal()"
-          class="export-pill-btn"
-          title="Raise a new support ticket"
-          style="height: 38px; padding: 0 16px;"
-        >
-          <i data-lucide="plus"></i>
-          <span>Raise Support Ticket</span>
-        </button>
-      </div>
-
-      <!-- Tickets Table View -->
-      <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-card); box-shadow: var(--shadow-card); overflow: hidden;">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse text-xs">
-            <thead style="background: var(--bg-subtle); border-bottom: 1px solid var(--line); color: var(--text-muted); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
-              <tr>
-                <th class="py-3.5 px-6">Incident &amp; Description</th>
-                <th class="py-3.5 px-4">Product</th>
-                <th class="py-3.5 px-4">Severity</th>
-                <th class="py-3.5 px-4">Status</th>
-                <th class="py-3.5 px-6 text-right">Created</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${tickets.length === 0 ? `
-                <tr>
-                  <td colspan="5" class="py-12 text-center" style="color: var(--text-muted);">
-                    <div class="text-sm font-semibold" style="color: var(--text-main);">No active support incidents</div>
-                    <div class="text-xs mt-1">Your platform tools and integrations are operating normally.</div>
-                  </td>
-                </tr>
-              ` : tickets.map(t => `
-                <tr style="border-bottom: 1px solid var(--line); transition: background 0.15s ease;" onmouseover="this.style.background='var(--bg-subtle)'" onmouseout="this.style.background='transparent'">
-                  <td class="py-4 px-6">
-                    <div class="font-bold text-sm leading-tight" style="color: var(--text-main);">${t.title}</div>
-                    <div class="text-[11px] mt-1" style="color: var(--text-muted);">${t.description || t.yorkNotes || 'Incident logged.'}</div>
-                  </td>
-                  <td class="py-4 px-4 whitespace-nowrap">
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold" style="background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--line);">
-                      ${t.productName || t.product || 'Fuel'}
-                    </span>
-                  </td>
-                  <td class="py-4 px-4 whitespace-nowrap">
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold" style="${
-                      t.severity === 'high' 
-                        ? 'background: rgba(239, 68, 68, 0.12); color: #DC2626; border: 1px solid rgba(239, 68, 68, 0.25);' 
-                        : t.severity === 'medium'
-                        ? 'background: rgba(245, 158, 11, 0.12); color: #B45309; border: 1px solid rgba(245, 158, 11, 0.25);'
-                        : 'background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--line);'
-                    }">
-                      <span style="width: 5px; height: 5px; border-radius: 50%; background: currentColor;"></span>
-                      <span style="text-transform: capitalize;">${t.severity}</span>
-                    </span>
-                  </td>
-                  <td class="py-4 px-4 whitespace-nowrap">
-                    ${t.status === 'resolved' ? `
-                      <span class="inline-flex items-center gap-1 text-[11px] font-bold" style="color: var(--emerald-dark);">
-                        <span>✓</span>
-                        <span>Resolved</span>
-                      </span>
-                    ` : `
-                      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold" style="background: var(--emerald-subtle); color: var(--emerald-dark); border: 1px solid rgba(0,180,138,0.3);">
-                        <span style="width: 5px; height: 5px; border-radius: 50%; background: var(--emerald); display: inline-block;" class="animate-pulse"></span>
-                        <span>Investigating</span>
-                      </span>
-                    `}
-                  </td>
-                  <td class="py-4 px-6 text-right whitespace-nowrap" style="color: var(--text-muted); font-size: 11px;">
-                    ${t.createdAt || 'Recent'}
-                  </td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
+        <div class="bento-list support-ticket-list">
+          ${tickets.length === 0 ? `
+            <div style="padding:28px 0;color:var(--text-muted)">
+              <div style="font-weight:600;color:var(--text-main);margin-bottom:4px">No support tickets yet</div>
+              <div>Everything looks healthy.</div>
+            </div>
+          ` : tickets.map(t => {
+            const sev = (t.severity || 'medium').toLowerCase();
+            const status = (t.status || 'open').toLowerCase();
+            return `
+              <article class="support-ticket-card">
+                <div class="support-ticket-top">
+                  <div style="min-width:0;flex:1">
+                    <div class="support-ticket-badges">
+                      <span class="support-status-badge ${status}">${statusLabel(status)}</span>
+                      <span class="support-product-badge">${t.productName || t.product || 'Platform'}</span>
+                    </div>
+                    <h3 class="support-ticket-title">${t.title} <span class="support-ticket-id">#${t.id}</span></h3>
+                  </div>
+                  <span class="support-ticket-time">${t.createdAt || 'Recent'}</span>
+                </div>
+                <div class="support-ticket-desc">${t.description || 'Incident logged with York Service Desk.'}</div>
+                <div class="support-ticket-meta">
+                  <span>Severity: <strong class="sev-${sev}">${(t.severity || 'medium').toUpperCase()}</strong></span>
+                  <span>Specialist: <strong>${t.yorkAssignee || 'York IE Pod'}</strong></span>
+                </div>
+                ${t.yorkNotes ? `
+                  <div class="support-york-response">
+                    <div class="support-york-response-label">York response</div>
+                    <div class="support-york-response-text">${t.yorkNotes}</div>
+                  </div>
+                ` : ''}
+              </article>
+            `;
+          }).join('')}
         </div>
       </div>
     </div>
@@ -8991,134 +10236,155 @@ function renderClientTicketsTab(client) {
 
 function renderClientTeamTab(client) {
   const team = client.team || [];
+  const grantedIds = client.grantedProducts || [];
+  const grantedProducts = PRODUCTS_CATALOG.filter(p => grantedIds.includes(p.id));
+
+  const initials = (name = '') => {
+    const parts = name.trim().split(/\s+/);
+    if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+    return name.substring(0, 2).toUpperCase() || 'TM';
+  };
+
+  const roleLabel = (role) => (role === 'owner' ? 'Owner' : 'Member');
+  const titleClean = (title = '') => title.replace(/\s*\(Owner\)\s*/i, '').trim();
+  const firstName = (client.ownerName || app.currentUser?.name || "there").split(" ")[0];
 
   return `
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-      
-      <!-- Section Title & Controls Row -->
-      <section class="title-controls-row">
-        <div class="page-headline-wrap">
-          <h1 class="page-headline-lead">Team &amp; Permissions</h1>
-          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
-            Manage team members, roles, and assigned software workspace access.
-          </p>
+    <div class="bento-page">
+      ${renderBentoGreeting({
+        title: `Hey ${firstName}, manage team access`,
+        subtitle: "Invite collaborators and control per-service access.",
+        primaryCta: `<button type="button" class="bento-cta" onclick="showToast('Invitation sent to new team member.', 'success')"><span>+</span><span>Invite member</span></button>`
+      })}
+
+      ${renderBentoMetrics([
+        { value: team.length, label: 'Members' },
+        { value: grantedProducts.length, label: 'Services' },
+        { value: 'Owner', label: 'Access model' }
+      ])}
+
+      <div class="bento-surface team-panel" style="border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg-card)">
+        <div class="team-panel-header" style="padding:12px 16px;border-bottom:1px solid var(--line);background:transparent">
+          <h2 class="bento-panel-title">Members &amp; permissions</h2>
         </div>
-
-        <div class="controls-pill-row">
-          <button onclick="showToast('Invitation sent to new team member.', 'success')" class="export-pill-btn" style="height: 38px; padding: 0 16px;">
-            <i data-lucide="plus"></i>
-            <span>Invite Team Member</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- Team Members Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        ${team.map(m => `
-          <div class="clean-card" style="display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-              <div style="display: flex; align-items: center; gap: 12px;">
-                <div style="width: 42px; height: 42px; border-radius: 10px; background: var(--emerald-dark); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 13px; flex-shrink: 0;">
-                  ${m.name.substring(0, 2).toUpperCase()}
-                </div>
-                <div>
-                  <h4 style="font-weight: 700; font-size: 13.5px; color: var(--text-main);">${m.name}</h4>
-                  <div style="font-size: 11.5px; color: var(--text-muted);">${m.email}</div>
-                  <div style="font-size: 11px; font-weight: 700; color: var(--emerald-dark); margin-top: 2px;">${m.title}</div>
-                </div>
-              </div>
-
-              <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line);">
-                <span style="font-size: 10.5px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">Provisioned Tools</span>
-                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-                  ${(m.allowedProducts || []).map(pid => `
-                    <span class="badge-member-access">${pid}</span>
-                  `).join('')}
-                </div>
-              </div>
-            </div>
-
-            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--text-muted);">
-              <span>Role: <b style="color: var(--text-main);">${m.role || 'Member'}</b></span>
-              <span style="color: var(--emerald-dark); font-weight: 700;">Active</span>
-            </div>
-          </div>
-        `).join('')}
-      </div>
-
-    </div>
-  `;
-}
-function renderClientEcosystemTab(client) {
-  const granted = client.grantedProducts || [];
-
-  return `
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-      
-      <!-- Section Title & Controls Row -->
-      <section class="title-controls-row">
-        <div class="page-headline-wrap">
-          <h1 class="page-headline-lead">Ecosystem Catalog</h1>
-          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">
-            Explore additional proprietary software solutions available to attach to your operating retainer.
-          </p>
-        </div>
-
-        <div class="controls-pill-row">
-          <div style="display: inline-flex; align-items: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: var(--radius-pill); background: var(--bg-card); border: 1px solid var(--line); font-size: 12px; font-weight: 600; color: var(--text-main);">
-            <span>${granted.length} of 18 Active</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- 18 Products Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        ${PRODUCTS_CATALOG.map(p => {
-          const isGranted = granted.includes(p.id);
+        ${team.length === 0 ? `
+          <div style="padding:32px 16px;text-align:center;color:var(--text-muted)">No team members yet.</div>
+        ` : team.map(m => {
+          const isOwner = m.role === 'owner';
+          const allowed = m.allowedProducts || [];
           return `
-            <div class="product-card ${isGranted ? 'active-granted' : ''}">
-              <div>
-                <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;">
-                  <div style="width: 38px; height: 38px; border-radius: 9px; background: var(--bg-subtle); border: 1px solid var(--line); display: grid; place-items: center;">
-                    <i data-lucide="${p.icon ? p.icon.toLowerCase() : 'rocket'}" style="width: 18px; height: 18px; color: var(--emerald);"></i>
+            <div class="team-member-row">
+              <div class="team-member-identity">
+                <div class="team-member-avatar" aria-hidden="true">${initials(m.name)}</div>
+                <div style="min-width:0">
+                  <div class="team-member-name-row">
+                    <h3 class="team-member-name">${m.name}</h3>
+                    <span class="team-role-badge ${isOwner ? 'owner' : 'member'}">${roleLabel(m.role)}</span>
                   </div>
-                  <span style="font-size: 10.5px; font-weight: 700; text-transform: uppercase; padding: 2px 8px; border-radius: 9999px; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--line);">
-                    ${p.stage}
-                  </span>
+                  <div class="team-member-meta">${m.email} · ${titleClean(m.title) || 'Team Member'}</div>
                 </div>
-
-                <h3 style="font-size: 14.5px; font-weight: 700; color: var(--text-main); margin-top: 12px;">${p.name}</h3>
-                <div style="font-size: 11.5px; font-weight: 600; color: var(--emerald-dark); margin-top: 2px;">${p.role}</div>
-                <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px; line-height: 1.5;">${p.description}</p>
               </div>
-
-              <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line);">
-                ${isGranted ? `
-                  <button 
-                    onclick="openLaunchWorkspaceModal('${p.id}')"
-                    class="export-pill-btn"
-                    style="width: 100%; height: 34px; justify-content: center; font-size: 12px;"
-                  >
-                    <span>Launch Active Tool</span>
-                    <i data-lucide="external-link"></i>
-                  </button>
-                ` : `
-                  <button 
-                    onclick="showToast('Access request dispatched to your York Operating Lead.', 'success')"
-                    style="width: 100%; height: 34px; font-size: 12px; font-weight: 600; border-radius: var(--cta-radius); background: var(--bg-card); border: 1px solid var(--line); color: var(--text-secondary); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.15s;"
-                    onmouseover="this.style.background='var(--bg-subtle)'; this.style.color='var(--text-main)'"
-                    onmouseout="this.style.background='var(--bg-card)'; this.style.color='var(--text-secondary)'"
-                  >
-                    <i data-lucide="plus" style="width: 13px; height: 13px;"></i>
-                    <span>Request Provisioning</span>
-                  </button>
-                `}
+              <div class="team-rights" aria-label="Service permissions for ${m.name}">
+                ${grantedProducts.map(p => {
+                  if (isOwner) return `<span class="team-right-chip locked">${p.name}</span>`;
+                  const hasAccess = allowed.includes(p.id);
+                  return `
+                    <button type="button" class="team-right-chip ${hasAccess ? 'active' : 'inactive'}"
+                      onclick="app.toggleMemberProduct('${client.id}', '${m.id}', '${p.id}')"
+                      title="${hasAccess ? 'Revoke' : 'Grant'} ${p.name} access">
+                      <span aria-hidden="true">${hasAccess ? '✓' : '+'}</span>
+                      <span>${p.name}</span>
+                    </button>`;
+                }).join('')}
               </div>
             </div>
           `;
         }).join('')}
       </div>
+    </div>
+  `;
+}
+function renderClientEcosystemTab(client) {
+  const granted = client.grantedProducts || [];
+  const filter = app.ecosystemFilter || 'all';
+  const stages = [
+    { key: 'all', label: 'All products' },
+    { key: 'decide', label: 'Decide' },
+    { key: 'execute', label: 'Execute' },
+    { key: 'measure', label: 'Measure' },
+    { key: 'assess', label: 'Assess' },
+    { key: 'operate', label: 'Operate' }
+  ];
 
+  const counts = stages.reduce((acc, s) => {
+    acc[s.key] = s.key === 'all'
+      ? PRODUCTS_CATALOG.length
+      : PRODUCTS_CATALOG.filter(p => (p.stageClass || p.stage.toLowerCase()) === s.key).length;
+    return acc;
+  }, {});
+
+  const filtered = filter === 'all'
+    ? PRODUCTS_CATALOG
+    : PRODUCTS_CATALOG.filter(p => (p.stageClass || p.stage.toLowerCase()) === filter);
+
+  const titleMap = {
+    all: 'All products.',
+    decide: 'Decide products.',
+    execute: 'Execute products.',
+    measure: 'Measure products.',
+    assess: 'Assess products.',
+    operate: 'Operate products.'
+  };
+
+  const firstName = (client.ownerName || app.currentUser?.name || "there").split(" ")[0];
+  const inPathCount = granted.length;
+
+  return `
+    <div class="bento-page">
+      ${renderBentoGreeting({
+        title: `Hey ${firstName}, explore the York Ecosystem`,
+        subtitle: "Browse Decide → Operate software and request access."
+      })}
+
+      ${renderBentoMetrics([
+        { value: PRODUCTS_CATALOG.length, label: 'Products' },
+        { value: inPathCount, label: 'In your path', tone: 'ok' }
+      ])}
+
+      <div class="bento-surface">
+        <div class="bento-panel-head">
+          <h2 class="bento-panel-title">${titleMap[filter] || 'All products.'}</h2>
+        </div>
+        <div class="bento-chip-row" role="tablist" aria-label="Ecosystem stage filter">
+          ${stages.map(s => `
+            <button type="button" class="bento-chip ${filter === s.key ? 'active' : ''}" onclick="app.setEcosystemFilter('${s.key}')">
+              <span>${s.label}</span>
+              <span class="bento-chip-count">${counts[s.key]}</span>
+            </button>
+          `).join('')}
+        </div>
+        <div class="eco-grid" style="margin-top:14px">
+          ${filtered.map(p => {
+            const isGranted = granted.includes(p.id);
+            return `
+              <article class="eco-card">
+                <div class="eco-card-stage">${p.stage}</div>
+                <h3 class="eco-card-name">${p.name}</h3>
+                <p class="eco-card-desc">${p.description}</p>
+                <div class="eco-card-footer">
+                  ${isGranted ? `
+                    <span class="badge-in-path">In your path</span>
+                    <button type="button" class="eco-workspace-link" onclick="openLaunchWorkspaceModal('${p.id}')">Workspace →</button>
+                  ` : `
+                    <span class="eco-available">Available</span>
+                    <button type="button" class="eco-request-btn" onclick="showToast('Access request dispatched to your York Operating Lead.', 'success')">Request access</button>
+                  `}
+                </div>
+              </article>
+            `;
+          }).join('')}
+        </div>
+      </div>
     </div>
   `;
 }
