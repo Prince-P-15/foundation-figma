@@ -3084,40 +3084,6 @@ i[data-lucide], svg.lucide {
   margin-bottom: 12px;
   flex-wrap: wrap;
 }
-.aa-az-filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  align-items: center;
-  padding: 0 16px 12px;
-}
-.aa-az-chip {
-  min-width: 28px;
-  height: 28px;
-  padding: 0 6px;
-  border-radius: 8px;
-  border: 1px solid var(--line);
-  background: var(--bg-card);
-  color: var(--text-muted);
-  font-size: 11px;
-  font-weight: 650;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-}
-.aa-az-chip:hover {
-  color: var(--text-main);
-  border-color: rgba(16, 185, 129, 0.35);
-}
-.aa-az-chip.active {
-  background: rgba(16, 185, 129, 0.12);
-  border-color: rgba(16, 185, 129, 0.45);
-  color: var(--emerald-dark);
-}
-.aa-az-chip:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
 .ps-combo {
   position: relative;
   width: var(--ps-width, 100%);
@@ -15046,7 +15012,6 @@ class YorkConsoleApp {
         this.companyAddOpen = false;
         this.companyAddQuery = '';
         this.companyAddSelected = [];
-        this.companyAddLetter = 'all';
         this.companyAddStrategists = {};
         this.companyNoteComposerOpen = false;
         this.clientTab = parsed.clientTab || 'workspaces';
@@ -15101,7 +15066,6 @@ class YorkConsoleApp {
     this.companyAddOpen = false;
     this.companyAddQuery = '';
     this.companyAddSelected = [];
-    this.companyAddLetter = 'all';
     this.companyAddStrategists = {};
     this.companyNoteComposerOpen = false;
     this.clientTab = 'products';
@@ -15363,7 +15327,6 @@ class YorkConsoleApp {
     this.companyAddOpen = typeof force === 'boolean' ? force : !this.companyAddOpen;
     if (this.companyAddOpen) {
       this.adminSelectedClientId = null;
-      this.companyAddLetter = this.companyAddLetter || 'all';
       if (!this.companyAddStrategists || typeof this.companyAddStrategists !== 'object') {
         this.companyAddStrategists = {};
       }
@@ -15371,7 +15334,6 @@ class YorkConsoleApp {
     if (!this.companyAddOpen) {
       this.companyAddQuery = '';
       this.companyAddSelected = [];
-      this.companyAddLetter = 'all';
       this.companyAddStrategists = {};
     }
     this.saveState();
@@ -15397,13 +15359,6 @@ class YorkConsoleApp {
         }
       }
     }
-  }
-
-  setCompanyAddLetter(letter) {
-    this.companyAddLetter = letter || 'all';
-    this.saveState();
-    render();
-    requestAnimationFrame(() => document.getElementById('aa-company-add-search')?.focus());
   }
 
   setCompanyAddStrategist(candidateId, strategistName) {
@@ -15458,7 +15413,6 @@ class YorkConsoleApp {
     });
     this.companyAddSelected = [];
     this.companyAddQuery = '';
-    this.companyAddLetter = 'all';
     this.companyAddStrategists = {};
     this.companyAddOpen = false;
     this.adminFilterStatus = 'inactive';
@@ -19245,24 +19199,13 @@ function getCompanyDirectoryCandidates() {
 
 function renderAdminAddCompaniesModule() {
   const q = (app.companyAddQuery || '').toLowerCase().trim();
-  const letter = (app.companyAddLetter || 'all').toLowerCase();
   const selected = new Set(app.companyAddSelected || []);
   const strategists = app.companyAddStrategists || {};
   let allCandidates = getCompanyDirectoryCandidates().slice().sort((a, b) =>
     String(a.name || '').localeCompare(String(b.name || ''), undefined, { sensitivity: 'base' })
   );
 
-  const letterCounts = {};
-  for (let i = 0; i < 26; i++) letterCounts[String.fromCharCode(97 + i)] = 0;
-  allCandidates.forEach(c => {
-    const ch = String(c.name || '').trim().charAt(0).toLowerCase();
-    if (ch >= 'a' && ch <= 'z') letterCounts[ch] += 1;
-  });
-
   let candidates = allCandidates;
-  if (letter && letter !== 'all') {
-    candidates = candidates.filter(c => String(c.name || '').trim().charAt(0).toLowerCase() === letter);
-  }
   if (q) {
     candidates = candidates.filter(c =>
       (c.name || '').toLowerCase().includes(q) ||
@@ -19273,24 +19216,12 @@ function renderAdminAddCompaniesModule() {
     );
   }
 
-  const azChips = `
-    <div class="aa-az-filter" role="group" aria-label="Filter companies A to Z">
-      <button type="button" class="aa-az-chip ${letter === 'all' ? 'active' : ''}" onclick="app.setCompanyAddLetter('all')">All</button>
-      ${Array.from({ length: 26 }, (_, i) => {
-        const L = String.fromCharCode(65 + i);
-        const key = L.toLowerCase();
-        const count = letterCounts[key] || 0;
-        return `<button type="button" class="aa-az-chip ${letter === key ? 'active' : ''}" ${count ? '' : 'disabled'} onclick="app.setCompanyAddLetter('${key}')" title="${count} companies">${L}</button>`;
-      }).join('')}
-    </div>
-  `;
-
   const selectedCount = selected.size;
   const tableBody = candidates.length === 0
     ? `
       <tr>
         <td colspan="5">
-          <div class="aa-module-empty" style="margin:12px 0;"><strong>No matching companies</strong>Try another letter or search, or create a custom company.</div>
+          <div class="aa-module-empty" style="margin:12px 0;"><strong>No matching companies</strong>Try another search, or create a custom company.</div>
         </td>
       </tr>
     `
@@ -19347,7 +19278,7 @@ function renderAdminAddCompaniesModule() {
         <div class="page-headline-wrap">
           <h1 class="page-headline-lead">Add accounts</h1>
           <p class="page-headline-sub">
-            Browse the full company directory A–Z, search by name, assign a Product Strategist, then add selected accounts.
+            Browse the company directory, search by name, assign a Product Strategist, then add selected accounts.
           </p>
         </div>
         <div class="aa-module-hero-actions">
@@ -19379,7 +19310,6 @@ function renderAdminAddCompaniesModule() {
             ${candidates.length} of ${allCandidates.length} companies
           </div>
         </div>
-        ${azChips}
         <div class="aa-module-body" style="padding:0;">
           <div class="support-desk-table-wrap" style="margin:0;border:none;box-shadow:none;border-radius:0;">
             <table class="support-desk-table">
