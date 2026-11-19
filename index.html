@@ -287,7 +287,8 @@
   .btn-primary,
   .stage-story-btn,
   #feedbackSubmitBtn,
-  .modal-submit-btn {
+  .modal-submit-btn,
+  .yf__btn {
     background: var(--cta-primary-bg) !important;
     color: var(--cta-primary-color) !important;
     border: 1px solid var(--cta-primary-border) !important;
@@ -297,7 +298,8 @@
   .btn-primary:hover,
   .stage-story-btn:hover,
   #feedbackSubmitBtn:hover,
-  .modal-submit-btn:hover {
+  .modal-submit-btn:hover,
+  .yf__btn:hover {
     transform: translateY(-2px);
     box-shadow: var(--cta-primary-shadow-hover) !important;
     background: var(--cta-primary-hover-bg) !important;
@@ -484,12 +486,8 @@
 
   .nav-right { display: flex; align-items: center; gap: 10px; }
 
-  /* Hero section version switcher */
-  .hero-version-switcher {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  }
+  /* Hero locked to version-2 (stacked); switcher removed */
+  .hero-version-switcher { display: none !important; }
   .hero-version-label {
     font-size: 0.72rem;
     font-weight: 600;
@@ -831,27 +829,26 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    align-items: flex-end;
-    gap: 6px;
-    margin: 16px auto 28px;
+    align-items: center;
+    gap: 10px;
+    margin: 16px auto 26px;
     width: fit-content;
     max-width: calc(100% - 24px);
-    padding: 12px 18px 10px;
-    border-radius: 24px;
+    padding: 8px 12px;
+    border-radius: 22px;
     background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.45) 0%,
-      rgba(236, 253, 245, 0.28) 55%,
-      rgba(224, 242, 254, 0.22) 100%
+      rgba(255, 255, 255, 0.65) 0%,
+      rgba(236, 253, 245, 0.4) 55%,
+      rgba(224, 242, 254, 0.35) 100%
     );
-    border: 1px solid rgba(255, 255, 255, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.75);
     box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.75) inset,
-      0 -1px 0 rgba(15, 23, 42, 0.04) inset,
-      0 12px 32px -14px rgba(15, 23, 42, 0.2),
-      0 4px 12px rgba(15, 23, 42, 0.06);
-    backdrop-filter: blur(22px) saturate(1.6);
-    -webkit-backdrop-filter: blur(22px) saturate(1.6);
+      0 1px 0 rgba(255, 255, 255, 0.85) inset,
+      0 14px 34px -12px rgba(15, 23, 42, 0.16),
+      0 4px 12px rgba(15, 23, 42, 0.05);
+    backdrop-filter: blur(24px) saturate(1.6);
+    -webkit-backdrop-filter: blur(24px) saturate(1.6);
     position: relative;
     isolation: isolate;
   }
@@ -863,9 +860,9 @@
     pointer-events: none;
     background: linear-gradient(
       165deg,
-      rgba(255, 255, 255, 0.55) 0%,
-      rgba(255, 255, 255, 0.12) 42%,
-      rgba(255, 255, 255, 0.04) 100%
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.15) 42%,
+      rgba(255, 255, 255, 0.05) 100%
     );
     z-index: 0;
   }
@@ -875,20 +872,28 @@
   }
   .hero-product-logo-btn {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 7px;
-    width: 68px;
-    padding: 4px 2px 2px;
-    border: none;
+    gap: 11px;
+    padding: 7px 18px 7px 9px;
+    border: 1px solid transparent;
     background: transparent;
     cursor: pointer;
     font-family: var(--font-primary) !important;
-    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-    border-radius: 14px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 16px;
+    text-align: left;
   }
   .hero-product-logo-btn:hover {
-    transform: translateY(-4px) scale(1.04);
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .hero-product-logo-btn.active {
+    background: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow:
+      0 10px 24px -8px rgba(15, 23, 42, 0.14),
+      0 0 0 1px rgba(15, 23, 42, 0.06);
   }
   .hero-product-logo-btn:hover .hero-product-logo-mark,
   .hero-product-logo-btn.active .hero-product-logo-mark {
@@ -897,14 +902,38 @@
       0 0 0 2px rgba(255, 255, 255, 0.9),
       0 0 0 4px color-mix(in srgb, var(--logo-accent, #12A883) 28%, transparent);
   }
+  .hero-product-btn-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .hero-product-logo-name {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #1E293B;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    transition: color 0.2s ease;
+  }
+  .hero-product-logo-sub {
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: #64748B;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+    transition: color 0.2s ease;
+  }
   .hero-product-logo-btn.active .hero-product-logo-name {
     color: #0F172A;
-    font-weight: 650;
+  }
+  .hero-product-logo-btn.active .hero-product-logo-sub {
+    color: #059669;
+    font-weight: 600;
   }
   .hero-product-logo-mark {
-    width: 48px;
-    height: 48px;
-    border-radius: 13px;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
     display: grid;
     place-items: center;
     color: #FFFFFF;
@@ -916,51 +945,44 @@
     transition: box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .hero-product-logo-btn.active .hero-product-logo-mark {
-    transform: scale(1.08);
+    transform: scale(1.06);
   }
   .hero-product-logo-mark svg {
-    width: 21px;
-    height: 21px;
-  }
-  .hero-product-logo-name {
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: #64748B;
-    letter-spacing: -0.01em;
-    line-height: 1.15;
-    text-align: center;
-    transition: color 0.2s ease;
-  }
-  .hero-product-logo-btn:hover .hero-product-logo-name {
-    color: #0F172A;
+    width: 20px;
+    height: 20px;
   }
   @media (max-width: 640px) {
     .hero-product-logos {
-      gap: 4px;
-      padding: 10px 12px 8px;
-      border-radius: 18px;
+      gap: 6px;
+      padding: 6px 8px;
+      border-radius: 16px;
+      flex-wrap: wrap;
     }
     .hero-product-logo-btn {
-      width: 56px;
-      gap: 5px;
+      padding: 6px 10px;
+      gap: 8px;
     }
     .hero-product-logo-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 11px;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
     }
     .hero-product-logo-mark svg {
-      width: 18px;
-      height: 18px;
+      width: 17px;
+      height: 17px;
     }
     .hero-product-logo-name {
-      font-size: 0.65rem;
+      font-size: 0.8rem;
+    }
+    .hero-product-logo-sub {
+      display: none;
     }
   }
   .hero-product-preview {
     position: relative;
-    max-width: 840px;
-    margin: 4px auto 0;
+    max-width: 1140px;
+    width: 100%;
+    margin: 8px auto 0;
     min-height: 0;
     padding: 0;
     border-radius: 0;
@@ -968,30 +990,60 @@
     border: none;
     box-shadow: none;
   }
+  .hero-product-preview::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 65%;
+    background: radial-gradient(ellipse 70% 50% at 50% 25%, rgba(18, 168, 131, 0.22), rgba(14, 184, 171, 0.12), transparent 70%);
+    filter: blur(55px);
+    pointer-events: none;
+    z-index: 0;
+  }
   .hero-preview-screen {
     display: none;
     position: relative;
     z-index: 1;
-    animation: heroPreviewIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: heroPreviewIn 0.32s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .hero-preview-screen.active {
     display: block;
   }
   @keyframes heroPreviewIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(10px) scale(0.99); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
   }
   .hero-screen-device {
     position: relative;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(226,232,240,0.85) 40%, rgba(148,163,184,0.45) 100%);
+    box-shadow:
+      0 26px 70px -18px rgba(15, 23, 42, 0.18),
+      0 10px 28px -10px rgba(15, 23, 42, 0.1),
+      0 0 0 1px rgba(15, 23, 42, 0.06);
   }
-  .hero-screen-device::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: 18px;
-    background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(226,232,240,0.85) 40%, rgba(148,163,184,0.55) 100%);
-    z-index: 0;
-    pointer-events: none;
+  .hero-preview-screen .hero-screen-body.hero-screenshot-body {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #0B0F19 !important;
+    overflow: hidden !important;
+    display: block !important;
+    min-height: auto !important;
+    width: 100%;
+    cursor: zoom-in;
+  }
+  .hero-preview-screen .hero-screenshot-img {
+    width: 100%;
+    aspect-ratio: 1024 / 570;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.4s ease;
   }
   /* Browser window — clean product screen */
   .hero-preview-screen .hero-window-frame {
@@ -999,8 +1051,7 @@
     z-index: 1;
     margin: 0;
     height: auto;
-    min-height: 372px;
-    border-radius: 17px;
+    border-radius: 19px;
     background: #FFFFFF;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -1788,8 +1839,22 @@
     ) !important;
   }
 
+  :root[data-theme="dark"] .hero-product-logo-btn:hover {
+    background: rgba(255, 255, 255, 0.06) !important;
+  }
+  :root[data-theme="dark"] .hero-product-logo-btn.active {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.6) !important;
+  }
   :root[data-theme="dark"] .hero-product-logo-name {
     color: #94A3B8 !important;
+  }
+  :root[data-theme="dark"] .hero-product-logo-sub {
+    color: #64748B !important;
+  }
+  :root[data-theme="dark"] .hero-product-logo-btn.active .hero-product-logo-sub {
+    color: #34D399 !important;
   }
 
   :root[data-theme="dark"] .hero-product-logo-btn:hover .hero-product-logo-name,
@@ -2196,8 +2261,8 @@
 
   .hero-mvp-grid {
     display: grid;
-    grid-template-columns: 410px 1fr;
-    gap: 40px;
+    grid-template-columns: 390px 1fr;
+    gap: 36px;
     align-items: center;
     max-width: 100%;
   }
@@ -2207,7 +2272,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 495px;
+    min-height: 590px;
     padding-right: 12px;
   }
 
@@ -2480,6 +2545,14 @@
   }
 
   @media (max-width: 640px) {
+    .hero-green-card {
+      flex: 0 0 min(86vw, 320px);
+      width: min(86vw, 320px);
+      height: 480px;
+    }
+    .hero-window-frame {
+      height: 220px;
+    }
     .hero-green-card.hero-card-down,
     .hero-green-card:nth-child(2) {
       margin-top: 28px;
@@ -2511,6 +2584,144 @@
   .hero-green-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 30px 65px -12px rgba(0, 0, 0, 0.38), 0 0 0 1.5px rgba(255, 255, 255, 0.4) inset;
+  }
+
+  /* Direct High-Resolution Screen Presentation (No browser mockup frame or header) */
+  .hero-card-media {
+    width: 100%;
+    height: 385px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #0B0F19;
+    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+    position: relative;
+    flex-shrink: 0;
+    cursor: zoom-in;
+  }
+
+  .hero-card-zoom-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 9999px;
+    background: rgba(11, 15, 25, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #F8FAFC;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    z-index: 5;
+  }
+
+  .hero-card-media:hover .hero-card-zoom-badge {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-card-screenshot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+    display: block;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hero-green-card:hover .hero-card-screenshot {
+    transform: scale(1.025);
+  }
+
+  /* Screenshot Lightbox Modal */
+  .screenshot-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(5, 10, 20, 0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 0.28s ease;
+  }
+  .screenshot-lightbox.active {
+    display: flex;
+    opacity: 1;
+  }
+  .lightbox-content {
+    position: relative;
+    max-width: 1240px;
+    width: 100%;
+    max-height: 92vh;
+    background: #0B0F19;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 35px 80px -20px rgba(0, 0, 0, 0.85);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: lightboxPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes lightboxPop {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .lightbox-header {
+    height: 48px;
+    background: #111827;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .lightbox-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #F8FAFC;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lightbox-close-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    color: #94A3B8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lightbox-close-btn:hover {
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.15);
+  }
+  .lightbox-img-wrap {
+    overflow-y: auto;
+    max-height: calc(92vh - 48px);
+    background: #0B0F19;
+  }
+  .lightbox-img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   /* Top Window Mockup Frame: Ultra-Sleek Glass Cockpit */
@@ -2800,6 +3011,403 @@
      AI TEAMMATES / FOUR JOBS (ASANA-STYLE MINIMAL CARDS)
      Background matches theme and 8 stages module (#F8FAFC / #0A0F1D)
      ══════════════════════════════════════════════════════════════ */
+  /* ══════════════════════════════════════════════════════════════
+     YORK FOUNDATION — v1 layer stack / v2 block stack (tiny toggle)
+     ══════════════════════════════════════════════════════════════ */
+  .foundation-section {
+    --yf-green: #12A883;
+    --yf-green-strong: #0E8F70;
+    --yf-green-soft: #ECFDF5;
+    --yf-lime: #84CC16;
+    --yf-lime-soft: #F7FEE7;
+    --yf-amber: #F59E0B;
+    --yf-amber-soft: #FFFBEB;
+    --yf-ink: var(--ink-primary);
+    --yf-body: var(--ink-secondary);
+    --yf-muted: var(--ink-muted);
+    --yf-line: rgba(15, 23, 42, 0.08);
+    --yf-surface: #FFFFFF;
+    --yf-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 24px 48px -24px rgba(15, 23, 42, 0.14);
+    --yf-cube: #fbfcfc;
+    --yf-cube-left: #edf1ef;
+    --yf-cube-side: #e2e8e5;
+    --yf-cube-edge: #c5d0cb;
+    --yf-top-mix: 22%;
+
+    position: relative;
+    padding: var(--section-edge-space) 0;
+    overflow: hidden;
+    background: transparent;
+    color: var(--yf-ink);
+    font-family: var(--font-primary);
+  }
+  .foundation-section::before,
+  .foundation-section::after { display: none; }
+  :root[data-theme="dark"] .foundation-section {
+    --yf-green: #34D399;
+    --yf-green-strong: #6EE7B7;
+    --yf-green-soft: rgba(16, 185, 129, 0.14);
+    --yf-lime: #A3E635;
+    --yf-lime-soft: rgba(132, 204, 22, 0.14);
+    --yf-amber: #FBBF24;
+    --yf-amber-soft: rgba(245, 158, 11, 0.14);
+    --yf-line: rgba(148, 163, 184, 0.14);
+    --yf-surface: rgba(15, 23, 42, 0.55);
+    --yf-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.45);
+    --yf-cube: #1b2733;
+    --yf-cube-left: #16212b;
+    --yf-cube-side: #121b24;
+    --yf-cube-edge: #2f3f4f;
+    --yf-top-mix: 55%;
+    background: transparent;
+  }
+  .foundation-wrap { position: relative; z-index: 2; }
+
+  /* Tiny v1 / v2 switcher */
+  .yf-version-tabs {
+    position: absolute;
+    top: -6px;
+    right: 0;
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+    padding: 2px;
+    border-radius: 6px;
+    background: rgba(15, 23, 42, 0.04);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+  }
+  :root[data-theme="dark"] .yf-version-tabs {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(148, 163, 184, 0.16);
+  }
+  .yf-version-tab {
+    border: 0;
+    background: transparent;
+    color: var(--ink-muted);
+    font: 600 10px/1 var(--font-mono);
+    letter-spacing: 0.02em;
+    padding: 4px 7px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .yf-version-tab:hover { color: var(--ink-primary); }
+  .yf-version-tab.active {
+    background: #fff;
+    color: #047857;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+  }
+  :root[data-theme="dark"] .yf-version-tab.active {
+    background: rgba(16, 185, 129, 0.18);
+    color: #6EE7B7;
+    box-shadow: none;
+  }
+  .foundation-section[data-yf-version="v1"] .yf-v2,
+  .foundation-section[data-yf-version="v2"] .yf-v1 { display: none; }
+
+  /* Shared copy / CTA */
+  .yf__kicker {
+    margin: 0 0 16px;
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: #059669;
+  }
+  :root[data-theme="dark"] .yf__kicker { color: #34D399; }
+  .yf__title {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    line-height: 1.22;
+    letter-spacing: -0.035em;
+    font-weight: 400;
+    color: var(--ink-primary);
+  }
+  .yf__title span { color: #059669; font-weight: 400; }
+  :root[data-theme="dark"] .yf__title { color: #F8FAFC; }
+  :root[data-theme="dark"] .yf__title span { color: #34D399; }
+  .yf__lead {
+    margin: 18px 0 0;
+    max-width: 30ch;
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    line-height: 1.4;
+    letter-spacing: -0.015em;
+    font-weight: 400;
+    color: var(--ink-primary);
+  }
+  :root[data-theme="dark"] .yf__lead { color: #E2E8F0; }
+  .yf__body {
+    margin: 14px 0 0;
+    max-width: 48ch;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    font-weight: 400;
+    color: var(--ink-secondary);
+  }
+  :root[data-theme="dark"] .yf__body { color: #94A3B8; }
+  .yf__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
+    padding: 10px 18px;
+    border-radius: var(--cta-radius) !important;
+    background: var(--cta-primary-bg) !important;
+    color: var(--cta-primary-color) !important;
+    border: 1px solid var(--cta-primary-border) !important;
+    box-shadow: var(--cta-primary-shadow) !important;
+    font-family: var(--font-primary) !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .yf__btn:hover {
+    background: var(--cta-primary-hover-bg) !important;
+    box-shadow: var(--cta-primary-shadow-hover) !important;
+    transform: translateY(-2px);
+    color: #FFFFFF !important;
+  }
+  .yf__btn svg { width: 14px; height: 14px; transition: transform 0.2s ease; }
+  .yf__btn:hover svg { transform: translateX(2px); }
+  .yf__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 28px; }
+  .yf__actions .yf__btn { margin-top: 0; }
+  .yf__note { font-size: 0.84rem; color: var(--ink-muted); }
+
+  /* ── V1: floating layer stack + card pillars ── */
+  .yf-v1 .yf__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center;
+  }
+  .yf-v1 .yf__visual { position: relative; width: 100%; max-width: 560px; margin-inline: auto; }
+  .yf-v1 .yf__visual svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .yf-v1 .yf__glow { fill: url(#yf-glow); }
+  .yf-v1 .yf__wire {
+    fill: none; stroke: var(--yf-line); stroke-width: 1.5;
+    stroke-dasharray: 4 6; animation: yf-dash 1.6s linear infinite;
+  }
+  @keyframes yf-dash { to { stroke-dashoffset: -20; } }
+  .yf-v1 .yf__dot { fill: var(--yf-green); }
+  .yf-v1 .yf__chip rect { fill: var(--yf-surface); stroke: var(--yf-line); }
+  .yf-v1 .yf__chip text { fill: var(--yf-ink); font: 600 13px var(--font-primary); }
+  .yf-v1 .yf__chip circle { fill: var(--c); }
+  .yf-v1 .yf__layer {
+    transition: opacity 0.3s, translate 0.35s ease;
+    animation: yf-float 6s ease-in-out infinite;
+  }
+  .yf-v1 .yf__layer[data-pillar="truth"] { --a: var(--yf-green); --s: var(--yf-green-soft); animation-delay: 0s; --lift: -10px; }
+  .yf-v1 .yf__layer[data-pillar="exec"] { --a: var(--yf-lime); --s: var(--yf-lime-soft); animation-delay: -0.4s; --lift: -5px; }
+  .yf-v1 .yf__layer[data-pillar="memory"] { --a: var(--yf-amber); --s: var(--yf-amber-soft); animation-delay: -0.8s; --lift: 0px; }
+  .yf-v1 .yf__layer .top { fill: var(--s); stroke: var(--a); stroke-width: 1.5; stroke-linejoin: round; }
+  .yf-v1 .yf__layer .l { fill: color-mix(in srgb, var(--a) 55%, var(--yf-surface)); }
+  .yf-v1 .yf__layer .r { fill: color-mix(in srgb, var(--a) 80%, var(--yf-surface)); }
+  .yf-v1 .yf__layer .grid { fill: none; stroke: var(--a); stroke-opacity: 0.28; stroke-width: 1; }
+  .yf-v1 .yf__layer .tag { fill: var(--yf-body); font: 500 12px var(--font-primary); }
+  .yf-v1 .yf__layer .tick { stroke: var(--a); stroke-width: 1.5; }
+  @keyframes yf-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(var(--lift, -6px)); }
+  }
+  .yf-v1 .yf__core { fill: none; stroke: var(--yf-green-strong); stroke-width: 1.6; stroke-linejoin: round; }
+  .yf-v1 .yf__visual[data-focus] .yf__layer { opacity: 0.3; }
+  .yf-v1 .yf__visual[data-focus="truth"] .yf__layer[data-pillar="truth"],
+  .yf-v1 .yf__visual[data-focus="exec"] .yf__layer[data-pillar="exec"],
+  .yf-v1 .yf__visual[data-focus="memory"] .yf__layer[data-pillar="memory"] {
+    opacity: 1; translate: 0 -8px;
+  }
+  .yf-v1 .yf__pillars {
+    position: relative;
+    margin-top: clamp(48px, 6vw, 72px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--yf-line);
+    border-radius: 20px;
+    background: var(--yf-surface);
+    box-shadow: var(--yf-shadow);
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+  }
+  .yf-v1 .yf__pillars::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #12A883 0%, #84CC16 50%, #F59E0B 100%);
+  }
+  .yf-v1 .yf__pillar {
+    position: relative;
+    padding: 28px 28px 30px;
+    border: 0; background: none; text-align: left;
+    font: inherit; color: inherit; cursor: default;
+    transition: background 0.25s ease;
+  }
+  .yf-v1 .yf__pillar + .yf__pillar { border-left: 1px solid var(--yf-line); }
+  .yf-v1 .yf__pillar[data-pillar="truth"] { --accent: var(--yf-green); --soft: var(--yf-green-soft); }
+  .yf-v1 .yf__pillar[data-pillar="exec"] { --accent: var(--yf-lime); --soft: var(--yf-lime-soft); }
+  .yf-v1 .yf__pillar[data-pillar="memory"] { --accent: var(--yf-amber); --soft: var(--yf-amber-soft); }
+  .yf-v1 .yf__pillar:hover,
+  .yf-v1 .yf__pillar:focus-visible {
+    background: color-mix(in srgb, var(--soft) 70%, transparent);
+    outline: none;
+  }
+  .yf-v1 .yf__phead { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .yf-v1 .yf__icon {
+    width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
+    color: var(--accent); background: var(--soft);
+    border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+  .yf-v1 .yf__icon svg { width: 18px; height: 18px; }
+  .yf-v1 .yf__verb {
+    font-size: 0.78rem; font-weight: 650; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .yf-v1 .yf__pillar h3 {
+    margin: 0 0 8px; font-size: 1.05rem; font-weight: 650;
+    letter-spacing: -0.02em; color: var(--ink-primary);
+  }
+  :root[data-theme="dark"] .yf-v1 .yf__pillar h3 { color: #F8FAFC; }
+  .yf-v1 .yf__pillar p {
+    margin: 0; font-size: 0.9rem; line-height: 1.55;
+    color: var(--ink-secondary); max-width: 36ch;
+  }
+  :root[data-theme="dark"] .yf-v1 .yf__pillar p { color: #94A3B8; }
+  .yf-v1 .yf__pillar + .yf__pillar::before {
+    content: "";
+    position: absolute; left: -9px; top: 46px; width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--yf-surface);
+    border: 1px solid var(--yf-line);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%2394A3B8' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6.5 5l3 3-3 3'/%3E%3C/svg%3E");
+    background-size: 12px; background-position: center; background-repeat: no-repeat;
+    z-index: 1;
+  }
+
+  /* ── V2: stepped block stack (reference HTML) ── */
+  .yf-v2 .yf__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(40px, 6vw, 96px);
+    align-items: center;
+  }
+  .yf-v2 .yf__art {
+    width: 100%;
+    max-width: 560px;
+    justify-self: end;
+    margin: 0;
+  }
+  .yf-v2 .yf__art svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .yf-v2 .yf__ground {
+    fill: none; stroke: var(--yf-line); stroke-width: 1; stroke-dasharray: 2 4;
+  }
+  .yf-v2 .yf__cube path {
+    stroke: var(--yf-cube-edge); stroke-width: 1; stroke-linejoin: round;
+    transition: fill 0.3s, stroke 0.3s;
+  }
+  .yf-v2 .yf__cube .t { fill: var(--yf-cube); }
+  .yf-v2 .yf__cube .l { fill: var(--yf-cube-left); }
+  .yf-v2 .yf__cube .r { fill: var(--yf-cube-side); }
+  .yf-v2 .yf__cube.is-key[data-pillar="truth"] { --a: var(--yf-green); }
+  .yf-v2 .yf__cube.is-key[data-pillar="exec"] { --a: var(--yf-lime); }
+  .yf-v2 .yf__cube.is-key[data-pillar="memory"] { --a: var(--yf-amber); }
+  .yf-v2 .yf__cube.is-key path { stroke: var(--a); }
+  .yf-v2 .yf__cube.is-key .t { fill: color-mix(in srgb, var(--a) var(--yf-top-mix, 22%), var(--yf-cube)); }
+  .yf-v2 .yf__cube.is-key .l { fill: color-mix(in srgb, var(--a) 70%, var(--yf-cube)); }
+  .yf-v2 .yf__cube.is-key .r { fill: var(--a); }
+  .yf-v2 .yf__label circle { fill: var(--yf-ink); }
+  .yf-v2 .yf__label path { stroke: var(--yf-muted); stroke-width: 1; stroke-opacity: 0.5; fill: none; }
+  .yf-v2 .yf__label text { fill: var(--yf-body); font: 500 13px var(--font-primary); }
+  .yf-v2 .yf__label { transition: opacity 0.3s; }
+  @media (prefers-reduced-motion: no-preference) {
+    .yf-v2 .yf__cube { animation: yf-settle 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: var(--d); }
+    .yf-v2 .yf__label { animation: yf-fade 0.5s ease both; animation-delay: 1.15s; }
+  }
+  @keyframes yf-settle { from { opacity: 0; transform: translateY(-14px); } }
+  @keyframes yf-fade { from { opacity: 0; } }
+  .yf-v2 .yf__art[data-focus="truth"] .is-key:not([data-pillar="truth"]) path,
+  .yf-v2 .yf__art[data-focus="exec"] .is-key:not([data-pillar="exec"]) path,
+  .yf-v2 .yf__art[data-focus="memory"] .is-key:not([data-pillar="memory"]) path {
+    fill: var(--yf-cube-side); stroke: var(--yf-cube-edge);
+  }
+  .yf-v2 .yf__art[data-focus="truth"] .yf__label:not([data-pillar="truth"]),
+  .yf-v2 .yf__art[data-focus="exec"] .yf__label:not([data-pillar="exec"]),
+  .yf-v2 .yf__art[data-focus="memory"] .yf__label:not([data-pillar="memory"]) {
+    opacity: 0.3;
+  }
+  .yf-v2 .yf__pillars {
+    margin: clamp(56px, 7vw, 88px) 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(28px, 4vw, 56px);
+  }
+  .yf-v2 .yf__pillar {
+    padding-top: 22px;
+    border-top: 1px solid var(--yf-line);
+    position: relative;
+    outline: none;
+  }
+  .yf-v2 .yf__pillar::before {
+    content: "";
+    position: absolute; top: -1px; left: 0; width: 40px; height: 2px;
+    background: var(--a);
+    transition: width 0.35s ease;
+  }
+  .yf-v2 .yf__pillar:hover::before,
+  .yf-v2 .yf__pillar:focus-visible::before { width: 100%; }
+  .yf-v2 .yf__pillar[data-pillar="truth"] { --a: var(--yf-green); }
+  .yf-v2 .yf__pillar[data-pillar="exec"] { --a: var(--yf-lime); }
+  .yf-v2 .yf__pillar[data-pillar="memory"] { --a: var(--yf-amber); }
+  .yf-v2 .yf__pillar h3 {
+    margin: 0 0 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--ink-primary);
+  }
+  :root[data-theme="dark"] .yf-v2 .yf__pillar h3 { color: #F8FAFC; }
+  .yf-v2 .yf__pillar p {
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.6;
+    color: var(--ink-secondary);
+    max-width: 34ch;
+  }
+  :root[data-theme="dark"] .yf-v2 .yf__pillar p { color: #94A3B8; }
+
+  @media (max-width: 960px) {
+    .yf-v1 .yf__top,
+    .yf-v2 .yf__top { grid-template-columns: 1fr; }
+    .yf-v2 .yf__art { justify-self: start; max-width: 480px; }
+    .yf__lead { max-width: 40ch; }
+  }
+  @media (max-width: 760px) {
+    .foundation-section { padding: 56px 0; }
+    .yf-version-tabs { top: -4px; right: 0; }
+    .yf-v1 .yf__pillars,
+    .yf-v2 .yf__pillars { grid-template-columns: 1fr; }
+    .yf-v1 .yf__pillar + .yf__pillar {
+      border-left: 0;
+      border-top: 1px solid var(--yf-line);
+    }
+    .yf-v1 .yf__pillar + .yf__pillar::before {
+      left: 28px; top: -9px; transform: rotate(90deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .foundation-section *,
+    .foundation-section *::before {
+      transition: none !important;
+      animation: none !important;
+    }
+    .yf__btn:hover,
+    .yf__btn:hover svg { transform: none !important; }
+  }
+
   .jobs-section {
     padding: var(--section-edge-space) 0;
     background: var(--bg-canvas);
@@ -2834,7 +3442,7 @@
   /* ══════════════════════════════════════════════════════════════
      UNIFIED SECTION HEADER & TYPOGRAPHY HIERARCHY
      Every section title except hero section strictly follows:
-     "Eight stages. One continuous intelligence."
+     "Five jobs. One connected system."
      ══════════════════════════════════════════════════════════════ */
   .section-header-unified,
   .jobs-header-row,
@@ -4533,26 +5141,40 @@
     filter: drop-shadow(0 0 6px rgba(52, 211, 153, 0.75));
   }
 
-  /* Light SaaS Application Window */
+  /* Full Screenshot Display replacing the old white window card */
   .stage-app-window {
     width: 100%;
-    max-width: 580px; /* Kept fixed inner element width as requested */
+    max-width: 620px;
     align-self: flex-start;
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
+    background: transparent;
+    border: none;
     border-radius: 16px;
-    padding: 18px 20px;
-    box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.06), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+    padding: 0;
+    box-shadow: 0 20px 48px -12px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(15, 23, 42, 0.08);
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    min-height: 330px;
-    transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    min-height: auto;
+    overflow: hidden;
+    transition: box-shadow 0.25s ease;
   }
   :root[data-theme="dark"] .stage-app-window {
-    background: #0B111E;
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.5);
+    background: transparent;
+    border: none;
+    box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  }
+
+  .copilot-screenshot-img {
+    width: 100%;
+    height: 460px;
+    object-fit: cover;
+    object-position: top left;
+    display: block;
+    border-radius: 16px;
+  }
+  @media (max-width: 640px) {
+    .copilot-screenshot-img {
+      height: 280px;
+    }
   }
 
   /* App Window Header Bar */
@@ -5094,17 +5716,20 @@
     position: relative;
     margin-bottom: 22px;
     z-index: 2;
+    width: 100%;
   }
   .stage-progress-bar {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 4px;
+    width: 100%;
     position: relative;
     background: #FFFFFF;
     border: 1px solid #E5E7EB;
     border-radius: 14px;
     padding: 5px;
     box-shadow: none;
+    box-sizing: border-box;
   }
   :root[data-theme="dark"] .stage-progress-bar {
     background: rgba(15, 23, 42, 0.65);
@@ -5330,10 +5955,10 @@
     text-align: center;
   }
 
-  /* Main Inner 2-Column Split Body (Tighter min-height 340px) */
+  /* Main Inner 2-Column Split Body — copy 60% / image 40% */
   .stage-card-body {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: minmax(0, 60%) minmax(0, 40%);
     min-height: 340px;
     transition: opacity 0.2s ease;
   }
@@ -5881,6 +6506,8 @@
     position: relative;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     min-height: 270px;
+    text-decoration: none;
+    color: inherit;
   }
 
   /* MINIMAL, PLEASANT CYAN-TO-TEAL AMBIENT SHADOW ON HOVER */
@@ -7052,7 +7679,7 @@
   @media (max-width: 1024px) {
     .jobs-grid, .jobs-carousel-track { grid-template-columns: repeat(2, 1fr); }
     .fuel-body { grid-template-columns: 1fr; }
-    .stage-card-body { grid-template-columns: 1fr; gap: 32px; }
+    .stage-card-body { grid-template-columns: minmax(0, 58%) minmax(0, 42%); }
     .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   }
   @media (max-width: 860px) {
@@ -7339,6 +7966,164 @@
     margin-top: -6px;
   }
 </style>
+  <meta name="description" content="Recreates exact webpage layouts from HTML files without altering design, enabling developers to preserve original structure and appearance effortlessly.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="favicon.svg">
+  <meta property="og:title" content="Figma Make App">
+  <meta property="og:description" content="Recreates exact webpage layouts from HTML files without altering design, enabling developers to preserve original structure and appearance effortlessly.">
+<style>.foundation-section .yf-v2{display:block!important}.foundation-section .yf-version-tabs,.foundation-section .yf-v1{display:none!important}</style>
+
+<style>
+/* ===== Five jobs: brief + interactive step rail ===== */
+.jx{--jx-line:var(--border-subtle,#e5e7eb);--jx-card:var(--bg-card,#fff);--jx-soft:var(--bg-canvas,#f8fafc);padding:var(--section-edge-space,96px) 0;position:relative}
+[data-theme="dark"] .jx{--jx-line:var(--line,rgba(148,163,184,.16));--jx-soft:var(--bg-surface,#0f172a)}
+.jx-grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:64px;align-items:start}
+.jx-grid>*,.jx-step>*{min-width:0}
+.jx-brief{position:sticky;top:110px}
+.jx-kicker{display:inline-flex;align-items:center;gap:10px;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--emerald,#12A883)}
+.jx-kicker i{width:22px;height:2px;border-radius:2px;background:currentColor}
+.jx-brief h2{margin:14px 0 0;font-size:clamp(2rem,3.6vw,2.9rem);font-weight:500;line-height:1.1;letter-spacing:-.035em;color:var(--ink-primary)}
+.jx-lede{margin-top:18px;font-size:1.02rem;line-height:1.65;color:var(--ink-secondary);max-width:44ch}
+.jx-facts{display:flex;gap:0;margin-top:28px;border:1px solid var(--jx-line);border-radius:16px;background:var(--jx-card);overflow:hidden;width:max-content;max-width:100%}
+.jx-facts div{padding:14px 20px}
+.jx-facts div+div{border-left:1px solid var(--jx-line)}
+.jx-facts b{display:block;font-size:1.6rem;font-weight:600;letter-spacing:-.03em;color:var(--ink-primary);line-height:1.1}
+.jx-facts span{font-size:.78rem;color:var(--ink-muted)}
+.jx-cta{display:inline-flex;align-items:center;gap:8px;margin-top:28px;height:44px;padding:0 18px;border-radius:var(--cta-radius,8px);background:var(--cta-primary-bg,#12A883);color:#fff;font-weight:600;font-size:.92rem;text-decoration:none;box-shadow:var(--cta-primary-shadow);transition:transform .2s,box-shadow .2s}
+.jx-cta:hover{transform:translateY(-2px);box-shadow:var(--cta-primary-shadow-hover)}
+.jx-cta svg{width:15px;height:15px;transition:transform .2s}.jx-cta:hover svg{transform:translateX(3px)}
+.jx-hint{display:flex;align-items:center;gap:8px;margin-top:18px;font-size:.8rem;color:var(--ink-muted)}
+.jx-hint svg{width:15px;height:15px;flex:none}
+
+.jx-steps{list-style:none;margin:0;padding:0;position:relative;display:grid;gap:14px;--rail-top:28px;--rail-h:0px;--fill:0px}
+.jx-steps::before{content:"";position:absolute;left:27px;top:var(--rail-top);bottom:auto;width:2px;height:var(--rail-h);border-radius:2px;background:var(--jx-line)}
+.jx-steps::after{content:"";position:absolute;left:27px;top:var(--rail-top);width:2px;height:var(--fill);max-height:var(--rail-h);border-radius:2px;background:linear-gradient(180deg,#059669,#0284C7,#0D9488,#D97706,#2563EB);transition:height 1.4s cubic-bezier(.2,.7,.2,1)}
+.jx-step{position:relative;display:grid;grid-template-columns:56px 1fr;gap:18px;align-items:start;outline:none}
+.jx-node{position:relative;z-index:1;width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:var(--jx-card);border:1px solid var(--jx-line);color:var(--c);font-weight:600;font-size:.95rem;font-variant-numeric:tabular-nums;transition:background .3s,color .3s,transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s}
+.jx-node svg{width:22px;height:22px}
+.jx-node em{position:absolute;right:-6px;top:-6px;font-style:normal;font-size:.62rem;font-weight:700;padding:2px 6px;border-radius:999px;background:var(--jx-card);border:1px solid var(--jx-line);color:var(--ink-muted)}
+.jx-body{position:relative;padding:16px 18px;border-radius:16px;border:1px solid var(--jx-line);background:var(--jx-card);transition:border-color .3s,box-shadow .3s,transform .35s cubic-bezier(.2,.7,.2,1);cursor:default}
+.jx-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.jx-name{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
+.jx-phase{font-size:.74rem;color:var(--ink-muted)}
+.jx-body h3{margin:6px 0 0;font-size:1.12rem;font-weight:600;letter-spacing:-.015em;color:var(--ink-primary)}
+.jx-prods{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.jx-prod{display:inline-flex;align-items:center;gap:7px;padding:4px 10px 4px 4px;border-radius:999px;border:1px solid var(--jx-line);background:var(--jx-soft);font-size:.78rem;font-weight:500;color:var(--ink-secondary);text-decoration:none;transition:border-color .2s,color .2s,transform .2s}
+.jx-prod i{width:20px;height:20px;border-radius:999px;display:grid;place-items:center;color:#fff}
+.jx-prod i svg{width:11px;height:11px}
+.jx-prod:hover{border-color:var(--c);color:var(--ink-primary);transform:translateY(-1px)}
+.jx-more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.78rem;font-weight:600;color:var(--c);background:none;border:0;padding:0;cursor:pointer;font-family:inherit}
+.jx-more svg{width:14px;height:14px;transition:transform .3s}
+/* active */
+.jx-step.on .jx-node{background:var(--c);color:#fff;border-color:var(--c);transform:scale(1.06) rotate(-4deg);box-shadow:0 12px 24px -12px var(--c)}
+.jx-step.on .jx-body{border-color:color-mix(in srgb,var(--c) 40%,var(--jx-line));box-shadow:0 22px 44px -28px color-mix(in srgb,var(--c) 70%,rgba(15,23,42,.4));transform:translateX(4px)}
+.jx-step.on .jx-more svg{transform:rotate(180deg)}
+/* bubble */
+.jx-bubble{position:absolute;z-index:5;left:18px;right:18px;bottom:calc(100% + 12px);padding:16px 18px;border-radius:16px;background:var(--ink-primary,#0f172a);color:#e2e8f0;box-shadow:0 30px 60px -24px rgba(2,6,23,.55);opacity:0;visibility:hidden;transform:translateY(8px) scale(.98);transform-origin:50% 100%;transition:opacity .22s,transform .3s cubic-bezier(.2,.7,.2,1),visibility .22s;pointer-events:none}
+[data-theme="dark"] .jx-bubble{background:#1e293b;border:1px solid rgba(148,163,184,.2)}
+.jx-bubble::after{content:"";position:absolute;left:40px;bottom:-7px;width:14px;height:14px;transform:rotate(45deg);background:inherit;border-radius:3px}
+.jx-step.on .jx-bubble{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+.jx-step.flip .jx-bubble{bottom:auto;top:calc(100% + 12px);transform-origin:50% 0}
+.jx-step.flip .jx-bubble::after{bottom:auto;top:-7px}
+.jx-bubble p{margin:0;font-size:.88rem;line-height:1.55;color:#cbd5e1}
+.jx-sig{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.jx-sig div{padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+.jx-sig b{display:block;font-size:.8rem;font-weight:600;color:#fff}
+.jx-sig span{font-size:.7rem;color:#94a3b8;line-height:1.35;display:block;margin-top:2px}
+.jx-flow{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:10px;border-top:1px dashed rgba(255,255,255,.14);font-size:.78rem;color:#a7f3d0}
+.jx-flow svg{width:14px;height:14px;flex:none;color:var(--c)}
+
+.jx-desc{margin:6px 0 0;font-size:.88rem;line-height:1.55;color:var(--ink-muted);max-width:56ch}
+.jx-body{transition:border-color .25s,box-shadow .25s,background .25s}
+.jx-step:hover .jx-body{border-color:color-mix(in srgb,var(--c) 35%,var(--jx-line));background:color-mix(in srgb,var(--c) 3%,var(--jx-card));box-shadow:0 16px 36px -26px color-mix(in srgb,var(--c) 60%,rgba(15,23,42,.35));transform:none}
+.jx-node{transition:background .25s,color .25s,border-color .25s,box-shadow .25s}
+.jx-step:hover .jx-node{background:color-mix(in srgb,var(--c) 10%,var(--jx-card));border-color:color-mix(in srgb,var(--c) 40%,var(--jx-line));box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 10%,transparent);transform:none}
+.jx-step.on .jx-node,.jx-step.on .jx-body{transform:none}
+
+/* ===== Five jobs: refined icons, tiles and rail ===== */
+.jx-node{background:linear-gradient(145deg,color-mix(in srgb,var(--c) 16%,var(--jx-card)),color-mix(in srgb,var(--c) 4%,var(--jx-card)));border-color:color-mix(in srgb,var(--c) 26%,var(--jx-line));color:var(--c);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 8px 18px -14px var(--c)}
+[data-theme="dark"] .jx-node{box-shadow:0 8px 18px -14px var(--c)}
+.jx-node svg{width:24px;height:24px;stroke-width:1.8}
+.jx-node em{background:var(--c);border-color:var(--c);color:#fff}
+.jx-step:hover .jx-node{background:linear-gradient(145deg,var(--c),color-mix(in srgb,var(--c) 70%,#0f172a));color:#fff;border-color:var(--c);box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 12%,transparent),0 12px 24px -12px var(--c)}
+.jx-step:hover .jx-node em{background:var(--jx-card);color:var(--c)}
+.jx-prod i{background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c)}
+.jx-prod i svg{stroke-width:2.2}
+.jx-prod:hover i{background:var(--c);color:#fff}
+.jx-steps::after{background:linear-gradient(180deg,#12A883 0%,#0D9488 35%,#0284C7 70%,#2563EB 100%);opacity:.9}
+.jx-steps::before{background:repeating-linear-gradient(180deg,var(--jx-line) 0 6px,transparent 6px 10px)}
+.jx-pulse{position:absolute;left:24px;top:var(--rail-top);width:8px;height:8px;border-radius:50%;background:#12A883;box-shadow:0 0 0 4px rgba(18,168,131,.18);animation:jxRun 6s cubic-bezier(.45,0,.55,1) infinite;z-index:0;pointer-events:none}
+@keyframes jxRun{0%{top:var(--rail-top);background:#12A883;opacity:0}8%{opacity:1}50%{background:#0284C7}92%{opacity:1}100%{top:calc(var(--rail-top) + var(--rail-h));background:#2563EB;opacity:0}}
+@media (max-width:640px){.jx-pulse{left:18px}}
+@media (prefers-reduced-motion:reduce){.jx-pulse{display:none}}
+@media (max-width:1024px){
+  .jx-grid{grid-template-columns:1fr;gap:40px}
+  .jx-brief{position:static}
+}
+@media (max-width:640px){
+  .jx-steps::before,.jx-steps::after{left:21px}
+  .jx-step{grid-template-columns:44px 1fr;gap:12px}
+  .jx-node{width:44px;height:44px;border-radius:13px}
+  .jx-node svg{width:18px;height:18px}
+  .jx-bubble,.jx-step.flip .jx-bubble{position:static;margin-top:12px;display:none;opacity:1;visibility:visible;transform:none}
+  .jx-bubble::after{display:none}
+  .jx-step.on .jx-bubble{display:block}
+  .jx-sig{grid-template-columns:1fr}
+  .jx-facts div{padding:12px 14px}
+}
+@media (prefers-reduced-motion:reduce){.jx *{transition:none!important}}
+@media (max-width:640px){.ref-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.ref-grid>*{min-width:0}}
+</style>
+
+<style>
+/* ===== Unified colour system ===== */
+/* service cards — category gradient icons + matching hover */
+.svc-cat-tag--hue{background:color-mix(in srgb,var(--c) 11%,transparent)!important;color:var(--c)!important;border:1px solid color-mix(in srgb,var(--c) 22%,transparent)!important;box-shadow:none!important;font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:.66rem}
+.svc-mini-icon{
+  background:var(--icon-gradient,linear-gradient(135deg,#10B981 0%,#06B6D4 100%))!important;
+  color:#fff!important;
+  box-shadow:0 4px 12px -2px var(--icon-bloom,rgba(16,185,129,.35)),inset 0 1px 1px rgba(255,255,255,.45)!important;
+  border:1px solid rgba(255,255,255,.25);
+  transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s ease,filter .25s ease;
+}
+.svc-mini-icon svg{stroke:currentColor;filter:drop-shadow(0 1px 2px rgba(0,0,0,.2))}
+.svc-card:hover .svc-mini-icon,
+.svc-card.highlighted .svc-mini-icon{
+  transform:scale(1.12) translateY(-1px);
+  filter:saturate(1.12) brightness(1.05);
+  box-shadow:0 10px 22px -4px var(--icon-bloom,rgba(16,185,129,.55)),inset 0 1px 1.5px rgba(255,255,255,.65)!important;
+}
+.svc-card:hover,
+.svc-card.highlighted{
+  border-color:color-mix(in srgb,var(--c) 42%,transparent)!important;
+  box-shadow:
+    0 14px 32px -8px var(--icon-bloom,rgba(16,185,129,.28)),
+    0 4px 14px -2px color-mix(in srgb,var(--c) 22%,transparent),
+    0 1px 3px rgba(0,0,0,.04)!important;
+}
+.svc-card .svc-arrow-glyph{transition:transform .2s,color .2s}
+.svc-card:hover .svc-arrow-glyph,
+.svc-card.highlighted .svc-arrow-glyph{color:var(--c)!important;transform:translateX(3px)}
+.svc-card:hover .svc-plus-btn,
+.svc-card.highlighted .svc-plus-btn{
+  border-color:color-mix(in srgb,var(--c) 45%,transparent);
+  color:var(--c);
+}
+[data-theme="dark"] .svc-cat-tag--hue{color:color-mix(in srgb,var(--c) 70%,#fff)!important}
+[data-theme="dark"] .svc-card:hover,
+[data-theme="dark"] .svc-card.highlighted{
+  box-shadow:
+    0 16px 36px -8px var(--icon-bloom,rgba(16,185,129,.38)),
+    0 6px 18px -2px color-mix(in srgb,var(--c) 28%,transparent),
+    0 2px 8px rgba(0,0,0,.4)!important;
+}
+/* York Suite block stack + pillars: emerald / teal / indigo */
+.foundation-section .yf,.foundation-section{--yf-lime:#0891B2;--yf-lime-soft:#E0F2FE;--yf-amber:#4F46E5;--yf-amber-soft:#EEF2FF}
+[data-theme="dark"] .foundation-section .yf,[data-theme="dark"] .foundation-section{--yf-lime:#38BDF8;--yf-lime-soft:rgba(56,189,248,.14);--yf-amber:#818CF8;--yf-amber-soft:rgba(129,140,248,.14)}
+/* Five jobs rail matches stage hues */
+.jx-steps::after{background:linear-gradient(180deg,#12A883 0%,#0D9488 25%,#0891B2 50%,#2563EB 75%,#4F46E5 100%)!important}
+@keyframes jxRun{0%{top:var(--rail-top);background:#12A883;opacity:0}8%{opacity:1}50%{background:#0891B2}92%{opacity:1}100%{top:calc(var(--rail-top) + var(--rail-h));background:#4F46E5;opacity:0}}
+</style>
 </head>
 <body>
 
@@ -7356,7 +8141,7 @@
     <span style="opacity: 0.35;">·</span>
     <span class="banner-gradient-text">Zero handoff latency</span>
   </span>
-  <a href="#flagship" class="banner-cta-link">
+  <a href="#foundation" class="banner-cta-link">
     <span>Explore Stack</span>
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
   </a>
@@ -7367,11 +8152,11 @@
   <div class="wrap">
     <nav class="nav" aria-label="Main Navigation">
       <a href="#" class="logo-brand-link" aria-label="York.ie Home">
-        <img src="logo-light.svg" alt="York.ie" class="site-logo logo-theme-light" height="32" width="145">
-        <img src="logo-dark.svg" alt="York.ie" class="site-logo logo-theme-dark" height="32" width="145">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDUiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAxNDUgMzIiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iWW9yay5pZSI+CiAgPGltYWdlIGhyZWY9ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBQ2dBQUFBcUNBWUFBQURCTmhsbUFBQUVWRWxFUVZSNEFiU1lTM2JiTUF4RklXMnN6anhaVHRwaG1tR2I1U1R6cEJ1eitpNU1VSlJNNnVOWVBvTDRBNGxMQUtSTzB0dmUzL3ZieVQ3ZVB1Mzl6Kys5VTIvUjN3NFlZTjN3YVRhY3JPdGU3T1B2Y0RUb05rQThGbURXZlYwOGtVcEE4U1p5R2JqcmV4a1FvM2dKajJGMkdGNXRzRmVxTnB6L0dXMGFRQ0xvMDk0alJHWkJ2dzdJSlBlYXdzaGtRQjUvZHZiMGE1cDN0T2xuSEQwZzJkQVcwR3hES2JPZ1B3VXNKNVZlQXdTQWxqQytGYlJtWTJGakl5QzdtT1JaeWpIclU4NjE2SXIrR2lqckFvV2FSMFVlODgyelBzSkFLaXVndlo5Q3dzSWd1b1RyOGZtQjZzMENLT3V3QU91eWNXdzRtRG9aSzIyUTEwUDNNTW5wdExIZVdFQnpqTk5KbUZqY0dqOG1ZWXhoNXRHbVhoUFdZVDFnOHJnOFJSOWp1UzlWbnA2L1BNZERuL1h0Zk9yVHNGbTVvOXlaS29USXc1TU9EWnRoaUVYd3pCcG82Qy9aWUQwRWVMeEpYVElDcWxGOU9uc3g5OXB3TWd3eEdVTjRvdHp0R3FqZDlsc0g5THhSYUFLTVVJU3QyRzBKdXVUTm1KZExOazNqck0xVFhzczFJQWJ3aG9PbENWektxWHBWQU95Z3VzUVozQkwyYklNSkV1YlFwK3I4R1FGcmVWWjZoakEzRnZGRmdWd0wrNVVObjNsNUFZbGpaalpHUUFEY2EyVTQ5ZVZZTTNwWmZuelhRSDFkcWN4dGtOUHFOdEpuN2d6NkpTT2dHcTdJQVNCc3RFUENhQ3pZMkcyb2U4a2NESHNqWHVYbWRhMUVOeVg2cFRQb2svVDVjbFREVCt2TXhYUmJoQ1k4NFoxNkFWclQxNUIvQU54ak5DUjRxTFo1RFUwZVFORk5uYjFmamlWNUdBVUs4ZnR2eCtjcHp5bnVURHlKNFdSMHZlano1N1hQeWl3UTVFQ3lleVM4aGhFOEVDZWF6OU44WXlSNW5yTVF6bXgwdlRJQ29ndGthWlErb09tYjV5VmpTSFdPdnF0c3BqVW52QnliWjFPTlZKa0NZaERCS0NWUzFtazNwVTloa2VkYVlNd0ZCQ0NIa3k0T29KK29rVTZNMDA3U3AvTDRBc09lQWlrM0FYTXY2eXFqN2plRXZpeUE4bmxOUk1jRFJqZ3g3RWJ4bWxLZ2pBeDFZQjBVSllGU1NJNER6R0RGRFJBSHJaa0N2ZEpFR3hCWVBIMVU3bG9TemttZXlXTjRxQVhXMm93OGV5ZkFjbnNLVDRTVGtDMkJNVzFsTXdjQVlsVkNPT1VCMWVvUFlOVkRNLzBFSGdkSWlJR1k0K1Z3cHRQTTZWM1l6QUdBU25KQ0N4aWhqcnN0ZyswNU5HYjdBREhTOVQrd2JmcUQ1bEpXM29RV1NJUUxHVkE4U2gxMVBMYVdtK2hKdGdNU3J0SUlSc2toK3JYUTFRTWs0cEJwbFByU1p6T3BsY1U2SUY0alRBQXhNNHhRMHFiZngrMkY1cFVBU1o0eDRIVXEyMlVkTUh1dCt6SkNFMFlvSFZMOUhqcGRMOXZ0YnRaY0IyUXB3R281QXlUOTRTRjBnVzJGM2NmM3ZkcUE3cDIwR0Y2c0dZM3dBK1dxZUZNVkQvdDkvcm5aQm5UdjZGOXVBVG8zQ2pEZ0FSZGU1aENVYzlBTEhiSHZmZHFBc1ZJTEZHQjBnQUdxL000eWgzN0dRNC82RGJJT0dJdG1veW1NM3E4Ni9WNmZ2ZWpIcTdQdXZjM3RnS3lNVVE1RmVJZlExZTdDeUUxUEFTWnFJemZDN2dQRUZ1S2dqZnowTzNIZjU0d2xXM0liWUt4V0E4V3JqT05sdkYzbUp2MDc1WHVBWVF4UWdMZ1BLZjNRNkcrTkdQOUcrUjhBQVAvL1JibFhxQUFBQUFaSlJFRlVBd0N0SXdiNDFsU1Bwd0FBQUFCSlJVNUVya0pnZ2c9PSIgeD0iMCIgeT0iMCIgd2lkdGg9IjMxIiBoZWlnaHQ9IjMyIi8+CiAgPHRleHQgeD0iMzgiIHk9IjIzIiBmaWxsPSIjMGYxNzJhIiBmb250LWZhbWlseT0iSW50ZXIsIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iNzUwIiBsZXR0ZXItc3BhY2luZz0iLTAuOCI+WW9yay5pZTwvdGV4dD4KPC9zdmc+Cg==" alt="York.ie" class="site-logo logo-theme-light" height="32" width="145">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDUiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAxNDUgMzIiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iWW9yay5pZSI+CiAgPGltYWdlIGhyZWY9ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBQ2dBQUFBcUNBWUFBQURCTmhsbUFBQUVWRWxFUVZSNEFiU1lTM2JiTUF4RklXMnN6anhaVHRwaG1tR2I1U1R6cEJ1eitpNU1VSlJNNnVOWVBvTDRBNGxMQUtSTzB0dmUzL3ZieVQ3ZVB1Mzl6Kys5VTIvUjN3NFlZTjN3YVRhY3JPdGU3T1B2Y0RUb05rQThGbURXZlYwOGtVcEE4U1p5R2JqcmV4a1FvM2dKajJGMkdGNXRzRmVxTnB6L0dXMGFRQ0xvMDk0alJHWkJ2dzdJSlBlYXdzaGtRQjUvZHZiMGE1cDN0T2xuSEQwZzJkQVcwR3hES2JPZ1B3VXNKNVZlQXdTQWxqQytGYlJtWTJGakl5QzdtT1JaeWpIclU4NjE2SXIrR2lqckFvV2FSMFVlODgyelBzSkFLaXVndlo5Q3dzSWd1b1RyOGZtQjZzMENLT3V3QU91eWNXdzRtRG9aSzIyUTEwUDNNTW5wdExIZVdFQnpqTk5KbUZqY0dqOG1ZWXhoNXRHbVhoUFdZVDFnOHJnOFJSOWp1UzlWbnA2L1BNZERuL1h0Zk9yVHNGbTVvOXlaS29USXc1TU9EWnRoaUVYd3pCcG82Qy9aWUQwRWVMeEpYVElDcWxGOU9uc3g5OXB3TWd3eEdVTjRvdHp0R3FqZDlsc0g5THhSYUFLTVVJU3QyRzBKdXVUTm1KZExOazNqck0xVFhzczFJQWJ3aG9PbENWektxWHBWQU95Z3VzUVozQkwyYklNSkV1YlFwK3I4R1FGcmVWWjZoakEzRnZGRmdWd0wrNVVObjNsNUFZbGpaalpHUUFEY2EyVTQ5ZVZZTTNwWmZuelhRSDFkcWN4dGtOUHFOdEpuN2d6NkpTT2dHcTdJQVNCc3RFUENhQ3pZMkcyb2U4a2NESHNqWHVYbWRhMUVOeVg2cFRQb2svVDVjbFREVCt2TXhYUmJoQ1k4NFoxNkFWclQxNUIvQU54ak5DUjRxTFo1RFUwZVFORk5uYjFmamlWNUdBVUs4ZnR2eCtjcHp5bnVURHlKNFdSMHZlano1N1hQeWl3UTVFQ3lleVM4aGhFOEVDZWF6OU44WXlSNW5yTVF6bXgwdlRJQ29ndGthWlErb09tYjV5VmpTSFdPdnF0c3BqVW52QnliWjFPTlZKa0NZaERCS0NWUzFtazNwVTloa2VkYVlNd0ZCQ0NIa3k0T29KK29rVTZNMDA3U3AvTDRBc09lQWlrM0FYTXY2eXFqN2plRXZpeUE4bmxOUk1jRFJqZ3g3RWJ4bWxLZ2pBeDFZQjBVSllGU1NJNER6R0RGRFJBSHJaa0N2ZEpFR3hCWVBIMVU3bG9TemttZXlXTjRxQVhXMm93OGV5ZkFjbnNLVDRTVGtDMkJNVzFsTXdjQVlsVkNPT1VCMWVvUFlOVkRNLzBFSGdkSWlJR1k0K1Z3cHRQTTZWM1l6QUdBU25KQ0N4aWhqcnN0ZyswNU5HYjdBREhTOVQrd2JmcUQ1bEpXM29RV1NJUUxHVkE4U2gxMVBMYVdtK2hKdGdNU3J0SUlSc2toK3JYUTFRTWs0cEJwbFByU1p6T3BsY1U2SUY0alRBQXhNNHhRMHFiZngrMkY1cFVBU1o0eDRIVXEyMlVkTUh1dCt6SkNFMFlvSFZMOUhqcGRMOXZ0YnRaY0IyUXB3R281QXlUOTRTRjBnVzJGM2NmM3ZkcUE3cDIwR0Y2c0dZM3dBK1dxZUZNVkQvdDkvcm5aQm5UdjZGOXVBVG8zQ2pEZ0FSZGU1aENVYzlBTEhiSHZmZHFBc1ZJTEZHQjBnQUdxL000eWgzN0dRNC82RGJJT0dJdG1veW1NM3E4Ni9WNmZ2ZWpIcTdQdXZjM3RnS3lNVVE1RmVJZlExZTdDeUUxUEFTWnFJemZDN2dQRUZ1S2dqZnowTzNIZjU0d2xXM0liWUt4V0E4V3JqT05sdkYzbUp2MDc1WHVBWVF4UWdMZ1BLZjNRNkcrTkdQOUcrUjhBQVAvL1JibFhxQUFBQUFaSlJFRlVBd0N0SXdiNDFsU1Bwd0FBQUFCSlJVNUVya0pnZ2c9PSIgeD0iMCIgeT0iMCIgd2lkdGg9IjMxIiBoZWlnaHQ9IjMyIi8+CiAgPHRleHQgeD0iMzgiIHk9IjIzIiBmaWxsPSIjZjhmYWZjIiBmb250LWZhbWlseT0iSW50ZXIsIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iNzUwIiBsZXR0ZXItc3BhY2luZz0iLTAuOCI+WW9yay5pZTwvdGV4dD4KPC9zdmc+Cg==" alt="York.ie" class="site-logo logo-theme-dark" height="32" width="145">
       </a>
       <div class="nav-right">
-        <button type="button" class="site-theme-toggle" id="themeToggleBtn" aria-label="Toggle dark/light theme" title="Toggle theme">
+                <button type="button" class="site-theme-toggle" id="themeToggleBtn" aria-label="Toggle dark/light theme" title="Toggle theme">
           <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -7387,8 +8172,8 @@
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
-        <a href="dashboard-v3.html" class="signin" id="openConsoleBtnNav">Sign in</a>
-        <a href="dashboard-v3.html" class="btn btn-primary btn-shimmer" id="openConsoleBtnGetStarted" style="padding: 8px 18px; font-size: 0.85rem;">
+        <a href="dashboard-v3.html?auth=1" class="signin" id="openConsoleBtnNav">Sign in</a>
+        <a href="dashboard-v3.html?auth=1" class="btn btn-primary btn-shimmer" id="openConsoleBtnGetStarted" style="padding: 8px 18px; font-size: 0.85rem;">
           Get started
         </a>
       </div>
@@ -7398,7 +8183,7 @@
 
 <main>
 <!-- HERO WITH MINTLIFY-INSPIRED 3D PARAMETRIC GRADIENT LINES -->
-<section class="hero-mvp-section" id="hero" data-hero-layout="split">
+<section class="hero-mvp-section" id="hero" data-hero-layout="stacked">
   <div class="hero-mvp-wrap">
     <div class="hero-mvp-grid">
 
@@ -7414,697 +8199,243 @@
           </p>
 
           <div class="hero-btn-row" style="margin-top: 24px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-            <a href="#flagship" class="btn btn-primary btn-shimmer" style="padding: 12px 24px; font-size: 0.92rem;">
+            <a href="#foundation" class="btn btn-primary btn-shimmer" style="padding: 12px 24px; font-size: 0.92rem;">
               <span class="hero-cta-label">Explore Platforms</span>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="margin-left: 4px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
           </div>
         </div>
 
-        <!-- Controls: Circular Arrows + Scrubber Track -->
-        <div class="hero-carousel-controls">
-          <div class="hero-control-buttons">
-            <button class="hero-arrow-btn" id="heroCarPrevBtn" aria-label="Previous platform" title="Previous platform">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-            <button class="hero-arrow-btn" id="heroCarNextBtn" aria-label="Next platform" title="Next platform">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-          </div>
-          <div class="hero-track-container" id="heroTrackContainer">
-            <div class="hero-track-thumb" id="heroTrackThumb"></div>
-          </div>
-        </div>
+        
       </div>
 
-      <!-- Top-down: product logos + interactive screen preview -->
+      <!-- Top-down: product logos + interactive screen preview (Version-2) -->
       <div class="hero-stacked-panel" aria-label="Product previews">
         <div class="hero-product-logos" id="heroProductLogos" role="tablist" aria-label="Select a product">
-          <button type="button" class="hero-product-logo-btn active" role="tab" aria-selected="true" data-preview="work" style="--logo-grad: linear-gradient(145deg, #12A883 0%, #1EA190 50%, #3B82F6 100%); --logo-accent: #12A883;">
-            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
-            <span class="hero-product-logo-name">Work</span>
+          <button type="button" class="hero-product-logo-btn active" role="tab" aria-selected="true" data-preview="lms" style="--logo-grad: linear-gradient(145deg, #12A883 0%, #1EA190 50%, #3B82F6 100%); --logo-accent: #12A883;">
+            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+            <div class="hero-product-btn-text">
+              <span class="hero-product-logo-name">LMS</span>
+              <span class="hero-product-logo-sub">Corporate Learning</span>
+            </div>
           </button>
-          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="service" style="--logo-grad: linear-gradient(145deg, #0EB8AB 0%, #12A1CE 55%, #4C6DE8 100%); --logo-accent: #12A1CE;">
-            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-            <span class="hero-product-logo-name">Service</span>
+          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="hub" style="--logo-grad: linear-gradient(145deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%); --logo-accent: #05AE78;">
+            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <div class="hero-product-btn-text">
+              <span class="hero-product-logo-name">Hub</span>
+              <span class="hero-product-logo-sub">Employee Workspace</span>
+            </div>
           </button>
-          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="stackai" style="--logo-grad: linear-gradient(145deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%); --logo-accent: #05AE78;">
-            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><circle cx="5" cy="18" r="2"/><path d="M7 7l3.5 3.5m3 3l3.5 3.5m0-10l-3.5 3.5m-3 3L7 17"/></svg></span>
-            <span class="hero-product-logo-name">StackAI</span>
-          </button>
-          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="fuel" style="--logo-grad: linear-gradient(145deg, #059669 0%, #10B981 50%, #06B6D4 100%); --logo-accent: #059669;">
+          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="fuel" style="--logo-grad: linear-gradient(145deg, #0EB8AB 0%, #12A1CE 55%, #4C6DE8 100%); --logo-accent: #12A1CE;">
             <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c.5 4.5 2.5 6.5 7 7-4.5.5-6.5 2.5-7 7-.5-4.5-2.5-6.5-7-7 4.5-.5 6.5-2.5 7-7z"/></svg></span>
-            <span class="hero-product-logo-name">Fuel</span>
-          </button>
-          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="gerrit" style="--logo-grad: linear-gradient(145deg, #0284C7 0%, #06B6D4 50%, #10B981 100%); --logo-accent: #0284C7;">
-            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v2c0 2-2 4-6 4s-6-2-6-4V9"/></svg></span>
-            <span class="hero-product-logo-name">Gerrit</span>
-          </button>
-          <button type="button" class="hero-product-logo-btn" role="tab" aria-selected="false" data-preview="gtm" style="--logo-grad: linear-gradient(145deg, #0D9488 0%, #10B981 50%, #6366F1 100%); --logo-accent: #0D9488;">
-            <span class="hero-product-logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg></span>
-            <span class="hero-product-logo-name">GTM</span>
+            <div class="hero-product-btn-text">
+              <span class="hero-product-logo-name">Fuel</span>
+              <span class="hero-product-logo-sub">Founder &amp; Investor</span>
+            </div>
           </button>
         </div>
 
         <div class="hero-product-preview" id="heroProductPreview">
-          <!-- Work: sprint board -->
-          <div class="hero-preview-screen active" data-preview="work">
+          <!-- 1. LMS: Corporate Learning Platform -->
+          <div class="hero-preview-screen active" data-preview="lms">
             <div class="hero-screen-device">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
-                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / work / sprint-42</span></div>
-                <div class="hero-status-pill">● SPRINT 42 ACTIVE</div>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hp-toolbar">
-                  <div>
-                    <div class="hp-title">Sprint board · Engineering</div>
-                    <div class="hp-sub">18 tasks routed across R&amp;D and Growth</div>
+              <div class="hero-window-frame">
+                <div class="hero-window-header">
+                  <div class="hero-window-dots">
+                    <span class="hero-dot dot-red"></span>
+                    <span class="hero-dot dot-yellow"></span>
+                    <span class="hero-dot dot-green"></span>
                   </div>
-                  <span class="hero-task-tag tag-slate">Board</span>
+                  <div class="hero-url-bar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                    <span>york.lms / dashboard / overview</span>
+                  </div>
+                  <a href="product.html?name=LMS" class="hero-status-pill" style="text-decoration: none;">● 250 EMPLOYEES · 80 COURSES ↗</a>
                 </div>
-                <div class="hp-list">
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Stripe v4 API Gateway Migration</span><span class="hero-task-meta">R&amp;D · PR #842 Approved</span></div><span class="hero-task-tag tag-green">AUTO-ROUTED ✓</span></div>
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">GTM Enterprise Launch Assets</span><span class="hero-task-meta">Growth · 12 Assets Synced</span></div><span class="hero-task-tag tag-blue">DISPATCHED ✓</span></div>
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Design Library · Token Sync</span><span class="hero-task-meta">Design · Ready for QA</span></div><span class="hero-task-tag tag-amber">IN REVIEW</span></div>
+                <div class="hero-screen-body hero-screenshot-body" data-zoom-src="images/lms-screenshot.png" data-zoom-title="York.IE LMS Corporate Learning Platform" title="Click to view full screenshot">
+                  <img src="images/lms-screenshot.png" alt="York.IE LMS Corporate Learning Dashboard" class="hero-screenshot-img">
                 </div>
-                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">+38%</span><span class="hero-metric-lbl">Velocity</span></div><div class="hero-metric-cell"><span class="hero-metric-val">0.4s</span><span class="hero-metric-lbl">Handoff</span></div><div class="hero-metric-cell"><span class="hero-metric-val">0.0%</span><span class="hero-metric-lbl">Blockers</span></div></div>
               </div>
-            </div>
             </div>
           </div>
 
-          <!-- Service: reliability / incident -->
-          <div class="hero-preview-screen" data-preview="service">
+          <!-- 2. Hub: Employee Management System -->
+          <div class="hero-preview-screen" data-preview="hub">
             <div class="hero-screen-device">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
-                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / service / inc-4402</span></div>
-                <div class="hero-status-pill">● 99.999% SLA</div>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hp-toolbar">
-                  <div>
-                    <div class="hp-title">Incident INC-4402 · Edge-EU</div>
-                    <div class="hp-sub">Auto-triage + canary rollback in progress</div>
+              <div class="hero-window-frame">
+                <div class="hero-window-header">
+                  <div class="hero-window-dots">
+                    <span class="hero-dot dot-red"></span>
+                    <span class="hero-dot dot-yellow"></span>
+                    <span class="hero-dot dot-green"></span>
                   </div>
-                  <span class="hero-task-tag tag-amber">Mitigating</span>
+                  <div class="hero-url-bar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                    <span>hub.york.ie / home / dashboard</span>
+                  </div>
+                  <a href="product.html?name=Hub" class="hero-status-pill" style="text-decoration: none;">● YORK.IE HUB · ACTIVE ↗</a>
                 </div>
-                <div class="hp-bars">
-                  <div class="hp-bar-row"><span>P99 latency</span><div class="hp-bar-track"><div class="hp-bar-fill is-ok" style="width:22%"></div></div><span>16ms</span></div>
-                  <div class="hp-bar-row"><span>CPU load</span><div class="hp-bar-track"><div class="hp-bar-fill is-warn" style="width:48%"></div></div><span>18%</span></div>
-                  <div class="hp-bar-row"><span>Canary</span><div class="hp-bar-track"><div class="hp-bar-fill is-ok" style="width:100%"></div></div><span>6/6</span></div>
+                <div class="hero-screen-body hero-screenshot-body" data-zoom-src="images/hub-screenshot.png" data-zoom-title="York.IE Hub Employee Workspace" title="Click to view full screenshot">
+                  <img src="images/hub-screenshot.png" alt="York.IE Hub Employee Management System" class="hero-screenshot-img">
                 </div>
-                <div class="hp-list">
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Traffic shunted to Edge-EU replica</span><span class="hero-task-meta">0 packet loss · 140ms ago</span></div><span class="hero-task-tag tag-green">VERIFIED ✓</span></div>
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Canary rollback v2.14.8</span><span class="hero-task-meta">Runbook executed</span></div><span class="hero-task-tag tag-blue">EXECUTED ✓</span></div>
-                </div>
-                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">16.4ms</span><span class="hero-metric-lbl">P99</span></div><div class="hero-metric-cell"><span class="hero-metric-val">18%</span><span class="hero-metric-lbl">CPU</span></div><div class="hero-metric-cell"><span class="hero-metric-val">100%</span><span class="hero-metric-lbl">Canary</span></div></div>
               </div>
-            </div>
             </div>
           </div>
 
-          <!-- StackAI: model mesh -->
-          <div class="hero-preview-screen" data-preview="stackai">
-            <div class="hero-screen-device">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
-                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / stackai / mesh-v4</span></div>
-                <div class="hero-status-pill">● 240 AGENTS ACTIVE</div>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hp-toolbar">
-                  <div>
-                    <div class="hp-title">Model mesh · Live routing</div>
-                    <div class="hp-sub">Guardrailed requests across the agent fleet</div>
-                  </div>
-                  <span class="hero-task-tag tag-green">Healthy</span>
-                </div>
-                <div class="hp-chip-row">
-                  <span class="hp-chip">Claude 3.5</span>
-                  <span class="hp-chip">GPT-4o</span>
-                  <span class="hp-chip">Gemini</span>
-                  <span class="hp-chip">Local · 8B</span>
-                </div>
-                <div class="hp-list">
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Claude 3.5 Sonnet</span><span class="hero-task-meta">Complex code refactoring · 38ms</span></div><span class="hero-task-tag tag-green">ROUTED ✓</span></div>
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">GPT-4o Omnimodal</span><span class="hero-task-meta">Visual document reasoning · 42ms</span></div><span class="hero-task-tag tag-blue">ROUTED ✓</span></div>
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Policy guardrail pass</span><span class="hero-task-meta">PII scrub · tool allowlist</span></div><span class="hero-task-tag tag-slate">100%</span></div>
-                </div>
-                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">14.2k</span><span class="hero-metric-lbl">tok/sec</span></div><div class="hero-metric-cell"><span class="hero-metric-val">100%</span><span class="hero-metric-lbl">Guardrail</span></div><div class="hero-metric-cell"><span class="hero-metric-val">&lt;38ms</span><span class="hero-metric-lbl">Latency</span></div></div>
-              </div>
-            </div>
-            </div>
-          </div>
-
-          <!-- Fuel: company scorecard -->
+          <!-- 3. Fuel: Founder & Investor Platform -->
           <div class="hero-preview-screen" data-preview="fuel">
             <div class="hero-screen-device">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
-                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / fuel / company-score</span></div>
-                <div class="hero-status-pill">● SCORECARD LIVE</div>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hp-toolbar">
-                  <div>
-                    <div class="hp-title">Company health scorecard</div>
-                    <div class="hp-sub">Peer benchmark · top quartile</div>
+              <div class="hero-window-frame">
+                <div class="hero-window-header">
+                  <div class="hero-window-dots">
+                    <span class="hero-dot dot-red"></span>
+                    <span class="hero-dot dot-yellow"></span>
+                    <span class="hero-dot dot-green"></span>
                   </div>
-                  <span class="hero-task-tag tag-green">Weekly pulse</span>
-                </div>
-                <div class="hp-score-row">
-                  <div class="hp-score-ring">
-                    <div style="text-align:center;">
-                      <div class="hp-score-num">98.4</div>
-                      <div class="hp-score-lbl">Score</div>
-                    </div>
+                  <div class="hero-url-bar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                    <span>fuel.york.ie / company / volura</span>
                   </div>
-                  <div class="hp-list" style="margin:0;">
-                    <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">GTM conversion gap</span><span class="hero-task-meta">Ranked #1 priority</span></div><span class="hero-task-tag tag-amber">ACTION</span></div>
-                    <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Engineering velocity</span><span class="hero-task-meta">Above peer median</span></div><span class="hero-task-tag tag-green">STRONG</span></div>
-                  </div>
+                  <a href="product.html?name=Fuel" class="hero-status-pill" style="text-decoration: none;">● $42.8M PIPELINE · VOLURA ↗</a>
                 </div>
-                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">12</span><span class="hero-metric-lbl">Signals</span></div><div class="hero-metric-cell"><span class="hero-metric-val">5</span><span class="hero-metric-lbl">Gaps</span></div><div class="hero-metric-cell"><span class="hero-metric-val">3</span><span class="hero-metric-lbl">Bets</span></div></div>
+                <div class="hero-screen-body hero-screenshot-body" data-zoom-src="images/fuel-screenshot.png" data-zoom-title="Fuel Founder & Investor Platform" title="Click to view full screenshot">
+                  <img src="images/fuel-screenshot.png" alt="Fuel Founder and Investor Platform" class="hero-screenshot-img">
+                </div>
               </div>
-            </div>
-            </div>
-          </div>
-
-          <!-- Gerrit: code review -->
-          <div class="hero-preview-screen" data-preview="gerrit">
-            <div class="hero-screen-device">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
-                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / gerrit / change-8842</span></div>
-                <div class="hero-status-pill">● REVIEW PIPELINE</div>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hp-toolbar">
-                  <div>
-                    <div class="hp-title">change-8842 · Auth middleware</div>
-                    <div class="hp-sub">2 reviewers · +186 / −42</div>
-                  </div>
-                  <span class="hero-task-tag tag-green">+2</span>
-                </div>
-                <div class="hp-diff">
-                  <div class="hp-diff-line">@@ auth/middleware.ts @@</div>
-                  <div class="hp-diff-line del">- if (!token) return next()</div>
-                  <div class="hp-diff-line add">+ if (!token) throw new AuthError(401)</div>
-                  <div class="hp-diff-line add">+ await verifySession(token)</div>
-                </div>
-                <div class="hp-list">
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">CI · Build &amp; unit suite</span><span class="hero-task-meta">All checks green</span></div><span class="hero-task-tag tag-blue">PASSED</span></div>
-                </div>
-                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">14m</span><span class="hero-metric-lbl">Review lag</span></div><div class="hero-metric-cell"><span class="hero-metric-val">100%</span><span class="hero-metric-lbl">Coverage</span></div><div class="hero-metric-cell"><span class="hero-metric-val">0</span><span class="hero-metric-lbl">Blockers</span></div></div>
-              </div>
-            </div>
-            </div>
-          </div>
-
-          <!-- GTM: launch calendar -->
-          <div class="hero-preview-screen" data-preview="gtm">
-            <div class="hero-screen-device">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots"><span class="hero-dot dot-red"></span><span class="hero-dot dot-yellow"></span><span class="hero-dot dot-green"></span></div>
-                <div class="hero-url-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>york.platform / gtm / launch-q2</span></div>
-                <div class="hero-status-pill">● CAMPAIGN SYNCED</div>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hp-toolbar">
-                  <div>
-                    <div class="hp-title">Enterprise launch calendar</div>
-                    <div class="hp-sub">LinkedIn · CRM · Email · Ads</div>
-                  </div>
-                  <span class="hero-task-tag tag-green">Live</span>
-                </div>
-                <div class="hp-calendar">
-                  <div class="hp-day"><strong>Mon</strong><span>Teaser</span></div>
-                  <div class="hp-day is-live"><strong>Tue</strong><span>Launch</span></div>
-                  <div class="hp-day"><strong>Wed</strong><span>Nurture</span></div>
-                  <div class="hp-day"><strong>Thu</strong><span>SQL push</span></div>
-                </div>
-                <div class="hp-chip-row">
-                  <span class="hp-chip">LinkedIn</span>
-                  <span class="hp-chip">HubSpot</span>
-                  <span class="hp-chip">Email</span>
-                  <span class="hp-chip">Paid</span>
-                </div>
-                <div class="hp-list">
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Enterprise launch sequence</span><span class="hero-task-meta">12 assets · 3 channels</span></div><span class="hero-task-tag tag-green">LIVE</span></div>
-                  <div class="hero-task-row"><div class="hero-task-info"><span class="hero-task-name">Pipeline attribution</span><span class="hero-task-meta">Synced to CRM</span></div><span class="hero-task-tag tag-blue">SYNCED</span></div>
-                </div>
-                <div class="hero-micro-metrics"><div class="hero-metric-cell"><span class="hero-metric-val">2.4x</span><span class="hero-metric-lbl">Pipeline</span></div><div class="hero-metric-cell"><span class="hero-metric-val">38%</span><span class="hero-metric-lbl">Open rate</span></div><div class="hero-metric-cell"><span class="hero-metric-val">9</span><span class="hero-metric-lbl">SQLs</span></div></div>
-              </div>
-            </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Icon: concentric rotating arcs of all 22 product logos -->
-      <div class="hero-icon-panel" aria-label="York Foundation connected products">
-        <div class="hero-arc-fan" id="heroArcFan" aria-hidden="false"></div>
-      </div>
 
-      <!-- RIGHT COLUMN: Horizontal Carousel Viewport -->
-      <div class="hero-cards-viewport" id="heroCardsViewport">
-        <div class="hero-cards-track">
-
-          <!-- 1. Agentic Work Management (Emerald Mint) - LEFT (UP) -->
-          <div class="hero-green-card card-gradient-1 hero-card-up" style="background: linear-gradient(160deg, #12A883 0%, #1EA190 45%, #466BD8 100%);">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots">
-                  <span class="hero-dot dot-red"></span>
-                  <span class="hero-dot dot-yellow"></span>
-                  <span class="hero-dot dot-green"></span>
-                </div>
-                <div class="hero-status-pill">● ACTIVE SPRINT 42</div>
-              </div>
-              <div class="hero-url-bar">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                <span>york.platform / work / sprint-42</span>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hero-task-row">
-                  <div class="hero-task-info">
-                    <span class="hero-task-name">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M18 9a9 9 0 0 0-9 9"/><path d="M6 9v12"/></svg>
-                      <span>Stripe v4 API Gateway Migration</span>
-                    </span>
-                    <span class="hero-task-meta">R&amp;D Team · PR #842 Approved · 12ms</span>
-                  </div>
-                  <span class="hero-task-tag tag-green">AUTO-ROUTED ✓</span>
-                </div>
-                <div class="hero-task-row">
-                  <div class="hero-task-info">
-                    <span class="hero-task-name">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-                      <span>GTM Enterprise Launch Assets</span>
-                    </span>
-                    <span class="hero-task-meta">Growth · 12 Assets Synced · 0 Blockers</span>
-                  </div>
-                  <span class="hero-task-tag tag-blue">DISPATCHED ✓</span>
-                </div>
-                <div class="hero-micro-metrics">
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">+38%</span>
-                    <span class="hero-metric-lbl">Velocity</span>
-                  </div>
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">0.4s</span>
-                    <span class="hero-metric-lbl">Handoff</span>
-                  </div>
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">0.0%</span>
-                    <span class="hero-metric-lbl">Blocker Rate</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="hero-card-bottom">
-              <div class="hero-card-tag-pill">
-                <span class="hero-tag-glow-dot"></span>
-                <span>Work Coordination</span>
-              </div>
-              <h3 class="hero-card-title">Nurture cross-team velocity and eliminate handoff latency</h3>
-              <div class="hero-card-actions">
-                <a href="#flagship" class="hero-card-action-btn">Open workspace ↗</a>
-                <a href="#flagship" class="hero-card-action-link">Learn more ›</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 2. StackAI by York (Lush Forest) - IN CENTER (DOWN/CENTER) -->
-          <div class="hero-green-card card-gradient-3 hero-card-down">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots">
-                  <span class="hero-dot dot-red"></span>
-                  <span class="hero-dot dot-yellow"></span>
-                  <span class="hero-dot dot-green"></span>
-                </div>
-                <div class="hero-status-pill">● 240 AGENTS ACTIVE</div>
-              </div>
-              <div class="hero-url-bar">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                <span>york.platform / runtime / mesh-v4</span>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hero-task-row">
-                  <div class="hero-task-info">
-                    <span class="hero-task-name">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><circle cx="5" cy="19" r="2"/><line x1="7" y1="6" x2="10" y2="10"/><line x1="17" y1="6" x2="14" y2="10"/><line x1="7" y1="18" x2="10" y2="14"/><line x1="17" y1="18" x2="14" y2="14"/></svg>
-                      <span>Zero-Trust Swarm Mesh</span>
-                    </span>
-                    <span class="hero-task-meta">Claude 3.5 Sonnet · Complex Refactor</span>
-                  </div>
-                  <span class="hero-task-tag tag-purple">ROUTED ✓</span>
-                </div>
-                <div class="hero-task-row">
-                  <div class="hero-task-info">
-                    <span class="hero-task-name">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg>
-                      <span>GPT-4o Omnimodal Reasoning</span>
-                    </span>
-                    <span class="hero-task-meta">Document Analysis · 42ms runtime</span>
-                  </div>
-                  <span class="hero-task-tag tag-cyan">ROUTED ✓</span>
-                </div>
-                <div class="hero-micro-metrics">
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">14,200</span>
-                    <span class="hero-metric-lbl">Throughput</span>
-                  </div>
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">100%</span>
-                    <span class="hero-metric-lbl">Guardrail</span>
-                  </div>
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">&lt;38ms</span>
-                    <span class="hero-metric-lbl">Mesh Latency</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="hero-card-bottom">
-              <div class="hero-card-tag-pill">
-                <span class="hero-tag-glow-dot"></span>
-                <span>Agentic Mesh</span>
-              </div>
-              <h3 class="hero-card-title">Deploy autonomous multi-agent swarms with MCP context mesh</h3>
-              <div class="hero-card-actions">
-                <a href="#flagship" class="hero-card-action-btn">Explore StackAI ↗</a>
-                <a href="#flagship" class="hero-card-action-link">Learn more ›</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 3. York Service Management (Deep Jade) - RIGHT (CENTER CASCADE) -->
-          <div class="hero-green-card card-gradient-2 hero-card-center">
-            <div class="hero-window-frame">
-              <div class="hero-window-header">
-                <div class="hero-window-dots">
-                  <span class="hero-dot dot-red"></span>
-                  <span class="hero-dot dot-yellow"></span>
-                  <span class="hero-dot dot-green"></span>
-                </div>
-                <div class="hero-status-pill">● 99.999% SLA</div>
-              </div>
-              <div class="hero-url-bar">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                <span>york.platform / service / inc-4402</span>
-              </div>
-              <div class="hero-screen-body">
-                <div class="hero-task-row">
-                  <div class="hero-task-info">
-                    <span class="hero-task-name">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                      <span>INC-4402 · Buffer Saturation</span>
-                    </span>
-                    <span class="hero-task-meta">Cluster-08 Gateway Pods · Edge-EU</span>
-                  </div>
-                  <span class="hero-task-tag tag-cyan">MITIGATED ✓</span>
-                </div>
-                <div class="hero-task-row">
-                  <div class="hero-task-info">
-                    <span class="hero-task-name">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-                      <span>Canary Rollback to Release v2.14.8</span>
-                    </span>
-                    <span class="hero-task-meta">6/6 pods nominal · 0 packet loss</span>
-                  </div>
-                  <span class="hero-task-tag tag-green">VERIFIED ✓</span>
-                </div>
-                <div class="hero-micro-metrics">
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">16.4ms</span>
-                    <span class="hero-metric-lbl">P99 Latency</span>
-                  </div>
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">18%</span>
-                    <span class="hero-metric-lbl">CPU Load</span>
-                  </div>
-                  <div class="hero-metric-cell">
-                    <span class="hero-metric-val">100%</span>
-                    <span class="hero-metric-lbl">Canary Health</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="hero-card-bottom">
-              <div class="hero-card-tag-pill">
-                <span class="hero-tag-glow-dot"></span>
-                <span>Service Reliability</span>
-              </div>
-              <h3 class="hero-card-title">Sub-second incident triage with automated canary rollbacks</h3>
-              <div class="hero-card-actions">
-                <a href="#flagship" class="hero-card-action-btn">Launch Service Hub ↗</a>
-                <a href="#flagship" class="hero-card-action-link">Learn more ›</a>
-              </div>
-            </div>
-          </div>
-
-                  </div>
-      </div>
+      
 
     </div>
   </div>
 </section>
+
+<!-- Screenshot Lightbox Modal (Click-to-Enlarge high-resolution inspection) -->
+<div class="screenshot-lightbox" id="screenshotLightbox" role="dialog" aria-modal="true" aria-label="Screenshot Preview">
+  <div class="lightbox-content">
+    <div class="lightbox-header">
+      <div class="lightbox-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span id="lightboxTitle">Platform Overview</span>
+      </div>
+      <button type="button" class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Close preview" title="Close (Esc)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="lightbox-img-wrap">
+      <img src="" alt="" id="lightboxImg" class="lightbox-img">
+    </div>
+  </div>
+</div>
 
 
 <!-- ═════════════════════════════════════════════════════════════════
-     FOUR JOBS / MULTI-COLOR SHOWCASE SECTION (MATCHING UPLOADED IMAGE)
+     WHAT YORK SUITE DOES — block stack
      ═════════════════════════════════════════════════════════════════ -->
-<section class="jobs-section" id="capabilities">
-  <div class="wrap" style="position: relative; z-index: 2;">
-    <div class="section-header-unified">
-      <h2>Four jobs. One assistant.</h2>
-      <p>York handles the work that usually fragments across tools, teams, and status meetings.</p>
-    </div>
+<section class="foundation-section" id="foundation" aria-labelledby="foundation-brand">
+  <div class="wrap foundation-wrap">
+    
 
-    <div class="jobs-carousel-wrap">
-      <div class="jobs-carousel-track" id="jobsCarouselTrack">
-
-        <div class="job-shell">
-          <a href="#flagship" class="job-card">
-            <span class="job-mark" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z" fill="currentColor"/></svg>
-            </span>
-            <div class="job-content-card">
-              <span class="job-kicker">Anticipate</span>
-              <h3 class="job-card-title">Thinks ahead</h3>
-              <p class="job-card-desc">Fuel runs a scorecard across product, go-to-market, and finance — and surfaces the one or two gaps that matter now.</p>
-            </div>
+    <!-- York Suite: stepped block stack -->
+    <div class="yf-v2" data-yf-panel="v2">
+      <div class="yf__top">
+        <div>
+          <p class="yf__kicker">About the institution</p>
+          <h2 class="yf__title" id="foundation-brand">York Suite</h2>
+          <p class="yf__lead">The operating layer behind York.ie, where companies, operators and decisions share one source of truth.</p>
+          <p class="yf__body">Not another product shelf. York Suite holds how work is planned, executed, measured and remembered, so teams stop rebuilding context from slides, chats and disconnected tools.</p>
+          <a class="yf__btn" href="#journey">
+            See how York operates
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
           </a>
         </div>
-
-        <div class="job-shell">
-          <a href="#flagship" class="job-card">
-            <span class="job-mark" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
-            </span>
-            <div class="job-content-card">
-              <span class="job-kicker">Execute</span>
-              <h3 class="job-card-title">Executes across tools</h3>
-              <p class="job-card-desc">Scaffolds projects in R&amp;D Launchpad, schedules campaigns in GTM Launchpad, opens tickets, and files audits from one thread.</p>
-            </div>
-          </a>
-        </div>
-
-        <div class="job-shell">
-          <a href="#flagship" class="job-card">
-            <span class="job-mark" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
-            </span>
-            <div class="job-content-card">
-              <span class="job-kicker">Align</span>
-              <h3 class="job-card-title">Coordinates everyone</h3>
-              <p class="job-card-desc">Drafts board updates, tracks hiring in Hub, runs assessments, and keeps every team aligned in the rooms that matter.</p>
-            </div>
-          </a>
-        </div>
-
-        <div class="job-shell">
-          <a href="#flagship" class="job-card">
-            <span class="job-mark" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
-            </span>
-            <div class="job-content-card">
-              <span class="job-kicker">Advise</span>
-              <h3 class="job-card-title">Tells you the truth</h3>
-              <p class="job-card-desc">No dashboards to interpret — just a direct answer on runway, R&amp;D health, campaign performance, and peer standing.</p>
-            </div>
-          </a>
-        </div>
-
+        <figure class="yf__art" id="yf-art" role="img" aria-label="A stepped stack of blocks. Memory sits at the base, execution in the middle and shared truth on top.">
+          <svg viewBox="0 0 520 360" aria-hidden="true">
+            <path class="yf__ground" d="M190.0 94.0 L-52.5 234.0 M190.0 94.0 L432.5 234.0 M238.5 122.0 L-4.0 262.0 M141.5 122.0 L384.0 262.0 M287.0 150.0 L44.5 290.0 M93.0 150.0 L335.5 290.0 M335.5 178.0 L93.0 318.0 M44.5 178.0 L287.0 318.0 M384.0 206.0 L141.5 346.0 M-4.0 206.0 L238.5 346.0 M432.5 234.0 L190.0 374.0 M-52.5 234.0 L190.0 374.0"/>
+            <g class="yf__cube" style="--d:0ms"><path class="t" d="M190.0 94.0 L238.5 122.0 L190.0 150.0 L141.5 122.0 Z"/><path class="l" d="M141.5 178.0 L190.0 206.0 L190.0 150.0 L141.5 122.0 Z"/><path class="r" d="M238.5 178.0 L190.0 206.0 L190.0 150.0 L238.5 122.0 Z"/></g>
+            <g class="yf__cube" style="--d:70ms"><path class="t" d="M141.5 122.0 L190.0 150.0 L141.5 178.0 L93.0 150.0 Z"/><path class="l" d="M93.0 206.0 L141.5 234.0 L141.5 178.0 L93.0 150.0 Z"/><path class="r" d="M190.0 206.0 L141.5 234.0 L141.5 178.0 L190.0 150.0 Z"/></g>
+            <g class="yf__cube" style="--d:140ms"><path class="t" d="M238.5 122.0 L287.0 150.0 L238.5 178.0 L190.0 150.0 Z"/><path class="l" d="M190.0 206.0 L238.5 234.0 L238.5 178.0 L190.0 150.0 Z"/><path class="r" d="M287.0 206.0 L238.5 234.0 L238.5 178.0 L287.0 150.0 Z"/></g>
+            <g class="yf__cube" style="--d:210ms"><path class="t" d="M93.0 150.0 L141.5 178.0 L93.0 206.0 L44.5 178.0 Z"/><path class="l" d="M44.5 234.0 L93.0 262.0 L93.0 206.0 L44.5 178.0 Z"/><path class="r" d="M141.5 234.0 L93.0 262.0 L93.0 206.0 L141.5 178.0 Z"/></g>
+            <g class="yf__cube" style="--d:280ms"><path class="t" d="M190.0 150.0 L238.5 178.0 L190.0 206.0 L141.5 178.0 Z"/><path class="l" d="M141.5 234.0 L190.0 262.0 L190.0 206.0 L141.5 178.0 Z"/><path class="r" d="M238.5 234.0 L190.0 262.0 L190.0 206.0 L238.5 178.0 Z"/></g>
+            <g class="yf__cube" style="--d:350ms"><path class="t" d="M287.0 150.0 L335.5 178.0 L287.0 206.0 L238.5 178.0 Z"/><path class="l" d="M238.5 234.0 L287.0 262.0 L287.0 206.0 L238.5 178.0 Z"/><path class="r" d="M335.5 234.0 L287.0 262.0 L287.0 206.0 L335.5 178.0 Z"/></g>
+            <g class="yf__cube" style="--d:420ms"><path class="t" d="M141.5 178.0 L190.0 206.0 L141.5 234.0 L93.0 206.0 Z"/><path class="l" d="M93.0 262.0 L141.5 290.0 L141.5 234.0 L93.0 206.0 Z"/><path class="r" d="M190.0 262.0 L141.5 290.0 L141.5 234.0 L190.0 206.0 Z"/></g>
+            <g class="yf__cube" style="--d:490ms"><path class="t" d="M238.5 178.0 L287.0 206.0 L238.5 234.0 L190.0 206.0 Z"/><path class="l" d="M190.0 262.0 L238.5 290.0 L238.5 234.0 L190.0 206.0 Z"/><path class="r" d="M287.0 262.0 L238.5 290.0 L238.5 234.0 L287.0 206.0 Z"/></g>
+            <g class="yf__cube is-key" data-pillar="memory" style="--d:560ms"><path class="t" d="M190.0 206.0 L238.5 234.0 L190.0 262.0 L141.5 234.0 Z"/><path class="l" d="M141.5 290.0 L190.0 318.0 L190.0 262.0 L141.5 234.0 Z"/><path class="r" d="M238.5 290.0 L190.0 318.0 L190.0 262.0 L238.5 234.0 Z"/></g>
+            <g class="yf__cube" style="--d:630ms"><path class="t" d="M190.0 66.0 L238.5 94.0 L190.0 122.0 L141.5 94.0 Z"/><path class="l" d="M141.5 150.0 L190.0 178.0 L190.0 122.0 L141.5 94.0 Z"/><path class="r" d="M238.5 150.0 L190.0 178.0 L190.0 122.0 L238.5 94.0 Z"/></g>
+            <g class="yf__cube" style="--d:700ms"><path class="t" d="M141.5 94.0 L190.0 122.0 L141.5 150.0 L93.0 122.0 Z"/><path class="l" d="M93.0 178.0 L141.5 206.0 L141.5 150.0 L93.0 122.0 Z"/><path class="r" d="M190.0 178.0 L141.5 206.0 L141.5 150.0 L190.0 122.0 Z"/></g>
+            <g class="yf__cube" style="--d:770ms"><path class="t" d="M238.5 94.0 L287.0 122.0 L238.5 150.0 L190.0 122.0 Z"/><path class="l" d="M190.0 178.0 L238.5 206.0 L238.5 150.0 L190.0 122.0 Z"/><path class="r" d="M287.0 178.0 L238.5 206.0 L238.5 150.0 L287.0 122.0 Z"/></g>
+            <g class="yf__cube is-key" data-pillar="exec" style="--d:840ms"><path class="t" d="M190.0 122.0 L238.5 150.0 L190.0 178.0 L141.5 150.0 Z"/><path class="l" d="M141.5 206.0 L190.0 234.0 L190.0 178.0 L141.5 150.0 Z"/><path class="r" d="M238.5 206.0 L190.0 234.0 L190.0 178.0 L238.5 150.0 Z"/></g>
+            <g class="yf__cube is-key" data-pillar="truth" style="--d:910ms"><path class="t" d="M190.0 38.0 L238.5 66.0 L190.0 94.0 L141.5 66.0 Z"/><path class="l" d="M141.5 122.0 L190.0 150.0 L190.0 94.0 L141.5 66.0 Z"/><path class="r" d="M238.5 122.0 L190.0 150.0 L190.0 94.0 L238.5 66.0 Z"/></g>
+            <g class="yf__label" data-pillar="truth"><circle cx="214.2" cy="102.4" r="2.5"/><path d="M214.2 102.4 H 410"/><text x="418" y="106.4">Shared truth</text></g>
+            <g class="yf__label" data-pillar="exec"><circle cx="214.2" cy="186.4" r="2.5"/><path d="M214.2 186.4 H 410"/><text x="418" y="190.4">Execution</text></g>
+            <g class="yf__label" data-pillar="memory"><circle cx="214.2" cy="270.4" r="2.5"/><path d="M214.2 270.4 H 410"/><text x="418" y="274.4">Memory</text></g>
+          </svg>
+        </figure>
       </div>
+      <ul class="yf__pillars" id="yf-pillars-v2">
+        <li class="yf__pillar" data-pillar="truth" tabindex="0">
+          <h3>Shared operating truth</h3>
+          <p>One place for status, runway, delivery and ownership, instead of competing versions of the same story across decks and chats.</p>
+        </li>
+        <li class="yf__pillar" data-pillar="exec" tabindex="0">
+          <h3>Connected execution</h3>
+          <p>Strategy, people and capital decisions stay in the same thread, so handoffs keep their context.</p>
+        </li>
+        <li class="yf__pillar" data-pillar="memory" tabindex="0">
+          <h3>Durable institutional memory</h3>
+          <p>What changed, why it changed and who owns the next move stays visible long after the meeting ends.</p>
+        </li>
+      </ul>
     </div>
   </div>
 </section>
 
-<!-- ═════════════════════════════════════════════════════════════════
-     COPILOT-STYLE SHOWCASE (MICROSOFT COPILOT REFERENCE SPEC)
-     Deliver real productivity for every team
-     ═════════════════════════════════════════════════════════════════ -->
-<section class="copilot-section" id="flagship">
-  <div class="wrap">
-    <!-- Centered Header: Flagship Fuel (Matching Eight Stages Hierarchy) -->
-    <div class="section-header-unified">
-      <div class="flagship-kicker">
-        <span class="kicker-dot">●</span>
-        <span>FLAGSHIP · FUEL</span>
-      </div>
-      <h2>The workspace that replaces the<br>guesswork.</h2>
-      <p>
-        Board deck. Spreadsheet. Gut feel. Fuel replaces all three with a company scorecard, real peer benchmarks, and operating history you can actually trust.
-      </p>
-    </div>
+<script>
+  (function () {
+    var section = document.getElementById('foundation');
+    if (!section) return;
 
-    <!-- Showcase Grid: Left Nav Rail + Center Box (Reduced Width, Increased Height) + Overlapping Card (20% on box, 80% floating) -->
-    <div class="copilot-showcase-grid">
+    function bindFocus(artId, pillarsId) {
+      var art = document.getElementById(artId);
+      var pillars = document.querySelectorAll('#' + pillarsId + ' .yf__pillar');
+      if (!art || !pillars.length) return;
+      pillars.forEach(function (p) {
+        var on = function () { art.dataset.focus = p.dataset.pillar; };
+        var off = function () { delete art.dataset.focus; };
+        p.addEventListener('mouseenter', on);
+        p.addEventListener('focus', on);
+        p.addEventListener('mouseleave', off);
+        p.addEventListener('blur', off);
+      });
+    }
 
-      <!-- LEFT COLUMN: Vertical Nav Rail (Arrows + 3 Platform Items) -->
-      <div class="copilot-nav-rail">
-        <button class="copilot-arrow-btn" id="copilotPrevBtn" aria-label="Previous platform" title="Previous platform (↑)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
-        </button>
+    bindFocus('yf-visual', 'yf-pillars-v1');
+    bindFocus('yf-art', 'yf-pillars-v2');
 
-        <div class="copilot-nav-items" id="copilotNavItems">
-          <!-- Item 0: Agentic Work Management (Defined Gradient 1: Jade to Royal Blue) -->
-          <button class="copilot-nav-item active" data-index="0" style="--item-gradient: linear-gradient(135deg, #12A883 0%, #1EA190 45%, #466BD8 100%); --item-bloom: rgba(18, 168, 131, 0.5);">
-            <div class="copilot-icon-wrap">
-              <div class="copilot-icon-box">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-              </div>
-            </div>
-            <span class="copilot-item-label">Agentic Work Management</span>
-          </button>
+    var visual = document.getElementById('yf-visual');
+    if (visual && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var svg = visual.querySelector('svg');
+      if (svg && typeof svg.pauseAnimations === 'function') svg.pauseAnimations();
+    }
 
-          <!-- Item 1: York Service Management (Defined Gradient 2: Aqua to Electric Blue) -->
-          <button class="copilot-nav-item" data-index="1" style="--item-gradient: linear-gradient(135deg, #0EB8AB 0%, #12A1CE 45%, #4C6DE8 100%); --item-bloom: rgba(14, 184, 171, 0.5);">
-            <div class="copilot-icon-wrap">
-              <div class="copilot-icon-box">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-            </div>
-            <span class="copilot-item-label">York Service Management</span>
-          </button>
-
-          <!-- Item 2: StackAI by York (Defined Gradient 3: Emerald to Turquoise) -->
-          <button class="copilot-nav-item" data-index="2" style="--item-gradient: linear-gradient(135deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%); --item-bloom: rgba(5, 174, 120, 0.5);">
-            <div class="copilot-icon-wrap">
-              <div class="copilot-icon-box">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><circle cx="5" cy="18" r="2"/><path d="M7 7l3.5 3.5m3 3l3.5 3.5m0-10l-3.5 3.5m-3 3L7 17"/></svg>
-              </div>
-            </div>
-            <span class="copilot-item-label">StackAI by York</span>
-          </button>
-        </div>
-
-        <button class="copilot-arrow-btn" id="copilotNextBtn" aria-label="Next platform" title="Next platform (↓)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-      </div>
-
-      <!-- CENTER STAGE BOX: Wider Solid Pastel Background Card Matching Design System -->
-      <div class="copilot-stage-box" id="copilotStageBox" style="--stage-bg: #E7F7F0; --stage-dark-bg: radial-gradient(circle at 18% 18%, rgba(18, 168, 131, 0.16) 0%, transparent 60%), radial-gradient(circle at 82% 82%, rgba(70, 107, 216, 0.10) 0%, transparent 55%), #0D1522; --stage-dark-border: rgba(18, 168, 131, 0.35);">
-
-        <!-- Top Prompt Pill -->
-        <div class="stage-prompt-bubble" id="copilotPromptBubble" style="--bubble-bg: #FFFFFF; --bubble-color: #006056; --bubble-border: rgba(0, 96, 86, 0.25); --bubble-dark-bg: rgba(18, 168, 131, 0.16); --bubble-dark-color: #A7F3D0; --bubble-dark-border: rgba(52, 211, 153, 0.35);">
-          <span class="bubble-spark-icon">✦</span>
-          <span id="copilotBubbleText">Coordinate <strong>cross-team deliverables</strong> across R&amp;D, GTM, and Finance?</span>
-        </div>
-
-        <!-- Center Light Application Window -->
-        <div class="stage-app-window" id="stageAppWindow">
-          <!-- Window Header Bar -->
-          <div class="app-window-header">
-            <div class="traffic-lights">
-              <span class="traffic-dot dot-red"></span>
-              <span class="traffic-dot dot-yellow"></span>
-              <span class="traffic-dot dot-green"></span>
-            </div>
-            <div class="app-url-pill" id="elementsWindowUrl">york.platform / work / sprint-42</div>
-            <div class="app-status-badge" id="elementsStatusPill">● SPRINT 42 ACTIVE</div>
-          </div>
-
-          <!-- Window Content Body (Dynamic via JS) -->
-          <div class="app-window-body" id="copilotCardsStack">
-            <div class="prod-card-header">
-              <span class="prod-card-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:5px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Sprint 42 Autonomous Task Routing</span>
-              <span class="prod-card-badge" style="background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0;">18 TASKS ROUTED</span>
-            </div>
-            <div class="prod-card-desc">York Foundation eliminated cross-functional handoff bottlenecks across 3 departments.</div>
-            <div class="prod-rows-list">
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">Stripe v4 API Gateway Migration</span>
-                  <span class="prod-row-meta"> · R&amp;D Team · PR #842 Approved</span>
-                </div>
-                <span class="prod-row-status" style="background: #E4F2F0; color: #165E50; border: 1px solid #C5E4DF;">AUTO-ROUTED ✓</span>
-              </div>
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">GTM Enterprise Launch Assets</span>
-                  <span class="prod-row-meta"> · Growth · 12 Assets Synced</span>
-                </div>
-                <span class="prod-row-status" style="background: #E8EEF5; color: #1E3A5F; border: 1px solid #D0D9E6;">DISPATCHED ✓</span>
-              </div>
-            </div>
-            <div class="prod-metrics-strip">
-              <div class="prod-metric-box">
-                <span class="metric-val">+38%</span>
-                <span class="metric-lbl">Sprint Velocity</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">0.4s</span>
-                <span class="metric-lbl">Handoff Latency</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">0.0%</span>
-                <span class="metric-lbl">Blocker Rate</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bottom Footer of the Box -->
-        <div class="stage-box-footer">
-          <div class="footer-brand"><strong>York</strong> Platform</div>
-          <div class="footer-caption" id="copilotCompanionText">Zero handoff latency across all teams</div>
-        </div>
-
-        <!-- EXTREME RIGHT RECTANGULAR CARD: Pure white card with 100% opaque vivid gradient border -->
-        <div class="copilot-floating-card" id="copilotFloatingCard" style="--card-gradient-border: linear-gradient(135deg, #12A883 0%, #1EA190 45%, #466BD8 100%); --card-gradient-border-hover: linear-gradient(135deg, #12A883 0%, #1EA190 45%, #466BD8 100%); --card-glow-color: rgba(18, 168, 131, 0.25);">
-          <div class="copilot-card-badge" id="copilotCardBadge">
-            <span class="badge-dot">●</span>
-            <span id="copilotBadgeText">MVP CAPABILITY</span>
-          </div>
-          <h4 id="copilotCardTitle">Autonomous Workflows</h4>
-          <p id="copilotCardDesc">Auto-routes tasks and sprint dependencies with zero handoff latency.</p>
-          <a href="#services" id="copilotCardAction" class="copilot-card-action">
-            <span>Explore Workflows</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-          </a>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-</section>
+    var tabs = section.querySelectorAll('.yf-version-tab');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var ver = tab.getAttribute('data-yf-ver');
+        section.setAttribute('data-yf-version', ver);
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+      });
+    });
+  })();
+</script>
 
 
 <!-- ═════════════════════════════════════════════════════════════════
@@ -8112,93 +8443,9 @@
      Left editorial column with headline + navigation controls & scrubber
      Right horizontal scrolling deep-blue application window cards
      ═════════════════════════════════════════════════════════════════ -->
-<section class="journey-section" id="journey">
-  <div class="wrap" style="position: relative; z-index: 2;">
-    <div class="section-header-unified">
-      <h2>Eight stages. One continuous intelligence.</h2>
-      <p>
-        York Foundation operates across the full company arc — synchronising code, capital, telemetry, and people in one unified living stack.
-      </p>
-    </div>
-
-    <!-- Stage Navigation Stepper & Glowing Rail -->
-    <div class="stage-stepper-wrap">
-      <div class="stage-progress-bar" id="stageBar"></div>
-      <div class="stage-track-rail">
-        <div class="stage-track-fill" id="stageTrackFill"></div>
-      </div>
-    </div>
-
-    <!-- Active Stage Slide Card (Dual-Theme Adaptive HUD) -->
-    <div class="stage-card-wrap" id="stageCard">
-      <!-- Main Stage Body (Authentic Dual-Column Executive Lifecycle Card) -->
-      <div class="stage-card-body" id="stageCardBody">
-        <!-- Left Column: Stage Mission, Narrative & Action -->
-        <div class="stage-card-left" id="stageCardLeft">
-          <h3 id="stageTitle">Every company starts as a decision.</h3>
-
-          <p class="stage-description" id="stageBody">
-            Before you commit to a bet, Fuel scores the whole business, highlights the gaps that matter now, and recommends the work that moves the needle.
-          </p>
-
-          <!-- Connected Stage Products -->
-          <div class="stage-connected-panel stage-connected-panel--left" id="stageConnectedPanel">
-            <div class="stage-connected-kicker">
-              <span class="stage-connected-dot" aria-hidden="true"></span>
-              <span id="stageConnectedLabel">Connected products</span>
-            </div>
-            <div class="stage-service-chips-row" id="stageServiceChips">
-              <!-- Dynamically populated from 22-product registry -->
-            </div>
-          </div>
-
-          <!-- Action Row: Explore Services CTA + Interactive Steppers -->
-          <div class="stage-action-row">
-            <a href="#services" class="stage-story-btn" id="stageStoryBtn">
-              <span id="stageStoryBtnText">Explore Build Services</span>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-            </a>
-            <div class="stage-nav-steppers">
-              <button class="stage-nav-arrow-btn" id="stagePrevBtn" aria-label="Previous Stage" title="Previous Stage (←)">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-              </button>
-              <button class="stage-nav-arrow-btn" id="stageNextBtn" aria-label="Next Stage" title="Next Stage (→)">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Column: Stage scene image + hanging tag -->
-        <div class="stage-card-right" id="stageCardRight">
-          <div class="stage-hero-image-wrap">
-            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&auto=format&fit=crop&q=80" alt="Stage Workflow" class="stage-hero-image" id="stageHeroImage">
-            <div class="stage-hero-scrim"></div>
-          </div>
-
-          <div class="stage-hanging-banner" id="stageHangingBanner">
-            <span id="stageBannerIconWrap">
-              <svg class="stage-banner-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v2c0 2-2 4-6 4s-6-2-6-4V9"/></svg>
-            </span>
-            <span id="stageBannerText">Gerrit Peer Review Pipeline</span>
-          </div>
-
-          <div class="stage-right-overlay-info">
-            <div class="stage-telemetry-caption" id="stageConduitText">
-              Diagnostic score baselines and identified gaps stream directly into sprint roadmaps.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- EXPLORE OUR OFFERS / 22 SERVICES REGISTRY WITH SEQUENCE EXPANSION -->
 <section class="services-section" id="services">
   <div class="wrap">
-    <!-- Unified Section Header Matching Eight Stages Hierarchy -->
+    <!-- Unified Section Header Matching Five Jobs Hierarchy -->
     <div class="section-header-unified">
       <h2>Explore our offers. Twenty-two unified services.</h2>
       <p>
@@ -8222,6 +8469,26 @@
 
     <!-- 4-Column Products Grid (All Products Loaded) -->
     <div class="ref-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+
+<!-- EXPLORE OUR OFFERS / 22 SERVICES REGISTRY WITH SEQUENCE EXPANSION -->
+<section class="jx" id="journey" aria-labelledby="jxTitle">
+  <div class="wrap jx-grid">
+    <div class="jx-brief">
+      <span class="jx-kicker"><i></i>How York runs a company</span>
+      <h2 id="jxTitle">Five jobs.<br>One connected system.</h2>
+      <p class="jx-lede">Decide what matters, execute the work, measure progress, assess gaps and operate the company. Every job hands its output to the next, so nothing restarts from a blank slide.</p>
+      <div class="jx-facts">
+        <div><b>5</b><span>connected jobs</span></div>
+        <div><b>22</b><span>services underneath</span></div>
+        <div><b>1</b><span>shared record</span></div>
+      </div>
+      <a href="#services" class="jx-cta">Explore all services
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <ol class="jx-steps" id="jxSteps"></ol>
   </div>
 </section>
 
@@ -8290,8 +8557,8 @@
     <div class="footer-main-grid">
       <div class="footer-brand-col">
         <a href="#hero" class="footer-brand-lockup" aria-label="York.ie Home">
-          <img src="logo-light.svg" alt="York.ie" class="footer-site-logo footer-logo-light" height="34" width="154">
-          <img src="logo-dark.svg" alt="York.ie" class="footer-site-logo footer-logo-dark" height="34" width="154">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDUiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAxNDUgMzIiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iWW9yay5pZSI+CiAgPGltYWdlIGhyZWY9ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBQ2dBQUFBcUNBWUFBQURCTmhsbUFBQUVWRWxFUVZSNEFiU1lTM2JiTUF4RklXMnN6anhaVHRwaG1tR2I1U1R6cEJ1eitpNU1VSlJNNnVOWVBvTDRBNGxMQUtSTzB0dmUzL3ZieVQ3ZVB1Mzl6Kys5VTIvUjN3NFlZTjN3YVRhY3JPdGU3T1B2Y0RUb05rQThGbURXZlYwOGtVcEE4U1p5R2JqcmV4a1FvM2dKajJGMkdGNXRzRmVxTnB6L0dXMGFRQ0xvMDk0alJHWkJ2dzdJSlBlYXdzaGtRQjUvZHZiMGE1cDN0T2xuSEQwZzJkQVcwR3hES2JPZ1B3VXNKNVZlQXdTQWxqQytGYlJtWTJGakl5QzdtT1JaeWpIclU4NjE2SXIrR2lqckFvV2FSMFVlODgyelBzSkFLaXVndlo5Q3dzSWd1b1RyOGZtQjZzMENLT3V3QU91eWNXdzRtRG9aSzIyUTEwUDNNTW5wdExIZVdFQnpqTk5KbUZqY0dqOG1ZWXhoNXRHbVhoUFdZVDFnOHJnOFJSOWp1UzlWbnA2L1BNZERuL1h0Zk9yVHNGbTVvOXlaS29USXc1TU9EWnRoaUVYd3pCcG82Qy9aWUQwRWVMeEpYVElDcWxGOU9uc3g5OXB3TWd3eEdVTjRvdHp0R3FqZDlsc0g5THhSYUFLTVVJU3QyRzBKdXVUTm1KZExOazNqck0xVFhzczFJQWJ3aG9PbENWektxWHBWQU95Z3VzUVozQkwyYklNSkV1YlFwK3I4R1FGcmVWWjZoakEzRnZGRmdWd0wrNVVObjNsNUFZbGpaalpHUUFEY2EyVTQ5ZVZZTTNwWmZuelhRSDFkcWN4dGtOUHFOdEpuN2d6NkpTT2dHcTdJQVNCc3RFUENhQ3pZMkcyb2U4a2NESHNqWHVYbWRhMUVOeVg2cFRQb2svVDVjbFREVCt2TXhYUmJoQ1k4NFoxNkFWclQxNUIvQU54ak5DUjRxTFo1RFUwZVFORk5uYjFmamlWNUdBVUs4ZnR2eCtjcHp5bnVURHlKNFdSMHZlano1N1hQeWl3UTVFQ3lleVM4aGhFOEVDZWF6OU44WXlSNW5yTVF6bXgwdlRJQ29ndGthWlErb09tYjV5VmpTSFdPdnF0c3BqVW52QnliWjFPTlZKa0NZaERCS0NWUzFtazNwVTloa2VkYVlNd0ZCQ0NIa3k0T29KK29rVTZNMDA3U3AvTDRBc09lQWlrM0FYTXY2eXFqN2plRXZpeUE4bmxOUk1jRFJqZ3g3RWJ4bWxLZ2pBeDFZQjBVSllGU1NJNER6R0RGRFJBSHJaa0N2ZEpFR3hCWVBIMVU3bG9TemttZXlXTjRxQVhXMm93OGV5ZkFjbnNLVDRTVGtDMkJNVzFsTXdjQVlsVkNPT1VCMWVvUFlOVkRNLzBFSGdkSWlJR1k0K1Z3cHRQTTZWM1l6QUdBU25KQ0N4aWhqcnN0ZyswNU5HYjdBREhTOVQrd2JmcUQ1bEpXM29RV1NJUUxHVkE4U2gxMVBMYVdtK2hKdGdNU3J0SUlSc2toK3JYUTFRTWs0cEJwbFByU1p6T3BsY1U2SUY0alRBQXhNNHhRMHFiZngrMkY1cFVBU1o0eDRIVXEyMlVkTUh1dCt6SkNFMFlvSFZMOUhqcGRMOXZ0YnRaY0IyUXB3R281QXlUOTRTRjBnVzJGM2NmM3ZkcUE3cDIwR0Y2c0dZM3dBK1dxZUZNVkQvdDkvcm5aQm5UdjZGOXVBVG8zQ2pEZ0FSZGU1aENVYzlBTEhiSHZmZHFBc1ZJTEZHQjBnQUdxL000eWgzN0dRNC82RGJJT0dJdG1veW1NM3E4Ni9WNmZ2ZWpIcTdQdXZjM3RnS3lNVVE1RmVJZlExZTdDeUUxUEFTWnFJemZDN2dQRUZ1S2dqZnowTzNIZjU0d2xXM0liWUt4V0E4V3JqT05sdkYzbUp2MDc1WHVBWVF4UWdMZ1BLZjNRNkcrTkdQOUcrUjhBQVAvL1JibFhxQUFBQUFaSlJFRlVBd0N0SXdiNDFsU1Bwd0FBQUFCSlJVNUVya0pnZ2c9PSIgeD0iMCIgeT0iMCIgd2lkdGg9IjMxIiBoZWlnaHQ9IjMyIi8+CiAgPHRleHQgeD0iMzgiIHk9IjIzIiBmaWxsPSIjMGYxNzJhIiBmb250LWZhbWlseT0iSW50ZXIsIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iNzUwIiBsZXR0ZXItc3BhY2luZz0iLTAuOCI+WW9yay5pZTwvdGV4dD4KPC9zdmc+Cg==" alt="York.ie" class="footer-site-logo footer-logo-light" height="34" width="154">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDUiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAxNDUgMzIiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iWW9yay5pZSI+CiAgPGltYWdlIGhyZWY9ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBQ2dBQUFBcUNBWUFBQURCTmhsbUFBQUVWRWxFUVZSNEFiU1lTM2JiTUF4RklXMnN6anhaVHRwaG1tR2I1U1R6cEJ1eitpNU1VSlJNNnVOWVBvTDRBNGxMQUtSTzB0dmUzL3ZieVQ3ZVB1Mzl6Kys5VTIvUjN3NFlZTjN3YVRhY3JPdGU3T1B2Y0RUb05rQThGbURXZlYwOGtVcEE4U1p5R2JqcmV4a1FvM2dKajJGMkdGNXRzRmVxTnB6L0dXMGFRQ0xvMDk0alJHWkJ2dzdJSlBlYXdzaGtRQjUvZHZiMGE1cDN0T2xuSEQwZzJkQVcwR3hES2JPZ1B3VXNKNVZlQXdTQWxqQytGYlJtWTJGakl5QzdtT1JaeWpIclU4NjE2SXIrR2lqckFvV2FSMFVlODgyelBzSkFLaXVndlo5Q3dzSWd1b1RyOGZtQjZzMENLT3V3QU91eWNXdzRtRG9aSzIyUTEwUDNNTW5wdExIZVdFQnpqTk5KbUZqY0dqOG1ZWXhoNXRHbVhoUFdZVDFnOHJnOFJSOWp1UzlWbnA2L1BNZERuL1h0Zk9yVHNGbTVvOXlaS29USXc1TU9EWnRoaUVYd3pCcG82Qy9aWUQwRWVMeEpYVElDcWxGOU9uc3g5OXB3TWd3eEdVTjRvdHp0R3FqZDlsc0g5THhSYUFLTVVJU3QyRzBKdXVUTm1KZExOazNqck0xVFhzczFJQWJ3aG9PbENWektxWHBWQU95Z3VzUVozQkwyYklNSkV1YlFwK3I4R1FGcmVWWjZoakEzRnZGRmdWd0wrNVVObjNsNUFZbGpaalpHUUFEY2EyVTQ5ZVZZTTNwWmZuelhRSDFkcWN4dGtOUHFOdEpuN2d6NkpTT2dHcTdJQVNCc3RFUENhQ3pZMkcyb2U4a2NESHNqWHVYbWRhMUVOeVg2cFRQb2svVDVjbFREVCt2TXhYUmJoQ1k4NFoxNkFWclQxNUIvQU54ak5DUjRxTFo1RFUwZVFORk5uYjFmamlWNUdBVUs4ZnR2eCtjcHp5bnVURHlKNFdSMHZlano1N1hQeWl3UTVFQ3lleVM4aGhFOEVDZWF6OU44WXlSNW5yTVF6bXgwdlRJQ29ndGthWlErb09tYjV5VmpTSFdPdnF0c3BqVW52QnliWjFPTlZKa0NZaERCS0NWUzFtazNwVTloa2VkYVlNd0ZCQ0NIa3k0T29KK29rVTZNMDA3U3AvTDRBc09lQWlrM0FYTXY2eXFqN2plRXZpeUE4bmxOUk1jRFJqZ3g3RWJ4bWxLZ2pBeDFZQjBVSllGU1NJNER6R0RGRFJBSHJaa0N2ZEpFR3hCWVBIMVU3bG9TemttZXlXTjRxQVhXMm93OGV5ZkFjbnNLVDRTVGtDMkJNVzFsTXdjQVlsVkNPT1VCMWVvUFlOVkRNLzBFSGdkSWlJR1k0K1Z3cHRQTTZWM1l6QUdBU25KQ0N4aWhqcnN0ZyswNU5HYjdBREhTOVQrd2JmcUQ1bEpXM29RV1NJUUxHVkE4U2gxMVBMYVdtK2hKdGdNU3J0SUlSc2toK3JYUTFRTWs0cEJwbFByU1p6T3BsY1U2SUY0alRBQXhNNHhRMHFiZngrMkY1cFVBU1o0eDRIVXEyMlVkTUh1dCt6SkNFMFlvSFZMOUhqcGRMOXZ0YnRaY0IyUXB3R281QXlUOTRTRjBnVzJGM2NmM3ZkcUE3cDIwR0Y2c0dZM3dBK1dxZUZNVkQvdDkvcm5aQm5UdjZGOXVBVG8zQ2pEZ0FSZGU1aENVYzlBTEhiSHZmZHFBc1ZJTEZHQjBnQUdxL000eWgzN0dRNC82RGJJT0dJdG1veW1NM3E4Ni9WNmZ2ZWpIcTdQdXZjM3RnS3lNVVE1RmVJZlExZTdDeUUxUEFTWnFJemZDN2dQRUZ1S2dqZnowTzNIZjU0d2xXM0liWUt4V0E4V3JqT05sdkYzbUp2MDc1WHVBWVF4UWdMZ1BLZjNRNkcrTkdQOUcrUjhBQVAvL1JibFhxQUFBQUFaSlJFRlVBd0N0SXdiNDFsU1Bwd0FBQUFCSlJVNUVya0pnZ2c9PSIgeD0iMCIgeT0iMCIgd2lkdGg9IjMxIiBoZWlnaHQ9IjMyIi8+CiAgPHRleHQgeD0iMzgiIHk9IjIzIiBmaWxsPSIjZjhmYWZjIiBmb250LWZhbWlseT0iSW50ZXIsIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iNzUwIiBsZXR0ZXItc3BhY2luZz0iLTAuOCI+WW9yay5pZTwvdGV4dD4KPC9zdmc+Cg==" alt="York.ie" class="footer-site-logo footer-logo-dark" height="34" width="154">
         </a>
         <p class="footer-brand-desc">
           One console. Twenty-two services. Fuel — your operating intelligence — runs the whole company.
@@ -8301,42 +8568,42 @@
       <div class="footer-col">
         <h5 class="footer-col-title">Build</h5>
         <ul>
-          <li><a href="#services">R&amp;D Launchpad</a></li>
-          <li><a href="#services">Gerrit</a></li>
-          <li><a href="#services">PMT</a></li>
-          <li><a href="#services">Design Library</a></li>
+          <li><a href="product.html?name=R%26D%20Launchpad">R&amp;D Launchpad</a></li>
+          <li><a href="product.html?name=Gerrit">Gerrit</a></li>
+          <li><a href="product.html?name=PMT">PMT</a></li>
+          <li><a href="product.html?name=Design%20Library">Design Library</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h5 class="footer-col-title">Quality</h5>
         <ul>
-          <li><a href="#services">QA Dashboard</a></li>
-          <li><a href="#services">Internal Audit</a></li>
-          <li><a href="#services">External Audit</a></li>
-          <li><a href="#services">UI/UX Audit</a></li>
-          <li><a href="#services">Prowler</a></li>
+          <li><a href="product.html?name=QA%20Usage%20Dashboard">QA Dashboard</a></li>
+          <li><a href="product.html?name=Internal%20Audit%20Platform">Internal Audit</a></li>
+          <li><a href="product.html?name=External%20Audit%20Platform">External Audit</a></li>
+          <li><a href="product.html?name=UI%2FUX%20Audit%20Platform">UI/UX Audit</a></li>
+          <li><a href="product.html?name=Prowler">Prowler</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h5 class="footer-col-title">Market</h5>
         <ul>
-          <li><a href="#services">GTM Launchpad</a></li>
-          <li><a href="#services">GTM Pulse</a></li>
-          <li><a href="#services">R&amp;D Pulse</a></li>
-          <li><a href="#services">Prompt Dashboard</a></li>
+          <li><a href="product.html?name=GTM%20Launchpad">GTM Launchpad</a></li>
+          <li><a href="product.html?name=GTM%20Pulse">GTM Pulse</a></li>
+          <li><a href="product.html?name=R%26D%20Pulse">R&amp;D Pulse</a></li>
+          <li><a href="product.html?name=Prompt%20Dashboard">Prompt Dashboard</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h5 class="footer-col-title">Capital &amp; People</h5>
         <ul>
-          <li><a href="#services">Fuel</a></li>
-          <li><a href="#services">Finance Pulse</a></li>
-          <li><a href="#services">Hub</a></li>
-          <li><a href="#services">LMS</a></li>
-          <li><a href="#services">Assessment</a></li>
+          <li><a href="product.html?name=Fuel">Fuel</a></li>
+          <li><a href="product.html?name=Finance%20Pulse">Finance Pulse</a></li>
+          <li><a href="product.html?name=Hub">Hub</a></li>
+          <li><a href="product.html?name=LMS">LMS</a></li>
+          <li><a href="product.html?name=Assessment%20Platform">Assessment</a></li>
         </ul>
       </div>
     </div>
@@ -8395,44 +8662,17 @@
       if (scrollBar) scrollBar.style.width = `${(window.scrollY / h) * 100}%`;
     });
 
-    // ─── 2.4 HERO LAYOUT TABS (Current / Top-down / Icon) ───
-    (function initHeroLayoutTabs() {
+    // ─── 2.4 HERO LOCKED TO VERSION-2 (STACKED) ───
+    (function initHeroStackedOnly() {
       const hero = document.getElementById('hero');
-      const tabs = document.querySelectorAll('.hero-layout-tab');
       const headline = document.querySelector('#hero h1.hero-editorial-headline');
       const gradientTitle = headline?.querySelector('.hero-gradient-title');
-      if (!hero || !tabs.length) return;
-
-      function applyHeroTitleSize(layout) {
-        if (!headline) return;
-        if (layout === 'stacked' || layout === 'icons') {
-          headline.style.setProperty('font-size', '72px', 'important');
-          headline.style.setProperty('line-height', '1.08', 'important');
-          if (gradientTitle) {
-            gradientTitle.style.setProperty('font-size', '72px', 'important');
-          }
-        } else {
-          headline.style.removeProperty('font-size');
-          headline.style.removeProperty('line-height');
-          if (gradientTitle) gradientTitle.style.removeProperty('font-size');
-        }
-      }
-
-      tabs.forEach((tab) => {
-        tab.addEventListener('click', () => {
-          const layout = tab.getAttribute('data-hero-layout') || 'split';
-          hero.setAttribute('data-hero-layout', layout);
-          applyHeroTitleSize(layout);
-          tabs.forEach((t) => {
-            const on = t === tab;
-            t.classList.toggle('active', on);
-            t.setAttribute('aria-selected', on ? 'true' : 'false');
-          });
-          window.dispatchEvent(new Event('resize'));
-        });
-      });
-
-      applyHeroTitleSize(hero.getAttribute('data-hero-layout') || 'split');
+      if (!hero) return;
+      hero.setAttribute('data-hero-layout', 'stacked');
+      if (!headline) return;
+      headline.style.setProperty('font-size', '72px', 'important');
+      headline.style.setProperty('line-height', '1.08', 'important');
+      if (gradientTitle) gradientTitle.style.setProperty('font-size', '72px', 'important');
     })();
 
     // ─── 2.45 TOP-DOWN PRODUCT LOGO → SCREEN PREVIEW (gentle auto-rotate) ───
@@ -8506,15 +8746,47 @@
         });
       });
 
-      document.querySelectorAll('.hero-layout-tab').forEach((tab) => {
-        tab.addEventListener('click', () => {
-          const layout = tab.getAttribute('data-hero-layout');
-          if (layout === 'stacked') startAuto();
-          else stopAuto();
+      startAuto();
+    })();
+
+    // ─── 2.48 SCREENSHOT LIGHTBOX MODAL CONTROLLER ───
+    (function initScreenshotLightbox() {
+      const lightbox = document.getElementById('screenshotLightbox');
+      const lbImg = document.getElementById('lightboxImg');
+      const lbTitle = document.getElementById('lightboxTitle');
+      const closeBtn = document.getElementById('lightboxCloseBtn');
+      if (!lightbox || !lbImg) return;
+
+      function openLightbox(src, title) {
+        lbImg.src = src;
+        lbImg.alt = title || 'Platform Screenshot';
+        if (lbTitle) lbTitle.textContent = title || 'Platform Overview';
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.removeProperty('overflow');
+        setTimeout(() => { lbImg.src = ''; }, 200);
+      }
+
+      document.querySelectorAll('[data-zoom-src]').forEach((el) => {
+        el.addEventListener('click', (e) => {
+          if (e.target.closest('a')) return;
+          const src = el.getAttribute('data-zoom-src');
+          const title = el.getAttribute('data-zoom-title');
+          if (src) openLightbox(src, title);
         });
       });
 
-      if (!hero || hero.getAttribute('data-hero-layout') === 'stacked') startAuto();
+      if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+      });
     })();
 
         // ─── 2.5 HERO MVP PLATFORMS CAROUSEL CONTROLLER ───
@@ -8578,33 +8850,33 @@
     (function initCopilotShowcase() {
       const PLATFORMS = [
         {
-          name: 'Agentic Work Management',
+          name: 'York.IE LMS · Learning',
           stageBg: '#E7F7F0',
           stageBorder: '#C6EADB',
           stageDarkBg: 'radial-gradient(circle at 18% 18%, rgba(18, 168, 131, 0.16) 0%, transparent 60%), radial-gradient(circle at 82% 82%, rgba(70, 107, 216, 0.10) 0%, transparent 55%), #0D1522',
           stageDarkBorder: 'rgba(18, 168, 131, 0.35)',
-          bubble: 'Coordinate <strong>cross-team deliverables</strong> across R&amp;D, GTM, and Finance?',
+          bubble: 'Assess <strong>org-wide capability</strong> across engineering tracks, courses &amp; employee levels?',
           bubbleBg: '#FFFFFF',
           bubbleColor: '#065F46',
           bubbleBorder: 'rgba(5, 150, 105, 0.22)',
           bubbleDarkBg: 'rgba(18, 168, 131, 0.16)',
           bubbleDarkColor: '#A7F3D0',
           bubbleDarkBorder: 'rgba(52, 211, 153, 0.35)',
-          url: 'york.platform / work / sprint-42',
-          status: '● SPRINT 42 ACTIVE',
+          url: 'york.lms / dashboard / overview',
+          status: '● 250 EMPLOYEES · 80 COURSES',
           statusColor: '#047857',
           statusBg: '#ECFDF5',
           statusBorder: '#A7F3D0',
           statusDarkColor: '#34D399',
           statusDarkBg: 'rgba(16, 185, 129, 0.16)',
           statusDarkBorder: 'rgba(52, 211, 153, 0.35)',
-          badgeText: 'MVP CAPABILITY',
+          badgeText: 'FLAGSHIP PRODUCT',
           badgeBg: '#ECFDF5',
           badgeColor: '#047857',
-          cardTitle: 'Autonomous Workflows',
-          cardDesc: 'Auto-routes tasks and sprint dependencies with zero handoff latency.',
-          cardActionText: 'Explore Workflows',
-          cardActionLink: '#services',
+          cardTitle: 'Corporate Learning',
+          cardDesc: 'Automated assessments, personalized learning paths &amp; capability tracks.',
+          cardActionText: 'Explore LMS',
+          cardActionLink: 'lms.html',
           actionColor: '#047857',
           cardInnerBg: '#FFFFFF',
           borderGradient: 'linear-gradient(135deg, #10B981 0%, #059669 45%, #3B82F6 100%)',
@@ -8615,72 +8887,83 @@
             { bg: '#E6F8F1', ink: '#047857' },
             { bg: '#EAF3FE', ink: '#1D4ED8' }
           ],
-          companion: 'Zero handoff latency across all teams',
+          brand: '<strong>York</strong> Learning',
+          companion: 'Automated assessments and talent capability mapping',
           cardsHtml: `
-            <div class="prod-card-header">
-              <span class="prod-card-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:5px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Sprint 42 Autonomous Task Routing</span>
-              <span class="prod-card-badge" style="background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0;">18 TASKS ROUTED</span>
-            </div>
-            <div class="prod-card-desc">York Foundation eliminated cross-functional handoff bottlenecks across 3 departments.</div>
-            <div class="prod-rows-list">
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">Stripe v4 API Gateway Migration</span>
-                  <span class="prod-row-meta"> · R&amp;D Team · PR #842 Approved</span>
-                </div>
-                <span class="prod-row-status" style="background: #E4F2F0; color: #165E50; border: 1px solid #C5E4DF;">AUTO-ROUTED ✓</span>
-              </div>
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">GTM Enterprise Launch Assets</span>
-                  <span class="prod-row-meta"> · Growth · 12 Assets Synced</span>
-                </div>
-                <span class="prod-row-status" style="background: #E8EEF5; color: #1E3A5F; border: 1px solid #D0D9E6;">DISPATCHED ✓</span>
-              </div>
-            </div>
-            <div class="prod-metrics-strip">
-              <div class="prod-metric-box">
-                <span class="metric-val">+38%</span>
-                <span class="metric-lbl">Sprint Velocity</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">0.4s</span>
-                <span class="metric-lbl">Handoff Latency</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">0.0%</span>
-                <span class="metric-lbl">Blocker Rate</span>
-              </div>
-            </div>
+            <img src="images/lms-screenshot.png" alt="York.IE LMS Corporate Learning Platform" class="copilot-screenshot-img">
           `
         },
         {
-          name: 'York Service Management',
+          name: 'York.IE Hub · People',
+          stageBg: '#EBF7F2',
+          stageBorder: '#C8E8DC',
+          stageDarkBg: 'radial-gradient(circle at 18% 18%, rgba(5, 174, 120, 0.16) 0%, transparent 60%), radial-gradient(circle at 82% 82%, rgba(14, 184, 171, 0.10) 0%, transparent 55%), #0C171F',
+          stageDarkBorder: 'rgba(5, 174, 120, 0.35)',
+          bubble: 'Coordinate <strong>schedules, timesheets, leave &amp; org tools</strong> in one workspace?',
+          bubbleBg: '#FFFFFF',
+          bubbleColor: '#065F46',
+          bubbleBorder: 'rgba(5, 150, 105, 0.22)',
+          bubbleDarkBg: 'rgba(5, 174, 120, 0.16)',
+          bubbleDarkColor: '#A7F3D0',
+          bubbleDarkBorder: 'rgba(52, 211, 153, 0.35)',
+          url: 'hub.york.ie / home / dashboard',
+          status: '● YORK.IE HUB · ACTIVE',
+          statusColor: '#059669',
+          statusBg: '#ECFDF5',
+          statusBorder: '#A7F3D0',
+          statusDarkColor: '#34D399',
+          statusDarkBg: 'rgba(16, 185, 129, 0.16)',
+          statusDarkBorder: 'rgba(52, 211, 153, 0.35)',
+          badgeText: 'FLAGSHIP PRODUCT',
+          badgeBg: '#ECFDF5',
+          badgeColor: '#059669',
+          cardTitle: 'Employee Management',
+          cardDesc: 'Unified employee portal for timesheets, leave &amp; WFH, schedules, and org tools.',
+          cardActionText: 'Explore Hub',
+          cardActionLink: 'product.html?name=Hub',
+          actionColor: '#059669',
+          cardInnerBg: '#FFFFFF',
+          borderGradient: 'linear-gradient(135deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%)',
+          borderGradientHover: 'linear-gradient(135deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%)',
+          glowColor: 'rgba(5, 174, 120, 0.25)',
+          metricColors: [
+            { bg: '#E2F7EE', ink: '#065F46' },
+            { bg: '#E6F8F1', ink: '#047857' },
+            { bg: '#EAF3FE', ink: '#1D4ED8' }
+          ],
+          brand: '<strong>York</strong> Hub',
+          companion: 'Unified employee management and team synchronization',
+          cardsHtml: `
+            <img src="images/hub-screenshot.png" alt="York.IE Hub Employee Management System" class="copilot-screenshot-img">
+          `
+        },
+        {
+          name: 'Fuel by York IE · Capital',
           stageBg: '#EBF3FE',
           stageBorder: '#CEE0FD',
           stageDarkBg: 'radial-gradient(circle at 18% 18%, rgba(14, 184, 171, 0.16) 0%, transparent 60%), radial-gradient(circle at 82% 82%, rgba(76, 109, 232, 0.10) 0%, transparent 55%), #0C1628',
           stageDarkBorder: 'rgba(14, 184, 171, 0.35)',
-          bubble: 'Auto-triage <strong>INC-4402</strong> &amp; execute canary rollback on Cluster-08?',
+          bubble: 'Access <strong>Volura scorecard</strong>, peer benchmarks &amp; $42.8M deal flow pipeline?',
           bubbleBg: '#FFFFFF',
           bubbleColor: '#1E40AF',
           bubbleBorder: 'rgba(37, 99, 235, 0.22)',
           bubbleDarkBg: 'rgba(14, 184, 171, 0.16)',
           bubbleDarkColor: '#99F6E4',
           bubbleDarkBorder: 'rgba(45, 212, 191, 0.35)',
-          url: 'york.platform / service / inc-4402',
-          status: '● 99.999% SLA ACTIVE',
+          url: 'fuel.york.ie / company / volura',
+          status: '● $42.8M PIPELINE ACTIVE',
           statusColor: '#1D4ED8',
           statusBg: '#EFF6FF',
           statusBorder: '#BFDBFE',
           statusDarkColor: '#60A5FA',
           statusDarkBg: 'rgba(59, 130, 246, 0.16)',
           statusDarkBorder: 'rgba(96, 165, 250, 0.35)',
-          badgeText: 'MVP CAPABILITY',
+          badgeText: 'FLAGSHIP PRODUCT',
           badgeBg: '#EFF6FF',
           badgeColor: '#1D4ED8',
-          cardTitle: 'Sub-Second Triage',
-          cardDesc: 'Preempts anomalies and auto-executes remediation runbooks in real time.',
-          cardActionText: 'Explore Service Hub',
+          cardTitle: 'Founder & Investor Platform',
+          cardDesc: 'Scorecards, peer benchmarks, deal flow pipelines & investor data room.',
+          cardActionText: 'Explore Fuel',
           cardActionLink: '#services',
           actionColor: '#1D4ED8',
           cardInnerBg: '#FFFFFF',
@@ -8692,120 +8975,10 @@
             { bg: '#E9F1FE', ink: '#2563EB' },
             { bg: '#EDE9FE', ink: '#5B21B6' }
           ],
-          companion: 'Zero-downtime autonomous reliability',
+          brand: '<strong>York</strong> Fuel',
+          companion: 'Market intelligence, investor matching and deal room',
           cardsHtml: `
-            <div class="prod-card-header">
-              <span class="prod-card-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:5px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Buffer Contention in Cluster-08 (Edge-EU)</span>
-              <span class="prod-card-badge" style="background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA;">INC-4402 · 140ms ago</span>
-            </div>
-            <div class="prod-card-desc">Autonomous agent detected TCP buffer saturation across 6 gateway pods.</div>
-            <div class="prod-rows-list">
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">Traffic Shunted to Edge-EU Replica</span>
-                  <span class="prod-row-meta"> · 0 packet loss · 18ms latency</span>
-                </div>
-                <span class="prod-row-status" style="background: #E4F2F0; color: #165E50; border: 1px solid #C5E4DF;">VERIFIED ✓</span>
-              </div>
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">Canary Rollback to Stable Release v2.14.8</span>
-                  <span class="prod-row-meta"> · 6/6 pods healthy · 32ms</span>
-                </div>
-                <span class="prod-row-status" style="background: #E8EEF5; color: #1E3A5F; border: 1px solid #D0D9E6;">EXECUTED ✓</span>
-              </div>
-            </div>
-            <div class="prod-metrics-strip">
-              <div class="prod-metric-box">
-                <span class="metric-val">16.4ms</span>
-                <span class="metric-lbl">P99 Latency</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">18%</span>
-                <span class="metric-lbl">CPU Load (Nominal)</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">100%</span>
-                <span class="metric-lbl">Canary Health</span>
-              </div>
-            </div>
-          `
-        },
-        {
-          name: 'StackAI by York',
-          stageBg: '#F2EEFE',
-          stageBorder: '#DCDBFC',
-          stageDarkBg: 'radial-gradient(circle at 18% 18%, rgba(11, 183, 194, 0.16) 0%, transparent 60%), radial-gradient(circle at 82% 82%, rgba(5, 174, 120, 0.10) 0%, transparent 55%), #0E1626',
-          stageDarkBorder: 'rgba(11, 183, 194, 0.35)',
-          bubble: 'Deploy <strong>240-agent mesh</strong> with MCP protocol bridges &amp; sub-40ms latency?',
-          bubbleBg: '#FFFFFF',
-          bubbleColor: '#5B21B6',
-          bubbleBorder: 'rgba(124, 58, 237, 0.22)',
-          bubbleDarkBg: 'rgba(11, 183, 194, 0.16)',
-          bubbleDarkColor: '#A5F3FC',
-          bubbleDarkBorder: 'rgba(34, 211, 238, 0.35)',
-          url: 'york.platform / runtime / mesh-v4',
-          status: '● 240 AGENTS ACTIVE',
-          statusColor: '#6D28D9',
-          statusBg: '#F5F3FF',
-          statusBorder: '#DDD6FE',
-          statusDarkColor: '#C4B5FD',
-          statusDarkBg: 'rgba(139, 92, 246, 0.16)',
-          statusDarkBorder: 'rgba(167, 139, 250, 0.35)',
-          badgeText: 'MVP CAPABILITY',
-          badgeBg: '#F5F3FF',
-          badgeColor: '#6D28D9',
-          cardTitle: 'Enterprise Agent Mesh',
-          cardDesc: 'Routes models across a zero-trust mesh at sub-40ms latency.',
-          cardActionText: 'Explore StackAI',
-          cardActionLink: '#services',
-          actionColor: '#6D28D9',
-          cardInnerBg: '#FFFFFF',
-          borderGradient: 'linear-gradient(135deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%)',
-          borderGradientHover: 'linear-gradient(135deg, #05AE78 0%, #0EB889 50%, #0BB7C2 100%)',
-          glowColor: 'rgba(5, 174, 120, 0.25)',
-          metricColors: [
-            { bg: '#EDE6FD', ink: '#5B21B6' },
-            { bg: '#EAF1FE', ink: '#1E40AF' },
-            { bg: '#E2F7EE', ink: '#065F46' }
-          ],
-          companion: 'Enterprise frontier agentic mesh',
-          cardsHtml: `
-            <div class="prod-card-header">
-              <span class="prod-card-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:5px;"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><circle cx="5" cy="19" r="2"/><line x1="7" y1="6" x2="10" y2="10"/><line x1="17" y1="6" x2="14" y2="10"/><line x1="7" y1="18" x2="10" y2="14"/><line x1="17" y1="18" x2="14" y2="14"/></svg>Zero-Trust Autonomous Agent Swarm</span>
-              <span class="prod-card-badge" style="background: #F5F3FF; color: #6D28D9; border: 1px solid #DDD6FE;">240 AGENTS · SUB-40ms</span>
-            </div>
-            <div class="prod-card-desc">High-concurrency model routing &amp; zero-trust MCP context mesh across cloud clusters.</div>
-            <div class="prod-rows-list">
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">Claude 3.5 Sonnet</span>
-                  <span class="prod-row-meta"> · Complex Code Refactoring · 38ms</span>
-                </div>
-                <span class="prod-row-status" style="background: #EDE6FD; color: #5B21B6; border: 1px solid #DDD6FE;">ROUTED ✓</span>
-              </div>
-              <div class="prod-row-item">
-                <div class="prod-row-left">
-                  <span class="row-task-name">GPT-4o Omnimodal</span>
-                  <span class="prod-row-meta"> · Visual Document Reasoning · 42ms</span>
-                </div>
-                <span class="prod-row-status" style="background: #E8EEF5; color: #1E3A5F; border: 1px solid #D0D9E6;">ROUTED ✓</span>
-              </div>
-            </div>
-            <div class="prod-metrics-strip">
-              <div class="prod-metric-box">
-                <span class="metric-val">14,200</span>
-                <span class="metric-lbl">tok/sec Throughput</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">100%</span>
-                <span class="metric-lbl">Guardrail Pass</span>
-              </div>
-              <div class="prod-metric-box">
-                <span class="metric-val">&lt;38ms</span>
-                <span class="metric-lbl">P99 Mesh Latency</span>
-              </div>
-            </div>
+            <img src="images/fuel-screenshot.png" alt="Fuel Founder and Investor Platform" class="copilot-screenshot-img">
           `
         }
       ];
@@ -8920,7 +9093,9 @@
           if (labelSpan) labelSpan.textContent = p.cardActionText;
         }
 
-        // Footnote
+        // Footnote & footer brand
+        const footerBrand = document.getElementById('copilotFooterBrand') || document.querySelector('.stage-box-footer .footer-brand');
+        if (footerBrand && p.brand) footerBrand.innerHTML = p.brand;
         if (companionText) companionText.textContent = p.companion;
       }
 
@@ -8981,6 +9156,12 @@
     })();
 
 
+    // Product details page (shared Hub layout for now)
+    function productDetailsUrl(name) {
+      const n = encodeURIComponent(String(name || 'Hub').trim());
+      return `product.html?name=${n}`;
+    }
+
     // ─── 4. COMPLETE 22 SERVICES REGISTRY WITH EXACT ICONS & COLORS ───
     const ALL_SERVICES = [
       { name: 'R&D Launchpad', desc: 'AI-native fullstack product development platform', cat: 'build', stage: 'Build', stageColor: '#0B4F6C', icon: 'M8 8l-4 4 4 4M16 8l4 4-4 4', color: '#0B4F6C' },
@@ -9013,13 +9194,13 @@
       if (!fan) return;
 
       const catGrad = {
-        build: 'linear-gradient(135deg, #0284C7 0%, #06B6D4 50%, #10B981 100%)',
-        quality: 'linear-gradient(135deg, #0284C7 0%, #06B6D4 45%, #10B981 100%)',
-        gtm: 'linear-gradient(135deg, #0D9488 0%, #10B981 45%, #6366F1 100%)',
-        signal: 'linear-gradient(135deg, #F59E0B 0%, #D97706 45%, #EF4444 100%)',
-        capital: 'linear-gradient(135deg, #059669 0%, #10B981 45%, #06B6D4 100%)',
-        people: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%)',
-        support: 'linear-gradient(135deg, #3B82F6 0%, #6366F1 50%, #8B5CF6 100%)'
+        build: 'linear-gradient(135deg, #0891B2 0%, color-mix(in srgb, #0891B2 70%, #0F172A) 100%)',
+        quality: 'linear-gradient(135deg, #0D9488 0%, color-mix(in srgb, #0D9488 70%, #0F172A) 100%)',
+        gtm: 'linear-gradient(135deg, #2563EB 0%, color-mix(in srgb, #2563EB 70%, #0F172A) 100%)',
+        signal: 'linear-gradient(135deg, #0284C7 0%, color-mix(in srgb, #0284C7 70%, #0F172A) 100%)',
+        capital: 'linear-gradient(135deg, #12A883 0%, color-mix(in srgb, #12A883 70%, #0F172A) 100%)',
+        people: 'linear-gradient(135deg, #4F46E5 0%, color-mix(in srgb, #4F46E5 70%, #0F172A) 100%)',
+        support: 'linear-gradient(135deg, #64748B 0%, color-mix(in srgb, #64748B 70%, #0F172A) 100%)'
       };
 
       // 4 rings — faster spin so rotation is obvious at first glance
@@ -9090,7 +9271,7 @@
           const safeName = svc.name.replace(/"/g, '&quot;');
           return `
             <div class="hero-arc-spoke" style="--a:${cssAngle.toFixed(2)}deg;">
-              <a href="#services" class="hero-arc-node" style="--arc-grad:${grad};" title="${safeName}" aria-label="${safeName}">
+              <a href="${productDetailsUrl(svc.name)}" class="hero-arc-node" style="--arc-grad:${grad};" title="${safeName}" aria-label="${safeName}">
                 <span class="hero-arc-node-face" style="--spin-dur:${spec.dur};">
                   <span class="hero-arc-node-upright" style="--a:${cssAngle.toFixed(2)}deg;">
                     <span class="hero-arc-bubble">
@@ -9142,183 +9323,118 @@
     const STAGES = [
       {
         num: '01',
-        name: 'Envision',
-        phase: 'Strategy & Scoring',
-        headline: 'Every company starts as a decision.',
-        body: 'Before you commit to a bet, Fuel scores the whole business, highlights the gaps that matter now, and recommends the work that moves the needle.',
-        note: 'Ask Fuel "where is the company weakest?" and it answers with a score, the gap, and ranked action.',
-        services: ['Fuel', 'Design Library', 'Prompt Dashboard'],
-        bannerText: 'Autonomous Scoring Engine',
+        name: 'Decide',
+        phase: 'Fuel + GrowthOS',
+        headline: 'Know what to do next.',
+        body: 'Diagnose your biggest growth opportunities, prioritize the right initiatives, and coordinate the products needed to move the company forward.',
+        note: 'Ask Fuel where the company is weakest and get a score, the gap, and ranked next actions.',
+        services: ['Fuel', 'PMT', 'Design Library'],
+        bannerText: 'Fuel + GrowthOS',
         bannerIcon: 'target',
         image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&auto=format&fit=crop&q=80',
-        conduit: 'Diagnostic score baselines and identified gaps stream directly into sprint roadmaps.',
+        conduit: 'Priorities and scored opportunities stream into execution roadmaps.',
         signals: [
           { icon: 'target', label: 'Company Scorecard & Diagnostics', stat: '98.4% Acc' },
           { icon: 'shield', label: 'Strategic Gap Identification', stat: 'Real-time' },
           { icon: 'trending', label: 'Ranked Execution Recommendations', stat: 'Top-5 PRI' }
         ],
-        color: '#059669',
+        color: '#12A883',
         colorGlow: 'rgba(5, 150, 105, 0.35)',
         colorBg: 'rgba(5, 150, 105, 0.12)',
         colorBorder: 'rgba(5, 150, 105, 0.35)'
       },
       {
         num: '02',
-        name: 'Plan',
-        phase: 'Roadmapping & Architecture',
-        headline: 'Turn the bet into a plan.',
-        body: 'PMT breaks the vision into roadmaps. Sprints link to deliverables. Fuel drafts the first version and keeps it honest as scope expands.',
-        note: 'Say "break this into sprints" and Fuel scaffolds the roadmap and assigns owners.',
-        services: ['PMT', 'Design Library'],
-        bannerText: 'Sprint Architecture Sync',
-        bannerIcon: 'git-branch',
-        image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&auto=format&fit=crop&q=80',
-        conduit: 'Sprint specs, milestones, and architectural constraints flow directly into Launchpad queues.',
+        name: 'Execute',
+        phase: 'Execution products',
+        headline: 'Turn priorities into work.',
+        body: 'Build and ship software, launch campaigns, and run approved finance workflows with AI.',
+        note: 'R&D and GTM LaunchPads keep delivery and go-to-market in the same operating thread.',
+        services: ['R&D Launchpad', 'GTM Launchpad', 'Design Library', 'PMT'],
+        bannerText: 'Execution products',
+        bannerIcon: 'terminal',
+        image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&auto=format&fit=crop&q=80',
+        conduit: 'Shipped work and campaign activity feed measurement dashboards automatically.',
         signals: [
-          { icon: 'git-branch', label: 'Architecture & Epic Decomposition', stat: 'Auto-scaffold' },
-          { icon: 'calendar', label: 'Sprint Milestones & Owner Allocation', stat: 'Synced' },
-          { icon: 'layers', label: 'Design System & Spec Artifacts', stat: '100% Linked' }
+          { icon: 'terminal', label: 'R&D LaunchPad Delivery', stat: 'Sub-second' },
+          { icon: 'send', label: 'GTM LaunchPad Campaigns', stat: 'Unified Cal' },
+          { icon: 'layers', label: 'Design Library & PMT', stat: '100% Linked' }
         ],
-        color: '#0284C7',
+        color: '#0D9488',
         colorGlow: 'rgba(2, 132, 199, 0.35)',
         colorBg: 'rgba(2, 132, 199, 0.12)',
         colorBorder: 'rgba(2, 132, 199, 0.35)'
       },
       {
         num: '03',
-        name: 'Build',
-        phase: 'Execution & Engineering',
-        headline: 'Ship the product. Not the process.',
-        body: 'R&D Launchpad gives engineers a high-velocity fullstack IDE. Gerrit handles structured peer review. Every PR links to the sprint.',
-        note: 'When review latency climbs, Fuel flags it and rebalances reviewers.',
-        services: ['R&D Launchpad', 'Gerrit'],
-        bannerText: 'Gerrit Peer Review Pipeline',
-        bannerIcon: 'terminal',
-        image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&auto=format&fit=crop&q=80',
-        conduit: 'Merged commits and PR telemetry automatically trigger automated validation suites.',
+        name: 'Measure',
+        phase: 'Pulse',
+        headline: 'Know if it’s working.',
+        body: 'Track engineering health, campaign and funnel performance, financial controls, and anomalies.',
+        note: 'See progress and problems before they slow the company down.',
+        services: ['R&D Pulse', 'GTM Pulse', 'Prompt Dashboard', 'QA Usage Dashboard'],
+        bannerText: 'Pulse',
+        bannerIcon: 'activity',
+        image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&auto=format&fit=crop&q=80',
+        conduit: 'Telemetry updates the company scorecard and flags what to assess next.',
         signals: [
-          { icon: 'terminal', label: 'Fullstack R&D Launchpad IDE', stat: 'Sub-second' },
-          { icon: 'git-branch', label: 'Gerrit Structured Peer Review', stat: 'Zero-lag' },
-          { icon: 'check-circle', label: 'Traceable Sprint Commit Binding', stat: '100% Audit' }
+          { icon: 'activity', label: 'Engineering & Delivery Health', stat: 'Live' },
+          { icon: 'trending', label: 'Campaign & Funnel Performance', stat: 'Live Stream' },
+          { icon: 'file-text', label: 'Prompt & QA Usage Signals', stat: 'Continuous' }
         ],
-        color: '#4F46E5',
-        colorGlow: 'rgba(79, 70, 229, 0.35)',
-        colorBg: 'rgba(79, 70, 229, 0.12)',
-        colorBorder: 'rgba(79, 70, 229, 0.35)'
+        color: '#0891B2',
+        colorGlow: 'rgba(13, 148, 136, 0.35)',
+        colorBg: 'rgba(13, 148, 136, 0.12)',
+        colorBorder: 'rgba(13, 148, 136, 0.35)'
       },
       {
         num: '04',
-        name: 'Validate',
-        phase: 'Quality & Security Gates',
-        headline: 'Five gates. One signal.',
-        body: 'QA, internal audit, external compliance, UI/UX audit, and cloud security run automatically with Playwright and Prowler.',
-        note: '"What broke this week?" returns a ranked list, not a red dashboard.',
-        services: ['QA Usage Dashboard', 'Internal Audit Platform', 'External Audit Platform', 'UI/UX Audit Platform', 'Prowler'],
-        bannerText: '5-Gate Security & QA Mesh',
+        name: 'Assess',
+        phase: 'Assessment products',
+        headline: 'Find the gaps that matter.',
+        body: 'Get focused expert evaluations with prioritized findings and a practical action plan.',
+        note: 'Assessments turn measurement into a clear remediation path.',
+        services: ['Internal Audit Platform', 'External Audit Platform', 'UI/UX Audit Platform', 'Assessment Platform', 'Prowler'],
+        bannerText: 'Assessment products',
         bannerIcon: 'shield',
         image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&auto=format&fit=crop&q=80',
-        conduit: 'Validated release artifacts and cryptographic compliance attestations push directly into launch channels.',
+        conduit: 'Prioritized findings feed back into Decide and Execute for the next cycle.',
         signals: [
-          { icon: 'shield', label: 'Playwright & Prowler Cloud Security Mesh', stat: '5-Gate Sec' },
-          { icon: 'cpu', label: 'Automated Regressions & UI/UX Audit', stat: 'Zero Fail' },
-          { icon: 'lock', label: 'Cryptographic Compliance Attestation', stat: 'SOC2 / ISO' }
+          { icon: 'shield', label: 'Internal & External Audit', stat: 'Prioritized' },
+          { icon: 'cpu', label: 'UI/UX & Assessment Platforms', stat: 'Actionable' },
+          { icon: 'lock', label: 'Prowler Cloud Posture', stat: 'Continuous' }
         ],
-        color: '#D97706',
+        color: '#2563EB',
         colorGlow: 'rgba(217, 119, 6, 0.35)',
         colorBg: 'rgba(217, 119, 6, 0.12)',
         colorBorder: 'rgba(217, 119, 6, 0.35)'
       },
       {
         num: '05',
-        name: 'Launch',
-        phase: 'Go-to-Market Orchestration',
-        headline: 'Coordinate the launch across every channel.',
-        body: 'GTM Launchpad schedules campaigns across social, ads, and CRM from one calendar while Survey Ticket captures feedback.',
-        note: '"Launch this on Tuesday" drafts copy, channels, and send schedule.',
-        services: ['GTM Launchpad', 'Survey Ticket'],
-        bannerText: 'Multi-Channel Release Queue',
-        bannerIcon: 'send',
-        image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200&auto=format&fit=crop&q=80',
-        conduit: 'Live campaign telemetry and customer acquisition signals stream straight into executive pulse dashboards.',
-        signals: [
-          { icon: 'send', label: 'Multi-Channel Campaign Orchestration', stat: 'Unified Cal' },
-          { icon: 'users', label: 'Survey Ticket Customer Feedback Loop', stat: 'Real-time' },
-          { icon: 'activity', label: 'CRM & Ad Network Deployment Sync', stat: 'Automated' }
-        ],
-        color: '#7C3AED',
-        colorGlow: 'rgba(124, 58, 237, 0.35)',
-        colorBg: 'rgba(124, 58, 237, 0.12)',
-        colorBorder: 'rgba(124, 58, 237, 0.35)'
-      },
-      {
-        num: '06',
-        name: 'Measure',
-        phase: 'Telemetry & Market Signal',
-        headline: 'Know what actually moved.',
-        body: 'R&D Pulse tracks engineering metrics. GTM Pulse tracks market engagement. Fuel tells you the one number that matters this week.',
-        note: 'Every Monday at 8am, Fuel delivers a one-page executive pulse.',
-        services: ['R&D Pulse', 'GTM Pulse', 'Prompt Dashboard'],
-        bannerText: 'Real-time Telemetry Pulse',
-        bannerIcon: 'activity',
-        image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&auto=format&fit=crop&q=80',
-        conduit: 'Engineering and market signals automatically update the company Scorecard, burn trajectory, and capital runway.',
-        signals: [
-          { icon: 'activity', label: 'Live R&D Velocity & Commit Cadence', stat: '142ms Telemetry' },
-          { icon: 'trending', label: 'GTM Market Engagement & Conversion', stat: 'Live Stream' },
-          { icon: 'file-text', label: 'Weekly Executive Diagnostic Pulse', stat: 'Every Mon 8am' }
-        ],
-        color: '#E11D48',
-        colorGlow: 'rgba(225, 29, 72, 0.35)',
-        colorBg: 'rgba(225, 29, 72, 0.12)',
-        colorBorder: 'rgba(225, 29, 72, 0.35)'
-      },
-      {
-        num: '07',
-        name: 'Capital',
-        phase: 'Runway & Capital Allocation',
-        headline: 'Raise, report, and allocate capital.',
-        body: 'Finance Pulse tracks burn and unit economics. Fuel runs investor readiness playbooks and scores where the next dollar belongs.',
-        note: '"Prep Series A update" scores your deck against investor rubrics.',
-        services: ['Fuel', 'Finance Pulse'],
-        bannerText: 'Capital Runway & VC Rubric',
-        bannerIcon: 'dollar-sign',
-        image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&auto=format&fit=crop&q=80',
-        conduit: 'Resource allocations and headcount requisitions feed directly into Hub and Talent Acquisition engines.',
-        signals: [
-          { icon: 'dollar-sign', label: 'Real-time Burn & Runway Tracking', stat: '18mo Safe' },
-          { icon: 'award', label: 'Investor Readiness & Deck Rubric Score', stat: '94 / 100' },
-          { icon: 'pie-chart', label: 'Capital Allocation & ROI Analysis', stat: 'Optimized' }
-        ],
-        color: '#0D9488',
-        colorGlow: 'rgba(13, 148, 136, 0.35)',
-        colorBg: 'rgba(13, 148, 136, 0.12)',
-        colorBorder: 'rgba(13, 148, 136, 0.35)'
-      },
-      {
-        num: '08',
         name: 'Operate',
-        phase: 'People Ops & Scaled Operations',
-        headline: 'Run the company while building the product.',
-        body: 'Hub handles HR and teams. LMS keeps onboarding fresh. Assessment tracks talent. Support Ticket closes customer loops.',
-        note: '"Who is ready for promotion?" scans LMS and Assessment history.',
-        services: ['Hub', 'LMS', 'Assessment Platform', 'Support Ticket'],
-        bannerText: 'Continuous People Engine',
+        phase: 'Hub',
+        headline: 'Run the business day to day.',
+        body: 'Manage people, projects, resourcing, and recurring workflows in one connected place.',
+        note: 'Hub, LMS, and Support Ticket keep the operating loop closed.',
+        services: ['Hub', 'LMS', 'Support Ticket'],
+        bannerText: 'Hub',
         bannerIcon: 'users',
         image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&auto=format&fit=crop&q=80',
-        conduit: 'People velocity and customer loop metrics feed back into the Envision stage for continuous company evolution.',
+        conduit: 'Operating cadence and people signals inform the next Decide cycle.',
         signals: [
-          { icon: 'users', label: 'Unified HRMS & Org Structuring (Hub)', stat: '100% Synced' },
-          { icon: 'book', label: 'LMS Onboarding & Continuous Training', stat: 'Automated' },
-          { icon: 'check-circle', label: 'Assessment Talent & Cross-Team Ticketing', stat: 'Closed Loop' }
+          { icon: 'users', label: 'Hub People & Projects', stat: '100% Synced' },
+          { icon: 'book', label: 'LMS Onboarding & Capability', stat: 'Automated' },
+          { icon: 'check-circle', label: 'Support Ticket Closed Loop', stat: 'Live Queue' }
         ],
-        color: '#2563EB',
+        color: '#4F46E5',
         colorGlow: 'rgba(37, 99, 235, 0.35)',
         colorBg: 'rgba(37, 99, 235, 0.12)',
         colorBorder: 'rgba(37, 99, 235, 0.35)'
       }
     ];
 
-    let currentStage = 2; // Default to Stage 03 Build matching reference screenshot
+    window.__YORK = { STAGES: STAGES, SERVICES: (typeof ALL_SERVICES !== 'undefined' ? ALL_SERVICES : []), url: (typeof productDetailsUrl === 'function' ? productDetailsUrl : function (n) { return 'product.html?name=' + encodeURIComponent(n); }) };
+    let currentStage = 0; // Default to Decide
     let autoCycleActive = true;
     let autoCycleTimer = null;
 
@@ -9348,6 +9464,7 @@
     const stageServiceChips = document.getElementById('stageServiceChips');
     const stageConnectedLabel = document.getElementById('stageConnectedLabel');
     const stageStoryBtn = document.getElementById('stageStoryBtn');
+
 
     function applyStageTokens(st) {
       if (!stageCard) return;
@@ -9381,9 +9498,10 @@
       if (stageStoryBtn) {
         stageStoryBtn.innerHTML = `<span>Explore ${st.name} Services</span> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>`;
       }
-      if (stageCounter) stageCounter.textContent = `${st.num} / 08`;
+      const stageTotal = String(STAGES.length).padStart(2, '0');
+      if (stageCounter) stageCounter.textContent = `${st.num} / ${stageTotal}`;
       const stageNavCounter = document.getElementById('stageNavCounter');
-      if (stageNavCounter) stageNavCounter.textContent = `${st.num} / 08`;
+      if (stageNavCounter) stageNavCounter.textContent = `${st.num} / ${stageTotal}`;
 
       if (stageConduitText) stageConduitText.textContent = st.conduit;
       if (stageBannerText) stageBannerText.textContent = st.bannerText;
@@ -9410,13 +9528,13 @@
       // Connected Stage Products — left column, icons/colors from the 22-product registry
       if (stageServiceChips) {
         const catGradients = {
-          build: 'linear-gradient(135deg, #0284C7 0%, #06B6D4 50%, #10B981 100%)',
-          quality: 'linear-gradient(135deg, #0284C7 0%, #06B6D4 45%, #10B981 100%)',
-          gtm: 'linear-gradient(135deg, #0D9488 0%, #10B981 45%, #6366F1 100%)',
-          signal: 'linear-gradient(135deg, #F59E0B 0%, #D97706 45%, #EF4444 100%)',
-          capital: 'linear-gradient(135deg, #059669 0%, #10B981 45%, #06B6D4 100%)',
-          people: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%)',
-          support: 'linear-gradient(135deg, #3B82F6 0%, #6366F1 50%, #8B5CF6 100%)'
+          build: 'linear-gradient(135deg, #0891B2 0%, color-mix(in srgb, #0891B2 70%, #0F172A) 100%)',
+          quality: 'linear-gradient(135deg, #0D9488 0%, color-mix(in srgb, #0D9488 70%, #0F172A) 100%)',
+          gtm: 'linear-gradient(135deg, #2563EB 0%, color-mix(in srgb, #2563EB 70%, #0F172A) 100%)',
+          signal: 'linear-gradient(135deg, #0284C7 0%, color-mix(in srgb, #0284C7 70%, #0F172A) 100%)',
+          capital: 'linear-gradient(135deg, #12A883 0%, color-mix(in srgb, #12A883 70%, #0F172A) 100%)',
+          people: 'linear-gradient(135deg, #4F46E5 0%, color-mix(in srgb, #4F46E5 70%, #0F172A) 100%)',
+          support: 'linear-gradient(135deg, #64748B 0%, color-mix(in srgb, #64748B 70%, #0F172A) 100%)'
         };
         stageServiceChips.innerHTML = st.services.map((svcName) => {
           const svc = ALL_SERVICES.find((s) => s.name === svcName)
@@ -9426,7 +9544,7 @@
           const bg = catGradients[cat] || catGradients.build;
           const label = svc ? svc.name : svcName;
           return `
-            <a href="#services" class="stage-product-tile" title="Explore ${label}">
+            <a href="${productDetailsUrl(label)}" class="stage-product-tile" title="Explore ${label}">
               <span class="stage-product-icon" style="background:${bg};">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${iconPath}"/></svg>
               </span>
@@ -9628,7 +9746,8 @@
       }
 
       // High-end category multi-stop gradients & radiant bloom matching the flagship showcase
-      const CATEGORY_STYLES = {
+      const CAT_HUE = {"capital": "#12A883", "quality": "#0D9488", "build": "#0891B2", "signal": "#0284C7", "gtm": "#2563EB", "people": "#4F46E5", "support": "#64748B"};
+    const CATEGORY_STYLES = {
         build: {
           gradient: 'linear-gradient(135deg, #0284C7 0%, #06B6D4 50%, #10B981 100%)',
           bloom: 'rgba(6, 182, 212, 0.35)',
@@ -9691,10 +9810,13 @@
           tagBorder: '#C6EADB'
         };
 
+        const detailsHref = productDetailsUrl(s.name);
+        const hue = CAT_HUE[s.cat] || '#12A883';
+        const iconGrad = (typeof s.color === 'string' && s.color.includes('gradient')) ? s.color : catStyle.gradient;
         return `
-          <div class="svc-card" data-idx="${idx}">
+          <a class="svc-card" style="--c:${hue};--icon-gradient:${iconGrad};--icon-bloom:${catStyle.bloom}" data-idx="${idx}" href="${detailsHref}" data-product="${s.name.replace(/"/g, '&quot;')}">
             <div class="svc-card-tag-row">
-              <span class="svc-cat-tag" style="background:${catStyle.gradient};color:#FFFFFF;border-color:transparent;box-shadow:0 2px 8px -2px ${catStyle.bloom};">${s.cat}</span>
+              <span class="svc-cat-tag svc-cat-tag--hue" style="--c:${hue}">${s.cat}</span>
             </div>
             
             <div class="svc-plan-tag">
@@ -9705,7 +9827,7 @@
             </div>
 
             <div class="svc-title-row">
-              <div class="svc-mini-icon" style="background: ${catStyle.gradient}; --icon-gradient: ${catStyle.gradient}; --icon-bloom: ${catStyle.bloom};">
+              <div class="svc-mini-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="${s.icon}"/>
                 </svg>
@@ -9720,14 +9842,14 @@
                 <span class="svc-learn-label">Learn more</span>
                 <span class="svc-arrow-glyph">→</span>
               </div>
-              <button class="svc-plus-btn" title="Add to active workspace" aria-label="Add ${s.name}">
+              <button type="button" class="svc-plus-btn" title="Add to active workspace" aria-label="Add ${s.name}">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
               </button>
             </div>
-          </div>
+          </a>
         `;
       }).join('');
 
@@ -9736,8 +9858,10 @@
       // Handle card interactions
       refGrid.querySelectorAll('.svc-card').forEach(card => {
         card.addEventListener('click', (e) => {
-          // If plus button was clicked, provide feedback
+          // If plus button was clicked, provide feedback and skip navigation
           if (e.target.closest('.svc-plus-btn')) {
+            e.preventDefault();
+            e.stopPropagation();
             const btn = e.target.closest('.svc-plus-btn');
             btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
             setTimeout(() => {
@@ -9856,29 +9980,208 @@
 
     renderServices();
 
+    /* ─── CONSOLE SELECTION SCREEN MODAL LOGIC ─── */
+    const consoleModal = document.getElementById('consoleSelectModal');
+    const closeConsoleBtn = document.getElementById('closeConsoleSelectBtn');
+    
+    function openConsoleModal(e) {
+      if (e) e.preventDefault();
+      if (consoleModal) {
+        consoleModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    
+    function closeConsoleModal() {
+      if (consoleModal) {
+        consoleModal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    }
+
+    if (closeConsoleBtn) closeConsoleBtn.addEventListener('click', closeConsoleModal);
+    if (consoleModal) {
+      consoleModal.addEventListener('click', (e) => {
+        if (e.target === consoleModal) closeConsoleModal();
+      });
+    }
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && consoleModal && consoleModal.style.display === 'flex') {
+        closeConsoleModal();
+      }
+    });
+
     // Reset console session on website home so hard refresh / direct entry always stays on the website
     try {
       sessionStorage.removeItem('york_session_active');
     } catch (e) {}
 
-    function handleSignInRedirect(e) {
-      if (e) e.preventDefault();
+    // Prepare session before navigating to role selection.
+    // Keep native <a href="dashboard-v3.html?auth=1"> navigation so links always work.
+    function prepareConsoleAuth() {
       try {
         sessionStorage.setItem('york_session_active', 'true');
+        var raw = localStorage.getItem('york_console_state_v19');
+        if (raw) {
+          var st = JSON.parse(raw);
+          st.currentUser = null;
+          localStorage.setItem('york_console_state_v19', JSON.stringify(st));
+        }
       } catch (err) {}
-      window.location.href = 'dashboard-v3.html';
     }
 
-    const navSignIn = document.getElementById('openConsoleBtnNav');
-    const navGetStarted = document.getElementById('openConsoleBtnGetStarted');
-    if (navSignIn) navSignIn.addEventListener('click', handleSignInRedirect);
-    if (navGetStarted) navGetStarted.addEventListener('click', handleSignInRedirect);
-
-    // Also wire any .signin or data-open-console elements to redirect to dashboard-v3.html
-    document.querySelectorAll('.signin, [data-open-console]').forEach(el => {
-      el.addEventListener('click', handleSignInRedirect);
+    document.querySelectorAll('#openConsoleBtnNav, #openConsoleBtnGetStarted, .signin, [data-open-console]').forEach(function(el) {
+      el.addEventListener('click', prepareConsoleAuth);
     });
   })();
+</script>
+
+<!-- ================= CONSOLE SELECTION SCREEN MODAL ================= -->
+<div id="consoleSelectModal" class="console-select-backdrop" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="consoleSelectTitle">
+  <div class="console-select-dialog">
+    <!-- Close button -->
+    <button type="button" class="console-select-close" id="closeConsoleSelectBtn" aria-label="Close selection screen">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    
+    <!-- Header -->
+    <div class="console-select-header">
+      <div class="console-select-brand">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAqCAYAAADBNhlmAAAEVElEQVR4AbSYS3bbMAxFIW2szjxZTtphmmGb5STzpBuz+i5MUJRM6uNYPoL4A4lLAKRO0tve3/vbyT7ePu39z++9U2/R3w4YYN3waTacrOte7OPvcDToNkA8FmDWfV08kUpA8SZyGbjrexkQo3gJj2F2GF5tsFeqNpz/GW0aQCLo094jRGZBvw7IJPeawshkQB5/dvb0a5p3tOlnHD0g2dAW0GxDKbOgPwUsJ5VeAwSAljC+FbRmY2FjIyC7mORZyjHrU8616Ir+GijrAoWaR0Ue882zPsJAKiugvZ9CwsIguoTr8fmB6s0CKOuwAOuycWw4mDoZK22Q10P3MMnptLHeWEBzjNNJmFjcGj8mYYxh5tGmXhPWYT1g8rg8RR9juS9Vnp6/PMdDn/XtfOrTsFm5o9yZKoTIw5MODZthiEXwzBpo6C/ZYD0EeLxJXTICqlF9Onsx99pwMgwxGUN4otztGqjd9lsH9LxRaAKMUISt2G0JuuTNmJdLNk3jrM1TXss1IAbwhoOlCVzKqXpVAOygusQZ3BL2bIMJEubQp+r8GQFreVZ6hjA3FvFFgVwL+5UNn3l5AYljZjZGQADca2U49eVYM3pZfnzXQH1dqcxtkNPqNtJn7gz6JSOgGq7IASBstEPCaCzY2G2oe8kcDHsjXuXmda1ENyX6pTPok/T5clTDT+vMxXRbhCY84Z16AVrT15B/ANxjNCR4qLZ5DU0eQNFNnb1fjiV5GAUK8ftvx+cpzynuTDyJ4WR0vejz57XPyiwQ5ECyeyS8hhE8ECeaz9N8YyR5nrMQzmx0vTICogtkaZQ+oOmb5yVjSHWOvqtspjUnvBybZ1ONVJkCYhDBKCVS1mk3pU9hkedaYMwFBCCHky4OoJ+okU6M007Sp/L4AsOeAik3AXMv6yqj7jeEviyA8nlNRMcDRjgx7EbxmlKgjAx1YB0UJYFSSI4DzGDFDRAHrZkCvdJEGxBYPH1U7loSzkmeyWN4qAXW2ow8eyfAcnsKT4STkC2BMW1lMwcAYlVCOOUB1eoPYNVDM/0EHgdIiIGY4+VwptPM6V3YzAGASnJCCxihjrstg+05NGb7ADHS9T+wbfqD5lJW3oQWSIQLGVA8Sh11PLaWm+hJtgMSrtIIRskh+rXQ1QMk4pBplPrSZzOplcU6IF4jTAAxM4xQ0qbfx+2F5pUASZ4x4HUq22UdMHut+zJCE0YoHVL9HjpdL9vtbtZcB2QpwGo5AyT94SF0gW2F3cf3vdqA7p20GF6sGY3wA+WqeFMVD/t9/rnZBnTv6F9uATo3CjDgARde5hCUc9ALHbHvfdqAsVILFGB0gAGq/M4yh37GQ4/6DbIOGItmoymM3q86/V6fvejHq7Puvc3tgKyMUQ5FeIfQ1e7CyE1PASZqIzfC7gPEFuKgjfz0O3Hf54wlW3IbYKxWA8WrjONlvF3mJv075XuAYQxQgLgPKf3Q6G+NGP9G+R8AAP//RblXqAAAAAZJREFUAwCtIwb41lSPpwAAAABJRU5ErkJggg==" alt="York" style="width:28px;height:28px;border-radius:7px;">
+        <span style="font-weight:700;font-size:16px;color:var(--ink-primary);letter-spacing:-0.02em">York Foundation</span>
+      </div>
+      <h2 id="consoleSelectTitle" class="console-select-title">Choose Console Version</h2>
+      <p class="console-select-sub">Select between Version 1 (Minimal) and Version 2 (Executive Pro) to launch your workspace console.</p>
+    </div>
+
+    <!-- 2 Version Selection Cards Grid -->
+    <div class="console-cards-grid">
+      <!-- Card 1: Version 1 Minimal Layout -->
+      <a href="dashboard-v3.html?auth=1" class="console-choice-card" id="choiceCardV1">
+        <div class="console-choice-badge">
+          <span class="choice-tag tag-minimal">version-1</span>
+          <span class="choice-rec">Minimal Console</span>
+        </div>
+        <div class="console-choice-icon-row">
+          <div class="choice-ic-bubble" style="background:#ECFDF5;color:#047857;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          </div>
+          <div class="choice-ic-meta">
+            <h3 class="choice-title">Version 1</h3>
+            <span class="choice-flavor">Clean · Compact · Low Distraction</span>
+          </div>
+        </div>
+        <p class="choice-desc">Minimal operations console with 240px collapsible sidebar, 4 key KPI cards, integrated product journey stage rail, and fast operations stream.</p>
+        <ul class="choice-features-list">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 240px sidebar with all 23 live services</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 7-stage Product Journey timeline flow</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Active initiatives progress &amp; straight dividers</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-header v1 / v2 tabs to switch anytime</li>
+        </ul>
+        <span class="choice-launch-btn btn-v1">
+          <span>Launch Version 1</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <!-- Card 2: Version 2 Modern Executive Pro Layout -->
+      <a href="dashboard.html" class="console-choice-card" id="choiceCardV2">
+        <div class="console-choice-badge">
+          <span class="choice-tag tag-pro">version-2</span>
+          <span class="choice-rec highlight">Executive Pro Console</span>
+        </div>
+        <div class="console-choice-icon-row">
+          <div class="choice-ic-bubble" style="background:#EFF6FF;color:#1D4ED8;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="choice-ic-meta">
+            <h3 class="choice-title">Version 2</h3>
+            <span class="choice-flavor">Collapsible Sidebar · Resource Strip</span>
+          </div>
+        </div>
+        <p class="choice-desc">Modern enterprise layout with collapsible floating sidebar, executive billing resource strip, and full 8-gate product quality telemetry.</p>
+        <ul class="choice-features-list">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Collapsible floating sidebar with icon collapse mode</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Executive billing &amp; compute resource strip</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Initiatives velocity column chart &amp; live stream</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B389" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-header v1 / v2 tabs to switch anytime</li>
+        </ul>
+        <span class="choice-launch-btn btn-v2">
+          <span>Launch Version 2</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+    </div>
+
+    <!-- Footer helper -->
+    <div class="console-select-foot">
+      <span>You can freely toggle between Version 1 and Version 2 inside any dashboard topbar.</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var data = window.__YORK || {}; var STAGES = data.STAGES || [], SERVICES = data.SERVICES || [], url = data.url;
+  var list = document.getElementById('jxSteps'); if (!list || !STAGES.length) return;
+  var ICON = {
+    Decide: '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+    Execute: '<path d="M5 15c-1.5 1.3-2 4-2 4s2.7-.5 4-2"/><path d="M9 15l-3-3c1-3 3.5-7 9-8.5 1.5-.4 3.5-.5 5-.5 0 1.5-.1 3.5-.5 5C18 13.5 14 16 11 17z"/><circle cx="15" cy="9" r="1.6"/>',
+    Measure: '<path d="M3 20h18"/><rect x="5" y="11" width="3" height="6" rx="1"/><rect x="10.5" y="7" width="3" height="10" rx="1"/><rect x="16" y="4" width="3" height="13" rx="1"/>',
+    Assess: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8"/><path d="M7.8 10.6l1.9 1.9 3.6-3.6"/>',
+    Operate: '<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17.5l9 5 9-5" opacity=".55"/>'
+  };
+  var NEXT = ['Execute', 'Measure', 'Assess', 'Operate', 'Decide'];
+  var grad = { build: 'linear-gradient(135deg,#0284C7,#06B6D4)', quality: 'linear-gradient(135deg,#0284C7,#10B981)', gtm: 'linear-gradient(135deg,#0D9488,#6366F1)', signal: 'linear-gradient(135deg,#F59E0B,#EF4444)', capital: 'linear-gradient(135deg,#059669,#06B6D4)', people: 'linear-gradient(135deg,#6366F1,#EC4899)', support: 'linear-gradient(135deg,#3B82F6,#8B5CF6)' };
+  var svg = function (d, w) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (w || 2) + '" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; };
+  var esc = function (t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); };
+  list.innerHTML = STAGES.map(function (st, i) {
+    var prods = st.services.map(function (n) {
+      var sv = SERVICES.find(function (x) { return x.name === n; }) || SERVICES.find(function (x) { return x.name.toLowerCase().indexOf(n.toLowerCase().split(' ')[0]) === 0; });
+      var label = sv ? sv.name : n, short = n.replace(/ Platform$/, '').replace(/ Usage Dashboard$/, ' Dashboard');
+      return '<a class="jx-prod" href="' + (url ? url(label) : '#services') + '" title="Explore ' + esc(label) + '"><i>' + svg('<path d="' + (sv ? sv.icon : 'M12 2v20M2 12h20') + '"/>', 2.4) + '</i>' + esc(short) + '</a>';
+    }).join('');
+    var sig = (st.signals || []).map(function (g) { return '<div><b>' + esc(g.stat) + '</b><span>' + esc(g.label) + '</span></div>'; }).join('');
+    return '<li class="jx-step" style="--c:' + st.color + '" data-i="' + i + '">' +
+      '<span class="jx-node" aria-hidden="true">' + svg(ICON[st.name] || ICON.Decide) + '<em>' + st.num + '</em></span>' +
+      '<div class="jx-body">' +
+        '<div class="jx-top"><span class="jx-name">' + st.num + ' · ' + esc(st.name) + '</span><span class="jx-phase">' + esc(st.phase) + '</span></div>' +
+        '<h3>' + esc(st.headline) + '</h3>' +
+        '<p class="jx-desc">' + esc(st.body) + '</p>' +
+        '<div class="jx-prods">' + prods + '</div>' +
+      '</div></li>';
+  }).join('');
+
+  var pulse = document.createElement('span'); pulse.className = 'jx-pulse'; pulse.setAttribute('aria-hidden', 'true'); list.appendChild(pulse);
+
+  function syncRail() {
+    var nodes = list.querySelectorAll('.jx-node');
+    if (!nodes.length) return;
+    var listRect = list.getBoundingClientRect();
+    var first = nodes[0].getBoundingClientRect();
+    var last = nodes[nodes.length - 1].getBoundingClientRect();
+    var top = (first.top + first.height / 2) - listRect.top;
+    var end = (last.top + last.height / 2) - listRect.top;
+    var h = Math.max(0, end - top);
+    list.style.setProperty('--rail-top', top + 'px');
+    list.style.setProperty('--rail-h', h + 'px');
+    if (list.dataset.filled === '1') list.style.setProperty('--fill', h + 'px');
+  }
+  syncRail();
+  window.addEventListener('resize', syncRail);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncRail);
+
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      list.dataset.filled = '1';
+      syncRail();
+      list.style.setProperty('--fill', getComputedStyle(list).getPropertyValue('--rail-h').trim() || '0px');
+      io.disconnect();
+    });
+  }, { threshold: .35 });
+  io.observe(list);
+})();
 </script>
 </body>
 </html>

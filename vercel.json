@@ -1,8 +1,17 @@
 {
   "version": 2,
+  "framework": null,
+  "installCommand": null,
   "buildCommand": null,
   "outputDirectory": ".",
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/dashboard", "destination": "/dashboard-v3.html" },
+    { "source": "/dashboard-v3", "destination": "/dashboard-v3.html" },
+    { "source": "/product", "destination": "/product.html" },
+    { "source": "/hub", "destination": "/product.html?name=Hub" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
